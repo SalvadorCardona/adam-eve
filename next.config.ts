@@ -1,7 +1,20 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  transpilePackages: ["three"],
+  webpack(config, options) {
+    config.module.rules.push({
+      test: /.*\.(glb|gltf)$/,
+      use: {
+        loader: "file-loader"
+      }
+    })
+    return config
+  },
+  typescript: {
+    ignoreBuildErrors: true
+  }
+}
 
-export default nextConfig;
+export default nextConfig
