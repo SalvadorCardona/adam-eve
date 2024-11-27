@@ -3,7 +3,8 @@ import { CameraProps, Canvas } from "@react-three/fiber"
 import { Environment, Grid, OrbitControls } from "@react-three/drei"
 import { Vector3 } from "three"
 import Ground from "@/app/game/ground/Ground"
-import { Character2 } from "@/app/game/character/Character2"
+import { GameProvider } from "@/app/game/provider/GameProvider"
+import mockGame from "@/app/game/mock/mockGame"
 
 export interface GameComponentPropsInterface {}
 
@@ -21,12 +22,11 @@ export default function GameComponent(props: GameComponentPropsInterface) {
 
 function Child(props: GameComponentPropsInterface) {
   return (
-    <>
+    <GameProvider game={mockGame}>
       <Grid cellColor={"white"} args={[100, 100]} />
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
       <Ground></Ground>
-      <Character2></Character2>
-    </>
+    </GameProvider>
   )
 }

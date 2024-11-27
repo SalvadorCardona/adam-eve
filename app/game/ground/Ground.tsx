@@ -3,16 +3,20 @@ import React, { MutableRefObject, useEffect, useRef } from "react"
 import { InstancedMesh, Object3D, TextureLoader } from "three"
 import { useLoader } from "@react-three/fiber"
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events"
+import useGameContext from "@/app/game/provider/useGameContext"
+import { characterEntityMetaData } from "@/app/game/entity/CharacterEntity"
+import { updateContainer } from "@/packages/container/container"
 
 export interface GroundPropsInterface {}
 
 export default function Ground() {
-  const line = 300
+  const line = 50
   const count = line * line
   const halfSize = line / 2
   const temp = new Object3D()
   const instancedMeshRef = useRef<InstancedMesh>() as MutableRefObject<InstancedMesh>
   const grass = useLoader(TextureLoader, "/grass2.png")
+  const gameContext = useGameContext()
 
   useEffect(() => {
     let localCount = 0
@@ -31,8 +35,11 @@ export default function Ground() {
   }, [])
 
   const test = (e: ThreeEvent<MouseEvent>) => {
-    console.log(e)
-    console.log(e.object)
+    const character = characterEntityMetaData.factory()
+
+    updateContainer(gameContext.game, character)
+
+    gameContext.updateGame(gameContext.game)
   }
   return (
     <instancedMesh onClick={test} ref={instancedMeshRef} args={[null, null, count]}>
