@@ -8,5 +8,6 @@ export interface GameContextInterface {
 
 export const GameContext = createContext<GameContextInterface>({
   game: {},
-  updateGame: () => {},
+  updateGame: () => {
+  }
 })

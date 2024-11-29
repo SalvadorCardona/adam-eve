@@ -9,8 +9,8 @@ const mockGame = {
     position: {
       x: 1,
       y: 0,
-      z: 1,
-    },
+      z: 1
+    }
   },
   "personnage/character/2": {
     "@id": "personnage/character/2",
@@ -19,9 +19,9 @@ const mockGame = {
     position: {
       x: -1,
       y: 0,
-      z: -1,
-    },
-  },
+      z: -1
+    }
+  }
 } as ContainerInterface<EntityInterfaceInterface>
 
 export default mockGame

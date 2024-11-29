@@ -2,27 +2,16 @@ import { PropsWithChildren, useState } from "react"
 import GameInterface from "@/app/game/domain/GameInterface"
 import { GameContext } from "./GameContext"
 import configGame from "@/app/game/config/configGame"
-import { useFrame } from "@react-three/fiber"
 
 interface InputGameProviderPropsInterface extends PropsWithChildren {
   game: GameInterface
 }
 
 export const GameProvider = ({
-  children,
-  game: baseGame,
-}: InputGameProviderPropsInterface) => {
+                               children,
+                               game: baseGame
+                             }: InputGameProviderPropsInterface) => {
   const [game, setGame] = useState<GameInterface>(baseGame)
-
-  useFrame((state, delta, xrFrame) => {
-    {
-      Object.values(game).map((entity) => {
-        const entityMetaData = configGame[entity["@type"]]
-        return entityMetaData.onFrame({ entity, game })
-      })
-    }
-    updateGame(game)
-  })
 
   const updateGame = (game: GameInterface) => {
     setGame({ ...game })
@@ -32,7 +21,7 @@ export const GameProvider = ({
     <GameContext.Provider
       value={{
         game,
-        updateGame,
+        updateGame
       }}
     >
       {Object.values(game).map((entity) => {
