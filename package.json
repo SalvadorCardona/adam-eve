@@ -16,6 +16,7 @@
     "react": "19.0.0-rc-935180c7e0-20240524",
     "react-dom": "19.0.0-rc-935180c7e0-20240524",
     "three": "^0.170.0",
+    "three-stdlib": "^2.34.0",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {

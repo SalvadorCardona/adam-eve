@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/game/entity/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/util/textureHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/adam-eve.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/Game.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/Vector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Tsx Component React" />
+        <option value="Typescript Function" />
+        <option value="Typescript Interface" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWebServerValidation" path_to_validation_script="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve" selected_validation_type="LOCAL" web_path_to_validation_script="http://127.0.0.1/" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pD8jgH30T9ZPIPTnCqORDdT634" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/adam-eve/app/game/entity&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript JSX&quot;
+    ]
+  }
+}</component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Space Code Reviews" />
+      <window_info id="Bookmarks" side_tool="true" />
+      <window_info id="Commit_Guest" />
+      <window_info id="Pull Requests" />
+      <window_info id="Merge Requests" />
+      <window_info id="Robo tasks" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32999182" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="File Transfer" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems View" order="2" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3298447" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="right" id="make" side_tool="true" />
+      <window_info anchor="right" id="Meet New UI" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\entity" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\public" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\character" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\packages" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\domain" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\public" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\packages" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\domain\EntityMetaDataInterface.ts" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-php-predefined-a98d8de5180a-5fbe0c30323e-com.jetbrains.php.sharedIndexes-PS-243.21565.202" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="" />
+      <created>1732289421902</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732289421902</updated>
+      <workItem from="1732289424266" duration="927000" />
+      <workItem from="1732291071932" duration="1478000" />
+      <workItem from="1732522907674" duration="2336000" />
+      <workItem from="1732526668429" duration="10391000" />
+      <workItem from="1732608416495" duration="601000" />
+      <workItem from="1732695764000" duration="602000" />
+      <workItem from="1732736000755" duration="7102000" />
+      <workItem from="1732781336469" duration="605000" />
+      <workItem from="1732823213406" duration="177000" />
+      <workItem from="1732823435022" duration="667000" />
+      <workItem from="1732824116622" duration="2770000" />
+      <workItem from="1732866506771" duration="1278000" />
+      <workItem from="1732886959364" duration="5703000" />
+      <workItem from="1732892947173" duration="14000" />
+      <workItem from="1732892968616" duration="564000" />
+      <workItem from="1732893546819" duration="484000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

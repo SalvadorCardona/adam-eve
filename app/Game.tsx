@@ -6,12 +6,14 @@ import Ground from "@/app/game/ground/Ground"
 import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
 
-export interface GameComponentPropsInterface {}
+export interface GameComponentPropsInterface {
+}
+
 
 export default function GameComponent(props: GameComponentPropsInterface) {
   const setupCamera: CameraProps = {
     position: new Vector3(0, 10, 2),
-    fov: 75,
+    fov: 75
   }
   return (
     <Canvas shadows camera={setupCamera}>
@@ -26,6 +28,7 @@ function Child(props: GameComponentPropsInterface) {
       <Grid cellColor={"white"} args={[100, 100]} />
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
+      {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}
       <Ground></Ground>
     </GameProvider>
   )

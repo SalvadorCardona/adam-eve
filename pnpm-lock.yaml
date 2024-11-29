@@ -26,6 +26,9 @@ dependencies:
   three:
     specifier: ^0.170.0
     version: 0.170.0
+  three-stdlib:
+    specifier: ^2.34.0
+    version: 2.34.0(three@0.170.0)
   uniqid:
     specifier: ^5.4.0
     version: 5.4.0
