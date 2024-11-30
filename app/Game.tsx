@@ -2,7 +2,6 @@
 import { CameraProps, Canvas } from "@react-three/fiber"
 import { Environment, Grid, OrbitControls } from "@react-three/drei"
 import { Vector3 } from "three"
-import Ground from "@/app/game/ground/Ground"
 import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
 
@@ -29,7 +28,7 @@ function Child(props: GameComponentPropsInterface) {
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
       {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}
-      <Ground></Ground>
+      {/*<Ground></Ground>*/}
     </GameProvider>
   )
 }

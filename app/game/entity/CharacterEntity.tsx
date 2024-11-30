@@ -18,7 +18,7 @@ export enum Controls {
 
 export const characterEntityMetaData: EntityMetaDataInterface = {
   factory: () => {
-    return jsonLdFactory<EntityInterface>("personnage/character",
+    return jsonLdFactory<EntityInterface>(characterEntityMetaData.type,
       {
         position: {
           x: 1,

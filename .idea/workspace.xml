@@ -5,25 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/game/entity/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/util/textureHelper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/adam-eve.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/home/Home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/Game.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/Vector.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/player.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/ground/Ground.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/util/textureHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/util/textureHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
@@ -42,6 +31,7 @@
         <option value="Typescript Function" />
         <option value="Typescript Interface" />
         <option value="TypeScript File" />
+        <option value="TSX Component React" />
       </list>
     </option>
   </component>
@@ -70,38 +60,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/adam-eve/app/game/entity&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "20.9.0",
+    "javascript.nodejs.core.library.typings.version": "20.9.5",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/adam-eve/app/game/entity",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TypeScript JSX&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TypeScript JSX"
     ]
   }
-}</component>
+}]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Space Code Reviews" />
@@ -175,6 +165,8 @@
       <workItem from="1732892947173" duration="14000" />
       <workItem from="1732892968616" duration="564000" />
       <workItem from="1732893546819" duration="484000" />
+      <workItem from="1732957445632" duration="531000" />
+      <workItem from="1732957993261" duration="1631000" />
     </task>
     <servers />
   </component>

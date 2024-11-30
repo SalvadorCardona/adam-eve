@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@react-three/drei':
     specifier: ^9.117.3
-    version: 9.117.3(@react-three/fiber@9.0.0-alpha.8)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@19.0.0-rc-935180c7e0-20240524)(react@19.0.0-rc-935180c7e0-20240524)(three@0.170.0)
+    version: 9.118.0(@react-three/fiber@9.0.0-alpha.8)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@19.0.0-rc-935180c7e0-20240524)(react@19.0.0-rc-935180c7e0-20240524)(three@0.170.0)
   '@react-three/fiber':
     specifier: 9.0.0-alpha.8
     version: 9.0.0-alpha.8(@types/react@18.3.12)(react-dom@19.0.0-rc-935180c7e0-20240524)(react@19.0.0-rc-935180c7e0-20240524)(three@0.170.0)
@@ -605,8 +605,8 @@ packages:
     resolution: {integrity: sha512-HVj7LrZ4ReHWBimBvu2SKND3cDVUPWKLqRTmWe/fNY6o1owGOX0cAHbdPDTMelgBlVbrTKrre6lFkhqGZErK/g==}
     dev: false
 
-  /@react-three/drei@9.117.3(@react-three/fiber@9.0.0-alpha.8)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@19.0.0-rc-935180c7e0-20240524)(react@19.0.0-rc-935180c7e0-20240524)(three@0.170.0):
-    resolution: {integrity: sha512-SnL8d17qO1cFXGVlDHhp+Oa9VZPwwOeibLHri5KNRARKOPv2+R71Sl84RTU9samBI2+1EaGJFciDvRgQnq+JOA==}
+  /@react-three/drei@9.118.0(@react-three/fiber@9.0.0-alpha.8)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@19.0.0-rc-935180c7e0-20240524)(react@19.0.0-rc-935180c7e0-20240524)(three@0.170.0):
+    resolution: {integrity: sha512-/teOuiiIT7PsNSB71Onl+0SeI2rf0AF3DnD/dBWYMAVsmubun8tzhfsIGSxFMvTda9E178+fYe/jLRe4SnBOvg==}
     peerDependencies:
       '@react-three/fiber': '>=8.0'
       react: '>=18.0'
