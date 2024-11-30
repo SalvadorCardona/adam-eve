@@ -5,4 +5,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   position: Vector3Interface
   size: Vector3Interface
   life: number
+  speed: number
 }

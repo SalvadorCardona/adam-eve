@@ -1,10 +1,14 @@
-import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
-import { jsonLdFactory } from "@/packages/utils/jsonLd/jsonLd"
-import EntityInterface from "@/app/game/domain/EntityInterface"
+import {
+  baseFactory,
+  EntityMetaDataInterface,
+} from "@/app/game/domain/EntityMetaDataInterface"
 import { imgLoader } from "@/app/game/util/textureHelper"
 import imageSource from "./img.png"
-import { vector3ToArray } from "@/app/game/domain/Vector"
+import { areVectorsEqual, vector3ToArray } from "@/app/game/domain/Vector"
 import { useEffect } from "react"
+import { findClosest } from "@/app/game/domain/findClosest"
+import { Vector3 } from "three"
+import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
 
 const image = imgLoader(imageSource.src, "un")
 
@@ -16,30 +20,38 @@ export enum Controls {
   jump = "jump",
 }
 
+export function generatePathCoordinates(
+  start: Vector3,
+  end: Vector3,
+  steps: number,
+): Vector3[] {
+  const path: Vector3[] = []
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps
+    const x = start.x + t * (end.x - start.x)
+    const y = start.y + t * (end.y - start.y)
+    const z = start.z + t * (end.z - start.z)
+    path.push({ x, y, z })
+  }
+
+  return path
+}
+
 export const characterEntityMetaData: EntityMetaDataInterface = {
-  factory: () => {
-    return jsonLdFactory<EntityInterface>(characterEntityMetaData.type,
-      {
-        position: {
-          x: 1,
-          y: 0.1,
-          z: 1
-        },
-        life: 60,
-        size: {
-          x: 1,
-          y: 1,
-          z: 1
-        }
-      }
-    )
-  },
+  factory: baseFactory,
   type: "personnage/character",
   onFrame: ({ entity, game }) => {
-    // entity.position.x += Math.random() * 0.2 - 0.1
-    // entity.position.z += Math.random() * 0.2 - 0.1
-    //
-    // updateContainer(game, entity)
+    const three = findClosest(entity, houseEntityMetaData.type, game)
+    console.log(three)
+    if (!three) return
+
+    const positions = generatePathCoordinates(entity.position, three.position, 4)
+    console.log(positions)
+    if (areVectorsEqual(entity.position, positions[0])) {
+      entity.position = positions[1]
+    } else {
+      entity.position = positions[0]
+    }
   },
   component: ({ entity }) => {
     useEffect(() => {
@@ -83,18 +95,16 @@ export const characterEntityMetaData: EntityMetaDataInterface = {
         window.removeEventListener("keydown", handleKeyDown)
       }
     }, [])
-
     return (
       <>
-        <mesh position={vector3ToArray(entity.position)} rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh
+          position={vector3ToArray(entity.position)}
+          rotation={[-Math.PI / 2, 0, 0]}
+        >
           <planeGeometry args={[entity.size.x, entity.size.y]} />
-          <meshStandardMaterial
-            attach="material"
-            transparent={true}
-            map={image}
-          />
+          <meshStandardMaterial attach="material" transparent={true} map={image} />
         </mesh>
       </>
     )
-  }
+  },
 }

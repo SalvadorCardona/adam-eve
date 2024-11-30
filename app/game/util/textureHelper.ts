@@ -1,18 +1,16 @@
-import { EquirectangularReflectionMapping, LinearMipMapLinearFilter, NearestFilter, TextureLoader } from "three"
-import { Texture } from "three/src/textures/Texture"
+import {
+  EquirectangularReflectionMapping,
+  LinearMipMapLinearFilter,
+  NearestFilter,
+  Texture,
+  TextureLoader
+} from "three"
 import { sRGBEncoding } from "@react-three/drei/helpers/deprecated"
 
 const pngLoader = new TextureLoader()
 
-export function imgLoader(path: string, type: string): Texture {
-  let image
-
-  if (type === "gif") {
-    console.log("for later")
-  } else {
-    image = pngLoader.load(path)
-  }
-
+export function imgLoader(path: string, type: string | null = null): Texture {
+  let image = pngLoader.load(path)
   // options
   image.mapping = EquirectangularReflectionMapping
   image.encoding = sRGBEncoding

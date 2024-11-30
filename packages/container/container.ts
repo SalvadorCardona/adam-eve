@@ -1,7 +1,11 @@
-import { JsonLdIri } from "@/packages/utils/jsonLd/jsonLd"
+import { JsonLdIri, JsonLDItem } from "@/packages/utils/jsonLd/jsonLd"
 
 export interface ContainerInterface<T> {
   [key: JsonLdIri]: T
+}
+
+export interface JsonLdContainerInterface<T> {
+  [key: JsonLdIri]: JsonLDItem<T>
 }
 
 export function createContainer<T>(): ContainerInterface<T> {
@@ -37,4 +41,11 @@ export function hasId<T>(container: ContainerInterface<T>, key: JsonLdIri): bool
 
 export function updateContainer<T>(container: ContainerInterface<T>, item: T): void {
   container[item["@id"]] = item
+}
+
+export function getByTypeInContainer<T>(
+  container: JsonLdContainerInterface<T>,
+  type: string
+): T[] {
+  return Object.values(container).filter(item => item["@type"] === type);
 }

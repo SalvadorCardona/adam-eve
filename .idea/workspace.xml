@@ -5,15 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/game/home/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/domain/findClosest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/EntityDecorator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/character2/character2Entity.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/house/houseimg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/low_poly_human.glb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/low_poly_tree.glb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react-three-fiber-webstorm-fix.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/Game.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/config/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/config/configGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/Vector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/img.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/ground/Ground.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/home/Home.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/util/textureHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/util/textureHelper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/jsonLd/jsonLd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/jsonLd/jsonLd.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +50,8 @@
         <option value="Tsx Component React" />
         <option value="Typescript Function" />
         <option value="Typescript Interface" />
-        <option value="TypeScript File" />
         <option value="TSX Component React" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -71,19 +91,19 @@
     "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "20.9.0",
     "javascript.nodejs.core.library.typings.version": "20.9.5",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/adam-eve/app/game/entity",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/entity",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
+    "nodejs_interpreter_path": "wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\prettier",
+    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\adam-eve\\node_modules\\typescript\\lib",
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -119,13 +139,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\entity" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\public" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\character" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\packages" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\public" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\character2" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\house" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\character" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\domain" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\public" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\packages" />
@@ -167,6 +188,9 @@
       <workItem from="1732893546819" duration="484000" />
       <workItem from="1732957445632" duration="531000" />
       <workItem from="1732957993261" duration="1631000" />
+      <workItem from="1732959832202" duration="4829000" />
+      <workItem from="1732996018903" duration="58000" />
+      <workItem from="1732996085811" duration="5397000" />
     </task>
     <servers />
   </component>

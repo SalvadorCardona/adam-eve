@@ -1,14 +1,14 @@
-import { ContainerInterface } from "@/packages/container/container"
+import { JsonLdContainerInterface } from "@/packages/container/container"
 import EntityInterface from "@/app/game/domain/EntityInterface"
 
-export default interface GameInterfaceInterface {
+export default interface GameInterface {
   time: 0
-  entities: ContainerInterface<EntityInterface>
+  entities: JsonLdContainerInterface<EntityInterface>
 }
 
-export function gameFactory(): GameInterfaceInterface {
+export function gameFactory(): GameInterface {
   return {
     time: 0,
-    entities: {}
+    entities: {},
   }
 }

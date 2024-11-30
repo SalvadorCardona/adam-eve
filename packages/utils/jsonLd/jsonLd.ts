@@ -14,6 +14,6 @@ export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T
   return {
     "@type": type,
     "@id": type + "/" + createUniqId(),
-    ...object
+    ...object,
   }
 }
