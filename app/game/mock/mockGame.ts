@@ -1,10 +1,10 @@
 import GameInterfaceInterface from "@/app/game/domain/GameInterface"
 import { createContainer, updateContainer } from "@/packages/container/container"
 import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
-import EntityInterface from "@/app/game/domain/EntityInterface"
+import EntityInterface from "@/app/game/domain/entity/EntityInterface"
 import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
-import { character2 } from "@/app/game/entity/character2/character2Entity"
 import { threeEntityMetaData } from "@/app/game/entity/three/Three2Entity"
+import { forumEntityMetaData } from "@/app/game/entity/forum/ForumEntity"
 
 const entities = createContainer<EntityInterface>()
 
@@ -16,7 +16,7 @@ updateContainer(
       life: 50,
       position: {
         x: 1,
-        y: 0,
+        y: 0.2,
         z: 1,
       },
       size: {
@@ -36,28 +36,8 @@ updateContainer(
       life: 50,
       position: {
         x: 4,
-        y: 0,
+        y: 0.2,
         z: 4,
-      },
-      size: {
-        x: 2,
-        y: 2,
-        z: 2,
-      },
-    },
-  }),
-)
-
-updateContainer(
-  entities,
-  character2.factory({
-    entity: {
-      speed: 0.1,
-      life: 50,
-      position: {
-        x: -1,
-        y: 0,
-        z: -1,
       },
       size: {
         x: 2,
@@ -76,8 +56,27 @@ updateContainer(
       life: 50,
       position: {
         x: 2,
-        y: 0,
+        y: 0.2,
         z: 2,
+      },
+      size: {
+        x: 2,
+        y: 2,
+        z: 2,
+      },
+    },
+  }),
+)
+
+updateContainer(
+  entities,
+  forumEntityMetaData.factory({
+    entity: {
+      life: 50,
+      position: {
+        x: 0,
+        y: 0,
+        z: 0,
       },
       size: {
         x: 2,

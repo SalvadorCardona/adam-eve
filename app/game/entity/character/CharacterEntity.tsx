@@ -1,11 +1,8 @@
-import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
-import { imgLoader } from "@/app/game/util/textureHelper"
-import imageSource from "./img.png"
+import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
 import { vector3ToArray } from "@/app/game/domain/Vector"
 import { useEffect } from "react"
-import { entityFactory } from "@/app/game/domain/entityFactory"
-
-const image = imgLoader(imageSource.src, "un")
+import { entityFactory } from "@/app/game/domain/entity/entityFactory"
+import { useGLTF } from "@react-three/drei"
 
 export enum Controls {
   up = "up",
@@ -14,6 +11,8 @@ export enum Controls {
   right = "right",
   jump = "jump",
 }
+
+useGLTF.preload("./low_poly_human.glb")
 
 export const characterEntityMetaData: EntityMetaDataInterface = {
   factory: entityFactory,
@@ -73,16 +72,13 @@ export const characterEntityMetaData: EntityMetaDataInterface = {
         window.removeEventListener("keydown", handleKeyDown)
       }
     }, [])
+    const glb = useGLTF("./low_poly_human.glb") // Load the GLB model
     return (
-      <>
-        <mesh
-          position={vector3ToArray(entity.position)}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <planeGeometry args={[entity.size.x, entity.size.y]} />
-          <meshStandardMaterial attach="material" transparent={true} map={image} />
-        </mesh>
-      </>
+      <primitive
+        object={glb.scene}
+        scale={[0.8, 0.8, 0.8]}
+        position={vector3ToArray(entity.position)}
+      />
     )
   },
 }

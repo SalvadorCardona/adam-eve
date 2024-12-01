@@ -1,9 +1,10 @@
-import EntityInterface from "@/app/game/domain/EntityInterface"
+import EntityInterface from "@/app/game/domain/entity/EntityInterface"
 import { jsonLdFactory } from "@/packages/utils/jsonLd/jsonLd"
 
 export function entityFactory(payload: {
   entity: Partial<EntityInterface>
 }): EntityInterface {
+  // @ts-ignore
   const type: string = this["@type"] ? this["@type"] : "unkwon"
   const baseEntity: Partial<EntityInterface> = {
     speed: 0.1,
@@ -21,5 +22,6 @@ export function entityFactory(payload: {
     actions: {},
     inventory: {},
   }
+
   return jsonLdFactory<EntityInterface>(type, { ...baseEntity, ...payload.entity })
 }

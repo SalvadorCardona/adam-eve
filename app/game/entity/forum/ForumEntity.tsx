@@ -2,22 +2,18 @@ import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaData
 
 import { useGLTF } from "@react-three/drei"
 import { vector3ToArray } from "@/app/game/domain/Vector"
-import { useRef } from "react"
-import { Mesh } from "three"
 import { entityFactory } from "@/app/game/domain/entity/entityFactory"
 
-useGLTF.preload("./low_poly_tree.glb")
+useGLTF.preload("./forum.glb")
 
-export const threeEntityMetaData: EntityMetaDataInterface = {
+export const forumEntityMetaData: EntityMetaDataInterface = {
   factory: entityFactory,
-  ["@type"]: "personnage/three",
+  ["@type"]: "personnage/forum",
   onFrame: ({ entity, game }) => {},
   component: ({ entity }) => {
-    const meshRef = useRef<Mesh>()
-    const glb = useGLTF("./low_poly_tree.glb") // Load the GLB model
+    const glb = useGLTF("./forum.glb") // Load the GLB model
     return (
       <primitive
-        ref={meshRef}
         object={glb.scene}
         scale={[1, 1, 1]}
         position={vector3ToArray(entity.position)}

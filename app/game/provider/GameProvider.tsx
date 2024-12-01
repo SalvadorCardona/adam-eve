@@ -1,8 +1,7 @@
 import { ReactNode, useEffect, useState } from "react"
 import GameInterface from "@/app/game/domain/GameInterface"
 import { GameContext } from "./GameContext"
-import configGame from "@/app/game/config/configGame"
-import { persistLocalStorage } from "@/packages/utils/localStorage/localStorage"
+import { gameProcessor } from "@/app/game/domain/gameProcessor"
 
 interface InputGameProviderPropsInterface {
   game: GameInterface
@@ -11,26 +10,22 @@ interface InputGameProviderPropsInterface {
 
 export const GameProvider = ({
   children,
-  game: baseGame,
+  game,
 }: InputGameProviderPropsInterface) => {
-  const [game, setGame] = useState<GameInterface>(baseGame)
+  const [gamefake, fakesetGame] = useState<GameInterface>(game)
+  const [version, setVersion] = useState<number>(0)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      Object.values(game.entities).map((entity) => {
-        const entityMetaData = configGame[entity["@type"]]
-        return entityMetaData.onFrame({ entity, game })
-      })
-
-      persistLocalStorage("game", game)
-      updateGame(game)
+      updateGame(gameProcessor(game))
     }, 1000 / 60) // Intervalle de 1000ms (1 seconde)
 
     return () => clearInterval(intervalId) // Nettoyage de l'intervalle lors du démontage
   }, [])
 
   const updateGame = (game: GameInterface) => {
-    setGame({ ...game })
+    fakesetGame({ ...game })
+    setVersion(version + 1)
   }
 
   return (
@@ -38,6 +33,7 @@ export const GameProvider = ({
       value={{
         game,
         updateGame,
+        version,
       }}
     >
       {children}

@@ -1,20 +1,23 @@
 import { ContainerInterface } from "@/packages/container/container"
 import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
-import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
+import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
 import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
-import { character2 } from "@/app/game/entity/character2/character2Entity"
 import { threeEntityMetaData } from "@/app/game/entity/three/Three2Entity"
-import { ActionMetadataInterface } from "@/app/game/domain/ActionMetadataInterface"
-import { goToDirection } from "@/app/game/action/goToDirection"
+import { ActionMetadataInterface } from "@/app/game/domain/action/ActionMetadataInterface"
+import { goToDirectionMetaData } from "@/app/game/action/goToDirectionMetaData"
+import { forumEntityMetaData } from "@/app/game/entity/forum/ForumEntity"
+import { woodRessourceMetadata } from "@/app/game/domain/ressource/woodRessource"
+import { RessourceMetadataInterface } from "@/app/game/domain/ressource/RessourceInterface"
 
 const configGame: ContainerInterface<
-  EntityMetaDataInterface | ActionMetadataInterface<any>
+  EntityMetaDataInterface | ActionMetadataInterface<any> | RessourceMetadataInterface
 > = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
   [houseEntityMetaData["@type"]]: houseEntityMetaData,
-  [character2["@type"]]: character2,
   [threeEntityMetaData["@type"]]: threeEntityMetaData,
-  [goToDirection["@type"]]: goToDirection,
+  [forumEntityMetaData["@type"]]: forumEntityMetaData,
+  [goToDirectionMetaData["@type"]]: goToDirectionMetaData,
+  [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
 }
 
 export default configGame

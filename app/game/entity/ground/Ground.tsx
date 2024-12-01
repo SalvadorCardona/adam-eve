@@ -2,7 +2,16 @@
 import React from "react"
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events"
 import { imgLoader } from "@/app/game/util/textureHelper"
-import imageSource from "./grass.png"
+import imageSource from "./grass2.png"
+import useGameContext from "@/app/game/provider/useGameContext"
+import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
+import {
+  getByTypeInContainer,
+  updateContainer,
+} from "@/packages/container/container"
+import { goToDirectionMetaData } from "@/app/game/action/goToDirectionMetaData"
+import EntityInterface from "@/app/game/domain/entity/EntityInterface"
+import { RepeatWrapping } from "three"
 
 const image = imgLoader(imageSource.src, "un")
 
@@ -33,14 +42,30 @@ export default function Ground() {
   //   instancedMeshRef.current.instanceMatrix.needsUpdate = true
   // }, [])
 
+  const gameContext = useGameContext()
+
   const test = (e: ThreeEvent<MouseEvent>) => {
-    console.log(e.point)
-    console.log(e.pointer)
+    if (!e) return
+    const character = getByTypeInContainer(
+      gameContext.game.entities,
+      characterEntityMetaData["@type"],
+    )[0] as EntityInterface
+
+    const action = goToDirectionMetaData.factory({
+      entity: character,
+      target: e.point,
+    })
+
+    updateContainer(character.actions, action)
   }
+
+  image.wrapS = image.wrapT = RepeatWrapping
+  image.repeat.set(10, 10)
+
   return (
     <mesh onClick={test} position={[0, -0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry args={[50, 50]} />
-      <meshStandardMaterial attach="material" transparent={true} map={image} />
+      <meshStandardMaterial attach="material" map={image} />
     </mesh>
   )
 }

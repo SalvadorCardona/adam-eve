@@ -10,10 +10,16 @@ dependencies:
     version: 10.2.9(next@14.2.18)(webpack@5.96.1)
   '@react-three/drei':
     specifier: ^9.92.7
-    version: 9.118.0(@react-three/fiber@8.17.10)(@types/three@0.170.0)(react-dom@18.3.1)(react@18.3.1)(three@0.160.1)
+    version: 9.118.0(@react-three/fiber@8.17.10)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@18.3.1)(react@18.3.1)(three@0.160.1)
   '@react-three/fiber':
     specifier: ^8.15.12
     version: 8.17.10(react-dom@18.3.1)(react@18.3.1)(three@0.160.1)
+  '@types/react':
+    specifier: ^18.3.12
+    version: 18.3.12
+  '@types/three':
+    specifier: ^0.170.0
+    version: 0.170.0
   glsl-random:
     specifier: ^0.0.5
     version: 0.0.5
@@ -34,7 +40,7 @@ dependencies:
     version: 2.34.0(three@0.160.1)
   tunnel-rat:
     specifier: ^0.1.2
-    version: 0.1.2(react@18.3.1)
+    version: 0.1.2(@types/react@18.3.12)(react@18.3.1)
   uniqid:
     specifier: ^5.4.0
     version: 5.4.0
@@ -1505,7 +1511,7 @@ packages:
     resolution: {integrity: sha512-HVj7LrZ4ReHWBimBvu2SKND3cDVUPWKLqRTmWe/fNY6o1owGOX0cAHbdPDTMelgBlVbrTKrre6lFkhqGZErK/g==}
     dev: false
 
-  /@react-three/drei@9.118.0(@react-three/fiber@8.17.10)(@types/three@0.170.0)(react-dom@18.3.1)(react@18.3.1)(three@0.160.1):
+  /@react-three/drei@9.118.0(@react-three/fiber@8.17.10)(@types/react@18.3.12)(@types/three@0.170.0)(react-dom@18.3.1)(react@18.3.1)(three@0.160.1):
     resolution: {integrity: sha512-/teOuiiIT7PsNSB71Onl+0SeI2rf0AF3DnD/dBWYMAVsmubun8tzhfsIGSxFMvTda9E178+fYe/jLRe4SnBOvg==}
     peerDependencies:
       '@react-three/fiber': '>=8.0'
@@ -1539,10 +1545,10 @@ packages:
       three-mesh-bvh: 0.7.8(three@0.160.1)
       three-stdlib: 2.34.0(three@0.160.1)
       troika-three-text: 0.52.2(three@0.160.1)
-      tunnel-rat: 0.1.2(react@18.3.1)
+      tunnel-rat: 0.1.2(@types/react@18.3.12)(react@18.3.1)
       utility-types: 3.11.0
       uuid: 9.0.1
-      zustand: 5.0.1(react@18.3.1)
+      zustand: 5.0.1(@types/react@18.3.12)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - '@types/three'
@@ -5365,10 +5371,10 @@ packages:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
     dev: false
 
-  /tunnel-rat@0.1.2(react@18.3.1):
+  /tunnel-rat@0.1.2(@types/react@18.3.12)(react@18.3.1):
     resolution: {integrity: sha512-lR5VHmkPhzdhrM092lI2nACsLO4QubF0/yoOhzX7c+wIpbN1GjHNzCc91QlpxBi+cnx8vVJ+Ur6vL5cEoQPFpQ==}
     dependencies:
-      zustand: 4.5.5(react@18.3.1)
+      zustand: 4.5.5(@types/react@18.3.12)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -5988,7 +5994,7 @@ packages:
       react: 18.3.1
     dev: false
 
-  /zustand@4.5.5(react@18.3.1):
+  /zustand@4.5.5(@types/react@18.3.12)(react@18.3.1):
     resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -6003,11 +6009,12 @@ packages:
       react:
         optional: true
     dependencies:
+      '@types/react': 18.3.12
       react: 18.3.1
       use-sync-external-store: 1.2.2(react@18.3.1)
     dev: false
 
-  /zustand@5.0.1(react@18.3.1):
+  /zustand@5.0.1(@types/react@18.3.12)(react@18.3.1):
     resolution: {integrity: sha512-pRET7Lao2z+n5R/HduXMio35TncTlSW68WsYBq2Lg1ASspsNGjpwLAsij3RpouyV6+kHMwwwzP0bZPD70/Jx/w==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
@@ -6025,5 +6032,6 @@ packages:
       use-sync-external-store:
         optional: true
     dependencies:
+      '@types/react': 18.3.12
       react: 18.3.1
     dev: false

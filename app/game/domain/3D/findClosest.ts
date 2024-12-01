@@ -1,4 +1,4 @@
-import EntityInterface from "@/app/game/domain/EntityInterface"
+import EntityInterface from "@/app/game/domain/entity/EntityInterface"
 import GameInterfaceInterface from "@/app/game/domain/GameInterface"
 import { getByTypeInContainer } from "@/packages/container/container"
 import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
