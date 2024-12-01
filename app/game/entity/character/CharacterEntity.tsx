@@ -1,14 +1,9 @@
-import {
-  baseFactory,
-  EntityMetaDataInterface,
-} from "@/app/game/domain/EntityMetaDataInterface"
+import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
 import { imgLoader } from "@/app/game/util/textureHelper"
 import imageSource from "./img.png"
-import { areVectorsEqual, vector3ToArray } from "@/app/game/domain/Vector"
+import { vector3ToArray } from "@/app/game/domain/Vector"
 import { useEffect } from "react"
-import { findClosest } from "@/app/game/domain/findClosest"
-import { Vector3 } from "three"
-import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
+import { entityFactory } from "@/app/game/domain/entityFactory"
 
 const image = imgLoader(imageSource.src, "un")
 
@@ -20,38 +15,21 @@ export enum Controls {
   jump = "jump",
 }
 
-export function generatePathCoordinates(
-  start: Vector3,
-  end: Vector3,
-  steps: number,
-): Vector3[] {
-  const path: Vector3[] = []
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps
-    const x = start.x + t * (end.x - start.x)
-    const y = start.y + t * (end.y - start.y)
-    const z = start.z + t * (end.z - start.z)
-    path.push({ x, y, z })
-  }
-
-  return path
-}
-
 export const characterEntityMetaData: EntityMetaDataInterface = {
-  factory: baseFactory,
-  type: "personnage/character",
+  factory: entityFactory,
+  ["@type"]: "personnage/character",
   onFrame: ({ entity, game }) => {
-    const three = findClosest(entity, houseEntityMetaData.type, game)
-    console.log(three)
-    if (!three) return
-
-    const positions = generatePathCoordinates(entity.position, three.position, 4)
-    console.log(positions)
-    if (areVectorsEqual(entity.position, positions[0])) {
-      entity.position = positions[1]
-    } else {
-      entity.position = positions[0]
-    }
+    // const three = findClosest(entity, houseEntityMetaData.type, game)
+    // console.log(three)
+    // if (!three) return
+    //
+    // const positions = generatePathCoordinates(entity.position, three.position, 4)
+    // console.log(positions)
+    // if (areVectorsEqual(entity.position, positions[0])) {
+    //   entity.position = positions[1]
+    // } else {
+    //   entity.position = positions[0]
+    // }
   },
   component: ({ entity }) => {
     useEffect(() => {

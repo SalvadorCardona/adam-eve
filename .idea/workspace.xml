@@ -5,36 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/game/domain/findClosest.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/entity/EntityDecorator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/entity/character2/character2Entity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/entity/house/houseimg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/low_poly_human.glb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/low_poly_tree.glb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-three-fiber-webstorm-fix.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/action/goToDirection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/domain/3D/generatePathCoordinates.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/domain/ActionMetadataInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/domain/InventoryItem.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/domain/entityFactory.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/Game.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/character/Character.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/character/Character2.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/character/character.glb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/config/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/config/configGame.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/EntityMetaDataInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/Vector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/ground/Ground.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/home/Home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/util/textureHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/util/textureHelper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/findClosest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/3D/findClosest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/EntityDecorator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/EntityDecorator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/character2/character2Entity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character2/character2Entity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/ground/earth.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/earth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/ground/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/grass.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/utils/jsonLd/jsonLd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/jsonLd/jsonLd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,38 +73,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "20.9.0",
-    "javascript.nodejs.core.library.typings.version": "20.9.5",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/entity",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "settings.typescriptcompiler",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/entity&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TypeScript JSX"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript JSX&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Space Code Reviews" />
@@ -146,12 +139,16 @@
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\house" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\3D" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\character" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\domain" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\public" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\packages" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\InventoryItem.ts" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\ActionInterface.ts" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\EntityFactory.ts" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\adam-eve\app\game\domain\EntityMetaDataInterface.ts" />
     </key>
   </component>
@@ -190,7 +187,8 @@
       <workItem from="1732957993261" duration="1631000" />
       <workItem from="1732959832202" duration="4829000" />
       <workItem from="1732996018903" duration="58000" />
-      <workItem from="1732996085811" duration="5397000" />
+      <workItem from="1732996085811" duration="5427000" />
+      <workItem from="1733059563766" duration="3744000" />
     </task>
     <servers />
   </component>

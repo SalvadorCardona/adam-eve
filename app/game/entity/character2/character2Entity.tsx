@@ -1,17 +1,17 @@
 "use client"
 
-import {
-  baseFactory,
-  EntityMetaDataInterface,
-} from "@/app/game/domain/EntityMetaDataInterface"
+import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
 import { useRef } from "react"
 import { Mesh } from "three"
 import { useGLTF } from "@react-three/drei"
 import { vector3ToArray } from "@/app/game/domain/Vector"
+import { entityFactory } from "@/app/game/domain/entityFactory"
+
+useGLTF.preload("./low_poly_human.glb")
 
 export const character2: EntityMetaDataInterface = {
-  factory: baseFactory,
-  type: "personnage/house2",
+  factory: entityFactory,
+  ["@type"]: "personnage/house2",
   onFrame: ({ entity, game }) => {},
   component: ({ entity }) => {
     const meshRef = useRef<Mesh>()

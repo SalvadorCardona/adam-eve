@@ -34,10 +34,11 @@ export default function Ground() {
   // }, [])
 
   const test = (e: ThreeEvent<MouseEvent>) => {
-    console.log(e)
+    console.log(e.point)
+    console.log(e.pointer)
   }
   return (
-    <mesh position={[0, -0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+    <mesh onClick={test} position={[0, -0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry args={[50, 50]} />
       <meshStandardMaterial attach="material" transparent={true} map={image} />
     </mesh>

@@ -6,7 +6,9 @@ interface EntityDecoratorPropsInterface {
 }
 
 export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
-  const entityMetaData = configGame[entity["@type"]]
+  const entityMetaData = configGame[entity["@type"]] as EntityInterface
+  console.log(configGame)
+  console.log(entity["@type"])
   return (
     <group
       onClick={() => {

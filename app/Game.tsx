@@ -4,7 +4,7 @@ import { Environment, Grid, OrbitControls } from "@react-three/drei"
 import { Vector3 } from "three"
 import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
-import Ground from "@/app/game/ground/Ground"
+import Ground from "@/app/game/entity/ground/Ground"
 import useGameContext from "@/app/game/provider/useGameContext"
 import { EntityDecorator } from "@/app/game/entity/EntityDecorator"
 

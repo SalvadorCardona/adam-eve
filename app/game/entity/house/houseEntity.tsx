@@ -1,16 +1,14 @@
-import {
-  baseFactory,
-  EntityMetaDataInterface,
-} from "@/app/game/domain/EntityMetaDataInterface"
+import { EntityMetaDataInterface } from "@/app/game/domain/EntityMetaDataInterface"
 import { imgLoader } from "@/app/game/util/textureHelper"
 import imageSource from "./houseimg.png"
 import { vector3ToArray } from "@/app/game/domain/Vector"
+import { entityFactory } from "@/app/game/domain/entityFactory"
 
 const image = imgLoader(imageSource.src, "un")
 
 export const houseEntityMetaData: EntityMetaDataInterface = {
-  factory: baseFactory,
-  type: "personnage/house",
+  factory: entityFactory,
+  ["@type"]: "personnage/house",
   onFrame: ({ entity, game }) => {},
   component: ({ entity }) => {
     return (

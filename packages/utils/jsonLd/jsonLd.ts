@@ -3,6 +3,10 @@ import createUniqId from "@/packages/utils/id/createUniqId"
 export type JsonLdIri = string
 export type JsonLdType = string
 
+export interface JsonTypedLdInterface {
+  "@type": JsonLdType
+}
+
 export interface BaseJsonLdInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
