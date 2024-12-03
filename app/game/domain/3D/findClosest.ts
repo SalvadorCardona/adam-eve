@@ -4,7 +4,7 @@ import { getByTypeInContainer } from "@/packages/container/container"
 import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 
 /**
- * Fais une recherche et retourne la target la plus proche
+ * FaiT une recherche et retourne la l'entité la plus proche
  */
 export const findClosest = (
   entity: EntityInterface,

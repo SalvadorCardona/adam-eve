@@ -6,7 +6,7 @@ import { threeEntityMetaData } from "@/app/game/entity/three/Three2Entity"
 import { ActionMetadataInterface } from "@/app/game/domain/action/ActionMetadataInterface"
 import { goToDirectionMetaData } from "@/app/game/action/goToDirectionMetaData"
 import { forumEntityMetaData } from "@/app/game/entity/forum/ForumEntity"
-import { woodRessourceMetadata } from "@/app/game/domain/ressource/woodRessource"
+import { woodRessourceMetadata } from "@/app/game/ressource/woodRessource"
 import { RessourceMetadataInterface } from "@/app/game/domain/ressource/RessourceInterface"
 
 const configGame: ContainerInterface<

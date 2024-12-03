@@ -44,7 +44,7 @@ export default function Ground() {
 
   const gameContext = useGameContext()
 
-  const test = (e: ThreeEvent<MouseEvent>) => {
+  const selectCahracter = (e: ThreeEvent<MouseEvent>) => {
     if (!e) return
     const character = getByTypeInContainer(
       gameContext.game.entities,
@@ -63,7 +63,11 @@ export default function Ground() {
   image.repeat.set(10, 10)
 
   return (
-    <mesh onClick={test} position={[0, -0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+    <mesh
+      onClick={selectCahracter}
+      position={[0, -0.1, 0]}
+      rotation={[-Math.PI / 2, 0, 0]}
+    >
       <planeGeometry args={[50, 50]} />
       <meshStandardMaterial attach="material" map={image} />
     </mesh>

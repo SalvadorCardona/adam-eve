@@ -16,5 +16,4 @@ export interface ActionMetadataInterface<T> extends JsonTypedLdInterface {
     action: ActionInterface<T>
   }) => void
   factory: (payload: any) => ActionInterface<T>
-  data: T
 }
