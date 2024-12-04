@@ -5,18 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/game/domain/3D/distanceBetweenVectors3.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/domain/MetaDataInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/domain/game/gameFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/domain/inventory/InventoryItemInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/ressource/wood/img.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/action/cutTheWoodDirectionMetaData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/action/cutTheWoodActionMetaData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/config/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/config/configGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/3D/findClosest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/3D/findClosest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/InventoryItem.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/action/ActionMetadataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/action/ActionMetadataInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/entity/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/domain/entity/EntityInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/domain/ressource/woodRessource.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/GameComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/GameComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/fonts/GeistMonoVF.woff" beforeDir="false" afterPath="$PROJECT_DIR$/app/interface/fonts/GeistMonoVF.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/fonts/GeistVF.woff" beforeDir="false" afterPath="$PROJECT_DIR$/app/interface/fonts/GeistVF.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/action/cutTheWoodActionMetaData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/action/cutTheWoodActionMetaData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/action/goToDirectionMetaData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/action/goToDirectionMetaData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/config/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/configGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/3D/distanceBetweenVectors3.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/distanceBetweenVectors3.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/3D/findClosest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/findClosest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/3D/generatePathCoordinates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/generatePathCoordinates.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/Vector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/Vector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/action/ActionMetadataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/action/ActionMetadataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/entity/EntityInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/entity/EntityMetaDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityMetaDataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/entity/entityFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/entityFactory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/gameProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/gameProcessor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/domain/ressource/RessourceInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/EntityDecorator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/forum/ForumEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/forum/ForumEntity.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/ressource/woodRessource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/ressource/woodRessource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/interface/InterfaceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/interface/InterfaceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/provider/GameProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/ressource/woodRessource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/ressource/wood/woodRessource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/util/textureHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/textureHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/id/createUniqId.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/id/createUniqId.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +67,25 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SalvadorCardona&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SalvadorCardona/adam-eve&quot;,
+    &quot;accountId&quot;: &quot;03d18207-f419-4995-b66b-dc4183ac29f0&quot;
+  }
+}</component>
   <component name="JsbtTreeLayoutManager">
     <layout place="tools.popupnpm">
       <scroll-view-position x="0" y="0" />
@@ -78,7 +121,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/action&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/freeland-workspace/Helios&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -133,13 +176,14 @@
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\ground" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\ressource" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\action" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\entity" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\forum" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\ressource\wood" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\domain\3D" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\domain\game" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game" />
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\interface" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\domain\game\gameFactory.ts" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\InventoryItem.ts" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\ActionInterface.ts" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\domain\EntityFactory.ts" />
@@ -186,6 +230,10 @@
       <workItem from="1733081568194" duration="6659000" />
       <workItem from="1733127289724" duration="457000" />
       <workItem from="1733169532735" duration="1507000" />
+      <workItem from="1733212786003" duration="735000" />
+      <workItem from="1733262608242" duration="150000" />
+      <workItem from="1733299039355" duration="290000" />
+      <workItem from="1733323060462" duration="4303000" />
     </task>
     <servers />
   </component>
@@ -202,6 +250,18 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/game/mock/mockGame.ts</url>
+          <line>41</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,11 +1,11 @@
-import { ActionMetadataInterface } from "@/app/game/domain/action/ActionMetadataInterface"
-import { areVectorsEqual, Vector3Interface } from "@/app/game/domain/Vector"
-import EntityInterface from "@/app/game/domain/entity/EntityInterface"
+import { ActionMetadataInterface } from "@/app/domain/action/ActionMetadataInterface"
+import { areVectorsEqual, Vector3Interface } from "@/app/domain/3D/Vector"
+import EntityInterface from "@/app/domain/entity/EntityInterface"
 import { jsonLdFactory } from "@/packages/utils/jsonLd/jsonLd"
-import { generatePathCoordinates } from "@/app/game/domain/3D/generatePathCoordinates"
+import { generatePathCoordinates } from "@/app/domain/3D/generatePathCoordinates"
 import { deleteContainerKey } from "@/packages/container/container"
 
-interface GoDirectionDataInterface {
+export interface GoDirectionDataInterface {
   coordinates?: Vector3Interface[]
   target: Vector3Interface
 }

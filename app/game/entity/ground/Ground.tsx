@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events"
-import { imgLoader } from "@/app/game/util/textureHelper"
+import { imgLoader } from "@/app/domain/3D/textureHelper"
 import imageSource from "./grass2.png"
 import useGameContext from "@/app/game/provider/useGameContext"
 import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
@@ -10,7 +10,7 @@ import {
   updateContainer,
 } from "@/packages/container/container"
 import { goToDirectionMetaData } from "@/app/game/action/goToDirectionMetaData"
-import EntityInterface from "@/app/game/domain/entity/EntityInterface"
+import EntityInterface from "@/app/domain/entity/EntityInterface"
 import { RepeatWrapping } from "three"
 
 const image = imgLoader(imageSource.src, "un")

@@ -3,9 +3,7 @@ export interface Vector2Interface {
   y: number
 }
 
-export interface Vector3Interface {
-  x: number
-  y: number
+export interface Vector3Interface extends Vector2Interface {
   z: number
 }
 
@@ -26,15 +24,13 @@ export function Vector3Factory(vector: Partial<Vector3Interface>): Vector3Interf
   }
 }
 
-export function vector3ToArray(
-  vector: Vector3Interface | Vector2Interface,
-): [number, number, number] {
+export function vector3ToArray(vector: Vector3Interface): [number, number, number] {
   return [vector.x, vector.y, vector?.z ?? 0]
 }
 
 export function areVectorsEqual(
-  v1: Vector2Interface | Vector3Interface,
-  v2: Vector2Interface | Vector3Interface,
+  v1: Vector3Interface,
+  v2: Vector3Interface,
 ): boolean {
   return v1.x === v2.x && v1.y === v2.y && (v1.z ?? 0) === (v2.z ?? 0)
 }

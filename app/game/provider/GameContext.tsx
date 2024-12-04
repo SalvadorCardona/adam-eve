@@ -1,5 +1,6 @@
 import { createContext } from "react"
-import GameInterfaceInterface, { gameFactory } from "@/app/game/domain/GameInterface"
+import GameInterfaceInterface from "@/app/domain/game/GameInterface"
+import { gameFactory } from "@/app/domain/game/gameFactory"
 
 export interface GameContextInterface {
   game: GameInterfaceInterface

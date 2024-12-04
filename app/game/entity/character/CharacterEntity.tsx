@@ -1,7 +1,7 @@
-import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
-import { vector3ToArray } from "@/app/game/domain/Vector"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
+import { vector3ToArray } from "@/app/domain/3D/Vector"
 import { useEffect } from "react"
-import { entityFactory } from "@/app/game/domain/entity/entityFactory"
+import { entityFactory } from "@/app/domain/entity/entityFactory"
 import { useGLTF } from "@react-three/drei"
 
 export enum Controls {
@@ -76,7 +76,7 @@ export const characterEntityMetaData: EntityMetaDataInterface = {
     return (
       <primitive
         object={glb.scene}
-        scale={[0.8, 0.8, 0.8]}
+        scale={[0.5, 0.5, 0.5]}
         position={vector3ToArray(entity.position)}
       />
     )

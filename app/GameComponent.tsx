@@ -5,8 +5,8 @@ import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
 import Ground from "@/app/game/entity/ground/Ground"
 import useGameContext from "@/app/game/provider/useGameContext"
-import { EntityDecorator } from "@/app/game/entity/EntityDecorator"
-import { InterfaceComponent } from "@/app/game/interface/InterfaceComponent"
+import { EntityDecorator } from "@/app/domain/entity/EntityDecorator"
+import { InterfaceComponent } from "@/app/interface/InterfaceComponent"
 
 export interface GameComponentPropsInterface {}
 

@@ -1,4 +1,6 @@
-import { Vector3Interface } from "@/app/game/domain/Vector"
+import { Vector3Interface } from "@/app/domain/3D/Vector"
+
+export type PathCoordinate = Vector3Interface[]
 
 /**
  * Permet de générer la route entre entité
@@ -7,7 +9,7 @@ export function generatePathCoordinates(
   start: Vector3Interface,
   end: Vector3Interface,
   steps: number,
-): Vector3Interface[] {
+): PathCoordinate {
   const path: Vector3Interface[] = []
   for (let i = 0; i <= steps; i++) {
     const t = i / steps

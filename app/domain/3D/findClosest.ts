@@ -1,21 +1,21 @@
-import EntityInterface from "@/app/game/domain/entity/EntityInterface"
-import GameInterfaceInterface from "@/app/game/domain/GameInterface"
+import EntityInterface from "@/app/domain/entity/EntityInterface"
+import GameInterfaceInterface from "@/app/domain/game/GameInterface"
 import { getByTypeInContainer } from "@/packages/container/container"
 import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 
 /**
- * FaiT une recherche et retourne la l'entité la plus proche
+ * Make search and return earnest entity
  */
 export const findClosest = (
   entity: EntityInterface,
   targetsEntities: JsonLdType,
   game: GameInterfaceInterface,
-): EntityInterface | null => {
+): EntityInterface | undefined => {
   const character = entity
 
   if (!character) {
     console.error("Character not found")
-    return null
+    return undefined
   }
 
   let closestTree: EntityInterface | null = null

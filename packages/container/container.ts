@@ -13,6 +13,10 @@ export interface JsonLdContainerInterface<T> {
   [key: JsonLdIri]: JsonLDItem<T>
 }
 
+export interface JsonLdTypeContainerInterface<T> {
+  [key: JsonLdType]: T
+}
+
 export function createContainer<T>(): ContainerInterface<T> {
   return {}
 }

@@ -1,8 +1,8 @@
-import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
-import { imgLoader } from "@/app/game/util/textureHelper"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
+import { imgLoader } from "@/app/domain/3D/textureHelper"
 import imageSource from "./houseimg.png"
-import { vector3ToArray } from "@/app/game/domain/Vector"
-import { entityFactory } from "@/app/game/domain/entity/entityFactory"
+import { vector3ToArray } from "@/app/domain/3D/Vector"
+import { entityFactory } from "@/app/domain/entity/entityFactory"
 
 const image = imgLoader(imageSource.src, "un")
 

@@ -1,35 +1,47 @@
-import GameInterfaceInterface from "@/app/game/domain/GameInterface"
-import { createContainer, updateContainer } from "@/packages/container/container"
+import { updateContainer } from "@/packages/container/container"
 import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
-import EntityInterface from "@/app/game/domain/entity/EntityInterface"
 import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
 import { threeEntityMetaData } from "@/app/game/entity/three/Three2Entity"
 import { forumEntityMetaData } from "@/app/game/entity/forum/ForumEntity"
+import { gameFactory } from "@/app/domain/game/gameFactory"
+import { woodRessourceMetadata } from "@/app/game/ressource/wood/woodRessource"
+import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMetaData"
 
-const entities = createContainer<EntityInterface>()
+const mockGame = gameFactory()
 
 updateContainer(
-  entities,
-  characterEntityMetaData.factory({
-    entity: {
-      speed: 0.1,
-      life: 50,
-      position: {
-        x: 1,
-        y: 0.2,
-        z: 1,
-      },
-      size: {
-        x: 1,
-        y: 1,
-        z: 1,
-      },
+  mockGame.inventory,
+  woodRessourceMetadata.factory({
+    inventory: {
+      quantity: 3,
     },
   }),
 )
 
+const character = characterEntityMetaData.factory({
+  entity: {
+    speed: 0.1,
+    life: 50,
+    position: {
+      x: 1,
+      y: 0.2,
+      z: 1,
+    },
+    size: {
+      x: 1,
+      y: 1,
+      z: 1,
+    },
+  },
+})
+
+const cutWoodAction = cutTheWoodActionMetaData.factory({})
+
+updateContainer(character.actions, cutWoodAction)
+updateContainer(mockGame.entities, character)
+
 updateContainer(
-  entities,
+  mockGame.entities,
   houseEntityMetaData.factory({
     entity: {
       speed: 0.1,
@@ -49,7 +61,7 @@ updateContainer(
 )
 
 updateContainer(
-  entities,
+  mockGame.entities,
   threeEntityMetaData.factory({
     entity: {
       speed: 0.1,
@@ -69,7 +81,7 @@ updateContainer(
 )
 
 updateContainer(
-  entities,
+  mockGame.entities,
   forumEntityMetaData.factory({
     entity: {
       life: 50,
@@ -86,10 +98,5 @@ updateContainer(
     },
   }),
 )
-
-const mockGame: GameInterfaceInterface = {
-  time: 0,
-  entities: entities,
-}
 
 export default mockGame

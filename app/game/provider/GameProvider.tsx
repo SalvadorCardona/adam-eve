@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react"
-import GameInterface from "@/app/game/domain/GameInterface"
+import GameInterface from "@/app/domain/game/GameInterface"
 import { GameContext } from "./GameContext"
-import { gameProcessor } from "@/app/game/domain/gameProcessor"
+import { gameProcessor } from "@/app/domain/game/gameProcessor"
 
 interface InputGameProviderPropsInterface {
   game: GameInterface

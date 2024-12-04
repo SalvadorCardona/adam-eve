@@ -1,8 +1,8 @@
-import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
 
 import { useGLTF } from "@react-three/drei"
-import { vector3ToArray } from "@/app/game/domain/Vector"
-import { entityFactory } from "@/app/game/domain/entity/entityFactory"
+import { vector3ToArray } from "@/app/domain/3D/Vector"
+import { entityFactory } from "@/app/domain/entity/entityFactory"
 
 useGLTF.preload("./forum.glb")
 

@@ -1,8 +1,8 @@
-import GameInterface from "@/app/game/domain/GameInterface"
-import configGame from "@/app/game/config/configGame"
+import GameInterface from "@/app/domain/game/GameInterface"
+import configGame from "@/app/game/configGame"
 import { persistLocalStorage } from "@/packages/utils/localStorage/localStorage"
-import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
-import { ActionMetadataInterface } from "@/app/game/domain/action/ActionMetadataInterface"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
+import { ActionMetadataInterface } from "@/app/domain/action/ActionMetadataInterface"
 
 export function gameProcessor(game: GameInterface) {
   game.time++

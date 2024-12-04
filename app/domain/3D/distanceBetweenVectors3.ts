@@ -1,4 +1,4 @@
-import { Vector3Interface } from "@/app/game/domain/Vector"
+import { Vector3Interface } from "@/app/domain/3D/Vector"
 
 export function distanceBetweenVectors3(
   v1: Vector3Interface,

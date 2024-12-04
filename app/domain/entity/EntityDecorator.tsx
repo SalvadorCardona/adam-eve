@@ -1,6 +1,6 @@
-import configGame from "@/app/game/config/configGame"
-import EntityInterface from "@/app/game/domain/entity/EntityInterface"
-import { EntityMetaDataInterface } from "@/app/game/domain/entity/EntityMetaDataInterface"
+import configGame from "@/app/game/configGame"
+import EntityInterface from "@/app/domain/entity/EntityInterface"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
 import useGameContext from "@/app/game/provider/useGameContext"
 
 interface EntityDecoratorPropsInterface {
