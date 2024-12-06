@@ -2,7 +2,7 @@ import { ActionMetadataInterface } from "@/app/domain/action/ActionMetadataInter
 import { areVectorsEqual, Vector3Interface } from "@/app/domain/3D/Vector"
 import EntityInterface from "@/app/domain/entity/EntityInterface"
 import { jsonLdFactory } from "@/packages/utils/jsonLd/jsonLd"
-import { generatePathCoordinates } from "@/app/domain/3D/generatePathCoordinates"
+import { generatePathCoordinates } from "@/app/domain/3D/pathCoordinate/generatePathCoordinates"
 import { deleteContainerKey } from "@/packages/container/container"
 
 export interface GoDirectionDataInterface {

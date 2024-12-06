@@ -8,7 +8,7 @@ import { entityFactory } from "@/app/domain/entity/entityFactory"
 
 useGLTF.preload("./low_poly_tree.glb")
 
-export const threeEntityMetaData: EntityMetaDataInterface = {
+export const treeEntityMetaData: EntityMetaDataInterface = {
   factory: entityFactory,
   ["@type"]: "personnage/three",
   onFrame: ({ entity, game }) => {},

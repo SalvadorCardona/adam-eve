@@ -13,5 +13,8 @@ export interface ActionMetadataInterface<T> extends MetaDataInterface {
     game: GameInterface
     action: ActionInterface<T>
   }) => void
-  factory: (payload: any) => ActionInterface<T>
+  factory: (payload: {
+    entity: EntityInterface
+    game: GameInterface
+  }) => ActionInterface<T>
 }

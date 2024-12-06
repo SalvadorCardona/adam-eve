@@ -39,6 +39,13 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   container[item["@id"]] = item
 }
 
+export function updateTypeContainer(
+  container: JsonLdContainerInterface<object>,
+  item: BaseJsonLdInterface,
+): void {
+  container[item["@type"]] = item
+}
+
 export function getByTypeInContainer<T>(
   container: JsonLdContainerInterface<T>,
   type: JsonLdType,

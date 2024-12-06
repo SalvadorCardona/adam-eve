@@ -21,13 +21,13 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
         })}
         <div>time : {gameContext.game?.time}</div>
       </div>
-      <div className={"fixed top-0 right-0 bg-white"}>
+      <div className={"fixed top-0 right-0 bg-white  h-screen"}>
         {gameContext.game.entitySelection && (
-          <>
+          <div className={"scroll-auto overflow-auto"}>
             <JsonPrettyComponent
               data={gameContext.game.entitySelection}
             ></JsonPrettyComponent>
-          </>
+          </div>
         )}
       </div>
     </>
