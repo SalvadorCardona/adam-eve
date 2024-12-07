@@ -1,6 +1,6 @@
 "use client"
 import { Canvas } from "@react-three/fiber"
-import { Environment, Grid, OrbitControls } from "@react-three/drei"
+import { Environment, OrbitControls } from "@react-three/drei"
 import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
 import Ground from "@/app/game/entity/ground/Ground"
@@ -28,10 +28,13 @@ function Child(props: GameComponentPropsInterface) {
     <>
       {Object.values(gameContext.game.entities).map((entity) => {
         return (
-          <EntityDecorator key={entity["@id"]} entity={entity}></EntityDecorator>
+          <EntityDecorator
+            key={"decorator" + entity["@id"]}
+            entity={entity}
+          ></EntityDecorator>
         )
       })}
-      <Grid cellColor={"white"} args={[100, 100]} />
+      {/*<Grid cellColor={"white"} args={[100, 100]} />*/}
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
       {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}

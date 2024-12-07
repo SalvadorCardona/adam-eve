@@ -9,7 +9,7 @@ export function gameProcessor(game: GameInterface) {
 
   Object.values(game.entities).forEach((entity) => {
     const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-    entityMetaData.onFrame({ entity, game })
+    entityMetaData.onFrame && entityMetaData.onFrame({ entity, game })
 
     Object.values(entity.actions).forEach((action) => {
       const actionMeta = getMetaData(action) as ActionMetadataInterface<any>

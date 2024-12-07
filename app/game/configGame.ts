@@ -24,7 +24,7 @@ export default configGame
 export function getMetaData<T = MetaDataInterface>(
   metaType: JsonLdType | MetaDataInterface,
 ): T {
-  if (typeof metaType === "string") return configGame[metaType]
-  console.log(metaType)
-  return configGame[metaType["@type"]]
+  if (typeof metaType === "string") return configGame[metaType] as T
+
+  return configGame[metaType["@type"]] as T
 }

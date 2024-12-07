@@ -14,6 +14,7 @@ export function imgLoader(path: string, type: string | null = null): Texture {
   image.mapping = EquirectangularReflectionMapping
   image.magFilter = NearestFilter
   image.minFilter = LinearMipMapLinearFilter
+  // image.format = true ? RGBFormat : RGBAFormat
 
   return image
 }

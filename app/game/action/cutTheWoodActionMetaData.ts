@@ -26,6 +26,7 @@ enum CutTheWoodState {
 interface cutTheWoodDataInterface {
   lastTimeWoodcut: number
   treeEntity?: EntityInterface
+  houseEntity?: EntityInterface
   threePathCoordinate?: PathCoordinate
   housePathCoordinate?: PathCoordinate
   state: CutTheWoodState
@@ -46,6 +47,10 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
           game,
         )
 
+        if (!action.data.treeEntity) {
+          return []
+        }
+
         action.data.threePathCoordinate = generatePathCoordinates(
           entity.position,
           action.data.treeEntity.position,
@@ -57,15 +62,19 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
 
       const getHousePathCoordinate = (): PathCoordinate => {
         if (action.data.housePathCoordinate) return action.data.housePathCoordinate
-        action.data.housePathCoordinate = findClosest(
+        action.data.houseEntity = findClosest(
           entity,
           houseEntityMetaData["@type"],
           game,
         )
 
+        if (!action.data.houseEntity) {
+          return []
+        }
+
         action.data.housePathCoordinate = generatePathCoordinates(
           entity.position,
-          action.data.housePathCoordinate.position,
+          action.data.houseEntity.position,
           50,
         )
 

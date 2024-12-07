@@ -21,16 +21,9 @@ addToInventory(
 
 const character = characterEntityMetaData.factory({
   entity: {
-    speed: 0.1,
-    life: 50,
     position: {
       x: 1,
       y: 0.2,
-      z: 1,
-    },
-    size: {
-      x: 1,
-      y: 1,
       z: 1,
     },
   },
@@ -48,17 +41,10 @@ updateContainer(
   mockGame.entities,
   houseEntityMetaData.factory({
     entity: {
-      speed: 0.1,
-      life: 50,
       position: {
         x: 4,
         y: 0.2,
         z: 4,
-      },
-      size: {
-        x: 2,
-        y: 2,
-        z: 2,
       },
     },
   }),
@@ -68,17 +54,10 @@ updateContainer(
   mockGame.entities,
   treeEntityMetaData.factory({
     entity: {
-      speed: 0.1,
-      life: 50,
       position: {
-        x: 10,
+        x: -2,
         y: 0.2,
-        z: 10,
-      },
-      size: {
-        x: 1,
-        y: 1,
-        z: 1,
+        z: -2,
       },
     },
   }),
@@ -88,16 +67,10 @@ updateContainer(
   mockGame.entities,
   forumEntityMetaData.factory({
     entity: {
-      life: 50,
       position: {
         x: 0,
         y: 0,
         z: 0,
-      },
-      size: {
-        x: 2,
-        y: 2,
-        z: 2,
       },
     },
   }),

@@ -1,23 +1,20 @@
 import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
+import { entityMedataFactory } from "@/app/domain/entity/EntityMedataFactory"
 
-import { useGLTF } from "@react-three/drei"
-import { vector3ToArray } from "@/app/domain/3D/Vector"
-import { entityFactory } from "@/app/domain/entity/entityFactory"
-
-useGLTF.preload("./forum.glb")
-
-export const forumEntityMetaData: EntityMetaDataInterface = {
-  factory: entityFactory,
-  ["@type"]: "personnage/forum",
-  onFrame: ({ entity, game }) => {},
-  component: ({ entity }) => {
-    const glb = useGLTF("./forum.glb") // Load the GLB model
-    return (
-      <primitive
-        object={glb.scene}
-        scale={[1, 1, 1]}
-        position={vector3ToArray(entity.position)}
-      />
-    )
+export const forumEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+  asset: {
+    // model3d: "./forum.glb",
+    model2d: "house.png",
   },
-}
+  ["@type"]: "entity/building/forum",
+  defaultEntity: () => {
+    return {
+      life: 50,
+      size: {
+        x: 2,
+        y: 2,
+        z: 2,
+      },
+    }
+  },
+})

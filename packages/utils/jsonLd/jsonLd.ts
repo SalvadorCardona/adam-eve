@@ -15,6 +15,7 @@ export interface BaseJsonLdInterface {
 export type JsonLDItem<T> = BaseJsonLdInterface & T
 
 export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T> {
+  // @ts-ignore
   return {
     "@type": type,
     "@id": type + "/" + createUniqId(),
