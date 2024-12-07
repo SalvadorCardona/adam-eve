@@ -1,7 +1,7 @@
 import useGameContext from "@/app/game/provider/useGameContext"
 import JsonPrettyComponent from "@/packages/ui/JsonPrettyComponent"
 import { InventoryItemInterface } from "@/app/domain/inventory/InventoryItemInterface"
-import configGame from "@/app/game/configGame"
+import { getMetaData } from "@/app/game/configGame"
 
 interface InterfaceComponentPropsInterface {}
 
@@ -39,7 +39,7 @@ interface InventoryPropsInterface {
 }
 
 const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {
-  const inventoryMetaData = configGame[inventoryItem["@type"]] ?? null
+  const inventoryMetaData = getMetaData(inventoryItem) ?? null
   const icon = inventoryMetaData?.asset?.icon
   const name = inventoryMetaData?.["@type"]
   return (

@@ -1,4 +1,4 @@
-import configGame from "@/app/game/configGame"
+import { getMetaData } from "@/app/game/configGame"
 import EntityInterface from "@/app/domain/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
 import useGameContext from "@/app/game/provider/useGameContext"
@@ -8,7 +8,7 @@ interface EntityDecoratorPropsInterface {
 }
 
 export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
-  const entityMetaData = configGame[entity["@type"]] as EntityMetaDataInterface
+  const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const gameContext = useGameContext()
 
   const selectEntity = () => {

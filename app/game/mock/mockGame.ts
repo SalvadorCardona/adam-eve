@@ -1,4 +1,4 @@
-import { updateContainer, updateTypeContainer } from "@/packages/container/container"
+import { updateContainer } from "@/packages/container/container"
 import { characterEntityMetaData } from "@/app/game/entity/character/CharacterEntity"
 import { houseEntityMetaData } from "@/app/game/entity/house/houseEntity"
 import { forumEntityMetaData } from "@/app/game/entity/forum/ForumEntity"
@@ -6,13 +6,14 @@ import { gameFactory } from "@/app/domain/game/gameFactory"
 import { woodRessourceMetadata } from "@/app/game/ressource/wood/woodRessource"
 import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMetaData"
 import { treeEntityMetaData } from "@/app/game/entity/tree/TreeEntity"
+import { addToInventory } from "@/app/domain/inventory/InventoryItemInterface"
 
 const mockGame = gameFactory()
 
-updateTypeContainer(
+addToInventory(
   mockGame.inventory,
   woodRessourceMetadata.factory({
-    inventory: {
+    inventoryItem: {
       quantity: 3,
     },
   }),

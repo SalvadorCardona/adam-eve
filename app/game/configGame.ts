@@ -7,6 +7,7 @@ import { woodRessourceMetadata } from "@/app/game/ressource/wood/woodRessource"
 import { MetaDataInterface } from "@/app/domain/MetaDataInterface"
 import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMetaData"
 import { treeEntityMetaData } from "@/app/game/entity/tree/TreeEntity"
+import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 
 const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
@@ -19,3 +20,11 @@ const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
 }
 
 export default configGame
+
+export function getMetaData<T = MetaDataInterface>(
+  metaType: JsonLdType | MetaDataInterface,
+): T {
+  if (typeof metaType === "string") return configGame[metaType]
+  console.log(metaType)
+  return configGame[metaType["@type"]]
+}

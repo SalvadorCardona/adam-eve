@@ -6,11 +6,11 @@ import {
   PathCoordinate,
 } from "@/app/domain/3D/pathCoordinate/generatePathCoordinates"
 import {
+  addToInventory,
   getInventoryItem,
   InventoryItemInterface,
 } from "@/app/domain/inventory/InventoryItemInterface"
 import { woodRessourceMetadata } from "@/app/game/ressource/wood/woodRessource"
-import { updateTypeContainer } from "@/packages/container/container"
 import { consumePathCoordinate } from "@/app/domain/3D/pathCoordinate/consumePathCoordinate"
 import { findClosest } from "@/app/domain/3D/findClosest"
 
@@ -104,20 +104,9 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
         action.data.housePathCoordinate = consumePathCoordinateResult.pathCoordinate
 
         if (consumePathCoordinateResult.isFinish) {
-          console.log(data.woodInventory.quantity)
+          addToInventory(game.inventory, data.woodInventory)
           data.woodInventory.quantity = 0
-          console.log(data.woodInventory.quantity)
 
-          updateTypeContainer(
-            game.inventory,
-            woodRessourceMetadata.factory({
-              inventory: {
-                quantity: 1000,
-              },
-            }),
-          )
-
-          console.log()
           action.data.housePathCoordinate = undefined
           data.state = CutTheWoodState.GoToTree
         }
@@ -129,24 +118,10 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
         woodRessourceMetadata["@type"],
       )
 
-      if (!woodInventory) {
-        updateTypeContainer(
-          payload.entity.inventory,
-          woodRessourceMetadata.factory({
-            inventory: {
-              quantity: 0,
-            },
-          }),
-        )
-      }
-
       const data: cutTheWoodDataInterface = {
         lastTimeWoodcut: 0,
         state: CutTheWoodState.GoToTree,
-        woodInventory: getInventoryItem(
-          payload.entity.inventory,
-          woodRessourceMetadata["@type"],
-        ) as InventoryItemInterface,
+        woodInventory,
       }
 
       return jsonLdFactory(cutTheWoodActionMetaData["@type"], { data })

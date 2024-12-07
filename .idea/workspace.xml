@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/domain/3D/pathCoordinate/consumePathCoordinate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/3D/generatePathCoordinates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/3D/pathCoordinate/generatePathCoordinates.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/action/ActionMetadataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/action/ActionMetadataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/game/gameProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/gameProcessor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/inventory/InventoryItemInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/inventory/InventoryItemInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/action/cutTheWoodActionMetaData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/action/cutTheWoodActionMetaData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/action/goToDirectionMetaData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/action/goToDirectionMetaData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/configGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/three/Three2Entity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/tree/TreeEntity.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/interface/InterfaceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/interface/InterfaceComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +206,8 @@
       <workItem from="1733299039355" duration="290000" />
       <workItem from="1733323060462" duration="4303000" />
       <workItem from="1733386612972" duration="98000" />
-      <workItem from="1733500484241" duration="4895000" />
+      <workItem from="1733500484241" duration="5702000" />
+      <workItem from="1733581490372" duration="2760000" />
     </task>
     <servers />
   </component>
@@ -231,7 +230,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/game/mock/mockGame.ts</url>
-          <line>44</line>
+          <line>45</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
