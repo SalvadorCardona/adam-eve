@@ -22,9 +22,11 @@ export const Model2D = ({ entity }: Model2DPropsInterface) => {
   )
 
   return (
-    <mesh position={vector3ToArray(entity.position)} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[entity.size.x, entity.size.y]} />
-      <meshStandardMaterial attach="material" map={image} />
-    </mesh>
+    <sprite
+      position={vector3ToArray(entity.position)}
+      scale={vector3ToArray(entity.size)}
+    >
+      <spriteMaterial attach="material" map={image} />
+    </sprite>
   )
 }

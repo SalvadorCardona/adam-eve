@@ -5,6 +5,7 @@ import { getByLdType } from "@/packages/container/container"
 import configGame from "@/app/game/configGame"
 import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
 import { Button, Theme } from "@radix-ui/themes"
+import { ActionControllerList, controller } from "@/app/domain/controller/controller"
 
 interface InterfaceComponentPropsInterface {}
 
@@ -45,12 +46,20 @@ const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
     configGame,
     "entity",
   ) as EntityMetaDataInterface[]
+
+  const clickOnBuilding = (metaData: EntityMetaDataInterface) => {
+    controller({ metaData, action: ActionControllerList.BuildRequest })
+  }
+
   return (
     <div className={"fixed bottom-0 left-0 bg-white  w-screen p-5"}>
       <div className={"flex gap-2"}>
         {buildingMetaDatas.map((metadata) => {
           return (
-            <Button key={metadata["@type"] + "itemfactory"}>
+            <Button
+              onClick={() => clickOnBuilding(metadata)}
+              key={metadata["@type"] + "itemfactory"}
+            >
               {metadata["@type"]}
             </Button>
           )

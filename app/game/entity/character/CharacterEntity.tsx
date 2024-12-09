@@ -4,10 +4,8 @@ import { entityMedataFactory } from "@/app/domain/entity/EntityMedataFactory"
 export const characterEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: "entity/personnage/character",
   asset: {
-    // model3d: "./low_poly_human.glb",
     model2d: "character.png",
   },
-
   defaultEntity: () => {
     return {
       speed: 0.1,

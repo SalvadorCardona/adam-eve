@@ -5,21 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/UI/Inventory.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/domain/entity/addEntityToGame.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/domain/controller/controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/draft.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/GameComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/three/ThreeGameComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/UI/three/ThreeGameComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/three/ThreeGameComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/entity/addEntityToGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/addEntityToGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/entity/components/Model2D.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/components/Model2D.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/domain/game/gameFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/gameFactory.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +216,8 @@
       <workItem from="1733610145388" duration="96000" />
       <workItem from="1733682552225" duration="3153000" />
       <workItem from="1733732141705" duration="7000" />
-      <workItem from="1733757009460" duration="562000" />
+      <workItem from="1733757009460" duration="789000" />
+      <workItem from="1733770902769" duration="3974000" />
     </task>
     <servers />
   </component>

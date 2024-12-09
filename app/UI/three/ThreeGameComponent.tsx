@@ -1,12 +1,13 @@
 "use client"
 import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls } from "@react-three/drei"
+import { Environment, Grid, OrbitControls } from "@react-three/drei"
 import { GameProvider } from "@/app/game/provider/GameProvider"
 import mockGame from "@/app/game/mock/mockGame"
 import Ground from "@/app/game/entity/ground/Ground"
 import useGameContext from "@/app/game/provider/useGameContext"
 import { EntityDecorator } from "@/app/domain/entity/EntityDecorator"
 import { InterfaceComponent } from "@/app/UI/InterfaceComponent"
+import React from "react"
 
 export interface GameComponentPropsInterface {}
 
@@ -34,7 +35,7 @@ function Child(props: GameComponentPropsInterface) {
           ></EntityDecorator>
         )
       })}
-      {/*<Grid cellColor={"white"} args={[100, 100]} />*/}
+      <Grid cellColor={"white"} args={[100, 100]} />
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
       {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}

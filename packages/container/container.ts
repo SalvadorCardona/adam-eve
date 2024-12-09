@@ -54,16 +54,16 @@ export function getByTypeInContainer<T>(
 }
 
 export function getByLdType(
-  container: JsonLdContainerInterface | JsonLdTypeContainerInterface,
+  container: ContainerInterface,
   jsonLdType: JsonLdType,
-): Array<JsonLdTypeContainerInterface | JsonLdContainerInterface> {
-  const results = [] as Array<
-    JsonLdTypeContainerInterface | JsonLdContainerInterface
-  >
+): Array<BaseJsonLdInterface> {
+  const results = []
+
   Object.keys(container).map((key) => {
     if (key.startsWith(jsonLdType)) {
       results.push(container[key])
     }
   })
+
   return results
 }
