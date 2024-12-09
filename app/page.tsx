@@ -1,6 +1,6 @@
 "use client"
-import GameComponent from "@/app/GameComponent"
+import ThreeGameComponent from "@/app/UI/three/ThreeGameComponent"
 
 export default function Home() {
-  return <GameComponent></GameComponent>
+  return <ThreeGameComponent></ThreeGameComponent>
 }

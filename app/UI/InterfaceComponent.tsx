@@ -1,7 +1,10 @@
 import useGameContext from "@/app/game/provider/useGameContext"
 import JsonPrettyComponent from "@/packages/ui/JsonPrettyComponent"
-import { InventoryItemInterface } from "@/app/domain/inventory/InventoryItemInterface"
-import { getMetaData } from "@/app/game/configGame"
+import { Inventory } from "@/app/UI/Inventory"
+import { getByLdType } from "@/packages/container/container"
+import configGame from "@/app/game/configGame"
+import { EntityMetaDataInterface } from "@/app/domain/entity/EntityMetaDataInterface"
+import { Button, Theme } from "@radix-ui/themes"
 
 interface InterfaceComponentPropsInterface {}
 
@@ -9,7 +12,7 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
   const gameContext = useGameContext()
 
   return (
-    <>
+    <Theme>
       <div className={"fixed flex top-0 left-0 bg-white w-full h-16 p-2"}>
         {Object.values(gameContext.game.inventory).map((inventoryItem) => {
           return (
@@ -30,23 +33,29 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
           </div>
         )}
       </div>
-    </>
+      <BottomSidebar></BottomSidebar>
+    </Theme>
   )
 }
 
-interface InventoryPropsInterface {
-  inventoryItem: InventoryItemInterface
-}
+interface BottomSidebarPropsInterface {}
 
-const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {
-  const inventoryMetaData = getMetaData(inventoryItem) ?? null
-  const icon = inventoryMetaData?.asset?.icon
-  const name = inventoryMetaData?.["@type"]
+const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
+  const buildingMetaDatas = getByLdType(
+    configGame,
+    "entity",
+  ) as EntityMetaDataInterface[]
   return (
-    <div className={"flex"}>
-      {icon && <img className={"h-8"} src={icon} alt={"ressource"} />}
-      {!icon && <span>{name}</span>}
-      <span>{inventoryItem.quantity}</span>
+    <div className={"fixed bottom-0 left-0 bg-white  w-screen p-5"}>
+      <div className={"flex gap-2"}>
+        {buildingMetaDatas.map((metadata) => {
+          return (
+            <Button key={metadata["@type"] + "itemfactory"}>
+              {metadata["@type"]}
+            </Button>
+          )
+        })}
+      </div>
     </div>
   )
 }

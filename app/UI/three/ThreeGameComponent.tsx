@@ -6,11 +6,11 @@ import mockGame from "@/app/game/mock/mockGame"
 import Ground from "@/app/game/entity/ground/Ground"
 import useGameContext from "@/app/game/provider/useGameContext"
 import { EntityDecorator } from "@/app/domain/entity/EntityDecorator"
-import { InterfaceComponent } from "@/app/interface/InterfaceComponent"
+import { InterfaceComponent } from "@/app/UI/InterfaceComponent"
 
 export interface GameComponentPropsInterface {}
 
-export default function GameComponent(props: GameComponentPropsInterface) {
+export default function ThreeGameComponent(props: GameComponentPropsInterface) {
   return (
     <GameProvider game={mockGame}>
       <Canvas shadows camera={{ position: [0, 10, 2], fov: 75 }}>

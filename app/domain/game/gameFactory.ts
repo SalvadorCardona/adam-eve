@@ -3,7 +3,8 @@ import { jsonLdFactory } from "@/packages/utils/jsonLd/jsonLd"
 
 export function gameFactory(game?: GameInterface): GameInterface {
   return jsonLdFactory("game", {
-    entitySelection: null,
+    entitySelection: undefined,
+    entityShouldBeCreated: undefined,
     time: 0,
     actions: {},
     entities: {},

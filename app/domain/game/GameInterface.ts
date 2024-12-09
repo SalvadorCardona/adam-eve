@@ -7,7 +7,10 @@ import { ActionBagInterface } from "@/app/domain/action/ActionBagInterface"
 export default interface GameInterface extends BaseJsonLdInterface {
   time: 0
   entities: JsonLdContainerInterface<EntityInterface>
-  entitySelection: EntityInterface | null
+  // When i click on entity, this stock here
+  entitySelection: EntityInterface | undefined
+  // Entity to need created
+  entityShouldBeCreated: EntityInterface | undefined
   inventory: InventoryInterface
   actions: ActionBagInterface
 }

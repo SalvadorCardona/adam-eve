@@ -2,14 +2,15 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 import { ReactNode } from "react"
+import "@radix-ui/themes/styles.css"
 
 const geistSans = localFont({
-  src: "./interface/fonts/GeistVF.woff",
+  src: "./UI/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 })
 const geistMono = localFont({
-  src: "./interface/fonts/GeistMonoVF.woff",
+  src: "./UI/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 })

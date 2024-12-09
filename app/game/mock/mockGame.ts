@@ -7,6 +7,7 @@ import { woodRessourceMetadata } from "@/app/game/ressource/wood/woodRessource"
 import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMetaData"
 import { treeEntityMetaData } from "@/app/game/entity/tree/TreeEntity"
 import { addToInventory } from "@/app/domain/inventory/InventoryItemInterface"
+import { addEntityToGame } from "@/app/domain/entity/addEntityToGame"
 
 const mockGame = gameFactory()
 
@@ -37,8 +38,8 @@ const cutWoodAction = cutTheWoodActionMetaData.factory({
 updateContainer(character.actions, cutWoodAction)
 updateContainer(mockGame.entities, character)
 
-updateContainer(
-  mockGame.entities,
+addEntityToGame(
+  mockGame,
   houseEntityMetaData.factory({
     entity: {
       position: {
@@ -50,8 +51,8 @@ updateContainer(
   }),
 )
 
-updateContainer(
-  mockGame.entities,
+addEntityToGame(
+  mockGame,
   treeEntityMetaData.factory({
     entity: {
       position: {
@@ -63,8 +64,8 @@ updateContainer(
   }),
 )
 
-updateContainer(
-  mockGame.entities,
+addEntityToGame(
+  mockGame,
   forumEntityMetaData.factory({
     entity: {
       position: {

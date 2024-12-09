@@ -5,15 +5,15 @@ import {
   JsonLdType,
 } from "@/packages/utils/jsonLd/jsonLd"
 
-export interface ContainerInterface<T> {
-  [key: JsonLdIri]: T
+export interface ContainerInterface<T = any> {
+  [key: string]: T
 }
 
-export interface JsonLdContainerInterface<T> {
+export interface JsonLdContainerInterface<T = object> {
   [key: JsonLdIri]: JsonLDItem<T>
 }
 
-export interface JsonLdTypeContainerInterface<T> {
+export interface JsonLdTypeContainerInterface<T = object> {
   [key: JsonLdType]: T
 }
 
@@ -51,4 +51,19 @@ export function getByTypeInContainer<T>(
   type: JsonLdType,
 ): T[] {
   return Object.values(container).filter((item) => item["@type"] === type)
+}
+
+export function getByLdType(
+  container: JsonLdContainerInterface | JsonLdTypeContainerInterface,
+  jsonLdType: JsonLdType,
+): Array<JsonLdTypeContainerInterface | JsonLdContainerInterface> {
+  const results = [] as Array<
+    JsonLdTypeContainerInterface | JsonLdContainerInterface
+  >
+  Object.keys(container).map((key) => {
+    if (key.startsWith(jsonLdType)) {
+      results.push(container[key])
+    }
+  })
+  return results
 }
