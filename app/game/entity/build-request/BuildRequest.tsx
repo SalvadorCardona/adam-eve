@@ -40,8 +40,6 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
       x: Math.round(gameContext.game.mousePosition.x),
     }
 
-    console.log(position)
-
     return (
       <group position={vector3ToArray(position)}>
         <EntityComponent entity={entity}></EntityComponent>

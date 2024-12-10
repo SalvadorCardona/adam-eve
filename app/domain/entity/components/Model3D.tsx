@@ -10,18 +10,18 @@ interface Model3DPropsInterface {
 export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const metaData = getMetaData(entity)
   if (!metaData.asset?.model3d) {
-    console.warn("Component 3D not found")
-
     return
   }
 
   const glb = useGLTF(metaData.asset.model3d) // Load the GLB model
-  
+
   return (
-    <primitive
-      object={glb.scene}
-      scale={vector3ToArray(entity.scale)}
-      position={vector3ToArray(entity.position)}
-    />
+    <group position={vector3ToArray(entity.position)}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[entity.size.x, entity.size.z]} />
+        <meshStandardMaterial color="greenyellow" />
+      </mesh>
+      <primitive object={glb.scene.clone()} scale={vector3ToArray(entity.scale)} />
+    </group>
   )
 }

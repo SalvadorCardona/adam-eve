@@ -37,7 +37,11 @@ export function controller({
       const metaInterface = game.entityShouldBeCreated as EntityMetaDataInterface
       const newEntity = metaInterface.factory({
         entity: {
-          position: positon,
+          position: {
+            z: Math.round(positon.z),
+            y: Math.round(positon.y ?? 0),
+            x: Math.round(positon.x),
+          },
         },
       })
 

@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/game/entity/build-request/BuildRequest.tsx" afterDir="false" />
+    <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="Add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/domain/controller/controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/controller/controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/configGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/tree/TreeEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/tree/TreeEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/entity/components/Model3D.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/components/Model3D.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/build-request/BuildRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/build-request/BuildRequest.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/forum/ForumEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/forum/ForumEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +51,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/SalvadorCardona/adam-eve&quot;,
+    &quot;url&quot;: &quot;git@github.com:SalvadorCardona/adam-eve.git&quot;,
     &quot;accountId&quot;: &quot;03d18207-f419-4995-b66b-dc4183ac29f0&quot;
   }
 }</component>
@@ -82,38 +79,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "20.9.0",
-    "javascript.nodejs.core.library.typings.version": "20.9.5",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/entity/build-request",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/salva/workspace/adam-eve&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/salva/.config/JetBrains/PhpStorm2024.3/node/versions/22.12.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/snap/phpstorm/450/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TypeScript JSX"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript JSX&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Space Code Reviews" />
@@ -165,7 +162,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-php-predefined-a98d8de5180a-5fbe0c30323e-com.jetbrains.php.sharedIndexes-PS-243.21565.202" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PS-243.22562.164" />
+        <option value="bundled-php-predefined-a98d8de5180a-7980c7aaca61-com.jetbrains.php.sharedIndexes-PS-243.22562.164" />
       </set>
     </attachedChunks>
   </component>
@@ -217,6 +215,7 @@
       <workItem from="1733770902769" duration="4156000" />
       <workItem from="1733818068875" duration="77000" />
       <workItem from="1733845755737" duration="1780000" />
+      <workItem from="1733858732859" duration="1923000" />
     </task>
     <servers />
   </component>
@@ -233,6 +232,22 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node_modules/.pnpm/@types+three@0.170.0/node_modules/@types/three/src/loaders/TextureLoader.d.ts</url>
+          <line>12</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
