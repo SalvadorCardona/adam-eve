@@ -44,7 +44,7 @@ interface BottomSidebarPropsInterface {}
 const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
   const buildingMetaDatas = getByLdType(
     configGame,
-    "entity",
+    "entity/building",
   ) as EntityMetaDataInterface[]
 
   const clickOnBuilding = (metaData: EntityMetaDataInterface) => {

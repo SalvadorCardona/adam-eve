@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c12f1cc0-dbcb-4e17-86f6-2191817dea57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/domain/controller/controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/draft.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/game/entity/build-request/BuildRequest.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/InterfaceComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UI/three/ThreeGameComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/three/ThreeGameComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/EntityDecorator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/entity/addEntityToGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/addEntityToGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/entity/components/Model2D.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/entity/components/Model2D.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/controller/controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/controller/controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/GameInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/domain/game/gameFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/game/gameFactory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/character/CharacterEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/configGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/configGame.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/ground/Ground.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/container/container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/container/container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/house/houseEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/entity/tree/TreeEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/entity/tree/TreeEntity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/game/mock/mockGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/mock/mockGame.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,38 +82,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/public&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "20.9.0",
+    "javascript.nodejs.core.library.typings.version": "20.9.5",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/salva/workspace/game/adam-eve/app/game/entity/build-request",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "wsl://Ubuntu@/home/salva/.nvm/versions/node/v20.9.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "\\\\wsl.localhost\\Ubuntu\\home\\salva\\workspace\\game\\adam-eve\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "fileTemplates",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TypeScript JSX&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TypeScript JSX"
     ]
   }
-}</component>
+}]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Space Code Reviews" />
@@ -144,11 +141,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\build-request" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\public" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\action" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\packages\ui" />
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity" />
-      <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\game\entity\ground" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\home\salva\workspace\game\adam-eve\app\UI\three" />
@@ -217,7 +214,9 @@
       <workItem from="1733682552225" duration="3153000" />
       <workItem from="1733732141705" duration="7000" />
       <workItem from="1733757009460" duration="789000" />
-      <workItem from="1733770902769" duration="3974000" />
+      <workItem from="1733770902769" duration="4156000" />
+      <workItem from="1733818068875" duration="77000" />
+      <workItem from="1733845755737" duration="1780000" />
     </task>
     <servers />
   </component>

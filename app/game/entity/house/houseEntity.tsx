@@ -11,11 +11,6 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
     return {
       speed: 0.1,
       life: 50,
-      position: {
-        x: 1,
-        y: 0.2,
-        z: 1,
-      },
       size: {
         x: 1,
         y: 1,

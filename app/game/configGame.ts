@@ -8,6 +8,7 @@ import { MetaDataInterface } from "@/app/domain/MetaDataInterface"
 import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMetaData"
 import { treeEntityMetaData } from "@/app/game/entity/tree/TreeEntity"
 import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
+import { buildRequest } from "@/app/game/entity/build-request/BuildRequest"
 
 const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
@@ -17,6 +18,7 @@ const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [goToDirectionMetaData["@type"]]: goToDirectionMetaData,
   [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
+  [buildRequest["@type"]]: buildRequest,
 }
 
 export default configGame

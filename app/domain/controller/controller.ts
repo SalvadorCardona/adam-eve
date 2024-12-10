@@ -46,6 +46,6 @@ export function controller({
   }
 
   if (metaData && ActionControllerList.BuildRequest === action) {
-    game.entityShouldBeCreated = metaData
+    game.entityShouldBeCreated = metaData as EntityMetaDataInterface
   }
 }

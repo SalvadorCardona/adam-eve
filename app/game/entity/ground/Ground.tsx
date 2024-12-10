@@ -29,6 +29,9 @@ export default function Ground() {
   return (
     <mesh
       onClick={clickToMap}
+      onPointerMove={(event) => {
+        gameContext.game.mousePosition = event.point
+      }}
       position={[0, -0.1, 0]}
       rotation={[-Math.PI / 2, 0, 0]}
     >

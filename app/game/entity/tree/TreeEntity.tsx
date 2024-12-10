@@ -6,7 +6,7 @@ export const treeEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
     // model3d: "low_poly_tree.glb",
     model2d: "three.png",
   },
-  ["@type"]: "entity/personnage/three",
+  ["@type"]: "entity/building/three",
   defaultEntity: () => {
     return {
       life: 50,

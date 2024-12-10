@@ -8,6 +8,7 @@ import { cutTheWoodActionMetaData } from "@/app/game/action/cutTheWoodActionMeta
 import { treeEntityMetaData } from "@/app/game/entity/tree/TreeEntity"
 import { addToInventory } from "@/app/domain/inventory/InventoryItemInterface"
 import { addEntityToGame } from "@/app/domain/entity/addEntityToGame"
+import { buildRequest } from "@/app/game/entity/build-request/BuildRequest"
 
 const mockGame = gameFactory()
 
@@ -61,6 +62,13 @@ addEntityToGame(
         z: -2,
       },
     },
+  }),
+)
+
+addEntityToGame(
+  mockGame,
+  buildRequest.factory({
+    entity: {},
   }),
 )
 
