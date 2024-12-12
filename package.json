@@ -8,8 +8,8 @@
     "serve": "vite preview",
     "test": "vitest",
     "build-gh": "vite build --base=https://salvadorcardona.github.io/trigo-js/",
-    "deploy-local": "gh-pages -d dist",
-    "deploy-gh": "pnpm build-gh && pnpm deploy-local"
+    "github-pages": "gh-pages -d dist",
+    "deploy-gh": "pnpm build-gh && pnpm github-pages"
   },
   "dependencies": {
     "@radix-ui/themes": "^3.1.6",
