@@ -1,19 +1,14 @@
-import type { Config } from "tailwindcss";
+const colors = require("tailwindcss/colors");
 
-export default {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./packages/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+module.exports = {
+  darkMode: "class",
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+      animation: {
+        "spin-slow": "spin 20s linear infinite"
+      }
+    }
   },
-  plugins: [],
-} satisfies Config;
+  plugins: []
+};
