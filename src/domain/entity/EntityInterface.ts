@@ -12,4 +12,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   speed: number
   inventory: InventoryInterface
   actions: ActionBagInterface
+  state?: string
 }

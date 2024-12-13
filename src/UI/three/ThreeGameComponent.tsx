@@ -8,22 +8,20 @@ import { EntityDecorator } from "@/src/domain/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 
-export interface GameComponentPropsInterface {}
-
-export default function ThreeGameComponent(props: GameComponentPropsInterface) {
+export default function ThreeGameComponent() {
   return (
-    <div className={"h-screen"}>
+    <main className={"h-screen"}>
       <GameProvider game={mockGame}>
         <Canvas shadows camera={{ position: [0, 10, 2], fov: 75 }}>
           <Child></Child>
         </Canvas>
         <InterfaceComponent></InterfaceComponent>
       </GameProvider>
-    </div>
+    </main>
   )
 }
 
-function Child(props: GameComponentPropsInterface) {
+function Child() {
   const gameContext = useGameContext()
 
   return (
@@ -36,7 +34,7 @@ function Child(props: GameComponentPropsInterface) {
           ></EntityDecorator>
         )
       })}
-      <Grid cellColor={"white"} args={[100, 100]} />
+      <Grid cellColor={"white"} args={[1000, 1000]} />
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
       {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}

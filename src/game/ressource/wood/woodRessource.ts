@@ -8,6 +8,6 @@ export const woodRessourceMetadata: InventoryMetadataInterface = {
   "@type": "ressource/wood",
   factory: inventoryFactory,
   asset: {
-    icon: woodIcon.src,
+    icon: woodIcon,
   },
 }

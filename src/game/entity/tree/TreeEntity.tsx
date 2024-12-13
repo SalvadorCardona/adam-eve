@@ -1,12 +1,13 @@
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/domain/entity/EntityMedataFactory"
+import asset from "./tree.glb?url"
 
 export const treeEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
-    // model3d: "low_poly_tree.glb",
-    model2d: "three.png",
+    model3d: asset,
+    // model2d: "three.png",
   },
-  ["@type"]: "entity/building/three",
+  ["@type"]: "entity/nature/tree",
   defaultEntity: () => {
     return {
       life: 50,
@@ -14,6 +15,11 @@ export const treeEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
         x: 1,
         y: 1,
         z: 1,
+      },
+      scale: {
+        x: 0.2,
+        y: 0.2,
+        z: 0.2,
       },
     }
   },

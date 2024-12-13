@@ -2,7 +2,7 @@ import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { getMetaData } from "@/src/game/configGame"
 import { vector3ToArray } from "@/src/domain/3D/Vector"
 import { imgLoader } from "@/src/domain/3D/textureHelper"
-import { useMemo } from "react"
+import React, { useMemo } from "react"
 
 interface Model2DPropsInterface {
   entity: EntityInterface
@@ -22,10 +22,7 @@ export const Model2D = ({ entity }: Model2DPropsInterface) => {
   )
 
   return (
-    <sprite
-      position={vector3ToArray(entity.position)}
-      scale={vector3ToArray(entity.size)}
-    >
+    <sprite scale={vector3ToArray(entity.size)}>
       <spriteMaterial attach="material" map={image} />
     </sprite>
   )

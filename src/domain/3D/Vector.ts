@@ -34,3 +34,11 @@ export function areVectorsEqual(
 ): boolean {
   return v1.x === v2.x && v1.y === v2.y && (v1.z ?? 0) === (v2.z ?? 0)
 }
+
+export function aroundVector(vector: Partial<Vector3Interface>): Vector3Interface {
+  return {
+    z: Math.round(vector.z ?? 0),
+    y: Math.round(vector.y ?? 0),
+    x: Math.round(vector.x ?? 0),
+  }
+}

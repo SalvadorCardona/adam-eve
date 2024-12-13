@@ -1,10 +1,12 @@
-import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
-import imageSource from "./houseimg.png"
+import imageSource from "./house.glb?url"
+import imageIcon from "./icon.png?url"
 import { entityMedataFactory } from "@/src/domain/entity/EntityMedataFactory"
+import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
 
 export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
-    model2d: imageSource.src,
+    model3d: imageSource,
+    icon: imageIcon,
   },
   ["@type"]: "entity/building/house",
   defaultEntity: () => {
@@ -15,6 +17,11 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
         x: 1,
         y: 1,
         z: 1,
+      },
+      scale: {
+        x: 0.3,
+        y: 0.3,
+        z: 0.3,
       },
     }
   },

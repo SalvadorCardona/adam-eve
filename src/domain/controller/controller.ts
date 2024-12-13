@@ -1,4 +1,4 @@
-import { Vector3Interface } from "@/src/domain/3D/Vector"
+import { aroundVector, Vector3Interface } from "@/src/domain/3D/Vector"
 import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { currentGame } from "@/src/domain/game/gameFactory"
 import { MetaDataInterface } from "@/src/domain/MetaDataInterface"
@@ -37,11 +37,7 @@ export function controller({
       const metaInterface = game.entityShouldBeCreated as EntityMetaDataInterface
       const newEntity = metaInterface.factory({
         entity: {
-          position: {
-            z: Math.round(positon.z),
-            y: Math.round(positon.y ?? 0),
-            x: Math.round(positon.x),
-          },
+          position: aroundVector(positon),
         },
       })
 

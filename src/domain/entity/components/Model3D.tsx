@@ -2,6 +2,7 @@ import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { useGLTF } from "@react-three/drei"
 import { vector3ToArray } from "@/src/domain/3D/Vector"
 import { getMetaData } from "@/src/game/configGame"
+import React from "react"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
@@ -16,12 +17,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const glb = useGLTF(metaData.asset.model3d) // Load the GLB model
 
   return (
-    <group position={vector3ToArray(entity.position)}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[entity.size.x, entity.size.z]} />
-        <meshStandardMaterial color="greenyellow" />
-      </mesh>
-      <primitive object={glb.scene.clone()} scale={vector3ToArray(entity.scale)} />
-    </group>
+    <primitive object={glb.scene.clone()} scale={vector3ToArray(entity.scale)} />
   )
 }

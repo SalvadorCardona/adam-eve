@@ -21,17 +21,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
   },
   "include": [
     "./src",
     "./packages"
   ],
-  "paths": {
-    "@/*": [
-      "./*"
-    ]
-  },
+
   "files": [
     "./vitest.setup.ts"
   ]

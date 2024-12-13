@@ -1,7 +1,7 @@
-import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { jsonLdFactory, JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 import { getMetaData } from "@/src/game/configGame"
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
+import EntityInterface from "@/src/domain/entity/EntityInterface"
 
 export function entityFactory(payload: {
   entity: Partial<EntityInterface>

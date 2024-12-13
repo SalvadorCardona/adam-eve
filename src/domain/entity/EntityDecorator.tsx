@@ -1,10 +1,11 @@
-import { getMetaData } from "@/src/game/configGame"
 import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
-import useGameContext from "@/src/game/provider/useGameContext"
 import { Model2D } from "@/src/domain/entity/components/Model2D"
 import { Model3D } from "@/src/domain/entity/components/Model3D"
 import { ActionControllerList, controller } from "@/src/domain/controller/controller"
+import { getMetaData } from "@/src/game/configGame"
+import React from "react"
+import { vector3ToArray } from "@/src/domain/3D/Vector"
 
 interface EntityDecoratorPropsInterface {
   entity: EntityInterface
@@ -12,7 +13,6 @@ interface EntityDecoratorPropsInterface {
 
 export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-  const gameContext = useGameContext()
 
   const clickOnEntity = () => {
     controller({
@@ -29,8 +29,12 @@ export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
   }
 
   return (
-    <group onClick={clickOnEntity}>
+    <group onClick={clickOnEntity} position={vector3ToArray(entity.position)}>
       <EntityComponent entity={entity} key={entity["@id"]}></EntityComponent>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+        <planeGeometry args={[entity.size.x, entity.size.z]} />
+        <meshStandardMaterial color="greenyellow" />
+      </mesh>
     </group>
   )
 }

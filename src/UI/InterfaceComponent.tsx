@@ -4,8 +4,10 @@ import { Inventory } from "@/src/UI/Inventory"
 import { getByLdType } from "@/packages/container/container"
 import configGame from "@/src/game/configGame"
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
-import { Button, Theme } from "@radix-ui/themes"
 import { ActionControllerList, controller } from "@/src/domain/controller/controller"
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 
 interface InterfaceComponentPropsInterface {}
 
@@ -13,8 +15,8 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
   const gameContext = useGameContext()
 
   return (
-    <Theme>
-      <div className={"fixed flex top-0 left-0 bg-white w-full h-16 p-2"}>
+    <Card>
+      <div className={"fixed flex top-0 left-0  w-full h-16 p-2"}>
         {Object.values(gameContext.game.inventory).map((inventoryItem) => {
           return (
             <Inventory
@@ -23,19 +25,24 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
             />
           )
         })}
-        <div>time : {gameContext.game?.time}</div>
+        <div>
+          <span className={""}>time : {gameContext.game?.time}</span>
+        </div>
       </div>
-      <div className={"fixed top-0 right-0 bg-white  h-screen"}>
+      <div className={"fixed top-0 right-0   h-screen"}>
         {gameContext.game.entitySelection && (
-          <div className={"scroll-auto overflow-auto"}>
+          <Card className={"scroll-auto overflow-auto"}>
+            <Button onClick={() => (gameContext.game.entitySelection = undefined)}>
+              Close
+            </Button>
             <JsonPrettyComponent
               data={gameContext.game.entitySelection}
             ></JsonPrettyComponent>
-          </div>
+          </Card>
         )}
       </div>
       <BottomSidebar></BottomSidebar>
-    </Theme>
+    </Card>
   )
 }
 
@@ -51,17 +58,27 @@ const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
     controller({ metaData, action: ActionControllerList.BuildRequest })
   }
 
+  function content(metadata: EntityMetaDataInterface) {
+    if (metadata.asset?.icon) {
+      return (
+        <img src={metadata.asset?.icon} alt="icon" className={"w-full h-full"} />
+      )
+    }
+    return <>{metadata["@type"]}</>
+  }
+
   return (
-    <div className={"fixed bottom-0 left-0 bg-white  w-screen p-5"}>
+    <div className={"fixed bottom-0 left-0   w-screen p-5"}>
       <div className={"flex gap-2"}>
         {buildingMetaDatas.map((metadata) => {
           return (
-            <Button
+            <Card
+              className={"w-20  h-20 rounded-2xl overflow-auto"}
               onClick={() => clickOnBuilding(metadata)}
               key={metadata["@type"] + "itemfactory"}
             >
-              {metadata["@type"]}
-            </Button>
+              {content(metadata)}
+            </Card>
           )
         })}
       </div>
