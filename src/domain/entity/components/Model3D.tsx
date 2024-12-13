@@ -1,8 +1,10 @@
 import EntityInterface from "@/src/domain/entity/EntityInterface"
-import { useGLTF } from "@react-three/drei"
+import { useAnimations, useGLTF } from "@react-three/drei"
 import { vector3ToArray } from "@/src/domain/3D/Vector"
 import { getMetaData } from "@/src/game/configGame"
-import React from "react"
+import React, { useEffect, useMemo, useRef } from "react"
+import { Group } from "three"
+import { SkeletonUtils } from "three-stdlib"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
@@ -14,9 +16,24 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     return
   }
 
-  const glb = useGLTF(metaData.asset.model3d) // Load the GLB model
+  const glb = useGLTF(metaData.asset.model3d)
+  const ref = useRef<Group>()
+  const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
+  console.log(glb.animations)
+  const { actions } = useAnimations(glb.animations, ref)
 
-  return (
-    <primitive object={glb.scene.clone()} scale={vector3ToArray(entity.scale)} />
-  )
+  useEffect(() => {
+    console.log(actions)
+    if (actions && actions.Running) {
+      console.log("ici")
+      actions.Running.play()
+    }
+    return () => {
+      if (actions && actions.Running) {
+        actions.Running.stop()
+      }
+    }
+  }, [actions])
+
+  return <primitive ref={ref} object={clone} scale={vector3ToArray(entity.scale)} />
 }

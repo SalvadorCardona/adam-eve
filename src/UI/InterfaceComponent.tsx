@@ -8,6 +8,7 @@ import { ActionControllerList, controller } from "@/src/domain/controller/contro
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { Time } from "@/src/UI/time/Time"
 
 interface InterfaceComponentPropsInterface {}
 
@@ -16,7 +17,7 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
 
   return (
     <Card>
-      <div className={"fixed flex top-0 left-0  w-full h-16 p-2"}>
+      <div className={"fixed flex top-0 left-0  w-full h-16 p-2 gap-2"}>
         {Object.values(gameContext.game.inventory).map((inventoryItem) => {
           return (
             <Inventory
@@ -26,7 +27,7 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
           )
         })}
         <div>
-          <span className={""}>time : {gameContext.game?.time}</span>
+          <Time></Time>
         </div>
       </div>
       <div className={"fixed top-0 right-0   h-screen"}>

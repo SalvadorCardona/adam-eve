@@ -9,11 +9,10 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: "entity/helper/build-request",
   defaultEntity: () => {
     return {
-      life: 50,
       size: {
-        x: 4,
-        y: 4,
-        z: 4,
+        x: 0,
+        y: 0,
+        z: 0,
       },
     }
   },

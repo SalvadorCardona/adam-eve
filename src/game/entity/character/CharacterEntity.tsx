@@ -1,6 +1,6 @@
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/domain/entity/EntityMedataFactory"
-import asset from "./asset.glb?url"
+import asset from "./robot.glb?url"
 
 export const characterEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: "entity/personnage/character",

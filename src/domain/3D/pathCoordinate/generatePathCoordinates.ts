@@ -1,4 +1,5 @@
 import { Vector3Interface } from "@/src/domain/3D/Vector"
+import { distanceBetweenVectors3 } from "@/src/domain/3D/distanceBetweenVectors3"
 
 export type PathCoordinate = Vector3Interface[]
 
@@ -8,11 +9,12 @@ export type PathCoordinate = Vector3Interface[]
 export function generatePathCoordinates(
   start: Vector3Interface,
   end: Vector3Interface,
-  steps: number,
+  steps?: number,
 ): PathCoordinate {
+  const currentSteps = steps ?? Math.round(distanceBetweenVectors3(start, end) * 50)
   const path: Vector3Interface[] = []
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps
+  for (let i = 0; i <= currentSteps; i++) {
+    const t = i / currentSteps
     const x = start.x + t * (end.x - start.x)
     const y = start.y + t * (end.y - start.y)
     const z = start.z + t * (end.z - start.z)

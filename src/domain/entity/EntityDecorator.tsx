@@ -29,8 +29,12 @@ export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
   }
 
   return (
-    <group onClick={clickOnEntity} position={vector3ToArray(entity.position)}>
-      <EntityComponent entity={entity} key={entity["@id"]}></EntityComponent>
+    <group
+      onClick={clickOnEntity}
+      position={vector3ToArray(entity.position)}
+      rotation={vector3ToArray(entity.rotation)}
+    >
+      <EntityComponent entity={entity}></EntityComponent>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
         <planeGeometry args={[entity.size.x, entity.size.z]} />
         <meshStandardMaterial color="greenyellow" />

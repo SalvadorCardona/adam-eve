@@ -38,7 +38,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
     ["@type"]: "action/cutTheWood",
     onFrame: ({ entity, action, game }) => {
       const data = action.data
-
+      entity.state = "Running"
       const getThreePathCoordinate = (): PathCoordinate => {
         if (action.data.threePathCoordinate) return action.data.threePathCoordinate
         action.data.treeEntity = findClosest(
@@ -54,7 +54,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
         action.data.threePathCoordinate = generatePathCoordinates(
           entity.position,
           action.data.treeEntity.position,
-          50,
         )
 
         return action.data.threePathCoordinate
@@ -75,7 +74,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
         action.data.housePathCoordinate = generatePathCoordinates(
           entity.position,
           action.data.houseEntity.position,
-          50,
         )
 
         return action.data.housePathCoordinate
@@ -87,6 +85,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
           pathCoordinate: getThreePathCoordinate(),
         })
 
+        entity.rotation = consumePathCoordinateResult.rotation
         entity.position = consumePathCoordinateResult.position
         action.data.threePathCoordinate = consumePathCoordinateResult.pathCoordinate
 
@@ -109,6 +108,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
           pathCoordinate: getHousePathCoordinate(),
         })
 
+        entity.rotation = consumePathCoordinateResult.rotation
         entity.position = consumePathCoordinateResult.position
         action.data.housePathCoordinate = consumePathCoordinateResult.pathCoordinate
 
