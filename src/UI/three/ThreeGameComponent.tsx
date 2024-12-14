@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { Environment, Grid, OrbitControls, Stats } from "@react-three/drei"
+import { Environment, Grid, OrbitControls } from "@react-three/drei"
 import { GameProvider } from "@/src/game/provider/GameProvider"
 import mockGame from "@/src/game/mock/mockGame"
 import Ground from "@/src/game/entity/ground/Ground"
@@ -34,11 +34,10 @@ function Child() {
           ></EntityDecorator>
         )
       })}
-      <Stats showPanel={1} className={"fixed right-0"} />
+      {/*<Stats showPanel={1} className={""} />*/}
       <Grid cellColor={"white"} args={[1000, 1000]} />
       <Environment preset="dawn" background blur={0.5} />
       <OrbitControls makeDefault />
-      {/*<OrthographicCamera makeDefault></OrthographicCamera>*/}
       <Ground></Ground>
     </>
   )
