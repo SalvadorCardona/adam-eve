@@ -32,22 +32,22 @@ export function controller({
     game.entitySelection = entity
   }
 
-  if (positon && ActionControllerList.ClickOnMap === action) {
-    if (game.entityShouldBeCreated) {
-      const metaInterface = game.entityShouldBeCreated as EntityMetaDataInterface
-      const newEntity = metaInterface.factory({
-        entity: {
-          position: aroundVector(positon),
-        },
-      })
+  if (
+    positon &&
+    ActionControllerList.ClickOnMap === action &&
+    game.entityShouldBeCreated
+  ) {
+    const metaInterface = game.entityShouldBeCreated as EntityMetaDataInterface
+    const newEntity = metaInterface.factory({
+      entity: {
+        position: aroundVector(positon),
+      },
+    })
 
-      addEntityToGame(game, newEntity)
-    }
+    addEntityToGame(game, newEntity)
   }
 
   if (metaData && ActionControllerList.BuildRequest === action) {
     game.entityShouldBeCreated = metaData as EntityMetaDataInterface
   }
 }
-
-function b
