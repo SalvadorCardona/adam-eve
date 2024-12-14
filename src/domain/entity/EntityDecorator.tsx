@@ -34,8 +34,6 @@ export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
       position={vector3ToArray(entity.position)}
       rotation={vector3ToArray(entity.rotation)}
     >
-      <primitive ref={ref} object={clone} scale={vector3ToArray(entity.scale)} />
-
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
         <planeGeometry args={[entity.size.x, entity.size.z]} />
         <meshStandardMaterial color="greenyellow" />
