@@ -9,6 +9,8 @@ import { cutTheWoodActionMetaData } from "@/src/game/action/cutTheWoodActionMeta
 import { treeEntityMetaData } from "@/src/game/entity/tree/TreeEntity"
 import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 import { buildRequest } from "@/src/game/entity/build-request/BuildRequest"
+import { goldRessourceMetadata } from "@/src/game/ressource/gold/woodRessource"
+import { waterRessourceMetadata } from "@/src/game/ressource/water/woodRessource"
 
 const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
@@ -19,6 +21,8 @@ const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
   [buildRequest["@type"]]: buildRequest,
+  [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
+  [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
 }
 
 export default configGame

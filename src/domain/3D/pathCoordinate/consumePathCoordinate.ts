@@ -17,7 +17,7 @@ export const consumePathCoordinate: ConsumePathCoordinateInterface = ({
   const newPathCoordinate = [...pathCoordinate]
   let newPosition = { ...position }
   let isFinish = false
-  let rotation = { x: 0, y: 0, z: 0 } // Initialisation de la rotation
+  const rotation = { x: 0, y: 0, z: 0 } // Initialisation de la rotation
 
   if (pathCoordinate.length < 2) {
     isFinish = true
@@ -43,6 +43,6 @@ export const consumePathCoordinate: ConsumePathCoordinateInterface = ({
     pathCoordinate: newPathCoordinate,
     position: newPosition,
     isFinish,
-    rotation
+    rotation,
   }
 }

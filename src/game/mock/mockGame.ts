@@ -9,6 +9,8 @@ import { treeEntityMetaData } from "@/src/game/entity/tree/TreeEntity"
 import { addToInventory } from "@/src/domain/inventory/InventoryItemInterface"
 import { addEntityToGame } from "@/src/domain/entity/addEntityToGame"
 import { buildRequest } from "@/src/game/entity/build-request/BuildRequest"
+import { goldRessourceMetadata } from "@/src/game/ressource/gold/woodRessource"
+import { waterRessourceMetadata } from "@/src/game/ressource/water/woodRessource"
 
 const mockGame = gameFactory()
 
@@ -17,6 +19,24 @@ addToInventory(
   woodRessourceMetadata.factory({
     inventoryItem: {
       quantity: 3,
+    },
+  }),
+)
+
+addToInventory(
+  mockGame.inventory,
+  waterRessourceMetadata.factory({
+    inventoryItem: {
+      quantity: 3,
+    },
+  }),
+)
+
+addToInventory(
+  mockGame.inventory,
+  goldRessourceMetadata.factory({
+    inventoryItem: {
+      quantity: 5,
     },
   }),
 )
