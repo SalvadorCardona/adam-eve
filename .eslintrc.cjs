@@ -7,13 +7,4 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-  rules: {
-    "react/self-closing-comp": [
-      "error",
-      {
-        component: true,
-        html: true,
-      },
-    ],
-  },
 }
