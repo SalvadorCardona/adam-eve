@@ -49,3 +49,5 @@ export function controller({
     game.entityShouldBeCreated = metaData as EntityMetaDataInterface
   }
 }
+
+function b
