@@ -26,18 +26,11 @@ export function hasCollisionInGame(
   game: GameInterface,
   entity: EntityInterface,
 ): boolean {
-  const isOverlap = (
-    pos1: Vector3Interface,
-    size1: Vector3Interface,
-    pos2: Vector3Interface,
-    size2: Vector3Interface,
-  ) => {
-    return (
-      Math.abs(pos1.x - pos2.x) < (size1.x + size2.x) / 2 &&
-      Math.abs(pos1.y - pos2.y) < (size1.y + size2.y) / 2 &&
-      Math.abs(pos1.z - pos2.z) < (size1.z + size2.z) / 2
-    )
+  for (const otherEntity of Object.values(game.entities)) {
+    if (otherEntity !== entity && hasCollision(entity, otherEntity)) {
+      return true;
+    }
   }
-
-  return isOverlap(entity1.position, entity1.size, entity2.position, entity2.size)
+  
+  return false;
 }

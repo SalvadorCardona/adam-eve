@@ -4,6 +4,7 @@ import { currentGame } from "@/src/domain/game/gameFactory"
 import { MetaDataInterface } from "@/src/domain/MetaDataInterface"
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
 import { addEntityToGame } from "@/src/domain/entity/addEntityToGame"
+import { hasCollisionInGame } from "@/src/domain/entity/hasCollision"
 
 export enum ActionControllerList {
   SelectedEntity = "SelectedEntity",
@@ -43,8 +44,9 @@ export function controller({
         position: aroundVector(positon),
       },
     })
-
-    addEntityToGame(game, newEntity)
+    if (!hasCollisionInGame(game, newEntity)) {
+      addEntityToGame(game, newEntity)
+    }
   }
 
   if (metaData && ActionControllerList.BuildRequest === action) {

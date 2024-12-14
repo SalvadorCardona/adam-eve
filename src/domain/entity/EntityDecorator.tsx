@@ -9,9 +9,13 @@ import { vector3ToArray } from "@/src/domain/3D/Vector"
 
 interface EntityDecoratorPropsInterface {
   entity: EntityInterface
+  bgColor?: string
 }
 
-export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
+export const EntityDecorator = ({
+  entity,
+  bgColor,
+}: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
 
   const clickOnEntity = () => {
@@ -37,7 +41,7 @@ export const EntityDecorator = ({ entity }: EntityDecoratorPropsInterface) => {
       <EntityComponent entity={entity}></EntityComponent>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
         <planeGeometry args={[entity.size.x, entity.size.z]} />
-        <meshStandardMaterial color="greenyellow" />
+        <meshStandardMaterial color={bgColor ?? "yellow"} />
       </mesh>
     </group>
   )

@@ -4,6 +4,7 @@ import useGameContext from "@/src/game/provider/useGameContext"
 import { aroundVector } from "@/src/domain/3D/Vector"
 import React from "react"
 import { EntityDecorator } from "@/src/domain/entity/EntityDecorator"
+import { hasCollisionInGame } from "@/src/domain/entity/hasCollision"
 
 export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: "entity/helper/build-request",
@@ -27,6 +28,8 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
     const entity = entityMetaData.factory({ entity: {} })
     entity.position = aroundVector(gameContext.game.mousePosition)
 
-    return <EntityDecorator entity={entity}></EntityDecorator>
+    const bgColor = hasCollisionInGame(gameContext.game, entity) ? "red" : "yellow"
+
+    return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
   },
 })
