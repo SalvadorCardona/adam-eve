@@ -12,9 +12,9 @@ export const characterEntityMetaData: EntityMetaDataInterface = entityMedataFact
       speed: 0.1,
       life: 50,
       scale: {
-        x: 0.2,
-        y: 0.2,
-        z: 0.2,
+        x: 0.1,
+        y: 0.1,
+        z: 0.1,
       },
       position: {
         x: 1,
