@@ -45,22 +45,24 @@ jobs:
             -   name: Build project
                 run: pnpm run build
 
-            -   name: Upload production-ready build files
-                uses: actions/upload-artifact@v3
-                with:
-                    name: production-files
-                    path: ./dist
-
-    deploy:
-        name: Deploy
-        needs: build
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
-
-        steps:
             -   name: "Deploy Github Pages"
+                if: github.ref == 'refs/heads/main'
                 uses: JamesIves/github-pages-deploy-action@3.7.1
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     BRANCH: gh-pages
                     FOLDER: dist
+
+#    deploy:
+#        name: Deploy
+#        needs: build
+#        runs-on: ubuntu-latest
+#        if: github.ref == 'refs/heads/main'
+#
+#        steps:
+#            -   name: "Deploy Github Pages"
+#                uses: JamesIves/github-pages-deploy-action@3.7.1
+#                with:
+#                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#                    BRANCH: gh-pages
+#                    FOLDER: dist
