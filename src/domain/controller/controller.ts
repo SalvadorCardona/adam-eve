@@ -23,7 +23,6 @@ interface PayloadInterface {
 
 export function controller({
   positon,
-  type,
   entity,
   action,
   metaData,
