@@ -7,6 +7,7 @@ import useGameContext from "@/src/game/provider/useGameContext"
 import { EntityDecorator } from "@/src/domain/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
+import { playSound } from "@/src/domain/3D/playSong"
 
 export default function ThreeGameComponent() {
   return (
@@ -23,6 +24,8 @@ export default function ThreeGameComponent() {
 
 function Child() {
   const gameContext = useGameContext()
+
+  playSound("song.wav")
 
   return (
     <>

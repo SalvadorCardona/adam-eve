@@ -19,13 +19,10 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const glb = useGLTF(metaData.asset.model3d)
   const ref = useRef<Group>()
   const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
-  console.log(glb.animations)
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
-    console.log(actions)
     if (actions && actions.Running) {
-      console.log("ici")
       actions.Running.play()
     }
     return () => {

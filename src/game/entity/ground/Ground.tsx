@@ -8,11 +8,8 @@ import { ActionControllerList, controller } from "@/src/domain/controller/contro
 
 const image = imgLoader(imageSource, "un")
 
-export interface GroundPropsInterface {}
-
 export default function Ground() {
   const gameContext = useGameContext()
-  console.log(imageSource)
   const clickToMap = (e: ThreeEvent<MouseEvent>) => {
     if (!e) return
 

@@ -3,8 +3,8 @@ import EntityInterface from "@/src/domain/entity/EntityInterface"
 import { currentGame } from "@/src/domain/game/gameFactory"
 import { MetaDataInterface } from "@/src/domain/MetaDataInterface"
 import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
-import { addEntityToGame } from "@/src/domain/entity/addEntityToGame"
-import { hasCollisionInGame } from "@/src/domain/entity/hasCollision"
+import { addEntityToGame } from "@/src/domain/entity/useCase/addEntityToGame"
+import { playSound } from "@/src/domain/3D/playSong"
 
 export enum ActionControllerList {
   SelectedEntity = "SelectedEntity",
@@ -43,9 +43,10 @@ export function controller({
         position: aroundVector(positon),
       },
     })
-    if (!hasCollisionInGame(game, newEntity)) {
-      addEntityToGame(game, newEntity)
-    }
+
+    playSound("build_song.mp3")
+
+    addEntityToGame(game, newEntity)
   }
 
   if (metaData && ActionControllerList.BuildRequest === action) {
