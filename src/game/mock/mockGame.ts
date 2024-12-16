@@ -88,13 +88,7 @@ addEntityToGame(
 addEntityToGame(
   mockGame,
   buildRequest.factory({
-    entity: {
-      position: {
-        x: 90,
-        y: 90,
-        z: 90,
-      },
-    },
+    entity: {},
   }),
 )
 

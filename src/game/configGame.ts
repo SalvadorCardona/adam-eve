@@ -11,6 +11,7 @@ import { JsonLdType } from "@/packages/utils/jsonLd/jsonLd"
 import { buildRequest } from "@/src/game/entity/build-request/BuildRequest"
 import { goldRessourceMetadata } from "@/src/game/ressource/gold/woodRessource"
 import { waterRessourceMetadata } from "@/src/game/ressource/water/woodRessource"
+import { roadEntity } from "./entity/road/RoadEntity"
 
 const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
@@ -23,6 +24,7 @@ const configGame: JsonLdTypeContainerInterface<MetaDataInterface> = {
   [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
+  [roadEntity["@type"]]: roadEntity,
 }
 
 export default configGame
