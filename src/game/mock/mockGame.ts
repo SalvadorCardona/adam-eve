@@ -44,9 +44,9 @@ addToInventory(
 const character = characterEntityMetaData.factory({
   entity: {
     position: {
-      x: 1,
+      x: 5,
       y: 0.2,
-      z: 1,
+      z: 5,
     },
   },
 })
@@ -88,7 +88,13 @@ addEntityToGame(
 addEntityToGame(
   mockGame,
   buildRequest.factory({
-    entity: {},
+    entity: {
+      position: {
+        x: 90,
+        y: 90,
+        z: 90,
+      },
+    },
   }),
 )
 

@@ -39,10 +39,12 @@ export const EntityDecorator = ({
       rotation={vector3ToArray(entity.rotation)}
     >
       <EntityComponent entity={entity}></EntityComponent>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[entity.size.x, entity.size.z]} />
-        <meshStandardMaterial color={bgColor ?? "yellow"} />
-      </mesh>
+      {bgColor && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+          <planeGeometry args={[entity.size.x, entity.size.z]} />
+          <meshStandardMaterial color={bgColor} />
+        </mesh>
+      )}
     </group>
   )
 }

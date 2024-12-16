@@ -74,7 +74,7 @@ const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
         {buildingMetaDatas.map((metadata) => {
           return (
             <Card
-              className={"w-20  h-20 rounded-2xl overflow-auto"}
+              className={"w-20  h-20 rounded-2xl overflow-auto cursor-pointer"}
               onClick={() => clickOnBuilding(metadata)}
               key={metadata["@type"] + "itemfactory"}
             >

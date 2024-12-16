@@ -5,11 +5,12 @@ import { hasCollisionInGame } from "@/src/domain/entity/hasCollision"
 
 export function addEntityToGame(game: GameInterface, entity: EntityInterface): void {
   entity.position.y = 0.01
-  if (!hasCollisionInGame(game, entity)) {
+  const collision = hasCollisionInGame(game, entity)
+  if (!collision) {
     updateContainer(game.entities, entity)
 
     return
   }
 
-  console.warn("Has a collision")
+  console.warn("Has a collision with", collision)
 }

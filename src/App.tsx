@@ -3,7 +3,5 @@ import ThreeGameComponent from "@/src/UI/three/ThreeGameComponent"
 import "./index.css"
 
 export default function App() {
-  return (
-      <ThreeGameComponent></ThreeGameComponent>
-  )
+  return <ThreeGameComponent></ThreeGameComponent>
 }

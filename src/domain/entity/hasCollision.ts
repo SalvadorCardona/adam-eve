@@ -25,12 +25,12 @@ export function hasCollision(
 export function hasCollisionInGame(
   game: GameInterface,
   entity: EntityInterface,
-): boolean {
+): false | EntityInterface {
   for (const otherEntity of Object.values(game.entities)) {
     if (otherEntity !== entity && hasCollision(entity, otherEntity)) {
-      return true;
+      return otherEntity
     }
   }
-  
-  return false;
+
+  return false
 }
