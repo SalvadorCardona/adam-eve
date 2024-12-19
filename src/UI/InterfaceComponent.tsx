@@ -1,18 +1,16 @@
-import useGameContext from "@/src/game/provider/useGameContext"
-import JsonPrettyComponent from "@/packages/ui/JsonPrettyComponent"
+import useGameContext from "@/src/UI/provider/useGameContext"
+import JsonPrettyComponent from "@/components/JsonPrettyComponent"
 import { Inventory } from "@/src/UI/Inventory"
-import { getByLdType } from "@/packages/container/container"
-import configGame from "@/src/game/configGame"
-import { EntityMetaDataInterface } from "@/src/domain/entity/EntityMetaDataInterface"
-import { ActionControllerList, controller } from "@/src/domain/controller/controller"
+import { getByLdType } from "@/src/container/container"
+import configGame from "@/src/game/game/app/configGame"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { ActionControllerList, controller } from "@/src/UI/controller"
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Time } from "@/src/UI/time/Time"
 
-interface InterfaceComponentPropsInterface {}
-
-export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
+export const InterfaceComponent = () => {
   const gameContext = useGameContext()
 
   return (
@@ -31,13 +29,17 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
         </div>
       </div>
       <div className={"fixed top-0 right-0   h-screen"}>
-        {gameContext.game.entitySelection && (
+        {gameContext.game.userControl.entitySelection && (
           <Card className={"scroll-auto overflow-auto"}>
-            <Button onClick={() => (gameContext.game.entitySelection = undefined)}>
+            <Button
+              onClick={() =>
+                (gameContext.game.userControl.entitySelection = undefined)
+              }
+            >
               Close
             </Button>
             <JsonPrettyComponent
-              data={gameContext.game.entitySelection}
+              data={gameContext.game.userControl.entitySelection}
             ></JsonPrettyComponent>
           </Card>
         )}
@@ -47,9 +49,7 @@ export const InterfaceComponent = ({}: InterfaceComponentPropsInterface) => {
   )
 }
 
-interface BottomSidebarPropsInterface {}
-
-const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
+const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType(
     configGame,
     "entity/building",
@@ -76,7 +76,7 @@ const BottomSidebar = ({}: BottomSidebarPropsInterface) => {
             <Card
               className={"w-20  h-20 rounded-2xl overflow-auto cursor-pointer"}
               onClick={() => clickOnBuilding(metadata)}
-              key={metadata["@type"] + "itemfactory"}
+              key={metadata["@type"] + "itemFactory"}
             >
               {content(metadata)}
             </Card>

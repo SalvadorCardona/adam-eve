@@ -1,4 +1,4 @@
-import useGameContext from "@/src/game/provider/useGameContext"
+import useGameContext from "@/src/UI/provider/useGameContext"
 import React from "react"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import image from "./img.png"

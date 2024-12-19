@@ -1,18 +1,26 @@
 import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls } from "@react-three/drei"
-import { GameProvider } from "@/src/game/provider/GameProvider"
-import mockGame from "@/src/game/mock/mockGame"
-import Ground from "@/src/game/entity/ground/Ground"
-import useGameContext from "@/src/game/provider/useGameContext"
-import { EntityDecorator } from "@/src/domain/entity/EntityDecorator"
+import { Environment } from "@react-three/drei"
+import { GameProvider } from "@/src/UI/provider/GameProvider"
+import mockGame from "@/src/game/game/app/mockGame"
+import useGameContext from "@/src/UI/provider/useGameContext"
+import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
+import { Control } from "@/src/UI/Control"
+import Ground from "@/src/game/entity/app/ground/Ground"
 
 export default function ThreeGameComponent() {
   return (
-    <main className={"h-screen"}>
+    <main className={"h-screen overflow-hidden"}>
       <GameProvider game={mockGame}>
-        <Canvas shadows camera={{ position: [0, 10, 2], fov: 75 }}>
+        <Canvas
+          shadows
+          camera={{
+            position: [0, 10, 10],
+            fov: 50,
+            rotation: [-Math.PI / 4, 0, 0],
+          }}
+        >
           <Child></Child>
         </Canvas>
         <InterfaceComponent></InterfaceComponent>
@@ -34,10 +42,10 @@ function Child() {
           ></EntityDecorator>
         )
       })}
+      <Control></Control>
       {/*<Stats showPanel={1} className={""} />*/}
       {/*<Grid cellColor={"white"} args={[1000, 1000]} />*/}
       <Environment preset="dawn" background blur={0.5} />
-      <OrbitControls makeDefault />
       <Ground></Ground>
     </>
   )

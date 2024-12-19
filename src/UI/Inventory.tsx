@@ -1,5 +1,5 @@
-import { getMetaData } from "@/src/game/configGame"
-import { InventoryItemInterface } from "@/src/domain/inventory/InventoryItemInterface"
+import { getMetaData } from "@/src/game/game/app/configGame"
+import { InventoryItemInterface } from "@/src/game/inventory/InventoryItemInterface"
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 
