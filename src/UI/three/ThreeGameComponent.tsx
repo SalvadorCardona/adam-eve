@@ -8,6 +8,7 @@ import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 import { Control } from "@/src/UI/Control"
 import Ground from "@/src/game/entity/app/ground/Ground"
+import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 
 export default function ThreeGameComponent() {
   return (
@@ -24,6 +25,7 @@ export default function ThreeGameComponent() {
           <Child></Child>
         </Canvas>
         <InterfaceComponent></InterfaceComponent>
+        <MouseCursor></MouseCursor>
       </GameProvider>
     </main>
   )
