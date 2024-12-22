@@ -8,13 +8,13 @@ import {
 
 const pngLoader = new TextureLoader()
 
-export function imgLoader(path: string, type: string | null = null): Texture {
+export function imgLoader(path: string, type: string): Texture {
   let image = pngLoader.load(path)
   // options
   image.mapping = EquirectangularReflectionMapping
   image.magFilter = NearestFilter
   image.minFilter = LinearMipMapLinearFilter
   // image.format = true ? RGBFormat : RGBAFormat
-
+  image.name = type ?? "unknow"
   return image
 }

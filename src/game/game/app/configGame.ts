@@ -10,7 +10,10 @@ import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 import { goToDirectionMetaData } from "@/src/game/action/app/goToDirectionMetaData"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
-import { roadEntity } from "@/src/game/entity/app/road/RoadEntity"
+import {
+  roadEntityMetadata,
+  waterEntityMetadata,
+} from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
@@ -24,7 +27,8 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
-  [roadEntity["@type"]]: roadEntity,
+  [roadEntityMetadata["@type"]]: roadEntityMetadata,
+  [waterEntityMetadata["@type"]]: waterEntityMetadata,
 }
 
 export default configGame

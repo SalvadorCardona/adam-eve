@@ -28,7 +28,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
     },
     position: {
       x: 0,
-      y: 0.1,
+      y: 0,
     },
     size: {
       x: 1,

@@ -11,6 +11,11 @@ export const BottomSidebar = () => {
     "entity/building",
   ) as EntityMetaDataInterface[]
 
+  const groundMetaDatas = getByLdType(
+    configGame,
+    "entity/ground",
+  ) as EntityMetaDataInterface[]
+
   const clickOnBuilding = (metaData: EntityMetaDataInterface) => {
     controller({ metaData, action: ActionControllerList.BuildRequest })
   }
@@ -27,6 +32,19 @@ export const BottomSidebar = () => {
   return (
     <div className={"fixed bottom-0 left-0   w-screen p-5"}>
       <div className={"flex gap-2"}>
+        {groundMetaDatas.map((metadata) => {
+          return (
+            <Card
+              className={"w-20  h-20 rounded-2xl overflow-auto cursor-pointer"}
+              onClick={() => clickOnBuilding(metadata)}
+              key={metadata["@type"] + "itemFactory"}
+            >
+              {content(metadata)}
+            </Card>
+          )
+        })}
+      </div>
+      <div className={"flex gap-2 mt-2"}>
         {buildingMetaDatas.map((metadata) => {
           return (
             <Card

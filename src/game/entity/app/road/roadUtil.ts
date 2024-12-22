@@ -1,8 +1,9 @@
-import { Road, RoadNetwork } from "@/src/game/entity/app/road/RoadEntity"
+import { Ground, GroundNetwork } from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { Mesh, MeshStandardMaterial, TextureLoader } from "three"
 import createUniqId from "@/src/utils/id/createUniqId"
 
-function updateRoad(grid: RoadNetwork) {
+function updateRoad(grid: GroundNetwork) {
+  const size = 1
   grid.forEach((road) => {
     // Reset connections
     road.connections = { top: false, bottom: false, left: false, right: false }
@@ -12,25 +13,25 @@ function updateRoad(grid: RoadNetwork) {
       if (road.id !== otherRoad.id) {
         if (
           road.position.x === otherRoad.position.x &&
-          road.position.y === otherRoad.position.y + otherRoad.size.height
+          road.position.y === otherRoad.position.y + size
         ) {
           road.connections.top = true
         }
         if (
           road.position.x === otherRoad.position.x &&
-          road.position.y + road.size.height === otherRoad.position.y
+          road.position.y + 1 === otherRoad.position.y
         ) {
           road.connections.bottom = true
         }
         if (
           road.position.y === otherRoad.position.y &&
-          road.position.x === otherRoad.position.x + otherRoad.size.width
+          road.position.x === otherRoad.position.x + 1
         ) {
           road.connections.left = true
         }
         if (
           road.position.y === otherRoad.position.y &&
-          road.position.x + road.size.width === otherRoad.position.x
+          road.position.x + 1 === otherRoad.position.x
         ) {
           road.connections.right = true
         }
@@ -40,18 +41,14 @@ function updateRoad(grid: RoadNetwork) {
 }
 
 export function createRoad(
-  grid: RoadNetwork,
+  grid: GroundNetwork,
   position: { x: number; y: number },
-  size?: {
-    width: number
-    height: number
-  },
+  type?: string,
 ): void {
-  const currentSize = size ?? { width: 1, height: 1 }
-  const newRoad: Road = {
+  const newRoad: Ground = {
+    type: type ?? "road",
     id: createUniqId(),
     position,
-    size: currentSize,
     connections: {
       top: false,
       bottom: false,
@@ -65,7 +62,7 @@ export function createRoad(
   updateRoad(grid)
 }
 
-function applyConnectionTexture(road: Road, mesh: Mesh) {
+function applyConnectionTexture(road: Ground, mesh: Mesh) {
   const textureLoader = new TextureLoader()
 
   if (road.connections.top && road.connections.left) {
