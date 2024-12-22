@@ -1,49 +1,92 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import icons from "./icon.png"
-import React, { useMemo } from "react"
-import { ExtrudeGeometry, Shape } from "three/src/Three"
+import React from "react"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { entityFactory } from "@/src/game/entity/entityFactory"
+import { currentGame } from "@/src/game/game/gameFactory"
+import { getByLdType } from "@/src/container/container"
+import { createRoad } from "@/src/game/entity/app/road/roadUtil"
 
-export const roadEntity: EntityMetaDataInterface = entityMedataFactory({
+export type Road = {
+  id: string // Identifiant unique de la route
+  position: { x: number; y: number } // Position dans le monde (grille ou absolue)
+  size: { width: number; height: number } // Dimensions du segment de route
+  type: string
+  connections: {
+    top?: boolean
+    bottom?: boolean
+    left?: boolean
+    right?: boolean
+  } // Connexions possibles
+}
+
+export interface RoadEntityInterface extends EntityInterface {
+  roadNetwork: RoadNetwork
+}
+
+export type RoadNetwork = Road[]
+
+export const typeRoad = "entity/building/road"
+const roadEntityArgs: Partial<EntityMetaDataInterface<RoadEntityInterface>> = {
   asset: {
     icon: icons,
   },
-  ["@type"]: "entity/building/road",
-  component: (data) => {
-    const shape = useMemo(() => {
-      const s = new Shape()
-      s.moveTo(0, 0)
-      s.lineTo(1, 0)
-      s.lineTo(1, 0.5)
-      s.lineTo(0.5, 0.5)
-      s.lineTo(0.5, 1)
-      s.lineTo(0, 1)
-      s.lineTo(0, 0)
-      return s
-    }, [])
+  ["@type"]: typeRoad,
+  factory: (payload) => {
+    const entity = payload?.entity ?? {}
+    entity["@type"] = typeRoad
+    const oldPosition = { ...entity.position }
+    let newRoad: RoadEntityInterface = entityFactory({ entity })
+    newRoad.position = { x: 0, y: 0, z: 0 }
+    const game = currentGame()
 
-    const geometry = useMemo(
-      () => new ExtrudeGeometry(shape, { depth: 0.1, bevelEnabled: false }),
-      [shape],
-    )
+    if (payload?.context === "build-request") {
+      return entityFactory({ entity })
+    }
+
+    const roadEntity =
+      (getByLdType(game.entities, typeRoad)[0] as RoadEntityInterface) ??
+      entityFactory({ entity })
+
+    createRoad(roadEntity.roadNetwork, {
+      x: oldPosition.x ?? 0,
+      y: oldPosition.y ?? 0,
+    })
+
+    return roadEntity
+  },
+  component: ({ entity }) => {
+    const roads = entity.roadNetwork
 
     return (
-      <mesh
-        geometry={geometry}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, 0, 0.05]}
-      >
-        <meshStandardMaterial color="gray" />
-      </mesh>
+      <>
+        {roads.map((road) => (
+          <mesh key={road.id} position={[road.position.x, road.position.y, 0]}>
+            <planeGeometry args={[road.size.width, road.size.height]} />
+            <meshStandardMaterial color="brown" />
+          </mesh>
+        ))}
+      </>
     )
   },
   defaultEntity: () => {
     return {
+      type: "road",
+      roadNetwork: [],
       size: {
         x: 1,
         y: 1,
         z: 1,
       },
+      position: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
     }
   },
-})
+}
+
+export const roadEntity =
+  entityMedataFactory<EntityMetaDataInterface<RoadEntityInterface>>(roadEntityArgs)

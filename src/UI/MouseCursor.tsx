@@ -3,9 +3,11 @@ import React, { useEffect, useRef } from "react"
 interface MouseCursorPropsInterface {}
 
 export const MouseCursor = ({}: MouseCursorPropsInterface) => {
+  return <></>
+
   const cursorRef = useRef<HTMLDivElement>(null)
   const SIZE = 50 // Taille de l'image du curseur
-  
+
   const updateMouse = (e: MouseEvent) => {
     if (cursorRef.current) {
       cursorRef.current.style.top = `${e.clientY - SIZE / 2}px`

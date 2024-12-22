@@ -18,14 +18,14 @@ export const findClosest = (
     return undefined
   }
 
-  let closestTree: EntityInterface | null = null
+  let closestTree: EntityInterface | undefined = undefined
   let minDistance = Infinity
   const targets = getByTypeInContainer(game.entities, targetsEntities)
   targets.forEach((entity) => {
     const distance = Math.sqrt(
       Math.pow(entity.position.x - character.position.x, 2) +
         Math.pow(entity.position.y - character.position.y, 2) +
-        Math.pow(entity.position.z - character.position.z, 2),
+        Math.pow(entity.position?.z ?? 0 - (character?.position?.z ?? 0), 2),
     )
 
     if (distance < minDistance) {

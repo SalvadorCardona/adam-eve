@@ -28,7 +28,7 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
 
     const entityMetaData = gameContext.game.userControl.entityShouldBeCreated
 
-    const entity = entityMetaData.factory({ entity: {} })
+    const entity = entityMetaData.factory({ context: "build-request" })
     entity.position = aroundVector(gameContext.game.userControl.mousePosition)
 
     const bgColor = hasCollisionInGame(gameContext.game, entity) ? "red" : "yellow"

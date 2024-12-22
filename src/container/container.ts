@@ -53,11 +53,11 @@ export function getByTypeInContainer<T>(
   return Object.values(container).filter((item) => item["@type"] === type)
 }
 
-export function getByLdType(
+export function getByLdType<T extends BaseJsonLdInterface = BaseJsonLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType,
-): Array<BaseJsonLdInterface> {
-  const results = []
+): Array<T> {
+  const results: Array<T> = []
 
   Object.keys(container).map((key) => {
     if (key.startsWith(jsonLdType)) {

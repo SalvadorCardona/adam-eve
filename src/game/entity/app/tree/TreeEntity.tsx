@@ -1,8 +1,7 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./tree.glb?url"
 
-export const treeEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+export const treeEntityMetaData = entityMedataFactory({
   asset: {
     model3d: asset,
     // model2d: "three.png",

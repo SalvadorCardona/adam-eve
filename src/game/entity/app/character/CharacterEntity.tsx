@@ -19,7 +19,6 @@ export const characterEntityMetaData: EntityMetaDataInterface = entityMedataFact
       position: {
         x: 1,
         y: 0.2,
-        z: 1,
       },
       size: {
         x: 0.2,

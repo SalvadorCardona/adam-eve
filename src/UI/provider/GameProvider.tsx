@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import GameInterface from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"

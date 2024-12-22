@@ -32,5 +32,12 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     }
   }, [actions])
 
-  return <primitive ref={ref} object={clone} scale={vector3ToArray(entity.scale)} />
+  return (
+    <primitive
+      rotation={[Math.PI / 2, 0, 0]}
+      ref={ref}
+      object={clone}
+      scale={vector3ToArray(entity.scale)}
+    />
+  )
 }

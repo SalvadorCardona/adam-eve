@@ -9,6 +9,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
     inventory: {},
     createdAt: new Date(),
     userControl: {
+      showGrid: true,
       entitySelection: undefined,
       entityShouldBeCreated: undefined,
     },

@@ -3,11 +3,19 @@ import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 
-export function entityFactory(payload: {
-  entity: Partial<EntityInterface>
-}): EntityInterface {
+export function entityFactory<T extends EntityInterface = EntityInterface>(
+  payload:
+    | {
+        entity?: Partial<T>
+      }
+    | undefined,
+): T {
+  let ldType: JsonLdType = "undefined"
+
+  if (payload?.entity?.["@type"]) ldType = payload.entity["@type"]
   // @ts-ignore
-  const ldType: JsonLdType = this["@type"] ? this["@type"] : "unkwon"
+  if (this && this["@type"]) ldType = this["@type"]
+  if (ldType === "undefined") console.warn("Has not Type", payload?.entity)
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
 
@@ -17,12 +25,10 @@ export function entityFactory(payload: {
     rotation: {
       x: 0,
       y: 0,
-      z: 0,
     },
     position: {
       x: 0,
-      y: 0.4,
-      z: 0,
+      y: 0.1,
     },
     size: {
       x: 1,
@@ -37,8 +43,8 @@ export function entityFactory(payload: {
       z: 1,
     },
     ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
-    ...payload.entity,
+    ...(payload?.entity ?? {}),
   }
 
-  return jsonLdFactory<EntityInterface>(ldType, baseEntity)
+  return jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 }

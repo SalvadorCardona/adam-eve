@@ -40,7 +40,7 @@ export const EntityDecorator = ({
     >
       <EntityComponent entity={entity}></EntityComponent>
       {bgColor && (
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+        <mesh position={[0, 0, 0]}>
           <planeGeometry args={[entity.size.x, entity.size.z]} />
           <meshStandardMaterial color={bgColor} />
         </mesh>

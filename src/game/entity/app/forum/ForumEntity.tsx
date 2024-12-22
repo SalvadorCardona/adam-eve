@@ -1,9 +1,8 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
 import imageSource from "./forum.glb?url"
 
-export const forumEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+export const forumEntityMetaData = entityMedataFactory({
   asset: {
     model3d: imageSource,
     icon: imageIcon,

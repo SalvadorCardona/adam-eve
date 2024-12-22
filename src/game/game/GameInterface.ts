@@ -8,6 +8,7 @@ import { Vector3Interface } from "@/src/game/3D/Vector"
 
 export default interface GameInterface extends BaseJsonLdInterface {
   userControl: {
+    showGrid: boolean
     mousePosition?: Vector3Interface
     // When i click on entity, this stock here
     entitySelection: EntityInterface | undefined

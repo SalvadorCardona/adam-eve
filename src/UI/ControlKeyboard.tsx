@@ -16,9 +16,10 @@ enum Controls {
   right = "right",
   jump = "jump",
   backAction = "backAction",
+  showGrid = "showGrid",
 }
 
-export const Control = ({}: ControlPropsInterface) => {
+export const ControlKeyboard = ({}: ControlPropsInterface) => {
   const map = useMemo<KeyboardControlsEntry<Controls>[]>(
     () => [
       { name: Controls.forward, keys: ["ArrowUp", "KeyW"] },
@@ -27,6 +28,7 @@ export const Control = ({}: ControlPropsInterface) => {
       { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
       { name: Controls.jump, keys: ["Space"] },
       { name: Controls.backAction, keys: ["Escape"] },
+      { name: Controls.showGrid, keys: ["KeyG"] },
     ],
     [],
   )
@@ -60,6 +62,9 @@ const Elem = ({}: ElemPropsInterface) => {
     }
     if (get().right) {
       camera.position.setX(camera.position.x + 0.7)
+    }
+    if (get().showGrid) {
+      game.userControl.showGrid = !game.userControl.showGrid
     }
     if (get().backAction) {
       game.userControl.entitySelection = undefined

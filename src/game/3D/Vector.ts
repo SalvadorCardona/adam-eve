@@ -3,6 +3,10 @@ export interface Vector2Interface {
   y: number
 }
 
+export interface MaybeVector3Interface extends Vector2Interface {
+  z?: number
+}
+
 export interface Vector3Interface extends Vector2Interface {
   z: number
 }
@@ -24,18 +28,31 @@ export function Vector3Factory(vector: Partial<Vector3Interface>): Vector3Interf
   }
 }
 
-export function vector3ToArray(vector: Vector3Interface): [number, number, number] {
+export function vector3ToArray(
+  vector: Vector3Interface | MaybeVector3Interface,
+): [number, number, number] {
   return [vector.x, vector.y, vector?.z ?? 0]
 }
 
 export function areVectorsEqual(
-  v1: Vector3Interface,
-  v2: Vector3Interface,
+  v1: Vector3Interface | MaybeVector3Interface,
+  v2: Vector3Interface | MaybeVector3Interface,
 ): boolean {
   return v1.x === v2.x && v1.y === v2.y && (v1.z ?? 0) === (v2.z ?? 0)
 }
 
-export function aroundVector(vector: Partial<Vector3Interface>): Vector3Interface {
+export function aroundVector(
+  vector: Partial<Vector3Interface>,
+  aroundNearHalf: boolean = false,
+): Vector3Interface {
+  if (!aroundNearHalf) {
+    return {
+      z: Math.round(vector.z ?? 0),
+      y: Math.round(vector.y ?? 0),
+      x: Math.round(vector.x ?? 0),
+    }
+  }
+
   function roundToNearestHalf(value: number): number {
     return Math.round(value * 2) / 2
   }

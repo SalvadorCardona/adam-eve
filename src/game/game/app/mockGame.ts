@@ -11,6 +11,7 @@ import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
 import { buildRequest } from "@/src/game/entity/app/build-request/BuildRequest"
 import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
+import { roadEntity } from "@/src/game/entity/app/road/RoadEntity"
 
 const mockGame = gameFactory()
 
@@ -45,8 +46,7 @@ const character = characterEntityMetaData.factory({
   entity: {
     position: {
       x: 5,
-      y: 0.2,
-      z: 5,
+      y: 5,
     },
   },
 })
@@ -65,12 +65,13 @@ addEntityToGame(
     entity: {
       position: {
         x: 4,
-        y: 0.2,
-        z: 4,
+        y: 4,
       },
     },
   }),
 )
+
+addEntityToGame(mockGame, roadEntity.factory())
 
 addEntityToGame(
   mockGame,
@@ -78,19 +79,13 @@ addEntityToGame(
     entity: {
       position: {
         x: -2,
-        y: 0.2,
-        z: -2,
+        y: -2,
       },
     },
   }),
 )
 
-addEntityToGame(
-  mockGame,
-  buildRequest.factory({
-    entity: {},
-  }),
-)
+updateContainer(mockGame.entities, buildRequest.factory({}))
 
 addEntityToGame(
   mockGame,
@@ -99,7 +94,6 @@ addEntityToGame(
       position: {
         x: 0,
         y: 0,
-        z: 0,
       },
     },
   }),
