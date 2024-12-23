@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { Environment, Grid, PerspectiveCamera } from "@react-three/drei"
+import { Environment, PerspectiveCamera } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import mockGame from "@/src/game/game/app/mockGame"
 import useGameContext from "@/src/UI/provider/useGameContext"
@@ -45,22 +45,14 @@ function Child() {
       })}
       <ControlKeyboard></ControlKeyboard>
       {/*<Stats showPanel={1} className={""} />*/}
-      {gameContext.game.userControl.showGrid && (
-        <Grid
-          cellColor={"white"}
-          args={[1000, 1000]}
-          cellSize={0.5}
-          cellThickness={1}
-          rotation={[Math.PI / 2, 0, 0]}
-        />
-      )}
+
       <PerspectiveCamera
         makeDefault
         fov={gameContext.game.camera.fov}
         position={vector3ToArray(gameContext.game.camera.position)}
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
-      
+
       <Environment preset="dawn" background blur={0.5} />
       <Ground></Ground>
     </>

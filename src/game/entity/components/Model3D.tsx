@@ -1,10 +1,11 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { useAnimations, useGLTF } from "@react-three/drei"
-import { vector3ToArray } from "@/src/game/3D/Vector"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
-import { Group } from "three"
+import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
+import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
+import { vector3ToArray } from "../../3D/Vector"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
@@ -22,9 +23,11 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
-    if (actions && actions.Running) {
-      actions.Running.play()
+    if (entity.state && actions[entity.state] && actions) {
+      console.log(actions)
+      actions[entity.state]?.play()
     }
+
     return () => {
       if (actions && actions.Running) {
         actions.Running.stop()
@@ -32,12 +35,40 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     }
   }, [actions])
 
+  if (entity["@type"] === characterEntityMetaData["@type"]) {
+    return (
+      <primitive
+        rotation={[Math.PI / 2, 0, 0]}
+        ref={ref}
+        object={clone}
+        scale={vector3ToArray(entity.scale)}
+      />
+    )
+  }
+
+  const scaleFactor = useMemo(() => {
+    const boundingBox = new Box3().setFromObject(clone)
+    const size = new Vector3()
+    boundingBox.getSize(size)
+    const scaleX = entity.size.x / size.x
+    const scaleY = entity.size.y / size.y
+    return [scaleX, scaleY, scaleX]
+  }, [clone])
+
+  const positionZ = useMemo(() => {
+    const boundingBox = new Box3().setFromObject(clone)
+    const size = new Vector3()
+    boundingBox.getSize(size)
+    return (size.z / 2) * scaleFactor[2]
+  }, [clone, scaleFactor])
+
   return (
     <primitive
       rotation={[Math.PI / 2, 0, 0]}
       ref={ref}
       object={clone}
-      scale={vector3ToArray(entity.scale)}
+      scale={scaleFactor}
+      position-z={positionZ}
     />
   )
 }

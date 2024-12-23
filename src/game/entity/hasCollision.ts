@@ -79,7 +79,6 @@ export function hasCollisionInGame(
     if (isGroundEntity(entity) && isGroundEntity(otherEntity)) {
       for (const roadNetwork1 of entity.roadNetwork) {
         for (const roadNetwork2 of otherEntity.roadNetwork) {
-          console.log(roadNetwork1)
           if (
             hasCollision(
               { position: roadNetwork1.position, size: { x: 1, y: 1 } },

@@ -32,10 +32,18 @@ export const BottomSidebar = () => {
     "user-action",
   )
 
+  const characterMetaDatas = getByLdType<ActionUserMetaDataInterface>(
+    configGame,
+    "entity/character",
+  )
+
   return (
     <div className={"fixed bottom-0 left-0   rounded-2xl p-5"}>
       <div className={"flex gap-2"}>
         <IconBuild metaDatas={actionMetaDatas}></IconBuild>
+      </div>
+      <div className={"flex gap-2"}>
+        <IconBuild metaDatas={characterMetaDatas}></IconBuild>
       </div>
       <div className={"flex gap-2"}>
         <IconBuild metaDatas={natureMetaDatas}></IconBuild>
