@@ -17,7 +17,8 @@ export const GameProvider = ({
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      updateGame(gameProcessor(game))
+      const newGame = gameProcessor(game)
+      updateGame(newGame)
     }, 1000 / 60) // Intervalle de 1000ms (1 seconde)
 
     return () => clearInterval(intervalId) // Nettoyage de l'intervalle lors du démontage

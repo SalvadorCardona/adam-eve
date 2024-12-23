@@ -1,13 +1,26 @@
-import React, { useEffect, useRef } from "react"
-import image from "./hand.png"
+import React, { useEffect, useRef, useState } from "react"
+import imageHandSrc from "./hand.png"
+import hammerSrc from "./hammer.png"
 import useImageLoader from "@/src/hook/useImageLoader"
+import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface MouseCursorPropsInterface {}
 
 export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const cursorRef = useRef<HTMLDivElement>(null)
+  const [imageSrc, setImageSrc] = useState(imageHandSrc)
   const SIZE = 50 // Taille de l'image du curseur
-  const imageContext = useImageLoader(image)
+  const { imageData, setImageData } = useImageLoader(imageSrc)
+  const game = useGameContext().game
+
+  useEffect(() => {
+    if (game.userControl.entityShouldBeCreated && imageData.src != hammerSrc) {
+      setImageSrc(hammerSrc)
+    }
+    if (!game.userControl.entityShouldBeCreated && imageData.src != imageHandSrc) {
+      setImageSrc(imageHandSrc)
+    }
+  }, [game.userControl.entityShouldBeCreated])
 
   const updateMouse = (e: MouseEvent) => {
     if (cursorRef.current) {
@@ -25,21 +38,28 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
     }
   }, [])
 
-  if (!imageContext.ready) return <></>
+  if (!imageData.ready) return <></>
 
-  const ratio = imageContext.width / imageContext.height
+  console.log(imageData)
   return (
     <div
       ref={cursorRef}
       style={{
         position: "absolute",
-        width: `${SIZE * ratio}px`,
-        height: `${SIZE}px`,
-        backgroundImage: `url(${image})`, // Remplacez par le chemin de votre image
-        backgroundSize: "cover",
         pointerEvents: "none", // Assure que le curseur ne bloque pas les interactions
         zIndex: 1000, // Assure que le curseur est au-dessus des autres éléments
       }}
-    />
+    >
+      <img
+        src={imageData.src}
+        alt="mouse-cursor"
+        style={{
+          width: `${SIZE * imageData.ratio}px`,
+          height: "auto",
+          marginTop: `${(SIZE * imageData.ratio) / 2}px`,
+          marginLeft: `${(SIZE * imageData.ratio) / 2}px`,
+        }}
+      />
+    </div>
   )
 }

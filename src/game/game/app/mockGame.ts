@@ -64,8 +64,8 @@ addEntityToGame(
   houseEntityMetaData.factory({
     entity: {
       position: {
-        x: 4,
-        y: 4,
+        x: 6,
+        y: -6,
       },
     },
   }),
@@ -78,8 +78,8 @@ addEntityToGame(
   treeEntityMetaData.factory({
     entity: {
       position: {
-        x: -2,
-        y: -2,
+        x: -4,
+        y: -4,
       },
     },
   }),

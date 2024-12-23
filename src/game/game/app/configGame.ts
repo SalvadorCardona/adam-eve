@@ -11,6 +11,7 @@ import { goToDirectionMetaData } from "@/src/game/action/app/goToDirectionMetaDa
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
 import {
+  grassEntityMetadata,
   roadEntityMetadata,
   waterEntityMetadata,
 } from "@/src/game/entity/app/road/RoadEntityMetadata"
@@ -29,6 +30,7 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
   [roadEntityMetadata["@type"]]: roadEntityMetadata,
   [waterEntityMetadata["@type"]]: waterEntityMetadata,
+  [grassEntityMetadata["@type"]]: grassEntityMetadata,
 }
 
 export default configGame

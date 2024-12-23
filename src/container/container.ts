@@ -3,6 +3,7 @@ import {
   JsonLdIri,
   JsonLDItem,
   JsonLdType,
+  JsonTypedLdInterface,
 } from "@/src/utils/jsonLd/jsonLd"
 
 export interface ContainerInterface<T = any> {
@@ -53,7 +54,7 @@ export function getByTypeInContainer<T>(
   return Object.values(container).filter((item) => item["@type"] === type)
 }
 
-export function getByLdType<T extends BaseJsonLdInterface = BaseJsonLdInterface>(
+export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType,
 ): Array<T> {

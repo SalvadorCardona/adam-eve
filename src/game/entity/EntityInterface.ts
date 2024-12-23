@@ -13,4 +13,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   inventory: InventoryInterface
   actions: ActionBagInterface
   state?: string
+  type: string | "ground"
 }

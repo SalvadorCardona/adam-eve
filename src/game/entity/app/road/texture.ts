@@ -1,3 +1,4 @@
+import { Color, DoubleSide, ShaderMaterial } from "three/src/Three"
 
 // Vertex Shader
 const vertexShaderGround = `
@@ -9,7 +10,7 @@ void main() {
   vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
-`;
+`
 
 // Fragment Shader
 const fragmentShaderGround = `
@@ -36,17 +37,17 @@ void main() {
 
   gl_FragColor = vec4(color, 1.0);
 }
-`;
+`
 
 // Shader Material
-const GroundMaterial = new THREE.ShaderMaterial({
+const GroundMaterial = new ShaderMaterial({
   uniforms: {
-    uColor: { value: new THREE.Color(0x333333) }, // Road color
+    uColor: { value: new Color(0x333333) }, // Road color
   },
-  vertexShaderGround,
-  fragmentShaderGround,
-  side: THREE.DoubleSide
-});
+  vertexShader: vertexShaderGround,
+  fragmentShader: fragmentShaderGround,
+  side: DoubleSide,
+})
 
 const vertexShader = `
 varying vec3 vNormal;
@@ -57,7 +58,7 @@ void main() {
   vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
-`;
+`
 
 // Fragment Shader
 const fragmentShader = `
@@ -88,15 +89,15 @@ void main() {
 
   gl_FragColor = vec4(color, 1.0);
 }
-`;
+`
 
 // Shader Material
-const waterMaterial = new THREE.ShaderMaterial({
+export const WerMaterial = new ShaderMaterial({
   uniforms: {
-    uColor: { value: new THREE.Color(0x1e90ff) }, // Water color
-    uTime: { value: 0.0 }
+    uColor: { value: new Color(0x1e90ff) }, // Water color
+    uTime: { value: 0.0 },
   },
   vertexShader,
   fragmentShader,
-  side: THREE.DoubleSide
-});
+  side: DoubleSide,
+})

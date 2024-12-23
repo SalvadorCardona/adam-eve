@@ -5,25 +5,37 @@ interface ImageData {
   width: number
   height: number
   image: HTMLImageElement | null
+  ratio: number
+  src: string
 }
 
-const useImageLoader = (src: string): ImageData => {
+interface Output {
+  imageData: ImageData
+  setImageData: (src: string) => void
+}
+
+const useImageLoader = (src: string): Output => {
   const [imageData, setImageData] = useState<ImageData>({
     ready: false,
     width: 0,
     height: 0,
     image: null,
+    ratio: 0,
+    src,
   })
 
-  useEffect(() => {
+  function buildImage(newSrc: string) {
+    console.log(newSrc)
     const img = new Image()
-    img.src = src
+    img.src = newSrc
     img.onload = () => {
       setImageData({
         ready: true,
         width: img.width,
         height: img.height,
         image: img,
+        ratio: img.width / img.height,
+        src,
       })
     }
     img.onerror = () => {
@@ -32,11 +44,20 @@ const useImageLoader = (src: string): ImageData => {
         width: 0,
         height: 0,
         image: null,
+        ratio: 0,
+        src,
       })
     }
+  }
+
+  useEffect(() => {
+    buildImage(src)
   }, [src])
 
-  return imageData
+  return {
+    imageData,
+    setImageData: buildImage,
+  }
 }
 
 export default useImageLoader

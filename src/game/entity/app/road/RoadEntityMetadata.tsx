@@ -12,9 +12,12 @@ import { Texture } from "three"
 import roadIcon from "./roadIcon.png"
 import waterIcon from "./waterIcon.png"
 import waterTextureSrc from "./waterTexture.png"
+import grassIcon from "./grassIcon.png"
+import grassTexturesrc from "./grassTexture.png"
 
 const waterTexture = imgLoader(waterTextureSrc, "water")
 const roadTexture = imgLoader(roadTextureSrc, "road")
+const grassTexture = imgLoader(grassTexturesrc, "road")
 
 export type Ground = {
   id: string // Identifiant unique de la route
@@ -37,6 +40,8 @@ export type GroundNetwork = Ground[]
 export const typeRoad = "entity/ground/road"
 export const typeWater = "entity/ground/water"
 
+export const typeGrass = "entity/ground/grass"
+
 const groundMetaDataFactory = ({
   type,
   icon,
@@ -46,7 +51,7 @@ const groundMetaDataFactory = ({
   icon: string
   texture: Texture
 }) => {
-  return {
+  const roadEntityArgs: Partial<EntityMetaDataInterface<GroundEntityInterface>> = {
     asset: {
       icon,
     },
@@ -67,6 +72,8 @@ const groundMetaDataFactory = ({
         (getByLdType(game.entities, type)[0] as GroundEntityInterface) ??
         entityFactory({ entity })
 
+      roadEntity.position = { x: 0, y: 0, z: 0 }
+
       createRoad(
         roadEntity.roadNetwork,
         {
@@ -75,8 +82,6 @@ const groundMetaDataFactory = ({
         },
         entity["@type"],
       )
-
-      console.log(roadEntity, texture, this)
 
       return roadEntity
     },
@@ -96,7 +101,7 @@ const groundMetaDataFactory = ({
     },
     defaultEntity: function () {
       return {
-        type: type,
+        type: "ground",
         roadNetwork: [],
         size: {
           x: 1,
@@ -111,6 +116,8 @@ const groundMetaDataFactory = ({
       }
     },
   }
+
+  return roadEntityArgs
 }
 
 export const roadEntityMetadata = entityMedataFactory<
@@ -130,5 +137,15 @@ export const waterEntityMetadata = entityMedataFactory<
     icon: waterIcon,
     type: typeWater,
     texture: waterTexture,
+  }),
+)
+
+export const grassEntityMetadata = entityMedataFactory<
+  EntityMetaDataInterface<GroundEntityInterface>
+>(
+  groundMetaDataFactory({
+    icon: grassIcon,
+    type: typeGrass,
+    texture: grassTexture,
   }),
 )
