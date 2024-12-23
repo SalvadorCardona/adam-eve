@@ -20,6 +20,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
 
   const baseEntity: Partial<EntityInterface> = {
+    collisionAble: true,
     speed: 0.1,
     life: 50,
     rotation: {

@@ -4,7 +4,7 @@ import {
   useKeyboardControls,
 } from "@react-three/drei"
 import React, { useMemo } from "react"
-import { useFrame, useThree } from "@react-three/fiber"
+import { useFrame } from "@react-three/fiber"
 import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface ControlPropsInterface {}
@@ -45,23 +45,20 @@ interface ElemPropsInterface {}
 const Elem = ({}: ElemPropsInterface) => {
   const [sub, get] = useKeyboardControls<Controls>()
   const game = useGameContext().game
-  const camera = useThree().camera
+  const moveSize = 0.7
 
   useFrame(() => {
     if (get().back) {
-      camera.position.setZ(camera.position.z + 0.7)
+      game.camera.position.y -= moveSize
     }
     if (get().forward) {
-      camera.position.setZ(camera.position.z - 0.7)
+      game.camera.position.y += moveSize
     }
     if (get().left) {
-      camera.position.setX(camera.position.x - 0.7)
+      game.camera.position.x -= moveSize
     }
     if (get().right) {
-      camera.position.setX(camera.position.x + 0.7)
-    }
-    if (get().right) {
-      camera.position.setX(camera.position.x + 0.7)
+      game.camera.position.x += moveSize
     }
     if (get().showGrid) {
       game.userControl.showGrid = !game.userControl.showGrid

@@ -1,16 +1,14 @@
 import React from "react"
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { ActionControllerList, controller } from "@/src/UI/controller"
+import { onClickMapUserActionMetadata } from "@/src/game/actionUser/app/OnClickMapUserActionMetadata"
 
 export default function Ground() {
   const gameContext = useGameContext()
   const clickToMap = (e: ThreeEvent<MouseEvent>) => {
     if (!e) return
-    controller({
-      positon: e.point,
-      action: ActionControllerList.ClickOnMap,
-    })
+    onClickMapUserActionMetadata.onCall &&
+      onClickMapUserActionMetadata.onCall({ game: gameContext.game })
   }
 
   return (

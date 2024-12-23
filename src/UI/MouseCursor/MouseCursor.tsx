@@ -1,26 +1,21 @@
 import React, { useEffect, useRef, useState } from "react"
-import imageHandSrc from "./hand.png"
-import hammerSrc from "./hammer.png"
+
 import useImageLoader from "@/src/hook/useImageLoader"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 
 interface MouseCursorPropsInterface {}
 
 export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const cursorRef = useRef<HTMLDivElement>(null)
-  const [imageSrc, setImageSrc] = useState(imageHandSrc)
+  const [imageSrc, setImageSrc] = useState(mouseIcon.normal)
   const SIZE = 50 // Taille de l'image du curseur
   const { imageData, setImageData } = useImageLoader(imageSrc)
   const game = useGameContext().game
 
   useEffect(() => {
-    if (game.userControl.entityShouldBeCreated && imageData.src != hammerSrc) {
-      setImageSrc(hammerSrc)
-    }
-    if (!game.userControl.entityShouldBeCreated && imageData.src != imageHandSrc) {
-      setImageSrc(imageHandSrc)
-    }
-  }, [game.userControl.entityShouldBeCreated])
+    setImageSrc(game.userControl.mouseIcon ?? mouseIcon.normal)
+  }, [game.userControl.mouseIcon])
 
   const updateMouse = (e: MouseEvent) => {
     if (cursorRef.current) {
@@ -28,6 +23,22 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
       cursorRef.current.style.left = `${e.clientX - SIZE / 2}px`
     }
   }
+
+  const handleScroll = (e: WheelEvent) => {
+    if (e.deltaY > 0) {
+      game.camera.position.z += 0.1
+    }
+    if (e.deltaY < 0) {
+      game.camera.position.z -= 0.1
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("wheel", handleScroll)
+    return () => {
+      window.removeEventListener("wheel", handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     window.addEventListener("mousemove", updateMouse)
@@ -40,7 +51,6 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
 
   if (!imageData.ready) return <></>
 
-  console.log(imageData)
   return (
     <div
       ref={cursorRef}

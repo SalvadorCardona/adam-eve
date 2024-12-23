@@ -8,10 +8,25 @@ export function gameFactory(game?: GameInterface): GameInterface {
     entities: {},
     inventory: {},
     createdAt: new Date(),
+    camera: {
+      fov: 50,
+      zoom: 0,
+      position: {
+        x: 0,
+        y: -10,
+        z: 10,
+      },
+      rotation: {
+        x: 0.5,
+        y: 0,
+        z: 0,
+      },
+    },
     userControl: {
       showGrid: true,
       entitySelection: undefined,
       entityShouldBeCreated: undefined,
+      entityShouldBeCreatedCollision: undefined,
     },
     ...(game ?? {}),
   })

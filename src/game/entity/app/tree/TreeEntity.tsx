@@ -1,10 +1,11 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./tree.glb?url"
+import iconSrc from "./iconSrc.png"
 
 export const treeEntityMetaData = entityMedataFactory({
   asset: {
     model3d: asset,
-    // model2d: "three.png",
+    icon: iconSrc,
   },
   ["@type"]: "entity/nature/tree",
   defaultEntity: () => {

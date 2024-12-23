@@ -14,4 +14,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   actions: ActionBagInterface
   state?: string
   type: string | "ground"
+  collisionAble?: boolean
 }

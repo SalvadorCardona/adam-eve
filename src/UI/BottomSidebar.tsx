@@ -1,9 +1,15 @@
 import { getByLdType } from "@/src/container/container"
 import configGame from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { ActionControllerList, controller } from "@/src/UI/controller"
 import { Card } from "@/components/ui/card"
 import React from "react"
+import {
+  ActionUserMetaDataInterface,
+  isActionMetadata,
+} from "@/src/game/actionUser/ActionUserMetaDataInterface"
+import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
+import useGameContext from "@/src/UI/provider/useGameContext"
+import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuildingUserActionMetadata"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(
@@ -15,8 +21,25 @@ export const BottomSidebar = () => {
     configGame,
     "entity/ground",
   )
+
+  const natureMetaDatas = getByLdType<EntityMetaDataInterface>(
+    configGame,
+    "entity/nature",
+  )
+
+  const actionMetaDatas = getByLdType<ActionUserMetaDataInterface>(
+    configGame,
+    "user-action",
+  )
+
   return (
     <div className={"fixed bottom-0 left-0   rounded-2xl p-5"}>
+      <div className={"flex gap-2"}>
+        <IconBuild metaDatas={actionMetaDatas}></IconBuild>
+      </div>
+      <div className={"flex gap-2"}>
+        <IconBuild metaDatas={natureMetaDatas}></IconBuild>
+      </div>
       <div className={"flex gap-2"}>
         <IconBuild metaDatas={groundMetaDatas}></IconBuild>
       </div>
@@ -27,9 +50,18 @@ export const BottomSidebar = () => {
   )
 }
 
-function IconBuild({ metaDatas }: { metaDatas: EntityMetaDataInterface[] }) {
-  const clickOnBuilding = (metaData: EntityMetaDataInterface) => {
-    controller({ metaData, action: ActionControllerList.BuildRequest })
+function IconBuild({ metaDatas }: { metaDatas: GameMetaDataInterface[] }) {
+  const game = useGameContext().game
+  const clickOnBuilding = (metaData: GameMetaDataInterface) => {
+    if (isActionMetadata(metaData) && metaData.onCall) {
+      metaData.onCall({ game, metaData })
+
+      return
+    }
+
+    if (createBuildingUserActionMetadata.onCall) {
+      createBuildingUserActionMetadata.onCall({ game, metaData })
+    }
   }
 
   return (
@@ -39,7 +71,7 @@ function IconBuild({ metaDatas }: { metaDatas: EntityMetaDataInterface[] }) {
           <Card
             key={metadata["@type"] + "icon-build"}
             className={
-              "w-20 h-20 rounded-2xl overflow-auto cursor-pointer transition-transform duration-300 hover:scale-105 "
+              "w-20 h-20 rounded-2xl overflow-auto transition-transform duration-300 hover:scale-105 "
             }
             onClick={() => clickOnBuilding(metadata)}
           >

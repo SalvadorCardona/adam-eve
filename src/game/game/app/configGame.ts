@@ -16,6 +16,7 @@ import {
   waterEntityMetadata,
 } from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
@@ -31,6 +32,7 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [roadEntityMetadata["@type"]]: roadEntityMetadata,
   [waterEntityMetadata["@type"]]: waterEntityMetadata,
   [grassEntityMetadata["@type"]]: grassEntityMetadata,
+  [removeBuildingUserActionMetadata["@type"]]: removeBuildingUserActionMetadata,
 }
 
 export default configGame

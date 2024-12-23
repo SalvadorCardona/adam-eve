@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { Environment, Grid } from "@react-three/drei"
+import { Environment, Grid, PerspectiveCamera } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import mockGame from "@/src/game/game/app/mockGame"
 import useGameContext from "@/src/UI/provider/useGameContext"
@@ -9,6 +9,7 @@ import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
 import Ground from "@/src/game/entity/app/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
+import { vector3ToArray } from "@/src/game/3D/Vector"
 
 export default function ThreeGameComponent() {
   return (
@@ -17,7 +18,7 @@ export default function ThreeGameComponent() {
         <Canvas
           shadows
           camera={{
-            fov: 50,
+            fov: 100,
           }}
         >
           <Child></Child>
@@ -53,6 +54,13 @@ function Child() {
           rotation={[Math.PI / 2, 0, 0]}
         />
       )}
+      <PerspectiveCamera
+        makeDefault
+        fov={gameContext.game.camera.fov}
+        position={vector3ToArray(gameContext.game.camera.position)}
+        rotation={vector3ToArray(gameContext.game.camera.rotation)}
+      />
+      
       <Environment preset="dawn" background blur={0.5} />
       <Ground></Ground>
     </>

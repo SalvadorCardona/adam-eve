@@ -41,25 +41,8 @@ export function hasCollisionInGame(
   entity: EntityInterface,
 ): false | EntityInterface {
   const canBeCollision: EntityInterface[] = Object.values(game.entities).filter(
-    (e) => e && e !== entity,
+    (e) => e && e !== entity && e.collisionAble,
   )
-  //
-  // Object.values(game.entities).forEach((otherEntity) => {
-  //   if (otherEntity !== entity) {
-  //     const isGround = otherEntity["@type"].startsWith("entity/ground")
-  //     if (!isGround && entity) {
-  //       canBeCollision.push(otherEntity)
-  //     }
-  //     if (isGround && entity) {
-  //       for (const roadNetwork of otherEntity.roadNetwork) {
-  //         canBeCollision.push({
-  //           position: roadNetwork.position,
-  //           size: { x: 1, y: 1 },
-  //         })
-  //       }
-  //     }
-  //   }
-  // })
 
   for (const otherEntity of canBeCollision) {
     if (

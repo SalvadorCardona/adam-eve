@@ -2,10 +2,11 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Model2D } from "@/src/game/entity/components/Model2D"
 import { Model3D } from "@/src/game/entity/components/Model3D"
-import { ActionControllerList, controller } from "@/src/UI/controller"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React from "react"
 import { vector3ToArray } from "@/src/game/3D/Vector"
+import { onClickEntityUserActionMetadata } from "@/src/game/actionUser/app/OnClickEntityUserActionMetadata"
+import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface EntityDecoratorPropsInterface {
   entity: EntityInterface
@@ -17,12 +18,10 @@ export const EntityDecorator = ({
   bgColor,
 }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-
+  const game = useGameContext().game
   const clickOnEntity = () => {
-    controller({
-      entity,
-      action: ActionControllerList.ClickOnEntity,
-    })
+    onClickEntityUserActionMetadata.onApply &&
+      onClickEntityUserActionMetadata.onApply({ game, entity })
   }
 
   let EntityComponent = entityMetaData.component
