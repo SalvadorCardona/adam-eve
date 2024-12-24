@@ -1,5 +1,5 @@
 import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
-import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
+import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
 import { houseEntityMetaData } from "@/src/game/entity/app/house/houseEntity"
 import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
@@ -18,11 +18,13 @@ import {
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
+import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
+  [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
   [forumEntityMetaData["@type"]]: forumEntityMetaData,
-  [characterEntityMetaData["@type"]]: characterEntityMetaData,
+  [workerEntityMetaData["@type"]]: workerEntityMetaData,
   [houseEntityMetaData["@type"]]: houseEntityMetaData,
   [treeEntityMetaData["@type"]]: treeEntityMetaData,
   [goToDirectionMetaData["@type"]]: goToDirectionMetaData,

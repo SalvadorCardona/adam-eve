@@ -1,4 +1,4 @@
-import { ActionEntityMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
+import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import {
@@ -11,7 +11,7 @@ import {
   InventoryItemInterface,
 } from "@/src/game/inventory/InventoryItemInterface"
 import { consumePathCoordinate } from "@/src/game/3D/pathCoordinate/consumePathCoordinate"
-import { findClosest } from "@/src/game/3D/findClosest"
+import { findClosestInGame } from "@/src/game/3D/findClosest"
 import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
 import { houseEntityMetaData } from "@/src/game/entity/app/house/houseEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
@@ -32,15 +32,17 @@ interface CutTheWoodDataInterface {
   woodInventory: InventoryItemInterface
 }
 
-export const cutTheWoodActionMetaData: ActionEntityMetadataInterface<CutTheWoodDataInterface> =
+export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
   {
     ["@type"]: "action/cutTheWood",
     onFrame: ({ entity, action, game }) => {
+      if (!entity) return
+
       const data = action.data
       entity.state = "Running"
       const getThreePathCoordinate = (): PathCoordinate => {
         if (action.data.threePathCoordinate) return action.data.threePathCoordinate
-        action.data.treeEntity = findClosest(
+        action.data.treeEntity = findClosestInGame(
           entity,
           treeEntityMetaData["@type"],
           game,
@@ -60,7 +62,7 @@ export const cutTheWoodActionMetaData: ActionEntityMetadataInterface<CutTheWoodD
 
       const getHousePathCoordinate = (): PathCoordinate => {
         if (action.data.housePathCoordinate) return action.data.housePathCoordinate
-        action.data.houseEntity = findClosest(
+        action.data.houseEntity = findClosestInGame(
           entity,
           houseEntityMetaData["@type"],
           game,
@@ -121,6 +123,9 @@ export const cutTheWoodActionMetaData: ActionEntityMetadataInterface<CutTheWoodD
       }
     },
     factory: (payload) => {
+      if (!payload.entity) {
+        throw new Error("Entity is not here")
+      }
       const woodInventory = getInventoryItem(
         payload.entity.inventory,
         woodRessourceMetadata["@type"],

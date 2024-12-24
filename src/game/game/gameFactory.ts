@@ -1,7 +1,5 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
-import { addAction } from "@/src/game/action/addAction"
-import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 
 export function gameFactory(game?: GameInterface): GameInterface {
   const newGame = jsonLdFactory("game", {
@@ -29,8 +27,6 @@ export function gameFactory(game?: GameInterface): GameInterface {
     },
     ...(game ?? {}),
   })
-
-  addAction(newGame.actions, findWorkerCharacterActionMetadata)
 
   _currentGame = newGame
 

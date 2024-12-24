@@ -1,6 +1,5 @@
-import { ActionEntityMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
+import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { areVectorsEqual, Vector3Interface } from "@/src/game/3D/Vector"
-import EntityInterface from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { generatePathCoordinates } from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
 import { deleteContainerKey } from "@/src/container/container"
@@ -10,10 +9,12 @@ export interface GoDirectionDataInterface {
   target: Vector3Interface
 }
 
-export const goToDirectionMetaData: ActionEntityMetadataInterface<GoDirectionDataInterface> =
+export const goToDirectionMetaData: ActionMetadataInterface<GoDirectionDataInterface> =
   {
     ["@type"]: "action/goToDirection",
     onFrame: ({ entity, action }) => {
+      if (!entity) return
+
       const data = action.data
       if (!data.coordinates) return
 
@@ -28,7 +29,7 @@ export const goToDirectionMetaData: ActionEntityMetadataInterface<GoDirectionDat
         data.coordinates.splice(0, 1)
       }
     },
-    factory: (payload: { entity: EntityInterface; target: Vector3Interface }) => {
+    factory: (payload) => {
       const data: GoDirectionDataInterface = {
         target: payload.target,
         coordinates: generatePathCoordinates(

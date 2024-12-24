@@ -6,22 +6,25 @@ import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 /**
  * Make search and return earnest entity
  */
-export const findClosest = (
+export const findClosestInGame = (
   entity: EntityInterface,
   targetsEntities: JsonLdType,
   game: GameInterfaceInterface,
 ): EntityInterface | undefined => {
+  const targets = getByTypeInContainer(game.entities, targetsEntities)
+
+  return findClosest(entity, targets)
+}
+
+export const findClosest = (
+  entity: EntityInterface,
+  entities: EntityInterface[],
+): EntityInterface | undefined => {
   const character = entity
-
-  if (!character) {
-    console.error("Character not found")
-    return undefined
-  }
-
   let closestTree: EntityInterface | undefined = undefined
   let minDistance = Infinity
-  const targets = getByTypeInContainer(game.entities, targetsEntities)
-  targets.forEach((entity) => {
+
+  entities.forEach((entity) => {
     const distance = Math.sqrt(
       Math.pow(entity.position.x - character.position.x, 2) +
         Math.pow(entity.position.y - character.position.y, 2) +

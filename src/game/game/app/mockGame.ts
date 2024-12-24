@@ -10,10 +10,11 @@ import { houseEntityMetaData } from "@/src/game/entity/app/house/houseEntity"
 import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
 import { buildRequest } from "@/src/game/entity/app/build-request/BuildRequest"
 import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
-import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
+import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
 import { roadEntityMetadata } from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { addAction } from "@/src/game/action/addAction"
+import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 
 const mockGame = gameFactory()
 
@@ -45,7 +46,7 @@ addToInventory(
   }),
 )
 
-const character = characterEntityMetaData.factory({
+const character = workerEntityMetaData.factory({
   entity: {
     position: {
       y: -8,
@@ -64,7 +65,7 @@ updateContainer(mockGame.entities, character)
 
 addEntityToGame(
   mockGame,
-  characterEntityMetaData.factory({
+  workerEntityMetaData.factory({
     entity: {
       position: {
         y: -8,
@@ -76,7 +77,7 @@ addEntityToGame(
 
 addEntityToGame(
   mockGame,
-  characterEntityMetaData.factory({
+  workerEntityMetaData.factory({
     entity: {
       position: {
         y: -8,
@@ -88,7 +89,7 @@ addEntityToGame(
 
 addEntityToGame(
   mockGame,
-  characterEntityMetaData.factory({
+  workerEntityMetaData.factory({
     entity: {
       position: {
         y: -8,
@@ -136,6 +137,11 @@ addEntityToGame(
       },
     },
   }),
+)
+
+addAction(
+  mockGame.actions,
+  findWorkerCharacterActionMetadata.factory({ game: mockGame }),
 )
 
 export default mockGame

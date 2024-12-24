@@ -4,8 +4,8 @@ import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
 import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
-import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
 import { vector3ToArray } from "../../3D/Vector"
+import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
@@ -32,7 +32,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
         actions.Running.stop()
       }
     }
-  }, [actions])
+  }, [entity.state])
 
   useEffect(() => {
     clone.traverse((child) => {
@@ -44,7 +44,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   }, [entity.ressourceNeeded])
 
   // Juste pour corriger le problème du personnage
-  if (entity["@type"] === characterEntityMetaData["@type"]) {
+  if (entity["@type"] === workerEntityMetaData["@type"]) {
     return (
       <primitive
         rotation={[Math.PI / 2, 0, 0]}

@@ -51,7 +51,7 @@ export function getByTypeInContainer<T>(
   container: JsonLdContainerInterface<T>,
   type: JsonLdType,
 ): T[] {
-  return Object.values(container).filter((item) => item["@type"] === type)
+  return Object.values(container).filter((item) => item["@type"].startsWith(type))
 }
 
 export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(

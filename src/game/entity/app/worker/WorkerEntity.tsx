@@ -3,8 +3,8 @@ import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./robot.glb?url"
 import iconFarmerSrc from "./iconFarmer.png"
 
-export const characterEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
-  ["@type"]: "entity/character/character",
+export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+  ["@type"]: "entity/character/worker",
   asset: {
     model3d: asset,
     icon: iconFarmerSrc,
