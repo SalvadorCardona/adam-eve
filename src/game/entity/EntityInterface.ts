@@ -8,6 +8,7 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   rotation: MaybeVector3Interface
   scale: Vector3Interface
   size: MaybeVector3Interface
+  maxLife: number
   life: number
   speed: number
   inventory: InventoryInterface
@@ -15,4 +16,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   state?: string
   type: string | "ground"
   collisionAble?: boolean
+  ressourceNeeded?: InventoryInterface
 }

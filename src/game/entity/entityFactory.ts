@@ -47,5 +47,9 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
     ...(payload?.entity ?? {}),
   }
 
+  if (!baseEntity.maxLife) {
+    baseEntity.maxLife = baseEntity.life
+  }
+
   return jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 }

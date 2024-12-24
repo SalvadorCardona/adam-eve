@@ -4,6 +4,8 @@ import { playSound } from "@/src/game/3D/playSong"
 import song from "./broken-sound.wav?url"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
+import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
+import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 
 export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {
   asset: {
@@ -11,14 +13,18 @@ export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {
   },
   "@type": "user-action/remove-building",
   onCall: ({ game }) => {
-    game.userControl.entityShouldBeRemoved = true
     game.userControl.mouseIcon = mouseIcon.removeBuilding
     game.userControl.currentAction = removeBuildingUserActionMetadata
   },
   onApply: ({ game, entity }) => {
-    if (game.userControl.entityShouldBeRemoved) {
-      playSound(song)
-      removeEntityToGame(game, entity)
+    if (
+      !onSelectEntityUserActionMetadata.data.entitySelection ||
+      !hasActionUser(game, removeBuildingUserActionMetadata)
+    ) {
+      return
     }
+
+    playSound(song)
+    removeEntityToGame(game, entity)
   },
 }

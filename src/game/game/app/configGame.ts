@@ -17,15 +17,18 @@ import {
 } from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
+import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
+import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
+  [forumEntityMetaData["@type"]]: forumEntityMetaData,
   [characterEntityMetaData["@type"]]: characterEntityMetaData,
   [houseEntityMetaData["@type"]]: houseEntityMetaData,
   [treeEntityMetaData["@type"]]: treeEntityMetaData,
-  [forumEntityMetaData["@type"]]: forumEntityMetaData,
   [goToDirectionMetaData["@type"]]: goToDirectionMetaData,
   [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
+  [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
   [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
@@ -33,6 +36,7 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [waterEntityMetadata["@type"]]: waterEntityMetadata,
   [grassEntityMetadata["@type"]]: grassEntityMetadata,
   [removeBuildingUserActionMetadata["@type"]]: removeBuildingUserActionMetadata,
+  [wheatRessourceMetadata["@type"]]: wheatRessourceMetadata,
 }
 
 export default configGame

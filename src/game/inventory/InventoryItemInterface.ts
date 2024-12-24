@@ -14,20 +14,17 @@ export interface InventoryItemInterface extends BaseJsonLdInterface {
 export type InventoryInterface = JsonLdTypeContainerInterface<InventoryItemInterface>
 
 export interface InventoryMetadataInterface extends GameMetaDataInterface {
-  factory: (payload: {
-    inventoryItem: Partial<InventoryItemInterface>
-  }) => InventoryItemInterface
+  factory: (payload: { quantity?: number }) => InventoryItemInterface
 }
 
 export function inventoryFactory(payload: {
-  inventoryItem: Partial<InventoryItemInterface>
+  quantity?: number
 }): InventoryItemInterface {
   // @ts-ignore
   const type: string = this["@type"] ? this["@type"] : "unkwon"
 
   return jsonLdFactory<InventoryItemInterface>(type, {
-    quantity: 0,
-    ...payload.inventoryItem,
+    quantity: payload?.quantity ?? 0,
   })
 }
 
@@ -54,12 +51,11 @@ export function getInventoryItem(
   if (item) return item
 
   const metaData = getMetaData<InventoryMetadataInterface>(inventoryType)
+
   const newItem =
     inventory[inventoryType] ??
     metaData.factory({
-      inventoryItem: {
-        quantity: 0,
-      },
+      quantity: 0,
     })
 
   updateInventory(inventory, newItem)

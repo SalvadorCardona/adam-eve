@@ -2,25 +2,22 @@ import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMet
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 
-interface Data {
-  entitySelection: EntityInterface | undefined
-}
-
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
   data: { entitySelection: EntityInterface | undefined }
 }
 
-export const onClickEntityUserActionMetadata: OnClickEntityUserActionMetadataInterface =
+export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataInterface =
   {
     "@type": "user-action/on-click-entity",
     onApply: ({ game, entity }) => {
-      onClickEntityUserActionMetadata.data.entitySelection = entity
-      game.userControl.entitySelection = entity
+      console.log(entity)
+      onSelectEntityUserActionMetadata.data.entitySelection = entity
+      if (!game.userControl.currentAction) {
+        game.userControl.currentAction = onSelectEntityUserActionMetadata
+      }
       removeBuildingUserActionMetadata.onApply &&
         removeBuildingUserActionMetadata.onApply({ game, entity })
-      // onClickEntityUserActionMetadata.onApply &&
-      //   onClickEntityUserActionMetadata.onApply({ game, entity })
     },
     data: {
       entitySelection: undefined,

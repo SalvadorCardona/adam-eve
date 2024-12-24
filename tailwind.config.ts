@@ -4,11 +4,15 @@ module.exports = {
   darkMode: ["class", "class"],
   content: [
     "./index.html",
+    "./index.css",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./components/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Roboto", "sans-serif"], // Ajoutez votre police ici
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

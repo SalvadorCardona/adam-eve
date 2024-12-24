@@ -24,7 +24,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
 
   useEffect(() => {
     if (entity.state && actions[entity.state] && actions) {
-      console.log(actions)
       actions[entity.state]?.play()
     }
 
@@ -35,6 +34,16 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     }
   }, [actions])
 
+  useEffect(() => {
+    clone.traverse((child) => {
+      if (entity.ressourceNeeded && child.isMesh) {
+        child.material.transparent = true // Activer la transparence
+        child.material.opacity = 0.5 // Régler l'opacité (0.0 à 1.0)
+      }
+    })
+  }, [entity.ressourceNeeded])
+
+  // Juste pour corriger le problème du personnage
   if (entity["@type"] === characterEntityMetaData["@type"]) {
     return (
       <primitive

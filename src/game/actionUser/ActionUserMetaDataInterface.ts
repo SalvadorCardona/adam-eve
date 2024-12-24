@@ -8,12 +8,6 @@ export interface ActionUserMetaDataInterface<D = object>
     game: GameInterface
     metaData?: GameMetaDataInterface
   }) => void
-  onApply?: (payload: { game: GameInterface; entity: EntityInterface }) => void
+  onApply?: (payload: { game: GameInterface; entity?: EntityInterface }) => void
   data?: D
-}
-
-export function isActionMetadata(
-  metadata: GameMetaDataInterface,
-): metadata is ActionUserMetaDataInterface {
-  return metadata["@type"].startsWith("user-action/")
 }

@@ -2,6 +2,8 @@ import imageSource from "./house.glb?url"
 import imageIcon from "./icon.png?url"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 
 export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
@@ -10,7 +12,12 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
   },
   ["@type"]: "entity/building/house",
   defaultEntity: () => {
-    return {
+    const entity: Partial<EntityInterface> = {
+      ressourceNeeded: {
+        [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
+          quantity: 5,
+        }),
+      },
       speed: 0.1,
       life: 50,
       size: {
@@ -24,5 +31,7 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
         z: 0.3,
       },
     }
+
+    return entity
   },
 })

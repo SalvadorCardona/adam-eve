@@ -12,41 +12,44 @@ import { buildRequest } from "@/src/game/entity/app/build-request/BuildRequest"
 import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 import { characterEntityMetaData } from "@/src/game/entity/app/character/CharacterEntity"
 import { roadEntityMetadata } from "@/src/game/entity/app/road/RoadEntityMetadata"
+import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
+import { addAction } from "@/src/game/action/addAction"
 
 const mockGame = gameFactory()
 
 addToInventory(
   mockGame.inventory,
   woodRessourceMetadata.factory({
-    inventoryItem: {
-      quantity: 3,
-    },
+    quantity: 3,
   }),
 )
 
 addToInventory(
   mockGame.inventory,
   waterRessourceMetadata.factory({
-    inventoryItem: {
-      quantity: 3,
-    },
+    quantity: 3,
+  }),
+)
+
+addToInventory(
+  mockGame.inventory,
+  wheatRessourceMetadata.factory({
+    quantity: 3,
   }),
 )
 
 addToInventory(
   mockGame.inventory,
   goldRessourceMetadata.factory({
-    inventoryItem: {
-      quantity: 5,
-    },
+    quantity: 5,
   }),
 )
 
 const character = characterEntityMetaData.factory({
   entity: {
     position: {
-      x: 5,
-      y: 5,
+      y: -8,
+      x: 7,
     },
   },
 })
@@ -56,8 +59,44 @@ const cutWoodAction = cutTheWoodActionMetaData.factory({
   game: mockGame,
 })
 
-updateContainer(character.actions, cutWoodAction)
+addAction(character.actions, cutWoodAction)
 updateContainer(mockGame.entities, character)
+
+addEntityToGame(
+  mockGame,
+  characterEntityMetaData.factory({
+    entity: {
+      position: {
+        y: -8,
+        x: 0,
+      },
+    },
+  }),
+)
+
+addEntityToGame(
+  mockGame,
+  characterEntityMetaData.factory({
+    entity: {
+      position: {
+        y: -8,
+        x: 1,
+      },
+    },
+  }),
+)
+
+addEntityToGame(
+  mockGame,
+  characterEntityMetaData.factory({
+    entity: {
+      position: {
+        y: -8,
+        x: 3,
+      },
+    },
+  }),
+)
 
 addEntityToGame(
   mockGame,
@@ -93,7 +132,7 @@ addEntityToGame(
     entity: {
       position: {
         x: 0,
-        y: 0,
+        y: -6,
       },
     },
   }),

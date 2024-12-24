@@ -1,4 +1,4 @@
-import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
+import { ActionEntityMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { areVectorsEqual, Vector3Interface } from "@/src/game/3D/Vector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
@@ -10,7 +10,7 @@ export interface GoDirectionDataInterface {
   target: Vector3Interface
 }
 
-export const goToDirectionMetaData: ActionMetadataInterface<GoDirectionDataInterface> =
+export const goToDirectionMetaData: ActionEntityMetadataInterface<GoDirectionDataInterface> =
   {
     ["@type"]: "action/goToDirection",
     onFrame: ({ entity, action }) => {

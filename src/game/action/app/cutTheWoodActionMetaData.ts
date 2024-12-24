@@ -1,4 +1,4 @@
-import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
+import { ActionEntityMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import {
@@ -22,7 +22,7 @@ enum CutTheWoodState {
   GoToBuild = "GoToBuild",
 }
 
-interface cutTheWoodDataInterface {
+interface CutTheWoodDataInterface {
   lastTimeWoodcut: number
   treeEntity?: EntityInterface
   houseEntity?: EntityInterface
@@ -32,7 +32,7 @@ interface cutTheWoodDataInterface {
   woodInventory: InventoryItemInterface
 }
 
-export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInterface> =
+export const cutTheWoodActionMetaData: ActionEntityMetadataInterface<CutTheWoodDataInterface> =
   {
     ["@type"]: "action/cutTheWood",
     onFrame: ({ entity, action, game }) => {
@@ -126,7 +126,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<cutTheWoodDataInt
         woodRessourceMetadata["@type"],
       )
 
-      const data: cutTheWoodDataInterface = {
+      const data: CutTheWoodDataInterface = {
         lastTimeWoodcut: 0,
         state: CutTheWoodState.GoToTree,
         woodInventory,

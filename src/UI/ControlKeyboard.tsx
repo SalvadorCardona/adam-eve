@@ -64,8 +64,7 @@ const Elem = ({}: ElemPropsInterface) => {
       game.userControl.showGrid = !game.userControl.showGrid
     }
     if (get().backAction) {
-      game.userControl.entitySelection = undefined
-      game.userControl.entityShouldBeCreated = undefined
+      game.userControl.currentAction = undefined
     }
   })
 

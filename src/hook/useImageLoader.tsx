@@ -25,7 +25,6 @@ const useImageLoader = (src: string): Output => {
   })
 
   function buildImage(newSrc: string) {
-    console.log(newSrc)
     const img = new Image()
     img.src = newSrc
     img.onload = () => {

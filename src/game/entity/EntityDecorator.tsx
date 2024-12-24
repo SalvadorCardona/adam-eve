@@ -5,7 +5,7 @@ import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React from "react"
 import { vector3ToArray } from "@/src/game/3D/Vector"
-import { onClickEntityUserActionMetadata } from "@/src/game/actionUser/app/OnClickEntityUserActionMetadata"
+import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
 import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface EntityDecoratorPropsInterface {
@@ -20,8 +20,8 @@ export const EntityDecorator = ({
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
   const clickOnEntity = () => {
-    onClickEntityUserActionMetadata.onApply &&
-      onClickEntityUserActionMetadata.onApply({ game, entity })
+    onSelectEntityUserActionMetadata.onApply &&
+      onSelectEntityUserActionMetadata.onApply({ game, entity })
   }
 
   let EntityComponent = entityMetaData.component

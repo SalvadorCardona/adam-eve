@@ -1,6 +1,6 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
 import React from "react"
-import { Card, CardContent, CardTitle } from "@/components/ui/card"
+import { Card, CardTitle } from "@/components/ui/card"
 import image from "./img.png"
 
 const convertFramesToTime = (frames: number) => {
@@ -17,11 +17,9 @@ export const Time = () => {
   const timeString = convertFramesToTime(gameContext.game?.time || 0)
 
   return (
-    <Card>
-      <CardContent className={"flex items-center gap-2"}>
-        <CardTitle>{timeString}</CardTitle>
-        <img className={"h-8"} src={image} alt={"ressource"} />
-      </CardContent>
+    <Card className={"flex p-2 gap-2 items-center"}>
+      <img className={"h-8"} src={image} alt={"ressource"} />
+      <CardTitle>{timeString}</CardTitle>
     </Card>
   )
 }
