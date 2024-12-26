@@ -8,7 +8,10 @@ interface Collision2D {
   size: MaybeVector3Interface
 }
 
-export function hasCollision(entity1: Collision2D, entity2: Collision2D): boolean {
+export function entityHasCollision(
+  entity1: Collision2D,
+  entity2: Collision2D,
+): boolean {
   const isOverlap = (
     pos1: MaybeVector3Interface,
     size1: MaybeVector3Interface,
@@ -48,14 +51,14 @@ export function hasCollisionInGame(
     if (
       entity.type !== "ground" &&
       otherEntity.type !== "ground" &&
-      hasCollision(entity, otherEntity)
+      entityHasCollision(entity, otherEntity)
     ) {
       return otherEntity
     }
     if (isGroundEntity(entity) && !isGroundEntity(otherEntity)) {
       for (const roadNetwork of entity.roadNetwork) {
         if (
-          hasCollision(
+          entityHasCollision(
             { position: roadNetwork.position, size: { x: 1, y: 1 } },
             otherEntity,
           )
@@ -67,7 +70,7 @@ export function hasCollisionInGame(
     if (!isGroundEntity(entity) && isGroundEntity(otherEntity)) {
       for (const roadNetwork of otherEntity.roadNetwork) {
         if (
-          hasCollision(entity, {
+          entityHasCollision(entity, {
             position: roadNetwork.position,
             size: { x: 1, y: 1 },
           })
@@ -80,7 +83,7 @@ export function hasCollisionInGame(
       for (const roadNetwork1 of entity.roadNetwork) {
         for (const roadNetwork2 of otherEntity.roadNetwork) {
           if (
-            hasCollision(
+            entityHasCollision(
               { position: roadNetwork1.position, size: { x: 1, y: 1 } },
               {
                 position: roadNetwork2.position,

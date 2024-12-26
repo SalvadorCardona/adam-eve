@@ -38,7 +38,7 @@ export const consumePathCoordinate: ConsumePathCoordinateInterface = ({
   const direction = {
     x: newPosition.x - position.x,
     y: newPosition.y - position.y,
-    z: newPosition?.z ?? 0 - position?.z ?? 0,
+    z: (newPosition?.z ?? 0) - (position.z ?? 0),
   }
 
   rotation.z = Math.atan2(direction.y, direction.x) * (180 / (Math.PI * 6))

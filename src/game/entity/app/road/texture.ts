@@ -40,7 +40,7 @@ void main() {
 `
 
 // Shader Material
-const GroundMaterial = new ShaderMaterial({
+export const GroundMaterial = new ShaderMaterial({
   uniforms: {
     uColor: { value: new Color(0x333333) }, // Road color
   },

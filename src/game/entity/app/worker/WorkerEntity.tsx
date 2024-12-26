@@ -9,6 +9,9 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     model3d: asset,
     icon: iconFarmerSrc,
   },
+  propriety: {
+    inventorySize: 10,
+  },
   defaultEntity: () => {
     return {
       state: "Punch",

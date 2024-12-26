@@ -12,7 +12,6 @@ export const findClosestInGame = (
   game: GameInterfaceInterface,
 ): EntityInterface | undefined => {
   const targets = getByTypeInContainer(game.entities, targetsEntities)
-
   return findClosest(entity, targets)
 }
 

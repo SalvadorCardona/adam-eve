@@ -1,6 +1,5 @@
 import { updateContainer } from "@/src/container/container"
 import { gameFactory } from "@/src/game/game/gameFactory"
-import { addToInventory } from "@/src/game/inventory/InventoryItemInterface"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
@@ -15,36 +14,14 @@ import { roadEntityMetadata } from "@/src/game/entity/app/road/RoadEntityMetadat
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { addAction } from "@/src/game/action/addAction"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
+import { addToInventory } from "@/src/game/inventory/addToInventory"
 
 const mockGame = gameFactory()
 
-addToInventory(
-  mockGame.inventory,
-  woodRessourceMetadata.factory({
-    quantity: 3,
-  }),
-)
-
-addToInventory(
-  mockGame.inventory,
-  waterRessourceMetadata.factory({
-    quantity: 3,
-  }),
-)
-
-addToInventory(
-  mockGame.inventory,
-  wheatRessourceMetadata.factory({
-    quantity: 3,
-  }),
-)
-
-addToInventory(
-  mockGame.inventory,
-  goldRessourceMetadata.factory({
-    quantity: 5,
-  }),
-)
+addToInventory(mockGame.inventory, woodRessourceMetadata["@type"], 15)
+addToInventory(mockGame.inventory, waterRessourceMetadata["@type"], 10)
+addToInventory(mockGame.inventory, wheatRessourceMetadata["@type"], 15)
+addToInventory(mockGame.inventory, goldRessourceMetadata["@type"], 100)
 
 const character = workerEntityMetaData.factory({
   entity: {
@@ -111,6 +88,19 @@ addEntityToGame(
   }),
 )
 
+addEntityToGame(
+  mockGame,
+  houseEntityMetaData.factory({
+    entity: {
+      isBuild: false,
+      position: {
+        x: 6,
+        y: -3,
+      },
+    },
+  }),
+)
+
 addEntityToGame(mockGame, roadEntityMetadata.factory())
 
 addEntityToGame(
@@ -131,6 +121,7 @@ addEntityToGame(
   mockGame,
   forumEntityMetaData.factory({
     entity: {
+      isBuild: true,
       position: {
         x: 0,
         y: -6,

@@ -1,6 +1,6 @@
 import { JsonLdContainerInterface } from "@/src/container/container"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { InventoryInterface } from "@/src/game/inventory/InventoryItemInterface"
+import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { Vector3Interface } from "@/src/game/3D/Vector"
@@ -23,6 +23,6 @@ export default interface GameInterface extends BaseJsonLdInterface {
   time: number
   entities: JsonLdContainerInterface<EntityInterface>
   // When i click on entity, this stock here
-  inventory: InventoryInterface
+  inventory: InventoryBagInterface
   actions: ActionBagInterface
 }

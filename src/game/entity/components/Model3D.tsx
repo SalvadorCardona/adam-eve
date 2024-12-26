@@ -6,10 +6,32 @@ import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
 import { vector3ToArray } from "../../3D/Vector"
 import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
+import { ShaderMaterial } from "three/src/Three"
+import { imgLoader } from "@/src/game/3D/textureHelper"
+import grassTexturesrc from "@/src/game/entity/app/road/grassTexture.png"
+
+function fragmentShader() {
+  return `
+      uniform vec3 colorA; 
+      uniform vec3 colorB; 
+      varying vec3 vUv;
+
+      void main() {
+	 
+        gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 0.5);
+      }
+  `
+}
 
 interface Model3DPropsInterface {
   entity: EntityInterface
 }
+
+class Color {
+  constructor(number: number) {}
+}
+
+const grassTexture = imgLoader(grassTexturesrc, "road")
 
 export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const metaData = getMetaData(entity)
@@ -17,9 +39,29 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     return
   }
 
+  const shaderMaterial = useMemo(
+    () =>
+      new ShaderMaterial({
+        uniforms: {
+          colorA: { value: new Color(0xff0000) },
+          colorB: { value: new Color(0x0000ff) },
+        },
+        vertexShader: `
+      varying vec3 vUv;
+      void main() {
+        vUv = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+        fragmentShader: fragmentShader(),
+      }),
+    [],
+  )
+
   const glb = useGLTF(metaData.asset.model3d)
   const ref = useRef<Group>()
   const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
+
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
@@ -33,17 +75,16 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
       }
     }
   }, [entity.state])
+  //
+  // useEffect(() => {
+  //   ref.current.traverse((child) => {
+  //     if (child.isMesh) {
+  //       child.material.transparent = !entity.isBuild
+  //       child.material.opacity = entity.isBuild ? 1 : 0.5
+  //     }
+  //   })
+  // }, [entity.isBuild])
 
-  useEffect(() => {
-    clone.traverse((child) => {
-      if (entity.ressourceNeeded && child.isMesh) {
-        child.material.transparent = true // Activer la transparence
-        child.material.opacity = 0.5 // Régler l'opacité (0.0 à 1.0)
-      }
-    })
-  }, [entity.ressourceNeeded])
-
-  // Juste pour corriger le problème du personnage
   if (entity["@type"] === workerEntityMetaData["@type"]) {
     return (
       <primitive
@@ -74,10 +115,11 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   return (
     <primitive
       rotation={[Math.PI / 2, 0, 0]}
+      material={shaderMaterial}
       ref={ref}
       object={clone}
       scale={scaleFactor}
       position-z={positionZ}
-    />
+    ></primitive>
   )
 }

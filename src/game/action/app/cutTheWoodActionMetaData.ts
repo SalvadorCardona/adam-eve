@@ -1,20 +1,14 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
-import {
-  generatePathCoordinates,
-  PathCoordinate,
-} from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
-import {
-  addToInventory,
-  getInventoryItem,
-  InventoryItemInterface,
-} from "@/src/game/inventory/InventoryItemInterface"
-import { consumePathCoordinate } from "@/src/game/3D/pathCoordinate/consumePathCoordinate"
 import { findClosestInGame } from "@/src/game/3D/findClosest"
-import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
-import { houseEntityMetaData } from "@/src/game/entity/app/house/houseEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
+import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
+import { transfertInventory } from "@/src/game/inventory/transfertInventory"
+import { addToInventory } from "@/src/game/inventory/addToInventory"
+import { entityGoToEntity } from "@/src/game/entity/useCase/EntityGoToEntity"
+import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
 
 enum CutTheWoodState {
   CutTheThree = "CutTheThree",
@@ -23,101 +17,68 @@ enum CutTheWoodState {
 }
 
 interface CutTheWoodDataInterface {
-  lastTimeWoodcut: number
   treeEntity?: EntityInterface
-  houseEntity?: EntityInterface
-  threePathCoordinate?: PathCoordinate
-  housePathCoordinate?: PathCoordinate
+  forumEntity?: EntityInterface
   state: CutTheWoodState
-  woodInventory: InventoryItemInterface
 }
 
 export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
   {
     ["@type"]: "action/cutTheWood",
     onFrame: ({ entity, action, game }) => {
+      const data = action.data
       if (!entity) return
 
-      const data = action.data
       entity.state = "Running"
-      const getThreePathCoordinate = (): PathCoordinate => {
-        if (action.data.threePathCoordinate) return action.data.threePathCoordinate
-        action.data.treeEntity = findClosestInGame(
-          entity,
-          treeEntityMetaData["@type"],
-          game,
-        )
-
-        if (!action.data.treeEntity) {
-          return []
-        }
-
-        action.data.threePathCoordinate = generatePathCoordinates(
-          entity.position,
-          action.data.treeEntity.position,
-        )
-
-        return action.data.threePathCoordinate
-      }
-
-      const getHousePathCoordinate = (): PathCoordinate => {
-        if (action.data.housePathCoordinate) return action.data.housePathCoordinate
-        action.data.houseEntity = findClosestInGame(
-          entity,
-          houseEntityMetaData["@type"],
-          game,
-        )
-
-        if (!action.data.houseEntity) {
-          return []
-        }
-
-        action.data.housePathCoordinate = generatePathCoordinates(
-          entity.position,
-          action.data.houseEntity.position,
-        )
-
-        return action.data.housePathCoordinate
-      }
 
       if (data.state === CutTheWoodState.GoToTree) {
-        const consumePathCoordinateResult = consumePathCoordinate({
-          position: entity.position,
-          pathCoordinate: getThreePathCoordinate(),
-        })
+        if (!data.treeEntity) {
+          data.treeEntity = findClosestInGame(
+            entity,
+            treeEntityMetaData["@type"],
+            game,
+          )
+          console.log(data.treeEntity)
+          if (!data.treeEntity) return
+        }
+        const result = entityGoToEntity(entity, data.treeEntity)
 
-        entity.rotation = consumePathCoordinateResult.rotation
-        entity.position = consumePathCoordinateResult.position
-        action.data.threePathCoordinate = consumePathCoordinateResult.pathCoordinate
-
-        if (consumePathCoordinateResult.isFinish) {
-          action.data.threePathCoordinate = undefined
+        if (result.isFinish) {
           data.state = CutTheWoodState.CutTheThree
         }
       }
 
       if (data.state === CutTheWoodState.CutTheThree) {
-        data.woodInventory.quantity++
-        if (data.woodInventory.quantity > 50) {
+        addToInventory(entity.inventory, woodRessourceMetadata["@type"], 1)
+        const woodRessource = getInventoryItem(
+          entity.inventory,
+          woodRessourceMetadata["@type"],
+        )
+        if (woodRessource.quantity > 50) {
           data.state = CutTheWoodState.GoToBuild
         }
       }
 
       if (data.state === CutTheWoodState.GoToBuild) {
-        const consumePathCoordinateResult = consumePathCoordinate({
-          position: entity.position,
-          pathCoordinate: getHousePathCoordinate(),
-        })
+        if (!data.forumEntity) {
+          data.forumEntity = findClosestInGame(
+            entity,
+            forumEntityMetaData["@type"],
+            game,
+          )
 
-        entity.rotation = consumePathCoordinateResult.rotation
-        entity.position = consumePathCoordinateResult.position
-        action.data.housePathCoordinate = consumePathCoordinateResult.pathCoordinate
+          if (!data.forumEntity) return
+        }
+        const result = entityGoToEntity(entity, data.forumEntity)
 
-        if (consumePathCoordinateResult.isFinish) {
-          addToInventory(game.inventory, data.woodInventory)
-          data.woodInventory.quantity = 0
+        if (result.isFinish) {
+          transfertInventory(
+            entity.inventory,
+            game.inventory,
+            woodRessourceMetadata["@type"],
+            10,
+          )
 
-          action.data.housePathCoordinate = undefined
           data.state = CutTheWoodState.GoToTree
         }
       }
@@ -126,15 +87,9 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       if (!payload.entity) {
         throw new Error("Entity is not here")
       }
-      const woodInventory = getInventoryItem(
-        payload.entity.inventory,
-        woodRessourceMetadata["@type"],
-      )
 
       const data: CutTheWoodDataInterface = {
-        lastTimeWoodcut: 0,
         state: CutTheWoodState.GoToTree,
-        woodInventory,
       }
 
       return jsonLdFactory(cutTheWoodActionMetaData["@type"], { data })
