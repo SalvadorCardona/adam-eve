@@ -18,7 +18,6 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
   },
   component: () => {
     const gameContext = useGameContext()
-
     if (
       !hasActionUser(gameContext.game, createBuildingUserActionMetadata) ||
       !gameContext.game.userControl.mousePosition ||
@@ -39,6 +38,7 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
       ? mouseIcon.cantBeBuild
       : mouseIcon.build
 
+    console.log(entity)
     return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
   },
 })

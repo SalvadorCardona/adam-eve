@@ -1,0 +1,2964 @@
+{
+  "@type": "game",
+  "@id": "game/1fa12bd",
+  "time": 19689,
+  "actions": {
+    "action/findWorkerCharacter/m9kd7l": {
+      "@type": "action/findWorkerCharacter",
+      "@id": "action/findWorkerCharacter/m9kd7l",
+      "data": {
+        "state": "GoToTree"
+      }
+    }
+  },
+  "entities": {
+    "entity/helper/build-request/pndq52": {
+      "@type": "entity/helper/build-request",
+      "@id": "entity/helper/build-request/pndq52",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": false,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "maxLife": 50
+    },
+    "entity/ground/grass/5e8de9": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/5e8de9",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0.01
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "roadNetwork": [
+        {
+          "type": "entity/ground/grass",
+          "id": "139f369",
+          "position": {
+            "x": -2,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1pt0882",
+          "position": {
+            "x": -1,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "l1mdoa",
+          "position": {
+            "x": 0,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "pkyyng",
+          "position": {
+            "x": 1,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "7tjzxr",
+          "position": {
+            "x": 2,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "urpwej",
+          "position": {
+            "x": 3,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "tyka50",
+          "position": {
+            "x": 4,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1cl31v6",
+          "position": {
+            "x": 4,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "y20oax",
+          "position": {
+            "x": 4,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "r40cgt",
+          "position": {
+            "x": 4,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1i0bmxx",
+          "position": {
+            "x": 4,
+            "y": -7
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "gu27qe",
+          "position": {
+            "x": 4,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "bu8wbp",
+          "position": {
+            "x": 3,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "jtjxm",
+          "position": {
+            "x": 3,
+            "y": -7
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "yo01pn",
+          "position": {
+            "x": 3,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1m0ayzz",
+          "position": {
+            "x": 3,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1oz2d80",
+          "position": {
+            "x": 3,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "j2ghfr",
+          "position": {
+            "x": 2,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "x7hqe2",
+          "position": {
+            "x": 2,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "wcr1uh",
+          "position": {
+            "x": 2,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "q77oks",
+          "position": {
+            "x": 2,
+            "y": -7
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "elnrh5",
+          "position": {
+            "x": 2,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "b1db0n",
+          "position": {
+            "x": -7,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "13678q7",
+          "position": {
+            "x": -6,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1hlztz9",
+          "position": {
+            "x": -5,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "ir4vny",
+          "position": {
+            "x": -4,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "15p2c8g",
+          "position": {
+            "x": -3,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "m6iejt",
+          "position": {
+            "x": -2,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "159io8v",
+          "position": {
+            "x": -1,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "yca6l6",
+          "position": {
+            "x": 0,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1krkj6c",
+          "position": {
+            "x": 1,
+            "y": -7
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "zkphcq",
+          "position": {
+            "x": 1,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1xvrj0",
+          "position": {
+            "x": 0,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1h6ihoy",
+          "position": {
+            "x": -2,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "ymh9hn",
+          "position": {
+            "x": -2,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1c3ypv1",
+          "position": {
+            "x": -1,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "eb8m18",
+          "position": {
+            "x": -3,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1wsj6i7",
+          "position": {
+            "x": -4,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "pdyh7n",
+          "position": {
+            "x": -5,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "o0ge7l",
+          "position": {
+            "x": -6,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "17wban9",
+          "position": {
+            "x": -7,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "hjoz4w",
+          "position": {
+            "x": -7,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "68w46n",
+          "position": {
+            "x": -6,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1erpr3f",
+          "position": {
+            "x": -6,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "17xsx83",
+          "position": {
+            "x": -5,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "rfrhgn",
+          "position": {
+            "x": -4,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1e5356n",
+          "position": {
+            "x": -3,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "xkwh0q",
+          "position": {
+            "x": -2,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "yut4ia",
+          "position": {
+            "x": -1,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "186dp4g",
+          "position": {
+            "x": 0,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1l3cc7d",
+          "position": {
+            "x": 1,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "ydaeuq",
+          "position": {
+            "x": 1,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "9jtjzg",
+          "position": {
+            "x": 0,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1qouoig",
+          "position": {
+            "x": -2,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1h7pki2",
+          "position": {
+            "x": -1,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "jgqjfq",
+          "position": {
+            "x": -3,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "yxrxtb",
+          "position": {
+            "x": -4,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "md35v0",
+          "position": {
+            "x": -5,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "araz3j",
+          "position": {
+            "x": -6,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "13xvc62",
+          "position": {
+            "x": -7,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "o36btt",
+          "position": {
+            "x": -3,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "5jou68",
+          "position": {
+            "x": -4,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "rfj0fh",
+          "position": {
+            "x": -5,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "7vdq1c",
+          "position": {
+            "x": -6,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "ycm23f",
+          "position": {
+            "x": -7,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "134ksc8",
+          "position": {
+            "x": -3,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "z0sunw",
+          "position": {
+            "x": -2,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "r8pcmi",
+          "position": {
+            "x": -2,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1bpbnae",
+          "position": {
+            "x": -1,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "vwhm69",
+          "position": {
+            "x": -4,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "nmo38n",
+          "position": {
+            "x": -5,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "18fp40y",
+          "position": {
+            "x": -6,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1wd6fll",
+          "position": {
+            "x": -8,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "nuucvx",
+          "position": {
+            "x": -8,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1a0jxey",
+          "position": {
+            "x": -7,
+            "y": 0
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1dt86la",
+          "position": {
+            "x": -8,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "ksq9lv",
+          "position": {
+            "x": -7,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "195tlhf",
+          "position": {
+            "x": -6,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "o2ctjk",
+          "position": {
+            "x": -5,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1hqoyx1",
+          "position": {
+            "x": -4,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "mxuupr",
+          "position": {
+            "x": -3,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1bmigaq",
+          "position": {
+            "x": -2,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/grass",
+          "id": "1h7wbi8",
+          "position": {
+            "x": -1,
+            "y": 1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": false
+          }
+        }
+      ],
+      "maxLife": 50
+    },
+    "entity/ground/road/1dv1mqw": {
+      "@type": "entity/ground/road",
+      "@id": "entity/ground/road/1dv1mqw",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0.01
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "roadNetwork": [
+        {
+          "type": "entity/ground/road",
+          "id": "sjgxxc",
+          "position": {
+            "x": 1,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "1o59k2u",
+          "position": {
+            "x": 0,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "1hudy7n",
+          "position": {
+            "x": -1,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "1xopz0l",
+          "position": {
+            "x": -2,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "j1kq1p",
+          "position": {
+            "x": -3,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "19ikem7",
+          "position": {
+            "x": -4,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "182rlld",
+          "position": {
+            "x": -5,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "exs8sj",
+          "position": {
+            "x": -6,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/road",
+          "id": "bi3mt5",
+          "position": {
+            "x": -7,
+            "y": -8
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": false,
+            "right": true
+          }
+        }
+      ],
+      "maxLife": 50
+    },
+    "entity/building/forum/gah8n8": {
+      "@type": "entity/building/forum",
+      "@id": "entity/building/forum/gah8n8",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -7,
+        "x": -5
+      },
+      "size": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "z": 1,
+        "y": 1
+      },
+      "numberOfWorker": 2,
+      "maxLife": 50
+    },
+    "entity/building/house/91t8wx": {
+      "@type": "entity/building/house",
+      "@id": "entity/building/house/91t8wx",
+      "isBuild": false,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -7,
+        "x": -2
+      },
+      "size": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.3,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "maxLife": 50
+    },
+    "entity/building/house/7ohfqf": {
+      "@type": "entity/building/house",
+      "@id": "entity/building/house/7ohfqf",
+      "isBuild": false,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -7,
+        "x": 0
+      },
+      "size": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.3,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1197gf7": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1197gf7",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": 2
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/xsljub": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/xsljub",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": 1
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1yrrbw9": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1yrrbw9",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": 1
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/11bk95j": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/11bk95j",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": 0
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1fgd9cp": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1fgd9cp",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": -1
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1lus9ul": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1lus9ul",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": -2
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1mw1g3z": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1mw1g3z",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": -3
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1s0da5n": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1s0da5n",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": -3
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1eh0qe3": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1eh0qe3",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": -2
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/1ed9mij": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/1ed9mij",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": -1
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/nature/tree/ix57u5": {
+      "@type": "entity/nature/tree",
+      "@id": "entity/nature/tree/ix57u5",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": 0
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "maxLife": 50
+    },
+    "entity/ground/water/zw7f0l": {
+      "@type": "entity/ground/water",
+      "@id": "entity/ground/water/zw7f0l",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0.01
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "roadNetwork": [
+        {
+          "type": "entity/ground/water",
+          "id": "z56dqi",
+          "position": {
+            "x": 1,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "bv9ysy",
+          "position": {
+            "x": 0,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "rbibmc",
+          "position": {
+            "x": -1,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "cyakf0",
+          "position": {
+            "x": -2,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "14o8sy4",
+          "position": {
+            "x": -3,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "4un3uq",
+          "position": {
+            "x": -4,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "rzno4e",
+          "position": {
+            "x": -5,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "yiae7m",
+          "position": {
+            "x": -6,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "adwys5",
+          "position": {
+            "x": -7,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "54khaj",
+          "position": {
+            "x": -8,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "3txoc8",
+          "position": {
+            "x": -8,
+            "y": -8
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1ynwf2n",
+          "position": {
+            "x": -8,
+            "y": -7
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1myu5om",
+          "position": {
+            "x": -8,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "2xw72v",
+          "position": {
+            "x": -8,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "179l5jj",
+          "position": {
+            "x": -8,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "67jvb7",
+          "position": {
+            "x": -8,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1afwdv8",
+          "position": {
+            "x": -8,
+            "y": -2
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "16i5yfn",
+          "position": {
+            "x": -7,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "19223zk",
+          "position": {
+            "x": -6,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "fmmsj2",
+          "position": {
+            "x": -5,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1dzdzm9",
+          "position": {
+            "x": -4,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "hg5231",
+          "position": {
+            "x": -2,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "33zgfz",
+          "position": {
+            "x": -1,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1nhti1s",
+          "position": {
+            "x": 0,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1jkfx26",
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "243a21",
+          "position": {
+            "x": 2,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "10hkibw",
+          "position": {
+            "x": 3,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1u9nkvc",
+          "position": {
+            "x": 2,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1qcjkv1",
+          "position": {
+            "x": 3,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1a8vexx",
+          "position": {
+            "x": 4,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "hzq0dz",
+          "position": {
+            "x": 5,
+            "y": -9
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "glnzp0",
+          "position": {
+            "x": 5,
+            "y": -8
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "b8zxvd",
+          "position": {
+            "x": 5,
+            "y": -7
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "f2c1a5",
+          "position": {
+            "x": 5,
+            "y": -6
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "hsjw",
+          "position": {
+            "x": 5,
+            "y": -5
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "hc539m",
+          "position": {
+            "x": 5,
+            "y": -4
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1utlxw5",
+          "position": {
+            "x": 5,
+            "y": -3
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": false,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "nkaw50",
+          "position": {
+            "x": 5,
+            "y": -2
+          },
+          "connections": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": false
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "9holif",
+          "position": {
+            "x": 4,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "w4mx6n",
+          "position": {
+            "x": -3,
+            "y": -2
+          },
+          "connections": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "12e41p2",
+          "position": {
+            "x": -8,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": false,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "15k105j",
+          "position": {
+            "x": -7,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1afpw2i",
+          "position": {
+            "x": -6,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "x66arz",
+          "position": {
+            "x": -5,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "q3axbw",
+          "position": {
+            "x": -4,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1jvgkqo",
+          "position": {
+            "x": -3,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "14mkl6q",
+          "position": {
+            "x": -2,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "2wr3i9",
+          "position": {
+            "x": -1,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1326h41",
+          "position": {
+            "x": 0,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1o31dj6",
+          "position": {
+            "x": 1,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "ln0n8q",
+          "position": {
+            "x": 2,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "16mtaug",
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "byihp8",
+          "position": {
+            "x": 4,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "type": "entity/ground/water",
+          "id": "1d4rfuj",
+          "position": {
+            "x": 5,
+            "y": -1
+          },
+          "connections": {
+            "top": true,
+            "bottom": false,
+            "left": true,
+            "right": false
+          }
+        }
+      ],
+      "maxLife": 50
+    },
+    "entity/building/timberHouse/1mnmnxl": {
+      "@type": "entity/building/timberHouse",
+      "@id": "entity/building/timberHouse/1mnmnxl",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -8,
+        "x": 3
+      },
+      "size": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 1,
+        "z": 1,
+        "y": 1
+      },
+      "numberOfWorker": 2,
+      "maxLife": 50
+    },
+    "entity/character/worker/cyl1du": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/cyl1du",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -3,
+        "x": -6
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/yw73sf": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/yw73sf",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -3,
+        "x": -5
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/gpmyta": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/gpmyta",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": -5
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/1qwba5k": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/1qwba5k",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": -4
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/dv92pk": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/dv92pk",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -5,
+        "x": 3
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/14gdxhm": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/14gdxhm",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -4,
+        "x": 3
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    },
+    "entity/character/worker/16jhd0d": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/16jhd0d",
+      "isBuild": true,
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "z": 0.01,
+        "y": -6,
+        "x": 2
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0.2
+      },
+      "actions": {},
+      "inventory": {},
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      },
+      "maxLife": 50
+    }
+  },
+  "inventory": {
+    "ressource/wood": {
+      "@type": "ressource/wood",
+      "@id": "ressource/wood/2ny8j6",
+      "quantity": 0
+    },
+    "ressource/water": {
+      "@type": "ressource/water",
+      "@id": "ressource/water/6xt43y",
+      "quantity": 10
+    },
+    "ressource/wheat": {
+      "@type": "ressource/wheat",
+      "@id": "ressource/wheat/hbaokg",
+      "quantity": 15
+    },
+    "ressource/gold": {
+      "@type": "ressource/gold",
+      "@id": "ressource/gold/1kk953p",
+      "quantity": 80
+    }
+  },
+  "createdAt": "2024-12-26T14:48:58.886Z",
+  "camera": {
+    "fov": 50,
+    "zoom": 0,
+    "position": {
+      "x": -0.7000000000000002,
+      "y": -12.799999999999997,
+      "z": 10
+    },
+    "rotation": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "userControl": {
+    "showGrid": true,
+    "mousePosition": {
+      "x": 3.4915353805024347,
+      "y": -8.443170505122657,
+      "z": 0
+    },
+    "mouseIcon": "/src/UI/MouseCursor/hammer-canceled.png",
+    "currentAction": {
+      "@type": "user-action/create-building",
+      "data": {
+        "entityMetaData": {
+          "@type": "entity/character/worker",
+          "asset": {
+            "model3d": "/src/game/entity/app/worker/robot.glb",
+            "icon": "/src/game/entity/app/worker/iconFarmer.png",
+            "animationMapper": {
+              "move": "Running",
+              "wait": "Idle"
+            }
+          },
+          "propriety": {
+            "inventorySize": 10
+          }
+        }
+      }
+    }
+  }
+}

@@ -19,12 +19,16 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
   {
     ["@type"]: "action/findWorkerCharacter",
     onFrame: ({ action, game }) => {
-      const data = action.data
       const buildings = getByTypeInContainer<EntityInterface>(
         game.entities,
         "entity/building",
       ).filter((building) => {
-        return building.numberOfWorker && building.numberOfWorker > 0
+        return (
+          building.numberOfWorker &&
+          building.numberOfWorker > 0 &&
+          building.isBuild &&
+          Object.values(building.worker).length < building.numberOfWorker
+        )
       })
 
       if (buildings.length === 0) return
@@ -32,11 +36,11 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
       const workers = getByTypeInContainer<EntityInterface>(
         game.entities,
         "entity/character/worker",
-      ).filter((character) => {
-        return isObjectEmpty(character.actions)
+      ).filter((worker) => {
+        return isObjectEmpty(worker.actions)
       })
 
-      buildings.forEach((building) => {})
+      console.log(buildings)
       for (const building of buildings) {
         const metaData = getMetaData<EntityMetaDataInterface>(building)
         for (const worker of workers) {
@@ -45,8 +49,12 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
             building.numberOfWorker &&
             buildingNumberOfWorker < building.numberOfWorker
           ) {
-            updateContainer(building.worker, worker)
-            if (metaData.workerAction) {
+            if (
+              metaData.workerAction &&
+              isObjectEmpty(worker.actions) &&
+              Object.values(building.worker).length < building.numberOfWorker
+            ) {
+              updateContainer(building.worker, worker)
               addAction(
                 worker.actions,
                 metaData.workerAction.factory({ entity: worker, game }),

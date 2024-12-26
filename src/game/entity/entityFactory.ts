@@ -1,7 +1,7 @@
 import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 
 export function entityFactory<T extends EntityInterface = EntityInterface>(
   payload:
@@ -18,9 +18,9 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
   if (ldType === "undefined") console.warn("Has not Type", payload?.entity)
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
-
   const baseEntity: Partial<EntityInterface> = {
-    isBuild: false,
+    isBuild: !ldType.startsWith("entity/building"),
+    state: entityState.wait,
     collisionAble: true,
     worker: {},
     speed: 0.1,

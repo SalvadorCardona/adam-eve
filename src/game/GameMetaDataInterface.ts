@@ -5,6 +5,7 @@ export interface GameMetaDataInterface extends JsonTypedLdInterface {
     icon?: string
     model3d?: string
     model2d?: string
+    animationMapper?: Record<string, string>
   }
   label?: string
 }

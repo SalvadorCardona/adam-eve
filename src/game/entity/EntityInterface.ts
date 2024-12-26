@@ -4,6 +4,11 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { JsonLdContainerInterface } from "@/src/container/container"
 
+export enum entityState {
+  wait = "wait",
+  move = "move",
+}
+
 export default interface EntityInterface extends BaseJsonLdInterface {
   position: MaybeVector3Interface
   rotation: MaybeVector3Interface
@@ -14,8 +19,7 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   speed: number
   inventory: InventoryBagInterface
   actions: ActionBagInterface
-  state?: string
-  type: string | "ground"
+  state?: entityState
   collisionAble?: boolean
   worker: JsonLdContainerInterface<EntityInterface>
   numberOfWorker?: number

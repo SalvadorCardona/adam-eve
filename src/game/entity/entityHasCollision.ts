@@ -9,8 +9,8 @@ interface Collision2D {
 }
 
 export function entityHasCollision(
-  entity1: Collision2D,
-  entity2: Collision2D,
+  entitySource: Collision2D,
+  entityTarget: Collision2D,
 ): boolean {
   const isOverlap = (
     pos1: MaybeVector3Interface,
@@ -32,11 +32,16 @@ export function entityHasCollision(
     )
   }
 
-  return isOverlap(entity1.position, entity1.size, entity2.position, entity2.size)
+  return isOverlap(
+    entitySource.position,
+    entitySource.size,
+    entityTarget.position,
+    entityTarget.size,
+  )
 }
 
 function isGroundEntity(entity: EntityInterface): entity is GroundEntityInterface {
-  return entity.type === "ground"
+  return entity["@type"].startsWith("entity/ground")
 }
 
 export function hasCollisionInGame(
@@ -48,54 +53,50 @@ export function hasCollisionInGame(
   )
 
   for (const otherEntity of canBeCollision) {
-    if (
-      entity.type !== "ground" &&
-      otherEntity.type !== "ground" &&
-      entityHasCollision(entity, otherEntity)
-    ) {
+    if (!isGroundEntity(otherEntity) && entityHasCollision(entity, otherEntity)) {
       return otherEntity
     }
-    if (isGroundEntity(entity) && !isGroundEntity(otherEntity)) {
-      for (const roadNetwork of entity.roadNetwork) {
-        if (
-          entityHasCollision(
-            { position: roadNetwork.position, size: { x: 1, y: 1 } },
-            otherEntity,
-          )
-        ) {
-          return otherEntity
-        }
-      }
-    }
-    if (!isGroundEntity(entity) && isGroundEntity(otherEntity)) {
-      for (const roadNetwork of otherEntity.roadNetwork) {
-        if (
-          entityHasCollision(entity, {
-            position: roadNetwork.position,
-            size: { x: 1, y: 1 },
-          })
-        ) {
-          return otherEntity
-        }
-      }
-    }
-    if (isGroundEntity(entity) && isGroundEntity(otherEntity)) {
-      for (const roadNetwork1 of entity.roadNetwork) {
-        for (const roadNetwork2 of otherEntity.roadNetwork) {
-          if (
-            entityHasCollision(
-              { position: roadNetwork1.position, size: { x: 1, y: 1 } },
-              {
-                position: roadNetwork2.position,
-                size: { x: 1, y: 1 },
-              },
-            )
-          ) {
-            return otherEntity
-          }
-        }
-      }
-    }
+    // if (isGroundEntity(entity) && !isGroundEntity(otherEntity)) {
+    //   for (const roadNetwork of entity.roadNetwork) {
+    //     if (
+    //       entityHasCollision(
+    //         { position: roadNetwork.position, size: { x: 1, y: 1 } },
+    //         otherEntity,
+    //       )
+    //     ) {
+    //       return otherEntity
+    //     }
+    //   }
+    // }
+    // if (!isGroundEntity(entity) && isGroundEntity(otherEntity)) {
+    //   for (const roadNetwork of otherEntity.roadNetwork) {
+    //     if (
+    //       entityHasCollision(entity, {
+    //         position: roadNetwork.position,
+    //         size: { x: 1, y: 1 },
+    //       })
+    //     ) {
+    //       return otherEntity
+    //     }
+    //   }
+    // }
+    // if (isGroundEntity(entity) && isGroundEntity(otherEntity)) {
+    //   for (const roadNetwork1 of entity.roadNetwork) {
+    //     for (const roadNetwork2 of otherEntity.roadNetwork) {
+    //       if (
+    //         entityHasCollision(
+    //           { position: roadNetwork1.position, size: { x: 1, y: 1 } },
+    //           {
+    //             position: roadNetwork2.position,
+    //             size: { x: 1, y: 1 },
+    //           },
+    //         )
+    //       ) {
+    //         return otherEntity
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   return false

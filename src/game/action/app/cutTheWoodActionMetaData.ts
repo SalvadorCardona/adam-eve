@@ -1,10 +1,9 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import EntityInterface from "@/src/game/entity/EntityInterface"
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
+import { jsonLdFactory, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import { findClosestInGame } from "@/src/game/3D/findClosest"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
-import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { addToInventory } from "@/src/game/inventory/addToInventory"
 import { entityGoToEntity } from "@/src/game/entity/useCase/EntityGoToEntity"
@@ -17,8 +16,8 @@ enum CutTheWoodState {
 }
 
 interface CutTheWoodDataInterface {
-  treeEntity?: EntityInterface
-  forumEntity?: EntityInterface
+  treeEntityIri?: JsonLdIri
+  timberHouseEntityIri?: JsonLdIri
   state: CutTheWoodState
 }
 
@@ -29,19 +28,22 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       const data = action.data
       if (!entity) return
 
-      entity.state = "Running"
+      entity.state = entityState.move
 
       if (data.state === CutTheWoodState.GoToTree) {
-        if (!data.treeEntity) {
-          data.treeEntity = findClosestInGame(
-            entity,
-            treeEntityMetaData["@type"],
-            game,
-          )
-          console.log(data.treeEntity)
-          if (!data.treeEntity) return
+        const newTreeEntity = data.treeEntityIri
+          ? game.entities[data.treeEntityIri]
+          : (findClosestInGame(entity, treeEntityMetaData["@type"], game) as
+              | EntityInterface
+              | undefined)
+
+        if (!newTreeEntity) {
+          return
         }
-        const result = entityGoToEntity(entity, data.treeEntity)
+
+        data.treeEntityIri = newTreeEntity["@id"]
+
+        const result = entityGoToEntity(entity, newTreeEntity)
 
         if (result.isFinish) {
           data.state = CutTheWoodState.CutTheThree
@@ -60,16 +62,16 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       }
 
       if (data.state === CutTheWoodState.GoToBuild) {
-        if (!data.forumEntity) {
-          data.forumEntity = findClosestInGame(
-            entity,
-            forumEntityMetaData["@type"],
-            game,
-          )
+        const newTimberHouseEntity = data.timberHouseEntityIri
+          ? game.entities[data.timberHouseEntityIri]
+          : (findClosestInGame(entity, "entity/building/timberHouse", game) as
+              | EntityInterface
+              | undefined)
 
-          if (!data.forumEntity) return
-        }
-        const result = entityGoToEntity(entity, data.forumEntity)
+        if (!newTimberHouseEntity) return
+
+        data.timberHouseEntityIri = newTimberHouseEntity["@id"]
+        const result = entityGoToEntity(entity, newTimberHouseEntity)
 
         if (result.isFinish) {
           transfertInventory(

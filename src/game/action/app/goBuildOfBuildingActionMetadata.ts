@@ -1,6 +1,6 @@
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import { jsonLdFactory, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import { getByTypeInContainer } from "@/src/container/container"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { entityGoToEntity } from "@/src/game/entity/useCase/EntityGoToEntity"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
@@ -9,6 +9,8 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { enoughRessource } from "@/src/game/inventory/enoughRessource"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
+import { findClosestInGame } from "@/src/game/3D/findClosest"
+import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 
 enum State {
   GoToForum,
@@ -20,7 +22,7 @@ enum State {
 
 interface FindWorkerData {
   state: State
-  building?: EntityInterface
+  buildingIri?: JsonLdIri
   buildingPathCoordinate?: EntityInterface
   forum?: EntityInterface
   forumPathCoordinate?: EntityInterface
@@ -35,48 +37,41 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const data = action.data
 
       const getBuilding = (): EntityInterface | undefined => {
-        const currentBuilding = data.building
+        const currentBuilding = game.entities[data.buildingIri ?? ""]
         if (currentBuilding?.isBuild) return currentBuilding
-        data.building = getByTypeInContainer<EntityInterface>(
+
+        const newBuilding = getByTypeInContainer<EntityInterface>(
           game.entities,
           "entity/building",
         ).find((building) => {
           return !building.isBuild
         })
 
-        return data.building
-      }
-
-      const getForum = (): EntityInterface | undefined => {
-        const currentForum = data.forum
-        if (currentForum) return currentForum
-
-        const forum = getByTypeInContainer<EntityInterface>(
-          game.entities,
-          "entity/building/forum",
-        )
-
-        if (forum.length) {
-          return forum[0]
+        if (!newBuilding) {
+          return undefined
         }
 
-        return undefined
+        data.buildingIri = newBuilding["@id"]
+
+        return newBuilding
       }
 
       const building = getBuilding()
 
       if (!building) {
         data.state = State.NoBuild
+        entity.state = entityState.wait
         return
       }
 
       const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
-      entity.state = "Running"
+      entity.state = entityState.move
 
       if (data.state === State.GoToForum) {
-        const forum = getForum()
+        const forum = findClosestInGame(entity, forumEntityMetaData["@type"], game)
         if (!forum) {
           data.state = State.NoBuild
+
           return
         }
         const result = entityGoToEntity(entity, forum)
@@ -106,9 +101,10 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
           })
 
         const hasTakeRessource = ressourceTaken.some((amount) => amount > 0)
-
         if (hasTakeRessource) {
           data.state = State.GoToBuild
+        } else {
+          entity.state = entityState.wait
         }
       }
 
@@ -136,6 +132,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
           )
         ) {
           building.isBuild = true
+          data.buildingIri = undefined
         }
         data.state = State.GoToForum
       }

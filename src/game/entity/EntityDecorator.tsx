@@ -3,10 +3,11 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { Model2D } from "@/src/game/entity/components/Model2D"
 import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import React from "react"
+import React, { Component, ReactNode, useRef } from "react"
 import { vector3ToArray } from "@/src/game/3D/Vector"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { useFrame } from "@react-three/fiber"
 
 interface EntityDecoratorPropsInterface {
   entity: EntityInterface
@@ -24,6 +25,8 @@ export const EntityDecorator = ({
       onSelectEntityUserActionMetadata.onApply({ game, entity })
   }
 
+  const shaderRef = useRef()
+
   let EntityComponent = entityMetaData.component
 
   if (!EntityComponent) {
@@ -31,13 +34,21 @@ export const EntityDecorator = ({
     if (entityMetaData.asset?.model3d) EntityComponent = Model3D
   }
 
+  useFrame(({ clock }) => {
+    if (shaderRef.current) {
+      // shaderRef.current.uniforms.uTime.value = clock.getElapsedTime()
+    }
+  })
+
   return (
     <group
       onClick={clickOnEntity}
       position={vector3ToArray(entity.position)}
       rotation={vector3ToArray(entity.rotation)}
     >
-      <EntityComponent entity={entity}></EntityComponent>
+      <ErrorBoundary>
+        <EntityComponent entity={entity}></EntityComponent>
+      </ErrorBoundary>
       {bgColor && (
         <mesh position={[0, 0, 0]}>
           <planeGeometry args={[entity.size.x, entity.size.z]} />
@@ -46,4 +57,40 @@ export const EntityDecorator = ({
       )}
     </group>
   )
+}
+
+interface ErrorBoundaryProps {
+  children: ReactNode
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+    // Met à jour l'état pour afficher l'interface de repli lors du prochain rendu.
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    debugger
+    // Vous pouvez aussi enregistrer l'erreur dans un service de rapport d'erreurs.
+    console.error("Erreur capturée par ErrorBoundary: ", error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Vous pouvez personnaliser l'interface de repli ici.
+      console.log(this.state)
+      return <></>
+    }
+
+    return this.props.children
+  }
 }

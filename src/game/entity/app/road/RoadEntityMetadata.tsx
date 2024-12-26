@@ -101,7 +101,6 @@ const groundMetaDataFactory = ({
     },
     defaultEntity: function () {
       return {
-        type: "ground",
         roadNetwork: [],
         size: {
           x: 1,

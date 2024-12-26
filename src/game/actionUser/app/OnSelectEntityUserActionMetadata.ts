@@ -11,7 +11,6 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
   {
     "@type": "user-action/on-click-entity",
     onApply: ({ game, entity }) => {
-      console.log(entity)
       onSelectEntityUserActionMetadata.data.entitySelection = entity
       if (!game.userControl.currentAction) {
         game.userControl.currentAction = onSelectEntityUserActionMetadata

@@ -20,6 +20,7 @@ import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/Remo
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
+import { timberHouseEntityMetaData } from "@/src/game/entity/app/timberHouse/TimberHouseEntity"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -30,6 +31,7 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [goToDirectionMetaData["@type"]]: goToDirectionMetaData,
   [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
+  [timberHouseEntityMetaData["@type"]]: timberHouseEntityMetaData,
   [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
   [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
