@@ -1,6 +1,6 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import React from "react"
+import React, { useMemo } from "react"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { entityFactory } from "@/src/game/entity/entityFactory"
 import { currentGame } from "@/src/game/game/gameFactory"
@@ -13,7 +13,10 @@ import roadIcon from "./roadIcon.png"
 import waterIcon from "./waterIcon.png"
 import waterTextureSrc from "./waterTexture.png"
 import grassIcon from "./grassIcon.png"
+import grassModel from "./tile.glb?url"
 import grassTexturesrc from "./grassTexture.png"
+import { useGLTF } from "@react-three/drei"
+import { SkeletonUtils } from "three-stdlib"
 
 const waterTexture = imgLoader(waterTextureSrc, "water")
 const roadTexture = imgLoader(roadTextureSrc, "road")
@@ -87,14 +90,23 @@ const groundMetaDataFactory = ({
     },
     component: ({ entity }) => {
       const roads = entity.roadNetwork
+      const glb = useGLTF(grassModel)
+      const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
 
       return (
         <>
           {roads.map((road) => (
-            <mesh key={road.id} position={[road.position.x, road.position.y, 0]}>
-              <planeGeometry args={[entity.size.x, entity.size.y]} />
-              <meshStandardMaterial attach="material" map={texture} />
-            </mesh>
+            <primitive
+              key={road.id}
+              position={[road.position.x, road.position.y, 0]}
+              rotation={[Math.PI / 2, 0, 0]}
+              object={clone}
+              scale={[1, 1, 1]}
+            />
+            //   <mesh key={road.id} position={[road.position.x, road.position.y, 0]}>
+            // <planeGeometry args={[entity.size.x, entity.size.y]} />
+            // <meshStandardMaterial attach="material" map={texture} />
+            // </mesh>
           ))}
         </>
       )
