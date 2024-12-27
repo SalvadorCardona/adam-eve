@@ -21,6 +21,9 @@ import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRess
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 import { timberHouseEntityMetaData } from "@/src/game/entity/app/timberHouse/TimberHouseEntity"
+import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
+import { storageEntityMetaData } from "@/src/game/entity/app/storage/storageEntity"
+import { portEntityMetaData } from "@/src/game/entity/app/port/portEntity"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -41,6 +44,9 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [grassEntityMetadata["@type"]]: grassEntityMetadata,
   [removeBuildingUserActionMetadata["@type"]]: removeBuildingUserActionMetadata,
   [wheatRessourceMetadata["@type"]]: wheatRessourceMetadata,
+  [theDeathActionMetadata["@type"]]: theDeathActionMetadata,
+  [storageEntityMetaData["@type"]]: storageEntityMetaData,
+  [portEntityMetaData["@type"]]: portEntityMetaData,
 }
 
 export default configGame

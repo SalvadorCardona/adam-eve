@@ -60,7 +60,7 @@ const groundMetaDataFactory = ({
       const entity = payload?.entity ?? {}
       entity["@type"] = type
       const oldPosition = { ...entity.position }
-      let newRoad: GroundEntityInterface = entityFactory({ entity })
+      const newRoad: GroundEntityInterface = entityFactory({ entity })
       newRoad.position = { x: 0, y: 0, z: 0 }
       const game = currentGame()
 

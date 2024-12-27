@@ -1,4 +1,3 @@
-import { Canvas } from "@react-three/fiber"
 import { Environment, PerspectiveCamera } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import mockGame from "@/src/game/game/app/mockGame"
@@ -10,6 +9,7 @@ import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
 import Ground from "@/src/game/entity/app/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { vector3ToArray } from "@/src/game/3D/Vector"
+import { Canvas } from "@react-three/fiber"
 
 export default function ThreeGameComponent() {
   return (

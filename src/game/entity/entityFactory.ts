@@ -19,8 +19,9 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    isBuild: !ldType.startsWith("entity/building"),
-    state: entityState.wait,
+    state: ldType.startsWith("entity/building")
+      ? entityState.under_construction
+      : entityState.wait,
     collisionAble: true,
     worker: {},
     speed: 0.1,
@@ -40,11 +41,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
     },
     actions: {},
     inventory: {},
-    scale: {
-      x: 1,
-      y: 1,
-      z: 1,
-    },
+
     ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
   }

@@ -31,11 +31,12 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       entity.state = entityState.move
 
       if (data.state === CutTheWoodState.GoToTree) {
-        const newTreeEntity = data.treeEntityIri
-          ? game.entities[data.treeEntityIri]
-          : (findClosestInGame(entity, treeEntityMetaData["@type"], game) as
-              | EntityInterface
-              | undefined)
+        const newTreeEntity =
+          data.treeEntityIri && game.entities[data.treeEntityIri]
+            ? game.entities[data.treeEntityIri]
+            : (findClosestInGame(entity, treeEntityMetaData["@type"], game) as
+                | EntityInterface
+                | undefined)
 
         if (!newTreeEntity) {
           return
@@ -46,6 +47,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         const result = entityGoToEntity(entity, newTreeEntity)
 
         if (result.isFinish) {
+          newTreeEntity.life -= 10
           data.state = CutTheWoodState.CutTheThree
         }
       }

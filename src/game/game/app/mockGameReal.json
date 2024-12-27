@@ -15,7 +15,6 @@
     "entity/helper/build-request/pndq52": {
       "@type": "entity/helper/build-request",
       "@id": "entity/helper/build-request/pndq52",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": false,
       "worker": {},
@@ -46,7 +45,6 @@
     "entity/ground/grass/5e8de9": {
       "@type": "entity/ground/grass",
       "@id": "entity/ground/grass/5e8de9",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1242,7 +1240,6 @@
     "entity/ground/road/1dv1mqw": {
       "@type": "entity/ground/road",
       "@id": "entity/ground/road/1dv1mqw",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1402,7 +1399,6 @@
     "entity/building/forum/gah8n8": {
       "@type": "entity/building/forum",
       "@id": "entity/building/forum/gah8n8",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1435,8 +1431,7 @@
     "entity/building/house/91t8wx": {
       "@type": "entity/building/house",
       "@id": "entity/building/house/91t8wx",
-      "isBuild": false,
-      "state": "wait",
+      "state": "under_construction",
       "collisionAble": true,
       "worker": {},
       "speed": 0.1,
@@ -1467,8 +1462,7 @@
     "entity/building/house/7ohfqf": {
       "@type": "entity/building/house",
       "@id": "entity/building/house/7ohfqf",
-      "isBuild": false,
-      "state": "wait",
+      "state": "under_construction",
       "collisionAble": true,
       "worker": {},
       "speed": 0.1,
@@ -1499,7 +1493,6 @@
     "entity/nature/tree/1197gf7": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1197gf7",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1531,7 +1524,6 @@
     "entity/nature/tree/xsljub": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/xsljub",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1563,7 +1555,6 @@
     "entity/nature/tree/1yrrbw9": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1yrrbw9",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1595,7 +1586,6 @@
     "entity/nature/tree/11bk95j": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/11bk95j",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1627,7 +1617,6 @@
     "entity/nature/tree/1fgd9cp": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1fgd9cp",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1659,7 +1648,6 @@
     "entity/nature/tree/1lus9ul": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1lus9ul",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1691,7 +1679,6 @@
     "entity/nature/tree/1mw1g3z": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1mw1g3z",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1723,7 +1710,6 @@
     "entity/nature/tree/1s0da5n": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1s0da5n",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1755,7 +1741,6 @@
     "entity/nature/tree/1eh0qe3": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1eh0qe3",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1787,7 +1772,6 @@
     "entity/nature/tree/1ed9mij": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/1ed9mij",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1819,7 +1803,6 @@
     "entity/nature/tree/ix57u5": {
       "@type": "entity/nature/tree",
       "@id": "entity/nature/tree/ix57u5",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -1851,7 +1834,6 @@
     "entity/ground/water/zw7f0l": {
       "@type": "entity/ground/water",
       "@id": "entity/ground/water/zw7f0l",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2641,7 +2623,6 @@
     "entity/building/timberHouse/1mnmnxl": {
       "@type": "entity/building/timberHouse",
       "@id": "entity/building/timberHouse/1mnmnxl",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2674,7 +2655,6 @@
     "entity/character/worker/cyl1du": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/cyl1du",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2706,7 +2686,6 @@
     "entity/character/worker/yw73sf": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/yw73sf",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2738,7 +2717,6 @@
     "entity/character/worker/gpmyta": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/gpmyta",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2770,7 +2748,6 @@
     "entity/character/worker/1qwba5k": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/1qwba5k",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2802,7 +2779,6 @@
     "entity/character/worker/dv92pk": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/dv92pk",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2834,7 +2810,6 @@
     "entity/character/worker/14gdxhm": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/14gdxhm",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -2866,7 +2841,6 @@
     "entity/character/worker/16jhd0d": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/16jhd0d",
-      "isBuild": true,
       "state": "wait",
       "collisionAble": true,
       "worker": {},

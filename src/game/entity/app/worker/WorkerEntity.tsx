@@ -21,11 +21,6 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     return {
       speed: 0.1,
       life: 50,
-      scale: {
-        x: 0.1,
-        y: 0.1,
-        z: 0.1,
-      },
       size: {
         x: 0.2,
         y: 0.2,

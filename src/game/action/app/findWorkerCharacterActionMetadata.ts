@@ -1,6 +1,6 @@
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { getByTypeInContainer, updateContainer } from "@/src/container/container"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -26,7 +26,7 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
         return (
           building.numberOfWorker &&
           building.numberOfWorker > 0 &&
-          building.isBuild &&
+          building.state !== entityState.under_construction &&
           Object.values(building.worker).length < building.numberOfWorker
         )
       })
@@ -40,7 +40,6 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
         return isObjectEmpty(worker.actions)
       })
 
-      console.log(buildings)
       for (const building of buildings) {
         const metaData = getMetaData<EntityMetaDataInterface>(building)
         for (const worker of workers) {

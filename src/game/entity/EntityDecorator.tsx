@@ -41,21 +41,21 @@ export const EntityDecorator = ({
   })
 
   return (
-    <group
-      onClick={clickOnEntity}
-      position={vector3ToArray(entity.position)}
-      rotation={vector3ToArray(entity.rotation)}
-    >
-      <ErrorBoundary>
+    <ErrorBoundary>
+      <group
+        onClick={clickOnEntity}
+        position={vector3ToArray(entity.position)}
+        rotation={vector3ToArray(entity.rotation)}
+      >
         <EntityComponent entity={entity}></EntityComponent>
-      </ErrorBoundary>
-      {bgColor && (
-        <mesh position={[0, 0, 0]}>
-          <planeGeometry args={[entity.size.x, entity.size.z]} />
-          <meshStandardMaterial color={bgColor} />
-        </mesh>
-      )}
-    </group>
+        {bgColor && (
+          <mesh position={[0, 0, 0.03]}>
+            <planeGeometry args={[entity.size.x, entity.size.z]} />
+            <meshStandardMaterial color={bgColor} />
+          </mesh>
+        )}
+      </group>
+    </ErrorBoundary>
   )
 }
 
@@ -87,7 +87,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       // Vous pouvez personnaliser l'interface de repli ici.
-      console.log(this.state)
+      console.error(this.state)
       return <></>
     }
 

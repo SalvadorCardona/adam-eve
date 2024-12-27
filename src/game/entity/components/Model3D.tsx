@@ -1,10 +1,9 @@
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import { useAnimations, useGLTF } from "@react-three/drei"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
 import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
-import { vector3ToArray } from "../../3D/Vector"
 import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
 
 interface Model3DPropsInterface {
@@ -39,14 +38,16 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   }, [entity.state])
 
   useEffect(() => {
+    if (!ref.current) return
     ref.current.traverse((child) => {
       if (child.isMesh) {
         child.material = child.material.clone()
-        child.material.transparent = !entity.isBuild
-        child.material.opacity = entity.isBuild ? 1 : 0.5
+        child.material.transparent = entity.state === entityState.under_construction
+        child.material.opacity =
+          entity.state === entityState.under_construction ? 0.5 : 1
       }
     })
-  }, [entity.isBuild])
+  }, [entity.state])
 
   const scaleFactor = useMemo(() => {
     const boundingBox = new Box3().setFromObject(clone)
@@ -54,7 +55,9 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     boundingBox.getSize(size)
     const scaleX = entity.size.x / size.x
     const scaleY = entity.size.y / size.y
-    return [scaleX, scaleY, scaleX]
+    const scaleZ = entity.size.z / size.z
+    const uniformScale = Math.min(scaleX, scaleY, scaleZ)
+    return [uniformScale, uniformScale, uniformScale]
   }, [clone])
 
   const positionZ = useMemo(() => {
@@ -70,7 +73,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
         rotation={[Math.PI / 2, 0, 0]}
         ref={ref}
         object={clone}
-        scale={vector3ToArray(entity.scale)}
+        scale={[0.1, 0.1, 0.1]}
       />
     )
   }

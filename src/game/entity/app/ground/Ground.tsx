@@ -18,6 +18,7 @@ export default function Ground() {
         <Grid
           cellColor={"white"}
           args={[1000, 1000]}
+          position-z={0}
           cellSize={0.5}
           cellThickness={1}
           rotation={[Math.PI / 2, 0, 0]}
@@ -30,7 +31,7 @@ export default function Ground() {
         onPointerMove={(event) => {
           gameContext.game.userControl.mousePosition = event.point
         }}
-        position={[0, -0.1, 0]}
+        position={[0, 0, -0.1]}
         rotation={[0, 0, 0]}
       >
         <planeGeometry args={[50, 50]} />

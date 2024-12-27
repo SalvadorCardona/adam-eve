@@ -33,7 +33,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
       const newEntity = metaInterface.factory({
         entity: {
-          position: aroundVector(game.userControl.mousePosition),
+          position: aroundVector(game.userControl.mousePosition, true),
         },
       })
 

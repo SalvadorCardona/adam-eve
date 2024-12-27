@@ -2,7 +2,7 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { areVectorsEqual, Vector3Interface } from "@/src/game/3D/Vector"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { generatePathCoordinates } from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
-import { deleteContainerKey } from "@/src/container/container"
+import { updateContainer } from "@/src/container/container"
 
 export interface GoDirectionDataInterface {
   coordinates?: Vector3Interface[]
@@ -19,7 +19,7 @@ export const goToDirectionMetaData: ActionMetadataInterface<GoDirectionDataInter
       if (!data.coordinates) return
 
       if (data.coordinates.length < 2) {
-        deleteContainerKey(entity.actions, action["@id"])
+        updateContainer(entity.actions, action, "remove")
       }
       if (areVectorsEqual(entity.position, data.coordinates[0])) {
         entity.position = data.coordinates[1]

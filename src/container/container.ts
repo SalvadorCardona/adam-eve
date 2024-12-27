@@ -18,10 +18,6 @@ export interface JsonLdTypeContainerInterface<T = object> {
   [key: JsonLdType]: T
 }
 
-export function createContainer<T>(): ContainerInterface<T> {
-  return {}
-}
-
 export function deleteContainerKey<T>(
   container: ContainerInterface<T>,
   key: JsonLdIri,
@@ -36,8 +32,16 @@ export function hasId<T>(container: ContainerInterface<T>, key: JsonLdIri): bool
 export function updateContainer<T extends BaseJsonLdInterface>(
   container: ContainerInterface<T>,
   item: T,
+  action: "update" | "remove" = "update",
 ): void {
-  container[item["@id"]] = item
+  if (action === "update") {
+    container[item["@id"]] = item
+    return
+  }
+  if (action === "remove") {
+    deleteContainerKey(container, item["@id"])
+    return
+  }
 }
 
 export function updateTypeContainer(

@@ -20,11 +20,6 @@ export const forumEntityMetaData = entityMedataFactory({
         y: 2,
         z: 2,
       },
-      scale: {
-        x: 1,
-        z: 1,
-        y: 1,
-      },
     }
   },
 })

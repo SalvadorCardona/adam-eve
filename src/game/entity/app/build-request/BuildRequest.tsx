@@ -29,7 +29,7 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
     const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
 
     const entity = entityMetaData.factory({ context: "build-request" })
-    entity.position = aroundVector(gameContext.game.userControl.mousePosition)
+    entity.position = aroundVector(gameContext.game.userControl.mousePosition, true)
 
     const collision = hasCollisionInGame(gameContext.game, entity)
     const bgColor = collision ? "red" : "yellow"
@@ -38,7 +38,6 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
       ? mouseIcon.cantBeBuild
       : mouseIcon.build
 
-    console.log(entity)
     return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
   },
 })

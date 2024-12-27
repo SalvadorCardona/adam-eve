@@ -1,6 +1,16 @@
 import mockGameReal from "./mockGameReal.json"
+import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
+import { addAction } from "@/src/game/action/addAction"
+import GameInterface from "@/src/game/game/GameInterface"
 
-const mockGame = mockGameReal
+// @ts-ignore
+const mockGame = mockGameReal as GameInterface
+
+const theDeathAction = theDeathActionMetadata.factory({
+  game: mockGame,
+})
+
+addAction(mockGame.actions, theDeathAction)
 
 export default mockGame
 

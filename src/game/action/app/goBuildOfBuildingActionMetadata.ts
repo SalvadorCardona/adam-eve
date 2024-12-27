@@ -11,13 +11,15 @@ import { enoughRessource } from "@/src/game/inventory/enoughRessource"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { findClosestInGame } from "@/src/game/3D/findClosest"
 import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
+import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 
 enum State {
-  GoToForum,
-  TakeRessource,
-  GoToBuild,
-  PutRessource,
-  NoBuild,
+  GoToForum = "GoToForum",
+  TakeRessource = "TakeRessource",
+  GoToBuild = "GoToBuild",
+  PutRessource = "PutRessource",
+  NoBuild = "NoBuild",
+  ForumNotFound = "ForumNotFound",
 }
 
 interface FindWorkerData {
@@ -38,13 +40,14 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
       const getBuilding = (): EntityInterface | undefined => {
         const currentBuilding = game.entities[data.buildingIri ?? ""]
-        if (currentBuilding?.isBuild) return currentBuilding
+        if (currentBuilding?.state === entityState.under_construction)
+          return currentBuilding
 
         const newBuilding = getByTypeInContainer<EntityInterface>(
           game.entities,
           "entity/building",
         ).find((building) => {
-          return !building.isBuild
+          return building?.state === entityState.under_construction
         })
 
         if (!newBuilding) {
@@ -59,9 +62,13 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const building = getBuilding()
 
       if (!building) {
+        console.log(data)
         data.state = State.NoBuild
         entity.state = entityState.wait
         return
+      }
+      if (building && data.state === State.NoBuild) {
+        data.state = State.GoToForum
       }
 
       const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
@@ -70,7 +77,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       if (data.state === State.GoToForum) {
         const forum = findClosestInGame(entity, forumEntityMetaData["@type"], game)
         if (!forum) {
-          data.state = State.NoBuild
+          data.state = State.ForumNotFound
 
           return
         }
@@ -101,10 +108,11 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
           })
 
         const hasTakeRessource = ressourceTaken.some((amount) => amount > 0)
+
         if (hasTakeRessource) {
           data.state = State.GoToBuild
         } else {
-          entity.state = entityState.wait
+          updateEntityInGame(entity, { state: entityState.wait })
         }
       }
 
@@ -131,9 +139,10 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
             building.inventory,
           )
         ) {
-          building.isBuild = true
+          building.state = entityState.builded
           data.buildingIri = undefined
         }
+
         data.state = State.GoToForum
       }
     },

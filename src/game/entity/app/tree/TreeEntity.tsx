@@ -16,11 +16,6 @@ export const treeEntityMetaData = entityMedataFactory({
         y: 1,
         z: 1,
       },
-      scale: {
-        x: 0.2,
-        y: 0.2,
-        z: 0.2,
-      },
     }
   },
 })
