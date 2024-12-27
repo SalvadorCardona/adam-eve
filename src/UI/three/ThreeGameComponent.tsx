@@ -1,4 +1,4 @@
-import { Environment, PerspectiveCamera } from "@react-three/drei"
+import { PerspectiveCamera } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import mockGame from "@/src/game/game/app/mockGame"
 import useGameContext from "@/src/UI/provider/useGameContext"
@@ -6,10 +6,11 @@ import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
-import Ground from "@/src/game/entity/app/ground/Ground"
+import Ground from "@/src/game/entity/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { vector3ToArray } from "@/src/game/3D/Vector"
 import { Canvas } from "@react-three/fiber"
+import { useControls } from "leva"
 
 export default function ThreeGameComponent() {
   return (
@@ -45,6 +46,7 @@ function Child() {
       })}
       <ControlKeyboard></ControlKeyboard>
       {/*<Stats showPanel={1} className={""} />*/}
+      <Lights></Lights>
 
       <PerspectiveCamera
         makeDefault
@@ -53,8 +55,50 @@ function Child() {
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
 
-      <Environment preset="dawn" background blur={0.5} />
+      {/*<Environment preset="dawn" background blur={0.5} />*/}
       <Ground></Ground>
+    </>
+  )
+}
+
+function Lights() {
+  const ambientCtl = useControls("Ambient Light", {
+    visible: true,
+    intensity: {
+      value: 2,
+      min: 0,
+      max: 2,
+      step: 0.1,
+    },
+  })
+
+  const directionalCtl = useControls("Directional Light", {
+    visible: true,
+    position: {
+      x: 3.3,
+      y: 1.0,
+      z: 10,
+    },
+    castShadow: true,
+  })
+
+  return (
+    <>
+      <ambientLight visible={ambientCtl.visible} intensity={ambientCtl.intensity} />
+      <directionalLight
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-left={-10}
+        shadow-camera-bottom={-10}
+        shadow-mapSize={[1024, 1024]}
+        visible={directionalCtl.visible}
+        position={[
+          directionalCtl.position.x,
+          directionalCtl.position.y,
+          directionalCtl.position.z,
+        ]}
+        castShadow={directionalCtl.castShadow}
+      ></directionalLight>
     </>
   )
 }

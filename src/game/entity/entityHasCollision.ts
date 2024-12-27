@@ -1,7 +1,8 @@
 import { MaybeVector3Interface } from "@/src/game/3D/Vector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { GroundEntityInterface } from "@/src/game/entity/app/road/RoadEntityMetadata"
+
+import { GroundEntityInterface } from "@/src/game/entity/ground/GroundEntityInterface"
 
 interface Collision2D {
   position: MaybeVector3Interface

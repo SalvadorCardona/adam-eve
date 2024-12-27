@@ -62,7 +62,6 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const building = getBuilding()
 
       if (!building) {
-        console.log(data)
         data.state = State.NoBuild
         entity.state = entityState.wait
         return

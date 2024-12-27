@@ -29,6 +29,7 @@ export const ControlKeyboard = ({}: ControlPropsInterface) => {
       { name: Controls.jump, keys: ["Space"] },
       { name: Controls.backAction, keys: ["Escape"] },
       { name: Controls.showGrid, keys: ["KeyG"] },
+      { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
     ],
     [],
   )

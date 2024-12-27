@@ -1,13 +1,17 @@
-import { Ground, GroundNetwork } from "@/src/game/entity/app/road/RoadEntityMetadata"
 import { Mesh, MeshStandardMaterial, TextureLoader } from "three"
 import createUniqId from "@/src/utils/id/createUniqId"
+import {
+  GroundInterface,
+  GroundNetwork,
+} from "@/src/game/entity/ground/GroundInterface"
 
-function updateRoad(grid: GroundNetwork) {
+function updateRoad({ grid }: { grid: GroundNetwork }) {
   const size = 1
+  console.log("onmetajour")
+
   grid.forEach((road) => {
     // Reset connections
     road.connections = { top: false, bottom: false, left: false, right: false }
-
     // Check for neighboring roads and update connections
     grid.forEach((otherRoad) => {
       if (road.id !== otherRoad.id) {
@@ -44,8 +48,8 @@ export function createRoad(
   grid: GroundNetwork,
   position: { x: number; y: number },
   type?: string,
-): void {
-  const newRoad: Ground = {
+) {
+  const newRoad: GroundInterface = {
     type: type ?? "road",
     id: createUniqId(),
     position,
@@ -59,10 +63,12 @@ export function createRoad(
 
   grid.push(newRoad)
 
-  updateRoad(grid)
+  updateRoad({ grid })
+
+  return newRoad
 }
 
-function applyConnectionTexture(road: Ground, mesh: Mesh) {
+function applyConnectionTexture(road: GroundInterface, mesh: Mesh) {
   const textureLoader = new TextureLoader()
 
   if (road.connections.top && road.connections.left) {

@@ -41,6 +41,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     if (!ref.current) return
     ref.current.traverse((child) => {
       if (child.isMesh) {
+        child.castShadow = true
         child.material = child.material.clone()
         child.material.transparent = entity.state === entityState.under_construction
         child.material.opacity =
@@ -74,6 +75,8 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
         ref={ref}
         object={clone}
         scale={[0.1, 0.1, 0.1]}
+        castShadow
+        receiveShadow
       />
     )
   }
@@ -85,6 +88,8 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
       object={clone}
       scale={scaleFactor}
       position-z={positionZ}
+      castShadow
+      receiveShadow
     ></primitive>
   )
 }

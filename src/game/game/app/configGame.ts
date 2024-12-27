@@ -10,11 +10,7 @@ import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
 import { goToDirectionMetaData } from "@/src/game/action/app/goToDirectionMetaData"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
-import {
-  grassEntityMetadata,
-  roadEntityMetadata,
-  waterEntityMetadata,
-} from "@/src/game/entity/app/road/RoadEntityMetadata"
+import { roadGroundEntityMetadata } from "@/src/game/entity/ground/road/RoadGroundEntityMetadata"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
@@ -24,6 +20,8 @@ import { timberHouseEntityMetaData } from "@/src/game/entity/app/timberHouse/Tim
 import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
 import { storageEntityMetaData } from "@/src/game/entity/app/storage/storageEntity"
 import { portEntityMetaData } from "@/src/game/entity/app/port/portEntity"
+import { waterGroundEntityMetadata } from "@/src/game/entity/ground/water/waterGroundEntityMetadata"
+import { grassGroundEntityMetadata } from "@/src/game/entity/ground/grass/GrassGroundEntityMetadata"
 
 const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -39,9 +37,9 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
-  [roadEntityMetadata["@type"]]: roadEntityMetadata,
-  [waterEntityMetadata["@type"]]: waterEntityMetadata,
-  [grassEntityMetadata["@type"]]: grassEntityMetadata,
+  [roadGroundEntityMetadata["@type"]]: roadGroundEntityMetadata,
+  [waterGroundEntityMetadata["@type"]]: waterGroundEntityMetadata,
+  [grassGroundEntityMetadata["@type"]]: grassGroundEntityMetadata,
   [removeBuildingUserActionMetadata["@type"]]: removeBuildingUserActionMetadata,
   [wheatRessourceMetadata["@type"]]: wheatRessourceMetadata,
   [theDeathActionMetadata["@type"]]: theDeathActionMetadata,

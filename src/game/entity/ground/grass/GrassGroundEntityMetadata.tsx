@@ -1,0 +1,133 @@
+import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { groundMetaDataFactory } from "@/src/game/entity/ground/groundMetaDataFactory"
+import grassIcon from "@/src/game/entity/ground/grass/grassIcon.png"
+import React, { useMemo } from "react"
+import { Color, ShaderMaterial, Shape } from "three"
+import { GroundInterface } from "@/src/game/entity/ground/GroundInterface"
+
+export const typeGrass = "entity/ground/grass"
+
+const gradientMaterial = new ShaderMaterial({
+  uniforms: {
+    color1: { value: new Color("#8a643a") }, // Couleur de départ
+    color2: { value: new Color("#5a7c57") }, // Couleur de fin
+  },
+  vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+  fragmentShader: `
+      uniform vec3 color1;
+      uniform vec3 color2;
+      varying vec2 vUv;
+      void main() {
+        gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
+      }
+    `,
+})
+
+export const grassGroundEntityMetadata = entityMedataFactory<
+  // @ts-ignore
+  EntityMetaDataInterface<GroundEntityInterface>
+>(
+  groundMetaDataFactory({
+    icon: grassIcon,
+    defautType: typeGrass,
+    component: ({ road }) => {
+      return (
+        <group
+          key={road.id + "child"}
+          position={[road.position.x, road.position.y, -1.5]}
+        >
+          <mesh position={[0, 0, 0]}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial
+              color="#8a643a" // Brown color for a cozy look
+              roughness={0.5} // Adjust roughness for a softer appearance
+              metalness={0.1} // Low metalness for a more matte finish
+            />
+          </mesh>
+          <mesh
+            position={[0, 0, 0.5]}
+            rotation={[0, 0, 0]}
+            receiveShadow
+            material={gradientMaterial}
+          >
+            <RoundedCubeLine road={road} />
+            <meshStandardMaterial
+              color={"#5a7c57"} // Blue for water, green otherwise
+              roughness={0.7} // Higher roughness for a more natural texture
+              metalness={0.0} // No metalness for a matte finish
+            />
+          </mesh>
+        </group>
+      )
+    },
+  }),
+)
+
+interface RoundedCubeLinePropsInterface {
+  road: GroundInterface
+}
+
+const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
+  const { connections } = road
+
+  // Memoize the shape for performance
+  const roundedBox = useMemo(() => {
+    const shape = new Shape()
+    const size = 1 // Size of the square
+    const radius = 0.2 // Radius for rounded corners
+
+    shape.moveTo(-size / 2 + radius, -size / 2)
+
+    // Bottom edge
+    if (!connections.top && !connections.right) {
+      shape.lineTo(size / 2 - radius, -size / 2)
+      shape.quadraticCurveTo(size / 2, -size / 2, size / 2, -size / 2 + radius)
+    } else {
+      shape.lineTo(size / 2, -size / 2)
+    }
+
+    // Right edge
+    if (!connections.right && !connections.bottom) {
+      shape.lineTo(size / 2, size / 2 - radius)
+      shape.quadraticCurveTo(size / 2, size / 2, size / 2 - radius, size / 2)
+    } else {
+      shape.lineTo(size / 2, size / 2)
+    }
+
+    // Top edge
+    if (!connections.bottom && !connections.left) {
+      shape.lineTo(-size / 2 + radius, size / 2)
+      shape.quadraticCurveTo(-size / 2, size / 2, -size / 2, size / 2 - radius)
+    } else {
+      shape.lineTo(-size / 2, size / 2)
+    }
+
+    // Left edge
+    if (!connections.left && !connections.top) {
+      shape.lineTo(-size / 2, -size / 2 + radius)
+      shape.quadraticCurveTo(-size / 2, -size / 2, -size / 2 + radius, -size / 2)
+    } else {
+      shape.lineTo(-size / 2, -size / 2)
+    }
+
+    return shape
+  }, [connections])
+
+  // Memoize extrusion settings for performance
+  const extrudeSettings = useMemo(
+    () => ({
+      depth: 1, // Extrusion height
+      bevelEnabled: false, // No beveled edges
+    }),
+    [],
+  )
+
+  return <extrudeGeometry args={[roundedBox, extrudeSettings]} />
+}

@@ -28,7 +28,10 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
 
     const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
 
-    const entity = entityMetaData.factory({ context: "build-request" })
+    const entity = entityMetaData.factory({
+      context: "build-request",
+      game: gameContext.game,
+    })
     entity.position = aroundVector(gameContext.game.userControl.mousePosition, true)
 
     const collision = hasCollisionInGame(gameContext.game, entity)
