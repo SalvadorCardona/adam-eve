@@ -44,8 +44,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
         data.treeEntityIri = newTreeEntity["@id"]
 
-        const result = entityGoToEntity(entity, newTreeEntity)
-
+        const result = entityGoToEntity(entity, newTreeEntity, game)
         if (result.isFinish) {
           newTreeEntity.life -= 10
           data.state = CutTheWoodState.CutTheThree
@@ -73,7 +72,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         if (!newTimberHouseEntity) return
 
         data.timberHouseEntityIri = newTimberHouseEntity["@id"]
-        const result = entityGoToEntity(entity, newTimberHouseEntity)
+        const result = entityGoToEntity(entity, newTimberHouseEntity, game)
 
         if (result.isFinish) {
           transfertInventory(

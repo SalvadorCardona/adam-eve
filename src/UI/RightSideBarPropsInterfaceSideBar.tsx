@@ -1,10 +1,9 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import JsonPrettyComponent from "@/components/JsonPrettyComponent"
 import React, { useMemo } from "react"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
+import { EntityModal } from "@/src/UI/entity-modal"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export const RightSideBarPropsInterfaceSideBar = () => {
   const { game } = useGameContext()
@@ -15,19 +14,15 @@ export const RightSideBarPropsInterfaceSideBar = () => {
       onSelectEntityUserActionMetadata.data.entitySelection
     )
   }, [game.userControl.currentAction])
+
   return (
-    <div className={"fixed top-0 right-0   h-screen w-[450px] max-h-screen"}>
+    <div className={"fixed top-1/3 right-0   h-screen w-[450px] max-h-screen "}>
       {hasAction && (
-        <Card>
-          <CardContent className={"scroll-auto overflow-scroll"}>
-            <Button onClick={() => (game.userControl.currentAction = undefined)}>
-              Close
-            </Button>
-            <JsonPrettyComponent
-              data={onSelectEntityUserActionMetadata.data.entitySelection as object}
-            ></JsonPrettyComponent>
-          </CardContent>
-        </Card>
+        <EntityModal
+          entity={
+            onSelectEntityUserActionMetadata.data.entitySelection as EntityInterface
+          }
+        ></EntityModal>
       )}
     </div>
   )

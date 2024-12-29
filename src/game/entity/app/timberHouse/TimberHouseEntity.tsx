@@ -17,6 +17,7 @@ export const timberHouseEntityMetaData = entityMedataFactory({
     },
   },
   workerAction: cutTheWoodActionMetaData,
+  label: "Maison de bucheron",
   ["@type"]: "entity/building/timberHouse",
   defaultEntity: () => {
     return {

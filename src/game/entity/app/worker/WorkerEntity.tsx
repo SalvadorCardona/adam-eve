@@ -6,6 +6,7 @@ import { entityState } from "@/src/game/entity/EntityInterface"
 
 export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: "entity/character/worker",
+  label: 'Citoyen',
   asset: {
     model3d: asset,
     icon: iconFarmerSrc,

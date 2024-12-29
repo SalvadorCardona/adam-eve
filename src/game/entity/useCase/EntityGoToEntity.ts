@@ -1,16 +1,21 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { generatePathCoordinates } from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
 import { consumePathCoordinate } from "@/src/game/3D/pathCoordinate/consumePathCoordinate"
 import { entityHasCollision } from "@/src/game/entity/entityHasCollision"
+import { aStarPathfinding } from "@/src/game/3D/findClosestWithGround"
+import GameInterface from "@/src/game/game/GameInterface"
+import { generatePathCoordinates } from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
 
 export function entityGoToEntity(
   entitySource: EntityInterface,
   entityTarget: EntityInterface,
+  game?: GameInterface,
 ) {
-  const pathCoordinate = generatePathCoordinates(
-    entitySource.position,
-    entityTarget.position,
-  )
+  let pathCoordinate = game
+    ? aStarPathfinding(entitySource.position, entityTarget.position, game, 5)
+    : generatePathCoordinates(entitySource.position, entityTarget.position)
+  if (!pathCoordinate) {
+    throw new Error("problem path")
+  }
 
   const consumePathCoordinateResult = consumePathCoordinate({
     position: entitySource.position,

@@ -11,6 +11,7 @@ export const forumEntityMetaData = entityMedataFactory({
   },
   workerAction: goBuildOfBuildingActionMetadata,
   ["@type"]: "entity/building/forum",
+  label: "Centre Ville",
   defaultEntity: () => {
     return {
       numberOfWorker: 2,

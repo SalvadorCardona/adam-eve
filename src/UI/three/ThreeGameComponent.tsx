@@ -10,7 +10,6 @@ import Ground from "@/src/game/entity/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { vector3ToArray } from "@/src/game/3D/Vector"
 import { Canvas } from "@react-three/fiber"
-import { useControls } from "leva"
 
 export default function ThreeGameComponent() {
   return (
@@ -62,42 +61,38 @@ function Child() {
 }
 
 function Lights() {
-  const ambientCtl = useControls("Ambient Light", {
-    visible: true,
-    intensity: {
-      value: 2,
-      min: 0,
-      max: 2,
-      step: 0.1,
-    },
-  })
-
-  const directionalCtl = useControls("Directional Light", {
-    visible: true,
-    position: {
-      x: 3.3,
-      y: 1.0,
-      z: 10,
-    },
-    castShadow: true,
-  })
+  // const ambientCtl = useControls("Ambient Light", {
+  //   visible: true,
+  //   intensity: {
+  //     value: 2,
+  //     min: 0,
+  //     max: 2,
+  //     step: 0.1,
+  //   },
+  // })
+  //
+  // const directionalCtl = useControls("Directional Light", {
+  //   visible: true,
+  //   position: {
+  //     x: 3.3,
+  //     y: 1.0,
+  //     z: 10,
+  //   },
+  //   castShadow: true,
+  // })
 
   return (
     <>
-      <ambientLight visible={ambientCtl.visible} intensity={ambientCtl.intensity} />
+      <ambientLight visible={true} intensity={2} />
       <directionalLight
         shadow-camera-right={10}
         shadow-camera-top={10}
         shadow-camera-left={-10}
         shadow-camera-bottom={-10}
         shadow-mapSize={[1024, 1024]}
-        visible={directionalCtl.visible}
-        position={[
-          directionalCtl.position.x,
-          directionalCtl.position.y,
-          directionalCtl.position.z,
-        ]}
-        castShadow={directionalCtl.castShadow}
+        visible={true}
+        position={[3.3, 1.0, 10]}
+        castShadow={true}
       ></directionalLight>
     </>
   )

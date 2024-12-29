@@ -18,6 +18,7 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
     },
   },
   ["@type"]: "entity/building/house",
+  label: "Maison",
   defaultEntity: () => {
     const entity: Partial<EntityInterface> = {
       speed: 0.1,
