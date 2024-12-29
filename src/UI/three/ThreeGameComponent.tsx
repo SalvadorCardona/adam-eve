@@ -10,11 +10,12 @@ import Ground from "@/src/game/entity/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { vector3ToArray } from "@/src/game/3D/Vector"
 import { Canvas } from "@react-three/fiber"
+import GameInterface from "@/src/game/game/GameInterface"
 
-export default function ThreeGameComponent() {
+export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
   return (
     <main className={"h-screen overflow-hidden"}>
-      <GameProvider game={mockGame}>
+      <GameProvider game={game ?? mockGame}>
         <Canvas
           shadows
           camera={{

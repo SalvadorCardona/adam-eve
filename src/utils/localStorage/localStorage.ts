@@ -17,3 +17,19 @@ export function removeLocalStorage(key: string): void {
 
   localStorage.removeItem(key)
 }
+
+export function getItemsInLocalStorageByPrefix<T = any>(prefix: string): T[] {
+  const items: T[] = []
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    if (key && key.startsWith(prefix)) {
+      const item = getLocalStorage<T>(key)
+      if (item) {
+        items.push(item)
+      }
+    }
+  }
+
+  return items
+}

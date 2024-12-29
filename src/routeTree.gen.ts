@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
+import { Route as SaveGameSaveGameIdImport } from './routes/saveGame.$saveGameId'
 
 // Create/Update Routes
 
@@ -31,6 +32,12 @@ const LayoutRoute = LayoutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SaveGameSaveGameIdRoute = SaveGameSaveGameIdImport.update({
+  id: '/saveGame/$saveGameId',
+  path: '/saveGame/$saveGameId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -59,6 +66,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/saveGame/$saveGameId': {
+      id: '/saveGame/$saveGameId'
+      path: '/saveGame/$saveGameId'
+      fullPath: '/saveGame/$saveGameId'
+      preLoaderRoute: typeof SaveGameSaveGameIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -68,12 +82,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
 export interface FileRoutesById {
@@ -81,14 +97,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_layout': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/about'
+  fullPaths: '/' | '' | '/about' | '/saveGame/$saveGameId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/about'
-  id: '__root__' | '/' | '/_layout' | '/about'
+  to: '/' | '' | '/about' | '/saveGame/$saveGameId'
+  id: '__root__' | '/' | '/_layout' | '/about' | '/saveGame/$saveGameId'
   fileRoutesById: FileRoutesById
 }
 
@@ -96,12 +113,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LayoutRoute: typeof LayoutRoute
   AboutRoute: typeof AboutRoute
+  SaveGameSaveGameIdRoute: typeof SaveGameSaveGameIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LayoutRoute: LayoutRoute,
   AboutRoute: AboutRoute,
+  SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,7 +135,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_layout",
-        "/about"
+        "/about",
+        "/saveGame/$saveGameId"
       ]
     },
     "/": {
@@ -127,6 +147,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/saveGame/$saveGameId": {
+      "filePath": "saveGame.$saveGameId.tsx"
     }
   }
 }
