@@ -39,12 +39,8 @@ export const grassGroundEntityMetadata = entityMedataFactory<
     defautType: typeGrass,
     component: ({ road }) => {
       return (
-        <group
-          key={road.id + "child"}
-          position={[road.position.x, 0, road.position.y]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <mesh position={[0, 0, 0]}>
+        <>
+          <mesh>
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial
               color="#8a643a" // Brown color for a cozy look
@@ -52,12 +48,7 @@ export const grassGroundEntityMetadata = entityMedataFactory<
               metalness={0.1} // Low metalness for a more matte finish
             />
           </mesh>
-          <mesh
-            position={[0, 0, 0.5]}
-            rotation={[0, 0, 0]}
-            receiveShadow
-            material={gradientMaterial}
-          >
+          <mesh receiveShadow material={gradientMaterial}>
             <RoundedCubeLine road={road} />
             <meshStandardMaterial
               color={"#5a7c57"} // Blue for water, green otherwise
@@ -65,7 +56,7 @@ export const grassGroundEntityMetadata = entityMedataFactory<
               metalness={0.0} // No metalness for a matte finish
             />
           </mesh>
-        </group>
+        </>
       )
     },
   }),
@@ -85,7 +76,6 @@ const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
     const radius = 0.2 // Radius for rounded corners
 
     shape.moveTo(-size / 2 + radius, -size / 2)
-    console.log("new" + road["@id"])
     // Bottom edge
     if (!connections.right && !connections.bottom) {
       shape.lineTo(size / 2 - radius, -size / 2)

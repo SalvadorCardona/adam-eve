@@ -27,7 +27,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
     onFrame: ({ entity, action, game }) => {
       const data = action.data
       if (!entity) return
-      console.log(entity)
       entity.state = entityState.move
 
       if (data.state === CutTheWoodState.GoToTree) {

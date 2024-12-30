@@ -32,9 +32,9 @@ export function hasId<T>(container: ContainerInterface<T>, key: JsonLdIri): bool
 export function updateContainer<T extends BaseJsonLdInterface>(
   container: ContainerInterface<T>,
   item: T,
-  action: "update" | "remove" = "update",
+  action: "update" | "remove" | "create" = "update",
 ): void {
-  if (action === "update") {
+  if (action === "update" || action === "create") {
     container[item["@id"]] = item
     return
   }

@@ -11,7 +11,6 @@ import { enoughRessource } from "@/src/game/inventory/enoughRessource"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { findClosestInGame } from "@/src/game/3D/findClosest"
 import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
-import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 
 enum State {
   GoToForum = "GoToForum",
@@ -111,7 +110,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
         if (hasTakeRessource) {
           data.state = State.GoToBuild
         } else {
-          updateEntityInGame(entity, { state: entityState.wait })
+          entity.state = entityState.wait
         }
       }
 

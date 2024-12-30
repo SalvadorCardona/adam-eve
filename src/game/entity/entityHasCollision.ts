@@ -21,7 +21,7 @@ export function entityHasCollision(
   ) => {
     return (
       Math.abs(pos1.x - pos2.x) < (size1.x + size2.x) / 2 &&
-      Math.abs(pos1.y - pos2.y) < (size1.y + size2.y) / 2 &&
+      // Math.abs(pos1.y - pos2.y) < (size1.y + size2.y) / 2 &&
       Math.abs(pos1.z - pos2.z) < (size1.z + size2.z) / 2
     )
   }

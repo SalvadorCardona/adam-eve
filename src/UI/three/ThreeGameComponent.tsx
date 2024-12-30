@@ -5,7 +5,7 @@ import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
-import Ground from "@/src/game/entity/ground/Ground"
+import GlobalGround from "@/src/game/entity/app/globalGround/GlobalGround"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { Canvas } from "@react-three/fiber"
 import GameInterface from "@/src/game/game/GameInterface"
@@ -47,8 +47,10 @@ function Child() {
       <ControlKeyboard></ControlKeyboard>
       {/*<Stats showPanel={1} className={""} />*/}
       <Lights></Lights>
-      makeDefault
-      {/*<OrbitControls></OrbitControls>*/}
+      {/*<OrbitControls*/}
+      {/*  rotation={[-0.3, -0.05, -0.02]}*/}
+      {/*  position={[-0.4, 3.5, 3.5]}*/}
+      {/*></OrbitControls>*/}
       <PerspectiveCamera
         makeDefault={true}
         fov={gameContext.game.camera.fov}
@@ -56,7 +58,7 @@ function Child() {
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
       {/*<Environment preset="dawn" background blur={0.5} />*/}
-      <Ground></Ground>
+      <GlobalGround></GlobalGround>
     </>
   )
 }

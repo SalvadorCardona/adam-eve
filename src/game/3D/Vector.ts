@@ -30,7 +30,7 @@ export function areVectorsEqual(
   v1: Vector3Interface,
   v2: Vector3Interface,
 ): boolean {
-  return v1.x === v2.x && v1.y === v2.y
+  return v1.x === v2.x && v1.z === v2.z
 }
 
 export function aroundVector(

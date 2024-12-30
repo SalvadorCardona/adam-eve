@@ -16,12 +16,12 @@ export const roadGroundEntityMetadata = entityMedataFactory<
     defautType: typeRoad,
     component: ({ road }) => {
       return (
-        <group key={road.id} position={[road.position.x, -1.5, road.position.y]}>
-          <mesh position={[0, 0, 0]}>
+        <>
+          <mesh>
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial color="#8a643a" roughness={0.5} metalness={0.1} />
           </mesh>
-          <mesh position={[0, 0, 1]} receiveShadow>
+          <mesh position={[0, 0, 0]} receiveShadow>
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial
               color={"#c9b03c"} // Blue for water, green otherwise
@@ -30,7 +30,7 @@ export const roadGroundEntityMetadata = entityMedataFactory<
               metalness={0.0} // No metalness for a matte finish
             />
           </mesh>
-        </group>
+        </>
       )
     },
   }),

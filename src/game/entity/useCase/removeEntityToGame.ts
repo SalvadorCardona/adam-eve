@@ -1,10 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { updateContainer } from "@/src/container/container"
+import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 
 export function removeEntityToGame(
   game: GameInterface,
   entity: EntityInterface,
 ): void {
-  updateContainer(game.entities, entity, "remove")
+  updateEntityInGame(game, entity, "remove")
 }

@@ -62,11 +62,11 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     return [uniformScale, uniformScale, uniformScale]
   }, [clone])
 
-  const positionZ = useMemo(() => {
+  const positionY = useMemo(() => {
     const boundingBox = new Box3().setFromObject(clone)
     const size = new Vector3()
     boundingBox.getSize(size)
-    return (size.z / 2) * scaleFactor[2]
+    return (size.y / 2) * scaleFactor[2]
   }, [clone, scaleFactor])
 
   if (entity["@type"] === workerEntityMetaData["@type"]) {
@@ -84,10 +84,10 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
 
   return (
     <primitive
+      position-y={positionY}
       ref={ref}
       object={clone}
       scale={scaleFactor}
-      // position-z={positionZ}
       castShadow={true}
       receiveShadow={true}
       rotation={vector3ToArray(entity.rotation)}
