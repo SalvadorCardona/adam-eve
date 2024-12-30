@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
+import React from "react"
 
 export function OptionsWindow() {
   return (
@@ -18,17 +19,22 @@ export function OptionsWindow() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="difficulty">Difficulté</Label>
-          <select id="difficulty" className="w-full p-2 rounded-md bg-white border border-amber-300">
+          <select
+            id="difficulty"
+            className="w-full p-2 rounded-md bg-white border border-amber-300"
+          >
             <option>Facile</option>
             <option>Normal</option>
             <option>Difficile</option>
           </select>
         </div>
-        <Button type="submit" className="w-full bg-emerald-400 hover:bg-emerald-500 text-white">
+        <Button
+          type="submit"
+          className="w-full bg-emerald-400 hover:bg-emerald-500 text-white"
+        >
           Sauvegarder les options
         </Button>
       </form>
     </div>
   )
 }
-
