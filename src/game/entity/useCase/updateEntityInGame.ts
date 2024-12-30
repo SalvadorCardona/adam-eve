@@ -4,5 +4,5 @@ export function updateEntityInGame(
   entity: EntityInterface,
   data: Partial<EntityInterface>,
 ): EntityInterface {
-  return entity
+  return { ...entity, ...data }
 }

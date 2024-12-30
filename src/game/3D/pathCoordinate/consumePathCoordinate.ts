@@ -1,13 +1,9 @@
-import {
-  areVectorsEqual,
-  MaybeVector3Interface,
-  Vector3Interface,
-} from "@/src/game/3D/Vector"
+import { areVectorsEqual, Vector3Interface } from "@/src/game/3D/Vector"
 import { PathCoordinate } from "@/src/game/3D/pathCoordinate/generatePathCoordinates"
 
 interface ConsumePathCoordinateInterface {
-  (params: { pathCoordinate: PathCoordinate; position: MaybeVector3Interface }): {
-    position: MaybeVector3Interface
+  (params: { pathCoordinate: PathCoordinate; position: Vector3Interface }): {
+    position: Vector3Interface
     rotation: Vector3Interface
     pathCoordinate: PathCoordinate
     isFinish: boolean
@@ -38,10 +34,10 @@ export const consumePathCoordinate: ConsumePathCoordinateInterface = ({
   const direction = {
     x: newPosition.x - position.x,
     y: newPosition.y - position.y,
-    z: (newPosition?.z ?? 0) - (position.z ?? 0),
+    z: newPosition.z - position.z,
   }
 
-  rotation.z = Math.atan2(direction.y, direction.x) * (180 / (Math.PI * 6))
+  rotation.y = Math.atan2(direction.x, direction.z) * (180 / Math.PI)
 
   return {
     pathCoordinate: newPathCoordinate,

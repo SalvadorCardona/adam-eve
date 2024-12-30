@@ -1,18 +1,18 @@
-import mockGameReal from "./mockGameReal.json"
-import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
-import { addAction } from "@/src/game/action/addAction"
-import GameInterface from "@/src/game/game/GameInterface"
-
-// @ts-ignore
-const mockGame = mockGameReal as GameInterface
-
-const theDeathAction = theDeathActionMetadata.factory({
-  game: mockGame,
-})
-
-addAction(mockGame.actions, theDeathAction)
-
-export default mockGame
+// import mockGameReal from "../../mockGame/mocks/defaultMockGame.json"
+// import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
+// import { addAction } from "@/src/game/action/addAction"
+// import GameInterface from "@/src/game/game/GameInterface"
+//
+// // @ts-ignore
+// const mockGame = mockGameReal as GameInterface
+//
+// const theDeathAction = theDeathActionMetadata.factory({
+//   game: mockGame,
+// })
+//
+// addAction(mockGame.actions, theDeathAction)
+//
+// export default mockGame
 
 // import { updateContainer } from "@/src/container/container"
 // import { gameFactory } from "@/src/game/game/gameFactory"

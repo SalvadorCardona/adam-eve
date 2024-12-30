@@ -15,13 +15,13 @@ import {
 interface SaveGameInterface extends BaseJsonLdInterface {
   name?: string
   game: GameInterface
-  createdAt: Date
+  createdAt: Date | string
 }
 
 export interface SaveGameMetadataInterface extends GameMetaDataInterface {
   factory: (payload: {
     game: GameInterface
-    saveGame: SaveGameInterface
+    saveGame: Partial<SaveGameInterface>
   }) => SaveGameInterface
   getItem: (iriSaveGame: JsonLdIri) => SaveGameInterface | undefined
   getCollection: () => SaveGameInterface[]

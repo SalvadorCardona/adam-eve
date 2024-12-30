@@ -11,12 +11,20 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NewGameImport } from './routes/newGame'
 import { Route as AboutImport } from './routes/about'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
 import { Route as SaveGameSaveGameIdImport } from './routes/saveGame.$saveGameId'
+import { Route as MockMockNameImport } from './routes/mock/$mockName'
 
 // Create/Update Routes
+
+const NewGameRoute = NewGameImport.update({
+  id: '/newGame',
+  path: '/newGame',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -38,6 +46,12 @@ const IndexRoute = IndexImport.update({
 const SaveGameSaveGameIdRoute = SaveGameSaveGameIdImport.update({
   id: '/saveGame/$saveGameId',
   path: '/saveGame/$saveGameId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MockMockNameRoute = MockMockNameImport.update({
+  id: '/mock/$mockName',
+  path: '/mock/$mockName',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -66,6 +80,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/newGame': {
+      id: '/newGame'
+      path: '/newGame'
+      fullPath: '/newGame'
+      preLoaderRoute: typeof NewGameImport
+      parentRoute: typeof rootRoute
+    }
+    '/mock/$mockName': {
+      id: '/mock/$mockName'
+      path: '/mock/$mockName'
+      fullPath: '/mock/$mockName'
+      preLoaderRoute: typeof MockMockNameImport
+      parentRoute: typeof rootRoute
+    }
     '/saveGame/$saveGameId': {
       id: '/saveGame/$saveGameId'
       path: '/saveGame/$saveGameId'
@@ -82,6 +110,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/newGame': typeof NewGameRoute
+  '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
@@ -89,6 +119,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/newGame': typeof NewGameRoute
+  '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
@@ -97,15 +129,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_layout': typeof LayoutRoute
   '/about': typeof AboutRoute
+  '/newGame': typeof NewGameRoute
+  '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/about' | '/saveGame/$saveGameId'
+  fullPaths:
+    | '/'
+    | ''
+    | '/about'
+    | '/newGame'
+    | '/mock/$mockName'
+    | '/saveGame/$saveGameId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/about' | '/saveGame/$saveGameId'
-  id: '__root__' | '/' | '/_layout' | '/about' | '/saveGame/$saveGameId'
+  to:
+    | '/'
+    | ''
+    | '/about'
+    | '/newGame'
+    | '/mock/$mockName'
+    | '/saveGame/$saveGameId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_layout'
+    | '/about'
+    | '/newGame'
+    | '/mock/$mockName'
+    | '/saveGame/$saveGameId'
   fileRoutesById: FileRoutesById
 }
 
@@ -113,6 +166,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LayoutRoute: typeof LayoutRoute
   AboutRoute: typeof AboutRoute
+  NewGameRoute: typeof NewGameRoute
+  MockMockNameRoute: typeof MockMockNameRoute
   SaveGameSaveGameIdRoute: typeof SaveGameSaveGameIdRoute
 }
 
@@ -120,6 +175,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LayoutRoute: LayoutRoute,
   AboutRoute: AboutRoute,
+  NewGameRoute: NewGameRoute,
+  MockMockNameRoute: MockMockNameRoute,
   SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
 }
 
@@ -136,6 +193,8 @@ export const routeTree = rootRoute
         "/",
         "/_layout",
         "/about",
+        "/newGame",
+        "/mock/$mockName",
         "/saveGame/$saveGameId"
       ]
     },
@@ -147,6 +206,12 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/newGame": {
+      "filePath": "newGame.tsx"
+    },
+    "/mock/$mockName": {
+      "filePath": "mock/$mockName.tsx"
     },
     "/saveGame/$saveGameId": {
       "filePath": "saveGame.$saveGameId.tsx"

@@ -41,7 +41,8 @@ export const grassGroundEntityMetadata = entityMedataFactory<
       return (
         <group
           key={road.id + "child"}
-          position={[road.position.x, road.position.y, -1.5]}
+          position={[road.position.x, 0, road.position.y]}
+          rotation={[-Math.PI / 2, 0, 0]}
         >
           <mesh position={[0, 0, 0]}>
             <boxGeometry args={[1, 1, 1]} />
@@ -84,9 +85,9 @@ const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
     const radius = 0.2 // Radius for rounded corners
 
     shape.moveTo(-size / 2 + radius, -size / 2)
-
+    console.log("new" + road["@id"])
     // Bottom edge
-    if (!connections.top && !connections.right) {
+    if (!connections.right && !connections.bottom) {
       shape.lineTo(size / 2 - radius, -size / 2)
       shape.quadraticCurveTo(size / 2, -size / 2, size / 2, -size / 2 + radius)
     } else {
@@ -94,7 +95,7 @@ const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
     }
 
     // Right edge
-    if (!connections.right && !connections.bottom) {
+    if (!connections.top && !connections.right) {
       shape.lineTo(size / 2, size / 2 - radius)
       shape.quadraticCurveTo(size / 2, size / 2, size / 2 - radius, size / 2)
     } else {
@@ -102,7 +103,7 @@ const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
     }
 
     // Top edge
-    if (!connections.bottom && !connections.left) {
+    if (!connections.left && !connections.top) {
       shape.lineTo(-size / 2 + radius, size / 2)
       shape.quadraticCurveTo(-size / 2, size / 2, -size / 2, size / 2 - radius)
     } else {
@@ -110,7 +111,7 @@ const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
     }
 
     // Left edge
-    if (!connections.left && !connections.top) {
+    if (!connections.bottom && !connections.left) {
       shape.lineTo(-size / 2, -size / 2 + radius)
       shape.quadraticCurveTo(-size / 2, -size / 2, -size / 2 + radius, -size / 2)
     } else {

@@ -16,7 +16,7 @@ export const roadGroundEntityMetadata = entityMedataFactory<
     defautType: typeRoad,
     component: ({ road }) => {
       return (
-        <group key={road.id} position={[road.position.x, road.position.y, -1.5]}>
+        <group key={road.id} position={[road.position.x, -1.5, road.position.y]}>
           <mesh position={[0, 0, 0]}>
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial color="#8a643a" roughness={0.5} metalness={0.1} />

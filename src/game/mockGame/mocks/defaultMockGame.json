@@ -9,6 +9,10 @@
       "data": {
         "state": "GoToTree"
       }
+    },
+    "action/TheDeathActionMetadata/1pp7t1t": {
+      "@type": "action/TheDeathActionMetadata",
+      "@id": "action/TheDeathActionMetadata/1pp7t1t"
     }
   },
   "entities": {

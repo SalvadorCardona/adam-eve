@@ -1,6 +1,5 @@
 import { PerspectiveCamera } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
-import mockGame from "@/src/game/game/app/mockGame"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
@@ -8,14 +7,15 @@ import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
 import Ground from "@/src/game/entity/ground/Ground"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
-import { vector3ToArray } from "@/src/game/3D/Vector"
 import { Canvas } from "@react-three/fiber"
 import GameInterface from "@/src/game/game/GameInterface"
+import { mockGames } from "@/src/game/mockGame/mockGame"
+import { vector3ToArray } from "@/src/game/3D/Vector"
 
 export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
   return (
     <main className={"h-screen overflow-hidden"}>
-      <GameProvider game={game ?? mockGame}>
+      <GameProvider game={game ?? mockGames.defaultMock}>
         <Canvas
           shadows
           camera={{
@@ -47,14 +47,14 @@ function Child() {
       <ControlKeyboard></ControlKeyboard>
       {/*<Stats showPanel={1} className={""} />*/}
       <Lights></Lights>
-
+      makeDefault
+      {/*<OrbitControls></OrbitControls>*/}
       <PerspectiveCamera
-        makeDefault
+        makeDefault={true}
         fov={gameContext.game.camera.fov}
         position={vector3ToArray(gameContext.game.camera.position)}
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
-
       {/*<Environment preset="dawn" background blur={0.5} />*/}
       <Ground></Ground>
     </>

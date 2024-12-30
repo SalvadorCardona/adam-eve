@@ -1,6 +1,5 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { MaybeVector3Interface, Vector3Interface } from "@/src/game/3D/Vector"
-import { distanceBetweenVectors3 } from "@/src/game/3D/distanceBetweenVectors3"
+import { Vector3Interface } from "@/src/game/3D/Vector"
 
 interface Node {
   position: Vector3Interface
@@ -20,8 +19,6 @@ export function aStarPathfinding(
   game: GameInterface,
   step?: number,
 ): Vector3Interface[] | null {
-  const currentSteps = step ?? Math.round(distanceBetweenVectors3(start, goal) * 50)
-
   const openSet: Node[] = []
   const closedSet: Set<string> = new Set()
 
@@ -89,10 +86,10 @@ function getNeighbors(position: Vector3Interface): Vector3Interface[] {
 }
 
 export function interpolatePath(
-  path: MaybeVector3Interface[],
+  path: Vector3Interface[],
   steps: number,
-): MaybeVector3Interface[] {
-  const interpolatedPath: MaybeVector3Interface[] = []
+): Vector3Interface[] {
+  const interpolatedPath: Vector3Interface[] = []
 
   for (let i = 0; i < path.length - 1; i++) {
     const start = path[i]

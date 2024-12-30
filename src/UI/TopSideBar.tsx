@@ -2,7 +2,7 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { Inventory } from "@/src/UI/Inventory"
 import { Time } from "@/src/UI/time/Time"
 import React from "react"
-import { GameMenu } from "@/components/game-menu"
+import { GameMenu } from "@/src/UI/menu/game-menu"
 
 export const TopSideBar = () => {
   const gameContext = useGameContext()

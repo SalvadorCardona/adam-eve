@@ -1,16 +1,22 @@
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
-import { saveGameMetadata } from "@/src/game/saveGame/SaveGameMetadataInterface"
 import React from "react"
 import ThreeGameComponent from "@/src/UI/three/ThreeGameComponent"
 import { NotFound } from "@/components/NotFound"
+import { mockGames } from "@/src/game/mockGame/mockGame"
 
-export const Route = createFileRoute("/saveGame/$saveGameId")({
-  loader: ({ params: { saveGameId } }) => saveGameMetadata.getItem(saveGameId),
+export const Route = createFileRoute("/mock/$mockName")({
+  loader: ({ params: { mockName } }) => {
+    if (typeof mockName === "string" && mockGames[mockName]) {
+      return mockGames[mockName]
+    }
+
+    throw new Error("Not mock game")
+  },
   errorComponent: SaveGameErrorComponent,
   component: SaveGameComponent,
   notFoundComponent: () => {
-    return <NotFound>Save Game not found</NotFound>
+    return <NotFound>Not mock game</NotFound>
   },
 })
 
@@ -19,11 +25,10 @@ export function SaveGameErrorComponent({ error }: ErrorComponentProps) {
 }
 
 function SaveGameComponent() {
-  const saveGame = Route.useLoaderData()
+  const newMockGame = Route.useLoaderData()
 
-  if (!saveGame) {
+  if (!newMockGame) {
     throw new Error("Game not found")
   }
-
-  return <ThreeGameComponent game={saveGame.game}></ThreeGameComponent>
+  return <ThreeGameComponent game={newMockGame}></ThreeGameComponent>
 }

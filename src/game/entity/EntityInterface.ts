@@ -1,5 +1,5 @@
 import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
-import { MaybeVector3Interface } from "@/src/game/3D/Vector"
+import { Vector3Interface } from "@/src/game/3D/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { JsonLdContainerInterface } from "@/src/container/container"
@@ -12,9 +12,9 @@ export enum entityState {
 }
 
 export default interface EntityInterface extends BaseJsonLdInterface {
-  position: MaybeVector3Interface
-  rotation: MaybeVector3Interface
-  size: MaybeVector3Interface
+  position: Vector3Interface
+  rotation: Vector3Interface
+  size: Vector3Interface
   maxLife: number
   life: number
   speed: number

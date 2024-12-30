@@ -19,7 +19,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
     position: Vector3Interface
     rotation: Vector3Interface
   }
-  createdAt: Date
+  createdAt: DateString
   time: number
   entities: JsonLdContainerInterface<EntityInterface>
   // When i click on entity, this stock here

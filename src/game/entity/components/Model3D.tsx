@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useRef } from "react"
 import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
 import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
+import { vector3ToArray } from "@/src/game/3D/Vector"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
@@ -71,25 +72,25 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   if (entity["@type"] === workerEntityMetaData["@type"]) {
     return (
       <primitive
-        rotation={[Math.PI / 2, 0, 0]}
         ref={ref}
         object={clone}
         scale={[0.1, 0.1, 0.1]}
-        castShadow
-        receiveShadow
+        castShadow={true}
+        receiveShadow={true}
+        rotation={vector3ToArray(entity.rotation)}
       />
     )
   }
 
   return (
     <primitive
-      rotation={[Math.PI / 2, 0, 0]}
       ref={ref}
       object={clone}
       scale={scaleFactor}
-      position-z={positionZ}
-      castShadow
-      receiveShadow
+      // position-z={positionZ}
+      castShadow={true}
+      receiveShadow={true}
+      rotation={vector3ToArray(entity.rotation)}
     ></primitive>
   )
 }

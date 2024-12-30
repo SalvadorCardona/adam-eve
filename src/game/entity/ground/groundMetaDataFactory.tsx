@@ -20,6 +20,7 @@ export const groundMetaDataFactory = ({
       icon,
     },
     ["@type"]: defautType,
+    // @ts-ignore Interface need to be utpdate
     factory: function (payload) {
       const entity = payload?.entity ?? {}
       const game = payload?.game
@@ -36,12 +37,13 @@ export const groundMetaDataFactory = ({
         (getByLdType(game.entities, defautType)[0] as GroundEntityInterface) ??
         entityFactory({ entity })
 
-      roadEntity.position = { x: 0, y: 0, z: 0 }
-      const newRoadChild = createRoad(
+      roadEntity.position = { x: 0, y: -1, z: 0 }
+
+      createRoad(
         roadEntity.roadNetwork,
         {
           x: oldPosition.x ?? 0,
-          y: oldPosition.y ?? 0,
+          y: oldPosition.z ?? 0,
         },
         defautType,
       )
@@ -59,7 +61,7 @@ export const groundMetaDataFactory = ({
             ) : (
               <group
                 key={road.id}
-                position={[road.position.x, road.position.y, -1.5]}
+                position={[road.position.x, -1.5, road.position.y]}
               >
                 <mesh position={[0, 0, 0]}>
                   <boxGeometry args={[1, 1, 1]} />

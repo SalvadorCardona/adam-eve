@@ -13,11 +13,11 @@ export function gameFactory(game?: GameInterface): GameInterface {
       zoom: 0,
       position: {
         x: 0,
-        y: -10,
-        z: 10,
+        y: 10,
+        z: 0,
       },
       rotation: {
-        x: 0.5,
+        x: -Math.PI / 4,
         y: 0,
         z: 0,
       },

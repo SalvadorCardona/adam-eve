@@ -9,7 +9,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <div className={"bg-red-600"}>
+      <div>
         <Outlet />
       </div>
     </React.Fragment>

@@ -42,14 +42,10 @@ export const EntityDecorator = ({
 
   return (
     <ErrorBoundary>
-      <group
-        onClick={clickOnEntity}
-        position={vector3ToArray(entity.position)}
-        rotation={vector3ToArray(entity.rotation)}
-      >
+      <group onClick={clickOnEntity} position={vector3ToArray(entity.position)}>
         <EntityComponent entity={entity}></EntityComponent>
         {bgColor && (
-          <mesh position={[0, 0, 0.03]}>
+          <mesh position={[0, 0, 0.03]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[entity.size.x, entity.size.z]} />
             <meshStandardMaterial color={bgColor} />
           </mesh>

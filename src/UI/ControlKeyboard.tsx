@@ -50,10 +50,10 @@ const Elem = ({}: ElemPropsInterface) => {
 
   useFrame(() => {
     if (get().back) {
-      game.camera.position.y -= moveSize
+      game.camera.position.z -= moveSize
     }
     if (get().forward) {
-      game.camera.position.y += moveSize
+      game.camera.position.z += moveSize
     }
     if (get().left) {
       game.camera.position.x -= moveSize
