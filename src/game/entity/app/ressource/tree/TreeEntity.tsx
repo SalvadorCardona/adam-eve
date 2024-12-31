@@ -9,7 +9,7 @@ export const treeEntityMetaData = entityMedataFactory({
     model3d: asset,
     icon: iconSrc,
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "storage"),
+  ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "tree"),
   defaultEntity: () => {
     return {
       life: 50,

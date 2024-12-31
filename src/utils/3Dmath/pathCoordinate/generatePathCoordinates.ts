@@ -1,15 +1,69 @@
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import {
+  Vector2Interface,
+  vector2ToVector3,
+  Vector3Interface,
+} from "@/src/utils/3Dmath/Vector"
 import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
-export type PathCoordinate = Vector3Interface[]
+export type PathCoordinate = Vector2Interface[]
 
-export interface CurrentPathCoordinate {
+export interface CurrentPathCoordinateInterface {
   pathCoordinate: PathCoordinate
   currentCoordinate: number
+  totalDistance: number
+  isFinish: boolean
+}
+
+export function consommeCurrentPathCoordinate(entity: EntityInterface) {
+  if (!entity.currentPathOfCoordinate) return
+
+  const currentPathOfCoordinate = entity.currentPathOfCoordinate
+
+  const nextCoordinate =
+    currentPathOfCoordinate.pathCoordinate[currentPathOfCoordinate.currentCoordinate]
+  if (!nextCoordinate) {
+    entity.currentPathOfCoordinate.isFinish
+    return
+  }
+  const nextCoordinateConverted = vector2ToVector3(nextCoordinate)
+
+  const direction = {
+    x: nextCoordinateConverted.x - entity.position.x,
+    y: nextCoordinateConverted.y - entity.position.y,
+    z: nextCoordinateConverted.z - entity.position.z,
+  }
+
+  // Normalize the direction vector
+  const length = Math.sqrt(direction.x ** 2 + direction.y ** 2 + direction.z ** 2)
+  const normalizedDirection = {
+    x: direction.x / length,
+    y: direction.y / length,
+    z: direction.z / length,
+  }
+
+  entity.rotation.y =
+    Math.atan2(normalizedDirection.z, normalizedDirection.x) + Math.PI / 2
+
+  // Move the entity by 0.1 towards the next coordinate
+  entity.position.x += normalizedDirection.x * (entity.speed / 2)
+  entity.position.y += normalizedDirection.y * (entity.speed / 2)
+  entity.position.z += normalizedDirection.z * (entity.speed / 2)
+
+  // Check if the entity has reached the next coordinate
+  if (length <= 0.1) {
+    currentPathOfCoordinate.currentCoordinate++
+  }
+
+  entity.currentPathOfCoordinate.isFinish = currentPathCoordinateIsFinish(
+    currentPathOfCoordinate,
+  )
+
+  return entity.currentPathOfCoordinate
 }
 
 export function currentPathCoordinateIsFinish(
-  currentPathCoordinate: CurrentPathCoordinate,
+  currentPathCoordinate: CurrentPathCoordinateInterface,
 ): boolean {
   return (
     currentPathCoordinate.pathCoordinate.length <=

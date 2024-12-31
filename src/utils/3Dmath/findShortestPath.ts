@@ -27,12 +27,15 @@ export function findShortestPath(
   groundNetwork: GroundNetwork,
 ): PathResult | null {
   const nodes = new Map(groundNetwork.map((node) => [node["@id"], node]))
-
   const startNode = findClosestNode(start, groundNetwork)
   const endNode = findClosestNode(end, groundNetwork)
 
-  if (!endNode || !startNode) {
-    throw new Error("node notfound")
+  if (!startNode) {
+    throw new Error("start node notfound")
+  }
+
+  if (!endNode) {
+    throw new Error("End node notfound")
   }
 
   const startId = startNode["@id"]

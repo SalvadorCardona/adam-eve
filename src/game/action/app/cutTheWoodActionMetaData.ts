@@ -50,9 +50,11 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         data.treeEntityIri = newTreeEntity["@id"]
 
         const result = entityGoToEntity(entity, newTreeEntity, game)
-        if (result.isFinish) {
+
+        if (entity?.currentPathOfCoordinate?.isFinish) {
           newTreeEntity.life -= 10
           data.state = CutTheWoodState.CutTheThree
+          entity.currentPathOfCoordinate = undefined
         }
       }
 
@@ -70,7 +72,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       if (data.state === CutTheWoodState.GoToBuild) {
         const newTimberHouseEntity = data.timberHouseEntityIri
           ? game.entities[data.timberHouseEntityIri]
-          : (findClosestInGame(entity, "entity/building/timberHouse", game) as
+          : (findClosestInGame(entity, appLdType.timberHouse, game) as
               | EntityInterface
               | undefined)
 
@@ -79,7 +81,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         data.timberHouseEntityIri = newTimberHouseEntity["@id"]
         const result = entityGoToEntity(entity, newTimberHouseEntity, game)
 
-        if (result.isFinish) {
+        if (entity?.currentPathOfCoordinate?.isFinish) {
           transfertInventory(
             entity.inventory,
             game.inventory,
@@ -87,6 +89,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
             10,
           )
 
+          entity.currentPathOfCoordinate = undefined
           data.state = CutTheWoodState.GoToTree
         }
       }
