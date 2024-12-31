@@ -4,6 +4,7 @@ import {
   BaseJsonLdInterface,
   jsonLdFactory,
   JsonLdIri,
+  JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
 import {
   getItemsInLocalStorageByPrefix,
@@ -11,6 +12,7 @@ import {
   persistLocalStorage,
   removeLocalStorage,
 } from "@/src/utils/localStorage/localStorage"
+import { appLdType } from "@/src/AppLdType"
 
 interface SaveGameInterface extends BaseJsonLdInterface {
   name?: string
@@ -29,24 +31,26 @@ export interface SaveGameMetadataInterface extends GameMetaDataInterface {
   removeItem: (iriSaveGame: JsonLdIri) => void
 }
 
+const ldType = JsonLdTypeFactory(appLdType.saveGame)
+
 export const saveGameMetadata: SaveGameMetadataInterface = {
-  "@type": "save-game",
+  "@type": ldType,
 
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>
   }): SaveGameInterface => {
     const sameGame = {
-      "@type": "save-game",
+      "@type": ldType,
       game: payload.game,
       ...payload.saveGame,
     }
 
-    return jsonLdFactory("save-game", sameGame)
+    return jsonLdFactory(ldType, sameGame)
   },
 
   getCollection: (): SaveGameInterface[] => {
-    return getItemsInLocalStorageByPrefix<SaveGameInterface>("save-game")
+    return getItemsInLocalStorageByPrefix<SaveGameInterface>(ldType)
   },
 
   getItem: (iriSaveGame: JsonLdIri): SaveGameInterface | undefined => {

@@ -1,0 +1,76 @@
+export type JsonLdIri = string
+export type JsonLdType = string
+
+export interface Vector2Interface {
+  x: number
+  y: number
+}
+
+export interface Vector3Interface extends Vector2Interface {
+  z: number
+}
+
+export type JsonLDItem<T> = BaseJsonLdInterface & T
+
+interface JsonLdContainerInterface<T = object> {
+  [key: JsonLdIri]: JsonLDItem<T>
+}
+
+interface ContainerInterface<T = any> {
+  [key: string]: T
+}
+
+export interface GroundInterface {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+  position: { x: number; y: number }
+  hasBuilding?: JsonLdIri
+  connections: {
+    top?: JsonLdIri
+    bottom?: JsonLdIri
+    left?: JsonLdIri
+    right?: JsonLdIri
+  }
+}
+
+export type GroundNetwork = GroundInterface[]
+
+export interface BaseJsonLdInterface {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+}
+
+interface GameInterface extends BaseJsonLdInterface {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+  userControl: {
+    showGrid: boolean
+    mouseIcon?: string
+    mousePosition?: Vector3Interface
+  }
+  camera: {
+    fov: number
+    zoom: number
+    position: Vector3Interface
+    rotation: Vector3Interface
+  }
+  time: number
+  entities: JsonLdContainerInterface<EntityInterface>
+  // When i click on entity, this stock here
+}
+
+interface EntityInterface extends BaseJsonLdInterface {
+  position: Vector3Interface
+  rotation: Vector3Interface
+  size: Vector3Interface
+  maxLife: number
+  life: number
+  speed: number
+  collisionAble?: boolean
+  worker: JsonLdContainerInterface<EntityInterface>
+  numberOfWorker?: number
+}
+
+interface GroundEntityInterface extends EntityInterface {
+  roadNetwork: GroundNetwork
+}

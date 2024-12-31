@@ -15,10 +15,26 @@ export interface BaseJsonLdInterface {
 export type JsonLDItem<T> = BaseJsonLdInterface & T
 
 export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T> {
+  const jsonLdType = JsonLdTypeFactory(type)
   // @ts-ignore
   return {
-    "@type": type,
-    "@id": type + "/" + createUniqId(),
+    "@type": jsonLdType,
+    "@id": JsonLdIriFactory(jsonLdType),
     ...object,
   }
+}
+
+export function JsonLdTypeFactory(
+  baseType: JsonLdType,
+  nextType?: string,
+): JsonLdType {
+  if (!nextType) return baseType
+
+  return baseType + "/" + nextType
+}
+
+export function JsonLdIriFactory(baseType: JsonLdType, iri?: string): JsonLdIri {
+  const newIri = iri ?? createUniqId()
+
+  return baseType + "/" + newIri
 }

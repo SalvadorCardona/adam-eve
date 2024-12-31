@@ -5,12 +5,12 @@ import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
-import GlobalGround from "@/src/game/entity/app/globalGround/GlobalGround"
+import GlobalGround from "@/src/game/GlobalGround"
 import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { Canvas } from "@react-three/fiber"
 import GameInterface from "@/src/game/game/GameInterface"
 import { mockGames } from "@/src/game/mockGame/mockGame"
-import { vector3ToArray } from "@/src/game/3D/Vector"
+import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
 
 export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
   return (

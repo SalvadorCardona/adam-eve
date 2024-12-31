@@ -1,8 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import { appLdType } from "@/src/AppLdType"
+import { gameCalculated } from "@/src/game/game/gameCalculated"
 
 export function gameFactory(game?: GameInterface): GameInterface {
-  const newGame = jsonLdFactory("game", {
+  const newGame = jsonLdFactory(appLdType.game, {
     time: 0,
     actions: {},
     entities: {},
@@ -27,6 +29,8 @@ export function gameFactory(game?: GameInterface): GameInterface {
     },
     ...(game ?? {}),
   })
+
+  newGame.gameCalculated = gameCalculated(newGame)
 
   _currentGame = newGame
 

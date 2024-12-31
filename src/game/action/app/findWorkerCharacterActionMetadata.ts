@@ -1,11 +1,13 @@
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
-import { getByTypeInContainer, updateContainer } from "@/src/container/container"
+import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { getByLdType, updateContainer } from "@/src/container/container"
 import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
+import { appLdType } from "@/src/AppLdType"
+import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
 
 enum State {
   GoToTree = "GoToTree",
@@ -17,11 +19,11 @@ interface FindWorkerData {
 
 export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWorkerData> =
   {
-    ["@type"]: "action/findWorkerCharacter",
+    ["@type"]: JsonLdTypeFactory(appLdType.action, "findWorkerCharacter"),
     onFrame: ({ action, game }) => {
-      const buildings = getByTypeInContainer<EntityInterface>(
+      const buildings = getByLdType<EntityInterface>(
         game.entities,
-        "entity/building",
+        appLdType.entityBuilding,
       ).filter((building) => {
         return (
           building.numberOfWorker &&
@@ -33,9 +35,9 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
 
       if (buildings.length === 0) return
 
-      const workers = getByTypeInContainer<EntityInterface>(
+      const workers = getByLdType<EntityInterface>(
         game.entities,
-        "entity/character/worker",
+        workerEntityMetaData["@type"],
       ).filter((worker) => {
         return isObjectEmpty(worker.actions)
       })

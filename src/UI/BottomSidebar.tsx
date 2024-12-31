@@ -8,31 +8,32 @@ import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuildingUserActionMetadata"
 import { isActionUserMetadata } from "@/src/game/actionUser/IsActionUserMetadata"
+import { appLdType } from "@/src/AppLdType"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(
     configGame,
-    "entity/building",
+    appLdType.entityBuilding,
   )
 
   const groundMetaDatas = getByLdType<EntityMetaDataInterface>(
     configGame,
-    "entity/ground",
+    appLdType.entityGround,
   )
 
   const natureMetaDatas = getByLdType<EntityMetaDataInterface>(
     configGame,
-    "entity/nature",
+    appLdType.entityRessource,
   )
 
   const actionMetaDatas = getByLdType<ActionUserMetaDataInterface>(
     configGame,
-    "user-action",
+    appLdType.userAction,
   )
 
   const characterMetaDatas = getByLdType<ActionUserMetaDataInterface>(
     configGame,
-    "entity/character",
+    appLdType.entityCharacter,
   )
 
   return (

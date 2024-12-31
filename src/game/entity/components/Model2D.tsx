@@ -1,7 +1,7 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import { vector3ToArray } from "@/src/game/3D/Vector"
-import { imgLoader } from "@/src/game/3D/textureHelper"
+import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
+import { imageToTexture } from "@/src/utils/threejs/textureHelper"
 import React, { useMemo } from "react"
 
 interface Model2DPropsInterface {
@@ -17,7 +17,7 @@ export const Model2D = ({ entity }: Model2DPropsInterface) => {
   }
 
   const image = useMemo(
-    () => imgLoader(metaData.asset.model2d, "un"),
+    () => imageToTexture(metaData.asset.model2d, "un"),
     [metaData.asset.model2d],
   )
 

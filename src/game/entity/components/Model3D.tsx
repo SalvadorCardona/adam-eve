@@ -4,8 +4,8 @@ import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
 import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
-import { workerEntityMetaData } from "@/src/game/entity/app/worker/WorkerEntity"
-import { vector3ToArray } from "@/src/game/3D/Vector"
+import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
+import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
 
 interface Model3DPropsInterface {
   entity: EntityInterface

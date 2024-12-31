@@ -44,20 +44,6 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   }
 }
 
-export function updateTypeContainer(
-  container: JsonLdContainerInterface<object>,
-  item: BaseJsonLdInterface,
-): void {
-  container[item["@type"]] = item
-}
-
-export function getByTypeInContainer<T>(
-  container: JsonLdContainerInterface<T>,
-  type: JsonLdType,
-): T[] {
-  return Object.values(container).filter((item) => item["@type"].startsWith(type))
-}
-
 export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType,

@@ -5,7 +5,7 @@ import { gameFactory } from "@/src/game/game/gameFactory"
 import { addAction } from "@/src/game/action/addAction"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
-import { buildRequest } from "@/src/game/entity/app/build-request/BuildRequest"
+import { buildRequest } from "@/src/game/entity/app/helper/build-request/BuildRequest"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 
 export const Route = createFileRoute("/newGame")({

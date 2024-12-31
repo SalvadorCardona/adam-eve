@@ -4,10 +4,10 @@ import { Model2D } from "@/src/game/entity/components/Model2D"
 import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { Component, ReactNode, useRef } from "react"
-import { vector3ToArray } from "@/src/game/3D/Vector"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useFrame } from "@react-three/fiber"
+import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
 
 interface EntityDecoratorPropsInterface {
   entity: EntityInterface
@@ -75,7 +75,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    debugger
     // Vous pouvez aussi enregistrer l'erreur dans un service de rapport d'erreurs.
     console.error("Erreur capturée par ErrorBoundary: ", error, errorInfo)
   }

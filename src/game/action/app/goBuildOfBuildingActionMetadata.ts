@@ -1,16 +1,21 @@
-import { jsonLdFactory, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
-import { getByTypeInContainer } from "@/src/container/container"
+import {
+  jsonLdFactory,
+  JsonLdIri,
+  JsonLdTypeFactory,
+} from "@/src/utils/jsonLd/jsonLd"
+import { getByLdType } from "@/src/container/container"
 import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { entityGoToEntity } from "@/src/game/entity/useCase/EntityGoToEntity"
+import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { enoughRessource } from "@/src/game/inventory/enoughRessource"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
-import { findClosestInGame } from "@/src/game/3D/findClosest"
-import { forumEntityMetaData } from "@/src/game/entity/app/forum/ForumEntity"
+import { findClosestInGame } from "@/src/utils/3Dmath/findClosest"
+import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
+import { appLdType } from "@/src/AppLdType"
 
 enum State {
   GoToForum = "GoToForum",
@@ -31,7 +36,7 @@ interface FindWorkerData {
 
 export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorkerData> =
   {
-    ["@type"]: "action/goBuildOfBuilding",
+    ["@type"]: JsonLdTypeFactory(appLdType.action, "goBuildOfBuilding"),
     onFrame: ({ action, game, entity }) => {
       if (!entity) return
       const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)
@@ -42,9 +47,9 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
         if (currentBuilding?.state === entityState.under_construction)
           return currentBuilding
 
-        const newBuilding = getByTypeInContainer<EntityInterface>(
+        const newBuilding = getByLdType<EntityInterface>(
           game.entities,
-          "entity/building",
+          appLdType.entityBuilding,
         ).find((building) => {
           return building?.state === entityState.under_construction
         })
@@ -79,7 +84,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
           return
         }
-        const result = entityGoToEntity(entity, forum)
+        const result = entityGoToEntity(entity, forum, game)
         if (result.isFinish) {
           data.state = State.TakeRessource
         }
@@ -115,7 +120,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       if (data.state === State.GoToBuild) {
-        const result = entityGoToEntity(entity, building)
+        const result = entityGoToEntity(entity, building, game)
         if (result.isFinish) {
           data.state = State.PutRessource
         }

@@ -1,24 +1,24 @@
 {
   "@type": "game",
-  "@id": "game/hvwykb",
-  "time": 15765,
+  "@id": "game/w22ehm",
+  "time": 12515,
   "actions": {
-    "action/TheDeathActionMetadata/4g33fd": {
+    "action/TheDeathActionMetadata/r80csa": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/4g33fd"
+      "@id": "action/TheDeathActionMetadata/r80csa"
     },
-    "action/findWorkerCharacter/1rcwno9": {
+    "action/findWorkerCharacter/1xzmoy5": {
       "@type": "action/findWorkerCharacter",
-      "@id": "action/findWorkerCharacter/1rcwno9",
+      "@id": "action/findWorkerCharacter/1xzmoy5",
       "data": {
         "state": "GoToTree"
       }
     }
   },
   "entities": {
-    "entity/helper/build-request/1p02qz9": {
+    "entity/helper/build-request/8341e": {
       "@type": "entity/helper/build-request",
-      "@id": "entity/helper/build-request/1p02qz9",
+      "@id": "entity/helper/build-request/8341e",
       "state": "wait",
       "collisionAble": false,
       "worker": {},
@@ -43,9 +43,9 @@
       "inventory": {},
       "maxLife": 50
     },
-    "entity/ground/grass/1ve0nwg": {
+    "entity/ground/grass/10tdlvc": {
       "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1ve0nwg",
+      "@id": "entity/ground/grass/10tdlvc",
       "state": "wait",
       "collisionAble": true,
       "worker": {},
@@ -71,1096 +71,387 @@
       "roadNetwork": [
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/w3r2wu",
-          "id": "ye2yu8",
-          "position": {
-            "x": -9.5,
-            "y": 1.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/w3r2wu",
-            "left": "entity/ground/grass/item/w3r2wu",
-            "right": "entity/ground/grass/item/w3r2wu"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/195kthl",
-          "id": "1d0zwgl",
-          "position": {
-            "x": -8.5,
-            "y": 1.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/195kthl",
-            "left": "entity/ground/grass/item/195kthl",
-            "right": "entity/ground/grass/item/195kthl"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/71tmsd",
-          "id": "1f0lcj0",
-          "position": {
-            "x": -7.5,
-            "y": 1.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/71tmsd",
-            "left": "entity/ground/grass/item/71tmsd",
-            "right": "entity/ground/grass/item/71tmsd"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1kknjcf",
-          "id": "32pkob",
-          "position": {
-            "x": -6.5,
-            "y": 1.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1kknjcf",
-            "bottom": "entity/ground/grass/item/1kknjcf",
-            "left": "entity/ground/grass/item/1kknjcf",
-            "right": "entity/ground/grass/item/1kknjcf"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/bxcn05",
-          "id": "5ny896",
-          "position": {
-            "x": -6.5,
-            "y": 0.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/bxcn05",
-            "right": "entity/ground/grass/item/bxcn05"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/tnpad7",
-          "id": "1w80a6y",
-          "position": {
-            "x": -6.5,
-            "y": -1
-          },
-          "connections": {}
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/byw3c8",
-          "id": "17lxkl4",
-          "position": {
-            "x": -5.5,
-            "y": 0.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/byw3c8",
-            "left": "entity/ground/grass/item/byw3c8"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1vwfz89",
-          "id": "7i23zt",
-          "position": {
-            "x": -5.5,
-            "y": 1.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1vwfz89",
-            "bottom": "entity/ground/grass/item/1vwfz89",
-            "left": "entity/ground/grass/item/1vwfz89"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1d2kdkm",
-          "id": "17q18kx",
-          "position": {
-            "x": -5.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1d2kdkm",
-            "bottom": "entity/ground/grass/item/1d2kdkm",
-            "left": "entity/ground/grass/item/1d2kdkm",
-            "right": "entity/ground/grass/item/1d2kdkm"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1hjzv6j",
-          "id": "11ddy9o",
-          "position": {
-            "x": -6.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1hjzv6j",
-            "bottom": "entity/ground/grass/item/1hjzv6j",
-            "left": "entity/ground/grass/item/1hjzv6j",
-            "right": "entity/ground/grass/item/1hjzv6j"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/pqqzr1",
-          "id": "stxwdq",
-          "position": {
-            "x": -7.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/pqqzr1",
-            "bottom": "entity/ground/grass/item/pqqzr1",
-            "left": "entity/ground/grass/item/pqqzr1",
-            "right": "entity/ground/grass/item/pqqzr1"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1qojfyq",
-          "id": "qxcj87",
-          "position": {
-            "x": -8.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1qojfyq",
-            "bottom": "entity/ground/grass/item/1qojfyq",
-            "left": "entity/ground/grass/item/1qojfyq",
-            "right": "entity/ground/grass/item/1qojfyq"
-          },
-          "hasBuilding": "entity/building/timberHouse/1mkfotn"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1tqfq6c",
-          "id": "1jrtupk",
-          "position": {
-            "x": -9.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1tqfq6c",
-            "bottom": "entity/ground/grass/item/1tqfq6c",
-            "left": "entity/ground/grass/item/1tqfq6c",
-            "right": "entity/ground/grass/item/1tqfq6c"
-          },
-          "hasBuilding": "entity/building/timberHouse/1mkfotn"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1euac7f",
-          "id": "132edu6",
-          "position": {
-            "x": -9.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1euac7f",
-            "bottom": "entity/ground/grass/item/1euac7f",
-            "left": "entity/ground/grass/item/1euac7f",
-            "right": "entity/ground/grass/item/1euac7f"
-          },
-          "hasBuilding": "entity/building/timberHouse/1mkfotn"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1pnd4em",
-          "id": "12an811",
-          "position": {
-            "x": -8.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1pnd4em",
-            "bottom": "entity/ground/grass/item/1pnd4em",
-            "left": "entity/ground/grass/item/1pnd4em",
-            "right": "entity/ground/grass/item/1pnd4em"
-          },
-          "hasBuilding": "entity/building/timberHouse/1mkfotn"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1mcuwxf",
-          "id": "1ebiech",
-          "position": {
-            "x": -7.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1mcuwxf",
-            "bottom": "entity/ground/grass/item/1mcuwxf",
-            "left": "entity/ground/grass/item/1mcuwxf",
-            "right": "entity/ground/grass/item/1mcuwxf"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1mj9qgw",
-          "id": "1bhflaq",
-          "position": {
-            "x": -6.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1mj9qgw",
-            "bottom": "entity/ground/grass/item/1mj9qgw",
-            "left": "entity/ground/grass/item/1mj9qgw",
-            "right": "entity/ground/grass/item/1mj9qgw"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/z8msnt",
-          "id": "1yf63b2",
-          "position": {
-            "x": -5.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/z8msnt",
-            "bottom": "entity/ground/grass/item/z8msnt",
-            "left": "entity/ground/grass/item/z8msnt"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/qodqpq",
-          "id": "a5das7",
-          "position": {
-            "x": -5.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/qodqpq",
-            "left": "entity/ground/grass/item/qodqpq",
-            "right": "entity/ground/grass/item/qodqpq"
-          },
-          "hasBuilding": "entity/character/worker/1owtvxu"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/o6m872",
-          "id": "4gej4d",
-          "position": {
-            "x": -6.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/o6m872",
-            "left": "entity/ground/grass/item/o6m872",
-            "right": "entity/ground/grass/item/o6m872"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1b4o0rt",
-          "id": "n0fu15",
-          "position": {
-            "x": -7.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1b4o0rt",
-            "left": "entity/ground/grass/item/1b4o0rt",
-            "right": "entity/ground/grass/item/1b4o0rt"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/ygiyuo",
-          "id": "c983f5",
-          "position": {
-            "x": -8.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/ygiyuo",
-            "left": "entity/ground/grass/item/ygiyuo",
-            "right": "entity/ground/grass/item/ygiyuo"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1o0qny6",
-          "id": "150gewy",
-          "position": {
-            "x": -9.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1o0qny6",
-            "left": "entity/ground/grass/item/1o0qny6",
-            "right": "entity/ground/grass/item/1o0qny6"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/rgsoj0",
-          "id": "1qvq14b",
-          "position": {
-            "x": -10.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/rgsoj0",
-            "right": "entity/ground/grass/item/rgsoj0"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1smqdzx",
-          "id": "1yupn1s",
-          "position": {
-            "x": -10.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1smqdzx",
-            "bottom": "entity/ground/grass/item/1smqdzx",
-            "right": "entity/ground/grass/item/1smqdzx"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/zz1yds",
-          "id": "3aoewt",
-          "position": {
-            "x": -10.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/zz1yds",
-            "bottom": "entity/ground/grass/item/zz1yds",
-            "right": "entity/ground/grass/item/zz1yds"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/arraov",
-          "id": "13e39ye",
-          "position": {
-            "x": -10.5,
-            "y": 1.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/arraov",
-            "right": "entity/ground/grass/item/arraov"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1j2htph",
-          "id": "100x8pv",
-          "position": {
-            "x": -4.5,
-            "y": 2.5
-          },
-          "connections": {
-            "left": "entity/ground/grass/item/1j2htph",
-            "right": "entity/ground/grass/item/1j2htph"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/p7yvum",
-          "id": "d9gab6",
-          "position": {
-            "x": -3.5,
-            "y": 2.5
-          },
-          "connections": {
-            "left": "entity/ground/grass/item/p7yvum",
-            "right": "entity/ground/grass/item/p7yvum"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/lo4ei3",
-          "id": "uu1g7h",
-          "position": {
-            "x": -2.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/lo4ei3",
-            "left": "entity/ground/grass/item/lo4ei3"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1nytn21",
-          "id": "1pv0ive",
-          "position": {
-            "x": -2.5,
-            "y": 1.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1nytn21",
-            "bottom": "entity/ground/grass/item/1nytn21"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1o926ce",
-          "id": "1e3rb50",
-          "position": {
-            "x": -2.5,
-            "y": 0.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1o926ce",
-            "bottom": "entity/ground/grass/item/1o926ce"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1lr69wi",
-          "id": "9uvxas",
-          "position": {
-            "x": -2.5,
-            "y": -0.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/1lr69wi",
-            "right": "entity/ground/grass/item/1lr69wi"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/evd49t",
-          "id": "ovedgc",
+          "@id": "entity/ground/grass/item/74rxfv",
           "position": {
             "x": -1.5,
-            "y": -0.5
+            "y": -6.5
           },
           "connections": {
-            "left": "entity/ground/grass/item/evd49t",
-            "right": "entity/ground/grass/item/evd49t"
+            "top": "entity/ground/grass/item/cax47t",
+            "right": "entity/ground/grass/item/6ivu81"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1ry7s26",
-          "id": "jbc6bt",
+          "@id": "entity/ground/grass/item/6ivu81",
           "position": {
             "x": -0.5,
-            "y": -0.5
+            "y": -6.5
           },
           "connections": {
-            "bottom": "entity/ground/grass/item/1ry7s26",
-            "left": "entity/ground/grass/item/1ry7s26"
-          },
-          "hasBuilding": "entity/ground/grass/1ve0nwg"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/p1ance",
-          "id": "14t6m7s",
-          "position": {
-            "x": -0.5,
-            "y": 0.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/p1ance",
-            "bottom": "entity/ground/grass/item/p1ance",
-            "right": "entity/ground/grass/item/p1ance"
-          },
-          "hasBuilding": "entity/ground/grass/1ve0nwg"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1hun8u1",
-          "id": "1mvkwiz",
-          "position": {
-            "x": -0.5,
-            "y": 1.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1hun8u1",
-            "bottom": "entity/ground/grass/item/1hun8u1",
-            "right": "entity/ground/grass/item/1hun8u1"
-          },
-          "hasBuilding": "entity/building/house/119g8ic"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/5w57mb",
-          "id": "wazps0",
-          "position": {
-            "x": -0.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/5w57mb",
-            "bottom": "entity/ground/grass/item/5w57mb",
-            "right": "entity/ground/grass/item/5w57mb"
-          },
-          "hasBuilding": "entity/building/house/119g8ic"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1em7h8r",
-          "id": "16qzc51",
-          "position": {
-            "x": -0.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1em7h8r",
-            "bottom": "entity/ground/grass/item/1em7h8r"
+            "top": "entity/ground/grass/item/1p5gv8g",
+            "left": "entity/ground/grass/item/74rxfv",
+            "right": "entity/ground/grass/item/13495ov"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/urzjj0",
-          "id": "1mkful8",
-          "position": {
-            "x": -0.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/urzjj0",
-            "bottom": "entity/ground/grass/item/urzjj0",
-            "left": "entity/ground/grass/item/urzjj0",
-            "right": "entity/ground/grass/item/urzjj0"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/fvo4pm",
-          "id": "1mj1fl6",
-          "position": {
-            "x": -1.5,
-            "y": 4.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/fvo4pm",
-            "left": "entity/ground/grass/item/fvo4pm",
-            "right": "entity/ground/grass/item/fvo4pm"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1wno50t",
-          "id": "181mg0c",
+          "@id": "entity/ground/grass/item/13495ov",
           "position": {
             "x": 0.5,
-            "y": 4.5
+            "y": -6.5
           },
           "connections": {
-            "bottom": "entity/ground/grass/item/1wno50t",
-            "left": "entity/ground/grass/item/1wno50t"
+            "top": "entity/ground/grass/item/5q09h8",
+            "left": "entity/ground/grass/item/6ivu81",
+            "right": "entity/ground/grass/item/gf4lr0"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/4r6oza",
-          "id": "14uyny",
-          "position": {
-            "x": 0.5,
-            "y": 5.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/4r6oza",
-            "bottom": "entity/ground/grass/item/4r6oza",
-            "left": "entity/ground/grass/item/4r6oza",
-            "right": "entity/ground/grass/item/4r6oza"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/qqvzpn",
-          "id": "3s60pb",
-          "position": {
-            "x": -0.5,
-            "y": 5.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/qqvzpn",
-            "bottom": "entity/ground/grass/item/qqvzpn",
-            "left": "entity/ground/grass/item/qqvzpn",
-            "right": "entity/ground/grass/item/qqvzpn"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/16zelxf",
-          "id": "1r9ms16",
-          "position": {
-            "x": -1.5,
-            "y": 5.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/16zelxf",
-            "bottom": "entity/ground/grass/item/16zelxf",
-            "right": "entity/ground/grass/item/16zelxf"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/18r0lnd",
-          "id": "1xmedec",
-          "position": {
-            "x": -1.5,
-            "y": 6.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/18r0lnd",
-            "bottom": "entity/ground/grass/item/18r0lnd",
-            "right": "entity/ground/grass/item/18r0lnd"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1shu0dg",
-          "id": "1y4rvbf",
-          "position": {
-            "x": -0.5,
-            "y": 6.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1shu0dg",
-            "bottom": "entity/ground/grass/item/1shu0dg",
-            "left": "entity/ground/grass/item/1shu0dg",
-            "right": "entity/ground/grass/item/1shu0dg"
-          },
-          "hasBuilding": "entity/nature/tree/5kexuv"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1ihaszw",
-          "id": "9i1mv0",
-          "position": {
-            "x": 0.5,
-            "y": 6.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1ihaszw",
-            "bottom": "entity/ground/grass/item/1ihaszw",
-            "left": "entity/ground/grass/item/1ihaszw"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/7rliqb",
-          "id": "y4l9nb",
-          "position": {
-            "x": -0.5,
-            "y": 7.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/7rliqb",
-            "left": "entity/ground/grass/item/7rliqb",
-            "right": "entity/ground/grass/item/7rliqb"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1kd63gk",
-          "id": "1ytbqpo",
-          "position": {
-            "x": -1.5,
-            "y": 7.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1kd63gk",
-            "right": "entity/ground/grass/item/1kd63gk"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1vlvy3b",
-          "id": "aq4xqq",
-          "position": {
-            "x": 0.5,
-            "y": 7.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1vlvy3b",
-            "left": "entity/ground/grass/item/1vlvy3b"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/19lw97b",
-          "id": "qdopqz",
-          "position": {
-            "x": 0.5,
-            "y": 2.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/19lw97b",
-            "left": "entity/ground/grass/item/19lw97b",
-            "right": "entity/ground/grass/item/19lw97b"
-          },
-          "hasBuilding": "entity/building/house/119g8ic"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/15eco3o",
-          "id": "14ktdv8",
-          "position": {
-            "x": 0.5,
-            "y": 1.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/15eco3o",
-            "bottom": "entity/ground/grass/item/15eco3o",
-            "left": "entity/ground/grass/item/15eco3o",
-            "right": "entity/ground/grass/item/15eco3o"
-          },
-          "hasBuilding": "entity/building/house/119g8ic"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1jesd5o",
-          "id": "1mplr4b",
-          "position": {
-            "x": 0.5,
-            "y": 0.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/1jesd5o",
-            "left": "entity/ground/grass/item/1jesd5o",
-            "right": "entity/ground/grass/item/1jesd5o"
-          },
-          "hasBuilding": "entity/ground/grass/1ve0nwg"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/pvyq95",
-          "id": "lpnd7m",
+          "@id": "entity/ground/grass/item/gf4lr0",
           "position": {
             "x": 1.5,
-            "y": 0.5
+            "y": -6.5
           },
           "connections": {
-            "bottom": "entity/ground/grass/item/pvyq95",
-            "left": "entity/ground/grass/item/pvyq95"
+            "top": "entity/ground/grass/item/1ibolww",
+            "left": "entity/ground/grass/item/13495ov"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/crfex6",
-          "id": "16b8pl7",
+          "@id": "entity/ground/grass/item/1ibolww",
           "position": {
             "x": 1.5,
-            "y": 1.5
+            "y": -7.5
           },
           "connections": {
-            "top": "entity/ground/grass/item/crfex6",
-            "bottom": "entity/ground/grass/item/crfex6",
-            "left": "entity/ground/grass/item/crfex6"
+            "top": "entity/ground/grass/item/1fu7go8",
+            "bottom": "entity/ground/grass/item/gf4lr0",
+            "left": "entity/ground/grass/item/5q09h8"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/kqxbuc",
-          "id": "1iz3f82",
+          "@id": "entity/ground/grass/item/5q09h8",
+          "position": {
+            "x": 0.5,
+            "y": -7.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/1qq2m4r",
+            "bottom": "entity/ground/grass/item/13495ov",
+            "left": "entity/ground/grass/item/1p5gv8g",
+            "right": "entity/ground/grass/item/1ibolww"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1p5gv8g",
+          "position": {
+            "x": -0.5,
+            "y": -7.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/1u9q9sz",
+            "bottom": "entity/ground/grass/item/6ivu81",
+            "left": "entity/ground/grass/item/cax47t",
+            "right": "entity/ground/grass/item/5q09h8"
+          },
+          "hasBuilding": "entity/building/timberHouse/1ez8gn3"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/cax47t",
+          "position": {
+            "x": -1.5,
+            "y": -7.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/hl9pia",
+            "bottom": "entity/ground/grass/item/74rxfv",
+            "right": "entity/ground/grass/item/1p5gv8g"
+          },
+          "hasBuilding": "entity/building/timberHouse/1ez8gn3"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/hl9pia",
+          "position": {
+            "x": -1.5,
+            "y": -8.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/8cm1he",
+            "bottom": "entity/ground/grass/item/cax47t",
+            "right": "entity/ground/grass/item/1u9q9sz"
+          },
+          "hasBuilding": "entity/building/timberHouse/1ez8gn3"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1u9q9sz",
+          "position": {
+            "x": -0.5,
+            "y": -8.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/1e8ntn3",
+            "bottom": "entity/ground/grass/item/1p5gv8g",
+            "left": "entity/ground/grass/item/hl9pia",
+            "right": "entity/ground/grass/item/1qq2m4r"
+          },
+          "hasBuilding": "entity/building/timberHouse/1ez8gn3"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1qq2m4r",
+          "position": {
+            "x": 0.5,
+            "y": -8.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/e1a6e3",
+            "bottom": "entity/ground/grass/item/5q09h8",
+            "left": "entity/ground/grass/item/1u9q9sz",
+            "right": "entity/ground/grass/item/1fu7go8"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1fu7go8",
           "position": {
             "x": 1.5,
-            "y": 2.5
+            "y": -8.5
           },
           "connections": {
-            "top": "entity/ground/grass/item/kqxbuc",
-            "left": "entity/ground/grass/item/kqxbuc",
-            "right": "entity/ground/grass/item/kqxbuc"
-          }
+            "top": "entity/ground/grass/item/1yhsccb",
+            "bottom": "entity/ground/grass/item/1ibolww",
+            "left": "entity/ground/grass/item/1qq2m4r",
+            "right": "entity/ground/grass/item/4c4qvr"
+          },
+          "hasBuilding": "entity/character/worker/1u4i0c7"
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1nncsu2",
-          "id": "1wgtjvu",
-          "position": {
-            "x": 2.5,
-            "y": 2.5
-          },
-          "connections": {
-            "bottom": "entity/ground/grass/item/1nncsu2",
-            "left": "entity/ground/grass/item/1nncsu2"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/rgyf9p",
-          "id": "1j4gypz",
-          "position": {
-            "x": 2.5,
-            "y": 3.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/rgyf9p",
-            "bottom": "entity/ground/grass/item/rgyf9p"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1gnk5lm",
-          "id": "8ohg8k",
-          "position": {
-            "x": 2.5,
-            "y": 4.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/1gnk5lm",
-            "bottom": "entity/ground/grass/item/1gnk5lm"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/5y2fvx",
-          "id": "nk06sy",
-          "position": {
-            "x": 2.5,
-            "y": 5.5
-          },
-          "connections": {
-            "top": "entity/ground/grass/item/5y2fvx",
-            "left": "entity/ground/grass/item/5y2fvx"
-          }
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/x9d588",
-          "id": "1g8v77i",
+          "@id": "entity/ground/grass/item/1yhsccb",
           "position": {
             "x": 1.5,
-            "y": 5.5
+            "y": -9.5
           },
           "connections": {
-            "left": "entity/ground/grass/item/x9d588",
-            "right": "entity/ground/grass/item/x9d588"
+            "bottom": "entity/ground/grass/item/1fu7go8",
+            "left": "entity/ground/grass/item/e1a6e3"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1jovncl",
-          "id": "1iq7g40",
+          "@id": "entity/ground/grass/item/e1a6e3",
           "position": {
-            "x": -4.5,
-            "y": 4.5
+            "x": 0.5,
+            "y": -9.5
           },
           "connections": {
-            "left": "entity/ground/grass/item/1jovncl",
-            "right": "entity/ground/grass/item/1jovncl"
-          },
-          "hasBuilding": "entity/character/worker/e8ryxl"
-        },
-        {
-          "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1m3gfuw",
-          "id": "1m5j2g3",
-          "position": {
-            "x": -3.5,
-            "y": 4.5
-          },
-          "connections": {
-            "left": "entity/ground/grass/item/1m3gfuw",
-            "right": "entity/ground/grass/item/1m3gfuw"
+            "bottom": "entity/ground/grass/item/1qq2m4r",
+            "left": "entity/ground/grass/item/1e8ntn3",
+            "right": "entity/ground/grass/item/1yhsccb"
           }
         },
         {
           "@type": "entity/ground/grass/item",
-          "@id": "entity/ground/grass/item/1bgjwkw",
-          "id": "ln6ydw",
+          "@id": "entity/ground/grass/item/1e8ntn3",
           "position": {
-            "x": -2.5,
-            "y": 4.5
+            "x": -0.5,
+            "y": -9.5
           },
           "connections": {
-            "left": "entity/ground/grass/item/1bgjwkw",
-            "right": "entity/ground/grass/item/1bgjwkw"
+            "bottom": "entity/ground/grass/item/1u9q9sz",
+            "left": "entity/ground/grass/item/8cm1he",
+            "right": "entity/ground/grass/item/e1a6e3"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/8cm1he",
+          "position": {
+            "x": -1.5,
+            "y": -9.5
+          },
+          "connections": {
+            "bottom": "entity/ground/grass/item/hl9pia",
+            "right": "entity/ground/grass/item/1e8ntn3"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/4c4qvr",
+          "position": {
+            "x": 2.5,
+            "y": -8.5
+          },
+          "connections": {
+            "left": "entity/ground/grass/item/1fu7go8",
+            "right": "entity/ground/grass/item/1fvlnpi"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1fvlnpi",
+          "position": {
+            "x": 3.5,
+            "y": -8.5
+          },
+          "connections": {
+            "left": "entity/ground/grass/item/4c4qvr",
+            "right": "entity/ground/grass/item/1off2k"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1off2k",
+          "position": {
+            "x": 4.5,
+            "y": -8.5
+          },
+          "connections": {
+            "left": "entity/ground/grass/item/1fvlnpi",
+            "right": "entity/ground/grass/item/1d6u3qr"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1d6u3qr",
+          "position": {
+            "x": 5.5,
+            "y": -8.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/922ijp",
+            "left": "entity/ground/grass/item/1off2k"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/922ijp",
+          "position": {
+            "x": 5.5,
+            "y": -9.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/in623j",
+            "bottom": "entity/ground/grass/item/1d6u3qr"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/in623j",
+          "position": {
+            "x": 5.5,
+            "y": -10.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/2q767n",
+            "bottom": "entity/ground/grass/item/922ijp"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/2q767n",
+          "position": {
+            "x": 5.5,
+            "y": -11.5
+          },
+          "connections": {
+            "bottom": "entity/ground/grass/item/in623j"
+          },
+          "hasBuilding": "entity/ressource/storage/15mp9ek"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/ih5lag",
+          "position": {
+            "x": 3.5,
+            "y": -5.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/1bf3kke",
+            "right": "entity/ground/grass/item/1mem0dq"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1mem0dq",
+          "position": {
+            "x": 4.5,
+            "y": -5.5
+          },
+          "connections": {
+            "top": "entity/ground/grass/item/sy978r",
+            "left": "entity/ground/grass/item/ih5lag"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/sy978r",
+          "position": {
+            "x": 4.5,
+            "y": -6.5
+          },
+          "connections": {
+            "bottom": "entity/ground/grass/item/1mem0dq",
+            "left": "entity/ground/grass/item/1bf3kke"
+          },
+          "hasBuilding": "entity/ressource/storage/1j8eoip"
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/1bf3kke",
+          "position": {
+            "x": 3.5,
+            "y": -6.5
+          },
+          "connections": {
+            "bottom": "entity/ground/grass/item/ih5lag",
+            "right": "entity/ground/grass/item/sy978r"
           }
         }
       ],
       "maxLife": 50
     },
-    "entity/character/worker/e8ryxl": {
+    "entity/character/worker/1u4i0c7": {
       "@type": "entity/character/worker",
-      "@id": "entity/character/worker/e8ryxl",
-      "state": "move",
+      "@id": "entity/character/worker/1u4i0c7",
+      "state": "wait",
       "collisionAble": true,
       "worker": {},
       "speed": 0.1,
       "life": 50,
       "rotation": {
         "x": 0,
-        "y": 67.61983591396145,
+        "y": 0,
         "z": 0
       },
       "position": {
-        "x": -3.9184778865019827,
+        "z": -8.5,
         "y": 0,
-        "z": 5.09238943250986
+        "x": 1.5
       },
       "size": {
         "x": 0.2,
         "y": 0.2,
         "z": 0.2
       },
-      "actions": {
-        "action/cutTheWood/i1hz1c": {
-          "@type": "action/cutTheWood",
-          "@id": "action/cutTheWood/i1hz1c",
-          "data": {
-            "state": "GoToTree",
-            "treeEntityIri": "entity/nature/tree/5kexuv",
-            "timberHouseEntityIri": "entity/building/timberHouse/1mkfotn"
-          }
-        }
-      },
-      "inventory": {
-        "ressource/wood": {
-          "@type": "ressource/wood",
-          "@id": "ressource/wood/1tidqr7",
-          "quantity": 41
-        }
-      },
+      "actions": {},
+      "inventory": {},
       "maxLife": 50
     },
-    "entity/character/worker/1owtvxu": {
-      "@type": "entity/character/worker",
-      "@id": "entity/character/worker/1owtvxu",
-      "state": "move",
-      "collisionAble": true,
-      "worker": {},
-      "speed": 0.1,
-      "life": 50,
-      "rotation": {
-        "x": 0,
-        "y": 67.61787778508672,
-        "z": 0
-      },
-      "position": {
-        "x": -4.7129809899147315,
-        "y": 0,
-        "z": 4.765072228353008
-      },
-      "size": {
-        "x": 0.2,
-        "y": 0.2,
-        "z": 0.2
-      },
-      "actions": {
-        "action/cutTheWood/1kcoxr2": {
-          "@type": "action/cutTheWood",
-          "@id": "action/cutTheWood/1kcoxr2",
-          "data": {
-            "state": "GoToTree",
-            "treeEntityIri": "entity/nature/tree/5kexuv",
-            "timberHouseEntityIri": "entity/building/timberHouse/1mkfotn"
-          }
-        }
-      },
-      "inventory": {
-        "ressource/wood": {
-          "@type": "ressource/wood",
-          "@id": "ressource/wood/1ik3a8d",
-          "quantity": 41
-        }
-      },
-      "maxLife": 50
-    },
-    "entity/building/timberHouse/1mkfotn": {
+    "entity/building/timberHouse/1ez8gn3": {
       "@type": "entity/building/timberHouse",
-      "@id": "entity/building/timberHouse/1mkfotn",
+      "@id": "entity/building/timberHouse/1ez8gn3",
       "state": "builded",
       "collisionAble": true,
-      "worker": {
-        "entity/character/worker/e8ryxl": {
-          "@type": "entity/character/worker",
-          "@id": "entity/character/worker/e8ryxl",
-          "state": "move",
-          "collisionAble": true,
-          "worker": {},
-          "speed": 0.1,
-          "life": 50,
-          "rotation": {
-            "x": 0,
-            "y": 67.61983591396145,
-            "z": 0
-          },
-          "position": {
-            "x": -3.9184778865019827,
-            "y": 0,
-            "z": 5.09238943250986
-          },
-          "size": {
-            "x": 0.2,
-            "y": 0.2,
-            "z": 0.2
-          },
-          "actions": {
-            "action/cutTheWood/i1hz1c": {
-              "@type": "action/cutTheWood",
-              "@id": "action/cutTheWood/i1hz1c",
-              "data": {
-                "state": "GoToTree",
-                "treeEntityIri": "entity/nature/tree/5kexuv",
-                "timberHouseEntityIri": "entity/building/timberHouse/1mkfotn"
-              }
-            }
-          },
-          "inventory": {
-            "ressource/wood": {
-              "@type": "ressource/wood",
-              "@id": "ressource/wood/1tidqr7",
-              "quantity": 41
-            }
-          },
-          "maxLife": 50
-        },
-        "entity/character/worker/1owtvxu": {
-          "@type": "entity/character/worker",
-          "@id": "entity/character/worker/1owtvxu",
-          "state": "move",
-          "collisionAble": true,
-          "worker": {},
-          "speed": 0.1,
-          "life": 50,
-          "rotation": {
-            "x": 0,
-            "y": 67.61787778508672,
-            "z": 0
-          },
-          "position": {
-            "x": -4.7129809899147315,
-            "y": 0,
-            "z": 4.765072228353008
-          },
-          "size": {
-            "x": 0.2,
-            "y": 0.2,
-            "z": 0.2
-          },
-          "actions": {
-            "action/cutTheWood/1kcoxr2": {
-              "@type": "action/cutTheWood",
-              "@id": "action/cutTheWood/1kcoxr2",
-              "data": {
-                "state": "GoToTree",
-                "treeEntityIri": "entity/nature/tree/5kexuv",
-                "timberHouseEntityIri": "entity/building/timberHouse/1mkfotn"
-              }
-            }
-          },
-          "inventory": {
-            "ressource/wood": {
-              "@type": "ressource/wood",
-              "@id": "ressource/wood/1ik3a8d",
-              "quantity": 41
-            }
-          },
-          "maxLife": 50
-        }
-      },
+      "worker": {},
       "speed": 0.1,
       "life": 50,
       "rotation": {
@@ -1169,9 +460,9 @@
         "z": 0
       },
       "position": {
-        "z": 3,
+        "z": -8,
         "y": 0,
-        "x": -9
+        "x": -1
       },
       "size": {
         "x": 2,
@@ -1183,37 +474,10 @@
       "numberOfWorker": 2,
       "maxLife": 50
     },
-    "entity/nature/tree/5kexuv": {
-      "@type": "entity/nature/tree",
-      "@id": "entity/nature/tree/5kexuv",
+    "entity/ressource/storage/15mp9ek": {
+      "@type": "entity/ressource/storage",
+      "@id": "entity/ressource/storage/15mp9ek",
       "state": "wait",
-      "collisionAble": true,
-      "worker": {},
-      "speed": 0.1,
-      "life": 10,
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "position": {
-        "z": 6.5,
-        "y": 0,
-        "x": -0.5
-      },
-      "size": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "actions": {},
-      "inventory": {},
-      "maxLife": 50
-    },
-    "entity/building/house/119g8ic": {
-      "@type": "entity/building/house",
-      "@id": "entity/building/house/119g8ic",
-      "state": "builded",
       "collisionAble": true,
       "worker": {},
       "speed": 0.1,
@@ -1224,35 +488,56 @@
         "z": 0
       },
       "position": {
-        "z": 2,
+        "z": -11.5,
         "y": 0,
-        "x": 0
+        "x": 5.5
       },
       "size": {
-        "x": 2,
-        "y": 2,
-        "z": 2
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {},
+      "inventory": {},
+      "maxLife": 50
+    },
+    "entity/ressource/storage/1j8eoip": {
+      "@type": "entity/ressource/storage",
+      "@id": "entity/ressource/storage/1j8eoip",
+      "state": "wait",
+      "collisionAble": true,
+      "worker": {},
+      "speed": 0.1,
+      "life": 50,
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "position": {
+        "z": -6.5,
+        "y": 0,
+        "x": 4.5
+      },
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
       },
       "actions": {},
       "inventory": {},
       "maxLife": 50
     }
   },
-  "inventory": {
-    "ressource/wood": {
-      "@type": "ressource/wood",
-      "@id": "ressource/wood/8situz",
-      "quantity": 600
-    }
-  },
-  "createdAt": "2024-12-30T15:57:11.144Z",
+  "inventory": {},
+  "createdAt": "2024-12-31T13:43:22.823Z",
   "camera": {
     "fov": 50,
     "zoom": 0,
     "position": {
-      "x": -6.661338147750939e-16,
+      "x": 0,
       "y": 10,
-      "z": 12.599999999999998
+      "z": 0
     },
     "rotation": {
       "x": -0.7853981633974483,
@@ -1263,21 +548,32 @@
   "userControl": {
     "showGrid": true,
     "mousePosition": {
-      "x": 2.840839383445445,
-      "y": -0.20000000000000195,
-      "z": 8.762759660801233
+      "x": 2.689578260486809,
+      "y": -0.20000000000000093,
+      "z": -3.8192829916341267
     },
     "mouseIcon": "/src/UI/MouseCursor/hammer.png",
     "currentAction": {
       "@type": "user-action/create-building",
       "data": {
         "entityMetaData": {
-          "@type": "entity/ground/grass",
+          "@type": "entity/ressource/storage",
           "asset": {
-            "icon": "/src/game/entity/ground/grass/grassIcon.png"
+            "model3d": "/src/game/entity/app/ressource/tree/tree.glb",
+            "icon": "/src/game/entity/app/ressource/tree/iconSrc.png"
           }
         }
       }
+    }
+  },
+  "gameCalculated": {
+    "building": {
+      "hash": "2mtqzu",
+      "count": 1
+    },
+    "character": {
+      "hash": "nj6boi",
+      "count": 1
     }
   }
 }

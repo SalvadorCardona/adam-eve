@@ -1,13 +1,18 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
-import { jsonLdFactory, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
-import { findClosestInGame } from "@/src/game/3D/findClosest"
+import {
+  jsonLdFactory,
+  JsonLdIri,
+  JsonLdTypeFactory,
+} from "@/src/utils/jsonLd/jsonLd"
+import { findClosestInGame } from "@/src/utils/3Dmath/findClosest"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { addToInventory } from "@/src/game/inventory/addToInventory"
-import { entityGoToEntity } from "@/src/game/entity/useCase/EntityGoToEntity"
-import { treeEntityMetaData } from "@/src/game/entity/app/tree/TreeEntity"
+import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
+import { appLdType } from "@/src/AppLdType"
 
 enum CutTheWoodState {
   CutTheThree = "CutTheThree",
@@ -23,7 +28,7 @@ interface CutTheWoodDataInterface {
 
 export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
   {
-    ["@type"]: "action/cutTheWood",
+    ["@type"]: JsonLdTypeFactory(appLdType.action, "cutTheWood"),
     onFrame: ({ entity, action, game }) => {
       const data = action.data
       if (!entity) return
@@ -38,6 +43,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
                 | undefined)
 
         if (!newTreeEntity) {
+          entity.state = entityState.wait
           return
         }
 

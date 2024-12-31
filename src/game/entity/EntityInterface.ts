@@ -1,5 +1,5 @@
 import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
-import { Vector3Interface } from "@/src/game/3D/Vector"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { JsonLdContainerInterface } from "@/src/container/container"
