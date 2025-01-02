@@ -1,9 +1,9 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
+import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
 
-export interface ActionMetadataInterface<T> extends GameMetaDataInterface {
+export interface ActionMetadataInterface<T> extends BaseGameMetaDataInterface {
   onFrame: (payload: {
     entity?: EntityInterface
     game: GameInterface

@@ -1,5 +1,5 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
+import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import {
   BaseJsonLdInterface,
   jsonLdFactory,
@@ -20,7 +20,7 @@ interface SaveGameInterface extends BaseJsonLdInterface {
   createdAt: Date | string
 }
 
-export interface SaveGameMetadataInterface extends GameMetaDataInterface {
+export interface SaveGameMetadataInterface extends BaseGameMetaDataInterface {
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>
@@ -35,7 +35,6 @@ const ldType = JsonLdTypeFactory(appLdType.saveGame)
 
 export const saveGameMetadata: SaveGameMetadataInterface = {
   "@type": ldType,
-
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>

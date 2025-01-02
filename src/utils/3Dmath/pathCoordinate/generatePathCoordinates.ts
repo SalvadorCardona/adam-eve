@@ -15,6 +15,10 @@ export interface CurrentPathCoordinateInterface {
   isFinish: boolean
 }
 
+function roundToHalf(num: number) {
+  return Math.round(num * 2) / 2
+}
+
 export function consommeCurrentPathCoordinate(entity: EntityInterface) {
   if (!entity.currentPathOfCoordinate) return
 
@@ -42,8 +46,7 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
     z: direction.z / length,
   }
 
-  entity.rotation.y =
-    Math.atan2(normalizedDirection.z, normalizedDirection.x) + Math.PI / 2
+  entity.rotation.y = Math.atan2(normalizedDirection.x, normalizedDirection.z)
 
   // Move the entity by 0.1 towards the next coordinate
   entity.position.x += normalizedDirection.x * (entity.speed / 2)

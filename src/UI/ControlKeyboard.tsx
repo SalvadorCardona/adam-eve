@@ -3,9 +3,10 @@ import {
   KeyboardControlsEntry,
   useKeyboardControls,
 } from "@react-three/drei"
-import React, { useMemo } from "react"
-import { useFrame, useThree } from "@react-three/fiber"
+import React, { useEffect, useMemo } from "react"
+import { useFrame } from "@react-three/fiber"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { GameState } from "@/src/game/game/GameInterface"
 
 interface ControlPropsInterface {}
 
@@ -17,6 +18,8 @@ enum Controls {
   jump = "jump",
   backAction = "backAction",
   showGrid = "showGrid",
+  rotate = "rotate",
+  pause = "pause",
 }
 
 export const ControlKeyboard = ({}: ControlPropsInterface) => {
@@ -30,6 +33,8 @@ export const ControlKeyboard = ({}: ControlPropsInterface) => {
       { name: Controls.backAction, keys: ["Escape"] },
       { name: Controls.showGrid, keys: ["KeyG"] },
       { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
+      { name: Controls.rotate, keys: ["KeyR"] },
+      { name: Controls.pause, keys: ["KeyP"] },
     ],
     [],
   )
@@ -47,10 +52,28 @@ const Elem = ({}: ElemPropsInterface) => {
   const [sub, get] = useKeyboardControls<Controls>()
   const game = useGameContext().game
   const moveSize = 0.7
-  const camera = useThree().camera
+
+  useEffect(() => {
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (get().rotate) {
+        game.userControl.rotation = (game.userControl?.rotation ?? 0) + Math.PI / 2
+      }
+      if (get().pause) {
+        game.gameState =
+          game.gameState === GameState.RUN ? GameState.PAUSE : GameState.RUN
+      }
+    }
+
+    window.addEventListener("keyup", handleKeyUp)
+
+    // Nettoyage pour éviter les fuites de mémoire
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp)
+    }
+  }, [get])
+
   useFrame(() => {
     if (get().back) {
-      console.log(camera)
       game.camera.position.z += moveSize
     }
     if (get().forward) {

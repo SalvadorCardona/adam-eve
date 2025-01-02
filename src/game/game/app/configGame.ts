@@ -1,4 +1,4 @@
-import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
+import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
 import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseEntity"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
@@ -20,8 +20,9 @@ import { storageEntityMetaData } from "@/src/game/entity/app/building/storage/st
 import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEntity"
 import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/RoadGroundEntityMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { gameMetadata } from "@/src/game/game/GameMetaData"
 
-const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
+const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
   [forumEntityMetaData["@type"]]: forumEntityMetaData,
   [workerEntityMetaData["@type"]]: workerEntityMetaData,
@@ -41,12 +42,13 @@ const configGame: JsonLdTypeContainerInterface<GameMetaDataInterface> = {
   [theDeathActionMetadata["@type"]]: theDeathActionMetadata,
   [storageEntityMetaData["@type"]]: storageEntityMetaData,
   [portEntityMetaData["@type"]]: portEntityMetaData,
+  [gameMetadata["@type"]]: gameMetadata,
 }
 
 export default configGame
 
-export function getMetaData<T = GameMetaDataInterface>(
-  metaType: JsonLdType | GameMetaDataInterface,
+export function getMetaData<T = BaseGameMetaDataInterface>(
+  metaType: JsonLdType | BaseGameMetaDataInterface,
 ): T {
   if (typeof metaType === "string") return configGame[metaType] as T
 

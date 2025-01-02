@@ -4,7 +4,7 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { Card } from "@/components/ui/card"
 import React from "react"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { GameMetaDataInterface } from "@/src/game/GameMetaDataInterface"
+import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuildingUserActionMetadata"
 import { isActionUserMetadata } from "@/src/game/actionUser/IsActionUserMetadata"
@@ -57,9 +57,9 @@ export const BottomSidebar = () => {
   )
 }
 
-function IconBuild({ metaDatas }: { metaDatas: GameMetaDataInterface[] }) {
+function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
   const game = useGameContext().game
-  const clickOnBuilding = (metaData: GameMetaDataInterface) => {
+  const clickOnBuilding = (metaData: BaseGameMetaDataInterface) => {
     if (isActionUserMetadata(metaData) && metaData.onCall) {
       metaData.onCall({ game, metaData })
 

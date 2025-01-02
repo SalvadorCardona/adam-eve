@@ -38,6 +38,7 @@ export const buildRequest: EntityMetaDataInterface = entityMedataFactory({
 
     const collision = hasCollisionInGame(gameContext.game, entity)
     const bgColor = collision ? "red" : "yellow"
+    entity.rotation.y = gameContext.game.userControl?.rotation ?? 0
 
     gameContext.game.userControl.mouseIcon = collision
       ? mouseIcon.cantBeBuild

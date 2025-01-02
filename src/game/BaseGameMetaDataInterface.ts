@@ -1,6 +1,6 @@
 import { JsonTypedLdInterface } from "@/src/utils/jsonLd/jsonLd"
 
-export interface GameMetaDataInterface extends JsonTypedLdInterface {
+export interface BaseGameMetaDataInterface extends JsonTypedLdInterface {
   asset?: {
     icon?: string
     model3d?: string

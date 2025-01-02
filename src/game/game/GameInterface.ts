@@ -7,12 +7,20 @@ import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { GameCalculatedInterface } from "@/src/game/game/gameCalculated"
 
+export enum GameState {
+  RUN = "run",
+  PAUSE = "pause",
+}
+
 export default interface GameInterface extends BaseJsonLdInterface {
+  gameSpeed: number
+  gameState: GameState
   userControl: {
     showGrid: boolean
     mouseIcon?: string
     mousePosition?: Vector3Interface
     currentAction?: ActionUserMetaDataInterface | undefined
+    rotation?: number
   }
   camera: {
     fov: number
@@ -23,7 +31,6 @@ export default interface GameInterface extends BaseJsonLdInterface {
   createdAt: DateString
   time: number
   entities: JsonLdContainerInterface<EntityInterface>
-  // When i click on entity, this stock here
   inventory: InventoryBagInterface
   actions: ActionBagInterface
   gameCalculated: GameCalculatedInterface
