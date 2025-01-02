@@ -8,6 +8,8 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 interface EntityPriorityInterface {
   ressourceForConstruction?: InventoryBagInterface
   inventorySize?: number
+  speed?: number
+  attackRange?: number
 }
 
 export interface EntityMetaDataInterface<T extends EntityInterface = EntityInterface>

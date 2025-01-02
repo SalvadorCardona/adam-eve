@@ -23,7 +23,6 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
   label: "Maison",
   defaultEntity: () => {
     const entity: Partial<EntityInterface> = {
-      speed: 0.1,
       life: 50,
       size: {
         x: 2,

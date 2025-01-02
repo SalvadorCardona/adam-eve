@@ -1,20 +1,22 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import asset from "./robot.glb?url"
-import iconFarmerSrc from "./iconFarmer.png"
-import { entityState } from "@/src/game/entity/EntityInterface"
+import asset from "./Zombie.glb?url"
+import iconFarmerSrc from "./img.png"
+import { entityState, factionState } from "@/src/game/entity/EntityInterface"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 
-export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
-  ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "worker"),
+// https://poly.pizza/m/xqEzosAVYX
+export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+  ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "zombie"),
   label: "Citoyen",
   asset: {
     model3d: asset,
     icon: iconFarmerSrc,
     animationMapper: {
-      [entityState.move]: "Running",
-      [entityState.wait]: "Idle",
+      [entityState.move]: "Armature|Walk2",
+      [entityState.wait]: "Armature|Idle",
+      [entityState.attack]: "Armature|Attack",
     },
   },
   propriety: {
@@ -23,11 +25,12 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   },
   defaultEntity: () => {
     return {
+      faction: factionState.enemy,
       life: 50,
       size: {
-        x: 0.2,
-        y: 0.2,
-        z: 0.2,
+        x: 0.8,
+        y: 0.8,
+        z: 0.8,
       },
     }
   },

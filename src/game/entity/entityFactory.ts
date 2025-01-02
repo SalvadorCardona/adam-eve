@@ -1,7 +1,10 @@
 import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  entityState,
+  factionState,
+} from "@/src/game/entity/EntityInterface"
 
 export function entityFactory<T extends EntityInterface = EntityInterface>(
   payload:
@@ -22,9 +25,9 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
     state: ldType.startsWith("entity/building")
       ? entityState.under_construction
       : entityState.wait,
+    faction: factionState.self,
     collisionAble: true,
     worker: {},
-    speed: 0.1,
     life: 50,
     rotation: {
       x: 0,
@@ -51,6 +54,5 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
   if (!baseEntity.maxLife) {
     baseEntity.maxLife = baseEntity.life
   }
-
   return jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 }

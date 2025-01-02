@@ -10,6 +10,12 @@ export enum entityState {
   move = "move",
   under_construction = "under_construction",
   builded = "builded",
+  attack = "attack",
+}
+
+export enum factionState {
+  enemy = "enemy",
+  self = "self",
 }
 
 export default interface EntityInterface extends BaseJsonLdInterface {
@@ -26,4 +32,5 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   worker: JsonLdContainerInterface<EntityInterface>
   numberOfWorker?: number
   currentPathOfCoordinate?: CurrentPathCoordinateInterface
+  faction: factionState
 }

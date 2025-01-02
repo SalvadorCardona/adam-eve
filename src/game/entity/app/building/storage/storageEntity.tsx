@@ -22,7 +22,6 @@ export const storageEntityMetaData: EntityMetaDataInterface = entityMedataFactor
   ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "storage"),
   defaultEntity: () => {
     const entity: Partial<EntityInterface> = {
-      speed: 0.1,
       life: 50,
       size: {
         x: 2,

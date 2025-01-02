@@ -6,7 +6,7 @@ import {
 import { getByLdType } from "@/src/container/container"
 import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -75,6 +75,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
+
       entity.state = entityState.move
 
       if (data.state === State.GoToForum) {
@@ -84,8 +85,8 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
           return
         }
-        const result = entityGoToEntity(entity, forum, game)
-        if (result.isFinish) {
+        const result = entityGoToEntityWithGround(entity, forum, game)
+        if (entity?.currentPathOfCoordinate?.isFinish) {
           data.state = State.TakeRessource
         }
       }
@@ -120,8 +121,9 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       if (data.state === State.GoToBuild) {
-        const result = entityGoToEntity(entity, building, game)
-        if (result.isFinish) {
+        const result = entityGoToEntityWithGround(entity, building, game)
+        ork
+        if (entity?.currentPathOfCoordinate?.isFinish) {
           data.state = State.PutRessource
         }
       }

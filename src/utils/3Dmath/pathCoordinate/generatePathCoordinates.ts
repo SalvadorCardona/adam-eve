@@ -5,6 +5,8 @@ import {
 } from "@/src/utils/3Dmath/Vector"
 import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
 import EntityInterface from "@/src/game/entity/EntityInterface"
+import { getMetaData } from "@/src/game/game/app/configGame"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 
 export type PathCoordinate = Vector2Interface[]
 
@@ -13,15 +15,14 @@ export interface CurrentPathCoordinateInterface {
   currentCoordinate: number
   totalDistance: number
   isFinish: boolean
-}
-
-function roundToHalf(num: number) {
-  return Math.round(num * 2) / 2
+  unreachable: boolean
+  hash: string
 }
 
 export function consommeCurrentPathCoordinate(entity: EntityInterface) {
   if (!entity.currentPathOfCoordinate) return
-
+  const meta = getMetaData<EntityMetaDataInterface>(entity)
+  const speed = meta.propriety.speed ?? 0.01
   const currentPathOfCoordinate = entity.currentPathOfCoordinate
 
   const nextCoordinate =
@@ -38,7 +39,6 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
     z: nextCoordinateConverted.z - entity.position.z,
   }
 
-  // Normalize the direction vector
   const length = Math.sqrt(direction.x ** 2 + direction.y ** 2 + direction.z ** 2)
   const normalizedDirection = {
     x: direction.x / length,
@@ -49,9 +49,8 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
   entity.rotation.y = Math.atan2(normalizedDirection.x, normalizedDirection.z)
 
   // Move the entity by 0.1 towards the next coordinate
-  entity.position.x += normalizedDirection.x * (entity.speed / 2)
-  entity.position.y += normalizedDirection.y * (entity.speed / 2)
-  entity.position.z += normalizedDirection.z * (entity.speed / 2)
+  entity.position.x += normalizedDirection.x * speed
+  entity.position.z += normalizedDirection.z * speed
 
   // Check if the entity has reached the next coordinate
   if (length <= 0.1) {

@@ -1,7 +1,7 @@
 {
   "@type": "game",
   "@id": "game/g5p9mx",
-  "time": 11301,
+  "time": 12295,
   "gameSpeed": 1,
   "gameState": "Pause",
   "actions": {
@@ -398,8 +398,7 @@
           "connections": {
             "top": "entity/ground/grass/item/1a5v8kp",
             "left": "entity/ground/grass/item/1re6os"
-          },
-          "hasBuilding": "entity/character/worker/y231xr"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -424,7 +423,7 @@
             "top": "entity/ground/grass/item/1gtsijo",
             "bottom": "entity/ground/grass/item/1a5v8kp"
           },
-          "hasBuilding": "entity/ressource/tree/15nik8b"
+          "hasBuilding": "entity/character/worker/y231xr"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -824,7 +823,7 @@
       "collisionAble": true,
       "worker": {},
       "speed": 0.1,
-      "life": 50,
+      "life": 30,
       "rotation": {
         "x": 0,
         "y": 0,
@@ -832,33 +831,6 @@
       },
       "position": {
         "z": -12.5,
-        "y": 0,
-        "x": 5.5
-      },
-      "size": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "actions": {},
-      "inventory": {},
-      "maxLife": 50
-    },
-    "entity/ressource/tree/15nik8b": {
-      "@type": "entity/ressource/tree",
-      "@id": "entity/ressource/tree/15nik8b",
-      "state": "wait",
-      "collisionAble": true,
-      "worker": {},
-      "speed": 0.1,
-      "life": 0,
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "position": {
-        "z": -11.5,
         "y": 0,
         "x": 5.5
       },
@@ -996,13 +968,13 @@
       "life": 50,
       "rotation": {
         "x": 0,
-        "y": 4.71238898038469,
+        "y": 4.71233100703463,
         "z": 0
       },
       "position": {
-        "z": -9.5,
+        "z": -9.500020359610238,
         "y": 0,
-        "x": 0.05118913402342498
+        "x": 3.8511891273106817
       },
       "size": {
         "x": 0.2,
@@ -1015,7 +987,7 @@
           "@id": "action/cutTheWood/1yhw85u",
           "data": {
             "state": "GoToBuild",
-            "treeEntityIri": "entity/ressource/tree/15nik8b",
+            "treeEntityIri": "entity/ressource/tree/liwtdb",
             "timberHouseEntityIri": "entity/building/timberHouse/1k01mli"
           }
         }
@@ -1029,8 +1001,12 @@
       },
       "maxLife": 50,
       "currentPathOfCoordinate": {
-        "totalDistance": 8,
+        "totalDistance": 9,
         "pathCoordinate": [
+          {
+            "x": 5.5,
+            "y": -12.5
+          },
           {
             "x": 5.5,
             "y": -11.5
@@ -1068,7 +1044,7 @@
             "y": -9.5
           }
         ],
-        "currentCoordinate": 8,
+        "currentCoordinate": 5,
         "isFinish": false
       }
     },
@@ -1132,7 +1108,7 @@
     "ressource/wood": {
       "@type": "ressource/wood",
       "@id": "ressource/wood/19ilj9x",
-      "quantity": 160
+      "quantity": 190
     }
   },
   "createdAt": "2024-12-31T14:47:50.315Z",
@@ -1173,11 +1149,11 @@
   },
   "gameCalculated": {
     "building": {
-      "hash": "i42nb2",
+      "hash": "ora5u5",
       "count": 3
     },
     "character": {
-      "hash": "1yoowjx",
+      "hash": "1gepoaz",
       "count": 1
     }
   }

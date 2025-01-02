@@ -10,7 +10,7 @@ import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessour
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { addToInventory } from "@/src/game/inventory/addToInventory"
-import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { appLdType } from "@/src/AppLdType"
 
@@ -49,12 +49,11 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
         data.treeEntityIri = newTreeEntity["@id"]
 
-        const result = entityGoToEntity(entity, newTreeEntity, game)
+        const result = entityGoToEntityWithGround(entity, newTreeEntity, game)
 
         if (entity?.currentPathOfCoordinate?.isFinish) {
           newTreeEntity.life -= 10
           data.state = CutTheWoodState.CutTheThree
-          entity.currentPathOfCoordinate = undefined
         }
       }
 
@@ -79,7 +78,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         if (!newTimberHouseEntity) return
 
         data.timberHouseEntityIri = newTimberHouseEntity["@id"]
-        const result = entityGoToEntity(entity, newTimberHouseEntity, game)
+        const result = entityGoToEntityWithGround(entity, newTimberHouseEntity, game)
 
         if (entity?.currentPathOfCoordinate?.isFinish) {
           transfertInventory(
@@ -89,7 +88,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
             10,
           )
 
-          entity.currentPathOfCoordinate = undefined
           data.state = CutTheWoodState.GoToTree
         }
       }
