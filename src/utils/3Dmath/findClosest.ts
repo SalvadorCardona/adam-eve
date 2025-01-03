@@ -2,8 +2,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterfaceInterface from "@/src/game/game/GameInterface"
 import { getByLdType } from "@/src/container/container"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector3"
-import { vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
+import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
 
 /**
  * Make search and return earnest entity
@@ -26,10 +25,7 @@ export const findClosest = (
   let closestTree: EntityInterface | undefined = undefined
 
   entities.forEach((entity) => {
-    const distance = distanceBetweenVector2(
-      vector3ToVector2(entity.position),
-      vector3ToVector2(character.position),
-    )
+    const distance = distanceBetweenVector3(character.position, entity.position)
 
     if (distance < minDistance) {
       minDistance = distance

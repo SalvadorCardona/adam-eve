@@ -3,7 +3,6 @@ import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/Wor
 import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseEntity"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
-import { buildRequest } from "@/src/game/entity/app/helper/build-request/BuildRequest"
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
 import { JsonLdTypeContainerInterface } from "@/src/container/container"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
@@ -42,7 +41,7 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
   [timberHouseEntityMetaData["@type"]]: timberHouseEntityMetaData,
   [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
-  [buildRequest["@type"]]: buildRequest,
+  // [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
   [roadGroundEntityMetadata["@type"]]: roadGroundEntityMetadata,

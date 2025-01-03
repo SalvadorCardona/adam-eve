@@ -35,7 +35,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const rotationY = game.userControl?.rotation ?? 0
 
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
-      const newEntity = metaInterface.factory({
+      const entity = metaInterface.factory({
         game,
         entity: {
           position: aroundVector(game.userControl.mousePosition, true),
@@ -43,7 +43,8 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         },
       })
 
-      if (addEntityToGame(game, newEntity)) {
+      if (metaInterface.canBeBuild({ game, entity })) {
+        addEntityToGame(game, entity)
         game.userControl.rotation = 0
         playSound(song)
       }

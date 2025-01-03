@@ -17,19 +17,12 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
     setImageSrc(game.userControl.mouseIcon ?? mouseIcon.normal)
   }, [game.userControl.mouseIcon])
 
-  const updateMouse = (e: MouseEvent) => {
-    if (cursorRef.current) {
-      cursorRef.current.style.top = `${e.clientY - SIZE / 2}px`
-      cursorRef.current.style.left = `${e.clientX - SIZE / 2}px`
-    }
-  }
-
   const handleScroll = (e: WheelEvent) => {
     if (e.deltaY > 0) {
-      game.camera.position.z += 0.1
+      game.camera.position.y += 0.1
     }
     if (e.deltaY < 0) {
-      game.camera.position.z -= 0.1
+      game.camera.position.y -= 0.1
     }
   }
 
@@ -39,6 +32,13 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
       window.removeEventListener("wheel", handleScroll)
     }
   }, [])
+
+  const updateMouse = (e: MouseEvent) => {
+    if (cursorRef.current) {
+      cursorRef.current.style.top = `${e.clientY - SIZE / 2}px`
+      cursorRef.current.style.left = `${e.clientX - SIZE / 2}px`
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("mousemove", updateMouse)

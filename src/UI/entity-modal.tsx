@@ -1,6 +1,6 @@
 import React from "react"
 import { Progress } from "../../components/ui/progress"
-import { Activity, Box, Leaf, Shield, Zap } from "lucide-react"
+import { Activity, Box, Leaf, Zap } from "lucide-react"
 import EntityInterface from "../game/entity/EntityInterface"
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
 import { getMetaData } from "@/src/game/game/app/configGame"
@@ -57,15 +57,6 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entity }) => {
               Actions : {Object.values(entity.actions).length} disponibles
             </div>
           </div>
-
-          {entity.collisionAble !== undefined && (
-            <div className="flex items-center gap-4">
-              <Shield className="h-5 w-5 text-blue-600" />
-              <div className="font-semibold">
-                Collision : {entity.collisionAble ? "Activée" : "Désactivée"}
-              </div>
-            </div>
-          )}
 
           <div className="font-semibold">
             Position :

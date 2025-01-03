@@ -24,7 +24,6 @@
       "@id": "entity/helper/build-request/1ew0sij",
       "state": "wait",
       "faction": "self",
-      "collisionAble": false,
       "worker": {},
       "life": 50,
       "rotation": {
@@ -51,7 +50,6 @@
       "@id": "entity/ground/grass/139eotb",
       "state": "wait",
       "faction": "self",
-      "collisionAble": true,
       "worker": {},
       "life": 50,
       "rotation": {
@@ -331,7 +329,6 @@
       "@id": "entity/building/tower/t5xcs5",
       "state": "builded",
       "faction": "self",
-      "collisionAble": true,
       "worker": {},
       "life": 50,
       "rotation": {

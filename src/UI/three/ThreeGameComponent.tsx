@@ -11,11 +11,15 @@ import { Canvas } from "@react-three/fiber"
 import GameInterface from "@/src/game/game/GameInterface"
 import { mockGames } from "@/src/game/mockGame/mockGame"
 import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
+import { gameLoader } from "@/src/game/game/gameLoader"
+import { CreateBuilding } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuilding"
+import { SelectOnMap } from "@/src/game/actionUser/app/SelectUserAction/SelectOnMap"
 
 export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
+  const currentGame = game ? gameLoader(game) : gameLoader(mockGames.defaultMock)
   return (
     <main className={"h-screen overflow-hidden"}>
-      <GameProvider game={game ?? mockGames.defaultMock}>
+      <GameProvider game={currentGame}>
         <Canvas
           shadows
           camera={{
@@ -51,6 +55,8 @@ function Child() {
       {/*  rotation={[-0.3, -0.05, -0.02]}*/}
       {/*  position={[-0.4, 3.5, 3.5]}*/}
       {/*></OrbitControls>*/}
+      <CreateBuilding></CreateBuilding>
+      <SelectOnMap></SelectOnMap>
       <PerspectiveCamera
         makeDefault={true}
         fov={gameContext.game.camera.fov}
