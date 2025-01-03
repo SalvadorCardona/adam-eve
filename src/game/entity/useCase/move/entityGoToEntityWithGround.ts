@@ -1,4 +1,4 @@
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { getByLdType } from "@/src/container/container"
 import { findShortestPath } from "@/src/utils/3Dmath/findShortestPath"
@@ -15,7 +15,11 @@ export function entityGoToEntityWithGround(
   entityTarget: EntityInterface,
   game: GameInterface,
 ) {
-  const hash: string = JSON.stringify([entitySource["@id"], entityTarget.position])
+  const hash: string = JSON.stringify([
+    entitySource["@id"],
+    entityTarget.position,
+    game.gameCalculated.building,
+  ])
   if (
     entitySource.currentPathOfCoordinate &&
     entitySource.currentPathOfCoordinate.hash === hash
@@ -31,7 +35,6 @@ export function entityGoToEntityWithGround(
   }
 
   const ground = game.entities[groundIri] as GroundEntityInterface
-
   const path = findShortestPath(
     vector3ToVector2(entitySource.position),
     vector3ToVector2(entityTarget.position),
@@ -43,8 +46,12 @@ export function entityGoToEntityWithGround(
     pathCoordinate: path?.path.map((e) => e.position) ?? [],
     currentCoordinate: 0,
     isFinish: true,
-    unreachable: !!path,
+    unreachable: path === null,
     hash,
+  }
+
+  if (entitySource.currentPathOfCoordinate.unreachable === false) {
+    entitySource.state = EntityState.move
   }
 
   return consommeCurrentPathCoordinate(entitySource)

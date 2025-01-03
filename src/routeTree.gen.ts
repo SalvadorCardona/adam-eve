@@ -15,6 +15,7 @@ import { Route as NewGameImport } from './routes/newGame'
 import { Route as AboutImport } from './routes/about'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
+import { Route as MockIndexImport } from './routes/mock/index'
 import { Route as SaveGameSaveGameIdImport } from './routes/saveGame.$saveGameId'
 import { Route as MockMockNameImport } from './routes/mock/$mockName'
 
@@ -40,6 +41,12 @@ const LayoutRoute = LayoutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MockIndexRoute = MockIndexImport.update({
+  id: '/mock/',
+  path: '/mock/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -101,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SaveGameSaveGameIdImport
       parentRoute: typeof rootRoute
     }
+    '/mock/': {
+      id: '/mock/'
+      path: '/mock'
+      fullPath: '/mock'
+      preLoaderRoute: typeof MockIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -113,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/newGame': typeof NewGameRoute
   '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
+  '/mock': typeof MockIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -122,6 +137,7 @@ export interface FileRoutesByTo {
   '/newGame': typeof NewGameRoute
   '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
+  '/mock': typeof MockIndexRoute
 }
 
 export interface FileRoutesById {
@@ -132,6 +148,7 @@ export interface FileRoutesById {
   '/newGame': typeof NewGameRoute
   '/mock/$mockName': typeof MockMockNameRoute
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
+  '/mock/': typeof MockIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -143,6 +160,7 @@ export interface FileRouteTypes {
     | '/newGame'
     | '/mock/$mockName'
     | '/saveGame/$saveGameId'
+    | '/mock'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/newGame'
     | '/mock/$mockName'
     | '/saveGame/$saveGameId'
+    | '/mock'
   id:
     | '__root__'
     | '/'
@@ -159,6 +178,7 @@ export interface FileRouteTypes {
     | '/newGame'
     | '/mock/$mockName'
     | '/saveGame/$saveGameId'
+    | '/mock/'
   fileRoutesById: FileRoutesById
 }
 
@@ -169,6 +189,7 @@ export interface RootRouteChildren {
   NewGameRoute: typeof NewGameRoute
   MockMockNameRoute: typeof MockMockNameRoute
   SaveGameSaveGameIdRoute: typeof SaveGameSaveGameIdRoute
+  MockIndexRoute: typeof MockIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -178,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewGameRoute: NewGameRoute,
   MockMockNameRoute: MockMockNameRoute,
   SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
+  MockIndexRoute: MockIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -195,7 +217,8 @@ export const routeTree = rootRoute
         "/about",
         "/newGame",
         "/mock/$mockName",
-        "/saveGame/$saveGameId"
+        "/saveGame/$saveGameId",
+        "/mock/"
       ]
     },
     "/": {
@@ -215,6 +238,9 @@ export const routeTree = rootRoute
     },
     "/saveGame/$saveGameId": {
       "filePath": "saveGame.$saveGameId.tsx"
+    },
+    "/mock/": {
+      "filePath": "mock/index.tsx"
     }
   }
 }

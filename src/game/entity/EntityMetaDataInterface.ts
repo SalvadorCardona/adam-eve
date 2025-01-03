@@ -5,11 +5,17 @@ import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 
+interface EntityAttackPriorityInterface {
+  attackRange: number
+  damage: number
+  attackSpeed: number
+}
+
 interface EntityPriorityInterface {
   ressourceForConstruction?: InventoryBagInterface
   inventorySize?: number
   speed?: number
-  attackRange?: number
+  attack?: EntityAttackPriorityInterface
 }
 
 export interface EntityMetaDataInterface<T extends EntityInterface = EntityInterface>

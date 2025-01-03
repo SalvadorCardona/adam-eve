@@ -30,7 +30,7 @@ export function hasCollisionInGame(
   entity: EntityInterface,
 ): false | EntityInterface {
   const canBeCollision: EntityInterface[] = Object.values(game.entities).filter(
-    (e) => e && e !== entity && e.collisionAble,
+    (e) => e && e !== entity,
   )
 
   for (const otherEntity of canBeCollision) {

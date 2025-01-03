@@ -2,17 +2,13 @@ import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
-  entityState,
+  EntityState,
   factionState,
 } from "@/src/game/entity/EntityInterface"
 
-export function entityFactory<T extends EntityInterface = EntityInterface>(
-  payload:
-    | {
-        entity?: Partial<T>
-      }
-    | undefined,
-): T {
+export function entityFactory<
+  T extends EntityInterface = EntityInterface,
+>(payload?: { entity?: Partial<T> }): T {
   let ldType: JsonLdType = "undefined"
 
   if (payload?.entity?.["@type"]) ldType = payload.entity["@type"]
@@ -23,10 +19,9 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
     state: ldType.startsWith("entity/building")
-      ? entityState.under_construction
-      : entityState.wait,
+      ? EntityState.under_construction
+      : EntityState.wait,
     faction: factionState.self,
-    collisionAble: true,
     worker: {},
     life: 50,
     rotation: {
@@ -54,5 +49,6 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(
   if (!baseEntity.maxLife) {
     baseEntity.maxLife = baseEntity.life
   }
+
   return jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 }

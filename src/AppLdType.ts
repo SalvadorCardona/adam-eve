@@ -7,6 +7,7 @@ export const appLdType = {
   entity: "entity",
   entityHelper: "entity/helper",
   entityBuilding,
+  entityAttack: "entity/attack",
   entityRessource: "entity/ressource",
   entityCharacter: "entity/character",
   entityGround: "entity/ground",

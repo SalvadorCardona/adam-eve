@@ -14,6 +14,8 @@ export function addEntityToGame(
     return true
   }
 
+  updateEntityInGame(game, entity, "create")
+
   console.warn("Has a collision with", collision)
   return false
 }

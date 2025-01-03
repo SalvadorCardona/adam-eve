@@ -21,9 +21,16 @@ import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEnti
 import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/RoadGroundEntityMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
-import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
-import { TowerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
+import {
+  ZombieAttackActionMetadata,
+  zombieEntityMetaData,
+} from "@/src/game/entity/app/character/zombie/zombieEntity"
+import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
 import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
+import {
+  ArrowAttackActionMetadata,
+  ArrowMetaData,
+} from "@/src/game/entity/app/attack/ArrowEntity"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -47,8 +54,11 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [portEntityMetaData["@type"]]: portEntityMetaData,
   [gameMetadata["@type"]]: gameMetadata,
   [zombieEntityMetaData["@type"]]: zombieEntityMetaData,
-  [TowerEntityMetaData["@type"]]: TowerEntityMetaData,
+  [towerEntityMetaData["@type"]]: towerEntityMetaData,
   [TowerAttackActionMetadata["@type"]]: TowerAttackActionMetadata,
+  [ArrowAttackActionMetadata["@type"]]: ArrowAttackActionMetadata,
+  [ArrowMetaData["@type"]]: ArrowMetaData,
+  [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
 }
 
 export default configGame

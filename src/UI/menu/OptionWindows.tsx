@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import React from "react"
 
-export function OptionsWindow() {
+export function OptionWindows() {
   return (
     <div className="p-4 bg-amber-100 rounded-lg h-full">
       <h2 className="text-xl font-bold mb-4 text-amber-800">Options</h2>

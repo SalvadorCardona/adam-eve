@@ -4,7 +4,7 @@ import {
   JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
 import { getByLdType } from "@/src/container/container"
-import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
@@ -44,14 +44,14 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
       const getBuilding = (): EntityInterface | undefined => {
         const currentBuilding = game.entities[data.buildingIri ?? ""]
-        if (currentBuilding?.state === entityState.under_construction)
+        if (currentBuilding?.state === EntityState.under_construction)
           return currentBuilding
 
         const newBuilding = getByLdType<EntityInterface>(
           game.entities,
           appLdType.entityBuilding,
         ).find((building) => {
-          return building?.state === entityState.under_construction
+          return building?.state === EntityState.under_construction
         })
 
         if (!newBuilding) {
@@ -67,7 +67,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
       if (!building) {
         data.state = State.NoBuild
-        entity.state = entityState.wait
+        entity.state = EntityState.wait
         return
       }
       if (building && data.state === State.NoBuild) {
@@ -76,7 +76,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
       const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
 
-      entity.state = entityState.move
+      entity.state = EntityState.move
 
       if (data.state === State.GoToForum) {
         const forum = findClosestInGame(entity, forumEntityMetaData["@type"], game)
@@ -116,13 +116,12 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
         if (hasTakeRessource) {
           data.state = State.GoToBuild
         } else {
-          entity.state = entityState.wait
+          entity.state = EntityState.wait
         }
       }
 
       if (data.state === State.GoToBuild) {
         const result = entityGoToEntityWithGround(entity, building, game)
-        ork
         if (entity?.currentPathOfCoordinate?.isFinish) {
           data.state = State.PutRessource
         }
@@ -144,14 +143,14 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
             building.inventory,
           )
         ) {
-          building.state = entityState.builded
+          building.state = EntityState.builded
           data.buildingIri = undefined
         }
 
         data.state = State.GoToForum
       }
     },
-    factory: (payload) => {
+    factory: () => {
       const data: FindWorkerData = {
         state: State.GoToForum,
       }

@@ -1,11 +1,11 @@
-import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
+import { BaseJsonLdInterface, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { JsonLdContainerInterface } from "@/src/container/container"
 import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
 
-export enum entityState {
+export enum EntityState {
   wait = "wait",
   move = "move",
   under_construction = "under_construction",
@@ -27,10 +27,10 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   speed: number
   inventory: InventoryBagInterface
   actions: ActionBagInterface
-  state?: entityState
-  collisionAble?: boolean
+  state?: EntityState
   worker: JsonLdContainerInterface<EntityInterface>
   numberOfWorker?: number
   currentPathOfCoordinate?: CurrentPathCoordinateInterface
   faction: factionState
+  entityAttackTargetIri?: JsonLdIri
 }

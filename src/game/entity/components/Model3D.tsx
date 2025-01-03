@@ -1,4 +1,4 @@
-import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import { useAnimations, useGLTF } from "@react-three/drei"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
@@ -24,6 +24,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
+    console.log(actions)
     if (!metaData.asset?.animationMapper || !entity?.state) return
     const animationMapped = metaData.asset.animationMapper[entity.state]
 
@@ -44,9 +45,9 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
       if (child.isMesh) {
         child.castShadow = true
         child.material = child.material.clone()
-        child.material.transparent = entity.state === entityState.under_construction
+        child.material.transparent = entity.state === EntityState.under_construction
         child.material.opacity =
-          entity.state === entityState.under_construction ? 0.5 : 1
+          entity.state === EntityState.under_construction ? 0.5 : 1
       }
     })
   }, [entity.state])

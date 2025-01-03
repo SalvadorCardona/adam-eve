@@ -16,8 +16,8 @@ import {
   Upload,
   X,
 } from "lucide-react"
-import { SaveLoadWindow } from "./save-load-window"
-import { OptionsWindow } from "./options-window"
+import { SaveLoadWindow } from "./SaveLoadWindow"
+import { OptionWindows } from "./OptionWindows"
 import { useNavigate } from "@tanstack/react-router"
 
 export function GameMenu() {
@@ -107,7 +107,7 @@ export function GameMenu() {
           <div className="w-1/2">
             {rightWindow === "save" && <SaveLoadWindow type="save" />}
             {rightWindow === "load" && <SaveLoadWindow type="load" />}
-            {rightWindow === "options" && <OptionsWindow />}
+            {rightWindow === "options" && <OptionWindows />}
           </div>
         </div>
       </DialogContent>

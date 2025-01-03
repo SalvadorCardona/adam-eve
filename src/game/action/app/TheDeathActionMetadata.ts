@@ -9,16 +9,16 @@ export const theDeathActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.action, "TheDeathActionMetadata"),
   onFrame: ({ game, action }) => {
     action.nextTick = game.time + 50
-    
+
     const entities = getByLdType<EntityInterface>(game.entities, "entity").filter(
       (entity) => {
-        return entity.life < 0
+        return entity.life <= 0
       },
     )
 
     entities.forEach((entity) => removeEntityToGame(game, entity))
   },
-  factory: (payload) => {
+  factory: () => {
     return jsonLdFactory(theDeathActionMetadata["@type"], {})
   },
 }

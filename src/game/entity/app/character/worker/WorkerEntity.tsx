@@ -2,7 +2,7 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./robot.glb?url"
 import iconFarmerSrc from "./iconFarmer.png"
-import { entityState } from "@/src/game/entity/EntityInterface"
+import { EntityState } from "@/src/game/entity/EntityInterface"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 
@@ -13,8 +13,8 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     model3d: asset,
     icon: iconFarmerSrc,
     animationMapper: {
-      [entityState.move]: "Running",
-      [entityState.wait]: "Idle",
+      [EntityState.move]: "Running",
+      [EntityState.wait]: "Idle",
     },
   },
   propriety: {

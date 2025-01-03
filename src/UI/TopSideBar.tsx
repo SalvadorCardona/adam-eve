@@ -1,7 +1,7 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { Inventory } from "@/src/UI/Inventory"
 import React from "react"
-import { GameMenu } from "@/src/UI/menu/game-menu"
+import { GameMenu } from "@/src/UI/menu/GameMenu"
 
 export const TopSideBar = () => {
   const gameContext = useGameContext()

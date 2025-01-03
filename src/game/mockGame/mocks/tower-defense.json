@@ -3,11 +3,12 @@
   "@id": "game/new720",
   "gameSpeed": 1,
   "gameState": "run",
-  "time": 5178,
+  "time": 9381,
   "actions": {
     "action/TheDeathActionMetadata/uv4g8a": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/uv4g8a"
+      "@id": "action/TheDeathActionMetadata/uv4g8a",
+      "nextTick": 9429
     },
     "action/findWorkerCharacter/ngnvam": {
       "@type": "action/findWorkerCharacter",
@@ -82,7 +83,7 @@
             "bottom": "entity/ground/grass/item/xha4ib",
             "right": "entity/ground/grass/item/1atjdu1"
           },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          "hasBuilding": "entity/building/tower/t5xcs5"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -96,7 +97,7 @@
             "left": "entity/ground/grass/item/11aqjd2",
             "right": "entity/ground/grass/item/g211td"
           },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          "hasBuilding": "entity/building/tower/t5xcs5"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -108,8 +109,7 @@
           "connections": {
             "bottom": "entity/ground/grass/item/19tbkp6",
             "left": "entity/ground/grass/item/1atjdu1"
-          },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -123,8 +123,7 @@
             "bottom": "entity/ground/grass/item/1a8genn",
             "left": "entity/ground/grass/item/upg5wp",
             "right": "entity/ground/grass/item/pu5uuw"
-          },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -139,7 +138,7 @@
             "left": "entity/ground/grass/item/xha4ib",
             "right": "entity/ground/grass/item/19tbkp6"
           },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          "hasBuilding": "entity/building/tower/t5xcs5"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -153,7 +152,7 @@
             "bottom": "entity/ground/grass/item/277aip",
             "right": "entity/ground/grass/item/upg5wp"
           },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          "hasBuilding": "entity/building/tower/t5xcs5"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -165,8 +164,7 @@
           "connections": {
             "top": "entity/ground/grass/item/xha4ib",
             "right": "entity/ground/grass/item/21a8lt"
-          },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -179,8 +177,7 @@
             "top": "entity/ground/grass/item/upg5wp",
             "left": "entity/ground/grass/item/277aip",
             "right": "entity/ground/grass/item/1a8genn"
-          },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -192,8 +189,7 @@
           "connections": {
             "top": "entity/ground/grass/item/19tbkp6",
             "left": "entity/ground/grass/item/21a8lt"
-          },
-          "hasBuilding": "entity/building/tower/1mtc5mw"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -205,7 +201,7 @@
           "connections": {
             "top": "entity/ground/grass/item/tfuvj1"
           },
-          "hasBuilding": "entity/character/zombie/1t2q5mv"
+          "hasBuilding": "entity/character/zombie/q7pyre"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -219,7 +215,7 @@
             "bottom": "entity/ground/grass/item/1dbhbjt",
             "left": "entity/ground/grass/item/ryubs4"
           },
-          "hasBuilding": "entity/character/zombie/1a01o3u"
+          "hasBuilding": "entity/character/zombie/q7pyre"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -230,8 +226,7 @@
           },
           "connections": {
             "bottom": "entity/ground/grass/item/tfuvj1"
-          },
-          "hasBuilding": "entity/character/zombie/1lzl62v"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -242,8 +237,7 @@
           },
           "connections": {
             "bottom": "entity/ground/grass/item/721pzw"
-          },
-          "hasBuilding": "entity/character/zombie/1lzl62v"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -255,8 +249,7 @@
           "connections": {
             "top": "entity/ground/grass/item/4mlp6g",
             "bottom": "entity/ground/grass/item/18eg0qx"
-          },
-          "hasBuilding": "entity/character/zombie/1lzl62v"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -269,7 +262,7 @@
             "top": "entity/ground/grass/item/721pzw",
             "bottom": "entity/ground/grass/item/1x7o72"
           },
-          "hasBuilding": "entity/character/zombie/1a01o3u"
+          "hasBuilding": "entity/character/zombie/q7pyre"
         },
         {
           "@type": "entity/ground/grass/item",
@@ -280,8 +273,7 @@
           },
           "connections": {
             "top": "entity/ground/grass/item/18eg0qx"
-          },
-          "hasBuilding": "entity/character/zombie/1t2q5mv"
+          }
         },
         {
           "@type": "entity/ground/grass/item",
@@ -303,7 +295,8 @@
             "y": -8.5
           },
           "connections": {
-            "left": "entity/ground/grass/item/pu5uuw"
+            "left": "entity/ground/grass/item/pu5uuw",
+            "right": "entity/ground/grass/item/m8ne57"
           }
         },
         {
@@ -314,15 +307,28 @@
             "y": -8.5
           },
           "connections": {
+            "left": "entity/ground/grass/item/m8ne57",
             "right": "entity/ground/grass/item/tfuvj1"
+          }
+        },
+        {
+          "@type": "entity/ground/grass/item",
+          "@id": "entity/ground/grass/item/m8ne57",
+          "position": {
+            "x": 2.5,
+            "y": -8.5
+          },
+          "connections": {
+            "left": "entity/ground/grass/item/1sanju1",
+            "right": "entity/ground/grass/item/ryubs4"
           }
         }
       ],
       "maxLife": 50
     },
-    "entity/building/tower/1mtc5mw": {
+    "entity/building/tower/t5xcs5": {
       "@type": "entity/building/tower",
-      "@id": "entity/building/tower/1mtc5mw",
+      "@id": "entity/building/tower/t5xcs5",
       "state": "builded",
       "faction": "self",
       "collisionAble": true,
@@ -334,100 +340,109 @@
         "y": 0
       },
       "position": {
-        "z": -8.5,
+        "z": -9,
         "y": 0,
-        "x": -1.5
+        "x": -2
       },
       "size": {
         "x": 2,
         "y": 2,
         "z": 2
       },
-      "actions": {},
+      "actions": {
+        "action/TowerAttack/11cc2av": {
+          "@type": "action/TowerAttack",
+          "@id": "action/TowerAttack/11cc2av",
+          "nextTick": 0
+        }
+      },
       "inventory": {},
       "numberOfWorker": 2,
       "maxLife": 50
     },
-    "entity/character/zombie/1t2q5mv": {
+    "entity/character/zombie/q7pyre": {
       "@type": "entity/character/zombie",
-      "@id": "entity/character/zombie/1t2q5mv",
-      "state": "wait",
+      "@id": "entity/character/zombie/q7pyre",
+      "state": "move",
       "faction": "enemy",
-      "collisionAble": true,
       "worker": {},
       "life": 50,
       "rotation": {
         "x": 0,
         "z": 0,
-        "y": 0
+        "y": -3.0918183118048255
       },
       "position": {
-        "z": -7.5,
+        "z": -8.346460870581433,
         "y": 0,
-        "x": 5
+        "x": 4.507648626601367
       },
       "size": {
         "x": 0.8,
         "y": 0.8,
         "z": 0.8
       },
-      "actions": {},
+      "actions": {
+        "action/ZombieAttack/ykg4hr": {
+          "@type": "action/ZombieAttack",
+          "@id": "action/ZombieAttack/ykg4hr",
+          "data": {
+            "state": "GoToEnemy"
+          }
+        }
+      },
       "inventory": {},
-      "maxLife": 50
-    },
-    "entity/character/zombie/1a01o3u": {
-      "@type": "entity/character/zombie",
-      "@id": "entity/character/zombie/1a01o3u",
-      "state": "wait",
-      "faction": "enemy",
-      "collisionAble": true,
-      "worker": {},
-      "life": 50,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "position": {
-        "z": -8.5,
-        "y": 0,
-        "x": 5
-      },
-      "size": {
-        "x": 0.8,
-        "y": 0.8,
-        "z": 0.8
-      },
-      "actions": {},
-      "inventory": {},
-      "maxLife": 50
-    },
-    "entity/character/zombie/1lzl62v": {
-      "@type": "entity/character/zombie",
-      "@id": "entity/character/zombie/1lzl62v",
-      "state": "wait",
-      "faction": "enemy",
-      "collisionAble": true,
-      "worker": {},
-      "life": 50,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "position": {
-        "z": -9.5,
-        "y": 0,
-        "x": 5
-      },
-      "size": {
-        "x": 0.8,
-        "y": 0.8,
-        "z": 0.8
-      },
-      "actions": {},
-      "inventory": {},
-      "maxLife": 50
+      "maxLife": 50,
+      "entityAttackTargetIri": "entity/building/tower/t5xcs5",
+      "currentPathOfCoordinate": {
+        "totalDistance": 9,
+        "pathCoordinate": [
+          {
+            "x": 4.5,
+            "y": -7.5
+          },
+          {
+            "x": 4.5,
+            "y": -8.5
+          },
+          {
+            "x": 3.5,
+            "y": -8.5
+          },
+          {
+            "x": 2.5,
+            "y": -8.5
+          },
+          {
+            "x": 1.5,
+            "y": -8.5
+          },
+          {
+            "x": 0.5,
+            "y": -8.5
+          },
+          {
+            "x": -0.5,
+            "y": -8.5
+          },
+          {
+            "x": -0.5,
+            "y": -9.5
+          },
+          {
+            "x": -1.5,
+            "y": -9.5
+          },
+          {
+            "x": -2.5,
+            "y": -9.5
+          }
+        ],
+        "currentCoordinate": 1,
+        "isFinish": false,
+        "unreachable": false,
+        "hash": "[\"entity/character/zombie/q7pyre\",{\"z\":-9,\"y\":0,\"x\":-2},{\"hash\":\"1ec3u2v\",\"count\":1}]"
+      }
     }
   },
   "inventory": {},
@@ -449,20 +464,21 @@
   "userControl": {
     "showGrid": true,
     "mousePosition": {
-      "x": 5.464931184176307,
-      "y": -0.19999999999999998,
-      "z": -8.150431876747554
+      "x": 2.138609167407541,
+      "y": -0.1999999999999986,
+      "z": -6.336707519694865
     },
-    "mouseIcon": "/src/UI/MouseCursor/hammer-canceled.png",
+    "mouseIcon": "/src/UI/MouseCursor/hammer.png",
+    "rotation": 0,
     "currentAction": {
       "@type": "user-action/create-building",
       "data": {
         "entityMetaData": {
           "@type": "entity/character/zombie",
-          "label": "Citoyen",
+          "label": "Zombie",
           "asset": {
             "model3d": "/src/game/entity/app/character/zombie/Zombie.glb",
-            "icon": "/src/game/entity/app/character/zombie/img.png?t=1735825153176",
+            "icon": "/src/game/entity/app/character/zombie/img.png",
             "animationMapper": {
               "move": "Armature|Walk2",
               "wait": "Armature|Idle",
@@ -470,22 +486,25 @@
             }
           },
           "propriety": {
-            "inventorySize": 10,
-            "speed": 0.02
+            "speed": 0.02,
+            "attack": {
+              "damage": 1,
+              "attackRange": 1,
+              "attackSpeed": 60
+            }
           }
         }
       }
-    },
-    "rotation": 0
+    }
   },
   "gameCalculated": {
     "building": {
-      "hash": "kqop6r",
+      "hash": "1ec3u2v",
       "count": 1
     },
     "character": {
-      "hash": "1cxnwxz",
-      "count": 3
+      "hash": "1h98nva",
+      "count": 1
     }
   }
 }

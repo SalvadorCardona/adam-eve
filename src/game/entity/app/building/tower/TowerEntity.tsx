@@ -3,8 +3,11 @@ import imageIcon from "./icon.png?url"
 import imageSource from "./tower.glb?url"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { appLdType } from "@/src/AppLdType"
+import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
+import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
+import { addAction } from "@/src/game/action/addAction"
 
-export const TowerEntityMetaData = entityMedataFactory({
+export const towerEntityMetaData = entityMedataFactory({
   asset: {
     model3d: imageSource,
     icon: imageIcon,
@@ -15,12 +18,22 @@ export const TowerEntityMetaData = entityMedataFactory({
         quantity: 5,
       }),
     },
-    attackRange: 7,
+    attack: {
+      attackRange: 5,
+      damage: 1,
+      attackSpeed: 60,
+    },
   },
   label: "Tour de défense",
   ["@type"]: appLdType.tower,
   defaultEntity: () => {
+    const towerAttackAction = TowerAttackActionMetadata.factory()
+    const actionBag: ActionBagInterface = {}
+
+    addAction(actionBag, towerAttackAction)
+
     return {
+      actions: actionBag,
       numberOfWorker: 2,
       life: 50,
       size: {

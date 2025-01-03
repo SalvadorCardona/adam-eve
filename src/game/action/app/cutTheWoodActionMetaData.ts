@@ -1,5 +1,5 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import EntityInterface, { entityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import {
   jsonLdFactory,
   JsonLdIri,
@@ -32,7 +32,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
     onFrame: ({ entity, action, game }) => {
       const data = action.data
       if (!entity) return
-      entity.state = entityState.move
+      entity.state = EntityState.move
 
       if (data.state === CutTheWoodState.GoToTree) {
         const newTreeEntity =
@@ -43,13 +43,13 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
                 | undefined)
 
         if (!newTreeEntity) {
-          entity.state = entityState.wait
+          entity.state = EntityState.wait
           return
         }
 
         data.treeEntityIri = newTreeEntity["@id"]
 
-        const result = entityGoToEntityWithGround(entity, newTreeEntity, game)
+        entityGoToEntityWithGround(entity, newTreeEntity, game)
 
         if (entity?.currentPathOfCoordinate?.isFinish) {
           newTreeEntity.life -= 10
@@ -78,7 +78,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         if (!newTimberHouseEntity) return
 
         data.timberHouseEntityIri = newTimberHouseEntity["@id"]
-        const result = entityGoToEntityWithGround(entity, newTimberHouseEntity, game)
+        entityGoToEntityWithGround(entity, newTimberHouseEntity, game)
 
         if (entity?.currentPathOfCoordinate?.isFinish) {
           transfertInventory(
@@ -92,11 +92,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         }
       }
     },
-    factory: (payload) => {
-      if (!payload.entity) {
-        throw new Error("Entity is not here")
-      }
-
+    factory: () => {
       const data: CutTheWoodDataInterface = {
         state: CutTheWoodState.GoToTree,
       }
