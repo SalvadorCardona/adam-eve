@@ -5,6 +5,7 @@ import { BadgePlus, ExternalLink, Github, Upload, X } from "lucide-react"
 import { SaveLoadWindow } from "@/src/UI/menu/SaveLoadWindow"
 import { OptionWindows } from "@/src/UI/menu/OptionWindows"
 import { Card, CardContent } from "@/components/ui/card"
+import image from "./hom.webp"
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -20,7 +21,7 @@ function Home() {
     <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       {/* Image de fond */}
       <img
-        src="/hom.webp"
+        src={image}
         alt="Fond cosy"
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
