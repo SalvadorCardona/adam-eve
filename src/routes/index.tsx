@@ -6,6 +6,7 @@ import { SaveLoadWindow } from "@/src/UI/menu/SaveLoadWindow"
 import { OptionWindows } from "@/src/UI/menu/OptionWindows"
 import { Card, CardContent } from "@/components/ui/card"
 import image from "./hom.webp"
+import { Separator } from "@/components/ui/separator"
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -30,18 +31,18 @@ function Home() {
       <div className="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
 
       {/* Contenu principal */}
-      <Card className="relative z-20 w-1/3">
-        <CardContent className={"flex flex-col items-center justify-center p-10"}>
-          <h1 className="text-4xl md:text-6xl font-bold  mb-2 text-center">
-            Adam & Eve :
+      <Card className="relative z-20 w-1/3 border-white border-8">
+        <CardContent className={"flex flex-col items-center justify-center p-10 "}>
+          <h1 className="text-4xl md:text-6xl font-bold  mb-2 text-center capitalize ">
+            Adam & Eve
           </h1>
-          <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8 text-center text-primary capitalize">
             Rebuild the world
           </h2>
-
+          <Separator></Separator>
           <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="w-1/2">
+              <div className="">
                 <div className="grid gap-4 py-4">
                   <Button
                     className="w-full bg-amber-400 hover:bg-amber-500 text-amber-900"

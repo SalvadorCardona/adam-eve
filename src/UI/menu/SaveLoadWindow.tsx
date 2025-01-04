@@ -99,6 +99,7 @@ export function SaveLoadWindow({ type }: SaveLoadWindowProps) {
             </div>
           </div>
         ))}
+        {saves.length === 0 && <span>Aucune sauvegarde pour le moment</span>}
       </ScrollArea>
     </div>
   )
