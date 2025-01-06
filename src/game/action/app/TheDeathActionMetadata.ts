@@ -6,7 +6,7 @@ import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame
 import { appLdType } from "@/src/AppLdType"
 
 export const theDeathActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: JsonLdTypeFactory(appLdType.action, "TheDeathActionMetadata"),
+  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TheDeathActionMetadata"),
   onFrame: ({ game, action }) => {
     action.nextTick = game.time + 50
 

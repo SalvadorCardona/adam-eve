@@ -26,7 +26,6 @@ export const findClosest = (
 
   entities.forEach((entity) => {
     const distance = distanceBetweenVector3(character.position, entity.position)
-
     if (distance < minDistance) {
       minDistance = distance
       closestTree = entity

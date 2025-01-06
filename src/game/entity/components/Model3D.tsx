@@ -24,7 +24,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
-    console.log(actions)
     if (!metaData.asset?.animationMapper || !entity?.state) return
     const animationMapped = metaData.asset.animationMapper[entity.state]
 

@@ -36,7 +36,7 @@ interface FindWorkerData {
 
 export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorkerData> =
   {
-    ["@type"]: JsonLdTypeFactory(appLdType.action, "goBuildOfBuilding"),
+    ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "goBuildOfBuilding"),
     onFrame: ({ action, game, entity }) => {
       if (!entity) return
       const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)

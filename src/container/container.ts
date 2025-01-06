@@ -46,15 +46,46 @@ export function updateContainer<T extends BaseJsonLdInterface>(
 
 export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
-  jsonLdType: JsonLdType,
+  jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {
   const results: Array<T> = []
+
+  if (typeof jsonLdType === "object") {
+    Object.keys(container).forEach((key) => {
+      if (jsonLdType.some((type) => key.startsWith(type))) {
+        results.push(container[key])
+      }
+    })
+
+    return results
+  }
 
   Object.keys(container).map((key) => {
     if (key.startsWith(jsonLdType)) {
       results.push(container[key])
     }
   })
+
+  return results
+}
+
+export function getByLdIri<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
+  container: ContainerInterface,
+  jsonLdIri: JsonLdIri | JsonLdIri[],
+): Array<T> {
+  const results: Array<T> = []
+
+  if (Array.isArray(jsonLdIri)) {
+    jsonLdIri.forEach((iri) => {
+      if (iri in container) {
+        results.push(container[iri])
+      }
+    })
+  } else {
+    if (jsonLdIri in container) {
+      results.push(container[jsonLdIri])
+    }
+  }
 
   return results
 }

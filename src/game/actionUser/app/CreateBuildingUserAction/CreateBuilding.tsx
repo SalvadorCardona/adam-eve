@@ -1,8 +1,7 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuildingUserActionMetadata"
+import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
-import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import React from "react"
 
@@ -13,7 +12,7 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
 
   if (
     !hasActionUser(game, createBuildingUserActionMetadata) ||
-    !game.userControl.mousePosition ||
+    !game.userControl.mouseState.mousePosition ||
     !createBuildingUserActionMetadata.data.entityMetaData
   ) {
     return
@@ -26,13 +25,11 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
     game: game,
   })
 
-  entity.position = aroundVector(game.userControl.mousePosition, true)
+  entity.position = aroundVector(game.userControl.mouseState.mousePosition, true)
 
   const canBeBuild = entityMetaData.canBeBuild({ entity, game })
   const bgColor = canBeBuild ? "yellow" : "red"
   entity.rotation.y = game.userControl?.rotation ?? 0
-
-  game.userControl.mouseIcon = canBeBuild ? mouseIcon.cantBeBuild : mouseIcon.build
 
   return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
 }

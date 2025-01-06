@@ -1,17 +1,22 @@
 import React from "react"
-import { Progress } from "../../components/ui/progress"
+import { Progress } from "@/components/ui/progress"
 import { Activity, Box, Leaf, Zap } from "lucide-react"
-import EntityInterface from "../game/entity/EntityInterface"
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface EntityModalProps {
-  entity: EntityInterface
+  entityUri: JsonLdIri
 }
 
 // https://v0.dev/chat/b/b_i0Y0LFnf5uc?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..qvy90R5EB5YDdo3f.M41-4rBWiu9rhbr6BLxKn8JI1Ty0SJcnTppnRsaF3wqiD97so3TEoo1ZMxU.JPOThbtudLde243zJ0PjWQ
-export const EntityModal: React.FC<EntityModalProps> = ({ entity }) => {
+export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
+  const game = useGameContext().game
+  const entity = game.entities[entityUri]
+  if (!entity) return
+
   const metaData = getMetaData<EntityMetaDataInterface>(entity)
   return (
     <Card className="sm:max-w-[425px] bg-amber-50 text-amber-900">

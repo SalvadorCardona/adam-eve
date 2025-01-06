@@ -3,8 +3,7 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { Model2D } from "@/src/game/entity/components/Model2D"
 import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import React, { Component, ReactNode, useRef } from "react"
-import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/OnSelectEntityUserActionMetadata"
+import React, { Component, ReactNode, useMemo, useRef } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useFrame } from "@react-three/fiber"
 import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
@@ -20,10 +19,14 @@ export const EntityDecorator = ({
 }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
-  const clickOnEntity = () => {
-    onSelectEntityUserActionMetadata.onApply &&
-      onSelectEntityUserActionMetadata.onApply({ game, entity })
-  }
+  // const clickOnEntity = () => {
+  //   onSelectEntityUserActionMetadata.onApply &&
+  //     onSelectEntityUserActionMetadata.onApply({ game, entity })
+  // }
+  const isSelected = useMemo(() => {
+    console.log(game.userControl.entitiesSelected)
+    return game.userControl.entitiesSelected.includes(entity["@id"])
+  }, [game.userControl.entitiesSelected])
 
   const shaderRef = useRef()
 
@@ -42,12 +45,22 @@ export const EntityDecorator = ({
 
   return (
     <ErrorBoundary>
-      <group onClick={clickOnEntity} position={vector3ToArray(entity.position)}>
+      <group
+        uuid={"entity-" + entity["@id"]}
+        // onClick={clickOnEntity}
+        position={vector3ToArray(entity.position)}
+      >
         <EntityComponent entity={entity}></EntityComponent>
         {bgColor && (
-          <mesh position={[0, 0, 0.03]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[entity.size.x, entity.size.z]} />
             <meshStandardMaterial color={bgColor} />
+          </mesh>
+        )}
+        {isSelected && (
+          <mesh rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[entity.size.x, entity.size.z]} />
+            <meshStandardMaterial color={"red"} />
           </mesh>
         )}
       </group>

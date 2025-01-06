@@ -85,7 +85,7 @@ interface ZombieAttackAction {
 
 export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAction> =
   {
-    ["@type"]: JsonLdTypeFactory(appLdType.action, "ZombieAttack"),
+    ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "ZombieAttack"),
     onFrame: ({ game, entity, action }) => {
       if (!entity) return
       const data = action.data

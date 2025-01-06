@@ -28,7 +28,7 @@ interface CutTheWoodDataInterface {
 
 export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
   {
-    ["@type"]: JsonLdTypeFactory(appLdType.action, "cutTheWood"),
+    ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "cutTheWood"),
     onFrame: ({ entity, action, game }) => {
       const data = action.data
       if (!entity) return

@@ -1,4 +1,4 @@
-import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { getByLdType, updateContainer } from "@/src/container/container"
 import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
@@ -19,7 +19,7 @@ interface FindWorkerData {
 
 export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWorkerData> =
   {
-    ["@type"]: JsonLdTypeFactory(appLdType.action, "findWorkerCharacter"),
+    ["@type"]: appLdType.findWorkerAction,
     onFrame: ({ action, game }) => {
       const buildings = getByLdType<EntityInterface>(
         game.entities,

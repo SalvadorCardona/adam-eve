@@ -14,8 +14,13 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const game = useGameContext().game
 
   useEffect(() => {
-    setImageSrc(game.userControl.mouseIcon ?? mouseIcon.normal)
-  }, [game.userControl.mouseIcon])
+    if (game.userControl.currentAction?.mouseIcon) {
+      setImageSrc(game.userControl.currentAction?.mouseIcon)
+      return
+    }
+
+    setImageSrc(mouseIcon.normal)
+  }, [game.userControl.currentAction])
 
   const handleScroll = (e: WheelEvent) => {
     if (e.deltaY > 0) {

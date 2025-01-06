@@ -9,7 +9,7 @@ import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 
 export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: JsonLdTypeFactory(appLdType.action, "TowerAttack"),
+  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TowerAttack"),
   onFrame: ({ game, action, entity }) => {
     action.nextTick = game.time + 50
 
@@ -20,7 +20,7 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
     if (!zombie) {
       return
     }
-    
+
     if (!entityCanBeAttackEntity(entity, zombie)) {
       return
     }

@@ -1,16 +1,9 @@
 import React from "react"
-import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { onClickMapUserActionMetadata } from "@/src/game/actionUser/app/OnClickMapUserActionMetadata"
 import { Grid } from "@react-three/drei"
 
 export default function GlobalGround() {
   const gameContext = useGameContext()
-  const clickToMap = (e: ThreeEvent<MouseEvent>) => {
-    if (!e) return
-    onClickMapUserActionMetadata.onCall &&
-      onClickMapUserActionMetadata.onCall({ game: gameContext.game })
-  }
 
   return (
     <>
@@ -26,10 +19,6 @@ export default function GlobalGround() {
       )}
       <mesh
         receiveShadow={true}
-        onClick={clickToMap}
-        onPointerMove={(event) => {
-          gameContext.game.userControl.mousePosition = event.point
-        }}
         position={[0, -0.2, 0]}
         rotation={[-Math.PI / 2, 0, 0]}
       >

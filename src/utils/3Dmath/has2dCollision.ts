@@ -11,3 +11,15 @@ export const has2dCollision = (
     Math.abs(pos1.y - pos2.y) < (size1.y + size2.y) / 2
   )
 }
+
+export const has2dCollisionInZone = (
+  pos1: Vector2Interface,
+  size1: Vector2Interface,
+  start: Vector2Interface,
+  end: Vector2Interface,
+): boolean => {
+  const withinXBounds = pos1.x >= start.x && (pos1.x + size1.x) <= end.x;
+  const withinYBounds = pos1.y >= start.y && (pos1.y + size1.y) <= end.y;
+  
+  return withinXBounds && withinYBounds;
+}

@@ -27,7 +27,9 @@ export function gameFactory(game?: GameInterface): GameInterface {
       },
     },
     userControl: {
+      entitiesSelected: [],
       showGrid: true,
+      mouseState: {},
     },
     ...(game ?? {}),
   })

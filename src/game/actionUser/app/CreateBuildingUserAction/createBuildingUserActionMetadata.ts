@@ -16,16 +16,16 @@ interface CreateBuildingUserActionMetadataInterface
 
 export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataInterface =
   {
+    mouseIcon: mouseIcon.build,
     "@type": JsonLdTypeFactory(appLdType.userAction, "create-building"),
     onCall: ({ game, metaData }) => {
       createBuildingUserActionMetadata.data.entityMetaData =
         metaData as EntityMetaDataInterface
-      game.userControl.mouseIcon = mouseIcon.build
       game.userControl.currentAction = createBuildingUserActionMetadata
     },
     onApply: ({ game }) => {
       if (
-        !game.userControl.mousePosition ||
+        !game.userControl.mouseState.mousePosition ||
         !createBuildingUserActionMetadata.data.entityMetaData ||
         !hasActionUser(game, createBuildingUserActionMetadata)
       ) {
@@ -38,7 +38,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const entity = metaInterface.factory({
         game,
         entity: {
-          position: aroundVector(game.userControl.mousePosition, true),
+          position: aroundVector(game.userControl.mouseState.mousePosition, true),
           rotation: { x: 0, z: 0, y: rotationY },
         },
       })

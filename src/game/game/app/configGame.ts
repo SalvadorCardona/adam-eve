@@ -9,7 +9,7 @@ import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumE
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/RemoveBuildingUserActionMetadata"
+import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
@@ -30,6 +30,7 @@ import {
   ArrowAttackActionMetadata,
   ArrowMetaData,
 } from "@/src/game/entity/app/attack/ArrowEntity"
+import { effectMetaData } from "@/src/game/entity/app/effect/EffectSmokeEntity"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -58,6 +59,7 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [ArrowAttackActionMetadata["@type"]]: ArrowAttackActionMetadata,
   [ArrowMetaData["@type"]]: ArrowMetaData,
   [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
+  [effectMetaData["@type"]]: effectMetaData,
 }
 
 export default configGame

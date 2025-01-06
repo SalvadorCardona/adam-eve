@@ -22,7 +22,7 @@ export const ArrowMetaData = entityMedataFactory({
     speed: 0.05,
   },
   label: "Tour de défense",
-  ["@type"]: JsonLdTypeFactory(appLdType.action, "Arrow"),
+  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "Arrow"),
   defaultEntity: () => {
     const action = ArrowAttackActionMetadata.factory()
     const actionBag: ActionBagInterface = {}
@@ -41,7 +41,7 @@ export const ArrowMetaData = entityMedataFactory({
 })
 
 export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: JsonLdTypeFactory(appLdType.action, "ArrowAttack"),
+  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "ArrowAttack"),
   onFrame: ({ game, entity }) => {
     if (!entity || !entity.entityAttackTargetIri) {
       return

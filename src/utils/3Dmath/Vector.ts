@@ -26,6 +26,10 @@ export function vector3ToArray(vector: Vector3Interface): [number, number, numbe
   return [vector.x, vector.y, vector?.z ?? 0]
 }
 
+export function arrayToVector3(array: [number, number, number]): Vector3Interface {
+  return { x: array[0], y: array[1], z: array[2] }
+}
+
 export function areVectorsEqual(
   v1: Vector3Interface,
   v2: Vector3Interface,

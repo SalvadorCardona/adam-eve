@@ -5,6 +5,8 @@ import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame
 export function removeEntityToGame(
   game: GameInterface,
   entity: EntityInterface,
-): void {
+): boolean {
   updateEntityInGame(game, entity, "remove")
+
+  return true
 }

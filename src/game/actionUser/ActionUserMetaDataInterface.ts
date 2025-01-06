@@ -4,10 +4,11 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export interface ActionUserMetaDataInterface<D = object>
   extends BaseGameMetaDataInterface {
+  mouseIcon?: string
   onCall?: (payload: {
     game: GameInterface
     metaData?: BaseGameMetaDataInterface
   }) => void
-  onApply?: (payload: { game: GameInterface; entity?: EntityInterface }) => void
+  onApply: (payload: { game: GameInterface; entity?: EntityInterface }) => void
   data?: D
 }

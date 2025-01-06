@@ -6,8 +6,7 @@ import React from "react"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuildingUserActionMetadata"
-import { isActionUserMetadata } from "@/src/game/actionUser/IsActionUserMetadata"
+import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { appLdType } from "@/src/AppLdType"
 
 export const BottomSidebar = () => {
@@ -55,6 +54,12 @@ export const BottomSidebar = () => {
       </div>
     </div>
   )
+}
+
+function isActionUserMetadata(
+  metadata: BaseGameMetaDataInterface,
+): metadata is ActionUserMetaDataInterface {
+  return metadata["@type"].startsWith("user-action/")
 }
 
 function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
