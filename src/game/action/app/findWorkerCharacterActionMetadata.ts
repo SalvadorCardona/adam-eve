@@ -1,5 +1,5 @@
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
-import { getByLdType, updateContainer } from "@/src/container/container"
+import { getByLdType } from "@/src/container/container"
 import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
 import { getMetaData } from "@/src/game/game/app/configGame"
@@ -25,11 +25,16 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
         game.entities,
         appLdType.entityBuilding,
       ).filter((building) => {
+        const metaData = getMetaData<EntityMetaDataInterface>(building)
+        const workMeta = metaData.propriety.work
+
+        if (!workMeta) return false
+
         return (
-          building.numberOfWorker &&
-          building.numberOfWorker > 0 &&
+          workMeta.numberOfWorker &&
+          workMeta.numberOfWorker > 0 &&
           building.state !== EntityState.under_construction &&
-          Object.values(building.worker).length < building.numberOfWorker
+          building.workers.length < workMeta.numberOfWorker
         )
       })
 
@@ -44,18 +49,23 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
 
       for (const building of buildings) {
         const metaData = getMetaData<EntityMetaDataInterface>(building)
+        const workMeta = metaData.propriety.work
+        if (!workMeta) return
+
         for (const worker of workers) {
-          const buildingNumberOfWorker = Object.values(building.worker).length
+          const buildingNumberOfWorker = building.workers.length
           if (
-            building.numberOfWorker &&
-            buildingNumberOfWorker < building.numberOfWorker
+            workMeta.numberOfWorker &&
+            buildingNumberOfWorker < workMeta.numberOfWorker
           ) {
             if (
               metaData.workerAction &&
               isObjectEmpty(worker.actions) &&
-              Object.values(building.worker).length < building.numberOfWorker
+              building.workers.length < workMeta.numberOfWorker &&
+              !building.workers.includes(worker["@id"])
             ) {
-              updateContainer(building.worker, worker)
+              building.workers.push(worker["@id"])
+
               addAction(
                 worker.actions,
                 metaData.workerAction.factory({ entity: worker, game }),

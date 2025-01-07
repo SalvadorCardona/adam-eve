@@ -23,6 +23,9 @@ export const towerEntityMetaData = entityMedataFactory({
       damage: 1,
       attackSpeed: 60,
     },
+    work: {
+      numberOfWorker: 2,
+    },
   },
   label: "Tour de défense",
   ["@type"]: appLdType.tower,
@@ -34,7 +37,7 @@ export const towerEntityMetaData = entityMedataFactory({
 
     return {
       actions: actionBag,
-      numberOfWorker: 2,
+
       life: 50,
       size: {
         x: 2,

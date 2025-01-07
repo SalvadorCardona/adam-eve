@@ -4,8 +4,8 @@ import { entityFactory } from "@/src/game/entity/entityFactory"
 import { getByLdType } from "@/src/container/container"
 import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import { GroundInterface } from "@/src/game/entity/entityGround/GroundInterface"
-import { GroundEntityInterface } from "@/src/game/entity/entityGround/GroundEntityInterface"
 import { createGround } from "@/src/game/entity/entityGround/createGround"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export const groundMetaDataFactory = ({
   defaultType,
@@ -16,7 +16,7 @@ export const groundMetaDataFactory = ({
   icon: string
   component?: FC<{ road: GroundInterface }>
 }) => {
-  const roadEntityArgs: Partial<EntityMetaDataInterface<GroundEntityInterface>> = {
+  const roadEntityArgs: Partial<EntityMetaDataInterface<EntityInterface>> = {
     asset: {
       icon,
     },
@@ -29,13 +29,13 @@ export const groundMetaDataFactory = ({
 
       entity["@type"] = defaultType
       const oldPosition = { ...entity.position } as Vector3Interface
-      const newRoad: GroundEntityInterface = entityFactory({ entity })
+      const newRoad: EntityInterface = entityFactory({ entity })
       newRoad.position = { x: 0, y: 0, z: 0 }
       if (payload?.context === "build-request") {
         return entityFactory({ entity })
       }
       const roadEntity =
-        (getByLdType(game.entities, defaultType)[0] as GroundEntityInterface) ??
+        (getByLdType(game.entities, defaultType)[0] as EntityInterface) ??
         entityFactory({ entity })
 
       roadEntity.position = { x: 0, y: -1, z: 0 }
@@ -83,7 +83,6 @@ export const groundMetaDataFactory = ({
     },
     defaultEntity: function () {
       return {
-        roadNetwork: [],
         size: {
           x: 1,
           y: 1,

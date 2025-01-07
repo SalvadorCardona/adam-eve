@@ -8,6 +8,7 @@ import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
+import { diviseVector } from "@/src/utils/3Dmath/diviseVector"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -33,8 +34,32 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       }
 
       const rotationY = game.userControl?.rotation ?? 0
+      const mouseState = game.userControl.mouseState
 
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
+      if (mouseState.size > 1) {
+        const positions = diviseVector(
+          mouseState.startClickPositon,
+          mouseState.endClickPosition,
+        )
+        positions.forEach((e) => {
+          const entity = metaInterface.factory({
+            game,
+            entity: {
+              position: aroundVector(e, true),
+              rotation: { x: 0, z: 0, y: rotationY },
+            },
+          })
+          console.log(metaInterface.canBeBuild({ game, entity }))
+          if (metaInterface.canBeBuild({ game, entity })) {
+            addEntityToGame(game, entity)
+            game.userControl.rotation = 0
+            playSound(song)
+          }
+        })
+        return
+      }
+
       const entity = metaInterface.factory({
         game,
         entity: {

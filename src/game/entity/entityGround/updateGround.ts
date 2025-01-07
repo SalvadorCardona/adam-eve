@@ -1,16 +1,15 @@
-import { GroundNetwork } from "@/src/game/entity/ground/GroundInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import { vector2ToVector3 } from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
-import { GroundEntityInterface } from "@/src/game/entity/ground/GroundEntityInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
-  const grounds = getByLdType<GroundEntityInterface>(game.entities, "entity/ground")
+  const grounds = getByLdType<EntityInterface>(game.entities, "entity/ground")
 
   grounds.forEach((ground) => {
-    ground.roadNetwork.forEach((ground) => {
-      ground.hasBuilding = undefined
+    grounds.forEach((ground) => {
+      ground.connections.on = undefined
       Object.values(game.entities).forEach((entity) => {
         if (
           entityHasCollision(entity, {
@@ -18,17 +17,17 @@ export function updateGroundWithGame({ game }: { game: GameInterface }) {
             position: vector2ToVector3(ground.position),
           })
         ) {
-          ground.hasBuilding = entity["@id"]
+          ground.connections.on = entity["@id"]
         }
       })
     })
   })
 }
 
-export function updateGround({ grid }: { grid: GroundNetwork }) {
+export function updateGround({ entities }: { entities: EntityInterface[] }) {
   const size = 1
 
-  grid.forEach((ground) => {
+  entities.forEach((ground) => {
     // Reset connections
     ground.connections = {
       top: undefined,
@@ -38,7 +37,7 @@ export function updateGround({ grid }: { grid: GroundNetwork }) {
     }
 
     // Check for neighboring grounds and update connections
-    grid.forEach((otherGround) => {
+    entities.forEach((otherGround) => {
       if (ground["@id"] !== otherGround["@id"]) {
         if (
           ground.position.x === otherGround.position.x &&

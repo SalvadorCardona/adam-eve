@@ -12,11 +12,15 @@ export const forumEntityMetaData = entityMedataFactory({
     // model2d: "house.png",
   },
   workerAction: goBuildOfBuildingActionMetadata,
+  propriety: {
+    work: {
+      numberOfWorker: 2,
+    },
+  },
   ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "forum"),
   label: "Centre Ville",
   defaultEntity: () => {
     return {
-      numberOfWorker: 2,
       life: 50,
       size: {
         x: 2,

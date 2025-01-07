@@ -11,6 +11,9 @@ export const timberHouseEntityMetaData = entityMedataFactory({
     icon: imageIcon,
   },
   propriety: {
+    work: {
+      numberOfWorker: 2,
+    },
     ressourceForConstruction: {
       [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
         quantity: 5,
@@ -22,7 +25,6 @@ export const timberHouseEntityMetaData = entityMedataFactory({
   ["@type"]: appLdType.timberHouse,
   defaultEntity: () => {
     return {
-      numberOfWorker: 2,
       life: 50,
       size: {
         x: 2,

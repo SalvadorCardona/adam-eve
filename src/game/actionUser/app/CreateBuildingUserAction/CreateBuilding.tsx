@@ -26,7 +26,6 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
   })
 
   entity.position = aroundVector(game.userControl.mouseState.mousePosition, true)
-
   const canBeBuild = entityMetaData.canBeBuild({ entity, game })
   const bgColor = canBeBuild ? "yellow" : "red"
   entity.rotation.y = game.userControl?.rotation ?? 0

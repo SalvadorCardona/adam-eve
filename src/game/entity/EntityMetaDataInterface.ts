@@ -16,6 +16,9 @@ interface EntityPriorityInterface {
   inventorySize?: number
   speed?: number
   attack?: EntityAttackPriorityInterface
+  work?: {
+    numberOfWorker: number
+  }
 }
 
 export interface EntityMetaDataInterface<T extends EntityInterface = EntityInterface>

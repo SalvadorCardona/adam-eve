@@ -19,7 +19,7 @@ export function createGround(
 
   grid.push(newRoad)
 
-  updateGround({ grid })
+  updateGround({ entities: grid })
 
   return newRoad
 }

@@ -22,13 +22,14 @@ export function entityFactory<
       ? EntityState.under_construction
       : EntityState.wait,
     faction: factionState.self,
-    worker: {},
+    workers: [],
     life: 50,
     rotation: {
       x: 0,
       y: 0,
       z: 0,
     },
+    connections: {},
     position: {
       x: 0,
       y: 0.01,

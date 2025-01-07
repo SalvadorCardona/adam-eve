@@ -1,7 +1,7 @@
 import { JsonLdContainerInterface } from "@/src/container/container"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
-import { BaseJsonLdInterface, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { Vector2Interface, Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
@@ -19,11 +19,13 @@ export default interface GameInterface extends BaseJsonLdInterface {
     showGrid: boolean
     currentAction?: ActionUserMetaDataInterface | undefined
     rotation?: number
-    entitiesSelected: JsonLdIri[]
+    entitiesSelected: EntityInterface["@id"][]
+    entityHover?: EntityInterface["@id"]
     mouseState: {
       mousePosition?: Vector3Interface
       startClickPositon?: Vector2Interface
       endClickPosition?: Vector2Interface
+      size: number
     }
   }
   camera: {

@@ -30,7 +30,6 @@ export const ArrowMetaData = entityMedataFactory({
     addAction(actionBag, action)
     return {
       actions: actionBag,
-      numberOfWorker: 2,
       size: {
         x: 0.5,
         y: 0.5,

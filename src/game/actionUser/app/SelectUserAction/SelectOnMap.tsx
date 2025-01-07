@@ -10,18 +10,22 @@ import {
   vector3ToArray,
 } from "@/src/utils/3Dmath/Vector"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
+import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
 
 interface CreateBuildingPropsInterface {}
 
 const raycaster = new Raycaster()
 const mouse = new Vector2()
-let mouseIsFree: boolean = true
 
 export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   const [size, setSize] = useState<Vector2Interface | undefined>(undefined)
   const [position, setPosition] = useState<Vector3Interface>({ x: 0, z: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
-  const [startPosition, setStartPosition] = useState<Vector3Interface | null>(null)
+  const [startPosition, setStartPosition] = useState<Vector3Interface>({
+    x: 0,
+    z: 0,
+    y: 0,
+  })
   const { camera, scene } = useThree()
   const game = useGameContext().game
 
@@ -45,53 +49,50 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
       point.z,
     ])
 
-    if (isDragging && startPosition) {
-      // on mouse reste appuyer
-      const width = Math.abs(point.x - startPosition.x)
-      const height = Math.abs(point.z - startPosition.z)
+    setSize({ x: 0, y: 0 })
 
-      const newPosition = {
-        x: (point.x + startPosition.x) / 2,
-        y: (point.y + startPosition.y) / 2,
-        z: (point.z + startPosition.z) / 2,
-      }
+    if (!isDragging) return
 
-      const newSize = {
-        x: width,
-        y: height,
-      }
+    const width = Math.abs(point.x - startPosition.x)
+    const height = Math.abs(point.z - startPosition.z)
 
-      const newStartPosition = {
-        x: newPosition.x - newSize.x / 2,
-        y: newPosition.y,
-        z: newPosition.z - newSize.y / 2,
-      }
-
-      const newEndPosition = {
-        x: newStartPosition.x + newSize.x,
-        y: newStartPosition.y,
-        z: newStartPosition.z + newSize.y,
-      }
-
-      game.userControl.mouseState.startClickPositon = newStartPosition
-      game.userControl.mouseState.endClickPosition = newEndPosition
-      console.log("ici")
-      setSize(newSize)
-      setPosition(newPosition)
-    } else {
-      // on mouse move
-      setPosition({
-        x: point.x,
-        y: point.y,
-        z: point.z,
-      })
+    const newPosition = {
+      x: (point.x + startPosition.x) / 2,
+      y: (point.y + startPosition.y) / 2,
+      z: (point.z + startPosition.z) / 2,
     }
+
+    const newSize = {
+      x: width,
+      y: height,
+    }
+
+    const newStartPosition = {
+      x: newPosition.x - newSize.x / 2,
+      y: newPosition.y,
+      z: newPosition.z - newSize.y / 2,
+    }
+
+    const newEndPosition = {
+      x: newStartPosition.x + newSize.x,
+      y: newStartPosition.y,
+      z: newStartPosition.z + newSize.y,
+    }
+
+    game.userControl.mouseState.startClickPositon = newStartPosition
+    game.userControl.mouseState.endClickPosition = newEndPosition
+    game.userControl.mouseState.size = distanceBetweenVector3(
+      newStartPosition,
+      newEndPosition,
+    )
+    setSize(newSize)
+    setPosition(newPosition)
   }
 
   const handleMouseDown = () => {
     // ici on reste appuyé
     setIsDragging(true)
-    mouseIsFree = false
+
     raycaster.setFromCamera(mouse, camera)
     const intersects = raycaster.intersectObjects(scene.children)
     if (!intersects.length) return
@@ -101,19 +102,23 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   }
 
   const handleMouseUp = (event: MouseEvent) => {
-    console.log("on lache", event.type)
     // on lache ici
     setIsDragging(false)
-    setSize({ x: 0, y: 0 })
 
+    if (game.userControl.mouseState.size < 0.2) {
+      onSelectEntityUserActionMetadata.onClick({
+        game: game,
+      })
+
+      return
+    }
     onSelectEntityUserActionMetadata.onSelectZone({
       game: game,
     })
-
-    mouseIsFree = true
   }
 
   useEffect(() => {
+    window.addEventListener("click", newHandleMouseMove)
     window.addEventListener("mouseup", handleMouseUp)
     window.addEventListener("mousemove", newHandleMouseMove)
     window.addEventListener("mousedown", handleMouseDown)

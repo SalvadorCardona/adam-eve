@@ -87,10 +87,7 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
 
           <div className="font-semibold">
             Travailleurs :
-            <span className="font-normal">
-              {" "}
-              {Object.values(entity.worker).length}
-            </span>
+            <span className="font-normal"> {entity.workers.length}</span>
           </div>
         </div>
       </CardContent>
