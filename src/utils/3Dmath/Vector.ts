@@ -42,3 +42,9 @@ export function isVector3(
 ): vector is Vector3Interface {
   return Object.hasOwn(vector, "z")
 }
+
+export function isVector2(
+  vector: Vector2Interface | Vector3Interface,
+): vector is Vector3Interface {
+  return !Object.hasOwn(vector, "z")
+}

@@ -3,18 +3,25 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
-import { Vector2Interface, Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { GameCalculatedInterface } from "@/src/game/game/gameCalculated"
+import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
 
 export enum GameState {
   RUN = "run",
   PAUSE = "pause",
 }
 
+export enum GameMode {
+  NORMAL = "normal",
+  GOD = "god",
+}
+
 export default interface GameInterface extends BaseJsonLdInterface {
   gameSpeed: number
   gameState: GameState
+  gameMode: GameMode
   userControl: {
     showGrid: boolean
     currentAction?: ActionUserMetaDataInterface | undefined
@@ -22,10 +29,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
     entitiesSelected: EntityInterface["@id"][]
     entityHover?: EntityInterface["@id"]
     mouseState: {
-      mousePosition?: Vector3Interface
-      startClickPositon?: Vector2Interface
-      endClickPosition?: Vector2Interface
-      size: number
+      bounding3D: BoundingBox3DInterface
     }
   }
   camera: {

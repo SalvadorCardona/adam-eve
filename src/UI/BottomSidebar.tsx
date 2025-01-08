@@ -85,7 +85,10 @@ function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
             className={
               "w-20 h-20 rounded-2xl overflow-auto transition-transform duration-300 hover:scale-105 "
             }
-            onClick={() => clickOnBuilding(metadata)}
+            onClick={(e) => {
+              e.preventDefault()
+              clickOnBuilding(metadata)
+            }}
           >
             {metadata.asset?.icon ? (
               <img

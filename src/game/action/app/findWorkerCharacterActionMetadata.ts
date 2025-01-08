@@ -8,6 +8,7 @@ import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
+import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 
 enum State {
   GoToTree = "GoToTree",
@@ -21,10 +22,11 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<FindWork
   {
     ["@type"]: appLdType.findWorkerAction,
     onFrame: ({ action, game }) => {
-      const buildings = getByLdType<EntityInterface>(
-        game.entities,
-        appLdType.entityBuilding,
-      ).filter((building) => {
+      action.nextTick = game.time + 60
+
+      const buildings = entityQuery(game, {
+        "@type": appLdType.entityBuilding,
+      }).filter((building) => {
         const metaData = getMetaData<EntityMetaDataInterface>(building)
         const workMeta = metaData.propriety.work
 

@@ -1,12 +1,14 @@
-import GameInterface, { GameState } from "@/src/game/game/GameInterface"
+import GameInterface, { GameMode, GameState } from "@/src/game/game/GameInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { gameCalculated } from "@/src/game/game/gameCalculated"
+import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 
 export function gameFactory(game?: GameInterface): GameInterface {
   const newGame = jsonLdFactory(appLdType.game, {
     gameSpeed: 1,
     gameState: GameState.RUN,
+    gameMode: GameMode.NORMAL,
     time: 0,
     actions: {},
     entities: {},
@@ -30,7 +32,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       entitiesSelected: [],
       showGrid: true,
       mouseState: {
-        size: 0,
+        bounding3D: createBounding3D(),
       },
     },
     ...(game ?? {}),

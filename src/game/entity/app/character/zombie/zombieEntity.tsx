@@ -10,7 +10,7 @@ import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { addAction } from "@/src/game/action/addAction"
 import { findClosestInGame } from "@/src/utils/3Dmath/findClosest"
 import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
-import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { getEntityInGameByIri } from "@/src/game/entity/useCase/getEntityInGameByIri"
 import {
@@ -89,6 +89,9 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
     onFrame: ({ game, entity, action }) => {
       if (!entity) return
       const data = action.data
+      const metaData = getMetaData<EntityMetaDataInterface>(entity)
+      const attack = metaData.propriety.attack
+      if (!attack) return
 
       const enemy = entity.entityAttackTargetIri
         ? getEntityInGameByIri(game, entity.entityAttackTargetIri)
@@ -101,9 +104,12 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
           towerEntityMetaData["@type"],
           game,
         )
-        if (!newEnemy) return
+        if (!newEnemy) {
+          action.nextTick = game.time + 300
+          return
+        }
 
-        const distance = distanceBetweenVector3(entity.position, newEnemy.position)
+        const distance = distanceBetweenVector(entity.position, newEnemy.position)
         if (distance > 15) return
 
         entity.entityAttackTargetIri = newEnemy["@id"]
@@ -122,9 +128,8 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       }
 
       if (enemy && data.state === ZombieAttackState.AttackEnnemy) {
-        const metaData = getMetaData<EntityMetaDataInterface>(entity)
         entityAttackEntity(entity, enemy)
-        action.nextTick = game.time + metaData.propriety.attack?.attackSpeed
+        action.nextTick = game.time + attack.attackSpeed
       }
     },
     factory: () => {

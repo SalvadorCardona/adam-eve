@@ -1,6 +1,6 @@
 import { Vector2Interface, Vector3Interface } from "@/src/utils/3Dmath/Vector"
 
-export function distanceBetweenVector3(
+export function distanceBetweenVector(
   v1: Vector3Interface,
   v2: Vector3Interface,
 ): number {

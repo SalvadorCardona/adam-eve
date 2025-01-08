@@ -1,94 +1,63 @@
 {
   "@type": "game",
-  "@id": "game/195yi3b",
+  "@id": "game/1rmju7",
   "gameSpeed": 1,
   "gameState": "run",
-  "time": 9315,
+  "gameMode": "normal",
+  "time": 4654,
   "actions": {
-    "action/TheDeathActionMetadata/1pc19r4": {
+    "action/TheDeathActionMetadata/mwk6ef": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/1pc19r4",
-      "nextTick": 9351
+      "@id": "action/TheDeathActionMetadata/mwk6ef",
+      "nextTick": 4701
     },
-    "action/findWorkerCharacter/1cul2as": {
+    "action/findWorkerCharacter/f3d0ck": {
       "@type": "action/findWorkerCharacter",
-      "@id": "action/findWorkerCharacter/1cul2as",
+      "@id": "action/findWorkerCharacter/f3d0ck",
       "data": {
         "state": "GoToTree"
-      }
+      },
+      "nextTick": 4681
     }
   },
   "entities": {
-    "entity/character/worker/u7e88n": {
-      "@type": "entity/character/worker",
-      "@id": "entity/character/worker/u7e88n",
+    "entity/ground/grass/ku9k52": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/ku9k52",
       "state": "wait",
       "faction": "self",
-      "worker": {},
+      "workers": [],
       "life": 50,
       "rotation": {
         "x": 0,
         "z": 0,
         "y": 0
       },
+      "connections": {},
       "position": {
         "z": 0,
         "y": 0,
         "x": 0
       },
       "size": {
-        "x": 0.2,
-        "y": 0.2,
-        "z": 0.2
+        "x": 1,
+        "y": 1,
+        "z": 1
       },
       "actions": {},
-      "inventory": {},
-      "maxLife": 50
-    },
-    "entity/character/zombie/2u91wp": {
-      "@type": "entity/character/zombie",
-      "@id": "entity/character/zombie/2u91wp",
-      "state": "wait",
-      "faction": "enemy",
-      "worker": {},
-      "life": 50,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "position": {
-        "z": -2,
-        "y": 0,
-        "x": 0
-      },
-      "size": {
-        "x": 0.8,
-        "y": 0.8,
-        "z": 0.8
-      },
-      "actions": {
-        "action/ZombieAttack/73lms0": {
-          "@type": "action/ZombieAttack",
-          "@id": "action/ZombieAttack/73lms0",
-          "data": {
-            "state": "FindEnemy"
-          }
-        }
-      },
       "inventory": {},
       "maxLife": 50
     }
   },
   "inventory": {},
-  "createdAt": "2025-01-06T12:24:28.269Z",
+  "createdAt": "2025-01-08T13:47:39.087Z",
   "camera": {
     "fov": 50,
     "zoom": 0,
     "position": {
       "x": 0,
       "y": 10,
-      "z": 10.499999999999998
+      "z": 8.4
     },
     "rotation": {
       "x": -0.7853981633974483,
@@ -100,41 +69,29 @@
     "entitiesSelected": [],
     "showGrid": true,
     "mouseState": {
-      "mousePosition": {
-        "x": 6.935811463829755,
-        "y": -0.19999999999999912,
-        "z": -3.9550938421599393
+      "bounding3D": {
+        "position": {
+          "x": 6.394709157764188,
+          "y": -0.19999999999999918,
+          "z": -3.730181039781452
+        },
+        "size": {
+          "x": 0,
+          "z": 0,
+          "y": 0
+        }
       }
     },
-    "mousePosition": {
-      "x": 4.797560975229438,
-      "y": -0.2000000000000003,
-      "z": -6.732751044260366
-    },
-    "mouseIcon": "/src/UI/MouseCursor/hammer-canceled.png",
     "currentAction": {
+      "mouseIcon": "/src/UI/MouseCursor/hammer.png",
       "@type": "user-action/create-building",
       "data": {
         "entityMetaData": {
-          "@type": "entity/character/zombie",
-          "label": "Zombie",
+          "@type": "entity/ground/grass",
           "asset": {
-            "model3d": "/src/game/entity/app/character/zombie/Zombie.glb",
-            "icon": "/src/game/entity/app/character/zombie/img.png",
-            "animationMapper": {
-              "move": "Armature|Walk",
-              "wait": "Armature|Idle",
-              "attack": "Armature|Attack"
-            }
+            "icon": "/src/game/entity/app/ground/grass/grassIcon.png"
           },
-          "propriety": {
-            "speed": 0.01,
-            "attack": {
-              "damage": 1,
-              "attackRange": 1,
-              "attackSpeed": 60
-            }
-          }
+          "label": "Herbe"
         }
       }
     },
@@ -142,12 +99,12 @@
   },
   "gameCalculated": {
     "building": {
-      "hash": "1q0ethi",
+      "hash": "1tijiij",
       "count": 0
     },
     "character": {
-      "hash": "1hidhrx",
-      "count": 3
+      "hash": "12d8nt6",
+      "count": 0
     }
   }
 }

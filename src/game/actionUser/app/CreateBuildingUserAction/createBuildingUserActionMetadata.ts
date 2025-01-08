@@ -9,6 +9,8 @@ import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { diviseVector } from "@/src/utils/3Dmath/diviseVector"
+import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/boudingBox"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -26,53 +28,72 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
     },
     onApply: ({ game }) => {
       if (
-        !game.userControl.mouseState.mousePosition ||
         !createBuildingUserActionMetadata.data.entityMetaData ||
         !hasActionUser(game, createBuildingUserActionMetadata)
       ) {
         return
       }
 
+      const bounding = boundingBoxObbToAabb(game.userControl.mouseState.bounding3D)
       const rotationY = game.userControl?.rotation ?? 0
-      const mouseState = game.userControl.mouseState
-
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
-      if (mouseState.size > 1) {
-        const positions = diviseVector(
-          mouseState.startClickPositon,
-          mouseState.endClickPosition,
-        )
-        positions.forEach((e) => {
+      const isMultipleBuilding =
+        bounding2DSize(game.userControl.mouseState.bounding3D) > 1
+      const entities: EntityInterface[] = []
+
+      if (isMultipleBuilding) {
+        const positions = diviseVector(bounding.min, bounding.max)
+        positions.forEach((newPosition) => {
           const entity = metaInterface.factory({
             game,
             entity: {
-              position: aroundVector(e, true),
+              position: aroundVector(newPosition, true),
               rotation: { x: 0, z: 0, y: rotationY },
             },
           })
-          console.log(metaInterface.canBeBuild({ game, entity }))
+
+          entity.position.z = entity.position.z += entity.size.z / 2
+          entity.position.x = entity.position.x += entity.size.x / 2
+
+          entities.push(entity)
           if (metaInterface.canBeBuild({ game, entity })) {
             addEntityToGame(game, entity)
             game.userControl.rotation = 0
             playSound(song)
           }
         })
+
         return
+      } else {
+        entities.push(
+          metaInterface.factory({
+            game,
+            entity: {
+              position: aroundVector(
+                game.userControl.mouseState.bounding3D.position,
+                true,
+              ),
+              rotation: { x: 0, z: 0, y: rotationY },
+            },
+          }),
+        )
       }
 
-      const entity = metaInterface.factory({
-        game,
-        entity: {
-          position: aroundVector(game.userControl.mouseState.mousePosition, true),
-          rotation: { x: 0, z: 0, y: rotationY },
-        },
+      const result = entities.map((entity) => {
+        const canBeBuild = metaInterface.canBeBuild({ game, entity })
+        if (canBeBuild) {
+          addEntityToGame(game, entity)
+        }
+
+        return canBeBuild
       })
 
-      if (metaInterface.canBeBuild({ game, entity })) {
-        addEntityToGame(game, entity)
-        game.userControl.rotation = 0
+      if (result.some((e) => e)) {
         playSound(song)
+        game.userControl.entitiesSelected = []
       }
+
+      game.userControl.rotation = 0
     },
     data: {
       entityMetaData: undefined,

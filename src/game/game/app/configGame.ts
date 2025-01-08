@@ -17,7 +17,7 @@ import { timberHouseEntityMetaData } from "@/src/game/entity/app/building/timber
 import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
 import { storageEntityMetaData } from "@/src/game/entity/app/building/storage/storageEntity"
 import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEntity"
-import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/RoadGroundEntityMetadata"
+import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/roadGroundEntityMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
 import {
@@ -69,5 +69,7 @@ export function getMetaData<T = BaseGameMetaDataInterface>(
 ): T {
   if (typeof metaType === "string") return configGame[metaType] as T
 
-  return configGame[metaType["@type"]] as T
+  if (configGame[metaType["@type"]]) return configGame[metaType["@type"]] as T
+
+  throw new Error("Meta Data Not found: " + JSON.stringify(metaType))
 }

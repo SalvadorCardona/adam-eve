@@ -44,10 +44,14 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
             className="h-2 bg-amber-200"
           />
 
-          <div className="flex items-center gap-4">
-            <Zap className="h-5 w-5 text-yellow-600" />
-            <div className="font-semibold">Vitesse : {entity.speed}</div>
-          </div>
+          {metaData.propriety?.speed && (
+            <div className="flex items-center gap-4">
+              <Zap className="h-5 w-5 text-yellow-600" />
+              <div className="font-semibold">
+                Vitesse : {metaData.propriety.speed}
+              </div>
+            </div>
+          )}
 
           <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />

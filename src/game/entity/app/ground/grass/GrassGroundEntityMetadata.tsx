@@ -1,47 +1,56 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import grassIcon from "./grassIcon.png"
 import React, { useMemo } from "react"
 import { Shape } from "three"
-import { groundMetaDataFactory } from "@/src/game/entity/entityGround/groundMetaDataFactory"
-import { GroundInterface } from "@/src/game/entity/entityGround/GroundInterface"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 
-export const grassGroundEntityMetadata = entityMedataFactory<
-  // @ts-ignore
-  EntityMetaDataInterface<GroundEntityInterface>
->(
-  groundMetaDataFactory({
+export const grassGroundEntityMetadata = entityMedataFactory({
+  asset: {
     icon: grassIcon,
-    defaultType: JsonLdTypeFactory(appLdType.entityGround, "grass"),
-    component: ({ road }) => {
-      return (
-        <>
-          <mesh>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial
-              color="#8a643a" // Brown color for a cozy look
-              roughness={0.5} // Adjust roughness for a softer appearance
-              metalness={0.1} // Low metalness for a more matte finish
-            />
-          </mesh>
-          <mesh receiveShadow>
-            <RoundedCubeLine road={road} />
-            <meshStandardMaterial
-              color={"#5a7c57"} // Blue for water, green otherwise
-              roughness={0.7} // Higher roughness for a more natural texture
-              metalness={0.0} // No metalness for a matte finish
-            />
-          </mesh>
-        </>
-      )
-    },
-  }),
-)
+  },
+  ["@type"]: JsonLdTypeFactory(appLdType.entityGround, "grass"),
+  label: "Herbe",
+  canBeBuild: ({ entity, game }) => {
+    const grounds = entityQuery(game, { "@type": appLdType.entityGround })
+    for (const ground of grounds) {
+      if (entityHasCollision(entity, ground)) {
+        return false
+      }
+    }
+
+    return true
+  },
+  component: ({ entity }) => {
+    return (
+      <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+        <mesh>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#8a643a" roughness={0.5} metalness={0.1} />
+        </mesh>
+        <mesh receiveShadow>
+          <RoundedCubeLine road={entity} />
+          <meshStandardMaterial color={"#5a7c57"} roughness={0.7} metalness={0.0} />
+        </mesh>
+      </group>
+    )
+  },
+  defaultEntity: () => {
+    return {
+      size: {
+        x: 1,
+        y: 1,
+        z: 1,
+      },
+    }
+  },
+})
 
 interface RoundedCubeLinePropsInterface {
-  road: GroundInterface
+  road: EntityInterface
 }
 
 const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {

@@ -2,7 +2,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { Vector3d } from "leva/plugin"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 
 interface EntityGoPositionParams {
@@ -51,7 +51,7 @@ export function entityGoPosition({
     z: Math.atan2(normalizedDirection.y, normalizedDirection.x),
   }
 
-  const distance = distanceBetweenVector3(entity.position, targetPosition)
+  const distance = distanceBetweenVector(entity.position, targetPosition)
 
   return {
     distance,

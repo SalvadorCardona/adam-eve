@@ -1,4 +1,4 @@
-import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
 
 export const interpolateSteps = ({
   positions,

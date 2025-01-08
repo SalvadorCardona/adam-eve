@@ -3,7 +3,7 @@ import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
-import React from "react"
+import React, { useMemo } from "react"
 
 interface CreateBuildingPropsInterface {}
 
@@ -12,21 +12,25 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
 
   if (
     !hasActionUser(game, createBuildingUserActionMetadata) ||
-    !game.userControl.mouseState.mousePosition ||
     !createBuildingUserActionMetadata.data.entityMetaData
   ) {
     return
   }
-
   const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
+  const mousePositon = game.userControl.mouseState.bounding3D.position
+  const entity = useMemo(() => {
+    return entityMetaData.factory({
+      game: game,
+    })
+  }, [entityMetaData])
 
-  const entity = entityMetaData.factory({
-    context: "build-request",
-    game: game,
-  })
+  const canBeBuild = useMemo(() => {
+    return entityMetaData.canBeBuild({ entity, game })
+  }, [mousePositon])
 
-  entity.position = aroundVector(game.userControl.mouseState.mousePosition, true)
-  const canBeBuild = entityMetaData.canBeBuild({ entity, game })
+  const oldY = entity.position.y
+  entity.position = aroundVector(mousePositon, true)
+  entity.position.y = oldY
   const bgColor = canBeBuild ? "yellow" : "red"
   entity.rotation.y = game.userControl?.rotation ?? 0
 

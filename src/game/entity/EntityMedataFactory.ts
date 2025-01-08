@@ -1,6 +1,9 @@
 import { entityFactory } from "@/src/game/entity/entityFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { hasCollisionInGame } from "@/src/game/entity/useCase/entityHasCollision"
+import {
+  hasCollisionInGame,
+  hasCollisionWithGround,
+} from "@/src/game/entity/useCase/entityHasCollision"
 
 export function entityMedataFactory<
   T extends EntityMetaDataInterface = EntityMetaDataInterface,
@@ -11,7 +14,10 @@ export function entityMedataFactory<
 
   return {
     canBeBuild: (payload) => {
-      return !hasCollisionInGame(payload.game, payload.entity)
+      return (
+        !hasCollisionInGame(payload.game, payload.entity) &&
+        hasCollisionWithGround(payload.game, payload.entity)
+      )
     },
     "@type": "union",
     factory: entityFactory,

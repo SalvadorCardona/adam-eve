@@ -25,11 +25,7 @@ export interface EntityMetaDataInterface<T extends EntityInterface = EntityInter
   extends BaseGameMetaDataInterface {
   onFrame?: (payload: { entity: T; game: GameInterface }) => void
   component?: FC<{ entity: T }>
-  factory: (payload?: {
-    entity?: Partial<T>
-    context?: string
-    game: GameInterface
-  }) => T
+  factory: (payload?: { entity?: Partial<T>; game: GameInterface }) => T
   defaultEntity?: () => Partial<T>
   workerAction?: ActionMetadataInterface<any>
   propriety: EntityPriorityInterface

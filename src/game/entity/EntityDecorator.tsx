@@ -19,12 +19,8 @@ export const EntityDecorator = ({
 }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
-  // const clickOnEntity = () => {
-  //   onSelectEntityUserActionMetadata.onApply &&
-  //     onSelectEntityUserActionMetadata.onApply({ game, entity })
-  // }
+
   const isSelected = useMemo(() => {
-    console.log(game.userControl.entitiesSelected)
     return game.userControl.entitiesSelected.includes(entity["@id"])
   }, [game.userControl.entitiesSelected])
 
@@ -60,7 +56,7 @@ export const EntityDecorator = ({
         {isSelected && (
           <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[entity.size.x, entity.size.z]} />
-            <meshStandardMaterial color={"red"} />
+            <meshStandardMaterial color={"yellow"} />
           </mesh>
         )}
       </group>

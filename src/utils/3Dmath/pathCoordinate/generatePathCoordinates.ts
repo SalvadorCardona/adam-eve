@@ -3,7 +3,7 @@ import {
   vector2ToVector3,
   Vector3Interface,
 } from "@/src/utils/3Dmath/Vector"
-import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -81,7 +81,7 @@ export function generatePathCoordinates(
   end: Vector3Interface,
   steps?: number,
 ): PathCoordinate {
-  const currentSteps = steps ?? Math.round(distanceBetweenVector3(start, end) * 50)
+  const currentSteps = steps ?? Math.round(distanceBetweenVector(start, end) * 50)
   const path: Vector3Interface[] = []
   for (let i = 0; i <= currentSteps; i++) {
     const t = i / currentSteps

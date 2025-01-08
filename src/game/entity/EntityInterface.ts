@@ -3,6 +3,7 @@ import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
+import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
 
 export enum EntityState {
   wait = "wait",
@@ -17,13 +18,12 @@ export enum factionState {
   self = "self",
 }
 
-export default interface EntityInterface extends BaseJsonLdInterface {
-  position: Vector3Interface
+export default interface EntityInterface
+  extends BaseJsonLdInterface,
+    BoundingBox3DInterface {
   rotation: Vector3Interface
-  size: Vector3Interface
   maxLife: number
   life: number
-  speed: number
   inventory: InventoryBagInterface
   actions: ActionBagInterface
   state?: EntityState

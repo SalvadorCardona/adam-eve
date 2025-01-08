@@ -3,7 +3,7 @@ import { JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { has2dCollisionInZone } from "@/src/utils/3Dmath/has2dCollision"
 
 interface CircleSearch {
@@ -17,20 +17,21 @@ interface SquareSearch {
 }
 
 interface EntityQueryParams {
-  game: GameInterface
   "@type"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
   squareSearch?: SquareSearch
 }
 
-export function entityQuery(params: EntityQueryParams): EntityInterface[] {
-  const { game, "@type": type, "@id": id, circleSearch, squareSearch } = params
-  let entities: EntityInterface[] = Object.values(game.entities)
+export function entityQuery(
+  game: GameInterface,
+  query: EntityQueryParams,
+): EntityInterface[] {
+  const { "@type": type, "@id": id, circleSearch, squareSearch } = query
+  let entities: EntityInterface[] = type
+    ? getByLdType(game.entities, type)
+    : Object.values(game.entities)
 
-  if (type) {
-    entities = getByLdType(entities, type)
-  }
   if (id) {
     entities = entities.filter((entity) => {
       return Array.isArray(id) ? id.includes(entity["@id"]) : entity["@id"] === id

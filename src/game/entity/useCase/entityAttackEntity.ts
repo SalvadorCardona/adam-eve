@@ -1,7 +1,7 @@
 import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { distanceBetweenVector3 } from "@/src/utils/3Dmath/distanceBetweenVector3"
+import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 
 export function entityAttackEntity(
   entitySource: EntityInterface,
@@ -29,7 +29,7 @@ export function entityCanBeAttackEntity(
   const attack = entityMeta.propriety.attack
   if (!attack) return false
 
-  const distance = distanceBetweenVector3(
+  const distance = distanceBetweenVector(
     entitySource.position,
     entityTarget.position,
   )
