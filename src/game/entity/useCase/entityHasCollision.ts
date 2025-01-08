@@ -1,5 +1,5 @@
 import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { has2dCollision } from "@/src/utils/3Dmath/has2dCollision"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
@@ -20,10 +20,6 @@ export function entityHasCollision(
     vector3ToVector2(entityTarget.position),
     vector3ToVector2(entityTarget.size),
   )
-}
-
-function isGroundEntity(entity: EntityInterface) {
-  return entity["@type"].startsWith("entity/ground")
 }
 
 export function hasCollisionInGame(

@@ -4,6 +4,7 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
 import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
+import { appLdType } from "@/src/AppLdType"
 
 export enum EntityState {
   wait = "wait",
@@ -40,3 +41,29 @@ export default interface EntityInterface
     on?: JsonLdIri
   }
 }
+
+export function isGroundEntity(
+  entity: EntityInterface,
+): entity is GroundEntityInterface {
+  return entity["@type"].startsWith(appLdType.entityGround)
+}
+
+export function isBuildingEntity(
+  entity: EntityInterface,
+): entity is BuildingEntityInterface {
+  return entity["@type"].startsWith(appLdType.entityBuilding)
+}
+
+export function isCharacterEntity(
+  entity: EntityInterface,
+): entity is CharacterEntityInterface {
+  return entity["@type"].startsWith(appLdType.entityCharacter)
+}
+
+export interface RessourceEntityInterface extends EntityInterface {}
+
+export interface CharacterEntityInterface extends EntityInterface {}
+
+export interface BuildingEntityInterface extends EntityInterface {}
+
+export interface GroundEntityInterface extends EntityInterface {}

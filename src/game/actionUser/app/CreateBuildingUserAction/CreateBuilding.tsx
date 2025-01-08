@@ -16,23 +16,24 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
   ) {
     return
   }
+  const rotationY = game.userControl?.rotation ?? 0
   const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
   const mousePositon = game.userControl.mouseState.bounding3D.position
   const entity = useMemo(() => {
     return entityMetaData.factory({
       game: game,
+      entity: {
+        position: aroundVector({ ...mousePositon, y: 0 }, true),
+        rotation: { x: 0, z: 0, y: rotationY },
+      },
     })
-  }, [entityMetaData])
+  }, [entityMetaData, mousePositon])
 
   const canBeBuild = useMemo(() => {
     return entityMetaData.canBeBuild({ entity, game })
   }, [mousePositon])
 
-  const oldY = entity.position.y
-  entity.position = aroundVector(mousePositon, true)
-  entity.position.y = oldY
   const bgColor = canBeBuild ? "yellow" : "red"
-  entity.rotation.y = game.userControl?.rotation ?? 0
 
   return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
 }

@@ -56,14 +56,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           entity.position.x = entity.position.x += entity.size.x / 2
 
           entities.push(entity)
-          if (metaInterface.canBeBuild({ game, entity })) {
-            addEntityToGame(game, entity)
-            game.userControl.rotation = 0
-            playSound(song)
-          }
         })
-
-        return
       } else {
         entities.push(
           metaInterface.factory({
@@ -78,7 +71,6 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           }),
         )
       }
-
       const result = entities.map((entity) => {
         const canBeBuild = metaInterface.canBeBuild({ game, entity })
         if (canBeBuild) {

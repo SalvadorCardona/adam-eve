@@ -31,6 +31,7 @@ import {
   ArrowMetaData,
 } from "@/src/game/entity/app/attack/ArrowEntity"
 import { effectMetaData } from "@/src/game/entity/app/effect/EffectSmokeEntity"
+import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -60,6 +61,7 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [ArrowMetaData["@type"]]: ArrowMetaData,
   [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
   [effectMetaData["@type"]]: effectMetaData,
+  [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
 }
 
 export default configGame

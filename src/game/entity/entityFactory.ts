@@ -4,6 +4,9 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import EntityInterface, {
   EntityState,
   factionState,
+  isBuildingEntity,
+  isCharacterEntity,
+  isGroundEntity,
 } from "@/src/game/entity/EntityInterface"
 
 export function entityFactory<
@@ -18,9 +21,6 @@ export function entityFactory<
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    state: ldType.startsWith("entity/building")
-      ? EntityState.under_construction
-      : EntityState.wait,
     faction: factionState.self,
     workers: [],
     life: 50,
@@ -51,5 +51,19 @@ export function entityFactory<
     baseEntity.maxLife = baseEntity.life
   }
 
-  return jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
+  const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
+
+  if (isBuildingEntity(entity)) {
+    entity.state = EntityState.under_construction
+  }
+
+  if (isCharacterEntity(entity)) {
+    entity.state = EntityState.wait
+  }
+
+  if (isGroundEntity(entity)) {
+    entity.position.y -= 0.5
+  }
+
+  return entity
 }

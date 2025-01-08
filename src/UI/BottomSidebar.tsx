@@ -86,7 +86,6 @@ function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
               "w-20 h-20 rounded-2xl overflow-auto transition-transform duration-300 hover:scale-105 "
             }
             onClick={(e) => {
-              e.preventDefault()
               clickOnBuilding(metadata)
             }}
           >

@@ -104,22 +104,11 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     })
   }, [isDragging])
 
-  const onClick = (event: MouseEvent) => {
-    if (!isDragging) return
-    event.preventDefault()
-
-    onSelectEntityUserActionMetadata.onClick({
-      game: game,
-    })
-  }
-
   useEffect(() => {
-    window.addEventListener("click", onClick)
     window.addEventListener("mouseup", handleMouseUp)
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mousedown", handleMouseDown)
     return () => {
-      window.removeEventListener("click", onClick)
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mousedown", handleMouseDown)
       window.removeEventListener("mouseup", handleMouseUp)

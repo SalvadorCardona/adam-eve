@@ -26,10 +26,10 @@ export const grassGroundEntityMetadata = entityMedataFactory({
   },
   component: ({ entity }) => {
     return (
-      <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
-        <mesh>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#8a643a" roughness={0.5} metalness={0.1} />
+      <group rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh position={[0, 0, -1]}>
+          <RoundedCubeLine road={entity} />
+          <meshStandardMaterial color={"#8a643a"} roughness={0.7} metalness={0.0} />
         </mesh>
         <mesh receiveShadow>
           <RoundedCubeLine road={entity} />
