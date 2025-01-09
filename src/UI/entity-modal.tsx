@@ -55,6 +55,11 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
 
           <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />
+            <div className="font-semibold">Etat : {entity.state}</div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Box className="h-5 w-5 text-purple-600" />
             <div className="font-semibold">
               Inventaire : {Object.values(entity.inventory).length} objets
             </div>
@@ -67,32 +72,37 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
             </div>
           </div>
 
-          <div className="font-semibold">
-            Position :
-            <span className="font-normal">
-              {" "}
-              X: {entity.position.x}, Y: {entity.position.y}, Z: {entity.position.z}
-            </span>
-          </div>
+          {/*<div className="font-semibold">*/}
+          {/*  Position :*/}
+          {/*  <span className="font-normal">*/}
+          {/*    {" "}*/}
+          {/*    X: {entity.position.x}, Y: {entity.position.y}, Z: {entity.position.z}*/}
+          {/*  </span>*/}
+          {/*</div>*/}
 
-          <div className="font-semibold">
-            Taille :
-            <span className="font-normal">
-              {" "}
-              X: {entity.size.x}, Y: {entity.size.y}, Z: {entity.size.z}
-            </span>
-          </div>
+          {/*<div className="font-semibold">*/}
+          {/*  Taille :*/}
+          {/*  <span className="font-normal">*/}
+          {/*    {" "}*/}
+          {/*    X: {entity.size.x}, Y: {entity.size.y}, Z: {entity.size.z}*/}
+          {/*  </span>*/}
+          {/*</div>*/}
 
-          {entity.state && (
+          {entity?.state && (
             <div className="font-semibold">
               État :<span className="font-normal capitalize"> {entity.state}</span>
             </div>
           )}
 
-          <div className="font-semibold">
-            Travailleurs :
-            <span className="font-normal"> {entity.workers.length}</span>
-          </div>
+          {metaData?.propriety?.work && (
+            <div className="font-semibold">
+              Travailleurs :
+              <span className="font-normal">
+                {" "}
+                {entity.workers.length} / {metaData.propriety.work?.numberOfWorker}
+              </span>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

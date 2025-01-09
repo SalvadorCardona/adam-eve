@@ -21,6 +21,7 @@ export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
     <main className={"h-screen overflow-hidden"}>
       <GameProvider game={currentGame}>
         <Canvas
+          id={"game"}
           shadows
           camera={{
             fov: 100,

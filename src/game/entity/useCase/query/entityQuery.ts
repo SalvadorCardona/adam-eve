@@ -2,9 +2,12 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  getEntityBaseType,
+} from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { has2dCollisionInZone } from "@/src/utils/3Dmath/has2dCollision"
+import { appLdType } from "@/src/AppLdType"
 
 interface CircleSearch {
   center: Vector3Interface
@@ -21,6 +24,13 @@ interface EntityQueryParams {
   "@id"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
   squareSearch?: SquareSearch
+  order?: {}
+}
+
+const orderTypePriority = {
+  [appLdType.entityCharacter]: 1,
+  [appLdType.entityBuilding]: 2,
+  [appLdType.entityGround]: 3,
 }
 
 export function entityQuery(
@@ -60,6 +70,17 @@ export function entityQuery(
       )
     })
   }
+
+  entities.sort((a, b) => {
+    const aType = getEntityBaseType(a)
+    const bType = getEntityBaseType(b)
+    if (!bType || !aType) return 0
+
+    const priorityA = orderTypePriority[aType] || Infinity
+    const priorityB = orderTypePriority[bType] || Infinity
+
+    return priorityA - priorityB
+  })
 
   return entities
 }

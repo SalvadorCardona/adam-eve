@@ -11,6 +11,7 @@ import {
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
+import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 
 interface CreateBuildingPropsInterface {}
 
@@ -30,7 +31,7 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   const game = useGameContext().game
 
   const handleMouseMove = (event: MouseEvent) => {
-    event.stopPropagation()
+    if (!isGame(event)) return
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
     raycaster.setFromCamera(mouse, camera)
@@ -49,6 +50,17 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     if (!isDragging) {
       game.userControl.mouseState.bounding3D.size = { x: 0, z: 0, y: 0 }
       setSize({ x: 0, y: 0, z: 0 })
+      const entities = entityQuery(game, {
+        circleSearch: {
+          center: game.userControl.mouseState.bounding3D.position,
+          radius: 1,
+        },
+      })
+
+      if (entities.length) {
+        game.userControl.entitySelectedByHover = entities[0]["@id"]
+      }
+
       return
     }
 
@@ -78,7 +90,7 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   }
 
   const handleMouseDown = (event: MouseEvent) => {
-    event.stopPropagation()
+    if (!isGame(event)) return
     // ici on reste appuyé
     setIsDragging(true)
 
@@ -91,9 +103,14 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   }
 
   const handleMouseUp = (event: MouseEvent) => {
-    event.stopPropagation()
+    if (!isGame(event)) return
     // on lache ici
     setIsDragging(false)
+  }
+
+  const isGame = (event: MouseEvent): boolean => {
+    // @ts-ignore
+    return event.target && event.target.tagName === "CANVAS"
   }
 
   useEffect(() => {

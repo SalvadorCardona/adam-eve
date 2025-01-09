@@ -19,7 +19,7 @@ export default function GlobalGround() {
       )}
       <mesh
         receiveShadow={true}
-        position={[0, -0.2, 0]}
+        position={[0, -0.5, 0]}
         rotation={[-Math.PI / 2, 0, 0]}
       >
         <planeGeometry args={[100, 100, 128, 128]} />
@@ -32,7 +32,7 @@ export default function GlobalGround() {
           metalness={0.0} // No metalness for a matte finish
         />
       </mesh>
-      <mesh position={[0, -0.8, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh position={[0, -1.2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <boxGeometry args={[100, 100, 1]} />
         <meshStandardMaterial color="#8a643a" roughness={0.5} metalness={0.1} />
       </mesh>

@@ -21,33 +21,6 @@
     }
   },
   "entities": {
-    "entity/ground/grass/ku9k52": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/ku9k52",
-      "state": "wait",
-      "faction": "self",
-      "workers": [],
-      "life": 50,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 0,
-        "y": 0,
-        "x": 0
-      },
-      "size": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "actions": {},
-      "inventory": {},
-      "maxLife": 50
-    }
   },
   "inventory": {},
   "createdAt": "2025-01-08T13:47:39.087Z",

@@ -54,7 +54,9 @@ export function entityFactory<
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 
   if (isBuildingEntity(entity)) {
-    entity.state = EntityState.under_construction
+    entity.state = metaData?.propriety?.ressourceForConstruction
+      ? EntityState.under_construction
+      : EntityState.builded
   }
 
   if (isCharacterEntity(entity)) {

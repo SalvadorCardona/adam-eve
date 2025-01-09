@@ -1,14 +1,9 @@
 import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { getByLdType } from "@/src/container/container"
 import { findShortestPath } from "@/src/utils/3Dmath/findShortestPath"
-import { vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
-import { GroundEntityInterface } from "@/src/game/entity/entityGround/GroundEntityInterface"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { consommeCurrentPathCoordinate } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
-import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
-
-let groundIri: JsonLdIri | undefined = undefined
+import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 
 export function entityGoToEntityWithGround(
   entitySource: EntityInterface,
@@ -27,18 +22,10 @@ export function entityGoToEntityWithGround(
     return consommeCurrentPathCoordinate(entitySource)
   }
 
-  if (!groundIri) {
-    groundIri = getByLdType<GroundEntityInterface>(
-      game.entities,
-      grassGroundEntityMetadata["@type"],
-    )[0]["@id"]
-  }
-
-  const ground = game.entities[groundIri] as GroundEntityInterface
   const path = findShortestPath(
-    vector3ToVector2(entitySource.position),
-    vector3ToVector2(entityTarget.position),
-    ground.roadNetwork,
+    entitySource.position,
+    entityTarget.position,
+    entityQuery(game, { "@type": grassGroundEntityMetadata["@type"] }),
   )
 
   entitySource.currentPathOfCoordinate = {

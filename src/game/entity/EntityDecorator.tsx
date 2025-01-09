@@ -3,9 +3,8 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { Model2D } from "@/src/game/entity/components/Model2D"
 import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import React, { Component, ReactNode, useMemo, useRef } from "react"
+import React, { Component, ReactNode, useMemo } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { useFrame } from "@react-three/fiber"
 import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
 
 interface EntityDecoratorPropsInterface {
@@ -24,20 +23,12 @@ export const EntityDecorator = ({
     return game.userControl.entitiesSelected.includes(entity["@id"])
   }, [game.userControl.entitiesSelected])
 
-  const shaderRef = useRef()
-
   let EntityComponent = entityMetaData.component
 
   if (!EntityComponent) {
     EntityComponent = Model2D
     if (entityMetaData.asset?.model3d) EntityComponent = Model3D
   }
-
-  useFrame(({ clock }) => {
-    if (shaderRef.current) {
-      // shaderRef.current.uniforms.uTime.value = clock.getElapsedTime()
-    }
-  })
 
   return (
     <ErrorBoundary>

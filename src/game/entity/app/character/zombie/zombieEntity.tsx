@@ -65,9 +65,9 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
       faction: factionState.enemy,
       life: 50,
       size: {
-        x: 0.8,
-        y: 0.8,
-        z: 0.8,
+        x: 0.5,
+        y: 0.5,
+        z: 0.5,
       },
     }
   },

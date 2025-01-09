@@ -9,48 +9,45 @@ import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/bouding
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
-  onClick: (params: { game: GameInterface }) => void
+  // onClick: (params: { game: GameInterface }) => void
   onSelectZone: (params: { game: GameInterface }) => void
 }
 
 export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataInterface =
   {
     "@type": JsonLdTypeFactory(appLdType.userAction, "on-click-entity"),
-    onClick: (params) => {
-      const entities = entityQuery(params.game, {
-        circleSearch: {
-          center: params.game.userControl.mouseState.bounding3D.position,
-          radius: 0.3,
-        },
-      })
-      params.game.userControl.entitiesSelected = entities.map((e) => e["@id"])
-
-      onSelectEntityUserActionMetadata.onApply({ game: params.game })
-    },
-    onSelectZone: (params) => {
-      const bounding = boundingBoxObbToAabb(
-        params.game.userControl.mouseState.bounding3D,
-      )
-      const isClick =
-        bounding2DSize(params.game.userControl.mouseState.bounding3D) < 0.3
-
+    // onClick: (params) => {
+    //   const entities = entityQuery(game, {
+    //     circleSearch: {
+    //       center: game.userControl.mouseState.bounding3D.position,
+    //       radius: 0.3,
+    //     },
+    //   })
+    //   game.userControl.entitiesSelected = entities.map((e) => e["@id"])
+    //
+    //   onSelectEntityUserActionMetadata.onApply({ game: game })
+    // },
+    onSelectZone: ({ game }) => {
+      const bounding = boundingBoxObbToAabb(game.userControl.mouseState.bounding3D)
+      const isClick = bounding2DSize(game.userControl.mouseState.bounding3D) < 0.3
       const entities = isClick
-        ? entityQuery(params.game, {
+        ? entityQuery(game, {
             circleSearch: {
-              center: params.game.userControl.mouseState.bounding3D.position,
-              radius: 0.3,
+              center: game.userControl.mouseState.bounding3D.position,
+              radius: 1,
             },
           })
-        : entityQuery(params.game, {
+        : entityQuery(game, {
             squareSearch: {
               start: bounding.min,
               end: bounding.max,
             },
           })
 
-      params.game.userControl.entitiesSelected = entities.map((e) => e["@id"])
+      console.log("selected", entities[0])
+      game.userControl.entitiesSelected = entities.map((e) => e["@id"])
 
-      onSelectEntityUserActionMetadata.onApply({ game: params.game })
+      onSelectEntityUserActionMetadata.onApply({ game: game })
     },
     onApply: (payload) => {
       createBuildingUserActionMetadata.onApply(payload)

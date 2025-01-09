@@ -1,14 +1,10 @@
-import {
-  Vector2Interface,
-  vector2ToVector3,
-  Vector3Interface,
-} from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 
-export type PathCoordinate = Vector2Interface[]
+export type PathCoordinate = Vector3Interface[]
 
 export interface CurrentPathCoordinateInterface {
   pathCoordinate: PathCoordinate
@@ -24,22 +20,20 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
   const meta = getMetaData<EntityMetaDataInterface>(entity)
   const speed = meta.propriety.speed ?? 0.01
   const currentPathOfCoordinate = entity.currentPathOfCoordinate
-
   const nextCoordinate =
     currentPathOfCoordinate.pathCoordinate[currentPathOfCoordinate.currentCoordinate]
   if (!nextCoordinate) {
     entity.currentPathOfCoordinate.isFinish
     return
   }
-  const nextCoordinateConverted = vector2ToVector3(nextCoordinate)
 
   const direction = {
-    x: nextCoordinateConverted.x - entity.position.x,
-    y: nextCoordinateConverted.y - entity.position.y,
-    z: nextCoordinateConverted.z - entity.position.z,
+    x: nextCoordinate.x - entity.position.x,
+    y: nextCoordinate.y - entity.position.y,
+    z: nextCoordinate.z - entity.position.z,
   }
 
-  const length = Math.sqrt(direction.x ** 2 + direction.y ** 2 + direction.z ** 2)
+  const length = Math.sqrt(direction.x ** 2 + direction.z ** 2)
   const normalizedDirection = {
     x: direction.x / length,
     y: direction.y / length,
@@ -48,11 +42,9 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
 
   entity.rotation.y = Math.atan2(normalizedDirection.x, normalizedDirection.z)
 
-  // Move the entity by 0.1 towards the next coordinate
   entity.position.x += normalizedDirection.x * speed
   entity.position.z += normalizedDirection.z * speed
 
-  // Check if the entity has reached the next coordinate
   if (length <= 0.1) {
     currentPathOfCoordinate.currentCoordinate++
   }

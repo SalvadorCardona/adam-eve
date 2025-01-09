@@ -15,7 +15,7 @@ export const has2dCollision = (
 export const has2dCollisionInZone = (
   pos1: Vector2Interface,
   size1: Vector2Interface,
-  start: Vector2Interface,
+    start: Vector2Interface,
   end: Vector2Interface,
 ): boolean => {
   const withinXBounds = pos1.x >= start.x && (pos1.x + size1.x) <= end.x;

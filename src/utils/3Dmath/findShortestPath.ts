@@ -1,30 +1,32 @@
-import { GroundInterface, GroundNetwork, Vector2Interface } from "@/context.txt"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { Vector3Interface } from "./Vector"
+import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 
 type PathResult = {
-  path: GroundInterface[] // IDs of the nodes in the path
+  path: Vector3Interface[] // IDs of the nodes in the path
   totalDistance: number
 }
 
 function findClosestNode(
-  target: Vector2Interface,
-  groundNetwork: GroundNetwork,
+  target: Vector3Interface,
+  groundNetwork: EntityInterface[],
   tolerance: number = 0.5,
-): GroundInterface | undefined {
+): EntityInterface | undefined {
   return groundNetwork.find(
     (node) =>
       Math.abs(node.position.x - target.x) <= tolerance &&
-      Math.abs(node.position.y - target.y) <= tolerance,
+      Math.abs(node.position.z - target.z) <= tolerance,
   )
 }
 
-const calculateDistance = (a: Vector2Interface, b: Vector2Interface): number => {
-  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2))
+const calculateDistance = (a: Vector3Interface, b: Vector3Interface): number => {
+  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.z - a.z, 2))
 }
 
 export function findShortestPath(
-  start: Vector2Interface,
-  end: Vector2Interface,
-  groundNetwork: GroundNetwork,
+  start: Vector3Interface,
+  end: Vector3Interface,
+  groundNetwork: EntityInterface[],
 ): PathResult | null {
   const nodes = new Map(groundNetwork.map((node) => [node["@id"], node]))
   const startNode = findClosestNode(start, groundNetwork)
@@ -77,7 +79,7 @@ export function findShortestPath(
       const neighborNode = nodes.get(neighborId)!
       const distanceToNeighbor = Math.sqrt(
         Math.pow(neighborNode.position.x - currentNode.position.x, 2) +
-          Math.pow(neighborNode.position.y - currentNode.position.y, 2),
+          Math.pow(neighborNode.position.z - currentNode.position.z, 2),
       )
 
       const newDistance = currentDistance + distanceToNeighbor
@@ -89,7 +91,7 @@ export function findShortestPath(
     })
   }
 
-  const path: GroundInterface[] = []
+  const path: EntityInterface[] = []
   let currentNodeId: string | null = endId
   let totalDistance = 0
 
@@ -98,7 +100,7 @@ export function findShortestPath(
     const previousNodeId = previousNodes.get(currentNodeId)
     const previousNode = previousNodeId ? nodes.get(previousNodeId) : null
     const distance = previousNode
-      ? calculateDistance(previousNode.position, currentNode.position)
+      ? distanceBetweenVector(previousNode.position, currentNode.position)
       : 0
     totalDistance += distance
     path.unshift(currentNode)

@@ -27,6 +27,11 @@ export const forumEntityMetaData = entityMedataFactory({
         y: 2,
         z: 2,
       },
+      rotation: {
+        x: 0,
+        y: Math.PI,
+        z: 0,
+      },
     }
   },
 })

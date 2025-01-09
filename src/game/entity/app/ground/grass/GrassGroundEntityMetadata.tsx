@@ -25,15 +25,25 @@ export const grassGroundEntityMetadata = entityMedataFactory({
     return true
   },
   component: ({ entity }) => {
+    const randomGreen = () => {
+      const baseGreen = 124 // Base green value (0-255)
+      const variation = Math.floor(Math.random() * 20) - 5 // Random variation between -10 and +10
+      return Math.min(255, Math.max(0, baseGreen + variation)) // Ensure value is within 0-255
+    }
+
+    const greenColor = useMemo(() => {
+      return `rgb(90, ${randomGreen()}, 87)`
+    }, [entity["@id"]])
+
     return (
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh position={[0, 0, -1]}>
-          <RoundedCubeLine road={entity} />
-          <meshStandardMaterial color={"#8a643a"} roughness={0.7} metalness={0.0} />
-        </mesh>
+      <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+        {/*<mesh position={[0, 0, -1]}>*/}
+        {/*  <RoundedCubeLine road={entity} />*/}
+        {/*  <meshStandardMaterial color={"#8a643a"} roughness={0.7} metalness={0.0} />*/}
+        {/*</mesh>*/}
         <mesh receiveShadow>
           <RoundedCubeLine road={entity} />
-          <meshStandardMaterial color={"#5a7c57"} roughness={0.7} metalness={0.0} />
+          <meshStandardMaterial color={greenColor} roughness={0.7} metalness={0.0} />
         </mesh>
       </group>
     )

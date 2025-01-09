@@ -5,11 +5,20 @@ import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
+import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { EntityState } from "@/src/game/entity/EntityInterface"
 
 export const bridgeEntityMetaData = entityMedataFactory({
   asset: {
     model3d: imageSource,
     icon: imageIcon,
+  },
+  propriety: {
+    ressourceForConstruction: {
+      [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
+        quantity: 10,
+      }),
+    },
   },
   canBeBuild: ({ entity, game }) => {
     const grounds = entityQuery(game, { "@type": appLdType.entityGround })
@@ -25,6 +34,7 @@ export const bridgeEntityMetaData = entityMedataFactory({
   label: "Pont",
   defaultEntity: () => {
     return {
+      state: EntityState.under_construction,
       life: 50,
       size: {
         x: 1,

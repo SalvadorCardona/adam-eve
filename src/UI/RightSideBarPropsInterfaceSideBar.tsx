@@ -9,6 +9,7 @@ export const RightSideBarPropsInterfaceSideBar = () => {
   const hasAction = useMemo(() => {
     return game.userControl.entitiesSelected.length > 0
   }, [game.userControl.entitiesSelected])
+
   return (
     <div className={"fixed top-1/3 right-0   h-screen w-[450px] max-h-screen "}>
       {hasAction && (

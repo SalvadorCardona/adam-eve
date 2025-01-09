@@ -13,7 +13,7 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     model3d: asset,
     icon: iconFarmerSrc,
     animationMapper: {
-      [EntityState.move]: "Running",
+      [EntityState.move]: "Walking",
       [EntityState.wait]: "Idle",
     },
   },

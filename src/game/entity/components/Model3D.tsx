@@ -20,7 +20,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const glb = useGLTF(metaData.asset.model3d)
   const ref = useRef<Group>()
   const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
-
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
@@ -56,18 +55,11 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
     const size = new Vector3()
     boundingBox.getSize(size)
     const scaleX = entity.size.x / size.x
-    const scaleY = entity.size.y / size.y
     const scaleZ = entity.size.z / size.z
-    const uniformScale = Math.min(scaleX, scaleY, scaleZ)
-    return [uniformScale, uniformScale, uniformScale]
-  }, [clone])
+    const scaleY = (scaleX + scaleZ) / 2 // Calculer scaleY en fonction de scaleX et scaleZ
 
-  const positionY = useMemo(() => {
-    const boundingBox = new Box3().setFromObject(clone)
-    const size = new Vector3()
-    boundingBox.getSize(size)
-    return (size.y / 2) * scaleFactor[2]
-  }, [clone, scaleFactor])
+    return [scaleX, scaleY, scaleZ]
+  }, [clone])
 
   if (entity["@type"] === workerEntityMetaData["@type"]) {
     return (
@@ -84,7 +76,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
 
   return (
     <primitive
-      position-y={positionY}
       ref={ref}
       object={clone}
       scale={scaleFactor}

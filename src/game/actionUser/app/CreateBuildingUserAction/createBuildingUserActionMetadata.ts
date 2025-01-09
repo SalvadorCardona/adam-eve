@@ -47,7 +47,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           const entity = metaInterface.factory({
             game,
             entity: {
-              position: aroundVector(newPosition, true),
+              position: aroundVector({ ...newPosition, y: 0 }, true),
               rotation: { x: 0, z: 0, y: rotationY },
             },
           })
@@ -63,7 +63,10 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
             game,
             entity: {
               position: aroundVector(
-                game.userControl.mouseState.bounding3D.position,
+                aroundVector(
+                  { ...game.userControl.mouseState.bounding3D.position, y: 0 },
+                  true,
+                ),
                 true,
               ),
               rotation: { x: 0, z: 0, y: rotationY },
@@ -85,6 +88,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         game.userControl.entitiesSelected = []
       }
 
+      console.log(entities)
       game.userControl.rotation = 0
     },
     data: {

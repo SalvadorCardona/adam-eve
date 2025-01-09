@@ -1,4 +1,8 @@
-import { BaseJsonLdInterface, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+import {
+  BaseJsonLdInterface,
+  JsonLdIri,
+  JsonLdType,
+} from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
@@ -58,6 +62,14 @@ export function isCharacterEntity(
   entity: EntityInterface,
 ): entity is CharacterEntityInterface {
   return entity["@type"].startsWith(appLdType.entityCharacter)
+}
+
+export function getEntityBaseType(entity: EntityInterface): JsonLdType | undefined {
+  if (isBuildingEntity(entity)) return appLdType.entityBuilding
+  if (isGroundEntity(entity)) return appLdType.entityGround
+  if (isCharacterEntity(entity)) return appLdType.entityCharacter
+
+  return undefined
 }
 
 export interface RessourceEntityInterface extends EntityInterface {}

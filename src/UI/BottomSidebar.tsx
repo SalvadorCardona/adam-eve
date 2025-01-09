@@ -8,6 +8,7 @@ import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { appLdType } from "@/src/AppLdType"
+import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(
@@ -36,7 +37,7 @@ export const BottomSidebar = () => {
   )
 
   return (
-    <div className={"fixed bottom-0 left-0   rounded-2xl p-5"}>
+    <div className={"fixed bottom-0 left-0  rounded-2xl p-5"}>
       <div className={"flex gap-2"}>
         <IconBuild metaDatas={actionMetaDatas}></IconBuild>
       </div>
@@ -80,25 +81,29 @@ function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
     <>
       {metaDatas.map((metadata) => {
         return (
-          <Card
+          <AdaptiveHoverDecorator
+            hoverElement={<span>{metadata?.label ?? metadata["@type"]}</span>}
             key={metadata["@type"] + "icon-build"}
-            className={
-              "w-20 h-20 rounded-2xl overflow-auto transition-transform duration-300 hover:scale-105 "
-            }
-            onClick={(e) => {
-              clickOnBuilding(metadata)
-            }}
           >
-            {metadata.asset?.icon ? (
-              <img
-                src={metadata.asset?.icon}
-                alt="icon"
-                className={"w-full h-full"}
-              />
-            ) : (
-              <>{metadata["@type"]}</>
-            )}
-          </Card>
+            <Card
+              className={
+                "w-20 h-20 rounded-2xl overflow-auto transition-transform duration-300 hover:scale-105 "
+              }
+              onClick={(e) => {
+                clickOnBuilding(metadata)
+              }}
+            >
+              {metadata.asset?.icon ? (
+                <img
+                  src={metadata.asset?.icon}
+                  alt="icon"
+                  className={"w-full h-full"}
+                />
+              ) : (
+                <>{metadata["@type"]}</>
+              )}
+            </Card>
+          </AdaptiveHoverDecorator>
         )
       })}
     </>

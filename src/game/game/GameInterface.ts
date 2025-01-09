@@ -27,7 +27,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
     currentAction?: ActionUserMetaDataInterface | undefined
     rotation?: number
     entitiesSelected: EntityInterface["@id"][]
-    entityHover?: EntityInterface["@id"]
+    entitySelectedByHover?: EntityInterface["@id"]
     mouseState: {
       bounding3D: BoundingBox3DInterface
     }

@@ -27,7 +27,7 @@ export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
         rotation: { x: 0, z: 0, y: rotationY },
       },
     })
-  }, [entityMetaData, mousePositon])
+  }, [entityMetaData, mousePositon, rotationY])
 
   const canBeBuild = useMemo(() => {
     return entityMetaData.canBeBuild({ entity, game })

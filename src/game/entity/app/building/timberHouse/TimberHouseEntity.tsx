@@ -1,7 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
 import imageSource from "./timberHouse.glb?url"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { appLdType } from "@/src/AppLdType"
 
@@ -14,11 +13,6 @@ export const timberHouseEntityMetaData = entityMedataFactory({
     work: {
       numberOfWorker: 2,
     },
-    ressourceForConstruction: {
-      [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
-        quantity: 5,
-      }),
-    },
   },
   workerAction: cutTheWoodActionMetaData,
   label: "Maison de bucheron",
@@ -30,6 +24,11 @@ export const timberHouseEntityMetaData = entityMedataFactory({
         x: 2,
         y: 2,
         z: 2,
+      },
+      rotation: {
+        x: 0,
+        y: Math.PI,
+        z: 0,
       },
     }
   },
