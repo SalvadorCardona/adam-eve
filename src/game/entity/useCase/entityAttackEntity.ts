@@ -18,6 +18,7 @@ export function entityAttackEntity(
     return true
   }
 
+  entitySource.state = EntityState.wait
   return canBeAttack
 }
 

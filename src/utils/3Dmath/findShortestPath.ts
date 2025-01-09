@@ -3,14 +3,14 @@ import { Vector3Interface } from "./Vector"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 
 type PathResult = {
-  path: Vector3Interface[] // IDs of the nodes in the path
+  path: EntityInterface[]
   totalDistance: number
 }
 
 function findClosestNode(
   target: Vector3Interface,
   groundNetwork: EntityInterface[],
-  tolerance: number = 0.5,
+  tolerance: number = 1,
 ): EntityInterface | undefined {
   return groundNetwork.find(
     (node) =>

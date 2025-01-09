@@ -3,6 +3,8 @@ import { JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
 import EntityInterface, {
+  EntityFaction,
+  EntityState,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
@@ -19,12 +21,18 @@ interface SquareSearch {
   end: Vector3Interface
 }
 
+type Order = "ASC" | "DESC"
+
 interface EntityQueryParams {
   "@type"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
   squareSearch?: SquareSearch
-  order?: {}
+  order?: {
+    distance?: Order
+  }
+  state?: EntityState | EntityState[]
+  faction?: EntityFaction | EntityFaction[]
 }
 
 const orderTypePriority = {
@@ -33,18 +41,40 @@ const orderTypePriority = {
   [appLdType.entityGround]: 3,
 }
 
+export function entityQueryFindOne(
+  game: GameInterface,
+  query: EntityQueryParams,
+): undefined | EntityInterface {
+  const result = entityQuery(game, query)
+  return result.length ? result[0] : undefined
+}
+
 export function entityQuery(
   game: GameInterface,
   query: EntityQueryParams,
 ): EntityInterface[] {
-  const { "@type": type, "@id": id, circleSearch, squareSearch } = query
+  const {
+    "@type": type,
+    "@id": id,
+    circleSearch,
+    squareSearch,
+    state,
+    order,
+    faction,
+  } = query
+
+  if (id && !Array.isArray(id)) {
+    const entity = Object.hasOwn(game.entities, id) ? game.entities[id] : undefined
+    if (entity) return [entity]
+  }
+
   let entities: EntityInterface[] = type
     ? getByLdType(game.entities, type)
     : Object.values(game.entities)
 
   if (id) {
     entities = entities.filter((entity) => {
-      return Array.isArray(id) ? id.includes(entity["@id"]) : entity["@id"] === id
+      return id.includes(entity["@id"])
     })
   }
 
@@ -55,6 +85,22 @@ export function entityQuery(
       return (
         distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
       )
+    })
+  }
+
+  if (state) {
+    entities = entities.filter((entity) => {
+      return entity.state && Array.isArray(state)
+        ? state.includes(entity.state)
+        : entity.state === state
+    })
+  }
+
+  if (faction) {
+    entities = entities.filter((entity) => {
+      return entity.faction && Array.isArray(faction)
+        ? faction.includes(entity.faction)
+        : entity.faction === faction
     })
   }
 
@@ -81,6 +127,23 @@ export function entityQuery(
 
     return priorityA - priorityB
   })
+
+  if (order?.distance) {
+    const referencePoint = circleSearch
+      ? vector3ToVector2(circleSearch.center)
+      : { x: 0, y: 0 }
+    entities.sort((a, b) => {
+      const distanceA = distanceBetweenVector2(
+        vector3ToVector2(a.position),
+        referencePoint,
+      )
+      const distanceB = distanceBetweenVector2(
+        vector3ToVector2(b.position),
+        referencePoint,
+      )
+      return order.distance === "ASC" ? distanceA - distanceB : distanceB - distanceA
+    })
+  }
 
   return entities
 }

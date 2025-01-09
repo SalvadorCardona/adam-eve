@@ -3,7 +3,6 @@ import {
   JsonLdIri,
   JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
-import { getByLdType } from "@/src/container/container"
 import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
@@ -13,9 +12,9 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { enoughRessource } from "@/src/game/inventory/enoughRessource"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
-import { findClosestInGame } from "@/src/utils/3Dmath/findClosest"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { appLdType } from "@/src/AppLdType"
+import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
 enum State {
   GoToForum = "GoToForum",
@@ -42,49 +41,36 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)
       const data = action.data
 
-      const getBuilding = (): EntityInterface | undefined => {
-        const currentBuilding = game.entities[data.buildingIri ?? ""]
-        if (currentBuilding?.state === EntityState.under_construction)
-          return currentBuilding
-
-        const newBuilding = getByLdType<EntityInterface>(
-          game.entities,
-          appLdType.entityBuilding,
-        ).find((building) => {
-          return building?.state === EntityState.under_construction
-        })
-
-        if (!newBuilding) {
-          return undefined
-        }
-
-        data.buildingIri = newBuilding["@id"]
-
-        return newBuilding
-      }
-
-      const building = getBuilding()
+      const building = data.buildingIri
+        ? entityQueryFindOne(game, {
+            "@id": data.buildingIri,
+          })
+        : entityQueryFindOne(game, {
+            state: EntityState.under_construction,
+          })
 
       if (!building) {
         data.state = State.NoBuild
         entity.state = EntityState.wait
         return
       }
+
       if (building && data.state === State.NoBuild) {
         data.state = State.GoToForum
       }
-
       const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
-
       entity.state = EntityState.move
 
       if (data.state === State.GoToForum) {
-        const forum = findClosestInGame(entity, forumEntityMetaData["@type"], game)
+        const forum = entityQueryFindOne(game, {
+          "@type": forumEntityMetaData["@type"],
+        })
+
         if (!forum) {
           data.state = State.ForumNotFound
-
           return
         }
+
         const result = entityGoToEntityWithGround(entity, forum, game)
         if (entity?.currentPathOfCoordinate?.isFinish) {
           data.state = State.TakeRessource

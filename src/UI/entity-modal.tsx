@@ -53,6 +53,13 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
             </div>
           )}
 
+          {entity.faction && (
+            <div className="flex items-center gap-4">
+              <Zap className="h-5 w-5 text-yellow-600" />
+              <div className="font-semibold">Faction : {entity.faction}</div>
+            </div>
+          )}
+
           <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />
             <div className="font-semibold">Etat : {entity.state}</div>

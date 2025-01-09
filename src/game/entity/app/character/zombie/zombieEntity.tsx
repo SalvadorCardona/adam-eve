@@ -2,22 +2,19 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./Zombie.glb?url"
 import iconFarmerSrc from "./img.png"
-import { EntityState, factionState } from "@/src/game/entity/EntityInterface"
+import { EntityFaction, EntityState } from "@/src/game/entity/EntityInterface"
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { addAction } from "@/src/game/action/addAction"
-import { findClosestInGame } from "@/src/utils/3Dmath/findClosest"
-import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
-import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
-import { getEntityInGameByIri } from "@/src/game/entity/useCase/getEntityInGameByIri"
 import {
   entityAttackEntity,
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { getMetaData } from "@/src/game/game/app/configGame"
+import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
 // https://poly.pizza/m/xqEzosAVYX
 // animation [
@@ -62,7 +59,7 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
 
     return {
       actions: actionBag,
-      faction: factionState.enemy,
+      faction: EntityFaction.enemy,
       life: 50,
       size: {
         x: 0.5,
@@ -76,7 +73,7 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
 enum ZombieAttackState {
   FindEnemy = "FindEnemy",
   GoToEnemy = "GoToEnemy",
-  AttackEnnemy = "AttackEnnemy",
+  attackEnemy = "attackEnemy",
 }
 
 interface ZombieAttackAction {
@@ -93,24 +90,22 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       const attack = metaData.propriety.attack
       if (!attack) return
 
-      const enemy = entity.entityAttackTargetIri
-        ? getEntityInGameByIri(game, entity.entityAttackTargetIri)
-        : undefined
+      const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
       if (!enemy) data.state = ZombieAttackState.FindEnemy
 
       if (data.state === ZombieAttackState.FindEnemy) {
-        const newEnemy = findClosestInGame(
-          entity,
-          towerEntityMetaData["@type"],
-          game,
-        )
+        const newEnemy = entityQueryFindOne(game, {
+          faction: EntityFaction.self,
+          circleSearch: {
+            center: entity.position,
+            radius: 15,
+          },
+        })
+
         if (!newEnemy) {
           action.nextTick = game.time + 300
           return
         }
-
-        const distance = distanceBetweenVector(entity.position, newEnemy.position)
-        if (distance > 15) return
 
         entity.entityAttackTargetIri = newEnemy["@id"]
         data.state = ZombieAttackState.GoToEnemy
@@ -123,12 +118,15 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
         }
 
         if (entityCanBeAttackEntity(entity, enemy)) {
-          data.state = ZombieAttackState.AttackEnnemy
+          data.state = ZombieAttackState.attackEnemy
         }
       }
 
-      if (enemy && data.state === ZombieAttackState.AttackEnnemy) {
-        entityAttackEntity(entity, enemy)
+      if (enemy && data.state === ZombieAttackState.attackEnemy) {
+        if (!entityAttackEntity(entity, enemy)) {
+          data.state = ZombieAttackState.GoToEnemy
+        }
+
         action.nextTick = game.time + attack.attackSpeed
       }
     },

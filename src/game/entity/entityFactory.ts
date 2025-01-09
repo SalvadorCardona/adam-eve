@@ -2,8 +2,8 @@ import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
+  EntityFaction,
   EntityState,
-  factionState,
   isBuildingEntity,
   isCharacterEntity,
   isGroundEntity,
@@ -21,7 +21,7 @@ export function entityFactory<
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    faction: factionState.self,
+    faction: EntityFaction.self,
     workers: [],
     life: 50,
     rotation: {

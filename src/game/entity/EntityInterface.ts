@@ -18,7 +18,7 @@ export enum EntityState {
   attack = "attack",
 }
 
-export enum factionState {
+export enum EntityFaction {
   enemy = "enemy",
   self = "self",
 }
@@ -35,7 +35,7 @@ export default interface EntityInterface
   workers: EntityInterface["@id"][]
   numberOfWorker?: number
   currentPathOfCoordinate?: CurrentPathCoordinateInterface
-  faction: factionState
+  faction: EntityFaction
   entityAttackTargetIri?: JsonLdIri
   connections: {
     top?: JsonLdIri

@@ -1,7 +1,7 @@
 import GameInterface, { GameMode, GameState } from "@/src/game/game/GameInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { gameCalculated } from "@/src/game/game/gameCalculated"
+import { createGameCalculated } from "@/src/game/game/createGameCalculated"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 
 export function gameFactory(game?: GameInterface): GameInterface {
@@ -38,7 +38,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
     ...(game ?? {}),
   })
 
-  newGame.gameCalculated = gameCalculated(newGame)
+  newGame.gameCalculated = createGameCalculated(newGame)
 
   return newGame
 }

@@ -10,11 +10,7 @@ export function entityGoToEntityWithGround(
   entityTarget: EntityInterface,
   game: GameInterface,
 ) {
-  const hash: string = JSON.stringify([
-    entitySource["@id"],
-    entityTarget.position,
-    game.gameCalculated.building,
-  ])
+  const hash: string = JSON.stringify([entitySource["@id"], entityTarget.position])
   if (
     entitySource.currentPathOfCoordinate &&
     entitySource.currentPathOfCoordinate.hash === hash
@@ -37,7 +33,7 @@ export function entityGoToEntityWithGround(
     hash,
   }
 
-  if (entitySource.currentPathOfCoordinate.unreachable === false) {
+  if (!entitySource.currentPathOfCoordinate.unreachable) {
     entitySource.state = EntityState.move
   }
 

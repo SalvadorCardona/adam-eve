@@ -5,7 +5,7 @@ import { BaseJsonLdInterface } from "@/src/utils/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { GameCalculatedInterface } from "@/src/game/game/gameCalculated"
+import { GameCalculatedInterface } from "@/src/game/game/createGameCalculated"
 import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
 
 export enum GameState {
