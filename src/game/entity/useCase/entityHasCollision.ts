@@ -1,24 +1,17 @@
-import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { has2dCollision } from "@/src/utils/3Dmath/has2dCollision"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
-
-interface Collision2D {
-  position: Vector3Interface
-  size: Vector3Interface
-}
+import { bounding3ToBounding2 } from "@/src/utils/3Dmath/boudingBox"
 
 export function entityHasCollision(
-  entitySource: Collision2D,
-  entityTarget: Collision2D,
+  entitySource: EntityInterface,
+  entityTarget: EntityInterface,
 ): boolean {
   return has2dCollision(
-    vector3ToVector2(entitySource.position),
-    vector3ToVector2(entitySource.size),
-    vector3ToVector2(entityTarget.position),
-    vector3ToVector2(entityTarget.size),
+    bounding3ToBounding2(entitySource),
+    bounding3ToBounding2(entityTarget),
   )
 }
 

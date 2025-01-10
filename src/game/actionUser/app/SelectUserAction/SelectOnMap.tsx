@@ -11,7 +11,7 @@ import {
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
-import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
 interface CreateBuildingPropsInterface {}
 
@@ -50,15 +50,15 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     if (!isDragging) {
       game.userControl.mouseState.bounding3D.size = { x: 0, z: 0, y: 0 }
       setSize({ x: 0, y: 0, z: 0 })
-      const entities = entityQuery(game, {
+      const entity = entityQueryFindOne(game, {
         circleSearch: {
           center: game.userControl.mouseState.bounding3D.position,
           radius: 1,
         },
       })
 
-      if (entities.length) {
-        game.userControl.entitySelectedByHover = entities[0]["@id"]
+      if (entity) {
+        game.userControl.entitySelectedByHover = entity["@id"]
       }
 
       return

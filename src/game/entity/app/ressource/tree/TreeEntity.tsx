@@ -9,15 +9,26 @@ export const treeEntityMetaData = entityMedataFactory({
     model3d: asset,
     icon: iconSrc,
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "tree"),
-  defaultEntity: () => {
-    return {
-      life: 50,
-      size: {
-        x: 1,
-        y: 1,
-        z: 1,
-      },
-    }
+  propriety: {
+    speed: 0.01,
+    attack: {
+      damage: 1,
+      attackRange: 1,
+      attackSpeed: 60,
+    },
+    scale: {
+      x: 0.5,
+      y: 0.5,
+      z: 0.5,
+    },
+    health: {
+      maxLife: 75,
+    },
+    size: {
+      x: 1,
+      y: 1,
+      z: 1,
+    },
   },
+  ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "tree"),
 })

@@ -25,6 +25,15 @@ export function createBounding3D(
   }
 }
 
+export function bounding3ToBounding2(
+  boundingBox: BoundingBox3DInterface,
+): BoundingBox2DInterface {
+  return {
+    size: vector3ToVector2(boundingBox.size),
+    position: vector3ToVector2(boundingBox.position),
+  }
+}
+
 export function bounding2DSize(
   bounding: BoundingBox2DInterface | BoundingBox3DInterface,
 ): number {

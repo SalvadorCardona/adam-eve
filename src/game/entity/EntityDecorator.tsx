@@ -18,7 +18,7 @@ export const EntityDecorator = ({
 }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
-
+  
   const isSelected = useMemo(() => {
     return game.userControl.entitiesSelected.includes(entity["@id"])
   }, [game.userControl.entitiesSelected])

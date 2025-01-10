@@ -12,6 +12,13 @@ export const grassGroundEntityMetadata = entityMedataFactory({
   asset: {
     icon: grassIcon,
   },
+  propriety: {
+    size: {
+      x: 1,
+      y: 1,
+      z: 1,
+    },
+  },
   ["@type"]: JsonLdTypeFactory(appLdType.entityGround, "grass"),
   label: "Herbe",
   canBeBuild: ({ entity, game }) => {
@@ -47,15 +54,6 @@ export const grassGroundEntityMetadata = entityMedataFactory({
         </mesh>
       </group>
     )
-  },
-  defaultEntity: () => {
-    return {
-      size: {
-        x: 1,
-        y: 1,
-        z: 1,
-      },
-    }
   },
 })
 

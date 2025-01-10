@@ -7,7 +7,7 @@ import React, { useMemo } from "react"
 
 interface CreateBuildingPropsInterface {}
 
-export const CreateBuilding = ({}: CreateBuildingPropsInterface) => {
+export const CreateBuilding = () => {
   const game = useGameContext().game
 
   if (

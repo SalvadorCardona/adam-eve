@@ -3,7 +3,7 @@ import {
   JsonLdIri,
   JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
-import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
@@ -15,6 +15,7 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { EntityState } from "@/src/game/entity/EntityState"
 
 enum State {
   GoToForum = "GoToForum",

@@ -2,7 +2,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { Vector3Interface } from "./Vector"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 
-type PathResult = {
+export type PathResult = {
   path: EntityInterface[]
   totalDistance: number
 }
@@ -10,7 +10,7 @@ type PathResult = {
 function findClosestNode(
   target: Vector3Interface,
   groundNetwork: EntityInterface[],
-  tolerance: number = 1,
+  tolerance: number = 0.5,
 ): EntityInterface | undefined {
   return groundNetwork.find(
     (node) =>
@@ -27,7 +27,7 @@ export function findShortestPath(
   start: Vector3Interface,
   end: Vector3Interface,
   groundNetwork: EntityInterface[],
-): PathResult | null {
+): PathResult | undefined {
   const nodes = new Map(groundNetwork.map((node) => [node["@id"], node]))
   const startNode = findClosestNode(start, groundNetwork)
   const endNode = findClosestNode(end, groundNetwork)
@@ -107,5 +107,5 @@ export function findShortestPath(
     currentNodeId = previousNodeId
   }
 
-  return path[0]?.["@id"] === startId ? { path, totalDistance } : null
+  return path[0]?.["@id"] === startId ? { path, totalDistance } : undefined
 }

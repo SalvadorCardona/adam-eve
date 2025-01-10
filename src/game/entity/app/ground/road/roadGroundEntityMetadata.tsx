@@ -10,6 +10,13 @@ export const roadGroundEntityMetadata = entityMedataFactory({
   },
   ["@type"]: JsonLdTypeFactory(appLdType.entityGround, "road"),
   label: "Route",
+  propriety: {
+    size: {
+      x: 1,
+      y: 1,
+      z: 1,
+    },
+  },
   component: () => {
     return (
       <>
@@ -28,14 +35,5 @@ export const roadGroundEntityMetadata = entityMedataFactory({
         </mesh>
       </>
     )
-  },
-  defaultEntity: () => {
-    return {
-      size: {
-        x: 1,
-        y: 1,
-        z: 1,
-      },
-    }
   },
 })

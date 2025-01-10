@@ -13,18 +13,20 @@ export const timberHouseEntityMetaData = entityMedataFactory({
     work: {
       numberOfWorker: 2,
     },
+    health: {
+      maxLife: 100,
+    },
+    size: {
+      x: 2,
+      y: 2,
+      z: 2,
+    },
   },
   workerAction: cutTheWoodActionMetaData,
   label: "Maison de bucheron",
   ["@type"]: appLdType.timberHouse,
   defaultEntity: () => {
     return {
-      life: 50,
-      size: {
-        x: 2,
-        y: 2,
-        z: 2,
-      },
       rotation: {
         x: 0,
         y: Math.PI,

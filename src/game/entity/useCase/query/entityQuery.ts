@@ -4,12 +4,12 @@ import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
 import EntityInterface, {
   EntityFaction,
-  EntityState,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { has2dCollisionInZone } from "@/src/utils/3Dmath/has2dCollision"
 import { appLdType } from "@/src/AppLdType"
+import { EntityState } from "@/src/game/entity/EntityState"
 
 interface CircleSearch {
   center: Vector3Interface

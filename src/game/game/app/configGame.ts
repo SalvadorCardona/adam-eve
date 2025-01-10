@@ -1,5 +1,5 @@
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
+import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
 import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseEntity"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
@@ -20,18 +20,13 @@ import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEnti
 import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/roadGroundEntityMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
-import {
-  ZombieAttackActionMetadata,
-  zombieEntityMetaData,
-} from "@/src/game/entity/app/character/zombie/zombieEntity"
+import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
 import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
-import {
-  ArrowAttackActionMetadata,
-  ArrowMetaData,
-} from "@/src/game/entity/app/attack/ArrowEntity"
-import { effectMetaData } from "@/src/game/entity/app/effect/EffectSmokeEntity"
+import { ArrowMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
+import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
+import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -60,7 +55,6 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [ArrowAttackActionMetadata["@type"]]: ArrowAttackActionMetadata,
   [ArrowMetaData["@type"]]: ArrowMetaData,
   [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
-  [effectMetaData["@type"]]: effectMetaData,
   [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
 }
 

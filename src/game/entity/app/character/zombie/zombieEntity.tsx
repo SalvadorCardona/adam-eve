@@ -1,37 +1,39 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import asset from "./Zombie.glb?url"
+import asset from "./zombie2.glb?url"
 import iconFarmerSrc from "./img.png"
-import { EntityFaction, EntityState } from "@/src/game/entity/EntityInterface"
-import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
-import { addAction } from "@/src/game/action/addAction"
-import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
-import {
-  entityAttackEntity,
-  entityCanBeAttackEntity,
-} from "@/src/game/entity/useCase/entityAttackEntity"
-import { getMetaData } from "@/src/game/game/app/configGame"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
+import { EntityState } from "@/src/game/entity/EntityState"
 
-// https://poly.pizza/m/xqEzosAVYX
-// animation [
-//     "Armature|Attack",
-//     "Armature|Bite_ground",
-//     "Armature|Crawl",
-//     "Armature|Die",
-//     "Armature|Die2",
-//     "Armature|Headbutt",
-//     "Armature|Hit_reaction",
-//     "Armature|Idle",
-//     "Armature|Running_Crawl",
-//     "Armature|Scream",
-//     "Armature|T-Pose",
-//     "Armature|Walk",
-//     "Armature|Walk2"
-// ]
+// : https://poly.pizza/m/y9KWOVG21R
+// "CharacterArmature|Death"
+// "CharacterArmature|Gun_Shoot"
+// "CharacterArmature|HitRecieve"
+// "CharacterArmature|HitRecieve_2"
+// "CharacterArmature|Idle"
+// "CharacterArmature|Idle_Gun"
+// "CharacterArmature|Idle_Gun_Pointing"
+// "CharacterArmature|Idle_Gun_Shoot"
+// "CharacterArmature|Idle_Neutral"
+// "CharacterArmature|Idle_Sword"
+// "CharacterArmature|Interact"
+// "CharacterArmature|Kick_Left"
+// "CharacterArmature|Kick_Right"
+// "CharacterArmature|Punch_Left"
+// "CharacterArmature|Punch_Right"
+// "CharacterArmature|Roll"
+// "CharacterArmature|Run"
+// "CharacterArmature|Run_Back"
+// "CharacterArmature|Run_Left"
+// "CharacterArmature|Run_Right"
+// "CharacterArmature|Run_Shoot"
+// "CharacterArmature|Sword_Slash"
+// "CharacterArmature|Walk"
+// "CharacterArmature|Wave"
+//
+//
 export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "zombie"),
   label: "Zombie",
@@ -39,9 +41,9 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     model3d: asset,
     icon: iconFarmerSrc,
     animationMapper: {
-      [EntityState.move]: "Armature|Walk",
-      [EntityState.wait]: "Armature|Idle",
-      [EntityState.attack]: "Armature|Attack",
+      [EntityState.move]: "CharacterArmature|Walk",
+      [EntityState.wait]: "CharacterArmature|Idle",
+      [EntityState.attack]: "CharacterArmature|Kick_Left",
     },
   },
   propriety: {
@@ -51,90 +53,19 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
       attackRange: 1,
       attackSpeed: 60,
     },
-  },
-  defaultEntity: () => {
-    const action = ZombieAttackActionMetadata.factory()
-    const actionBag: ActionBagInterface = {}
-    addAction(actionBag, action)
-
-    return {
-      actions: actionBag,
-      faction: EntityFaction.enemy,
-      life: 50,
-      size: {
-        x: 0.5,
-        y: 0.5,
-        z: 0.5,
-      },
-    }
+    scale: {
+      x: 0.5,
+      y: 0.5,
+      z: 0.5,
+    },
+    size: {
+      x: 0.5,
+      y: 0.5,
+      z: 0.5,
+    },
+    health: {
+      maxLife: 100,
+    },
+    defaultActions: [ZombieAttackActionMetadata["@type"]],
   },
 })
-
-enum ZombieAttackState {
-  FindEnemy = "FindEnemy",
-  GoToEnemy = "GoToEnemy",
-  attackEnemy = "attackEnemy",
-}
-
-interface ZombieAttackAction {
-  state: ZombieAttackState
-}
-
-export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAction> =
-  {
-    ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "ZombieAttack"),
-    onFrame: ({ game, entity, action }) => {
-      if (!entity) return
-      const data = action.data
-      const metaData = getMetaData<EntityMetaDataInterface>(entity)
-      const attack = metaData.propriety.attack
-      if (!attack) return
-
-      const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
-      if (!enemy) data.state = ZombieAttackState.FindEnemy
-
-      if (data.state === ZombieAttackState.FindEnemy) {
-        const newEnemy = entityQueryFindOne(game, {
-          faction: EntityFaction.self,
-          circleSearch: {
-            center: entity.position,
-            radius: 15,
-          },
-        })
-
-        if (!newEnemy) {
-          action.nextTick = game.time + 300
-          return
-        }
-
-        entity.entityAttackTargetIri = newEnemy["@id"]
-        data.state = ZombieAttackState.GoToEnemy
-      }
-
-      if (enemy && data.state === ZombieAttackState.GoToEnemy) {
-        const result = entityGoToEntityWithGround(entity, enemy, game)
-        if (result?.unreachable) {
-          return
-        }
-
-        if (entityCanBeAttackEntity(entity, enemy)) {
-          data.state = ZombieAttackState.attackEnemy
-        }
-      }
-
-      if (enemy && data.state === ZombieAttackState.attackEnemy) {
-        if (!entityAttackEntity(entity, enemy)) {
-          data.state = ZombieAttackState.GoToEnemy
-        }
-
-        action.nextTick = game.time + attack.attackSpeed
-      }
-    },
-    factory: () => {
-      const data: ZombieAttackAction = {
-        state: ZombieAttackState.FindEnemy,
-      }
-
-      return jsonLdFactory(ZombieAttackActionMetadata["@type"], { data })
-    },
-  }

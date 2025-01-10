@@ -9,14 +9,7 @@ import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
 import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
 import { appLdType } from "@/src/AppLdType"
-
-export enum EntityState {
-  wait = "wait",
-  move = "move",
-  under_construction = "under_construction",
-  builded = "builded",
-  attack = "attack",
-}
+import { EntityState } from "@/src/game/entity/EntityState"
 
 export enum EntityFaction {
   enemy = "enemy",
@@ -27,7 +20,6 @@ export default interface EntityInterface
   extends BaseJsonLdInterface,
     BoundingBox3DInterface {
   rotation: Vector3Interface
-  maxLife: number
   life: number
   inventory: InventoryBagInterface
   actions: ActionBagInterface
@@ -50,6 +42,12 @@ export function isGroundEntity(
   entity: EntityInterface,
 ): entity is GroundEntityInterface {
   return entity["@type"].startsWith(appLdType.entityGround)
+}
+
+export function isRessourceEntity(
+  entity: EntityInterface,
+): entity is RessourceEntityInterface {
+  return entity["@type"].startsWith(appLdType.entityRessource)
 }
 
 export function isBuildingEntity(

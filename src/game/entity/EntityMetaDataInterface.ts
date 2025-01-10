@@ -4,6 +4,8 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
 interface EntityAttackPriorityInterface {
   attackRange: number
@@ -19,6 +21,12 @@ interface EntityPriorityInterface {
   work?: {
     numberOfWorker: number
   }
+  health?: {
+    maxLife: number
+  }
+  size?: Vector3Interface
+  scale?: Vector3Interface
+  defaultActions?: JsonLdType[]
 }
 
 export interface EntityMetaDataInterface<T extends EntityInterface = EntityInterface>

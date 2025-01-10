@@ -1,5 +1,5 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
   jsonLdFactory,
   JsonLdIri,
@@ -13,17 +13,11 @@ import { addToInventory } from "@/src/game/inventory/addToInventory"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { appLdType } from "@/src/AppLdType"
-
-enum CutTheWoodState {
-  CutTheThree = "CutTheThree",
-  GoToTree = "GoToTree",
-  GoToBuild = "GoToBuild",
-}
+import { EntityState } from "@/src/game/entity/EntityState"
 
 interface CutTheWoodDataInterface {
   treeEntityIri?: JsonLdIri
   timberHouseEntityIri?: JsonLdIri
-  state: CutTheWoodState
 }
 
 export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
@@ -32,9 +26,8 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
     onFrame: ({ entity, action, game }) => {
       const data = action.data
       if (!entity) return
-      entity.state = EntityState.move
 
-      if (data.state === CutTheWoodState.GoToTree) {
+      if (entity.state === EntityState.go_to_tree) {
         const newTreeEntity =
           data.treeEntityIri && game.entities[data.treeEntityIri]
             ? game.entities[data.treeEntityIri]
@@ -53,22 +46,22 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
         if (entity?.currentPathOfCoordinate?.isFinish) {
           newTreeEntity.life -= 10
-          data.state = CutTheWoodState.CutTheThree
+          entity.state = EntityState.cut_the_tree
         }
       }
 
-      if (data.state === CutTheWoodState.CutTheThree) {
+      if (entity.state === EntityState.cut_the_tree) {
         addToInventory(entity.inventory, woodRessourceMetadata["@type"], 1)
         const woodRessource = getInventoryItem(
           entity.inventory,
           woodRessourceMetadata["@type"],
         )
         if (woodRessource.quantity > 50) {
-          data.state = CutTheWoodState.GoToBuild
+          entity.state = EntityState.go_to_put_ressource
         }
       }
 
-      if (data.state === CutTheWoodState.GoToBuild) {
+      if (entity.state === EntityState.go_to_put_ressource) {
         const newTimberHouseEntity = data.timberHouseEntityIri
           ? game.entities[data.timberHouseEntityIri]
           : (findClosestInGame(entity, appLdType.timberHouse, game) as
@@ -88,15 +81,11 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
             10,
           )
 
-          data.state = CutTheWoodState.GoToTree
+          entity.state = EntityState.go_to_tree
         }
       }
     },
     factory: () => {
-      const data: CutTheWoodDataInterface = {
-        state: CutTheWoodState.GoToTree,
-      }
-
-      return jsonLdFactory(cutTheWoodActionMetaData["@type"], { data })
+      return jsonLdFactory(cutTheWoodActionMetaData["@type"], {})
     },
   }

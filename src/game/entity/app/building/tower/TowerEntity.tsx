@@ -26,6 +26,14 @@ export const towerEntityMetaData = entityMedataFactory({
     work: {
       numberOfWorker: 2,
     },
+    health: {
+      maxLife: 100,
+    },
+    size: {
+      x: 2,
+      y: 2,
+      z: 2,
+    },
   },
   label: "Tour de défense",
   ["@type"]: appLdType.tower,

@@ -3,11 +3,13 @@ import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
   EntityFaction,
-  EntityState,
   isBuildingEntity,
   isCharacterEntity,
   isGroundEntity,
 } from "@/src/game/entity/EntityInterface"
+import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
+import { addAction } from "@/src/game/action/addAction"
+import { EntityState } from "@/src/game/entity/EntityState"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -21,9 +23,7 @@ export function entityFactory<
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    faction: EntityFaction.self,
     workers: [],
-    life: 50,
     rotation: {
       x: 0,
       y: 0,
@@ -35,11 +35,6 @@ export function entityFactory<
       y: 0.01,
       z: 0,
     },
-    size: {
-      x: 1,
-      y: 1,
-      z: 1,
-    },
     actions: {},
     inventory: {},
 
@@ -47,8 +42,8 @@ export function entityFactory<
     ...(payload?.entity ?? {}),
   }
 
-  if (!baseEntity.maxLife) {
-    baseEntity.maxLife = baseEntity.life
+  if (metaData?.propriety?.health) {
+    baseEntity.life = metaData.propriety.health.maxLife
   }
 
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
@@ -59,12 +54,29 @@ export function entityFactory<
       : EntityState.builded
   }
 
+  if (!entity?.faction && (isCharacterEntity(entity) || isBuildingEntity(entity))) {
+    entity.faction = EntityFaction.self
+  }
+
   if (isCharacterEntity(entity)) {
     entity.state = EntityState.wait
   }
 
   if (isGroundEntity(entity)) {
     entity.position.y -= 0.5
+  }
+
+  if (metaData?.propriety?.size) {
+    entity.size = metaData.propriety.size
+  }
+
+  if (metaData?.propriety?.defaultActions) {
+    metaData.propriety.defaultActions.forEach((actionType) => {
+      const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory({
+        entity,
+      })
+      addAction(entity.actions, action)
+    })
   }
 
   return entity

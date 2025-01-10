@@ -1,18 +1,19 @@
-import EntityInterface, { EntityState } from "@/src/game/entity/EntityInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 import { useAnimations, useGLTF } from "@react-three/drei"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useEffect, useMemo, useRef } from "react"
 import { Box3, Group, Vector3 } from "three"
 import { SkeletonUtils } from "three-stdlib"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/WorkerEntity"
 import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityState } from "@/src/game/entity/EntityState"
 
 interface Model3DPropsInterface {
   entity: EntityInterface
 }
 
 export const Model3D = ({ entity }: Model3DPropsInterface) => {
-  const metaData = getMetaData(entity)
+  const metaData = getMetaData<EntityMetaDataInterface>(entity)
   if (!metaData.asset?.model3d) {
     return
   }
@@ -24,6 +25,7 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
 
   useEffect(() => {
     if (!metaData.asset?.animationMapper || !entity?.state) return
+    console.log(Object.keys(actions))
     const animationMapped = metaData.asset.animationMapper[entity.state]
 
     if (animationMapped && actions[animationMapped] && actions) {
@@ -51,6 +53,9 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   }, [entity.state])
 
   const scaleFactor = useMemo(() => {
+    if (metaData?.propriety?.scale) {
+      return vector3ToArray(metaData?.propriety.scale)
+    }
     const boundingBox = new Box3().setFromObject(clone)
     const size = new Vector3()
     boundingBox.getSize(size)
@@ -60,19 +65,6 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
 
     return [scaleX, scaleY, scaleZ]
   }, [clone])
-
-  if (entity["@type"] === workerEntityMetaData["@type"]) {
-    return (
-      <primitive
-        ref={ref}
-        object={clone}
-        scale={[0.1, 0.1, 0.1]}
-        castShadow={true}
-        receiveShadow={true}
-        rotation={vector3ToArray(entity.rotation)}
-      />
-    )
-  }
 
   return (
     <primitive

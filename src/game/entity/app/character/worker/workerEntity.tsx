@@ -2,9 +2,9 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./robot.glb?url"
 import iconFarmerSrc from "./iconFarmer.png"
-import { EntityState } from "@/src/game/entity/EntityInterface"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
+import { EntityState } from "@/src/game/entity/EntityState"
 
 export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "worker"),
@@ -20,16 +20,19 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   propriety: {
     inventorySize: 10,
     speed: 0.02,
-  },
-  defaultEntity: () => {
-    return {
-      life: 50,
-      size: {
-        x: 0.2,
-        y: 0.2,
-        z: 0.2,
-      },
-    }
+    size: {
+      x: 0.2,
+      y: 0.2,
+      z: 0.2,
+    },
+    scale: {
+      x: 0.1,
+      y: 0.1,
+      z: 0.1,
+    },
+    health: {
+      maxLife: 25,
+    },
   },
 })
 

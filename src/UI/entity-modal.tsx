@@ -33,16 +33,20 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
         </CardHeader>
 
         <div className="grid gap-4 py-4">
-          <div className="flex items-center gap-4">
-            <Leaf className="h-5 w-5 text-green-600" />
-            <div className="font-semibold">
-              Vie : {entity.life} / {entity.maxLife}
-            </div>
-          </div>
-          <Progress
-            value={(entity.life / entity.maxLife) * 100}
-            className="h-2 bg-amber-200"
-          />
+          {metaData.propriety?.health && (
+            <>
+              <div className="flex items-center gap-4">
+                <Leaf className="h-5 w-5 text-green-600" />
+                <div className="font-semibold">
+                  Vie : {entity.life} / {metaData.propriety.health.maxLife}
+                </div>
+              </div>
+              <Progress
+                value={(entity.life / metaData.propriety.health.maxLife) * 100}
+                className="h-2 bg-amber-200"
+              />
+            </>
+          )}
 
           {metaData.propriety?.speed && (
             <div className="flex items-center gap-4">
