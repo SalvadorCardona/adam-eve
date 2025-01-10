@@ -19,10 +19,6 @@ function findClosestNode(
   )
 }
 
-const calculateDistance = (a: Vector3Interface, b: Vector3Interface): number => {
-  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.z - a.z, 2))
-}
-
 export function findShortestPath(
   start: Vector3Interface,
   end: Vector3Interface,
@@ -92,13 +88,16 @@ export function findShortestPath(
   }
 
   const path: EntityInterface[] = []
-  let currentNodeId: string | null = endId
+  let currentNodeId: string | undefined | null = endId
   let totalDistance = 0
 
   while (currentNodeId) {
     const currentNode = nodes.get(currentNodeId)
     const previousNodeId = previousNodes.get(currentNodeId)
-    const previousNode = previousNodeId ? nodes.get(previousNodeId) : null
+    const previousNode = previousNodeId ? nodes.get(previousNodeId) : undefined
+    if (!currentNode) {
+      continue
+    }
     const distance = previousNode
       ? distanceBetweenVector(previousNode.position, currentNode.position)
       : 0

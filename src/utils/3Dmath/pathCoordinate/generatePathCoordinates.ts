@@ -60,7 +60,7 @@ export function currentPathCoordinateIsFinish(
   currentPathCoordinate: CurrentPathCoordinateInterface,
 ): boolean {
   return (
-    currentPathCoordinate.pathCoordinate.length <=
+    currentPathCoordinate.pathCoordinate.length - 1 ===
     currentPathCoordinate.currentCoordinate
   )
 }

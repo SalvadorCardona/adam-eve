@@ -5,12 +5,12 @@ import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
-import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import {
   entityAttackEntity,
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 
 interface ZombieAttackAction {}
 
@@ -22,7 +22,10 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       const metaData = getMetaData<EntityMetaDataInterface>(entity)
       const attack = metaData.propriety.attack
       if (!attack) return
-      const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
+
+      const enemy = entity.entityAttackTargetIri
+        ? entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
+        : undefined
 
       if (!enemy) entity.state = EntityState.find_enemy
 
@@ -48,18 +51,14 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       }
 
       if (enemy && entity.state === EntityState.go_to_enemy) {
-        const result = entityGoToEntityWithGround(entity, enemy, game)
-        console.log(result)
-        if (result?.unreachable) {
-          return
-        }
+        const result = entityGoPosition({ entity, target: enemy })
 
         if (entityCanBeAttackEntity(entity, enemy)) {
-          entity.state = EntityState.attack_enemy
+          entity.state = EntityState.attack
         }
       }
 
-      if (enemy && entity.state === EntityState.attack_enemy) {
+      if (enemy && entity.state === EntityState.attack) {
         if (!entityAttackEntity(entity, enemy)) {
           entity.state = EntityState.go_to_enemy
         }

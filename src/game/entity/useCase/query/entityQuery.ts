@@ -65,7 +65,7 @@ export function entityQuery(
 
   if (id && !Array.isArray(id)) {
     const entity = Object.hasOwn(game.entities, id) ? game.entities[id] : undefined
-    if (entity) return [entity]
+    return entity ? [entity] : []
   }
 
   let entities: EntityInterface[] = type

@@ -17,9 +17,18 @@ export const Model2D = ({ entity }: Model2DPropsInterface) => {
   }
 
   const image = useMemo(
-    () => imageToTexture(metaData.asset.model2d, "un"),
+    () =>
+      metaData?.asset?.model2d
+        ? imageToTexture(metaData.asset.model2d, "un")
+        : undefined,
     [metaData.asset.model2d],
   )
+
+  if (!image) {
+    console.warn("No Asset 2d")
+
+    return
+  }
 
   return (
     <sprite scale={vector3ToArray(entity.size)}>

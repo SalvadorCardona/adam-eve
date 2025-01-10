@@ -1,5 +1,4 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { Vector3d } from "leva/plugin"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
@@ -7,11 +6,17 @@ import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 
 interface EntityGoPositionParams {
   entity: EntityInterface
-  target: Vector3d | EntityInterface
+  target: Vector3Interface | EntityInterface
 }
 
 interface EntityGoPositionOutput {
   distance: number
+}
+
+const isEntityInterface = (
+  e: Vector3Interface | EntityInterface,
+): e is EntityInterface => {
+  return Object.hasOwn(e, "position")
 }
 
 export function entityGoPosition({
@@ -21,7 +26,7 @@ export function entityGoPosition({
   const meta = getMetaData<EntityMetaDataInterface>(entity)
   const speed = meta.propriety.speed ?? 0.01
 
-  const targetPosition: Vector3Interface = Object.hasOwn(target, "position")
+  const targetPosition: Vector3Interface = isEntityInterface(target)
     ? target.position
     : target
 

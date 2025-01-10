@@ -10,7 +10,6 @@ import {
 } from "@/src/utils/3Dmath/Vector"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
-import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
 interface CreateBuildingPropsInterface {}
@@ -68,17 +67,17 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     const height = Math.abs(point.z - startPosition.z)
     const depths = Math.abs(point.y - startPosition.y)
 
-    const newPosition = aroundVector({
+    const newPosition = {
       x: (point.x + startPosition.x) / 2,
       y: (point.y + startPosition.y) / 2,
       z: (point.z + startPosition.z) / 2,
-    })
+    }
 
-    const newSize = aroundVector({
+    const newSize = {
       x: width,
       y: depths,
       z: height,
-    })
+    }
 
     game.userControl.mouseState.bounding3D = createBounding3D({
       size: newSize,

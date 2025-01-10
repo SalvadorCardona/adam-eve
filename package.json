@@ -9,7 +9,8 @@
     "test": "vitest",
     "build-gh": "vite build --base=https://salvadorcardona.github.io/adam-eve/",
     "github-pages": "gh-pages -d dist",
-    "deploy-gh": "pnpm build-gh && pnpm github-pages"
+    "deploy-gh": "pnpm build-gh && pnpm github-pages",
+    "lint": "tsc"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.2",

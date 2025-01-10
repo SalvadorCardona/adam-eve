@@ -14,18 +14,33 @@ interface Model3DPropsInterface {
 
 export const Model3D = ({ entity }: Model3DPropsInterface) => {
   const metaData = getMetaData<EntityMetaDataInterface>(entity)
-  if (!metaData.asset?.model3d) {
+
+  const pathModel = useMemo(() => {
+    if (metaData.asset?.multiModel3d) {
+      const randomIndex = Math.floor(
+        Math.random() * metaData.asset.multiModel3d.length,
+      )
+      return metaData.asset.multiModel3d[randomIndex]
+    }
+
+    if (metaData?.asset?.model3d) {
+      return metaData.asset.model3d
+    }
+
+    return undefined
+  }, [entity["@id"]])
+
+  if (!pathModel) {
     return
   }
 
-  const glb = useGLTF(metaData.asset.model3d)
+  const glb = useGLTF(pathModel)
   const ref = useRef<Group>()
   const clone = useMemo(() => SkeletonUtils.clone(glb.scene), [glb.scene])
   const { actions } = useAnimations(glb.animations, ref)
 
   useEffect(() => {
     if (!metaData.asset?.animationMapper || !entity?.state) return
-    console.log(Object.keys(actions))
     const animationMapped = metaData.asset.animationMapper[entity.state]
 
     if (animationMapped && actions[animationMapped] && actions) {
@@ -42,10 +57,14 @@ export const Model3D = ({ entity }: Model3DPropsInterface) => {
   useEffect(() => {
     if (!ref.current) return
     ref.current.traverse((child) => {
+      // @ts-ignore
       if (child.isMesh) {
         child.castShadow = true
+        // @ts-ignore
         child.material = child.material.clone()
+        // @ts-ignore
         child.material.transparent = entity.state === EntityState.under_construction
+        // @ts-ignore
         child.material.opacity =
           entity.state === EntityState.under_construction ? 0.5 : 1
       }

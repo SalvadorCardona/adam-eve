@@ -18,7 +18,7 @@ export const EntityDecorator = ({
 }: EntityDecoratorPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
-  
+
   const isSelected = useMemo(() => {
     return game.userControl.entitiesSelected.includes(entity["@id"])
   }, [game.userControl.entitiesSelected])
@@ -27,7 +27,8 @@ export const EntityDecorator = ({
 
   if (!EntityComponent) {
     EntityComponent = Model2D
-    if (entityMetaData.asset?.model3d) EntityComponent = Model3D
+    if (entityMetaData.asset?.model3d || entityMetaData.asset?.multiModel3d)
+      EntityComponent = Model3D
   }
 
   return (

@@ -14,6 +14,7 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     icon: iconFarmerSrc,
     animationMapper: {
       [EntityState.move]: "Walking",
+      [EntityState.go_to_tree]: "Walking",
       [EntityState.wait]: "Idle",
     },
   },

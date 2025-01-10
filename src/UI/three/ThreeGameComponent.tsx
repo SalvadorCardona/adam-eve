@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from "@react-three/drei"
+import { PerspectiveCamera, Stats } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
@@ -50,7 +50,7 @@ function Child() {
         )
       })}
       <ControlKeyboard></ControlKeyboard>
-      {/*<Stats showPanel={1} className={""} />*/}
+      <Stats showPanel={1} className={""} />
       <Lights></Lights>
       {/*<OrbitControls*/}
       {/*  rotation={[-0.3, -0.05, -0.02]}*/}
