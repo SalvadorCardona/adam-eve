@@ -23,36 +23,35 @@ export const EntityDecorator = ({
     return game.userControl.entitiesSelected.includes(entity["@id"])
   }, [game.userControl.entitiesSelected])
 
-  let EntityComponent = entityMetaData.component
+  const EntityComponent = useMemo(() => {
+    console.log("started mounted")
+    if (entityMetaData.component) return entityMetaData.component
+    if (entityMetaData?.asset?.model2d) return Model2D
+    if (entityMetaData?.asset?.model3d) return Model3D
 
-  if (!EntityComponent) {
-    EntityComponent = Model2D
-    if (entityMetaData.asset?.model3d || entityMetaData.asset?.multiModel3d)
-      EntityComponent = Model3D
-  }
+    return Model2D
+  }, [])
 
   return (
-    <ErrorBoundary>
-      <group
-        uuid={"entity-" + entity["@id"]}
-        // onClick={clickOnEntity}
-        position={vector3ToArray(entity.position)}
-      >
-        <EntityComponent entity={entity}></EntityComponent>
-        {bgColor && (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[entity.size.x, entity.size.z]} />
-            <meshStandardMaterial color={bgColor} />
-          </mesh>
-        )}
-        {isSelected && (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[entity.size.x, entity.size.z]} />
-            <meshStandardMaterial color={"yellow"} />
-          </mesh>
-        )}
-      </group>
-    </ErrorBoundary>
+    <group
+      uuid={"entity-" + entity["@id"]}
+      // onClick={clickOnEntity}
+      position={vector3ToArray(entity.position)}
+    >
+      <EntityComponent entity={entity}></EntityComponent>
+      {bgColor && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[entity.size.x, entity.size.z]} />
+          <meshStandardMaterial color={bgColor} />
+        </mesh>
+      )}
+      {isSelected && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[entity.size.x, entity.size.z]} />
+          <meshStandardMaterial color={"yellow"} />
+        </mesh>
+      )}
+    </group>
   )
 }
 

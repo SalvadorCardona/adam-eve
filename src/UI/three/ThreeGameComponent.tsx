@@ -1,7 +1,6 @@
 import { PerspectiveCamera, Stats } from "@react-three/drei"
 import { GameProvider } from "@/src/UI/provider/GameProvider"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
 import React from "react"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
@@ -14,6 +13,8 @@ import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
 import { gameLoader } from "@/src/game/game/gameLoader"
 import { CreateBuilding } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuilding"
 import { SelectOnMap } from "@/src/game/actionUser/app/SelectUserAction/SelectOnMap"
+import { EntitiesLoop } from "@/src/UI/three/EntitiesLoop"
+import { WebGLRenderer } from "three"
 
 export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
   const currentGame = game ? gameLoader(game) : gameLoader(mockGames.defaultMock)
@@ -26,6 +27,7 @@ export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
           camera={{
             fov: 100,
           }}
+          gl={(canvas) => new WebGLRenderer({ canvas })}
         >
           <Child></Child>
         </Canvas>
@@ -41,16 +43,9 @@ function Child() {
 
   return (
     <>
-      {Object.values(gameContext.game.entities).map((entity) => {
-        return (
-          <EntityDecorator
-            key={"decorator" + entity["@id"]}
-            entity={entity}
-          ></EntityDecorator>
-        )
-      })}
+      <EntitiesLoop />
       <ControlKeyboard></ControlKeyboard>
-      <Stats showPanel={1} className={""} />
+      <Stats showPanel={0} className={""} />
       <Lights></Lights>
       {/*<OrbitControls*/}
       {/*  rotation={[-0.3, -0.05, -0.02]}*/}
@@ -64,7 +59,6 @@ function Child() {
         position={vector3ToArray(gameContext.game.camera.position)}
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
-      {/*<Environment preset="dawn" background blur={0.5} />*/}
       <GlobalGround></GlobalGround>
     </>
   )

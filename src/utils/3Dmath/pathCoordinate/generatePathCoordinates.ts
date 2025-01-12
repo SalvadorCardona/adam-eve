@@ -1,5 +1,4 @@
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
-import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -63,25 +62,4 @@ export function currentPathCoordinateIsFinish(
     currentPathCoordinate.pathCoordinate.length - 1 ===
     currentPathCoordinate.currentCoordinate
   )
-}
-
-/**
- * Permet de générer la route entre entité
- */
-export function generatePathCoordinates(
-  start: Vector3Interface,
-  end: Vector3Interface,
-  steps?: number,
-): PathCoordinate {
-  const currentSteps = steps ?? Math.round(distanceBetweenVector(start, end) * 50)
-  const path: Vector3Interface[] = []
-  for (let i = 0; i <= currentSteps; i++) {
-    const t = i / currentSteps
-    const x = start.x + t * (end.x - start.x)
-    const y = start.y + t * (end.y - start.y)
-    const z = start.z + t * (end.z - start.z)
-    path.push({ x, y, z })
-  }
-
-  return path
 }

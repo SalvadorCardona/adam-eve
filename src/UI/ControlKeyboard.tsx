@@ -50,7 +50,8 @@ interface ElemPropsInterface {}
 
 const Elem = ({}: ElemPropsInterface) => {
   const [sub, get] = useKeyboardControls<Controls>()
-  const game = useGameContext().game
+  const gameContext = useGameContext()
+  const game = gameContext.game
   const moveSize = 0.7
 
   useEffect(() => {
@@ -75,21 +76,27 @@ const Elem = ({}: ElemPropsInterface) => {
   useFrame(() => {
     if (get().back) {
       game.camera.position.z += moveSize
+      gameContext.updateGame(game)
     }
     if (get().forward) {
       game.camera.position.z -= moveSize
+      gameContext.updateGame(game)
     }
     if (get().left) {
       game.camera.position.x -= moveSize
+      gameContext.updateGame(game)
     }
     if (get().right) {
       game.camera.position.x += moveSize
+      gameContext.updateGame(game)
     }
     if (get().showGrid) {
       game.userControl.showGrid = !game.userControl.showGrid
+      gameContext.updateGame(game)
     }
     if (get().backAction) {
       game.userControl.currentAction = undefined
+      gameContext.updateGame(game)
     }
   })
 

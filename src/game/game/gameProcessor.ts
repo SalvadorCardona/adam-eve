@@ -1,10 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 
 export function gameProcessor(game: GameInterface) {
   game.time++

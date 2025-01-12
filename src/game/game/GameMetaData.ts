@@ -25,7 +25,7 @@ const ldType = JsonLdTypeFactory(appLdType.game)
 
 export const gameMetadata: GameMetadataInterface = {
   propriety: {
-    gameFrame: 60,
+    gameFrame: 45,
   },
   "@type": appLdType.game,
   factory: gameFactory,

@@ -11,7 +11,8 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const [imageSrc, setImageSrc] = useState(mouseIcon.normal)
   const SIZE = 50 // Taille de l'image du curseur
   const { imageData, setImageData } = useImageLoader(imageSrc)
-  const game = useGameContext().game
+  const gameContext = useGameContext()
+  const game = gameContext.game
 
   useEffect(() => {
     if (game.userControl.currentAction?.mouseIcon) {
@@ -25,9 +26,11 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const handleScroll = (e: WheelEvent) => {
     if (e.deltaY > 0) {
       game.camera.position.y += 0.1
+      gameContext.updateGame(game)
     }
     if (e.deltaY < 0) {
       game.camera.position.y -= 0.1
+      gameContext.updateGame(game)
     }
   }
 

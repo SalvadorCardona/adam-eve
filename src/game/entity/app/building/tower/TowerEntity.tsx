@@ -36,7 +36,7 @@ export const towerEntityMetaData = entityMedataFactory({
     },
   },
   label: "Tour de défense",
-  ["@type"]: appLdType.tower,
+  ["@type"]: appLdType.towerEntity,
   defaultEntity: () => {
     const towerAttackAction = TowerAttackActionMetadata.factory()
     const actionBag: ActionBagInterface = {}

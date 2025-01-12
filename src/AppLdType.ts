@@ -19,8 +19,8 @@ export const appLdType = {
   saveGame: "save-game",
   userAction: "user-action",
   // Building
-  timberHouse: JsonLdTypeFactory(entityBuilding, "timberHouse"),
-  tower: JsonLdTypeFactory(entityBuilding, "tower"),
+  timberHouseEntity: JsonLdTypeFactory(entityBuilding, "timberHouse"),
+  towerEntity: JsonLdTypeFactory(entityBuilding, "tower"),
   // Action
   findWorkerAction: JsonLdTypeFactory(typeAction, "findWorkerCharacter"),
   cutTheWoodAction: JsonLdTypeFactory(typeAction, "cutTheWood"),

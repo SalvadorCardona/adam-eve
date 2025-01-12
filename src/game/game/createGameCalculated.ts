@@ -1,8 +1,7 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import createUniqId from "@/src/utils/id/createUniqId"
 import { getByLdType, JsonLdTypeContainerInterface } from "@/src/container/container"
 import { appLdType } from "@/src/AppLdType"
-import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { jsonLdFactory, JsonLDItem, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import EntityInterface, {
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
@@ -10,23 +9,30 @@ import EntityInterface, {
 interface HashInterface {
   hash: string
   count: number
+  items: EntityInterface[]
 }
 
 export interface GameCalculatedInterface
-  extends JsonLdTypeContainerInterface<HashInterface> {}
+  extends JsonLdTypeContainerInterface<HashInterface> {
+  global: JsonLDItem<HashInterface>
+}
 
 export function createGameCalculated(game: GameInterface): GameCalculatedInterface {
   return {
     [appLdType.entityBuilding]: hashFactory(game, appLdType.entityBuilding),
     [appLdType.entityCharacter]: hashFactory(game, appLdType.entityCharacter),
     [appLdType.entityGround]: hashFactory(game, appLdType.entityGround),
+    global: jsonLdFactory<HashInterface>("global", {
+      count: Object.values(game.entities).length,
+    }),
   }
 }
 
 function hashFactory(game: GameInterface, jsonLdType: JsonLdType) {
+  const items = getByLdType<EntityInterface>(game.entities, jsonLdType)
   return jsonLdFactory<HashInterface>(jsonLdType, {
-    hash: createUniqId(),
-    count: getByLdType(game.entities, jsonLdType).length,
+    count: items.length,
+    items,
   })
 }
 
@@ -39,4 +45,7 @@ export function updateGameCalculated(
   if (!type) return
 
   game.gameCalculated[type] = hashFactory(game, type)
+  game.gameCalculated["global"] = jsonLdFactory<HashInterface>("global", {
+    count: Object.values(game.entities).length,
+  })
 }

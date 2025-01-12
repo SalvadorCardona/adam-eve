@@ -66,6 +66,7 @@ export function getEntityBaseType(entity: EntityInterface): JsonLdType | undefin
   if (isBuildingEntity(entity)) return appLdType.entityBuilding
   if (isGroundEntity(entity)) return appLdType.entityGround
   if (isCharacterEntity(entity)) return appLdType.entityCharacter
+  if (isRessourceEntity(entity)) return appLdType.entityRessource
 
   return undefined
 }

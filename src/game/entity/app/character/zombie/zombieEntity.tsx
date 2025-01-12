@@ -2,6 +2,8 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset from "./zombie2.glb?url"
 import iconFarmerSrc from "./img.png"
+import zombieUrl from "./zombie.png"
+
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
@@ -40,6 +42,7 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   label: "Zombie",
   asset: {
     model3d: asset,
+    model2d: zombieUrl,
     icon: iconFarmerSrc,
     animationMapper: {
       [EntityState.move]: "CharacterArmature|Walk",

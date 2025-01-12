@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react"
-import GameInterface, { GameState } from "@/src/game/game/GameInterface"
+import GameInterface from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
 import { getMetaData } from "@/src/game/game/app/configGame"
@@ -21,12 +21,6 @@ export const GameProvider = ({
     const metaData = getMetaData<GameMetadataInterface>(game)
     const frame = 1000 / (metaData.propriety.gameFrame * game.gameSpeed)
     const intervalId = setInterval(() => {
-      if (game.gameState === GameState.PAUSE) {
-        updateGame(game)
-
-        return
-      }
-
       const newGame = gameProcessor(game)
       updateGame(newGame)
     }, frame)
@@ -35,7 +29,7 @@ export const GameProvider = ({
   }, [game.gameState, game.gameSpeed])
 
   const updateGame = (game: GameInterface) => {
-    setReactGame({ ...game })
+    // setReactGame({ ...game })
     setVersion(version + 1)
   }
 

@@ -52,7 +52,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
       if (entity.state === EntityState.go_to_put_ressource) {
         const newTimberHouseEntity = entityQueryFindOne(game, {
-          "@type": appLdType.timberHouse,
+          "@type": appLdType.timberHouseEntity,
         })
 
         if (!newTimberHouseEntity) return

@@ -4,7 +4,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = getByLdType<EntityInterface>(game.entities, "entity/ground")
-
+  
   updateGround({ entities: grounds })
 }
 
