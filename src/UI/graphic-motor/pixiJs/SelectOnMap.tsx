@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Container, Graphics, useApp } from "@pixi/react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { arrayToVector3, Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
