@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import { gameFactory } from "@/src/game/game/gameFactory"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
 import { gameLoader } from "@/src/game/game/gameLoader"
-import ThreeGameComponent from "@/src/UI/three/ThreeGameComponent"
+import GameComponent from "@/src/UI/GameComponent"
 
 export const Route = createFileRoute("/newGame")({
   component: RouteComponent,
@@ -22,5 +22,5 @@ function RouteComponent() {
     })
   }, [])
 
-  return <ThreeGameComponent game={game}></ThreeGameComponent>
+  return <GameComponent game={game}></GameComponent>
 }

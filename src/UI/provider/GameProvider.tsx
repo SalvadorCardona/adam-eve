@@ -4,6 +4,7 @@ import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
+import { createPubSub } from "@/src/utils/functionnal/pubsub"
 
 interface InputGameProviderPropsInterface {
   game: GameInterface
@@ -16,6 +17,7 @@ export const GameProvider = ({
 }: InputGameProviderPropsInterface) => {
   const [, setReactGame] = useState<GameInterface>(game)
   const [version, setVersion] = useState<number>(0)
+  const pubSub = createPubSub()
 
   useEffect(() => {
     const metaData = getMetaData<GameMetadataInterface>(game)
@@ -23,6 +25,7 @@ export const GameProvider = ({
     const intervalId = setInterval(() => {
       const newGame = gameProcessor(game)
       updateGame(newGame)
+      pubSub.publish(newGame)
     }, frame)
 
     return () => clearInterval(intervalId)
@@ -30,12 +33,13 @@ export const GameProvider = ({
 
   const updateGame = (game: GameInterface) => {
     // setReactGame({ ...game })
-    setVersion(version + 1)
+    // setVersion(version + 1)
   }
 
   return (
     <GameContext.Provider
       value={{
+        pubSub,
         game,
         updateGame,
         version,

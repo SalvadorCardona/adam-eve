@@ -7,7 +7,6 @@ import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
-import { BoundingBox3DInterface } from "@/src/utils/3Dmath/boudingBox"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 
@@ -16,10 +15,10 @@ export enum EntityFaction {
   self = "self",
 }
 
-export default interface EntityInterface
-  extends BaseJsonLdInterface,
-    BoundingBox3DInterface {
+export default interface EntityInterface extends BaseJsonLdInterface {
   rotation: Vector3Interface
+  size: Vector3Interface
+  position: Vector3Interface
   life: number
   inventory: InventoryBagInterface
   actions: ActionBagInterface

@@ -10,6 +10,7 @@ import EntityInterface, {
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -32,7 +33,7 @@ export function entityFactory<
     connections: {},
     position: {
       x: 0,
-      y: 0.01,
+      y: 0,
       z: 0,
     },
     actions: {},
@@ -47,6 +48,8 @@ export function entityFactory<
   }
 
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
+
+  entity.position = aroundVector(entity.position, true)
 
   if (isBuildingEntity(entity)) {
     entity.state = metaData?.propriety?.ressourceForConstruction

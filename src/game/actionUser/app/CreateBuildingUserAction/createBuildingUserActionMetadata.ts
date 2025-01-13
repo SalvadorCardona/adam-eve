@@ -5,7 +5,6 @@ import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { diviseVector } from "@/src/utils/3Dmath/diviseVector"
@@ -47,7 +46,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           const entity = metaInterface.factory({
             game,
             entity: {
-              position: aroundVector({ ...newPosition, y: 0 }, true),
+              position: newPosition,
               rotation: { x: 0, z: 0, y: rotationY },
             },
           })
@@ -62,13 +61,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           metaInterface.factory({
             game,
             entity: {
-              position: aroundVector(
-                aroundVector(
-                  { ...game.userControl.mouseState.bounding3D.position, y: 0 },
-                  true,
-                ),
-                true,
-              ),
+              position: game.userControl.mouseState.bounding3D.position,
               rotation: { x: 0, z: 0, y: rotationY },
             },
           }),

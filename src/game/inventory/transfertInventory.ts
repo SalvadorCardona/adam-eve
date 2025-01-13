@@ -13,7 +13,6 @@ export function transfertInventory(
   const sourceItem = getInventoryItem(source, inventoryType)
   const targetItem = getInventoryItem(target, inventoryType)
   const sourceQuantity = sourceItem.quantity
-  const targetQuantity = targetItem.quantity
 
   const transferableQuantity = Math.min(sourceQuantity, quantity)
 

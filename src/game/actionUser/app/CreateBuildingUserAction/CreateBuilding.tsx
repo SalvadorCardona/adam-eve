@@ -1,11 +1,8 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
-import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
-import { EntityDecorator } from "@/src/game/entity/EntityDecorator"
 import React, { useMemo } from "react"
-
-interface CreateBuildingPropsInterface {}
+import { EntityDecoratorResolver } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 
 export const CreateBuilding = () => {
   const game = useGameContext().game
@@ -23,7 +20,7 @@ export const CreateBuilding = () => {
     return entityMetaData.factory({
       game: game,
       entity: {
-        position: aroundVector({ ...mousePositon, y: 0 }, true),
+        position: mousePositon,
         rotation: { x: 0, z: 0, y: rotationY },
       },
     })
@@ -33,7 +30,9 @@ export const CreateBuilding = () => {
     return entityMetaData.canBeBuild({ entity, game })
   }, [mousePositon])
 
-  const bgColor = canBeBuild ? "yellow" : "red"
+  const color = canBeBuild ? "yellow" : "red"
 
-  return <EntityDecorator bgColor={bgColor} entity={entity}></EntityDecorator>
+  return (
+    <EntityDecoratorResolver color={color} entity={entity}></EntityDecoratorResolver>
+  )
 }

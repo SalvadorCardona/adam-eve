@@ -18,7 +18,13 @@ export enum GameMode {
   GOD = "god",
 }
 
+export enum GraphicMotor {
+  PIXI_JS = "PIXI_JS",
+  THREE_JS = "THREE_JS",
+}
+
 export default interface GameInterface extends BaseJsonLdInterface {
+  graphicMotor: GraphicMotor
   gameSpeed: number
   gameState: GameState
   gameMode: GameMode

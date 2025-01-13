@@ -1,21 +1,15 @@
-import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Model2D } from "@/src/game/entity/components/Model2D"
-import { Model3D } from "@/src/game/entity/components/Model3D"
 import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { Component, ReactNode, useMemo } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
+import { Model2DPixiJs } from "@/src/UI/graphic-motor/pixiJs/Model2DPixiJs"
+import { Container, Graphics } from "@pixi/react"
+import { EntityDecoratorResolverPropsInterface } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 
-interface EntityDecoratorPropsInterface {
-  entity: EntityInterface
-  bgColor?: string
-}
-
-export const EntityDecorator = ({
+export const EntityDecoratorPixiJs = ({
   entity,
-  bgColor,
-}: EntityDecoratorPropsInterface) => {
+  color,
+}: EntityDecoratorResolverPropsInterface) => {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
 
@@ -24,34 +18,39 @@ export const EntityDecorator = ({
   }, [game.userControl.entitiesSelected])
 
   const EntityComponent = useMemo(() => {
-    console.log("started mounted")
     if (entityMetaData.component) return entityMetaData.component
-    if (entityMetaData?.asset?.model2d) return Model2D
-    if (entityMetaData?.asset?.model3d) return Model3D
 
-    return Model2D
+    return Model2DPixiJs
   }, [])
 
   return (
-    <group
-      uuid={"entity-" + entity["@id"]}
-      // onClick={clickOnEntity}
-      position={vector3ToArray(entity.position)}
+    <Container
+      name={"entity-" + entity["@id"]}
+      x={entity.position.x}
+      y={entity.position.y}
     >
-      <EntityComponent entity={entity}></EntityComponent>
-      {bgColor && (
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[entity.size.x, entity.size.z]} />
-          <meshStandardMaterial color={bgColor} />
-        </mesh>
+      <EntityComponent entity={entity} />
+      {color && (
+        <Graphics
+          draw={(g) => {
+            g.clear()
+            g.beginFill(color)
+            g.drawRect(0, 0, entity.size.x, entity.size.z)
+            g.endFill()
+          }}
+        />
       )}
       {isSelected && (
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[entity.size.x, entity.size.z]} />
-          <meshStandardMaterial color={"yellow"} />
-        </mesh>
+        <Graphics
+          draw={(g) => {
+            g.clear()
+            g.beginFill(0xffff00) // Yellow color
+            g.drawRect(0, 0, entity.size.x, entity.size.z)
+            g.endFill()
+          }}
+        />
       )}
-    </group>
+    </Container>
   )
 }
 

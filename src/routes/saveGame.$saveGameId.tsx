@@ -2,7 +2,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router"
 import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
 import { saveGameMetadata } from "@/src/game/saveGame/SaveGameMetadataInterface"
 import React from "react"
-import ThreeGameComponent from "@/src/UI/three/ThreeGameComponent"
+import GameComponent from "@/src/UI/GameComponent"
 import { NotFound } from "@/components/NotFound"
 
 export const Route = createFileRoute("/saveGame/$saveGameId")({
@@ -25,5 +25,5 @@ function SaveGameComponent() {
     throw new Error("Game not found")
   }
 
-  return <ThreeGameComponent game={saveGame.game}></ThreeGameComponent>
+  return <GameComponent game={saveGame.game}></GameComponent>
 }

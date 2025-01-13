@@ -10,15 +10,12 @@ export function gameLoader(game: GameInterface): GameInterface {
   if (!getByLdType(game.actions, theDeathActionMetadata["@type"]).length) {
     addAction(game.actions, theDeathActionMetadata.factory({ game }))
   }
-  if (
-    !getByLdType(game.actions, appLdType.findWorkerAction).length
-  ) {
-    const meta = getMetaData<ActionMetadataInterface<any>>(appLdType.findWorkerAction)
+  if (!getByLdType(game.actions, appLdType.findWorkerAction).length) {
+    const meta = getMetaData<ActionMetadataInterface<any>>(
+      appLdType.findWorkerAction,
+    )
     addAction(game.actions, meta.factory({ game }))
   }
-  // if (!getByLdType(game.entities, buildRequest["@type"]).length) {
-  //   addEntityToGame(game, buildRequest.factory())
-  // }
 
   return game
 }

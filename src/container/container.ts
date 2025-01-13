@@ -6,6 +6,12 @@ import {
   JsonTypedLdInterface,
 } from "@/src/utils/jsonLd/jsonLd"
 
+interface ContainerWithCache {
+  "@cache": {
+    version: number
+  }
+}
+
 export interface ContainerInterface<T = any> {
   [key: string]: T
 }
@@ -38,6 +44,7 @@ export function updateContainer<T extends BaseJsonLdInterface>(
     container[item["@id"]] = item
     return
   }
+
   if (action === "remove") {
     deleteContainerKey(container, item["@id"])
     return

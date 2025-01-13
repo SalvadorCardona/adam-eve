@@ -1,49 +1,27 @@
-import { PerspectiveCamera, Stats } from "@react-three/drei"
-import { GameProvider } from "@/src/UI/provider/GameProvider"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { InterfaceComponent } from "@/src/UI/InterfaceComponent"
-import React from "react"
-import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
-import GlobalGround from "@/src/game/GlobalGround"
-import { MouseCursor } from "@/src/UI/MouseCursor/MouseCursor"
 import { Canvas } from "@react-three/fiber"
-import GameInterface from "@/src/game/game/GameInterface"
-import { mockGames } from "@/src/game/mockGame/mockGame"
-import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
-import { gameLoader } from "@/src/game/game/gameLoader"
+import { WebGLRenderer } from "three"
+import { EntitiesLoopThreeJs } from "@/src/UI/graphic-motor/three/EntitiesLoopThreeJs"
+import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
+import { PerspectiveCamera, Stats } from "@react-three/drei"
 import { CreateBuilding } from "@/src/game/actionUser/app/CreateBuildingUserAction/CreateBuilding"
 import { SelectOnMap } from "@/src/game/actionUser/app/SelectUserAction/SelectOnMap"
-import { EntitiesLoop } from "@/src/UI/three/EntitiesLoop"
-import { WebGLRenderer } from "three"
+import { vector3ToArray } from "@/src/utils/3Dmath/Vector"
+import GlobalGround from "@/src/game/GlobalGround"
+import React from "react"
 
-export default function ThreeGameComponent({ game }: { game?: GameInterface }) {
-  const currentGame = game ? gameLoader(game) : gameLoader(mockGames.defaultMock)
-  return (
-    <main className={"h-screen overflow-hidden"}>
-      <GameProvider game={currentGame}>
-        <Canvas
-          id={"game"}
-          shadows
-          camera={{
-            fov: 100,
-          }}
-          gl={(canvas) => new WebGLRenderer({ canvas })}
-        >
-          <Child></Child>
-        </Canvas>
-        <InterfaceComponent></InterfaceComponent>
-        <MouseCursor></MouseCursor>
-      </GameProvider>
-    </main>
-  )
-}
-
-function Child() {
+export function ThreeComponent() {
   const gameContext = useGameContext()
-
   return (
-    <>
-      <EntitiesLoop />
+    <Canvas
+      id={"game"}
+      shadows
+      camera={{
+        fov: 100,
+      }}
+      gl={(canvas) => new WebGLRenderer({ canvas })}
+    >
+      <EntitiesLoopThreeJs />
       <ControlKeyboard></ControlKeyboard>
       <Stats showPanel={0} className={""} />
       <Lights></Lights>
@@ -60,7 +38,7 @@ function Child() {
         rotation={vector3ToArray(gameContext.game.camera.rotation)}
       />
       <GlobalGround></GlobalGround>
-    </>
+    </Canvas>
   )
 }
 

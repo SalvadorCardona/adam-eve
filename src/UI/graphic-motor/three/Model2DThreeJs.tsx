@@ -8,7 +8,7 @@ interface Model2DPropsInterface {
   entity: EntityInterface
 }
 
-export const Model2D = ({ entity }: Model2DPropsInterface) => {
+export const Model2DThreeJs = ({ entity }: Model2DPropsInterface) => {
   const metaData = getMetaData(entity)
   if (!metaData.asset?.model2d) {
     console.warn("Component 2D not found")

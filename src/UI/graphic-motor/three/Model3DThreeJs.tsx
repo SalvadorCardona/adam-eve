@@ -12,7 +12,7 @@ interface Model3DPropsInterface {
   entity: EntityInterface
 }
 
-export const Model3D = ({ entity }: Model3DPropsInterface) => {
+export const Model3DThreeJs = ({ entity }: Model3DPropsInterface) => {
   const metaData = getMetaData<EntityMetaDataInterface>(entity)
 
   const pathModel = useMemo(() => {

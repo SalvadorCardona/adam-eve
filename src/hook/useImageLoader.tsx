@@ -17,8 +17,8 @@ interface Output {
 const useImageLoader = (src: string): Output => {
   const [imageData, setImageData] = useState<ImageData>({
     ready: false,
-    width: 0,
-    height: 0,
+    x: 0,
+    y: 0,
     image: null,
     ratio: 0,
     src,
@@ -30,8 +30,8 @@ const useImageLoader = (src: string): Output => {
     img.onload = () => {
       setImageData({
         ready: true,
-        width: img.width,
-        height: img.height,
+        x: img.width,
+        y: img.height,
         image: img,
         ratio: img.width / img.height,
         src,
@@ -40,8 +40,8 @@ const useImageLoader = (src: string): Output => {
     img.onerror = () => {
       setImageData({
         ready: false,
-        width: 0,
-        height: 0,
+        x: 0,
+        y: 0,
         image: null,
         ratio: 0,
         src,
