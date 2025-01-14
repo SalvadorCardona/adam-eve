@@ -1,6 +1,7 @@
 import {
   isVector3,
   Vector2Interface,
+  vector2ToVector3,
   Vector3Interface,
   vector3ToVector2,
 } from "@/src/utils/3Dmath/Vector"
@@ -31,6 +32,15 @@ export function bounding3ToBounding2(
   return {
     size: vector3ToVector2(boundingBox.size),
     position: vector3ToVector2(boundingBox.position),
+  }
+}
+
+export function bounding2ToBounding3(
+  boundingBox: BoundingBox2DInterface,
+): BoundingBox3DInterface {
+  return {
+    size: vector2ToVector3(boundingBox.size),
+    position: vector2ToVector3(boundingBox.position),
   }
 }
 

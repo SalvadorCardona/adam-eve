@@ -4,7 +4,6 @@ import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 
 interface PixiContainerInterface {
-  containers: ContainerChild[]
   currentContainer?: ContainerChild
   addChild: (containerChild: ContainerChild) => void
   removeChild: (containerChild: ContainerChild) => void
@@ -13,7 +12,6 @@ interface PixiContainerInterface {
 export const PixiContainer = createContext<PixiContainerInterface>({
   addChild(containerChild: ContainerChild): void {},
   removeChild(containerChild: ContainerChild): void {},
-  containers: [],
 })
 
 interface PixiContainerProviderPropsInterface {
@@ -41,12 +39,15 @@ export const PixiContainerProvider = ({
   }, [currentContainer])
 
   const args: PixiContainerInterface = {
-    addChild: (containerChild) => _currentContainer?.addChild(containerChild),
+    addChild: (containerChild) => {
+      _currentContainer?.addChild(containerChild)
+      console.log(containerChild)
+      console.log(_currentContainer?.children?.length)
+    },
     removeChild: (containerChild) => {
       _currentContainer?.removeChild(containerChild)
     },
     currentContainer: _currentContainer,
-    containers: [],
   }
 
   return <PixiContainer.Provider value={args}>{children}</PixiContainer.Provider>

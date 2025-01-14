@@ -85,7 +85,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         game.userControl.entitiesSelected = []
       }
 
-      console.log(entities)
+      console.log("entites", Object.values(game.entities).length)
       game.userControl.rotation = 0
     },
     data: {

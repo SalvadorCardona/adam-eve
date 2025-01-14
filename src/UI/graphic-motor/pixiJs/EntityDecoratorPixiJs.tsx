@@ -42,7 +42,6 @@ export const EntityDecoratorPixiJs = ({
   }, [])
 
   const position = useMemo(() => {
-    console.log("positon")
     return {
       x: entity.position.x,
       y: entity.position.z,

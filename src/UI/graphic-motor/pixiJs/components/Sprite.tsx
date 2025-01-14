@@ -1,5 +1,5 @@
 import { Assets, Sprite as BaseSprite, SpriteOptions } from "pixi.js"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 
@@ -28,18 +28,22 @@ export const Sprite = ({ options, image, position }: GraphicsPropsInterface) => 
     }
   }, [])
 
-  const container = useMemo(() => {
-    if (!texture) return new BaseSprite(options)
+  const containerRef = useRef<BaseSprite | null>(null)
 
-    return new BaseSprite({ ...options, texture: texture })
+  useEffect(() => {
+    if (!texture) {
+      containerRef.current = new BaseSprite(options)
+    } else {
+      containerRef.current = new BaseSprite({ ...options, texture: texture })
+    }
   }, [texture, options, _image])
 
   useEffect(() => {
-    if (position) {
-      container.x = position.x
-      container.y = position.y
+    if (position && containerRef.current) {
+      containerRef.current.x = position.x
+      containerRef.current.y = position.y
     }
   }, [position])
 
-  return container ? <PixiDecorator container={container}></PixiDecorator> : null
+  return containerRef.current ? <PixiDecorator container={containerRef.current}></PixiDecorator> : null
 }
