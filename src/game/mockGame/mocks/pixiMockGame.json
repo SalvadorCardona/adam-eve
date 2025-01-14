@@ -1,0 +1,83 @@
+{
+  "@type": "game",
+  "@id": "game/1rmju7",
+  "gameSpeed": 1,
+  "gameState": "run",
+  "gameMode": "normal",
+  "time": 4654,
+  "actions": {
+    "action/TheDeathActionMetadata/mwk6ef": {
+      "@type": "action/TheDeathActionMetadata",
+      "@id": "action/TheDeathActionMetadata/mwk6ef",
+      "nextTick": 4701
+    },
+    "action/findWorkerCharacter/f3d0ck": {
+      "@type": "action/findWorkerCharacter",
+      "@id": "action/findWorkerCharacter/f3d0ck",
+      "data": {
+        "state": "GoToTree"
+      },
+      "nextTick": 4681
+    }
+  },
+  "entities": {
+  },
+  "inventory": {},
+  "createdAt": "2025-01-08T13:47:39.087Z",
+  "camera": {
+    "fov": 50,
+    "zoom": 0,
+    "position": {
+      "x": 0,
+      "y": 10,
+      "z": 8.4
+    },
+    "rotation": {
+      "x": -0.7853981633974483,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "userControl": {
+    "entitiesSelected": [],
+    "showGrid": true,
+    "mouseState": {
+      "bounding3D": {
+        "position": {
+          "x": 6.394709157764188,
+          "y": -0.19999999999999918,
+          "z": -3.730181039781452
+        },
+        "size": {
+          "x": 0,
+          "z": 0,
+          "y": 0
+        }
+      }
+    },
+    "currentAction": {
+      "mouseIcon": "/src/UI/MouseCursor/hammer.png",
+      "@type": "user-action/create-building",
+      "data": {
+        "entityMetaData": {
+          "@type": "entity/ground/grass",
+          "asset": {
+            "icon": "/src/game/entity/app/ground/grass/grassIcon.png"
+          },
+          "label": "Herbe"
+        }
+      }
+    },
+    "rotation": 0
+  },
+  "gameCalculated": {
+    "building": {
+      "hash": "1tijiij",
+      "count": 0
+    },
+    "character": {
+      "hash": "12d8nt6",
+      "count": 0
+    }
+  }
+}
