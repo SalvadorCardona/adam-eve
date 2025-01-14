@@ -4,14 +4,14 @@ import { Graphics as BaseGraphics } from "pixi.js"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { config } from "@/src/app/config"
-import { PixiProvider } from "@/src/UI/graphic-motor/pixiJs/components/PixiAppComponent"
+import { PixiProvider } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/PixiProvider"
 import { ApplicationOptions } from "pixi.js/lib/app/Application"
 import { Graphics } from "./components/Graphics"
-import { Text } from "@/src/UI/graphic-motor/pixiJs/components/Text"
-import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
+import { SelectOnMap } from "@/src/UI/graphic-motor/pixiJs/SelectOnMap"
+import { EntitiesLoopPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntitiesLoopPixiJs"
 
-export const PixiJsComponent = () => {
+export const PixijsAppComponent = () => {
   const gameContext = useGameContext()
   const [size, setSize] = useState<Vector2Interface>({
     x: window.innerWidth,
@@ -68,25 +68,17 @@ export const PixiJsComponent = () => {
     height: size.y,
     background: 0x1099bb,
   }
-  const bunnyUrl = "https://pixijs.io/pixi-react/img/bunny.png"
 
   return (
     <>
       <PixiProvider options={options}>
-        {/*<Container x={game.camera.position.x} y={game.camera.position.z}>*/}
-        {/*  {gameContext.game.userControl.showGrid && <Grid size={size} />}*/}
-        {/*  <EntitiesLoopThreeJs></EntitiesLoopThreeJs>*/}
-        {/*</Container>*/}
-        <Container>
-          <Sprite options={{ x: 5, y: 80 }} image={bunnyUrl} />
+        <Grid size={size}></Grid>
+        <Container
+          position={{ x: game.camera.position.x, y: game.camera.position.y }}
+        >
+          <EntitiesLoopPixiJs></EntitiesLoopPixiJs>
         </Container>
-        <Container>
-          <Text text={"aqsqdqsda"}></Text>
-          <Text text={"bsqdqsd"}></Text>
-          <Text text={"c"}></Text>
-          <Grid size={size}></Grid>
-        </Container>
-        {/*<SelectOnMap></SelectOnMap>*/}
+        <SelectOnMap></SelectOnMap>
       </PixiProvider>
     </>
   )
@@ -99,11 +91,11 @@ interface GridPropsInterface {
 const Grid = ({ size }: GridPropsInterface) => {
   const drawGrid = (graphics: BaseGraphics) => {
     const lineWidth = 1
-    const lineColor = 0xffffff
+    const lineColor = "white"
 
     const cellSize = config.pixiJs2dItemSize
     const { x: width, y: height } = size
-    graphics.setStrokeStyle({ width: 1, color: lineColor })
+    // graphics.setStrokeStyle({ width: 1, color: lineColor })
 
     // Dessiner les lignes verticales
     for (let x = 0; x <= width; x += cellSize) {
@@ -116,6 +108,10 @@ const Grid = ({ size }: GridPropsInterface) => {
       graphics.moveTo(0, y) // Début de la ligne
       graphics.lineTo(width, y) // Fin de la ligne
     }
+
+    graphics.fill(0xff3300)
+    graphics.stroke({ width: lineWidth, color: lineColor })
   }
-  return <Graphics draw={drawGrid} options={{ position: { x: 0, z: 0 } }} />
+
+  return <Graphics draw={drawGrid} options={{ position: { x: 0, y: 0 } }} />
 }

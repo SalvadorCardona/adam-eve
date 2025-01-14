@@ -40,6 +40,7 @@ export function consommeCurrentPathCoordinate(entity: EntityInterface) {
   }
 
   entity.rotation.y = Math.atan2(normalizedDirection.x, normalizedDirection.z)
+  console.log(normalizedDirection.x)
 
   entity.position.x += normalizedDirection.x * speed
   entity.position.z += normalizedDirection.z * speed

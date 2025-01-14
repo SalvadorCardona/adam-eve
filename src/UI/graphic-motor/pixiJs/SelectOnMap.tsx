@@ -1,124 +1,83 @@
 import React, { useEffect, useState } from "react"
-import useGameContext from "@/src/UI/provider/useGameContext"
-import { arrayToVector3, Vector3Interface } from "@/src/utils/3Dmath/Vector"
-import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
+import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
-import "@pixi/events"
+import useGameContext from "@/src/UI/provider/useGameContext"
+import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
+
+const mouse: Vector2Interface = { x: 0, y: 0 }
+let isDragging = false
 
 interface CreateBuildingPropsInterface {}
 
 export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
-  const [size, setSize] = useState<Vector3Interface | undefined>(undefined)
-  const [position, setPosition] = useState<Vector3Interface>({ x: 0, z: 0, y: 0 })
-  const [isDragging, setIsDragging] = useState(false)
-  const [startPosition, setStartPosition] = useState<Vector3Interface>({
-    x: 0,
-    z: 0,
-    y: 0,
-  })
-  const app = useApp()
+  const appContext = usePixiApp()
   const game = useGameContext().game
+  const app = appContext.app
+  const [currentPosition, setCurrentPosition] = useState<Vector2Interface | null>(
+    null,
+  )
+  const [startPosition, setStartPosition] = useState<Vector2Interface | null>(null)
+  const [endPosition, setEndPosition] = useState<Vector2Interface | null>(null)
 
-  const handleMouseMove = (event) => {
-    console.log(event)
-    if (!isGame(event)) return
-    const point = event.data.global
+  useEffect(() => {
+    const handleMouseDown = (event: MouseEvent) => {
+      isDragging = true
+      setStartPosition({ x: event.clientX, y: event.clientY })
+      setCurrentPosition({ x: event.clientX, y: event.clientY })
+    }
 
-    game.userControl.mouseState.bounding3D.position = arrayToVector3([
-      point.x,
-      0,
-      point.y,
-    ])
-    console.log(event)
-    if (!isDragging) {
-      game.userControl.mouseState.bounding3D.size = { x: 0, z: 0, y: 0 }
-      setSize({ x: 0, y: 0, z: 0 })
-      const entity = entityQueryFindOne(game, {
-        circleSearch: {
-          center: game.userControl.mouseState.bounding3D.position,
-          radius: 1,
-        },
+    const handleMouseMove = (event: MouseEvent) => {
+      if (startPosition) {
+        setCurrentPosition({ x: event.clientX, y: event.clientY })
+      }
+    }
+
+    const handleMouseUp = (event: MouseEvent) => {
+      isDragging = false
+      setEndPosition({ x: event.clientX, y: event.clientY })
+      setCurrentPosition(null)
+    }
+
+    app.canvas.addEventListener("mousedown", handleMouseDown)
+    app.canvas.addEventListener("mousemove", handleMouseMove)
+    app.canvas.addEventListener("mouseup", handleMouseUp)
+
+    return () => {
+      app.canvas.removeEventListener("mousedown", handleMouseDown)
+      app.canvas.removeEventListener("mousemove", handleMouseMove)
+      app.canvas.removeEventListener("mouseup", handleMouseUp)
+    }
+  }, [app, startPosition, startPosition])
+
+  useEffect(() => {
+    if (startPosition && currentPosition && !isDragging) {
+      console.count("envie")
+      const width = currentPosition.x - startPosition.x
+      const height = currentPosition.y - startPosition.y
+
+      game.userControl.mouseState.bounding3D = createBounding3D({
+        size: { x: width, z: height, y: 0 },
+        position: { x: startPosition.x, z: startPosition.y, y: 0 },
       })
 
-      if (entity) {
-        game.userControl.entitySelectedByHover = entity["@id"]
-      }
-
-      return
+      onSelectEntityUserActionMetadata.onSelectZone({
+        game: game,
+      })
     }
-
-    const width = Math.abs(point.x - startPosition.x)
-    const height = Math.abs(point.y - startPosition.z)
-
-    const newPosition = {
-      x: (point.x + startPosition.x) / 2,
-      y: 0,
-      z: (point.y + startPosition.z) / 2,
-    }
-
-    const newSize = {
-      x: width,
-      y: 0,
-      z: height,
-    }
-
-    game.userControl.mouseState.bounding3D = createBounding3D({
-      size: newSize,
-      position: newPosition,
-    })
-
-    setSize(newSize)
-    setPosition(newPosition)
-  }
-
-  const handleMouseDown = (event) => {
-    console.log(event)
-    if (!isGame(event)) return
-    setIsDragging(true)
-    const point = event.data.global
-    setStartPosition({ x: point.x, y: 0, z: point.y })
-  }
-
-  const handleMouseUp = (event: PIXI.InteractionEvent) => {
-    console.log(event)
-    if (!isGame(event)) return
-    setIsDragging(false)
-  }
-
-  const isGame = (event: PIXI.InteractionEvent): boolean => {
-    console.log(event)
-    return event.target && event.target instanceof Container
-  }
-
-  useEffect(() => {
-    if (isDragging) return
-
-    onSelectEntityUserActionMetadata.onSelectZone({
-      game: game,
-    })
-  }, [isDragging])
-
-  useEffect(() => {
-    app.stage.on("pointerup", handleMouseUp)
-    app.stage.on("pointermove", handleMouseMove)
-    app.stage.on("pointerdown", handleMouseDown)
-    return () => {
-      app.stage.off("pointermove", handleMouseMove)
-      app.stage.off("pointerdown", handleMouseDown)
-      app.stage.off("pointerup", handleMouseUp)
-    }
-  }, [app.stage])
-
-  if (!size) return null
+  }, [endPosition, currentPosition])
 
   return (
     <Graphics
       draw={(g) => {
-        g.clear()
-        g.beginFill(0x00ff00, 0.5)
-        g.drawRect(position.x - size.x / 2, position.z - size.z / 2, size.x, size.z)
-        g.endFill()
+        if (startPosition && currentPosition) {
+          const width = currentPosition.x - startPosition.x
+          const height = currentPosition.y - startPosition.y
+          g.rect(startPosition.x, startPosition.y, width, height)
+        }
+        g.fill(0x650a5a)
+        g.stroke({ width: 2, color: 0xfeeb77 })
       }}
     />
   )

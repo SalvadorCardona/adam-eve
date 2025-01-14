@@ -10,6 +10,7 @@ import { appLdType } from "@/src/AppLdType"
 import { diviseVector } from "@/src/utils/3Dmath/diviseVector"
 import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/boudingBox"
 import EntityInterface from "@/src/game/entity/EntityInterface"
+import { config } from "@/src/app/config"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -39,9 +40,12 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const isMultipleBuilding =
         bounding2DSize(game.userControl.mouseState.bounding3D) > 1
       const entities: EntityInterface[] = []
-
       if (isMultipleBuilding) {
-        const positions = diviseVector(bounding.min, bounding.max)
+        const positions = diviseVector(
+          bounding.min,
+          bounding.max,
+          config.pixiJs2dItemSize,
+        )
         positions.forEach((newPosition) => {
           const entity = metaInterface.factory({
             game,

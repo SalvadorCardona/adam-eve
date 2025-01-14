@@ -23,16 +23,11 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   },
   propriety: {
     inventorySize: 10,
-    speed: 0.02,
+    speed: 1.4,
     size: {
-      x: 0.2,
-      y: 0.2,
-      z: 0.2,
-    },
-    scale: {
-      x: 0.1,
-      y: 0.1,
-      z: 0.1,
+      x: 50,
+      y: 50,
+      z: 50,
     },
     health: {
       maxLife: 25,

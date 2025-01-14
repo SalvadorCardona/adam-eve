@@ -1,30 +1,34 @@
-import { Graphics as BaseGraphics } from "pixi.js"
-import { GraphicsContext } from "pixi.js/lib/scene/graphics/shared/GraphicsContext"
-import { GraphicsOptions } from "pixi.js/lib/scene/graphics/shared/Graphics"
-import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/components/UsePixiApp"
-import { useEffect, useMemo } from "react"
+import { Text as TextBase, TextOptions, TextStyle } from "pixi.js"
+import React from "react"
+import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
 
 interface GraphicsPropsInterface {
-  options?: GraphicsOptions | GraphicsContext
-  draw?: (graphic: BaseGraphics) => void
+  text?: string
+  options?: TextOptions
 }
 
-export const Graphics = ({ options, draw }: GraphicsPropsInterface) => {
-  const app = usePixiApp().app
-  const graphic = useMemo(() => {
-    return new BaseGraphics(options)
-  }, [])
+export const Text = ({ text, options }: GraphicsPropsInterface) => {
+  const style = new TextStyle({
+    fontFamily: "Arial",
+    fontSize: 36,
+    fontStyle: "italic",
+    fontWeight: "bold",
+    stroke: { color: "#4a1850", width: 5, join: "round" },
+    dropShadow: {
+      color: "#000000",
+      blur: 4,
+      angle: Math.PI / 6,
+      distance: 6,
+    },
+    wordWrap: true,
+    wordWrapWidth: 440,
+  })
 
-  useEffect(() => {
-    if (draw) {
-      draw(graphic)
-    }
-    app?.stage.addChild(graphic)
+  const container = new TextBase({
+    text: text ? text : "your text",
+    ...options,
+    style,
+  })
 
-    return () => {
-      app?.stage.removeChild(graphic)
-    }
-  }, [graphic])
-
-  return
+  return <PixiDecorator container={container}></PixiDecorator>
 }

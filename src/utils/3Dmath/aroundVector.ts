@@ -2,13 +2,17 @@ import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 
 export function aroundVector(
   vector: Partial<Vector3Interface>,
-  aroundNearHalf: boolean = false,
+  roundToMultiple: number = 0,
 ): Vector3Interface {
-  if (!aroundNearHalf) {
+  if (roundToMultiple > 0) {
+    function roundToNearestMultiple(value: number, multiple: number): number {
+      return Math.round(value / multiple) * multiple
+    }
+
     return {
-      z: Math.round(vector.z ?? 0),
-      y: Math.round(vector.y ?? 0),
-      x: Math.round(vector.x ?? 0),
+      z: roundToNearestMultiple(vector.z ?? 0, roundToMultiple),
+      y: roundToNearestMultiple(vector.y ?? 0, roundToMultiple),
+      x: roundToNearestMultiple(vector.x ?? 0, roundToMultiple),
     }
   }
 

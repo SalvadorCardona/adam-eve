@@ -1,36 +1,210 @@
 {
   "@type": "game",
-  "@id": "game/1rmju7",
+  "@id": "game/et8h9i",
+  "graphicMotor": "PIXI_JS",
   "gameSpeed": 1,
   "gameState": "run",
   "gameMode": "normal",
-  "time": 4654,
+  "time": 2725,
   "actions": {
-    "action/TheDeathActionMetadata/mwk6ef": {
+    "action/TheDeathActionMetadata/1towvlo": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/mwk6ef",
-      "nextTick": 4701
+      "@id": "action/TheDeathActionMetadata/1towvlo",
+      "nextTick": 2751
     },
-    "action/findWorkerCharacter/f3d0ck": {
+    "action/findWorkerCharacter/1dhp5cw": {
       "@type": "action/findWorkerCharacter",
-      "@id": "action/findWorkerCharacter/f3d0ck",
-      "data": {
-        "state": "GoToTree"
-      },
-      "nextTick": 4681
+      "@id": "action/findWorkerCharacter/1dhp5cw",
+      "nextTick": 2761
     }
   },
   "entities": {
+    "entity/character/worker/19t4dwy": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/19t4dwy",
+      "workers": [],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 633,
+        "y": 0,
+        "x": 756
+      },
+      "actions": {
+        "action/cutTheWood/2huwu9": {
+          "@type": "action/cutTheWood",
+          "@id": "action/cutTheWood/2huwu9"
+        }
+      },
+      "inventory": {
+        "action/wood": {
+          "@type": "action/wood",
+          "@id": "action/wood/ufcus8",
+          "quantity": 50
+        }
+      },
+      "life": 25,
+      "faction": "self",
+      "state": "cut_the_tree",
+      "size": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "currentPathOfCoordinate": {
+        "totalDistance": 0,
+        "pathCoordinate": [],
+        "currentCoordinate": 0,
+        "isFinish": true,
+        "unreachable": true,
+        "hash": "[\"entity/character/worker/19t4dwy\",{\"z\":751,\"y\":0,\"x\":657}]"
+      }
+    },
+    "entity/building/timberHouse/1x5c1ue": {
+      "@type": "entity/building/timberHouse",
+      "@id": "entity/building/timberHouse/1x5c1ue",
+      "workers": [
+        "entity/character/worker/19t4dwy",
+        "entity/character/worker/pshqgm"
+      ],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 726,
+        "y": 0,
+        "x": 746
+      },
+      "actions": {},
+      "inventory": {},
+      "life": 100,
+      "state": "builded",
+      "faction": "self",
+      "size": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      }
+    },
+    "entity/ressource/tree/148ejma": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/148ejma",
+      "workers": [],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 751,
+        "y": 0,
+        "x": 657
+      },
+      "actions": {},
+      "inventory": {},
+      "life": 35,
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    "entity/ressource/tree/49czpy": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/49czpy",
+      "workers": [],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 714,
+        "y": 0,
+        "x": 623
+      },
+      "actions": {},
+      "inventory": {},
+      "life": 75,
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    "entity/ressource/tree/8w4ays": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/8w4ays",
+      "workers": [],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 683,
+        "y": 0,
+        "x": 609
+      },
+      "actions": {},
+      "inventory": {},
+      "life": 75,
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    "entity/ressource/tree/zn8qqg": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/zn8qqg",
+      "workers": [],
+      "rotation": {
+        "x": 0,
+        "z": 0,
+        "y": 0
+      },
+      "connections": {},
+      "position": {
+        "z": 650,
+        "y": 0,
+        "x": 607
+      },
+      "actions": {},
+      "inventory": {},
+      "life": 75,
+      "size": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
   },
-  "inventory": {},
-  "createdAt": "2025-01-08T13:47:39.087Z",
+  "inventory": {
+    "action/wood": {
+      "@type": "action/wood",
+      "@id": "action/wood/1rqrv00",
+      "quantity": 780
+    }
+  },
+  "createdAt": "2025-01-14T14:05:48.755Z",
   "camera": {
     "fov": 50,
     "zoom": 0,
     "position": {
       "x": 0,
       "y": 10,
-      "z": 8.4
+      "z": 0
     },
     "rotation": {
       "x": -0.7853981633974483,
@@ -44,9 +218,9 @@
     "mouseState": {
       "bounding3D": {
         "position": {
-          "x": 6.394709157764188,
-          "y": -0.19999999999999918,
-          "z": -3.730181039781452
+          "x": 851,
+          "y": 0,
+          "z": 807
         },
         "size": {
           "x": 0,
@@ -60,24 +234,238 @@
       "@type": "user-action/create-building",
       "data": {
         "entityMetaData": {
-          "@type": "entity/ground/grass",
+          "@type": "entity/ressource/tree",
           "asset": {
-            "icon": "/src/game/entity/app/ground/grass/grassIcon.png"
+            "icon": "/src/game/entity/app/ressource/tree/iconSrc.png",
+            "multiModel3d": [
+              "/src/game/entity/app/ressource/tree/assets/tree.glb",
+              "/src/game/entity/app/ressource/tree/assets/tree-tall.glb",
+              "/src/game/entity/app/ressource/tree/assets/tree-autumn.glb"
+            ]
           },
-          "label": "Herbe"
+          "propriety": {
+            "speed": 0.01,
+            "attack": {
+              "damage": 1,
+              "attackRange": 1,
+              "attackSpeed": 60
+            },
+            "health": {
+              "maxLife": 75
+            },
+            "size": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            }
+          }
         }
       }
     },
     "rotation": 0
   },
   "gameCalculated": {
-    "building": {
-      "hash": "1tijiij",
-      "count": 0
+    "entity/building": {
+      "@type": "entity/building",
+      "@id": "entity/building/46hh8j",
+      "count": 1,
+      "items": [
+        {
+          "@type": "entity/building/timberHouse",
+          "@id": "entity/building/timberHouse/1x5c1ue",
+          "workers": [
+            "entity/character/worker/19t4dwy",
+            "entity/character/worker/pshqgm"
+          ],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 726,
+            "y": 0,
+            "x": 746
+          },
+          "actions": {},
+          "inventory": {},
+          "life": 100,
+          "state": "builded",
+          "faction": "self",
+          "size": {
+            "x": 2,
+            "y": 2,
+            "z": 2
+          }
+        }
+      ]
     },
-    "character": {
-      "hash": "12d8nt6",
-      "count": 0
+    "entity/character": {
+      "@type": "entity/character",
+      "@id": "entity/character/1btnr0j",
+      "count": 6,
+      "items": [
+        {
+          "@type": "entity/character/worker",
+          "@id": "entity/character/worker/19t4dwy",
+          "workers": [],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 633,
+            "y": 0,
+            "x": 756
+          },
+          "actions": {
+            "action/cutTheWood/2huwu9": {
+              "@type": "action/cutTheWood",
+              "@id": "action/cutTheWood/2huwu9"
+            }
+          },
+          "inventory": {
+            "action/wood": {
+              "@type": "action/wood",
+              "@id": "action/wood/ufcus8",
+              "quantity": 50
+            }
+          },
+          "life": 25,
+          "faction": "self",
+          "state": "cut_the_tree",
+          "size": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "currentPathOfCoordinate": {
+            "totalDistance": 0,
+            "pathCoordinate": [],
+            "currentCoordinate": 0,
+            "isFinish": true,
+            "unreachable": true,
+            "hash": "[\"entity/character/worker/19t4dwy\",{\"z\":751,\"y\":0,\"x\":657}]"
+          }
+        }
+      ]
+    },
+    "entity/ground": {
+      "@type": "entity/ground",
+      "@id": "entity/ground/5yknw7",
+      "count": 0,
+      "items": []
+    },
+    "global": {
+      "@type": "global",
+      "@id": "global/rd2r2v",
+      "count": 11
+    },
+    "entity/ressource": {
+      "@type": "entity/ressource",
+      "@id": "entity/ressource/1af8r3s",
+      "count": 4,
+      "items": [
+        {
+          "@type": "entity/ressource/tree",
+          "@id": "entity/ressource/tree/148ejma",
+          "workers": [],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 751,
+            "y": 0,
+            "x": 657
+          },
+          "actions": {},
+          "inventory": {},
+          "life": 35,
+          "size": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "@type": "entity/ressource/tree",
+          "@id": "entity/ressource/tree/49czpy",
+          "workers": [],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 714,
+            "y": 0,
+            "x": 623
+          },
+          "actions": {},
+          "inventory": {},
+          "life": 75,
+          "size": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "@type": "entity/ressource/tree",
+          "@id": "entity/ressource/tree/8w4ays",
+          "workers": [],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 683,
+            "y": 0,
+            "x": 609
+          },
+          "actions": {},
+          "inventory": {},
+          "life": 75,
+          "size": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "@type": "entity/ressource/tree",
+          "@id": "entity/ressource/tree/zn8qqg",
+          "workers": [],
+          "rotation": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+          },
+          "connections": {},
+          "position": {
+            "z": 650,
+            "y": 0,
+            "x": 607
+          },
+          "actions": {},
+          "inventory": {},
+          "life": 75,
+          "size": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ]
     }
   }
 }

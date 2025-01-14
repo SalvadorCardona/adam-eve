@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Application, ApplicationOptions } from "pixi.js"
-import { PixiContext } from "@/src/UI/graphic-motor/pixiJs/components/PixiContext"
+import { PixiContext } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/PixiContext"
 import LoaderComponent from "@/components/LoaderComponent"
-import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/components/UsePixiApp"
+import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
 
 export const PixiProvider: React.FC<{

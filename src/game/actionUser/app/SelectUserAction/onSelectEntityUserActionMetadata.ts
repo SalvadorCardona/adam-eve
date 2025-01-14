@@ -44,7 +44,7 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
             },
           })
 
-      console.log("selected", entities[0])
+      // console.log("selected", entities[0])
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
 
       onSelectEntityUserActionMetadata.onApply({ game: game })

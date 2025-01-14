@@ -18,7 +18,6 @@ import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMeta
 import { storageEntityMetaData } from "@/src/game/entity/app/building/storage/storageEntity"
 import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEntity"
 import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/roadGroundEntityMetadata"
-import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
@@ -27,6 +26,7 @@ import { ArrowMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
+import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,

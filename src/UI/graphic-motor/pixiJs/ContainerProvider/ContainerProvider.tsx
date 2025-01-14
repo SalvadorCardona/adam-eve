@@ -1,7 +1,7 @@
 // Créez le contexte
 import React, { createContext, use, useEffect } from "react"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
-import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/components/UsePixiApp"
+import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 
 interface PixiContainerInterface {
   containers: ContainerChild[]
@@ -43,7 +43,6 @@ export const PixiContainerProvider = ({
   const args: PixiContainerInterface = {
     addChild: (containerChild) => _currentContainer?.addChild(containerChild),
     removeChild: (containerChild) => {
-      console.log(containerChild)
       _currentContainer?.removeChild(containerChild)
     },
     currentContainer: _currentContainer,

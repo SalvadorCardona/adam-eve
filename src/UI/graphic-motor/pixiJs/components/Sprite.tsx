@@ -1,24 +1,45 @@
-import { Graphics as BaseGraphics } from "pixi.js"
-import { GraphicsContext } from "pixi.js/lib/scene/graphics/shared/GraphicsContext"
-import { GraphicsOptions } from "pixi.js/lib/scene/graphics/shared/Graphics"
-import React, { useMemo } from "react"
+import { Assets, Sprite as BaseSprite, SpriteOptions } from "pixi.js"
+import React, { useEffect, useMemo, useState } from "react"
 import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
+import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 
 interface GraphicsPropsInterface {
-  options?: GraphicsOptions | GraphicsContext
-  draw?: (graphic: BaseGraphics) => void
+  options?: SpriteOptions
+  image?: string
+  position?: Vector2Interface
 }
 
-export const Graphics = ({ options, draw }: GraphicsPropsInterface) => {
-  const container = useMemo(() => {
-    const graphic = new BaseGraphics(options)
-
-    if (draw) {
-      draw(graphic)
+export const Sprite = ({ options, image, position }: GraphicsPropsInterface) => {
+  const [texture, setTexture] = useState(null)
+  const _image = image ?? "https://pixijs.io/pixi-react/img/bunny.png"
+  useEffect(() => {
+    let isMounted = true
+    const loadTexture = async () => {
+      const loadedTexture = await Assets.load(_image)
+      if (isMounted) {
+        setTexture(loadedTexture)
+      }
     }
 
-    return graphic
-  }, [draw, options])
+    loadTexture()
 
-  return <PixiDecorator container={container}></PixiDecorator>
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const container = useMemo(() => {
+    if (!texture) return new BaseSprite(options)
+
+    return new BaseSprite({ ...options, texture: texture })
+  }, [texture, options, _image])
+
+  useEffect(() => {
+    if (position) {
+      container.x = position.x
+      container.y = position.y
+    }
+  }, [position])
+
+  return container ? <PixiDecorator container={container}></PixiDecorator> : null
 }

@@ -1,13 +1,21 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
-import React from "react"
+import React, { useState } from "react"
 import { EntityDecoratorPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntityDecoratorPixiJs"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
-export const EntitiesLoopThreeJs = () => {
+export const EntitiesLoopPixiJs = () => {
   const gameContext = useGameContext()
+  const [entities, setEntities] = useState<EntityInterface[]>([])
+
+  const game = useGameContext()
+
+  game.pubSub.subscribe((e) => {
+    setEntities(Object.values(e.entities))
+  })
 
   return (
     <>
-      {Object.values(gameContext.game.entities).map((entity) => {
+      {entities.map((entity) => {
         return (
           <EntityDecoratorPixiJs
             key={"decorator" + entity["@id"]}

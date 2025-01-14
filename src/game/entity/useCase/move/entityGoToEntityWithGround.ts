@@ -1,10 +1,10 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { findShortestPath, PathResult } from "@/src/utils/3Dmath/findShortestPath"
-import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { consommeCurrentPathCoordinate } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { appLdType } from "@/src/AppLdType"
 
 export function entityGoToEntityWithGround(
   entitySource: EntityInterface,
@@ -33,7 +33,7 @@ export function entityGoToEntityWithGround(
     path = findShortestPath(
       entitySource.position,
       entityTarget.position,
-      entityQuery(game, { "@type": grassGroundEntityMetadata["@type"] }),
+      entityQuery(game, { "@type": appLdType.entityGround }),
     )
   } catch (e) {}
 

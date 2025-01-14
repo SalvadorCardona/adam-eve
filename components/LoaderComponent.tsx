@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "@/packages/ui/cn"
+import { cn } from "../lib/utils"
 
 export interface LoaderComponentPropsInterface
   extends React.HTMLAttributes<HTMLDivElement> {}

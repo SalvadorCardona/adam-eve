@@ -11,6 +11,7 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
+import { config } from "@/src/app/config"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -49,7 +50,7 @@ export function entityFactory<
 
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 
-  entity.position = aroundVector(entity.position, true)
+  entity.position = aroundVector(entity.position, config.pixiJs2dItemSize)
 
   if (isBuildingEntity(entity)) {
     entity.state = metaData?.propriety?.ressourceForConstruction
