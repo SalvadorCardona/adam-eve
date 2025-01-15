@@ -1,12 +1,10 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
-import imageSource from "./timberHouse.glb?url"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { appLdType } from "@/src/AppLdType"
 
 export const timberHouseEntityMetaData = entityMedataFactory({
   asset: {
-    model3d: imageSource,
     icon: imageIcon,
   },
   propriety: {

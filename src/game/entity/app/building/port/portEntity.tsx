@@ -1,4 +1,3 @@
-import imageSource from "./port.glb?url"
 import imageIcon from "./icon.png?url"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -8,7 +7,6 @@ import { appLdType } from "@/src/AppLdType"
 
 export const portEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
-    model3d: imageSource,
     icon: imageIcon,
   },
   propriety: {

@@ -1,6 +1,5 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import asset from "./robot.glb?url"
 import asset2D from "./worker.png"
 
 import iconFarmerSrc from "./iconFarmer.png"
@@ -13,7 +12,6 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   label: "Citoyen",
   asset: {
     model2d: asset2D,
-    model3d: asset,
     icon: iconFarmerSrc,
     animationMapper: {
       [EntityState.move]: "Walking",

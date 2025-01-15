@@ -1,6 +1,5 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
-import imageSource from "./tower.glb?url"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { appLdType } from "@/src/AppLdType"
 import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
@@ -9,7 +8,6 @@ import { addAction } from "@/src/game/action/addAction"
 
 export const towerEntityMetaData = entityMedataFactory({
   asset: {
-    model3d: imageSource,
     icon: imageIcon,
   },
   propriety: {
