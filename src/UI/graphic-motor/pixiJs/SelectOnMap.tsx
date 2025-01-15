@@ -32,8 +32,8 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
   function createBoundingBox(): BoundingBox2DInterface {
     const width = Math.abs(mouseUpPositon.x - mouseDownPositon.x)
     const height = Math.abs(mouseUpPositon.y - mouseDownPositon.y)
-    const positionX = Math.min(mouseDownPositon.x, mouseUpPositon.x)
-    const positionY = Math.min(mouseDownPositon.y, mouseUpPositon.y)
+    const positionX = (mouseDownPositon.x + mouseUpPositon.x) / 2
+    const positionY = (mouseDownPositon.y + mouseUpPositon.y) / 2
 
     return {
       size: { x: width, y: height },
@@ -45,6 +45,18 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     const mousePosition = event.global // Contient {x, y}
     mouseMovePositon =
       (app?.stage && app.stage.toLocal(mousePosition)) ?? createVector2()
+    handleMouseMove()
+  }
+
+  const handleMouseMove = () => {
+    const currentPosition = { ...mouseMovePositon }
+    setBoundingBox(createBoundingBox())
+    const newBoundingBox = {
+      size: { x: 0, y: 0 },
+      position: currentPosition,
+    }
+
+    game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
   }
 
   useEffect(() => {
@@ -52,18 +64,6 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
       setIsDraging(true)
       mouseDownPositon = { ...mouseMovePositon }
       setBoundingBox(createBoundingBox())
-    }
-
-    const handleMouseMove = () => {
-      const currentPosition = { ...mouseMovePositon }
-      setBoundingBox(createBoundingBox())
-
-      const newBoundingBox = {
-        size: { x: 0, y: 0 },
-        position: currentPosition,
-      }
-
-      game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
     }
 
     const handleMouseUp = (event: MouseEvent) => {
