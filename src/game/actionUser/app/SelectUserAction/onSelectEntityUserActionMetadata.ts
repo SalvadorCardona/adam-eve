@@ -3,9 +3,9 @@ import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import GameInterface from "@/src/game/game/GameInterface"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/boudingBox"
+import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createBuildingUserActionMetadata"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {

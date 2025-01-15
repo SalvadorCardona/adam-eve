@@ -6,9 +6,9 @@ import React from "react"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateBuildingUserAction/createBuildingUserActionMetadata"
 import { appLdType } from "@/src/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
+import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createBuildingUserActionMetadata"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(

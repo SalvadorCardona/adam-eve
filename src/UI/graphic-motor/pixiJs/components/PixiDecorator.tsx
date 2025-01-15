@@ -12,7 +12,6 @@ export const PixiDecorator = ({
   children,
 }: PixiDecoratorPropsInterface) => {
   const pixiContainer = usePixiContainer()
-
   useEffect(() => {
     pixiContainer.addChild(container)
     return () => {

@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react"
+import React, { ReactNode, useEffect } from "react"
 import GameInterface from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
@@ -15,8 +15,6 @@ export const GameProvider = ({
   children,
   game,
 }: InputGameProviderPropsInterface) => {
-  const [, setReactGame] = useState<GameInterface>(game)
-  const [version, setVersion] = useState<number>(0)
   const pubSub = createPubSub()
 
   useEffect(() => {
@@ -42,7 +40,7 @@ export const GameProvider = ({
         pubSub,
         game,
         updateGame,
-        version,
+        version: 0,
       }}
     >
       {children}

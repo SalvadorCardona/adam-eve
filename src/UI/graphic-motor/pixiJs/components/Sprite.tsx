@@ -1,5 +1,5 @@
 import { Assets, Sprite as BaseSprite, SpriteOptions } from "pixi.js"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 
@@ -12,23 +12,24 @@ interface GraphicsPropsInterface {
 export const Sprite = ({ options, image, position }: GraphicsPropsInterface) => {
   const [texture, setTexture] = useState(null)
   const _image = image ?? "https://pixijs.io/pixi-react/img/bunny.png"
+  const containerRef = useRef<BaseSprite | null>(null)
+
   useEffect(() => {
     let isMounted = true
     const loadTexture = async () => {
-      const loadedTexture = await Assets.load(_image)
-      if (isMounted) {
-        setTexture(loadedTexture)
-      }
+      return Assets.load(_image)
     }
 
-    loadTexture()
+    loadTexture().then((e) => {
+      if (isMounted) {
+        setTexture(e)
+      }
+    })
 
     return () => {
       isMounted = false
     }
   }, [])
-
-  const containerRef = useRef<BaseSprite | null>(null)
 
   useEffect(() => {
     if (!texture) {
@@ -45,5 +46,7 @@ export const Sprite = ({ options, image, position }: GraphicsPropsInterface) => 
     }
   }, [position])
 
-  return containerRef.current ? <PixiDecorator container={containerRef.current}></PixiDecorator> : null
+  return containerRef.current ? (
+    <PixiDecorator container={containerRef.current}></PixiDecorator>
+  ) : null
 }

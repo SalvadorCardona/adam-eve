@@ -22,7 +22,7 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       const metaData = getMetaData<EntityMetaDataInterface>(entity)
       const attack = metaData.propriety.attack
       if (!attack) return
-
+      console.log(entity)
       const enemy = entity.entityAttackTargetIri
         ? entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
         : undefined
@@ -34,13 +34,12 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
           faction: EntityFaction.self,
           circleSearch: {
             center: entity.position,
-            radius: 15,
+            radius: 200,
           },
           order: {
             distance: "ASC",
           },
         })
-
         if (!newEnemy) {
           action.nextTick = game.time + 300
           return

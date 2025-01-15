@@ -50,15 +50,13 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
       [EntityState.attack]: "CharacterArmature|Kick_Left",
     },
   },
-
   propriety: {
-    speed: 0.01,
+    speed: 1,
     attack: {
       damage: 1,
-      attackRange: 1,
+      attackRange: 20,
       attackSpeed: 60,
     },
-
     size: {
       x: 50,
       y: 50,

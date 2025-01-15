@@ -1,11 +1,6 @@
-import {
-  KeyboardControls,
-  KeyboardControlsEntry,
-  useKeyboardControls,
-} from "@react-three/drei"
-import React, { useEffect, useMemo } from "react"
-import { useFrame } from "@react-three/fiber"
+import { useEffect, useMemo } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { useGameFrame } from "@/src/UI/hook/useGameFrame"
 import { GameState } from "@/src/game/game/GameInterface"
 
 interface ControlPropsInterface {}
@@ -15,90 +10,159 @@ enum Controls {
   back = "back",
   left = "left",
   right = "right",
-  jump = "jump",
   backAction = "backAction",
   showGrid = "showGrid",
   rotate = "rotate",
   pause = "pause",
+  wheelUp = "wheelUp",
+  wheelDown = "wheelDown",
 }
 
-export const ControlKeyboard = ({}: ControlPropsInterface) => {
-  const map = useMemo<KeyboardControlsEntry<Controls>[]>(
+interface ControlItemInterface {
+  name: Controls
+  keys: string[]
+  cb?: () => void
+}
+
+const keysPressed: Record<string, boolean> = {}
+
+function valideKeyBoardInput(
+  controlList: ControlItemInterface[],
+  keysPressed: Record<string, boolean>,
+): void {
+  const keyPressedResult = Object.keys(keysPressed)
+    .map((key) => {
+      if (keysPressed[key]) return key
+
+      return false
+    })
+    .filter((e) => e !== false)
+
+  controlList.forEach((control) => {
+    control.keys.forEach((e) => {
+      keyPressedResult.includes(e)
+      if (keyPressedResult.includes(e) && control.cb) {
+        control.cb()
+      }
+    })
+  })
+}
+
+export const ControlKeyboard = () => {
+  const { game, updateGame } = useGameContext()
+  const moveSize = 10
+
+  const controlList = useMemo<ControlItemInterface[]>(
     () => [
-      { name: Controls.forward, keys: ["ArrowUp", "KeyW"] },
-      { name: Controls.back, keys: ["ArrowDown", "KeyS"] },
-      { name: Controls.left, keys: ["ArrowLeft", "KeyA"] },
-      { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
-      { name: Controls.jump, keys: ["Space"] },
-      { name: Controls.backAction, keys: ["Escape"] },
-      { name: Controls.showGrid, keys: ["KeyG"] },
-      { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
-      { name: Controls.rotate, keys: ["KeyR"] },
-      { name: Controls.pause, keys: ["KeyP"] },
+      {
+        name: Controls.forward,
+        keys: ["ArrowUp", "KeyW"],
+        cb: () => {
+          game.camera.position.z += moveSize
+        },
+      },
+      {
+        name: Controls.back,
+        keys: ["ArrowDown", "KeyS"],
+        cb: () => {
+          game.camera.position.z -= moveSize
+        },
+      },
+      {
+        name: Controls.left,
+        keys: ["ArrowLeft", "KeyA"],
+        cb: () => {
+          game.camera.position.x += moveSize
+        },
+      },
+      {
+        name: Controls.right,
+        keys: ["ArrowRight", "KeyD"],
+        cb: () => {
+          game.camera.position.x -= moveSize
+        },
+      },
+      {
+        name: Controls.backAction,
+        keys: ["Escape"],
+        cb: () => {
+          game.userControl.currentAction = undefined
+          updateGame(game)
+        },
+      },
+      {
+        name: Controls.showGrid,
+        keys: ["KeyG"],
+        cb: () => {
+          game.userControl.showGrid = !game.userControl.showGrid
+          updateGame(game)
+        },
+      },
+      {
+        name: Controls.rotate,
+        keys: ["KeyR"],
+        cb: () => {
+          game.userControl.rotation = (game.userControl?.rotation ?? 0) + Math.PI / 2
+        },
+      },
+      {
+        name: Controls.pause,
+        keys: ["KeyP"],
+        cb: () => {
+          game.gameState =
+            game.gameState === GameState.RUN ? GameState.PAUSE : GameState.RUN
+        },
+      },
+      {
+        name: Controls.wheelUp,
+        keys: ["WheelUp"],
+        cb: () => {
+          keysPressed["WheelUp"] = false
+        },
+      },
+      {
+        name: Controls.wheelDown,
+        keys: ["WheelDown"],
+        cb: () => {
+          keysPressed["WheelDown"] = false
+        },
+      },
     ],
     [],
   )
 
-  return (
-    <KeyboardControls map={map}>
-      <Elem></Elem>
-    </KeyboardControls>
-  )
-}
-
-interface ElemPropsInterface {}
-
-const Elem = ({}: ElemPropsInterface) => {
-  const [sub, get] = useKeyboardControls<Controls>()
-  const gameContext = useGameContext()
-  const game = gameContext.game
-  const moveSize = 0.7
+  useGameFrame(() => {
+    valideKeyBoardInput(controlList, keysPressed)
+  })
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      keysPressed[event.code] = true
+    }
+
     const handleKeyUp = (event: KeyboardEvent) => {
-      if (get().rotate) {
-        game.userControl.rotation = (game.userControl?.rotation ?? 0) + Math.PI / 2
-      }
-      if (get().pause) {
-        game.gameState =
-          game.gameState === GameState.RUN ? GameState.PAUSE : GameState.RUN
-      }
+      keysPressed[event.code] = false
     }
 
     window.addEventListener("keyup", handleKeyUp)
-
-    // Nettoyage pour éviter les fuites de mémoire
+    window.addEventListener("keydown", handleKeyDown)
     return () => {
+      window.removeEventListener("keydown", handleKeyDown)
       window.removeEventListener("keyup", handleKeyUp)
     }
-  }, [get])
+  }, [])
 
-  useFrame(() => {
-    if (get().back) {
-      game.camera.position.z += moveSize
-      gameContext.updateGame(game)
-    }
-    if (get().forward) {
-      game.camera.position.z -= moveSize
-      gameContext.updateGame(game)
-    }
-    if (get().left) {
-      game.camera.position.x -= moveSize
-      gameContext.updateGame(game)
-    }
-    if (get().right) {
-      game.camera.position.x += moveSize
-      gameContext.updateGame(game)
-    }
-    if (get().showGrid) {
-      game.userControl.showGrid = !game.userControl.showGrid
-      gameContext.updateGame(game)
-    }
-    if (get().backAction) {
-      game.userControl.currentAction = undefined
-      gameContext.updateGame(game)
-    }
-  })
+  const handleScroll = (e: WheelEvent) => {
+    const wheelAction = e.deltaY > 0 ? "WheelUp" : "WheelDown"
+    keysPressed[wheelAction] = true
+  }
 
-  return <></>
+  useEffect(() => {
+    window.addEventListener("wheel", handleScroll)
+    return () => {
+      window.removeEventListener("wheel", handleScroll)
+    }
+  }, [])
+
+  return null
 }

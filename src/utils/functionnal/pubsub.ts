@@ -3,7 +3,7 @@ import createUniqId from "@/src/utils/id/createUniqId"
 type EventHandler<T = any> = (data: T) => void
 
 export interface PubSub<T = any> {
-  subscribe(handler: EventHandler<T>): void
+  subscribe(handler: EventHandler<T>): string
 
   unsubscribe(event: string): void
 
@@ -18,7 +18,6 @@ export function createPubSub<T = any>(): PubSub<T> {
     subscribe(handler: EventHandler<T>): string {
       const id = createUniqId()
       handlers[id] = handler
-
       return id
     },
 

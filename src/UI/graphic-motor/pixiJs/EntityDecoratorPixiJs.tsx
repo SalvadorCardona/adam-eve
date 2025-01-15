@@ -54,20 +54,16 @@ export const EntityDecoratorPixiJs = ({
       {color && (
         <Graphics
           draw={(g) => {
-            g.clear()
-            g.beginFill(color)
-            g.drawRect(0, 0, entity.size.x, entity.size.z)
-            g.endFill()
+            g.rect(0, 0, entity.size.x, entity.size.z)
+            g.fill({ color, alpha: 0.5 })
           }}
         />
       )}
       {isSelected && (
         <Graphics
           draw={(g) => {
-            g.clear()
-            g.beginFill(0xffff00) // Yellow color
-            g.drawRect(0, 0, entity.size.x, entity.size.z)
-            g.endFill()
+            g.rect(0, 0, entity.size.x, entity.size.z)
+            g.fill({ color: 0xffff00, alpha: 0.5 })
           }}
         />
       )}

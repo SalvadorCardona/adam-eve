@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import useImageLoader from "@/src/hook/useImageLoader"
+import useImageLoader from "@/src/utils/react/hook/useImageLoader"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 
@@ -26,11 +26,9 @@ export const MouseCursor = ({}: MouseCursorPropsInterface) => {
   const handleScroll = (e: WheelEvent) => {
     if (e.deltaY > 0) {
       game.camera.position.y += 0.1
-      gameContext.updateGame(game)
     }
     if (e.deltaY < 0) {
       game.camera.position.y -= 0.1
-      gameContext.updateGame(game)
     }
   }
 

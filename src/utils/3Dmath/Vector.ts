@@ -3,6 +3,13 @@ export interface Vector2Interface {
   y: number
 }
 
+export function createVector2(x: number = 0, y: number = 0): Vector2Interface {
+  return {
+    x,
+    y,
+  }
+}
+
 export interface Vector3Interface extends Vector2Interface {
   z: number
 }

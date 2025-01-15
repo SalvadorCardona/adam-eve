@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react"
-import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { createVector2, Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { FederatedPointerEvent } from "pixi.js"
 import {
   bounding2ToBounding3,
   BoundingBox2DInterface,
 } from "@/src/utils/3Dmath/boudingBox"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 
-const mouse: Vector2Interface = { x: 0, y: 0 }
-let isDragging = false
+let mouse: Vector2Interface = { x: 0, y: 0 }
+let mouseMovePositon = createVector2()
+let mouseDownPositon = createVector2()
+let mouseUpPositon = createVector2()
 
 interface CreateBuildingPropsInterface {}
 
@@ -26,41 +29,64 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
 
   const [isDraging, setIsDraging] = useState<boolean>(false)
 
+  function createBoundingBox(): BoundingBox2DInterface {
+    const width = Math.abs(mouseUpPositon.x - mouseDownPositon.x)
+    const height = Math.abs(mouseUpPositon.y - mouseDownPositon.y)
+    const positionX = Math.min(mouseDownPositon.x, mouseUpPositon.x)
+    const positionY = Math.min(mouseDownPositon.y, mouseUpPositon.y)
+
+    return {
+      size: { x: width, y: height },
+      position: { x: positionX, y: positionY },
+    }
+  }
+
+  function storeMouse(event: FederatedPointerEvent): void {
+    const mousePosition = event.global // Contient {x, y}
+    mouseMovePositon =
+      (app?.stage && app.stage.toLocal(mousePosition)) ?? createVector2()
+  }
+
   useEffect(() => {
     const handleMouseDown = (event: MouseEvent) => {
       setIsDraging(true)
-      mouse.x = event.clientX
-      mouse.y = event.clientY
-      setBoundingBox({
-        size: { x: 0, y: 0 },
-        position: { x: mouse.x, y: mouse.y },
-      })
+      mouseDownPositon = { ...mouseMovePositon }
+      setBoundingBox(createBoundingBox())
     }
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const newWidth = event.clientX - mouse.x
-      const newHeight = event.clientY - mouse.y
-      setBoundingBox({
-        size: { x: newWidth, y: newHeight },
-        position: { x: mouse.x, y: mouse.y },
-      })
+    const handleMouseMove = () => {
+      const currentPosition = { ...mouseMovePositon }
+      setBoundingBox(createBoundingBox())
+
+      const newBoundingBox = {
+        size: { x: 0, y: 0 },
+        position: currentPosition,
+      }
+
+      game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
     }
 
     const handleMouseUp = (event: MouseEvent) => {
       setIsDraging(false)
+      mouseUpPositon = { ...mouseMovePositon }
 
-      game.userControl.mouseState.bounding3D = bounding2ToBounding3(boundingBox)
+      const newBoundingBox = createBoundingBox()
 
+      game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
       onSelectEntityUserActionMetadata.onSelectZone({
         game: game,
       })
     }
 
+    if (!app) return
+
+    app.stage.on("mousemove", storeMouse)
     app.canvas.addEventListener("mousedown", handleMouseDown)
     app.canvas.addEventListener("mousemove", handleMouseMove)
     app.canvas.addEventListener("mouseup", handleMouseUp)
 
     return () => {
+      app.stage.removeListener("mousemove", storeMouse)
       app.canvas.removeEventListener("mousedown", handleMouseDown)
       app.canvas.removeEventListener("mousemove", handleMouseMove)
       app.canvas.removeEventListener("mouseup", handleMouseUp)
@@ -86,22 +112,3 @@ export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
     />
   )
 }
-
-//
-// useEffect(() => {
-//   if (startPosition && currentPosition && !isDragging) {
-//     console.log("create")
-//     console.count("envie")
-//     const width = currentPosition.x - startPosition.x
-//     const height = currentPosition.y - startPosition.y
-//
-//     game.userControl.mouseState.bounding3D = createBounding3D({
-//       size: { x: width, z: height, y: 0 },
-//       position: { x: startPosition.x, z: startPosition.y, y: 0 },
-//     })
-//
-//     onSelectEntityUserActionMetadata.onSelectZone({
-//       game: game,
-//     })
-//   }
-// }, [endPosition, currentPosition])

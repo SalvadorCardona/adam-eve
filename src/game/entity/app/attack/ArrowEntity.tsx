@@ -10,7 +10,7 @@ export const ArrowMetaData = entityMedataFactory({
   },
   propriety: {
     attack: {
-      attackRange: 0.1,
+      attackRange: 10,
       damage: 20,
       attackSpeed: 0.1,
     },

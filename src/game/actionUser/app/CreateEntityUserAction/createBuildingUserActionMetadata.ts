@@ -39,6 +39,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
       const isMultipleBuilding =
         bounding2DSize(game.userControl.mouseState.bounding3D) > 1
+      console.log(game.userControl.mouseState.bounding3D)
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {
         const positions = diviseVector(
@@ -46,6 +47,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           bounding.max,
           config.pixiJs2dItemSize,
         )
+
         positions.forEach((newPosition) => {
           const entity = metaInterface.factory({
             game,
@@ -85,7 +87,6 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         game.userControl.entitiesSelected = []
       }
 
-      console.log("entites", Object.values(game.entities).length)
       game.userControl.rotation = 0
     },
     data: {

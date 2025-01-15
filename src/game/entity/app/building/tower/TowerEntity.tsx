@@ -19,7 +19,7 @@ export const towerEntityMetaData = entityMedataFactory({
       }),
     },
     attack: {
-      attackRange: 5,
+      attackRange: 250,
       damage: 1,
       attackSpeed: 60,
     },
@@ -30,9 +30,9 @@ export const towerEntityMetaData = entityMedataFactory({
       maxLife: 100,
     },
     size: {
-      x: 2,
-      y: 2,
-      z: 2,
+      x: 100,
+      y: 100,
+      z: 100,
     },
   },
   label: "Tour de défense",

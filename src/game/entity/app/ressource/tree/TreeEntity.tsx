@@ -13,18 +13,13 @@ export const treeEntityMetaData = entityMedataFactory({
   },
   propriety: {
     speed: 0.01,
-    attack: {
-      damage: 1,
-      attackRange: 1,
-      attackSpeed: 60,
-    },
     health: {
       maxLife: 75,
     },
     size: {
-      x: 1,
-      y: 1,
-      z: 1,
+      x: 50,
+      y: 50,
+      z: 50,
     },
   },
   ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "tree"),

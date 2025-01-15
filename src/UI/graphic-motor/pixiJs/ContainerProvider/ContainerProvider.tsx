@@ -41,8 +41,6 @@ export const PixiContainerProvider = ({
   const args: PixiContainerInterface = {
     addChild: (containerChild) => {
       _currentContainer?.addChild(containerChild)
-      console.log(containerChild)
-      console.log(_currentContainer?.children?.length)
     },
     removeChild: (containerChild) => {
       _currentContainer?.removeChild(containerChild)
