@@ -10,6 +10,7 @@ export interface JsonTypedLdInterface {
 export interface BaseJsonLdInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
+  "@version": number
 }
 
 export type JsonLDItem<T> = BaseJsonLdInterface & T
@@ -20,6 +21,7 @@ export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T
   return {
     "@type": jsonLdType,
     "@id": JsonLdIriFactory(jsonLdType),
+    "@version": 1,
     ...object,
   }
 }

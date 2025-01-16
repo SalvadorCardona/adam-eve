@@ -1,6 +1,6 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getMetaData } from "@/src/game/game/app/configGame"
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { EntityDecoratorResolverPropsInterface } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
@@ -9,13 +9,19 @@ import { ContainerOptions } from "pixi.js/lib/scene/container/Container"
 import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 
 export const EntityDecoratorPixiJs = ({
-  entity,
+  entity: baseEntity,
   color,
 }: EntityDecoratorResolverPropsInterface) => {
+  const [entity, setEntity] = useState(baseEntity)
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
+
+  useGamePubSub(entity["@id"], (e) => {
+    setEntity({ ...e.item })
+  })
 
   const isSelected = useMemo(() => {
     return game.userControl.entitiesSelected.includes(entity["@id"])
@@ -27,12 +33,14 @@ export const EntityDecoratorPixiJs = ({
     return Model2DPixiJs
   }, [])
 
-  const size = entityMetaData?.propriety?.size
-    ? {
-        x: entityMetaData.propriety.size.x,
-        y: entityMetaData.propriety.size.y,
-      }
-    : { x: 0, y: 0 }
+  const size = useMemo<ContainerOptions>(() => {
+    return entityMetaData?.propriety?.size
+      ? {
+          x: entityMetaData.propriety.size.x,
+          y: entityMetaData.propriety.size.y,
+        }
+      : { x: 0, y: 0 }
+  }, [])
 
   const options = useMemo<ContainerOptions>(() => {
     return {
@@ -46,10 +54,13 @@ export const EntityDecoratorPixiJs = ({
       x: entity.position.x,
       y: entity.position.z,
     }
-  }, [entity.position.x, entity.position.z])
+  }, [entity])
 
   return (
-    <Container options={options} position={position}>
+    <Container
+      options={{ ...options, zIndex: entity.position.y }}
+      position={position}
+    >
       <EntityComponent entity={entity} />
       {color && (
         <Graphics

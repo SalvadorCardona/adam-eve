@@ -37,6 +37,10 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   }
 }
 
+export function isEntity(entity: EntityInterface): entity is EntityInterface {
+  return entity["@type"].startsWith(appLdType.entity)
+}
+
 export function isGroundEntity(
   entity: EntityInterface,
 ): entity is GroundEntityInterface {

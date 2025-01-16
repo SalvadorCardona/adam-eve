@@ -1,9 +1,14 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react"
-import { Application, ApplicationOptions } from "pixi.js"
+import { Application, ApplicationOptions, Assets } from "pixi.js"
 import { PixiContext } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/PixiContext"
 import LoaderComponent from "@/components/LoaderComponent"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
+import { getByLdType } from "@/src/container/container"
+import configGame from "@/src/game/game/app/configGame"
+import { appLdType } from "@/src/AppLdType"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import waterTexture from "@/public/sprite/water.png?url"
 
 export const PixiProvider: React.FC<{
   children: React.ReactNode
@@ -16,6 +21,17 @@ export const PixiProvider: React.FC<{
     const app = new Application()
     await app.init(options)
     app.stage.interactive = true
+    app.stage.eventMode = "static"
+    const entitiesMetadata = getByLdType<EntityMetaDataInterface>(
+      configGame,
+      appLdType.entity,
+    ).filter((e) => e.asset?.model2d)
+
+    for (const entitiesMetadataKey of entitiesMetadata) {
+      await Assets.load(entitiesMetadataKey.asset.model2d)
+    }
+
+    await Assets.load(waterTexture)
 
     return app
   }

@@ -1,114 +1,135 @@
 import React, { useEffect, useState } from "react"
-import { createVector2, Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import {
+  createVector2,
+  Vector2Interface,
+  vector2ToVector3,
+} from "@/src/utils/3Dmath/Vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
+import { Container, FederatedPointerEvent } from "pixi.js"
+import { BoundingBox2DInterface } from "@/src/utils/3Dmath/boudingBox"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { FederatedPointerEvent } from "pixi.js"
-import {
-  bounding2ToBounding3,
-  BoundingBox2DInterface,
-} from "@/src/utils/3Dmath/boudingBox"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
+import { useDebounce } from "react-use"
 
-let mouse: Vector2Interface = { x: 0, y: 0 }
 let mouseMovePositon = createVector2()
-let mouseDownPositon = createVector2()
-let mouseUpPositon = createVector2()
 
-interface CreateBuildingPropsInterface {}
-
-export const SelectOnMap = ({}: CreateBuildingPropsInterface) => {
-  const appContext = usePixiApp()
+export const SelectOnMap = () => {
+  const app = usePixiApp().app
   const game = useGameContext().game
-  const app = appContext.app
+  const [isDragging, setIsDragging] = useState(false)
 
-  const [boundingBox, setBoundingBox] = useState<BoundingBox2DInterface>({
-    size: { x: 0, y: 0 },
-    position: { x: 0, y: 0 },
+  const [startPosition, setStartPosition] = useState<Vector2Interface>({
+    x: 0,
+    y: 0,
+  })
+  const [currentPosition, setCurrentPosition] = useState<Vector2Interface>({
+    x: 0,
+    y: 0,
   })
 
-  const [isDraging, setIsDraging] = useState<boolean>(false)
+  useDebounce(
+    () => {
+      if (isDragging) return
 
-  function createBoundingBox(): BoundingBox2DInterface {
-    const width = Math.abs(mouseUpPositon.x - mouseDownPositon.x)
-    const height = Math.abs(mouseUpPositon.y - mouseDownPositon.y)
-    const positionX = (mouseDownPositon.x + mouseUpPositon.x) / 2
-    const positionY = (mouseDownPositon.y + mouseUpPositon.y) / 2
+      game.userControl.mouseState.bounding3D.position =
+        vector2ToVector3(mouseMovePositon)
+      game.userControl.mouseState.bounding3D.size = vector2ToVector3(
+        createBoundingBoxByMouse().size,
+      )
 
-    return {
-      size: { x: width, y: height },
-      position: { x: positionX, y: positionY },
-    }
-  }
-
-  function storeMouse(event: FederatedPointerEvent): void {
-    const mousePosition = event.global // Contient {x, y}
-    mouseMovePositon =
-      (app?.stage && app.stage.toLocal(mousePosition)) ?? createVector2()
-    handleMouseMove()
-  }
-
-  const handleMouseMove = () => {
-    const currentPosition = { ...mouseMovePositon }
-    setBoundingBox(createBoundingBox())
-    const newBoundingBox = {
-      size: { x: 0, y: 0 },
-      position: currentPosition,
-    }
-
-    game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
-  }
-
-  useEffect(() => {
-    const handleMouseDown = (event: MouseEvent) => {
-      setIsDraging(true)
-      mouseDownPositon = { ...mouseMovePositon }
-      setBoundingBox(createBoundingBox())
-    }
-
-    const handleMouseUp = (event: MouseEvent) => {
-      setIsDraging(false)
-      mouseUpPositon = { ...mouseMovePositon }
-
-      const newBoundingBox = createBoundingBox()
-
-      game.userControl.mouseState.bounding3D = bounding2ToBounding3(newBoundingBox)
       onSelectEntityUserActionMetadata.onSelectZone({
         game: game,
       })
+    },
+    200,
+    [isDragging],
+  )
+
+  const createBoundingBoxByMouse = (): BoundingBox2DInterface => {
+    const width = Math.abs(currentPosition.x - startPosition.x)
+    const height = Math.abs(currentPosition.y - startPosition.y)
+
+    return {
+      position: {
+        x: Math.min(startPosition.x, currentPosition.x),
+        y: Math.min(startPosition.y, currentPosition.y),
+      },
+      size: { x: width, y: height },
+    }
+  }
+
+  useEffect(() => {
+    const handlePointerDown = (event: FederatedPointerEvent) => {
+      const localPosition = app.stage.toLocal(event.global)
+      setStartPosition({
+        x: localPosition.x,
+        y: localPosition.y,
+      })
+      setCurrentPosition({
+        x: localPosition.x,
+        y: localPosition.y,
+      })
+
+      setIsDragging(true)
+    }
+
+    const handlePointerMove = (event: FederatedPointerEvent) => {
+      const localPosition = app.stage.toLocal(event.global)
+      const newPosition = {
+        x: localPosition.x,
+        y: localPosition.y,
+      }
+      if (isDragging) {
+        setCurrentPosition(newPosition)
+      }
+      mouseMovePositon = newPosition
+
+      game.userControl.mouseState.bounding3D.position =
+        vector2ToVector3(mouseMovePositon)
+      game.userControl.mouseState.bounding3D.size = vector2ToVector3(
+        createBoundingBoxByMouse().size,
+      )
+    }
+
+    const handlePointerUp = () => {
+      setIsDragging(false)
     }
 
     if (!app) return
 
-    app.stage.on("mousemove", storeMouse)
-    app.canvas.addEventListener("mousedown", handleMouseDown)
-    app.canvas.addEventListener("mousemove", handleMouseMove)
-    app.canvas.addEventListener("mouseup", handleMouseUp)
+    const interactionLayer = new Container()
+    interactionLayer.interactive = true
+    interactionLayer.hitArea = app.screen // Cover the entire screen
+    app.stage.addChild(interactionLayer)
+
+    interactionLayer.on("pointerdown", handlePointerDown)
+    interactionLayer.on("pointermove", handlePointerMove)
+    interactionLayer.on("pointerup", handlePointerUp)
+    interactionLayer.on("pointerupoutside", handlePointerUp) // Capture pointerup outside
+    app.canvas.addEventListener("mouseup", handlePointerUp)
 
     return () => {
-      app.stage.removeListener("mousemove", storeMouse)
-      app.canvas.removeEventListener("mousedown", handleMouseDown)
-      app.canvas.removeEventListener("mousemove", handleMouseMove)
-      app.canvas.removeEventListener("mouseup", handleMouseUp)
+      interactionLayer.off("pointerdown", handlePointerDown)
+      interactionLayer.off("pointermove", handlePointerMove)
+      interactionLayer.off("pointerup", handlePointerUp)
+      app.canvas.removeEventListener("mouseup", handlePointerUp)
     }
-  }, [app, boundingBox, boundingBox])
+  }, [app, isDragging])
 
-  if (!isDraging) return
+  const drawSelectionBox = (g) => {
+    if (isDragging) {
+      const boundingBox = createBoundingBoxByMouse()
+      g.rect(
+        boundingBox.position.x,
+        boundingBox.position.y,
+        boundingBox.size.x,
+        boundingBox.size.y,
+      )
+      g.fill(0x650a5a)
+      g.stroke({ width: 2, color: 0xfeeb77 })
+    }
+  }
 
-  return (
-    <Graphics
-      draw={(g) => {
-        if (boundingBox) {
-          g.rect(
-            boundingBox.position.x,
-            boundingBox.position.y,
-            boundingBox.size.x,
-            boundingBox.size.y,
-          )
-        }
-        g.fill(0x650a5a)
-        g.stroke({ width: 2, color: 0xfeeb77 })
-      }}
-    />
-  )
+  return <Graphics draw={drawSelectionBox} />
 }

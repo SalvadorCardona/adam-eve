@@ -5,6 +5,8 @@ const typeAction = "action"
 const typeRessource = "action"
 
 export const appLdType = {
+  camera: "camera",
+  userControl: "userControl",
   game: "game",
   entity: "entity",
   entityHelper: "entity/helper",

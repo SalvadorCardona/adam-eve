@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useGameFrame } from "@/src/UI/hook/useGameFrame"
 import { GameState } from "@/src/game/game/GameInterface"
+import { updateContainer } from "@/src/container/container"
 
 interface ControlPropsInterface {}
 
@@ -59,6 +60,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowUp", "KeyW"],
         cb: () => {
           game.camera.position.z += moveSize
+          updateContainer(game, game.camera)
         },
       },
       {
@@ -66,6 +68,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowDown", "KeyS"],
         cb: () => {
           game.camera.position.z -= moveSize
+          updateContainer(game, game.camera)
         },
       },
       {
@@ -73,6 +76,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowLeft", "KeyA"],
         cb: () => {
           game.camera.position.x += moveSize
+          updateContainer(game, game.camera)
         },
       },
       {
@@ -80,6 +84,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowRight", "KeyD"],
         cb: () => {
           game.camera.position.x -= moveSize
+          updateContainer(game, game.camera)
         },
       },
       {
@@ -87,7 +92,7 @@ export const ControlKeyboard = () => {
         keys: ["Escape"],
         cb: () => {
           game.userControl.currentAction = undefined
-          updateGame(game)
+          updateContainer(game, game.userControl)
         },
       },
       {
@@ -95,7 +100,7 @@ export const ControlKeyboard = () => {
         keys: ["KeyG"],
         cb: () => {
           game.userControl.showGrid = !game.userControl.showGrid
-          updateGame(game)
+          updateContainer(game, game.userControl)
         },
       },
       {
@@ -103,6 +108,7 @@ export const ControlKeyboard = () => {
         keys: ["KeyR"],
         cb: () => {
           game.userControl.rotation = (game.userControl?.rotation ?? 0) + Math.PI / 2
+          updateContainer(game, game.userControl)
         },
       },
       {

@@ -39,9 +39,9 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
       const isMultipleBuilding =
         bounding2DSize(game.userControl.mouseState.bounding3D) > 1
-      console.log(game.userControl.mouseState.bounding3D)
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {
+        console.log(bounding)
         const positions = diviseVector(
           bounding.min,
           bounding.max,
@@ -57,8 +57,8 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
             },
           })
 
-          entity.position.z = entity.position.z += entity.size.z / 2
-          entity.position.x = entity.position.x += entity.size.x / 2
+          entity.position.z = entity.position.z += entity.size.z
+          entity.position.x = entity.position.x += entity.size.x
 
           entities.push(entity)
         })

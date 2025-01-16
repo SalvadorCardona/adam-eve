@@ -24,8 +24,8 @@ export function vector3ToVector2(vector: Vector3Interface): Vector2Interface {
 export function vector2ToVector3(vector: Vector2Interface): Vector3Interface {
   return {
     x: vector.x,
-    z: vector.y,
     y: 0,
+    z: vector.y,
   }
 }
 

@@ -8,9 +8,7 @@ export const CreateEntityComponent = () => {
   const game = useGameContext().game
   const rotationY = game.userControl?.rotation ?? 0
   const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
-
   const mousePositon = game.userControl.mouseState.bounding3D.position
-
   const entity = useMemo(() => {
     return entityMetaData
       ? entityMetaData.factory({

@@ -49,7 +49,7 @@ export function entityFactory<
 
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 
-  entity.position = aroundVector(entity.position, 10)
+  entity.position = aroundVector(entity.position, 50)
 
   if (isBuildingEntity(entity)) {
     entity.state = metaData?.propriety?.ressourceForConstruction

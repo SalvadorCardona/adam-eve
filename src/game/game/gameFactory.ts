@@ -5,7 +5,6 @@ import GameInterface, {
 } from "@/src/game/game/GameInterface"
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { createGameCalculated } from "@/src/game/game/createGameCalculated"
 import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 
 export function gameFactory(game?: GameInterface): GameInterface {
@@ -19,31 +18,24 @@ export function gameFactory(game?: GameInterface): GameInterface {
     entities: {},
     inventory: {},
     createdAt: new Date(),
-    camera: {
+    camera: jsonLdFactory(appLdType.camera, {
       fov: 50,
       zoom: 0,
       position: {
         x: 0,
-        y: 10,
-        z: 0,
-      },
-      rotation: {
-        x: -Math.PI / 4,
         y: 0,
         z: 0,
       },
-    },
-    userControl: {
+    }),
+    userControl: jsonLdFactory(appLdType.userControl, {
       entitiesSelected: [],
       showGrid: true,
       mouseState: {
         bounding3D: createBounding3D(),
       },
-    },
+    }),
     ...(game ?? {}),
   })
-
-  newGame.gameCalculated = createGameCalculated(newGame)
 
   return newGame
 }

@@ -67,7 +67,6 @@ export function entityQuery(
     const entity = Object.hasOwn(game.entities, id) ? game.entities[id] : undefined
     return entity ? [entity] : []
   }
-
   let entities: EntityInterface[] = type
     ? getByLdType(game.entities, type)
     : Object.values(game.entities)

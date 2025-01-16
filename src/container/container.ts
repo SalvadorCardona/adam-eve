@@ -5,6 +5,9 @@ import {
   JsonLdType,
   JsonTypedLdInterface,
 } from "@/src/utils/jsonLd/jsonLd"
+import { createChannelPubSub } from "@/src/utils/functionnal/pubsub"
+
+export const containerPubSub = createChannelPubSub<ContainerPublish>()
 
 interface ContainerWithCache {
   "@cache": {
@@ -31,24 +34,33 @@ export function deleteContainerKey<T>(
   delete container[key]
 }
 
-export function hasId<T>(container: ContainerInterface<T>, key: JsonLdIri): boolean {
-  return key in container
+export enum ContainerAction {
+  update = "update",
+  remove = "remove",
+  create = "create",
+}
+
+export interface ContainerPublish {
+  item: BaseJsonLdInterface
+  action: ContainerAction
 }
 
 export function updateContainer<T extends BaseJsonLdInterface>(
   container: ContainerInterface<T>,
   item: T,
-  action: "update" | "remove" | "create" = "update",
+  action: ContainerAction = ContainerAction.update,
 ): void {
-  if (action === "update" || action === "create") {
+  if (action === ContainerAction.update || action === ContainerAction.create) {
+    item["@version"]++
     container[item["@id"]] = item
-    return
   }
 
-  if (action === "remove") {
+  if (action === ContainerAction.remove) {
     deleteContainerKey(container, item["@id"])
-    return
   }
+
+  containerPubSub.publish(item["@id"], { item, action })
+  containerPubSub.publish(item["@type"], { item, action })
 }
 
 export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
@@ -72,27 +84,6 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
       results.push(container[key])
     }
   })
-
-  return results
-}
-
-export function getByLdIri<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
-  container: ContainerInterface,
-  jsonLdIri: JsonLdIri | JsonLdIri[],
-): Array<T> {
-  const results: Array<T> = []
-
-  if (Array.isArray(jsonLdIri)) {
-    jsonLdIri.forEach((iri) => {
-      if (iri in container) {
-        results.push(container[iri])
-      }
-    })
-  } else {
-    if (jsonLdIri in container) {
-      results.push(container[jsonLdIri])
-    }
-  }
 
   return results
 }

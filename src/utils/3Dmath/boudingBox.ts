@@ -63,10 +63,16 @@ export function boundingBoxObbToAabb(
   boundingBox: BoundingBox3DInterface,
 ): BoundingBox3DOBB {
   const half: Vector3Interface = {
-    x: Math.abs(boundingBox.size.x / 2),
-    y: Math.abs(boundingBox.size.y / 2),
-    z: Math.abs(boundingBox.size.z / 2),
+    x: Math.abs(boundingBox.size.x),
+    y: Math.abs(boundingBox.size.y),
+    z: Math.abs(boundingBox.size.z),
   }
+
+  // const half: Vector3Interface = {
+  //   x: Math.abs(boundingBox.size.x / 2),
+  //   y: Math.abs(boundingBox.size.y / 2),
+  //   z: Math.abs(boundingBox.size.z / 2),
+  // }
 
   return {
     min: {

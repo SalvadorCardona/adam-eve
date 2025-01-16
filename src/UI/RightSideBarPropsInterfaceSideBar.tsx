@@ -11,7 +11,7 @@ export const RightSideBarPropsInterfaceSideBar = () => {
   }, [game.userControl.entitiesSelected])
 
   return (
-    <div className={"fixed top-1/3 right-0   h-screen w-[450px] max-h-screen "}>
+    <div className={"fixed top-1/3 right-0   h-screen max-h-screen "}>
       {hasAction && (
         <EntityModal
           entityUri={game.userControl.entitiesSelected[0] as JsonLdIri}

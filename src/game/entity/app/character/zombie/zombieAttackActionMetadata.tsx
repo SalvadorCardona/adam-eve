@@ -11,6 +11,7 @@ import {
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
+import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 
 interface ZombieAttackAction {}
 
@@ -22,7 +23,6 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       const metaData = getMetaData<EntityMetaDataInterface>(entity)
       const attack = metaData.propriety.attack
       if (!attack) return
-      console.log(entity)
       const enemy = entity.entityAttackTargetIri
         ? entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
         : undefined
@@ -40,13 +40,13 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
             distance: "ASC",
           },
         })
+
         if (!newEnemy) {
           action.nextTick = game.time + 300
-          return
+        } else {
+          entity.entityAttackTargetIri = newEnemy["@id"]
+          entity.state = EntityState.go_to_enemy
         }
-
-        entity.entityAttackTargetIri = newEnemy["@id"]
-        entity.state = EntityState.go_to_enemy
       }
 
       if (enemy && entity.state === EntityState.go_to_enemy) {
@@ -64,6 +64,8 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
 
         action.nextTick = game.time + attack.attackSpeed
       }
+
+      updateEntityInGame(game, entity)
     },
     factory: () => {
       const data: ZombieAttackAction = {

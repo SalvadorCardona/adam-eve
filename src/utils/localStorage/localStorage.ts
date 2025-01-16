@@ -8,7 +8,7 @@ export function getLocalStorage<T>(key: string): null | T {
 
 export function persistLocalStorage(key: string, data: unknown): void {
   if (!isBrowser()) return
-
+  
   localStorage.setItem(key, JSON.stringify(data))
 }
 
