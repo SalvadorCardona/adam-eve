@@ -7,7 +7,6 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { enoughRessource } from "@/src/game/inventory/enoughRessource"
@@ -16,6 +15,7 @@ import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumE
 import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 enum State {
   GoToForum = "GoToForum",

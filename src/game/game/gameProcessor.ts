@@ -1,10 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 export function gameProcessor(game: GameInterface) {
   game.time++
@@ -14,7 +14,7 @@ export function gameProcessor(game: GameInterface) {
   Object.values(game.entities).forEach((entity) => {
     const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
     entityMetaData.onFrame && entityMetaData.onFrame({ entity, game })
-    actionProcesseur(entity.actions, game, entity)
+    entity?.actions && actionProcesseur(entity.actions, game, entity)
   })
 
   metaData.persistItem(game)

@@ -10,6 +10,8 @@ import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector
 import { has2dCollisionInZone } from "@/src/utils/3Dmath/has2dCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface CircleSearch {
   center: Vector3Interface
@@ -49,10 +51,10 @@ export function entityQueryFindOne(
   return result.length ? result[0] : undefined
 }
 
-export function entityQuery(
+export function entityQuery<T = EntityInterface>(
   game: GameInterface,
   query: EntityQueryParams,
-): EntityInterface[] {
+): T[] {
   const {
     "@type": type,
     "@id": id,
@@ -64,9 +66,12 @@ export function entityQuery(
   } = query
 
   if (id && !Array.isArray(id)) {
-    const entity = Object.hasOwn(game.entities, id) ? game.entities[id] : undefined
+    const entity = Object.hasOwn(game.entities, id)
+      ? (game.entities[id] as T)
+      : undefined
     return entity ? [entity] : []
   }
+
   let entities: EntityInterface[] = type
     ? getByLdType(game.entities, type)
     : Object.values(game.entities)
@@ -107,9 +112,11 @@ export function entityQuery(
     const start2D = vector3ToVector2(squareSearch.start)
     const end2d = vector3ToVector2(squareSearch.end)
     entities = entities.filter((entity) => {
+      const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
+
       return has2dCollisionInZone(
         vector3ToVector2(entity.position),
-        vector3ToVector2(entity.size),
+        vector3ToVector2(entityMetaData.propriety.size as Vector3Interface),
         start2D,
         end2d,
       )
@@ -144,5 +151,5 @@ export function entityQuery(
     })
   }
 
-  return entities
+  return entities as T[]
 }

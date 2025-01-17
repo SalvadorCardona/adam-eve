@@ -38,17 +38,10 @@ export const towerEntityMetaData = entityMedataFactory({
   defaultEntity: () => {
     const towerAttackAction = TowerAttackActionMetadata.factory()
     const actionBag: ActionBagInterface = {}
-
     addAction(actionBag, towerAttackAction)
 
     return {
       actions: actionBag,
-      life: 50,
-      size: {
-        x: 2,
-        y: 2.5,
-        z: 2,
-      },
     }
   },
 })

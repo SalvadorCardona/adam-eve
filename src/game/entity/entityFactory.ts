@@ -1,5 +1,4 @@
 import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
   EntityFaction,
@@ -11,6 +10,7 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -24,7 +24,6 @@ export function entityFactory<
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    workers: [],
     rotation: {
       x: 0,
       y: 0,
@@ -36,9 +35,6 @@ export function entityFactory<
       y: 0,
       z: 0,
     },
-    actions: {},
-    inventory: {},
-
     ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
   }
@@ -55,10 +51,24 @@ export function entityFactory<
     entity.state = metaData?.propriety?.ressourceForConstruction
       ? EntityState.under_construction
       : EntityState.builded
+
+    entity.workers = []
   }
 
-  if (!entity?.faction && (isCharacterEntity(entity) || isBuildingEntity(entity))) {
-    entity.faction = EntityFaction.self
+  if (isCharacterEntity(entity) || isBuildingEntity(entity)) {
+    entity.actions = {}
+    entity.faction = entity?.faction ? EntityFaction.self : entity.faction
+
+    if (metaData?.propriety?.defaultActions) {
+      metaData.propriety.defaultActions.forEach((actionType) => {
+        const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory(
+          {
+            entity,
+          },
+        )
+        addAction(entity.actions, action)
+      })
+    }
   }
 
   if (isCharacterEntity(entity)) {
@@ -67,19 +77,6 @@ export function entityFactory<
 
   if (isGroundEntity(entity)) {
     entity.position.y -= 0.5
-  }
-
-  if (metaData?.propriety?.size) {
-    entity.size = metaData.propriety.size
-  }
-
-  if (metaData?.propriety?.defaultActions) {
-    metaData.propriety.defaultActions.forEach((actionType) => {
-      const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory({
-        entity,
-      })
-      addAction(entity.actions, action)
-    })
   }
 
   return entity

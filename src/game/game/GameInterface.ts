@@ -22,21 +22,27 @@ export enum GraphicMotor {
   THREE_JS = "THREE_JS",
 }
 
-export default interface GameInterface extends BaseJsonLdInterface {
-  graphicMotor: GraphicMotor
+export type UserControl = JsonLDItem<{
+  showGrid: boolean
+  currentAction?: ActionUserMetaDataInterface | undefined
+  rotation?: number
+  entitiesSelected: EntityInterface["@id"][]
+  entitySelectedByHover?: EntityInterface["@id"]
+  mouseState: {
+    bounding3D: BoundingBox3DInterface
+  }
+}>
+
+export type GameOption = JsonLDItem<{
   gameSpeed: number
   gameState: GameState
   gameMode: GameMode
-  userControl: JsonLDItem<{
-    showGrid: boolean
-    currentAction?: ActionUserMetaDataInterface | undefined
-    rotation?: number
-    entitiesSelected: EntityInterface["@id"][]
-    entitySelectedByHover?: EntityInterface["@id"]
-    mouseState: {
-      bounding3D: BoundingBox3DInterface
-    }
-  }>
+}>
+
+export default interface GameInterface extends BaseJsonLdInterface {
+  graphicMotor: GraphicMotor
+  gameOption: GameOption
+  userControl: UserControl
   camera: JsonLDItem<{
     fov: number
     zoom: number

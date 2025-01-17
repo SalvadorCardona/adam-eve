@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useGameFrame } from "@/src/UI/hook/useGameFrame"
 import { GameState } from "@/src/game/game/GameInterface"
-import { updateContainer } from "@/src/container/container"
+import { updateGame } from "@/src/game/game/updateGame"
 
 interface ControlPropsInterface {}
 
@@ -23,6 +23,7 @@ interface ControlItemInterface {
   name: Controls
   keys: string[]
   cb?: () => void
+  type?: "keyup" | string
 }
 
 const keysPressed: Record<string, boolean> = {}
@@ -30,27 +31,35 @@ const keysPressed: Record<string, boolean> = {}
 function valideKeyBoardInput(
   controlList: ControlItemInterface[],
   keysPressed: Record<string, boolean>,
+  type?: "keyup" | string,
 ): void {
-  const keyPressedResult = Object.keys(keysPressed)
-    .map((key) => {
-      if (keysPressed[key]) return key
+  const keyPressedResult = !type
+    ? Object.keys(keysPressed)
+        .map((key) => {
+          if (keysPressed[key]) return key
 
-      return false
-    })
-    .filter((e) => e !== false)
+          return false
+        })
+        .filter((e) => e !== false)
+    : Object.keys(keysPressed)
 
   controlList.forEach((control) => {
     control.keys.forEach((e) => {
       keyPressedResult.includes(e)
       if (keyPressedResult.includes(e) && control.cb) {
-        control.cb()
+        if (control.type && type === control.type) {
+          control.cb()
+        }
+        if (!control.type) {
+          control.cb()
+        }
       }
     })
   })
 }
 
 export const ControlKeyboard = () => {
-  const { game, updateGame } = useGameContext()
+  const { game } = useGameContext()
   const moveSize = 10
 
   const controlList = useMemo<ControlItemInterface[]>(
@@ -60,7 +69,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowUp", "KeyW"],
         cb: () => {
           game.camera.position.z += moveSize
-          updateContainer(game, game.camera)
+          updateGame(game, game.camera)
         },
       },
       {
@@ -68,7 +77,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowDown", "KeyS"],
         cb: () => {
           game.camera.position.z -= moveSize
-          updateContainer(game, game.camera)
+          updateGame(game, game.camera)
         },
       },
       {
@@ -76,7 +85,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowLeft", "KeyA"],
         cb: () => {
           game.camera.position.x += moveSize
-          updateContainer(game, game.camera)
+          updateGame(game, game.camera)
         },
       },
       {
@@ -84,7 +93,7 @@ export const ControlKeyboard = () => {
         keys: ["ArrowRight", "KeyD"],
         cb: () => {
           game.camera.position.x -= moveSize
-          updateContainer(game, game.camera)
+          updateGame(game, game.camera)
         },
       },
       {
@@ -92,15 +101,16 @@ export const ControlKeyboard = () => {
         keys: ["Escape"],
         cb: () => {
           game.userControl.currentAction = undefined
-          updateContainer(game, game.userControl)
+          updateGame(game, game.userControl)
         },
       },
       {
         name: Controls.showGrid,
         keys: ["KeyG"],
+        type: "keyup",
         cb: () => {
           game.userControl.showGrid = !game.userControl.showGrid
-          updateContainer(game, game.userControl)
+          updateGame(game, game.userControl)
         },
       },
       {
@@ -108,15 +118,18 @@ export const ControlKeyboard = () => {
         keys: ["KeyR"],
         cb: () => {
           game.userControl.rotation = (game.userControl?.rotation ?? 0) + Math.PI / 2
-          updateContainer(game, game.userControl)
+          updateGame(game, game.userControl)
         },
       },
       {
         name: Controls.pause,
         keys: ["KeyP"],
+        type: "keyup",
         cb: () => {
-          game.gameState =
-            game.gameState === GameState.RUN ? GameState.PAUSE : GameState.RUN
+          game.gameOption.gameState =
+            game.gameOption.gameState === GameState.RUN
+              ? GameState.PAUSE
+              : GameState.RUN
         },
       },
       {
@@ -148,6 +161,7 @@ export const ControlKeyboard = () => {
 
     const handleKeyUp = (event: KeyboardEvent) => {
       keysPressed[event.code] = false
+      valideKeyBoardInput(controlList, keysPressed, event.type)
     }
 
     window.addEventListener("keyup", handleKeyUp)

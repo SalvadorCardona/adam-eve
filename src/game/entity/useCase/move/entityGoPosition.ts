@@ -1,8 +1,8 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface EntityGoPositionParams {
   entity: EntityInterface

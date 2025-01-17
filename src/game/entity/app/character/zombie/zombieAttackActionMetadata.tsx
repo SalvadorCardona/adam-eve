@@ -1,7 +1,6 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
@@ -12,6 +11,7 @@ import {
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface ZombieAttackAction {}
 

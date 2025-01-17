@@ -12,6 +12,8 @@ import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/bouding
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
 
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
   data: { entityMetaData: EntityMetaDataInterface | undefined }
@@ -33,7 +35,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
       ) {
         return
       }
-
+      console.log("Entities go to build")
       const bounding = boundingBoxObbToAabb(game.userControl.mouseState.bounding3D)
       const rotationY = game.userControl?.rotation ?? 0
       const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
@@ -41,7 +43,6 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         bounding2DSize(game.userControl.mouseState.bounding3D) > 1
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {
-        console.log(bounding)
         const positions = diviseVector(
           bounding.min,
           bounding.max,
@@ -57,8 +58,11 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
             },
           })
 
-          entity.position.z = entity.position.z += entity.size.z
-          entity.position.x = entity.position.x += entity.size.x
+          const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
+          entity.position.z = entity.position.z +=
+            entityMetaData.propriety.size?.z ?? 0
+          entity.position.x = entity.position.x +=
+            entityMetaData.propriety.size?.x ?? 0
 
           entities.push(entity)
         })
@@ -86,6 +90,9 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
         playSound(song)
         game.userControl.entitiesSelected = []
       }
+
+      console.log("current entities", Object.values(game.entities).length)
+      console.log("current array", Object.values(game.entities))
 
       game.userControl.rotation = 0
     },

@@ -1,14 +1,28 @@
 import { Graphics as BaseGraphics } from "pixi.js"
 import { config } from "@/src/app/config"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
-import React from "react"
+import React, { useState } from "react"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { appLdType } from "@/src/AppLdType"
+import { UserControl } from "@/src/game/game/GameInterface"
+import useGameContext from "@/src/UI/provider/useGameContext"
 
 interface GridPropsInterface {
   size: Vector2Interface
 }
 
 export const PixiGrid = ({ size }: GridPropsInterface) => {
+  const game = useGameContext().game
+  const [showGrid, setShowGrid] = useState<boolean>(game.userControl.showGrid)
+
+  useGamePubSub(appLdType.userControl, (e) => {
+    const userControl = e.item as UserControl
+    setShowGrid(userControl.showGrid)
+  })
+
+  if (!showGrid) return
+
   const drawGrid = (graphics: BaseGraphics) => {
     const lineWidth = 1
     const lineColor = "white"

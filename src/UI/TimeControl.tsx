@@ -1,8 +1,10 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { FastForward, Pause, Play, Rewind } from "lucide-react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { GameState } from "@/src/game/game/GameInterface"
+import { useGameFrame } from "@/src/UI/hook/useGameFrame"
+import { updateGame } from "@/src/game/game/updateGame"
 
 const convertFramesToTime = (frames: number) => {
   const totalSeconds = Math.floor(frames / 60)
@@ -14,29 +16,40 @@ const convertFramesToTime = (frames: number) => {
 }
 
 export default function TimeControls() {
+  const [time, setTime] = useState<number>(0)
+  useGameFrame((game) => {
+    setTime(game.time)
+  })
+
   const gameContext = useGameContext()
-  const speed = gameContext.game.gameSpeed
+  const speed = gameContext.game.gameOption.gameSpeed
+
   const isPaused = useMemo(() => {
-    return gameContext.game.gameState === GameState.PAUSE
-  }, [gameContext.game.gameState])
+    return gameContext.game.gameOption.gameState === GameState.PAUSE
+  }, [gameContext.game.gameOption.gameState])
 
   const canBeUpSpeed = useMemo(() => {
-    return gameContext.game.gameSpeed <= 1
-  }, [gameContext.game.gameSpeed])
+    return gameContext.game.gameOption.gameSpeed <= 1
+  }, [gameContext.game.gameOption.gameSpeed])
 
   const canBeDownSpeed = useMemo(() => {
-    return gameContext.game.gameSpeed >= 1
-  }, [gameContext.game.gameSpeed])
+    return gameContext.game.gameOption.gameSpeed >= 1
+  }, [gameContext.game.gameOption.gameSpeed])
 
-  const timeString = convertFramesToTime(gameContext.game?.time || 0)
+  const timeString = convertFramesToTime(time)
 
   const handleSpeedChange = (newSpeed: number) => {
-    gameContext.game.gameSpeed = newSpeed
+    gameContext.game.gameOption.gameSpeed = newSpeed
+    updateGame(gameContext.game, gameContext.game.gameOption)
   }
 
   const handlePauseToggle = () => {
-    gameContext.game.gameState =
-      gameContext.game.gameState === GameState.RUN ? GameState.PAUSE : GameState.RUN
+    gameContext.game.gameOption.gameState =
+      gameContext.game.gameOption.gameState === GameState.RUN
+        ? GameState.PAUSE
+        : GameState.RUN
+
+    updateGame(gameContext.game, gameContext.game.gameOption)
   }
 
   return (

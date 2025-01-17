@@ -17,17 +17,15 @@ export enum EntityFaction {
 
 export default interface EntityInterface extends BaseJsonLdInterface {
   rotation: Vector3Interface
-  size: Vector3Interface
   position: Vector3Interface
   life: number
-  inventory: InventoryBagInterface
-  actions: ActionBagInterface
+  inventory?: InventoryBagInterface
   state?: EntityState
-  workers: EntityInterface["@id"][]
   numberOfWorker?: number
   currentPathOfCoordinate?: CurrentPathCoordinateInterface
   faction: EntityFaction
   entityAttackTargetIri?: JsonLdIri
+  actions?: ActionBagInterface
   connections: {
     top?: JsonLdIri
     bottom?: JsonLdIri
@@ -76,8 +74,13 @@ export function getEntityBaseType(entity: EntityInterface): JsonLdType | undefin
 
 export interface RessourceEntityInterface extends EntityInterface {}
 
-export interface CharacterEntityInterface extends EntityInterface {}
+export interface CharacterEntityInterface extends EntityInterface {
+  actions: ActionBagInterface
+}
 
-export interface BuildingEntityInterface extends EntityInterface {}
+export interface BuildingEntityInterface extends EntityInterface {
+  actions: ActionBagInterface
+  workers: EntityInterface["@id"][]
+}
 
 export interface GroundEntityInterface extends EntityInterface {}

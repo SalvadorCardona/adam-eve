@@ -2,10 +2,10 @@ import React from "react"
 import { Progress } from "@/components/ui/progress"
 import { Activity, Box, Leaf, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import useGameContext from "@/src/UI/provider/useGameContext"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface EntityModalProps {
   entityUri: JsonLdIri

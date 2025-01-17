@@ -1,7 +1,7 @@
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 export type PathCoordinate = Vector3Interface[]
 

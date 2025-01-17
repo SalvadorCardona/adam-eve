@@ -10,9 +10,11 @@ import { createBounding3D } from "@/src/utils/3Dmath/boudingBox"
 export function gameFactory(game?: GameInterface): GameInterface {
   const newGame = jsonLdFactory(appLdType.game, {
     graphicMotor: GraphicMotor.PIXI_JS,
-    gameSpeed: 1,
-    gameState: GameState.RUN,
-    gameMode: GameMode.NORMAL,
+    gameOption: jsonLdFactory(appLdType.camera, {
+      gameSpeed: 1,
+      gameState: GameState.RUN,
+      gameMode: GameMode.NORMAL,
+    }),
     time: 0,
     actions: {},
     entities: {},

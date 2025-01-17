@@ -1,11 +1,11 @@
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { updateInventory } from "@/src/game/inventory/updateInventory"
 import {
   InventoryBagInterface,
   InventoryItemInterface,
   InventoryMetadataInterface,
 } from "@/src/game/inventory/InventoryItemInterface"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 export function getInventoryItem(
   inventory: InventoryBagInterface,

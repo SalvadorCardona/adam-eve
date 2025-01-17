@@ -1,4 +1,5 @@
 import createUniqId from "@/src/utils/id/createUniqId"
+import { JsonLdContainerInterface } from "@/src/container/container"
 
 export type JsonLdIri = string
 export type JsonLdType = string
@@ -11,6 +12,13 @@ export interface BaseJsonLdInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
   "@version": number
+}
+
+export interface JsonLdCollection<T = BaseJsonLdInterface> {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+  "@version": number
+  collection: JsonLdContainerInterface<T>
 }
 
 export type JsonLDItem<T> = BaseJsonLdInterface & T

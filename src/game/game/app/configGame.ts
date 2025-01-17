@@ -8,7 +8,6 @@ import { JsonLdTypeContainerInterface } from "@/src/container/container"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
-import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
@@ -59,13 +58,3 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
 }
 
 export default configGame
-
-export function getMetaData<T = BaseGameMetaDataInterface>(
-  metaType: JsonLdType | BaseGameMetaDataInterface,
-): T {
-  if (typeof metaType === "string") return configGame[metaType] as T
-
-  if (configGame[metaType["@type"]]) return configGame[metaType["@type"]] as T
-
-  throw new Error("Meta Data Not found: " + JSON.stringify(metaType))
-}

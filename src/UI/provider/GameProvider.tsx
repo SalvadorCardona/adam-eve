@@ -1,10 +1,12 @@
-import React, { ReactNode, useEffect } from "react"
-import GameInterface from "@/src/game/game/GameInterface"
+import React, { ReactNode, useEffect, useState } from "react"
+import GameInterface, { GameOption } from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 import { createPubSub } from "@/src/utils/functionnal/pubsub"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { appLdType } from "@/src/AppLdType"
 
 interface InputGameProviderPropsInterface {
   game: GameInterface
@@ -16,10 +18,15 @@ export const GameProvider = ({
   game,
 }: InputGameProviderPropsInterface) => {
   const pubSub = createPubSub()
+  const [version, setVersion] = useState(1)
+  useGamePubSub(appLdType.gameOption, (e) => {
+    const gameOption = e.item as GameOption
+    setVersion(gameOption["@version"])
+  })
 
   useEffect(() => {
     const metaData = getMetaData<GameMetadataInterface>(game)
-    const frame = 1000 / (metaData.propriety.gameFrame * game.gameSpeed)
+    const frame = 1000 / (metaData.propriety.gameFrame * game.gameOption.gameSpeed)
     const intervalId = setInterval(() => {
       const newGame = gameProcessor(game)
       updateGame(newGame)
@@ -27,7 +34,7 @@ export const GameProvider = ({
     }, frame)
 
     return () => clearInterval(intervalId)
-  }, [game.gameState, game.gameSpeed])
+  }, [version])
 
   const updateGame = (game: GameInterface) => {
     // setReactGame({ ...game })

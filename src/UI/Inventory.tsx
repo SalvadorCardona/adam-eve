@@ -1,7 +1,7 @@
-import { getMetaData } from "@/src/game/game/app/configGame"
 import { InventoryItemInterface } from "@/src/game/inventory/InventoryItemInterface"
 import React from "react"
 import { Card } from "@/components/ui/card"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface InventoryPropsInterface {
   inventoryItem: InventoryItemInterface

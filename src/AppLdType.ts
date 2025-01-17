@@ -8,6 +8,7 @@ export const appLdType = {
   camera: "camera",
   userControl: "userControl",
   game: "game",
+  gameOption: "gameOption",
   entity: "entity",
   entityHelper: "entity/helper",
   entityBuilding,
@@ -28,4 +29,5 @@ export const appLdType = {
   cutTheWoodAction: JsonLdTypeFactory(typeAction, "cutTheWood"),
   // Ressource
   woodRessource: JsonLdTypeFactory(typeRessource, "wood"),
+  theDeathAction: JsonLdTypeFactory(typeAction, "TheDeathActionMetadata"),
 }

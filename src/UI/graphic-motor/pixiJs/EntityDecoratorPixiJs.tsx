@@ -1,15 +1,23 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getMetaData } from "@/src/game/game/app/configGame"
 import React, { useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { EntityDecoratorResolverPropsInterface } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
-import { ContainerOptions } from "pixi.js/lib/scene/container/Container"
+import {
+  ContainerChild,
+  ContainerOptions,
+} from "pixi.js/lib/scene/container/Container"
 import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
+import {
+  Sprite,
+  SpriteAnimation,
+} from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { Ticker } from "pixi.js"
+import { EntityState } from "@/src/game/entity/EntityState"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 export const EntityDecoratorPixiJs = ({
   entity: baseEntity,
@@ -65,7 +73,7 @@ export const EntityDecoratorPixiJs = ({
       {color && (
         <Graphics
           draw={(g) => {
-            g.rect(0, 0, entity.size.x, entity.size.z)
+            g.rect(0, 0, size.x, size.y)
             g.fill({ color, alpha: 0.5 })
           }}
         />
@@ -73,7 +81,7 @@ export const EntityDecoratorPixiJs = ({
       {isSelected && (
         <Graphics
           draw={(g) => {
-            g.rect(0, 0, entity.size.x, entity.size.z)
+            g.rect(0, 0, size.x, size.y)
             g.fill({ color: 0xffff00, alpha: 0.5 })
           }}
         />
@@ -109,5 +117,33 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
     }
   }, [])
 
-  return <Sprite image={asset} options={size} />
+  const animation = useMemo(() => {
+    if (entity.state && entity.state in entityAnimation)
+      return entityAnimation[entity.state]
+    return undefined
+  }, [entity.state])
+
+  return <Sprite image={asset} options={size} animation={animation} />
+}
+
+const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
+  [EntityState.wait]: (e: Ticker, item: ContainerChild) => {
+    const deform = 0.1
+    const speed = 0.001
+    const scaleFactor = 1 - deform * Math.abs(Math.cos(e.lastTime * speed))
+    console.log(scaleFactor)
+    item.scale.x = scaleFactor / 5
+    item.scale.y = scaleFactor / 5
+  },
+  [EntityState.find_enemy]: (e: Ticker, item: ContainerChild) => {
+    const deform = 0.1
+    const speed = 0.01
+    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
+    const scaleFactor = Math.cos(e.lastTime * speed) * deform
+
+    console.log(scaleFactor)
+    // item.position.x += scaleFactor
+    item.position.y += scaleFactor
+    item.rotation += scaleFactor / 4
+  },
 }
