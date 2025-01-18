@@ -6,6 +6,7 @@ export interface BaseGameMetaDataInterface extends JsonTypedLdInterface {
     model3d?: string
     multiModel3d?: string[]
     model2d?: string
+    multiModel2d?: string[]
     animationMapper?: Record<string, string>
   }
   label?: string

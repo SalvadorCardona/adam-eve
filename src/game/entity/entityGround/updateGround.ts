@@ -1,15 +1,23 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { getByLdType } from "@/src/container/container"
 import EntityInterface from "@/src/game/entity/EntityInterface"
+import { appLdType } from "@/src/AppLdType"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
-  const grounds = getByLdType<EntityInterface>(game.entities, "entity/ground")
-  
+  const grounds = getByLdType<EntityInterface>(game.entities, appLdType.entityGround)
+
   updateGround({ entities: grounds })
 }
 
 export function updateGround({ entities }: { entities: EntityInterface[] }) {
-  const size = 1
+  console.log(getMetaData<EntityMetaDataInterface>(appLdType.entityGround))
+  const dimension = getMetaData<EntityMetaDataInterface>(grassGroundEntityMetadata)
+    .propriety.size as Vector3Interface
+  const size = dimension.x
 
   entities.forEach((ground) => {
     // Reset connections
@@ -18,6 +26,10 @@ export function updateGround({ entities }: { entities: EntityInterface[] }) {
       bottom: undefined,
       left: undefined,
       right: undefined,
+      topRight: undefined,
+      topLeft: undefined,
+      bottomLeft: undefined,
+      bottomRight: undefined,
     }
 
     entities.forEach((otherGround) => {
@@ -30,21 +42,45 @@ export function updateGround({ entities }: { entities: EntityInterface[] }) {
         }
         if (
           ground.position.x === otherGround.position.x &&
-          ground.position.z + 1 === otherGround.position.z
+          ground.position.z === otherGround.position.z - size
         ) {
           ground.connections.bottom = otherGround["@id"]
         }
         if (
           ground.position.z === otherGround.position.z &&
-          ground.position.x === otherGround.position.x + 1
+          ground.position.x === otherGround.position.x + size
         ) {
           ground.connections.left = otherGround["@id"]
         }
         if (
           ground.position.z === otherGround.position.z &&
-          ground.position.x + 1 === otherGround.position.x
+          ground.position.x === otherGround.position.x - size
         ) {
           ground.connections.right = otherGround["@id"]
+        }
+        if (
+          ground.position.x === otherGround.position.x + size &&
+          ground.position.z === otherGround.position.z + size
+        ) {
+          ground.connections.topLeft = otherGround["@id"]
+        }
+        if (
+          ground.position.x === otherGround.position.x - size &&
+          ground.position.z === otherGround.position.z + size
+        ) {
+          ground.connections.topRight = otherGround["@id"]
+        }
+        if (
+          ground.position.x === otherGround.position.x + size &&
+          ground.position.z === otherGround.position.z - size
+        ) {
+          ground.connections.bottomLeft = otherGround["@id"]
+        }
+        if (
+          ground.position.x === otherGround.position.x - size &&
+          ground.position.z === otherGround.position.z - size
+        ) {
+          ground.connections.bottomRight = otherGround["@id"]
         }
       }
     })

@@ -69,7 +69,7 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
 ): Array<T> {
   const results: Array<T> = []
 
-  if (typeof jsonLdType === "object") {
+  if (Array.isArray(jsonLdType)) {
     Object.keys(container).forEach((key) => {
       if (jsonLdType.some((type) => key.startsWith(type))) {
         results.push(container[key])

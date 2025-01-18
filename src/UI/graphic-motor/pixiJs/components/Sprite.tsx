@@ -48,7 +48,7 @@ export const Sprite = ({
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [image])
 
   useEffect(() => {
     const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
@@ -60,7 +60,7 @@ export const Sprite = ({
     if (containerRef.current && texture) {
       containerRef.current.texture = texture
     }
-  }, [texture, options, _image])
+  }, [texture, options, image])
 
   useEffect(() => {
     if (!animation || !containerRef.current) return

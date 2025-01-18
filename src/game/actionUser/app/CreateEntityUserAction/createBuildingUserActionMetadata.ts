@@ -12,8 +12,6 @@ import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/bouding
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
 
-import { getMetaData } from "@/src/game/game/app/getMetaData"
-
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
   data: { entityMetaData: EntityMetaDataInterface | undefined }
@@ -58,11 +56,11 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
             },
           })
 
-          const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-          entity.position.z = entity.position.z +=
-            entityMetaData.propriety.size?.z ?? 0
-          entity.position.x = entity.position.x +=
-            entityMetaData.propriety.size?.x ?? 0
+          // const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
+          // entity.position.z = entity.position.z +=
+          //   entityMetaData.propriety.size?.z ?? 0
+          // entity.position.x = entity.position.x +=
+          //   entityMetaData.propriety.size?.x ?? 0
 
           entities.push(entity)
         })

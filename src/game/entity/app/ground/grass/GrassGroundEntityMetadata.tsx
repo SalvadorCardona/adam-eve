@@ -1,16 +1,77 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import grassIcon from "./grassIcon.png"
-import grassTexture from "./grassTexture1.png"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
+import grassBottomLeft from "./asset/grass-bottom-left.png"
+import grassBottomRight from "./asset/grass-bottom-right.png"
+import grassTopRight from "./asset/grass-top-right.png"
+import grassTopLeft from "./asset/grass-top-left.png"
+import grassLeft from "./asset/grass-left.png"
+import grassRight from "./asset/grass-right.png"
+import grassTop from "./asset/grass-top.png"
+import grassBottom from "./asset/grass-bottom.png"
+import grassCornerBottomLeft from "./asset/grass-corner-bottom-left.png"
+import grassCornerTopLeft from "./asset/grass-corner-bottom-left.png"
+import grassCornerBottomRight from "./asset/grass-corner-bottom-right.png"
+import grassCornerTopRight from "./asset/grass-corner-bottom-right.png"
+import grass1 from "./asset/normal/grass1.png"
+import grass2 from "./asset/normal/grass2.png"
+import grass3 from "./asset/normal/grass3.png"
+import grass4 from "./asset/normal/grass4.png"
+import grass5 from "./asset/normal/grass5.png"
+import grass6 from "./asset/normal/grass6.png"
+import grass7 from "./asset/normal/grass7.png"
+import grass8 from "./asset/normal/grass8.png"
+import grass9 from "./asset/normal/grass9.png"
+import grass10 from "./asset/normal/grass10.png"
+import grass11 from "./asset/normal/grass11.png"
+import grass12 from "./asset/normal/grass12.png"
+import grass13 from "./asset/normal/grass13.png"
+import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
+import React, { useMemo, useState } from "react"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { EntityMetaDataInterface } from "../../../EntityMetaDataInterface"
+import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 
+const grassNormal = [
+  grass1,
+  grass2,
+  grass3,
+  grass4,
+  grass5,
+  grass6,
+  grass7,
+  grass8,
+  grass9,
+  grass10,
+  grass11,
+  grass12,
+  grass13,
+]
+
+const type = JsonLdTypeFactory(appLdType.entityGround, "grass")
 export const grassGroundEntityMetadata = entityMedataFactory({
   asset: {
     icon: grassIcon,
-    model2d: grassTexture,
+    multiModel2d: [
+      grassBottomLeft,
+      grassBottomRight,
+      grassTopRight,
+      grassTopLeft,
+      grassLeft,
+      grassRight,
+      grassTop,
+      grassBottom,
+      grassCornerBottomLeft,
+      grassCornerBottomRight,
+      grassCornerTopRight,
+      grassCornerTopLeft,
+      ...grassNormal,
+    ],
   },
   propriety: {
     size: {
@@ -19,7 +80,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       z: 50,
     },
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityGround, "grass"),
+  ["@type"]: type,
   label: "Herbe",
   canBeBuild: ({ entity, game }) => {
     const grounds = entityQuery(game, { "@type": appLdType.entityGround })
@@ -31,30 +92,69 @@ export const grassGroundEntityMetadata = entityMedataFactory({
 
     return true
   },
-  // component: ({ entity }) => {
-  //   const randomGreen = () => {
-  //     const baseGreen = 124 // Base green value (0-255)
-  //     const variation = Math.floor(Math.random() * 20) - 5 // Random variation between -10 and +10
-  //     return Math.min(255, Math.max(0, baseGreen + variation)) // Ensure value is within 0-255
-  //   }
-  //
-  //   const greenColor = useMemo(() => {
-  //     return `rgb(90, ${randomGreen()}, 87)`
-  //   }, [entity["@id"]])
-  //
-  //   return (
-  //     <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-  //       {/*<mesh position={[0, 0, -1]}>*/}
-  //       {/*  <RoundedCubeLine road={entity} />*/}
-  //       {/*  <meshStandardMaterial color={"#8a643a"} roughness={0.7} metalness={0.0} />*/}
-  //       {/*</mesh>*/}
-  //       <mesh receiveShadow>
-  //         <RoundedCubeLine road={entity} />
-  //         <meshStandardMaterial color={greenColor} roughness={0.7} metalness={0.0} />
-  //       </mesh>
-  //     </group>
-  //   )
-  // },
+  component: ({ entity }) => {
+    const [version, setVersion] = useState(1)
+    const size = useMemo(() => {
+      const size = getMetaData<EntityMetaDataInterface>(entity).propriety
+        .size as Vector3Interface
+      return {
+        width: size.x as Number,
+        height: size.y as Number,
+      }
+    }, [])
+
+    useGamePubSub(type, (e) => {
+      setVersion(version + 1)
+    })
+
+    let asset = grassNormal[Math.floor(Math.random() * 12)]
+
+    const connections = entity.connections
+    switch (true) {
+      case connections.top !== undefined &&
+        connections.left !== undefined &&
+        connections.right !== undefined &&
+        connections.bottom !== undefined:
+        asset = asset
+        break
+      case connections.top !== undefined &&
+        connections.left !== undefined &&
+        connections.right !== undefined:
+        asset = grassBottom
+        break
+      case connections.top !== undefined &&
+        connections.left !== undefined &&
+        connections.bottom !== undefined:
+        asset = grassRight
+        break
+      case connections.top !== undefined &&
+        connections.right !== undefined &&
+        connections.bottom !== undefined:
+        asset = grassLeft
+        break
+      case connections.left !== undefined &&
+        connections.right !== undefined &&
+        connections.bottom !== undefined:
+        asset = grassTop
+        break
+      case connections.top !== undefined && connections.left !== undefined:
+        asset = grassBottomRight
+        break
+      case connections.top !== undefined && connections.right !== undefined:
+        asset = grassBottomLeft
+        break
+      case connections.bottom !== undefined && connections.left !== undefined:
+        asset = grassTopRight
+        break
+      case connections.bottom !== undefined && connections.right !== undefined:
+        asset = grassTopLeft
+        break
+      default:
+        asset = asset
+    }
+    console.log(asset)
+    return <Sprite image={asset} options={size} />
+  },
 })
 
 interface RoundedCubeLinePropsInterface {

@@ -31,6 +31,10 @@ export default interface EntityInterface extends BaseJsonLdInterface {
     bottom?: JsonLdIri
     left?: JsonLdIri
     right?: JsonLdIri
+    topRight?: JsonLdIri
+    topLeft?: JsonLdIri
+    bottomLeft?: JsonLdIri
+    bottomRight?: JsonLdIri
     on?: JsonLdIri
   }
 }

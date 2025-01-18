@@ -2,9 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react"
 import GameInterface, { GameOption } from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
-import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 import { createPubSub } from "@/src/utils/functionnal/pubsub"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { appLdType } from "@/src/AppLdType"
 
@@ -25,8 +23,7 @@ export const GameProvider = ({
   })
 
   useEffect(() => {
-    const metaData = getMetaData<GameMetadataInterface>(game)
-    const frame = 1000 / (metaData.propriety.gameFrame * game.gameOption.gameSpeed)
+    const frame = 1000 / (45 * game.gameOption.gameSpeed)
     const intervalId = setInterval(() => {
       const newGame = gameProcessor(game)
       updateGame(newGame)
@@ -42,7 +39,7 @@ export const GameProvider = ({
   }
 
   return (
-    <GameContext.Provider
+    <GameContext
       value={{
         pubSub,
         game,
@@ -51,6 +48,6 @@ export const GameProvider = ({
       }}
     >
       {children}
-    </GameContext.Provider>
+    </GameContext>
   )
 }

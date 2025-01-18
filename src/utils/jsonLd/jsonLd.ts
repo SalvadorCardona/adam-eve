@@ -19,6 +19,7 @@ export interface JsonLdCollection<T = BaseJsonLdInterface> {
   "@type": JsonLdType
   "@version": number
   collection: JsonLdContainerInterface<T>
+  totalItems: number
 }
 
 export type JsonLDItem<T> = BaseJsonLdInterface & T

@@ -16,17 +16,11 @@ export interface GameMetadataInterface extends BaseGameMetaDataInterface {
   getCollection: () => GameInterface[]
   persistItem: (game: GameInterface) => void
   removeItem: (iriSaveGame: JsonLdIri) => void
-  propriety: {
-    gameFrame: number
-  }
 }
 
 const ldType = JsonLdTypeFactory(appLdType.game)
 
 export const gameMetadata: GameMetadataInterface = {
-  propriety: {
-    gameFrame: 45,
-  },
   "@type": appLdType.game,
   factory: gameFactory,
   getCollection: (): GameInterface[] => {

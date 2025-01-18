@@ -22,13 +22,17 @@ export const PixiProvider: React.FC<{
     await app.init(options)
     app.stage.interactive = true
     app.stage.eventMode = "static"
-    const entitiesMetadata = getByLdType<EntityMetaDataInterface>(
-      configGame,
-      appLdType.entity,
-    ).filter((e) => e.asset?.model2d)
 
-    for (const entitiesMetadataKey of entitiesMetadata) {
-      await Assets.load(entitiesMetadataKey.asset.model2d)
+    const assets: string[] = []
+    getByLdType<EntityMetaDataInterface>(configGame, appLdType.entity).forEach(
+      (e) => {
+        e.asset?.model2d && assets.push(e.asset.model2d)
+        e.asset?.model3d && assets.push(e.asset.model3d)
+      },
+    )
+
+    for (const asset of assets) {
+      await Assets.load(asset)
     }
 
     await Assets.load(waterTexture)
