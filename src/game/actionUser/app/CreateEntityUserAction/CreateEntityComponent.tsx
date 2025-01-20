@@ -1,39 +1,51 @@
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import { EntityDecoratorPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntityDecoratorPixiJs"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createBuildingUserActionMetadata"
+import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
+import { Vector2Interface, vector2ToVector3 } from "@/src/utils/3Dmath/Vector"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { appLdType } from "@/src/AppLdType"
 
 export const CreateEntityComponent = () => {
   const game = useGameContext().game
+  const [mousePosition, setMousePosition] = useState<Vector2Interface>(
+    game.mouseState.position,
+  )
   const rotationY = game.userControl?.rotation ?? 0
-  const entityMetaData = createBuildingUserActionMetadata.data.entityMetaData
-  const mousePositon = game.userControl.mouseState.bounding3D.position
+  const entityMetaData = createEntityUserActionMetadata.data.entityMetaData
+
+  useGamePubSub(appLdType.mouseState, () => {
+    setMousePosition(game.mouseState.position)
+  })
+
   const entity = useMemo(() => {
     return entityMetaData
       ? entityMetaData.factory({
           game: game,
           entity: {
-            position: mousePositon,
+            position: vector2ToVector3(mousePosition),
             rotation: { x: 0, z: 0, y: rotationY },
           },
         })
       : undefined
-  }, [entityMetaData, mousePositon, rotationY])
+  }, [entityMetaData, mousePosition, rotationY])
 
   const canBeBuild = useMemo(() => {
     return entityMetaData && entity
       ? entityMetaData.canBeBuild({ entity, game })
       : false
-  }, [mousePositon])
+  }, [mousePosition])
 
   if (
-    !hasActionUser(game, createBuildingUserActionMetadata) ||
-    !createBuildingUserActionMetadata.data.entityMetaData ||
+    !hasActionUser(game, createEntityUserActionMetadata) ||
+    !createEntityUserActionMetadata.data.entityMetaData ||
     !entity
   ) {
     return
   }
+
+  entity.position.y = 5
 
   const color = canBeBuild ? "yellow" : "red"
 

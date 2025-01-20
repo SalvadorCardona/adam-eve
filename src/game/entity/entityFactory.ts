@@ -57,7 +57,7 @@ export function entityFactory<
 
   if (isCharacterEntity(entity) || isBuildingEntity(entity)) {
     entity.actions = {}
-    entity.faction = entity?.faction ? EntityFaction.self : entity.faction
+    entity.faction = entity?.faction ? entity.faction : EntityFaction.self
 
     if (metaData?.propriety?.defaultActions) {
       metaData.propriety.defaultActions.forEach((actionType) => {
@@ -77,6 +77,8 @@ export function entityFactory<
 
   if (isGroundEntity(entity)) {
     entity.position.y -= 0.5
+  } else {
+    entity.position.y += 1
   }
 
   return entity

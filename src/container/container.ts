@@ -58,7 +58,6 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   if (action === ContainerAction.remove) {
     deleteContainerKey(container, item["@id"])
   }
-
   containerPubSub.publish(item["@id"], { item, action })
   containerPubSub.publish(item["@type"], { item, action })
 }

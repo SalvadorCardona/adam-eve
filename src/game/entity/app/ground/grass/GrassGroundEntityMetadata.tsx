@@ -94,6 +94,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
   },
   component: ({ entity }) => {
     const [version, setVersion] = useState(1)
+
     const size = useMemo(() => {
       const size = getMetaData<EntityMetaDataInterface>(entity).propriety
         .size as Vector3Interface
@@ -105,6 +106,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
 
     useGamePubSub(type, (e) => {
       setVersion(version + 1)
+      console.log("ici")
     })
 
     let asset = grassNormal[Math.floor(Math.random() * 12)]
@@ -152,7 +154,6 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       default:
         asset = asset
     }
-    console.log(asset)
     return <Sprite image={asset} options={size} />
   },
 })

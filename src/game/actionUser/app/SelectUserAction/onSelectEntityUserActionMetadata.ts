@@ -4,8 +4,11 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import GameInterface from "@/src/game/game/GameInterface"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
-import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/boudingBox"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createBuildingUserActionMetadata"
+import {
+  bounding2DSize,
+  boundingBox2DObbToAabb,
+} from "@/src/utils/3Dmath/boudingBox"
+import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -16,24 +19,13 @@ interface OnClickEntityUserActionMetadataInterface
 export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataInterface =
   {
     "@type": JsonLdTypeFactory(appLdType.userAction, "on-click-entity"),
-    // onClick: (params) => {
-    //   const entities = entityQuery(game, {
-    //     circleSearch: {
-    //       center: game.userControl.mouseState.bounding3D.position,
-    //       radius: 0.3,
-    //     },
-    //   })
-    //   game.userControl.entitiesSelected = entities.map((e) => e["@id"])
-    //
-    //   onSelectEntityUserActionMetadata.onApply({ game: game })
-    // },
     onSelectZone: ({ game }) => {
-      const bounding = boundingBoxObbToAabb(game.userControl.mouseState.bounding3D)
-      const isClick = bounding2DSize(game.userControl.mouseState.bounding3D) < 0.3
+      const bounding = boundingBox2DObbToAabb(game.mouseState.bounding2d)
+      const isClick = bounding2DSize(game.mouseState.bounding2d) < 0.3
       const entities = isClick
         ? entityQuery(game, {
             circleSearch: {
-              center: game.userControl.mouseState.bounding3D.position,
+              center: game.mouseState.bounding2d.position,
               radius: 1,
             },
           })
@@ -44,13 +36,12 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
             },
           })
 
-      // console.log("selected", entities[0])
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
 
       onSelectEntityUserActionMetadata.onApply({ game: game })
     },
     onApply: (payload) => {
-      createBuildingUserActionMetadata.onApply(payload)
+      createEntityUserActionMetadata.onApply(payload)
       removeBuildingUserActionMetadata.onApply(payload)
     },
   }

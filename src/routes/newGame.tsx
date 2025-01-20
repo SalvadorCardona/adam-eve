@@ -1,9 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import React, { useEffect } from "react"
-import { gameFactory } from "@/src/game/game/gameFactory"
 import { gameMetadata } from "@/src/game/game/GameMetaData"
 import { gameLoader } from "@/src/game/game/gameLoader"
 import GameComponent from "@/src/UI/GameComponent"
+import { gameFactory } from "@/src/game/game/GameInterface"
 
 export const Route = createFileRoute("/newGame")({
   component: RouteComponent,

@@ -1,5 +1,5 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { EntityDecoratorResolverPropsInterface } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
@@ -18,6 +18,7 @@ import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 
 export const EntityDecoratorPixiJs = ({
   entity: baseEntity,
@@ -41,11 +42,11 @@ export const EntityDecoratorPixiJs = ({
     return Model2DPixiJs
   }, [])
 
-  const size = useMemo<ContainerOptions>(() => {
+  const size = useMemo<Vector2Interface>(() => {
     return entityMetaData?.propriety?.size
       ? {
-          x: entityMetaData.propriety.size.x,
-          y: entityMetaData.propriety.size.y,
+          x: entityMetaData.propriety.size.x ?? 0,
+          y: entityMetaData.propriety.size.y ?? 0,
         }
       : { x: 0, y: 0 }
   }, [])
@@ -57,12 +58,16 @@ export const EntityDecoratorPixiJs = ({
     }
   }, [])
 
+  useEffect(() => {
+    setEntity(baseEntity)
+  }, [baseEntity])
+
   const position = useMemo(() => {
     return {
       x: entity.position.x,
       y: entity.position.z,
     }
-  }, [entity])
+  }, [entity.position.x, baseEntity.position.z])
 
   return (
     <Container
@@ -131,7 +136,7 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
     const deform = 0.1
     const speed = 0.001
     const scaleFactor = 1 - deform * Math.abs(Math.cos(e.lastTime * speed))
-    console.log(scaleFactor)
+
     item.scale.x = scaleFactor / 5
     item.scale.y = scaleFactor / 5
   },
@@ -141,7 +146,6 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
     // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
     const scaleFactor = Math.cos(e.lastTime * speed) * deform
 
-    console.log(scaleFactor)
     // item.position.x += scaleFactor
     item.position.y += scaleFactor
     item.rotation += scaleFactor / 4

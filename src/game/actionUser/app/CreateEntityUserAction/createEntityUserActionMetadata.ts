@@ -7,41 +7,45 @@ import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { diviseVector } from "@/src/utils/3Dmath/diviseVector"
-import { bounding2DSize, boundingBoxObbToAabb } from "@/src/utils/3Dmath/boudingBox"
+import { diviseVector2D } from "@/src/utils/3Dmath/diviseVector"
+import {
+  bounding2DSize,
+  boundingBox2DObbToAabb,
+} from "@/src/utils/3Dmath/boudingBox"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
+import { vector2ToVector3 } from "@/src/utils/3Dmath/Vector"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
   data: { entityMetaData: EntityMetaDataInterface | undefined }
 }
 
-export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataInterface =
+export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInterface =
   {
     mouseIcon: mouseIcon.build,
     "@type": JsonLdTypeFactory(appLdType.userAction, "create-building"),
     onCall: ({ game, metaData }) => {
-      createBuildingUserActionMetadata.data.entityMetaData =
+      createEntityUserActionMetadata.data.entityMetaData =
         metaData as EntityMetaDataInterface
-      game.userControl.currentAction = createBuildingUserActionMetadata
+      game.userControl.currentAction = createEntityUserActionMetadata
     },
     onApply: ({ game }) => {
       if (
-        !createBuildingUserActionMetadata.data.entityMetaData ||
-        !hasActionUser(game, createBuildingUserActionMetadata)
+        !createEntityUserActionMetadata.data.entityMetaData ||
+        !hasActionUser(game, createEntityUserActionMetadata)
       ) {
         return
       }
-      console.log("Entities go to build")
-      const bounding = boundingBoxObbToAabb(game.userControl.mouseState.bounding3D)
+
       const rotationY = game.userControl?.rotation ?? 0
-      const metaInterface = createBuildingUserActionMetadata.data.entityMetaData
-      const isMultipleBuilding =
-        bounding2DSize(game.userControl.mouseState.bounding3D) > 1
+      const metaInterface = createEntityUserActionMetadata.data.entityMetaData
+      console.log(game.mouseState)
+      const isMultipleBuilding = bounding2DSize(game.mouseState.bounding2d) > 1
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {
-        const positions = diviseVector(
+        const bounding = boundingBox2DObbToAabb(game.mouseState.bounding2d)
+        const positions = diviseVector2D(
           bounding.min,
           bounding.max,
           config.pixiJs2dItemSize,
@@ -51,7 +55,7 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           const entity = metaInterface.factory({
             game,
             entity: {
-              position: newPosition,
+              position: vector2ToVector3(newPosition),
               rotation: { x: 0, z: 0, y: rotationY },
             },
           })
@@ -69,12 +73,13 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
           metaInterface.factory({
             game,
             entity: {
-              position: game.userControl.mouseState.bounding3D.position,
+              position: vector2ToVector3(game.mouseState.position),
               rotation: { x: 0, z: 0, y: rotationY },
             },
           }),
         )
       }
+
       const result = entities.map((entity) => {
         const canBeBuild = metaInterface.canBeBuild({ game, entity })
         if (canBeBuild) {
@@ -83,7 +88,6 @@ export const createBuildingUserActionMetadata: CreateBuildingUserActionMetadataI
 
         return canBeBuild
       })
-
       if (result.some((e) => e)) {
         playSound(song)
         game.userControl.entitiesSelected = []

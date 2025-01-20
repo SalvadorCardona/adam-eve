@@ -1,344 +1,101 @@
 {
   "@type": "game",
-  "@id": "game/n1hgbl",
+  "@id": "game/17mzsi9",
   "@version": 1,
   "graphicMotor": "PIXI_JS",
   "gameOption": {
     "@type": "camera",
-    "@id": "camera/fc90s9",
+    "@id": "camera/f5g7c9",
     "@version": 1,
     "gameSpeed": 1,
     "gameState": "run",
     "gameMode": "normal"
   },
-  "time": 11250,
+  "time": 834,
   "actions": {
-    "action/TheDeathActionMetadata/1ukha0v": {
+    "action/TheDeathActionMetadata/1pjk9nn": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/1ukha0v",
+      "@id": "action/TheDeathActionMetadata/1pjk9nn",
       "@version": 2,
-      "nextTick": 11251
+      "nextTick": 851
     },
-    "action/findWorkerCharacter/qz1pt": {
+    "action/findWorkerCharacter/1d1ovo": {
       "@type": "action/findWorkerCharacter",
-      "@id": "action/findWorkerCharacter/qz1pt",
+      "@id": "action/findWorkerCharacter/1d1ovo",
       "@version": 2,
-      "nextTick": 11281
+      "nextTick": 841
     }
   },
-  "entities": {
-    "entity/ground/grass/1qkf4wo": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1qkf4wo",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 350,
-        "y": -0.5,
-        "x": 800
-      }
-    },
-    "entity/ground/grass/18tz70v": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/18tz70v",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 400,
-        "y": -0.5,
-        "x": 800
-      }
-    },
-    "entity/ground/grass/1jyv24d": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1jyv24d",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 450,
-        "y": -0.5,
-        "x": 800
-      }
-    },
-    "entity/ground/grass/chrf7d": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/chrf7d",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 500,
-        "y": -0.5,
-        "x": 800
-      }
-    },
-    "entity/ground/grass/1whdmme": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1whdmme",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 350,
-        "y": -0.5,
-        "x": 850
-      }
-    },
-    "entity/ground/grass/5w2501": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/5w2501",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 400,
-        "y": -0.5,
-        "x": 850
-      }
-    },
-    "entity/ground/grass/fxk21r": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/fxk21r",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 450,
-        "y": -0.5,
-        "x": 850
-      }
-    },
-    "entity/ground/grass/1btl8wx": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1btl8wx",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 500,
-        "y": -0.5,
-        "x": 850
-      }
-    },
-    "entity/ground/grass/1nzsnka": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1nzsnka",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 350,
-        "y": -0.5,
-        "x": 900
-      }
-    },
-    "entity/ground/grass/47te2r": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/47te2r",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 400,
-        "y": -0.5,
-        "x": 900
-      }
-    },
-    "entity/ground/grass/jz4a19": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/jz4a19",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 450,
-        "y": -0.5,
-        "x": 900
-      }
-    },
-    "entity/ground/grass/j2u1e2": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/j2u1e2",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 500,
-        "y": -0.5,
-        "x": 900
-      }
-    },
-    "entity/ground/grass/n2pnxj": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/n2pnxj",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 350,
-        "y": -0.5,
-        "x": 950
-      }
-    },
-    "entity/ground/grass/rizrac": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/rizrac",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 400,
-        "y": -0.5,
-        "x": 950
-      }
-    },
-    "entity/ground/grass/1pr666y": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/1pr666y",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 450,
-        "y": -0.5,
-        "x": 950
-      }
-    },
-    "entity/ground/grass/ns91hw": {
-      "@type": "entity/ground/grass",
-      "@id": "entity/ground/grass/ns91hw",
-      "@version": 2,
-      "rotation": {
-        "x": 0,
-        "z": 0,
-        "y": 0
-      },
-      "connections": {},
-      "position": {
-        "z": 500,
-        "y": -0.5,
-        "x": 950
-      }
-    }
-  },
+  "entities": {},
   "inventory": {},
-  "createdAt": "2025-01-17T15:01:34.245Z",
+  "createdAt": "2025-01-20T10:11:17.192Z",
+  "mouseState": {
+    "@type": "mouseState",
+    "@id": "mouseState/1o22dfk",
+    "@version": 31,
+    "bounding2d": {
+      "position": {
+        "x": 767,
+        "y": 340
+      },
+      "size": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "position": {
+      "x": 1120,
+      "y": 771
+    }
+  },
   "camera": {
     "@type": "camera",
-    "@id": "camera/53xptk",
-    "@version": 1,
+    "@id": "camera/holvis",
+    "@version": 72,
     "fov": 50,
     "zoom": 0,
     "position": {
-      "x": 0,
+      "x": 430,
       "y": 0,
-      "z": 0
+      "z": 180
     }
   },
   "userControl": {
     "@type": "userControl",
-    "@id": "userControl/17r7bsi",
+    "@id": "userControl/1ar2qpv",
     "@version": 1,
     "entitiesSelected": [],
-    "showGrid": true,
-    "mouseState": {
-      "bounding3D": {
-        "position": {
-          "x": 1577,
-          "y": 0,
-          "z": 999
-        },
-        "size": {
-          "x": 81,
-          "y": 0,
-          "z": 73
-        }
+    "showGrid": true
+  },
+  "camera/holvis": {
+    "@type": "camera",
+    "@id": "camera/holvis",
+    "@version": 72,
+    "fov": 50,
+    "zoom": 0,
+    "position": {
+      "x": 430,
+      "y": 0,
+      "z": 180
+    }
+  },
+  "mouseState/1o22dfk": {
+    "@type": "mouseState",
+    "@id": "mouseState/1o22dfk",
+    "@version": 31,
+    "bounding2d": {
+      "position": {
+        "x": 767,
+        "y": 340
+      },
+      "size": {
+        "x": 0,
+        "y": 0
       }
     },
-    "currentAction": {
-      "mouseIcon": "/src/UI/MouseCursor/hammer.png",
-      "@type": "user-action/create-building",
-      "data": {
-        "entityMetaData": {
-          "@type": "entity/ground/grass",
-          "asset": {
-            "icon": "/src/game/entity/app/ground/grass/grassIcon.png",
-            "model2d": "/src/game/entity/app/ground/grass/grassTexture1.png"
-          },
-          "propriety": {
-            "size": {
-              "x": 50,
-              "y": 50,
-              "z": 50
-            }
-          },
-          "label": "Herbe"
-        }
-      }
-    },
-    "rotation": 0
+    "position": {
+      "x": 1120,
+      "y": 771
+    }
   }
 }

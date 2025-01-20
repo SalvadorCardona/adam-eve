@@ -1,6 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { Vector3Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
+import {
+  Vector2Interface,
+  Vector3Interface,
+  vector3ToVector2,
+} from "@/src/utils/3Dmath/Vector"
 import { getByLdType } from "@/src/container/container"
 import EntityInterface, {
   EntityFaction,
@@ -14,13 +18,13 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 
 interface CircleSearch {
-  center: Vector3Interface
+  center: Vector2Interface
   radius: number
 }
 
 interface SquareSearch {
-  start: Vector3Interface
-  end: Vector3Interface
+  start: Vector2Interface
+  end: Vector2Interface
 }
 
 type Order = "ASC" | "DESC"
@@ -84,7 +88,7 @@ export function entityQuery<T = EntityInterface>(
 
   if (circleSearch) {
     const { center, radius } = circleSearch
-    const center2D = vector3ToVector2(center)
+    const center2D = center
     entities = entities.filter((entity) => {
       return (
         distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
@@ -109,8 +113,8 @@ export function entityQuery<T = EntityInterface>(
   }
 
   if (squareSearch) {
-    const start2D = vector3ToVector2(squareSearch.start)
-    const end2d = vector3ToVector2(squareSearch.end)
+    const start2D = squareSearch.start
+    const end2d = squareSearch.end
     entities = entities.filter((entity) => {
       const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
 
@@ -135,9 +139,7 @@ export function entityQuery<T = EntityInterface>(
   })
 
   if (order?.distance) {
-    const referencePoint = circleSearch
-      ? vector3ToVector2(circleSearch.center)
-      : { x: 0, y: 0 }
+    const referencePoint = circleSearch ? circleSearch.center : { x: 0, y: 0 }
     entities.sort((a, b) => {
       const distanceA = distanceBetweenVector2(
         vector3ToVector2(a.position),

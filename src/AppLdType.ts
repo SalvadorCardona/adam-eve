@@ -7,6 +7,7 @@ const typeRessource = "action"
 export const appLdType = {
   camera: "camera",
   userControl: "userControl",
+  mouseState: "mouseState",
   game: "game",
   gameOption: "gameOption",
   entity: "entity",

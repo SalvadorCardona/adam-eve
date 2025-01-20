@@ -9,9 +9,9 @@ import {
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 
 interface ZombieAttackAction {}
 
@@ -23,10 +23,10 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       const metaData = getMetaData<EntityMetaDataInterface>(entity)
       const attack = metaData.propriety.attack
       if (!attack) return
+
       const enemy = entity.entityAttackTargetIri
         ? entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
         : undefined
-
       if (!enemy) entity.state = EntityState.find_enemy
 
       if (entity.state === EntityState.find_enemy) {
@@ -34,13 +34,12 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
           faction: EntityFaction.self,
           circleSearch: {
             center: entity.position,
-            radius: 200,
+            radius: 500,
           },
           order: {
             distance: "ASC",
           },
         })
-
         if (!newEnemy) {
           action.nextTick = game.time + 300
         } else {

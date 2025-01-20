@@ -1,4 +1,4 @@
-import GameInterface from "@/src/game/game/GameInterface"
+import GameInterface, { gameFactory } from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { JsonLdIri, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import {
@@ -8,7 +8,6 @@ import {
   removeLocalStorage,
 } from "@/src/utils/localStorage/localStorage"
 import { appLdType } from "@/src/AppLdType"
-import { gameFactory } from "@/src/game/game/gameFactory"
 
 export interface GameMetadataInterface extends BaseGameMetaDataInterface {
   factory: (game?: GameInterface) => GameInterface

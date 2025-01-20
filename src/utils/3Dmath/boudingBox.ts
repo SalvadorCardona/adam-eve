@@ -26,6 +26,16 @@ export function createBounding3D(
   }
 }
 
+export function createBounding2D(
+  params?: Partial<BoundingBox3DInterface>,
+): BoundingBox2DInterface {
+  return {
+    position: { x: 0, y: 0 },
+    size: { x: 0, y: 0 },
+    ...params,
+  }
+}
+
 export function bounding3ToBounding2(
   boundingBox: BoundingBox3DInterface,
 ): BoundingBox2DInterface {
@@ -59,20 +69,39 @@ interface BoundingBox3DOBB {
   max: Vector3Interface
 }
 
-export function boundingBoxObbToAabb(
+interface BoundingBox2DOBB {
+  min: Vector2Interface
+  max: Vector2Interface
+}
+
+export function boundingBox2DObbToAabb(
+  boundingBox: BoundingBox2DInterface,
+): BoundingBox2DOBB {
+  const half: Vector2Interface = {
+    x: Math.abs(boundingBox.size.x / 2),
+    y: Math.abs(boundingBox.size.y / 2),
+  }
+
+  return {
+    min: {
+      x: boundingBox.position.x - half.x,
+      y: boundingBox.position.y - half.y,
+    },
+    max: {
+      x: boundingBox.position.x + half.x,
+      y: boundingBox.position.y + half.y,
+    },
+  }
+}
+
+export function boundingBoxObb3DToAabb(
   boundingBox: BoundingBox3DInterface,
 ): BoundingBox3DOBB {
   const half: Vector3Interface = {
-    x: Math.abs(boundingBox.size.x),
-    y: Math.abs(boundingBox.size.y),
-    z: Math.abs(boundingBox.size.z),
+    x: Math.abs(boundingBox.size.x / 2),
+    y: Math.abs(boundingBox.size.y / 2),
+    z: Math.abs(boundingBox.size.z / 2),
   }
-
-  // const half: Vector3Interface = {
-  //   x: Math.abs(boundingBox.size.x / 2),
-  //   y: Math.abs(boundingBox.size.y / 2),
-  //   z: Math.abs(boundingBox.size.z / 2),
-  // }
 
   return {
     min: {

@@ -3,6 +3,7 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { useGameFrame } from "@/src/UI/hook/useGameFrame"
 import { GameState } from "@/src/game/game/GameInterface"
 import { updateGame } from "@/src/game/game/updateGame"
+import { useNavigate } from "@tanstack/react-router"
 
 interface ControlPropsInterface {}
 
@@ -17,6 +18,7 @@ enum Controls {
   pause = "pause",
   wheelUp = "wheelUp",
   wheelDown = "wheelDown",
+  newGame = "newGame",
 }
 
 interface ControlItemInterface {
@@ -59,6 +61,7 @@ function valideKeyBoardInput(
 }
 
 export const ControlKeyboard = () => {
+  const navigate = useNavigate()
   const { game } = useGameContext()
   const moveSize = 10
 
@@ -144,6 +147,14 @@ export const ControlKeyboard = () => {
         keys: ["WheelDown"],
         cb: () => {
           keysPressed["WheelDown"] = false
+        },
+      },
+      {
+        name: Controls.newGame,
+        keys: ["KeyN"],
+        type: "keyup",
+        cb: () => {
+          navigate({ to: "/newGame" })
         },
       },
     ],

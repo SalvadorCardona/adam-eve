@@ -14,7 +14,6 @@ export function updateGroundWithGame({ game }: { game: GameInterface }) {
 }
 
 export function updateGround({ entities }: { entities: EntityInterface[] }) {
-  console.log(getMetaData<EntityMetaDataInterface>(appLdType.entityGround))
   const dimension = getMetaData<EntityMetaDataInterface>(grassGroundEntityMetadata)
     .propriety.size as Vector3Interface
   const size = dimension.x

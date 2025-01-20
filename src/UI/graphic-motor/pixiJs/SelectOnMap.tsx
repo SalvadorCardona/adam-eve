@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react"
-import {
-  createVector2,
-  Vector2Interface,
-  vector2ToVector3,
-} from "@/src/utils/3Dmath/Vector"
+import { createVector2, Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
-import { Container, FederatedPointerEvent } from "pixi.js"
+import { Container, FederatedPointerEvent, Graphics as BaseGraphic } from "pixi.js"
 import { BoundingBox2DInterface } from "@/src/utils/3Dmath/boudingBox"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { useDebounce } from "react-use"
+import { updateGame } from "@/src/game/game/updateGame"
 
 let mouseMovePositon = createVector2()
 
@@ -32,17 +29,14 @@ export const SelectOnMap = () => {
     () => {
       if (isDragging) return
 
-      game.userControl.mouseState.bounding3D.position =
-        vector2ToVector3(mouseMovePositon)
-      game.userControl.mouseState.bounding3D.size = vector2ToVector3(
-        createBoundingBoxByMouse().size,
-      )
-
+      // game.mouseState.position = mouseMovePositon
+      const bounding = createBoundingBoxByMouse()
+      game.mouseState.bounding2d.size = bounding.size
       onSelectEntityUserActionMetadata.onSelectZone({
         game: game,
       })
     },
-    200,
+    50,
     [isDragging],
   )
 
@@ -84,12 +78,10 @@ export const SelectOnMap = () => {
         setCurrentPosition(newPosition)
       }
       mouseMovePositon = newPosition
+      game.mouseState.position = mouseMovePositon
+      updateGame(game, game.mouseState)
 
-      game.userControl.mouseState.bounding3D.position =
-        vector2ToVector3(mouseMovePositon)
-      game.userControl.mouseState.bounding3D.size = vector2ToVector3(
-        createBoundingBoxByMouse().size,
-      )
+      game.mouseState.bounding2d = createBoundingBoxByMouse()
     }
 
     const handlePointerUp = () => {
@@ -100,6 +92,7 @@ export const SelectOnMap = () => {
 
     const interactionLayer = new Container()
     interactionLayer.interactive = true
+    interactionLayer.zIndex = 90
     interactionLayer.hitArea = app.screen // Cover the entire screen
     app.stage.addChild(interactionLayer)
 
@@ -117,7 +110,7 @@ export const SelectOnMap = () => {
     }
   }, [app, isDragging])
 
-  const drawSelectionBox = (g) => {
+  const drawSelectionBox = (g: BaseGraphic) => {
     if (isDragging) {
       const boundingBox = createBoundingBoxByMouse()
       g.rect(

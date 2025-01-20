@@ -8,7 +8,7 @@ import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { appLdType } from "@/src/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
-import { createBuildingUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createBuildingUserActionMetadata"
+import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(
@@ -72,8 +72,8 @@ function IconBuild({ metaDatas }: { metaDatas: BaseGameMetaDataInterface[] }) {
       return
     }
 
-    if (createBuildingUserActionMetadata.onCall) {
-      createBuildingUserActionMetadata.onCall({ game, metaData })
+    if (createEntityUserActionMetadata.onCall) {
+      createEntityUserActionMetadata.onCall({ game, metaData })
     }
   }
 
