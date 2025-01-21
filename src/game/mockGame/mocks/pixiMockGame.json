@@ -11,19 +11,19 @@
     "gameState": "run",
     "gameMode": "normal"
   },
-  "time": 4247,
+  "time": 10963,
   "actions": {
     "action/TheDeathActionMetadata/q82tcd": {
       "@type": "action/TheDeathActionMetadata",
       "@id": "action/TheDeathActionMetadata/q82tcd",
       "@version": 2,
-      "nextTick": 4251
+      "nextTick": 11001
     },
     "action/findWorkerCharacter/dhsk96": {
       "@type": "action/findWorkerCharacter",
       "@id": "action/findWorkerCharacter/dhsk96",
       "@version": 2,
-      "nextTick": 4261
+      "nextTick": 10981
     }
   },
   "entities": {
@@ -369,16 +369,23 @@
     "entity/character/worker/1jahaav": {
       "@type": "entity/character/worker",
       "@id": "entity/character/worker/1jahaav",
-      "@version": 1609,
-      "rotation": 0,
+      "@version": 8092,
+      "rotation": -2.8966139925510483,
       "connections": {},
       "position": {
-        "z": 0.19999999999969864,
+        "z": 97.29741297396635,
         "y": 1,
-        "x": 50
+        "x": 61.82435313855628
       },
       "life": 25,
-      "inventory": {},
+      "inventory": {
+        "action/wood": {
+          "@type": "action/wood",
+          "@id": "action/wood/12ek4f6",
+          "@version": 1,
+          "quantity": 41
+        }
+      },
       "actions": {
         "action/cutTheWood/1nfjg8t": {
           "@type": "action/cutTheWood",
@@ -387,7 +394,7 @@
         }
       },
       "faction": "self",
-      "state": "go_to_tree",
+      "state": "wait",
       "currentPathOfCoordinate": {
         "totalDistance": 220.71067811865476,
         "pathCoordinate": [
@@ -422,57 +429,25 @@
         "unreachable": false,
         "hash": "[\"entity/character/worker/1jahaav\",{\"z\":250,\"y\":1,\"x\":0}]"
       }
-    },
-    "entity/ressource/tree/1g1fua3": {
-      "@type": "entity/ressource/tree",
-      "@id": "entity/ressource/tree/1g1fua3",
-      "@version": 2,
-      "rotation": 0,
-      "connections": {},
-      "position": {
-        "z": 250,
-        "y": 1,
-        "x": 0
-      },
-      "life": 75
-    },
-    "entity/ressource/tree/h3ax7s": {
-      "@type": "entity/ressource/tree",
-      "@id": "entity/ressource/tree/h3ax7s",
-      "@version": 2,
-      "rotation": 0,
-      "connections": {},
-      "position": {
-        "z": 250,
-        "y": 1,
-        "x": 50
-      },
-      "life": 75
-    },
-    "entity/ressource/tree/rli2vr": {
-      "@type": "entity/ressource/tree",
-      "@id": "entity/ressource/tree/rli2vr",
-      "@version": 2,
-      "rotation": 0,
-      "connections": {},
-      "position": {
-        "z": 250,
-        "y": 1,
-        "x": 100
-      },
-      "life": 75
     }
   },
-  "inventory": {},
+  "inventory": {
+    "action/wood": {
+      "@type": "action/wood",
+      "@id": "action/wood/1we7dve",
+      "@version": 1,
+      "quantity": 240
+    }
+  },
   "createdAt": "2025-01-21T09:36:20.878Z",
   "mouseState": {
     "@type": "mouseState",
     "@id": "mouseState/106bih5",
-    "@version": 3355,
+    "@version": 3759,
     "bounding2d": {
       "position": {
-        "x": 134,
-        "y": 340
+        "x": 651,
+        "y": 372
       },
       "size": {
         "x": 0,
@@ -480,8 +455,8 @@
       }
     },
     "position": {
-      "x": 1288,
-      "y": 985
+      "x": 1617,
+      "y": 996
     }
   },
   "camera": {
@@ -530,11 +505,11 @@
   "mouseState/106bih5": {
     "@type": "mouseState",
     "@id": "mouseState/106bih5",
-    "@version": 3355,
+    "@version": 3759,
     "bounding2d": {
       "position": {
-        "x": 134,
-        "y": 340
+        "x": 651,
+        "y": 372
       },
       "size": {
         "x": 0,
@@ -542,8 +517,8 @@
       }
     },
     "position": {
-      "x": 1288,
-      "y": 985
+      "x": 1617,
+      "y": 996
     }
   },
   "camera/11exju8": {

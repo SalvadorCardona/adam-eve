@@ -55,7 +55,7 @@ export function entityFactory<
     entity.inventory = {}
     entity.actions = {}
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
-
+    entity.position.y += 1
     if (metaData?.propriety?.defaultActions) {
       metaData.propriety.defaultActions.forEach((actionType) => {
         const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory(
@@ -74,8 +74,6 @@ export function entityFactory<
 
   if (isGroundEntity(entity)) {
     entity.position.y -= 0.5
-  } else {
-    entity.position.y += 1
   }
 
   return entity
