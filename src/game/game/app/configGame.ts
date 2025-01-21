@@ -4,7 +4,6 @@ import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseE
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
-import { JsonLdTypeContainerInterface } from "@/src/container/container"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
@@ -26,6 +25,7 @@ import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/Bridge
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { JsonLdTypeContainerInterface } from "@/src/utils/jsonLd/jsonLd"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,

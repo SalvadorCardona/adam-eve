@@ -1,11 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { getByLdType, JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import {
   Vector2Interface,
   Vector3Interface,
   vector3ToVector2,
 } from "@/src/utils/3Dmath/Vector"
-import { getByLdType } from "@/src/container/container"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,

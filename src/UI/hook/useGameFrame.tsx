@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import GameInterface from "@/src/game/game/GameInterface"
-import { ContainerPublish, containerPubSub } from "@/src/container/container"
 import { appLdType } from "@/src/AppLdType"
+import { ContainerPublish, containerPubSub } from "@/src/utils/jsonLd/jsonLd"
 
 export const useGameFrame = (callback: (game: GameInterface) => void) => {
   const gameContext = useGameContext()

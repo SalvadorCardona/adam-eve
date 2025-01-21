@@ -1,8 +1,8 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterfaceInterface from "@/src/game/game/GameInterface"
-import { getByLdType } from "@/src/container/container"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
+import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 
 /**
  * Make search and return earnest entity
@@ -12,7 +12,10 @@ export const findClosestInGame = (
   targetsEntities: JsonLdType,
   game: GameInterfaceInterface,
 ): EntityInterface | undefined => {
-  const targets = getByLdType<EntityInterface>(game.entities, targetsEntities)
+  const targets = entityQuery<EntityInterface>(game, {
+    "@type": targetsEntities,
+  })
+
   return findClosest(entity, targets)
 }
 

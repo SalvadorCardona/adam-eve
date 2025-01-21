@@ -68,7 +68,7 @@ export const EntityDecoratorPixiJs = ({
       x: entity.position.x,
       y: entity.position.z,
     }
-  }, [entity.position.x, entity.position.y])
+  }, [entity.position.x, entity.position.z])
 
   return (
     <Container

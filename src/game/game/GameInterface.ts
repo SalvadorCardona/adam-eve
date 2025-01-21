@@ -1,9 +1,9 @@
-import { JsonLdContainerInterface } from "@/src/container/container"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import {
   BaseJsonLdInterface,
   jsonLdFactory,
+  JsonLdIriContainerInterface,
   JsonLDItem,
 } from "@/src/utils/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
@@ -64,7 +64,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
   }>
   createdAt: DateString
   time: number
-  entities: JsonLdContainerInterface<EntityInterface>
+  entities: JsonLdIriContainerInterface<EntityInterface>
   inventory: InventoryBagInterface
   actions: ActionBagInterface
 }

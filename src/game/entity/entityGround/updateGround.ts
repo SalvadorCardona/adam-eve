@@ -1,14 +1,18 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { getByLdType } from "@/src/container/container"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  GroundEntityInterface,
+} from "@/src/game/entity/EntityInterface"
 import { appLdType } from "@/src/AppLdType"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { entityQuery } from "../useCase/query/entityQuery"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
-  const grounds = getByLdType<EntityInterface>(game.entities, appLdType.entityGround)
+  const grounds = entityQuery<GroundEntityInterface>(game, {
+    "@type": appLdType.entityGround,
+  })
 
   updateGround({ entities: grounds })
 }

@@ -1,9 +1,9 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { addAction } from "@/src/game/action/addAction"
-import { getByLdType } from "@/src/container/container"
 import { appLdType } from "@/src/AppLdType"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
 
 export function gameLoader(game: GameInterface): GameInterface {
   if (!getByLdType(game.actions, appLdType.theDeathAction).length) {

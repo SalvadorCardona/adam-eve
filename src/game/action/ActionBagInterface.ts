@@ -1,4 +1,4 @@
-import { JsonLdContainerInterface } from "@/src/container/container"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
+import { JsonLdIriContainerInterface } from "@/src/utils/jsonLd/jsonLd"
 
-export type ActionBagInterface = JsonLdContainerInterface<ActionInterface<any>>
+export type ActionBagInterface = JsonLdIriContainerInterface<ActionInterface<any>>

@@ -1,4 +1,3 @@
-import { getByLdType } from "@/src/container/container"
 import configGame from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Card } from "@/components/ui/card"
@@ -9,6 +8,7 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { appLdType } from "@/src/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
+import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(

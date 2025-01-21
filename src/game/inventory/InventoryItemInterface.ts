@@ -1,6 +1,9 @@
-import { BaseJsonLdInterface, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import {
+  BaseJsonLdInterface,
+  JsonLdType,
+  JsonLdTypeContainerInterface,
+} from "@/src/utils/jsonLd/jsonLd"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { JsonLdTypeContainerInterface } from "@/src/container/container"
 
 export interface InventoryItemInterface extends BaseJsonLdInterface {
   quantity: number

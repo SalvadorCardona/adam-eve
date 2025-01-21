@@ -1,5 +1,4 @@
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
-import { getByLdType } from "@/src/container/container"
 import {
   BuildingEntityInterface,
   CharacterEntityInterface,
@@ -9,7 +8,6 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
@@ -37,10 +35,9 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
 
     if (buildings.length === 0) return
 
-    const workers = getByLdType<CharacterEntityInterface>(
-      game.entities,
-      workerEntityMetaData["@type"],
-    ).filter((worker) => {
+    const workers = entityQuery<CharacterEntityInterface>(game, {
+      "@type": appLdType.entityBuilding,
+    }).filter((worker) => {
       return isObjectEmpty(worker.actions)
     })
 
