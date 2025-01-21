@@ -42,8 +42,7 @@ export const PixiGrid = ({ size }: GridPropsInterface) => {
       graphics.lineTo(width, y) // Fin de la ligne
     }
 
-    graphics.fill(0xff3300)
-    graphics.stroke({ width: lineWidth, color: lineColor })
+    graphics.stroke({ width: lineWidth, color: lineColor, alpha: 0.2 })
   }
 
   return <Graphics draw={drawGrid} options={{ position: { x: 0, y: 0 } }} />

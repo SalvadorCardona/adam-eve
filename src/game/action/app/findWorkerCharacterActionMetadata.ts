@@ -36,7 +36,7 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
     if (buildings.length === 0) return
 
     const workers = entityQuery<CharacterEntityInterface>(game, {
-      "@type": appLdType.entityBuilding,
+      "@type": appLdType.entityCharacter,
     }).filter((worker) => {
       return isObjectEmpty(worker.actions)
     })

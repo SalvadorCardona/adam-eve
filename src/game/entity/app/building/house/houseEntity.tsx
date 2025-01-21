@@ -1,5 +1,5 @@
 import imageIcon from "./icon.png?url"
-import mdeol from "./model.webp?url"
+import model from "./model.png"
 
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -10,7 +10,7 @@ import { appLdType } from "@/src/AppLdType"
 export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
     icon: imageIcon,
-    model2d: mdeol,
+    model2d: model,
   },
   propriety: {
     ressourceForConstruction: {

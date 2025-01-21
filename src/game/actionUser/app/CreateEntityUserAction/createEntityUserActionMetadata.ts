@@ -60,12 +60,6 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
             },
           })
 
-          // const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-          // entity.position.z = entity.position.z +=
-          //   entityMetaData.propriety.size?.z ?? 0
-          // entity.position.x = entity.position.x +=
-          //   entityMetaData.propriety.size?.x ?? 0
-
           entities.push(entity)
         })
       } else {

@@ -5,6 +5,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 
 export function gameProcessor(game: GameInterface) {
   game.time++
@@ -35,5 +36,8 @@ function actionProcesseur(
     action.nextTick = undefined
     const actionMeta = getMetaData(action) as ActionMetadataInterface<any>
     actionMeta.onFrame({ entity, action, game })
+    if (entity) {
+      updateEntityInGame(game, entity)
+    }
   })
 }

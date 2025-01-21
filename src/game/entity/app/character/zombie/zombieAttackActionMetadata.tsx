@@ -9,7 +9,6 @@ import {
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 
@@ -36,9 +35,6 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
             center: entity.position,
             radius: 500,
           },
-          order: {
-            distance: "ASC",
-          },
         })
         if (!newEnemy) {
           action.nextTick = game.time + 300
@@ -63,8 +59,6 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
 
         action.nextTick = game.time + attack.attackSpeed
       }
-
-      updateEntityInGame(game, entity)
     },
     factory: () => {
       const data: ZombieAttackAction = {

@@ -141,6 +141,9 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
     item.scale.x = scaleFactor / 5
     item.scale.y = scaleFactor / 5
   },
+  [EntityState.under_construction]: (e: Ticker, item: ContainerChild) => {
+    item.alpha = 0.5
+  },
   [EntityState.find_enemy]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1
     const speed = 0.01

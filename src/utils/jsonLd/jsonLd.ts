@@ -21,14 +21,6 @@ export interface BaseJsonLdInterface {
   "@version": number
 }
 
-export interface JsonLdCollection<T = BaseJsonLdInterface> {
-  "@id": JsonLdIri
-  "@type": JsonLdType
-  "@version": number
-  collection: JsonLdIriContainerInterface<T>
-  totalItems: number
-}
-
 export type JsonLDItem<T> = BaseJsonLdInterface & T
 
 export interface JsonLdTypeContainerInterface<T = object> {
@@ -37,6 +29,14 @@ export interface JsonLdTypeContainerInterface<T = object> {
 
 export interface JsonLdIriContainerInterface<T = object> {
   [key: JsonLdIri]: JsonLDItem<T>
+}
+
+export interface JsonLdIriCollection<T = BaseJsonLdInterface> {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+  "@version": number
+  collection: JsonLdIriContainerInterface<T>
+  totalItems: number
 }
 
 export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T> {
