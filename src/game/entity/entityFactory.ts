@@ -24,11 +24,7 @@ export function entityFactory<
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
   const baseEntity: Partial<EntityInterface> = {
-    rotation: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
+    rotation: 0,
     connections: {},
     position: {
       x: 0,
@@ -56,6 +52,7 @@ export function entityFactory<
   }
 
   if (isCharacterEntity(entity) || isBuildingEntity(entity)) {
+    entity.inventory = {}
     entity.actions = {}
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
 

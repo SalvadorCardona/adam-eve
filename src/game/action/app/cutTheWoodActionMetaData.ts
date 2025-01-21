@@ -3,12 +3,12 @@ import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { addToInventory } from "@/src/game/inventory/addToInventory"
-import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
+import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 
 interface CutTheWoodDataInterface {}
 
@@ -17,7 +17,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
     ["@type"]: appLdType.cutTheWoodAction,
     onFrame: ({ entity, game }) => {
       if (!entity) return
-
       if (entity.state === EntityState.wait) {
         entity.state = EntityState.go_to_tree
       }
@@ -33,9 +32,9 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
           return
         }
 
-        entityGoToEntityWithGround(entity, newTreeEntity, game)
-
-        if (entity?.currentPathOfCoordinate?.isFinish) {
+        const result = entityGoPosition({ entity, target: newTreeEntity.position })
+        updateEntityInGame(game, entity)
+        if (result.isFinish) {
           newTreeEntity.life -= 10
           entity.state = EntityState.cut_the_tree
         }
@@ -58,9 +57,12 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         })
 
         if (!newTimberHouseEntity) return
-        entityGoToEntityWithGround(entity, newTimberHouseEntity, game)
+        const result = entityGoPosition({
+          entity,
+          target: newTimberHouseEntity.position,
+        })
 
-        if (entity?.currentPathOfCoordinate?.isFinish) {
+        if (result.isFinish) {
           transfertInventory(
             entity.inventory,
             game.inventory,

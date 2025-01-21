@@ -32,19 +32,3 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     },
   },
 })
-
-//
-// Dance
-// Death
-// Idle
-// Jump
-// No
-// Punch
-// Running
-// Sitting
-// Standing
-// ThumbsUp
-// WalkJump
-// Walking
-// Wave
-// Yes

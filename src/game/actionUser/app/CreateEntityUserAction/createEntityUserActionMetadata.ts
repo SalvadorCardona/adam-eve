@@ -56,7 +56,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
             game,
             entity: {
               position: vector2ToVector3(newPosition),
-              rotation: { x: 0, z: 0, y: rotationY },
+              rotation: rotationY,
             },
           })
 
@@ -74,7 +74,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
             game,
             entity: {
               position: vector2ToVector3(game.mouseState.position),
-              rotation: { x: 0, z: 0, y: rotationY },
+              rotation: rotationY,
             },
           }),
         )

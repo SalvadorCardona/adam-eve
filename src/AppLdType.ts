@@ -11,11 +11,9 @@ export const appLdType = {
   game: "game",
   gameOption: "gameOption",
   entity: "entity",
-  entityHelper: "entity/helper",
   entityBuilding,
   typeAction,
   entityAttack: "entity/attack",
-  entityEffect: "entity/effect",
   entityRessource: "entity/ressource",
   entityCharacter: "entity/character",
   entityGround: "entity/ground",
@@ -32,3 +30,10 @@ export const appLdType = {
   woodRessource: JsonLdTypeFactory(typeRessource, "wood"),
   theDeathAction: JsonLdTypeFactory(typeAction, "TheDeathActionMetadata"),
 }
+
+export const appLdTypeEntity = [
+  appLdType.entityGround,
+  appLdType.entityRessource,
+  appLdType.entityBuilding,
+  appLdType.entityCharacter,
+]

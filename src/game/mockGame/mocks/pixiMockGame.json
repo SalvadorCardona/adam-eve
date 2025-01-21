@@ -1,41 +1,477 @@
 {
   "@type": "game",
-  "@id": "game/17mzsi9",
+  "@id": "game/h4vqfq",
   "@version": 1,
   "graphicMotor": "PIXI_JS",
   "gameOption": {
     "@type": "camera",
-    "@id": "camera/f5g7c9",
+    "@id": "camera/1ky5djc",
     "@version": 1,
     "gameSpeed": 1,
     "gameState": "run",
     "gameMode": "normal"
   },
-  "time": 834,
+  "time": 4247,
   "actions": {
-    "action/TheDeathActionMetadata/1pjk9nn": {
+    "action/TheDeathActionMetadata/q82tcd": {
       "@type": "action/TheDeathActionMetadata",
-      "@id": "action/TheDeathActionMetadata/1pjk9nn",
+      "@id": "action/TheDeathActionMetadata/q82tcd",
       "@version": 2,
-      "nextTick": 851
+      "nextTick": 4251
     },
-    "action/findWorkerCharacter/1d1ovo": {
+    "action/findWorkerCharacter/dhsk96": {
       "@type": "action/findWorkerCharacter",
-      "@id": "action/findWorkerCharacter/1d1ovo",
+      "@id": "action/findWorkerCharacter/dhsk96",
       "@version": 2,
-      "nextTick": 841
+      "nextTick": 4261
     }
   },
-  "entities": {},
+  "entities": {
+    "entity/ground/grass/1d7fq08": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1d7fq08",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "bottom": "entity/ground/grass/1539xfy",
+        "left": "entity/ground/grass/1j2ha4m",
+        "right": "entity/ground/grass/pkztge",
+        "bottomLeft": "entity/ground/grass/f4txlw",
+        "bottomRight": "entity/ground/grass/1iet6pd"
+      },
+      "position": {
+        "z": 0,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/1539xfy": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1539xfy",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1d7fq08",
+        "bottom": "entity/ground/grass/hguny6",
+        "left": "entity/ground/grass/f4txlw",
+        "right": "entity/ground/grass/1iet6pd",
+        "topRight": "entity/ground/grass/pkztge",
+        "topLeft": "entity/ground/grass/1j2ha4m",
+        "bottomLeft": "entity/ground/grass/w7jwpo",
+        "bottomRight": "entity/ground/grass/yv5pau"
+      },
+      "position": {
+        "z": 50,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/hguny6": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/hguny6",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1539xfy",
+        "bottom": "entity/ground/grass/1qaaqhh",
+        "left": "entity/ground/grass/w7jwpo",
+        "right": "entity/ground/grass/yv5pau",
+        "topRight": "entity/ground/grass/1iet6pd",
+        "topLeft": "entity/ground/grass/f4txlw",
+        "bottomLeft": "entity/ground/grass/17d0bzf",
+        "bottomRight": "entity/ground/grass/1ysu3fh"
+      },
+      "position": {
+        "z": 100,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/pkztge": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/pkztge",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "bottom": "entity/ground/grass/1iet6pd",
+        "left": "entity/ground/grass/1d7fq08",
+        "bottomLeft": "entity/ground/grass/1539xfy"
+      },
+      "position": {
+        "z": 0,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/ground/grass/1iet6pd": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1iet6pd",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/pkztge",
+        "bottom": "entity/ground/grass/yv5pau",
+        "left": "entity/ground/grass/1539xfy",
+        "topLeft": "entity/ground/grass/1d7fq08",
+        "bottomLeft": "entity/ground/grass/hguny6"
+      },
+      "position": {
+        "z": 50,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/ground/grass/yv5pau": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/yv5pau",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1iet6pd",
+        "bottom": "entity/ground/grass/1ysu3fh",
+        "left": "entity/ground/grass/hguny6",
+        "topLeft": "entity/ground/grass/1539xfy",
+        "bottomLeft": "entity/ground/grass/1qaaqhh"
+      },
+      "position": {
+        "z": 100,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/ground/grass/1j2ha4m": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1j2ha4m",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "bottom": "entity/ground/grass/f4txlw",
+        "right": "entity/ground/grass/1d7fq08",
+        "bottomRight": "entity/ground/grass/1539xfy"
+      },
+      "position": {
+        "z": 0,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/f4txlw": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/f4txlw",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1j2ha4m",
+        "bottom": "entity/ground/grass/w7jwpo",
+        "right": "entity/ground/grass/1539xfy",
+        "topRight": "entity/ground/grass/1d7fq08",
+        "bottomRight": "entity/ground/grass/hguny6"
+      },
+      "position": {
+        "z": 50,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/w7jwpo": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/w7jwpo",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/f4txlw",
+        "bottom": "entity/ground/grass/17d0bzf",
+        "right": "entity/ground/grass/hguny6",
+        "topRight": "entity/ground/grass/1539xfy",
+        "bottomRight": "entity/ground/grass/1qaaqhh"
+      },
+      "position": {
+        "z": 100,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/17d0bzf": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/17d0bzf",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/w7jwpo",
+        "bottom": "entity/ground/grass/vk1d4z",
+        "right": "entity/ground/grass/1qaaqhh",
+        "topRight": "entity/ground/grass/hguny6",
+        "bottomRight": "entity/ground/grass/vqsxja"
+      },
+      "position": {
+        "z": 150,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/vk1d4z": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/vk1d4z",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/17d0bzf",
+        "bottom": "entity/ground/grass/1a1byk2",
+        "right": "entity/ground/grass/vqsxja",
+        "topRight": "entity/ground/grass/1qaaqhh",
+        "bottomRight": "entity/ground/grass/bnjg9j"
+      },
+      "position": {
+        "z": 200,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/1a1byk2": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1a1byk2",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/vk1d4z",
+        "right": "entity/ground/grass/bnjg9j",
+        "topRight": "entity/ground/grass/vqsxja"
+      },
+      "position": {
+        "z": 250,
+        "y": -0.5,
+        "x": 0
+      }
+    },
+    "entity/ground/grass/1qaaqhh": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1qaaqhh",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/hguny6",
+        "bottom": "entity/ground/grass/vqsxja",
+        "left": "entity/ground/grass/17d0bzf",
+        "right": "entity/ground/grass/1ysu3fh",
+        "topRight": "entity/ground/grass/yv5pau",
+        "topLeft": "entity/ground/grass/w7jwpo",
+        "bottomLeft": "entity/ground/grass/vk1d4z",
+        "bottomRight": "entity/ground/grass/675xfr"
+      },
+      "position": {
+        "z": 150,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/vqsxja": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/vqsxja",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1qaaqhh",
+        "bottom": "entity/ground/grass/bnjg9j",
+        "left": "entity/ground/grass/vk1d4z",
+        "right": "entity/ground/grass/675xfr",
+        "topRight": "entity/ground/grass/1ysu3fh",
+        "topLeft": "entity/ground/grass/17d0bzf",
+        "bottomLeft": "entity/ground/grass/1a1byk2"
+      },
+      "position": {
+        "z": 200,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/bnjg9j": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/bnjg9j",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/vqsxja",
+        "left": "entity/ground/grass/1a1byk2",
+        "topRight": "entity/ground/grass/675xfr",
+        "topLeft": "entity/ground/grass/vk1d4z"
+      },
+      "position": {
+        "z": 250,
+        "y": -0.5,
+        "x": 50
+      }
+    },
+    "entity/ground/grass/1ysu3fh": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/1ysu3fh",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/yv5pau",
+        "bottom": "entity/ground/grass/675xfr",
+        "left": "entity/ground/grass/1qaaqhh",
+        "topLeft": "entity/ground/grass/hguny6",
+        "bottomLeft": "entity/ground/grass/vqsxja"
+      },
+      "position": {
+        "z": 150,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/ground/grass/675xfr": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/675xfr",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {
+        "top": "entity/ground/grass/1ysu3fh",
+        "left": "entity/ground/grass/vqsxja",
+        "topLeft": "entity/ground/grass/1qaaqhh",
+        "bottomLeft": "entity/ground/grass/bnjg9j"
+      },
+      "position": {
+        "z": 200,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/ground/grass/m4eji3": {
+      "@type": "entity/ground/grass",
+      "@id": "entity/ground/grass/m4eji3",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 250,
+        "y": -0.5,
+        "x": 100
+      }
+    },
+    "entity/building/timberHouse/1mg1or0": {
+      "@type": "entity/building/timberHouse",
+      "@id": "entity/building/timberHouse/1mg1or0",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 50,
+        "y": 1,
+        "x": 50
+      },
+      "life": 100,
+      "state": "builded",
+      "workers": [],
+      "inventory": {},
+      "actions": {},
+      "faction": "self"
+    },
+    "entity/character/worker/1jahaav": {
+      "@type": "entity/character/worker",
+      "@id": "entity/character/worker/1jahaav",
+      "@version": 1609,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 0.19999999999969864,
+        "y": 1,
+        "x": 50
+      },
+      "life": 25,
+      "inventory": {},
+      "actions": {
+        "action/cutTheWood/1nfjg8t": {
+          "@type": "action/cutTheWood",
+          "@id": "action/cutTheWood/1nfjg8t",
+          "@version": 2
+        }
+      },
+      "faction": "self",
+      "state": "go_to_tree",
+      "currentPathOfCoordinate": {
+        "totalDistance": 220.71067811865476,
+        "pathCoordinate": [
+          {
+            "z": 0,
+            "y": -0.5,
+            "x": 50
+          },
+          {
+            "z": 50,
+            "y": -0.5,
+            "x": 50
+          },
+          {
+            "z": 100,
+            "y": -0.5,
+            "x": 50
+          },
+          {
+            "z": 150,
+            "y": -0.5,
+            "x": 50
+          },
+          {
+            "z": 200,
+            "y": -0.5,
+            "x": 0
+          }
+        ],
+        "currentCoordinate": 0,
+        "isFinish": false,
+        "unreachable": false,
+        "hash": "[\"entity/character/worker/1jahaav\",{\"z\":250,\"y\":1,\"x\":0}]"
+      }
+    },
+    "entity/ressource/tree/1g1fua3": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/1g1fua3",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 250,
+        "y": 1,
+        "x": 0
+      },
+      "life": 75
+    },
+    "entity/ressource/tree/h3ax7s": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/h3ax7s",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 250,
+        "y": 1,
+        "x": 50
+      },
+      "life": 75
+    },
+    "entity/ressource/tree/rli2vr": {
+      "@type": "entity/ressource/tree",
+      "@id": "entity/ressource/tree/rli2vr",
+      "@version": 2,
+      "rotation": 0,
+      "connections": {},
+      "position": {
+        "z": 250,
+        "y": 1,
+        "x": 100
+      },
+      "life": 75
+    }
+  },
   "inventory": {},
-  "createdAt": "2025-01-20T10:11:17.192Z",
+  "createdAt": "2025-01-21T09:36:20.878Z",
   "mouseState": {
     "@type": "mouseState",
-    "@id": "mouseState/1o22dfk",
-    "@version": 31,
+    "@id": "mouseState/106bih5",
+    "@version": 3355,
     "bounding2d": {
       "position": {
-        "x": 767,
+        "x": 134,
         "y": 340
       },
       "size": {
@@ -44,48 +480,60 @@
       }
     },
     "position": {
-      "x": 1120,
-      "y": 771
+      "x": 1288,
+      "y": 985
     }
   },
   "camera": {
     "@type": "camera",
-    "@id": "camera/holvis",
-    "@version": 72,
+    "@id": "camera/11exju8",
+    "@version": 27,
     "fov": 50,
     "zoom": 0,
     "position": {
-      "x": 430,
+      "x": 180,
       "y": 0,
-      "z": 180
+      "z": 80
     }
   },
   "userControl": {
     "@type": "userControl",
-    "@id": "userControl/1ar2qpv",
+    "@id": "userControl/11gwa9e",
     "@version": 1,
     "entitiesSelected": [],
-    "showGrid": true
+    "showGrid": true,
+    "currentAction": {
+      "mouseIcon": "/src/UI/MouseCursor/hammer.png",
+      "@type": "user-action/create-building",
+      "data": {
+        "entityMetaData": {
+          "@type": "entity/ressource/tree",
+          "asset": {
+            "icon": "/src/game/entity/app/ressource/tree/iconSrc.png"
+          },
+          "propriety": {
+            "speed": 0.01,
+            "health": {
+              "maxLife": 75
+            },
+            "size": {
+              "x": 50,
+              "y": 50,
+              "z": 50
+            }
+          }
+        }
+      }
+    },
+    "rotation": 0
   },
-  "camera/holvis": {
-    "@type": "camera",
-    "@id": "camera/holvis",
-    "@version": 72,
-    "fov": 50,
-    "zoom": 0,
-    "position": {
-      "x": 430,
-      "y": 0,
-      "z": 180
-    }
-  },
-  "mouseState/1o22dfk": {
+  "mouseState/106bih5": {
     "@type": "mouseState",
-    "@id": "mouseState/1o22dfk",
-    "@version": 31,
+    "@id": "mouseState/106bih5",
+    "@version": 3355,
     "bounding2d": {
       "position": {
-        "x": 767,
+        "x": 134,
         "y": 340
       },
       "size": {
@@ -94,8 +542,20 @@
       }
     },
     "position": {
-      "x": 1120,
-      "y": 771
+      "x": 1288,
+      "y": 985
+    }
+  },
+  "camera/11exju8": {
+    "@type": "camera",
+    "@id": "camera/11exju8",
+    "@version": 27,
+    "fov": 50,
+    "zoom": 0,
+    "position": {
+      "x": 180,
+      "y": 0,
+      "z": 80
     }
   }
 }

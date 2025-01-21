@@ -25,7 +25,7 @@ export const CreateEntityComponent = () => {
           game: game,
           entity: {
             position: vector2ToVector3(mousePosition),
-            rotation: { x: 0, z: 0, y: rotationY },
+            rotation: rotationY,
           },
         })
       : undefined

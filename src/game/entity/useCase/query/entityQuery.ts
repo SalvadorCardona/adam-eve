@@ -47,11 +47,11 @@ const orderTypePriority = {
   [appLdType.entityGround]: 3,
 }
 
-export function entityQueryFindOne(
+export function entityQueryFindOne<T = EntityInterface>(
   game: GameInterface,
   query: EntityQueryParams,
-): undefined | EntityInterface {
-  const result = entityQuery(game, query)
+): undefined | T {
+  const result = entityQuery<T>(game, query)
   return result.length ? result[0] : undefined
 }
 
@@ -149,7 +149,9 @@ export function entityQuery<T = EntityInterface>(
         vector3ToVector2(b.position),
         referencePoint,
       )
-      return order.distance === "ASC" ? distanceA - distanceB : distanceB - distanceA
+      return order.distance === "DESC"
+        ? distanceB - distanceA
+        : distanceA - distanceB
     })
   }
 

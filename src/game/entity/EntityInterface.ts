@@ -6,7 +6,6 @@ import {
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
-import { CurrentPathCoordinateInterface } from "@/src/utils/3Dmath/pathCoordinate/generatePathCoordinates"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 
@@ -16,13 +15,11 @@ export enum EntityFaction {
 }
 
 export default interface EntityInterface extends BaseJsonLdInterface {
-  rotation: Vector3Interface
+  rotation: number
   position: Vector3Interface
   life: number
-  inventory?: InventoryBagInterface
   state?: EntityState
   numberOfWorker?: number
-  currentPathOfCoordinate?: CurrentPathCoordinateInterface
   faction: EntityFaction
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
@@ -80,11 +77,13 @@ export interface RessourceEntityInterface extends EntityInterface {}
 
 export interface CharacterEntityInterface extends EntityInterface {
   actions: ActionBagInterface
+  inventory: InventoryBagInterface
 }
 
 export interface BuildingEntityInterface extends EntityInterface {
   actions: ActionBagInterface
   workers: EntityInterface["@id"][]
+  inventory: InventoryBagInterface
 }
 
 export interface GroundEntityInterface extends EntityInterface {}

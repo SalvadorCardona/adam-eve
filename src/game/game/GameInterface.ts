@@ -45,7 +45,6 @@ export type UserControl = JsonLDItem<{
 export type MouseState = JsonLDItem<{
   bounding2d: BoundingBox2DInterface
   position: Vector2Interface
-  size: Vector2Interface
 }>
 
 export type GameOption = JsonLDItem<{
@@ -72,7 +71,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
-  const newGame = jsonLdFactory(appLdType.game, {
+  return jsonLdFactory(appLdType.game, {
     graphicMotor: GraphicMotor.PIXI_JS,
     gameOption: jsonLdFactory(appLdType.camera, {
       gameSpeed: 1,
@@ -103,6 +102,4 @@ export function gameFactory(game?: GameInterface): GameInterface {
     }),
     ...(game ?? {}),
   })
-
-  return newGame
 }

@@ -11,6 +11,7 @@ interface EntityGoPositionParams {
 
 interface EntityGoPositionOutput {
   distance: number
+  isFinish: boolean
 }
 
 const isEntityInterface = (
@@ -47,18 +48,12 @@ export function entityGoPosition({
   entity.position.z += normalizedDirection.z * speed
   entity.position.y += normalizedDirection.y * speed
 
-  entity.rotation = {
-    x: Math.atan2(
-      normalizedDirection.y,
-      Math.sqrt(normalizedDirection.x ** 2 + normalizedDirection.z ** 2),
-    ),
-    y: Math.atan2(normalizedDirection.x, normalizedDirection.z),
-    z: Math.atan2(normalizedDirection.y, normalizedDirection.x),
-  }
+  entity.rotation = Math.atan2(normalizedDirection.x, normalizedDirection.z)
 
   const distance = distanceBetweenVector(entity.position, targetPosition)
 
   return {
     distance,
+    isFinish: distance < 50,
   }
 }

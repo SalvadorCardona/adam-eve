@@ -3,9 +3,10 @@ import {
   JsonLdIri,
   JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  BuildingEntityInterface,
+} from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntityWithGround"
 import { transfertInventory } from "@/src/game/inventory/transfertInventory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
@@ -16,6 +17,7 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
 
 enum State {
   GoToForum = "GoToForum",
@@ -43,10 +45,10 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const data = action.data
 
       const building = data.buildingIri
-        ? entityQueryFindOne(game, {
+        ? entityQueryFindOne<BuildingEntityInterface>(game, {
             "@id": data.buildingIri,
           })
-        : entityQueryFindOne(game, {
+        : entityQueryFindOne<BuildingEntityInterface>(game, {
             state: EntityState.under_construction,
           })
 
@@ -72,8 +74,8 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
           return
         }
 
-        const result = entityGoToEntityWithGround(entity, forum, game)
-        if (entity?.currentPathOfCoordinate?.isFinish) {
+        const result = entityGoPosition({ entity, target: forum.position })
+        if (result.isFinish) {
           data.state = State.TakeRessource
         }
       }
@@ -108,8 +110,8 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       if (data.state === State.GoToBuild) {
-        const result = entityGoToEntityWithGround(entity, building, game)
-        if (entity?.currentPathOfCoordinate?.isFinish) {
+        const result = entityGoPosition({ entity, target: building.position })
+        if (result.isFinish) {
           data.state = State.PutRessource
         }
       }

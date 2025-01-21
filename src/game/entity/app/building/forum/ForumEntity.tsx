@@ -24,13 +24,4 @@ export const forumEntityMetaData = entityMedataFactory({
   },
   ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "forum"),
   label: "Centre Ville",
-  defaultEntity: () => {
-    return {
-      rotation: {
-        x: 0,
-        y: Math.PI,
-        z: 0,
-      },
-    }
-  },
 })
