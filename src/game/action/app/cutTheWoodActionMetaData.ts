@@ -17,6 +17,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
     ["@type"]: appLdType.cutTheWoodAction,
     onFrame: ({ entity, game }) => {
       if (!entity) return
+
       if (entity.state === EntityState.wait) {
         entity.state = EntityState.go_to_tree
       }
@@ -77,6 +78,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       }
     },
     factory: () => {
-      return jsonLdFactory(cutTheWoodActionMetaData["@type"], {})
+      return jsonLdFactory(appLdType.cutTheWoodAction, {})
     },
   }

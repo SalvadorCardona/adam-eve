@@ -59,7 +59,6 @@ export default interface GameInterface extends BaseJsonLdInterface {
   gameOption: GameOption
   userControl: UserControl
   camera: JsonLDItem<{
-    fov: number
     zoom: number
     position: Vector3Interface
   }>
@@ -88,7 +87,6 @@ export function gameFactory(game?: GameInterface): GameInterface {
       position: createVector2(),
     }),
     camera: jsonLdFactory(appLdType.camera, {
-      fov: 50,
       zoom: 0,
       position: {
         x: 0,

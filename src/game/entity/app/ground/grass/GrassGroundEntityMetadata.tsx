@@ -35,7 +35,6 @@ import React, { useMemo, useState } from "react"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "../../../EntityMetaDataInterface"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
-import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 
 const grassNormal = [
   grass1,
@@ -104,57 +103,55 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       }
     }, [])
 
-    useGamePubSub(type, (e) => {
-      setVersion(version + 1)
-      console.log("ici")
-    })
+    const texturePath = useMemo(() => {
+      let asset = grassNormal[Math.floor(Math.random() * (grassNormal.length - 1))]
+      const connections = entity.connections
+      switch (true) {
+        case connections.top !== undefined &&
+          connections.left !== undefined &&
+          connections.right !== undefined &&
+          connections.bottom !== undefined:
+          break
+        case connections.top !== undefined &&
+          connections.left !== undefined &&
+          connections.right !== undefined:
+          asset = grassBottom
+          break
+        case connections.top !== undefined &&
+          connections.left !== undefined &&
+          connections.bottom !== undefined:
+          asset = grassRight
+          break
+        case connections.top !== undefined &&
+          connections.right !== undefined &&
+          connections.bottom !== undefined:
+          asset = grassLeft
+          break
+        case connections.left !== undefined &&
+          connections.right !== undefined &&
+          connections.bottom !== undefined:
+          asset = grassTop
+          break
+        case connections.top !== undefined && connections.left !== undefined:
+          asset = grassBottomRight
+          break
+        case connections.top !== undefined && connections.right !== undefined:
+          asset = grassBottomLeft
+          break
+        case connections.bottom !== undefined && connections.left !== undefined:
+          asset = grassTopRight
+          break
+        case connections.bottom !== undefined && connections.right !== undefined:
+          asset = grassTopLeft
+          break
+        default:
+          asset = asset
+      }
 
-    let asset = grassNormal[Math.floor(Math.random() * 12)]
+      return asset
+    }, [entity.connections])
 
-    const connections = entity.connections
-    switch (true) {
-      case connections.top !== undefined &&
-        connections.left !== undefined &&
-        connections.right !== undefined &&
-        connections.bottom !== undefined:
-        asset = asset
-        break
-      case connections.top !== undefined &&
-        connections.left !== undefined &&
-        connections.right !== undefined:
-        asset = grassBottom
-        break
-      case connections.top !== undefined &&
-        connections.left !== undefined &&
-        connections.bottom !== undefined:
-        asset = grassRight
-        break
-      case connections.top !== undefined &&
-        connections.right !== undefined &&
-        connections.bottom !== undefined:
-        asset = grassLeft
-        break
-      case connections.left !== undefined &&
-        connections.right !== undefined &&
-        connections.bottom !== undefined:
-        asset = grassTop
-        break
-      case connections.top !== undefined && connections.left !== undefined:
-        asset = grassBottomRight
-        break
-      case connections.top !== undefined && connections.right !== undefined:
-        asset = grassBottomLeft
-        break
-      case connections.bottom !== undefined && connections.left !== undefined:
-        asset = grassTopRight
-        break
-      case connections.bottom !== undefined && connections.right !== undefined:
-        asset = grassTopLeft
-        break
-      default:
-        asset = asset
-    }
-    return <Sprite image={asset} options={size} />
+    return <Sprite image={texturePath} options={size} />
   },
 })
 

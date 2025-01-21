@@ -1,7 +1,6 @@
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { EntityDecoratorResolverPropsInterface } from "@/src/UI/graphic-motor/EntityDecoratorResolver"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
 import {
@@ -14,22 +13,28 @@ import {
   Sprite,
   SpriteAnimation,
 } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
-import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+
+export interface EntityDecoratorResolverPropsInterface {
+  color?: string
+  entity: EntityInterface
+}
 
 export const EntityDecoratorPixiJs = ({
-  entity: baseEntity,
+  entity,
   color,
 }: EntityDecoratorResolverPropsInterface) => {
-  const [entity, setEntity] = useState(baseEntity)
+  const [version, setVersion] = useState(entity["@version"])
+
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
 
   useGamePubSub(entity["@id"], (e) => {
-    setEntity({ ...e.item })
+    setVersion(entity["@version"])
   })
 
   const isSelected = useMemo(() => {
@@ -58,16 +63,12 @@ export const EntityDecoratorPixiJs = ({
     }
   }, [])
 
-  useEffect(() => {
-    setEntity(baseEntity)
-  }, [baseEntity])
-
   const position = useMemo(() => {
     return {
       x: entity.position.x,
       y: entity.position.z,
     }
-  }, [entity.position.x, baseEntity.position.z])
+  }, [entity.position.x, entity.position.y])
 
   return (
     <Container
