@@ -17,7 +17,7 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
+import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 
 enum State {
   GoToForum = "GoToForum",
@@ -74,7 +74,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
           return
         }
 
-        const result = entityGoPosition({ entity, target: forum.position })
+        const result = entityGoToEntity({ entity, target: forum })
         if (result.isFinish) {
           data.state = State.TakeRessource
         }
@@ -110,7 +110,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       if (data.state === State.GoToBuild) {
-        const result = entityGoPosition({ entity, target: building.position })
+        const result = entityGoToEntity({ entity, target: building })
         if (result.isFinish) {
           data.state = State.PutRessource
         }

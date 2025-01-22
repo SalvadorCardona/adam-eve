@@ -3,10 +3,7 @@ import React, { useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
-import {
-  ContainerChild,
-  ContainerOptions,
-} from "pixi.js/lib/scene/container/Container"
+import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
@@ -56,7 +53,7 @@ export const EntityDecoratorPixiJs = ({
       : { x: 0, y: 0 }
   }, [])
 
-  const options = useMemo<ContainerOptions>(() => {
+  const { width, height } = useMemo(() => {
     return {
       width: size.x,
       height: size.y,
@@ -72,7 +69,7 @@ export const EntityDecoratorPixiJs = ({
 
   return (
     <Container
-      options={{ ...options, zIndex: entity.position.y }}
+      options={{ width: width, height: height, zIndex: entity.position.y }}
       position={position}
     >
       <EntityComponent entity={entity} />
@@ -104,7 +101,7 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
   const metaData = getMetaData<EntityMetaDataInterface>(entity)
   const asset = metaData.asset?.model2d ?? metaData.asset?.icon
   if (!asset) {
-    console.warn("Component 2D not found")
+    console.warn("Component 2D not found with", metaData)
 
     return
   }
@@ -126,6 +123,14 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
   const animation = useMemo(() => {
     if (entity.state && entity.state in entityAnimation)
       return entityAnimation[entity.state]
+
+    return undefined
+  }, [entity.state])
+
+  const spriteSheet = useMemo(() => {
+    if (entity.state && entity.state in entityAnimation)
+      return entityAnimation[entity.state]
+
     return undefined
   }, [entity.state])
 
@@ -145,6 +150,26 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
     item.alpha = 0.5
   },
   [EntityState.find_enemy]: (e: Ticker, item: ContainerChild) => {
+    const deform = 0.1
+    const speed = 0.01
+    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
+    const scaleFactor = Math.cos(e.lastTime * speed) * deform
+
+    // item.position.x += scaleFactor
+    item.position.y += scaleFactor
+    item.rotation += scaleFactor / 4
+  },
+  [EntityState.move]: (e: Ticker, item: ContainerChild) => {
+    const deform = 0.1
+    const speed = 0.01
+    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
+    const scaleFactor = Math.cos(e.lastTime * speed) * deform
+
+    // item.position.x += scaleFactor
+    item.position.y += scaleFactor
+    item.rotation += scaleFactor / 4
+  },
+  [EntityState.cut_the_tree]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1
     const speed = 0.01
     // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9

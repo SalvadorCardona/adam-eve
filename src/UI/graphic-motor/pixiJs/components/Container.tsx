@@ -1,9 +1,9 @@
 import { ContainerOptions } from "pixi.js/lib/scene/container/Container"
 import { Container as BaseContainer } from "pixi.js"
 import React, { useEffect, useRef } from "react"
-import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { usePixiInstance } from "@/src/UI/graphic-motor/pixiJs/hook/useTexture"
 
 interface ContainerPropsInterface {}
 
@@ -26,9 +26,11 @@ export const Container = ({
     }
   }, [position])
 
+  usePixiInstance({ container: containerRef.current })
+
   return (
     <PixiContainerProvider currentContainer={containerRef.current}>
-      <PixiDecorator container={containerRef.current}>{children}</PixiDecorator>
+      {children}
     </PixiContainerProvider>
   )
 }

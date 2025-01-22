@@ -18,6 +18,5 @@ export const ArrowMetaData = entityMedataFactory({
     },
     defaultActions: [ArrowAttackActionMetadata["@type"]],
   },
-  label: "Tour de défense",
-  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "Arrow"),
+  ["@type"]: JsonLdTypeFactory(appLdType.entityAttack, "Arrow"),
 })

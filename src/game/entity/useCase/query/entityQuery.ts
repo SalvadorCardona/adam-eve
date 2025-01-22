@@ -148,9 +148,7 @@ export function entityQuery<T = EntityInterface>(
         vector3ToVector2(b.position),
         referencePoint,
       )
-      return order.distance === "DESC"
-        ? distanceB - distanceA
-        : distanceA - distanceB
+      return order.distance === "ASC" ? distanceB - distanceA : distanceA - distanceB
     })
   }
 

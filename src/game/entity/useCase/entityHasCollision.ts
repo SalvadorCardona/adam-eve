@@ -3,26 +3,15 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { has2dCollision } from "@/src/utils/3Dmath/has2dCollision"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
-import { bounding3ToBounding2 } from "@/src/utils/3Dmath/boudingBox"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
 
 export function entityHasCollision(
   entitySource: EntityInterface,
   entityTarget: EntityInterface,
 ): boolean {
-  const metaDataEntitySource = getMetaData<EntityMetaDataInterface>(entitySource)
-  const metaDataentityTarget = getMetaData<EntityMetaDataInterface>(entityTarget)
   return has2dCollision(
-    bounding3ToBounding2({
-      position: entitySource.position,
-      size: metaDataEntitySource.propriety.size as Vector3Interface,
-    }),
-    bounding3ToBounding2({
-      position: entityTarget.position,
-      size: metaDataentityTarget.propriety.size as Vector3Interface,
-    }),
+    entityToBoundingBox(entitySource),
+    entityToBoundingBox(entityTarget),
   )
 }
 

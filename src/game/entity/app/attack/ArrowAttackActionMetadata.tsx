@@ -2,7 +2,7 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
-import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
+import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 
 export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
@@ -18,7 +18,7 @@ export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
       return
     }
 
-    entityGoPosition({
+    entityGoToEntity({
       entity,
       target: zombie,
     })

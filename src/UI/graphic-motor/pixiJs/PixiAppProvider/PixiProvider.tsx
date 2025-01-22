@@ -7,7 +7,6 @@ import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerPr
 import configGame from "@/src/game/game/app/configGame"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import waterTexture from "@/public/sprite/water.png?url"
 import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
 
 export const PixiProvider: React.FC<{
@@ -15,9 +14,10 @@ export const PixiProvider: React.FC<{
   options: Partial<ApplicationOptions>
 }> = ({ children, options }) => {
   const applicationRef = useRef<Application | undefined>(undefined)
-  const [ready, setReady] = useState(false) // Ajout de l'état ready
+  const [ready, setReady] = useState(false)
 
   async function initPixiJs(options: Partial<ApplicationOptions>) {
+    console.log(applicationRef.current)
     const app = new Application()
     await app.init(options)
     app.stage.interactive = true
@@ -34,8 +34,7 @@ export const PixiProvider: React.FC<{
     for (const asset of assets) {
       await Assets.load(asset)
     }
-
-    await Assets.load(waterTexture)
+    await Assets.loadBundle("main")
 
     return app
   }

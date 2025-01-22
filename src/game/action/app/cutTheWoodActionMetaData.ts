@@ -7,7 +7,7 @@ import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEnt
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
-import { entityGoPosition } from "@/src/game/entity/useCase/move/entityGoPosition"
+import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 
 interface CutTheWoodDataInterface {}
 
@@ -30,7 +30,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
           return
         }
 
-        const result = entityGoPosition({ entity, target: newTreeEntity.position })
+        const result = entityGoToEntity({ entity, target: newTreeEntity })
         if (result.isFinish) {
           newTreeEntity.life -= 10
           entity.state = EntityState.cut_the_tree
@@ -54,9 +54,9 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         })
 
         if (!newTimberHouseEntity) return
-        const result = entityGoPosition({
+        const result = entityGoToEntity({
           entity,
-          target: newTimberHouseEntity.position,
+          target: newTimberHouseEntity,
         })
 
         if (result.isFinish) {

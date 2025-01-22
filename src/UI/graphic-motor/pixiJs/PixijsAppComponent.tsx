@@ -8,9 +8,9 @@ import { EntitiesLoopPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntitiesLoopPi
 import { PixiGrid } from "@/src/UI/graphic-motor/pixiJs/PixiGrid"
 import { ControlKeyboard } from "@/src/UI/ControlKeyboard"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
-import waterTexture from "@/public/sprite/water.png?url"
 import { Camera } from "@/src/UI/graphic-motor/pixiJs/Camera"
 import { CreateEntityComponent } from "@/src/game/actionUser/app/CreateEntityUserAction/CreateEntityComponent"
+import { assetList } from "@/src/app/assetList"
 
 export const PixijsAppComponent = () => {
   const [size, setSize] = useState<Vector2Interface>({
@@ -48,7 +48,7 @@ export const PixijsAppComponent = () => {
       <Camera></Camera>
       <Sprite
         options={{ ...options, zIndex: -999 }}
-        image={waterTexture}
+        image={assetList.water}
         isTilling={true}
       ></Sprite>
     </PixiProvider>

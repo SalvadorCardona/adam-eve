@@ -1,15 +1,12 @@
-import {
-  Assets,
-  Sprite as BaseSprite,
-  SpriteOptions,
-  Ticker,
-  TilingSprite,
-} from "pixi.js"
-import React, { useEffect, useRef, useState } from "react"
-import { PixiDecorator } from "@/src/UI/graphic-motor/pixiJs/components/PixiDecorator"
+import { Sprite as BaseSprite, SpriteOptions, Ticker, TilingSprite } from "pixi.js"
+import React, { useEffect, useRef } from "react"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
+import {
+  usePixiInstance,
+  useTexture,
+} from "@/src/UI/graphic-motor/pixiJs/hook/useTexture"
 
 interface SpritePropsInterface {
   options?: SpriteOptions
@@ -28,39 +25,16 @@ export const Sprite = ({
   isTilling,
   animation,
 }: SpritePropsInterface) => {
-  const [texture, setTexture] = useState(null)
   const _image = image ?? "https://pixijs.io/pixi-react/img/bunny.png"
-  const containerRef = useRef<BaseSprite | TilingSprite | null>(null)
+  const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
+    ? BaseSprite
+    : TilingSprite
+  const containerRef = useRef<BaseSprite | TilingSprite>(new Instance(options))
   const app = usePixiApp().app
-
-  useEffect(() => {
-    let isMounted = true
-    const loadTexture = async () => {
-      return Assets.load(_image)
-    }
-
-    loadTexture().then((e) => {
-      if (isMounted) {
-        setTexture(e)
-      }
-    })
-
-    return () => {
-      isMounted = false
-    }
-  }, [image])
-
-  useEffect(() => {
-    const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
-      ? BaseSprite
-      : TilingSprite
-    if (!containerRef?.current) {
-      containerRef.current = new Instance(options)
-    }
-    if (containerRef.current && texture) {
-      containerRef.current.texture = texture
-    }
-  }, [texture, options, image])
+  useTexture({
+    textureSrc: _image,
+    container: containerRef.current,
+  })
 
   useEffect(() => {
     if (!animation || !containerRef.current) return
@@ -83,7 +57,7 @@ export const Sprite = ({
     }
   }, [position])
 
-  return containerRef.current ? (
-    <PixiDecorator container={containerRef.current}></PixiDecorator>
-  ) : null
+  usePixiInstance({ container: containerRef.current })
+
+  return <></>
 }

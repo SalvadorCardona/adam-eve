@@ -3,10 +3,11 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 
 interface EntityGoPositionParams {
   entity: EntityInterface
-  target: Vector3Interface | EntityInterface
+  target: EntityInterface
 }
 
 interface EntityGoPositionOutput {
@@ -14,22 +15,14 @@ interface EntityGoPositionOutput {
   isFinish: boolean
 }
 
-const isEntityInterface = (
-  e: Vector3Interface | EntityInterface,
-): e is EntityInterface => {
-  return Object.hasOwn(e, "position")
-}
-
-export function entityGoPosition({
+export function entityGoToEntity({
   entity,
   target,
 }: EntityGoPositionParams): EntityGoPositionOutput {
   const meta = getMetaData<EntityMetaDataInterface>(entity)
   const speed = meta.propriety.speed ?? 0.01
 
-  const targetPosition: Vector3Interface = isEntityInterface(target)
-    ? target.position
-    : target
+  const targetPosition: Vector3Interface = target.position
 
   const direction = {
     x: targetPosition.x - entity.position.x,
@@ -37,7 +30,8 @@ export function entityGoPosition({
     z: targetPosition.z - entity.position.z,
   }
 
-  const length = Math.sqrt(direction.x ** 2 + direction.y ** 2 + direction.z ** 2)
+  const length = Math.sqrt(direction.x ** 2 + direction.z ** 2)
+
   const normalizedDirection = {
     x: direction.x / length,
     y: direction.y / length,
@@ -54,6 +48,6 @@ export function entityGoPosition({
 
   return {
     distance,
-    isFinish: distance < 50,
+    isFinish: entityHasCollision(entity, target),
   }
 }
