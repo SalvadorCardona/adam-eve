@@ -8,6 +8,7 @@ import configGame from "@/src/game/game/app/configGame"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
+import { assetList } from "@/src/app/assetList"
 
 export const PixiProvider: React.FC<{
   children: React.ReactNode
@@ -27,13 +28,15 @@ export const PixiProvider: React.FC<{
     getByLdType<EntityMetaDataInterface>(configGame, appLdType.entity).forEach(
       (e) => {
         e.asset?.model2d && assets.push(e.asset.model2d)
-        e.asset?.model3d && assets.push(e.asset.model3d)
+        if (e.asset?.asset2d) e.asset.asset2d.forEach((a) => assets.push(a))
       },
     )
 
     for (const asset of assets) {
       await Assets.load(asset)
     }
+
+    Assets.addBundle("main", assetList)
     await Assets.loadBundle("main")
 
     return app

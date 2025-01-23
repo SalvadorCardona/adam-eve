@@ -14,7 +14,7 @@ interface CutTheWoodDataInterface {}
 export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
   {
     ["@type"]: appLdType.cutTheWoodAction,
-    onFrame: ({ entity, game }) => {
+    onFrame: ({ entity, game, action }) => {
       if (!entity) return
 
       if (entity.state === EntityState.wait) {
@@ -46,6 +46,8 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         if (woodRessource.quantity > 50) {
           entity.state = EntityState.go_to_put_ressource
         }
+
+        action.nextTick = game.time + 5
       }
 
       if (entity.state === EntityState.go_to_put_ressource) {

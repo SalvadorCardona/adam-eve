@@ -8,6 +8,7 @@ import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
   Sprite,
+  SpriteAnimated,
   SpriteAnimation,
 } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { Ticker } from "pixi.js"
@@ -127,13 +128,17 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
     return undefined
   }, [entity.state])
 
-  const spriteSheet = useMemo(() => {
-    if (entity.state && entity.state in entityAnimation)
-      return entityAnimation[entity.state]
-
-    return undefined
+  const spriteSheetData = useMemo(() => {
+    return (
+      entity.state &&
+      metaData.asset?.animationMapper &&
+      metaData.asset?.animationMapper[entity.state]
+    )
   }, [entity.state])
 
+  if (spriteSheetData) {
+    return <SpriteAnimated spriteSheetData={spriteSheetData} />
+  }
   return <Sprite image={asset} options={size} animation={animation} />
 }
 

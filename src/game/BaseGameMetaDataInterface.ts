@@ -6,10 +6,8 @@ import { EntityState } from "@/src/game/entity/EntityState"
 export interface BaseGameMetaDataInterface extends JsonTypedLdInterface {
   asset?: {
     icon?: string
-    model3d?: string
-    multiModel3d?: string[]
     model2d?: string
-    multiModel2d?: string[]
+    asset2d?: string[]
     animationMapper?: Partial<Record<EntityState, SpritesheetData | SpriteAnimation>>
   }
   label?: string

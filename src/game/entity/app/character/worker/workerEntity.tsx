@@ -6,7 +6,23 @@ import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
-import { assetList } from "@/src/app/assetList"
+import attackAnimationSrc from "./animation/attack.png"
+import ideAnimationSrc from "./animation/ide.png"
+import moveSrc from "./animation/move.png"
+
+const moveAnimation = createFramePixiJs({
+  image: moveSrc,
+  steps: 8,
+  width: 768,
+})
+
+const attackAnimation = createFramePixiJs({ image: attackAnimationSrc })
+
+const idleAnimation = createFramePixiJs({
+  image: ideAnimationSrc,
+  steps: 9,
+  width: 864,
+})
 
 export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "worker"),
@@ -14,8 +30,14 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   asset: {
     model2d: asset2D,
     icon: iconFarmerSrc,
+    asset2d: [attackAnimationSrc, ideAnimationSrc, moveSrc],
     animationMapper: {
-      [EntityState.wait]: createFramePixiJs({ image: assetList.attack }),
+      [EntityState.wait]: idleAnimation,
+      [EntityState.move]: moveAnimation,
+      [EntityState.go_to_put_ressource]: moveAnimation,
+      [EntityState.go_to_tree]: moveAnimation,
+      [EntityState.attack]: attackAnimation,
+      [EntityState.cut_the_tree]: attackAnimation,
     },
   },
   propriety: {

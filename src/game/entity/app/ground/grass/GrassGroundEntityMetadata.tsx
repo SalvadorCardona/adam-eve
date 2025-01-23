@@ -56,7 +56,7 @@ const type = JsonLdTypeFactory(appLdType.entityGround, "grass")
 export const grassGroundEntityMetadata = entityMedataFactory({
   asset: {
     icon: grassIcon,
-    multiModel2d: [
+    asset2d: [
       grassBottomLeft,
       grassBottomRight,
       grassTopRight,

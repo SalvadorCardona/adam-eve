@@ -29,9 +29,8 @@ export const PixiContainerProvider = ({
   const _currentContainer = currentContainer ?? app?.stage
 
   useEffect(() => {
-    if (currentContainer && app) {
+    if (currentContainer && app && app.stage) {
       app.stage.addChild(_currentContainer)
-
       return () => {
         app.stage.removeChild(_currentContainer)
       }

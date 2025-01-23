@@ -1,12 +1,20 @@
-import { Sprite as BaseSprite, SpriteOptions, Ticker, TilingSprite } from "pixi.js"
-import React, { useEffect, useRef } from "react"
+import {
+  AnimatedSprite,
+  Sprite as BaseSprite,
+  SpriteOptions,
+  Ticker,
+  TilingSprite,
+} from "pixi.js"
+import React, { useEffect, useMemo, useRef } from "react"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
-import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import {
+  usePixiAnimation,
   usePixiInstance,
   useTexture,
 } from "@/src/UI/graphic-motor/pixiJs/hook/useTexture"
+import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
+import { createSpritesheetByData } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
 
 interface SpritePropsInterface {
   options?: SpriteOptions
@@ -25,30 +33,16 @@ export const Sprite = ({
   isTilling,
   animation,
 }: SpritePropsInterface) => {
-  const _image = image ?? "https://pixijs.io/pixi-react/img/bunny.png"
   const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
     ? BaseSprite
     : TilingSprite
   const containerRef = useRef<BaseSprite | TilingSprite>(new Instance(options))
-  const app = usePixiApp().app
   useTexture({
-    textureSrc: _image,
+    textureSrc: image,
     container: containerRef.current,
   })
 
-  useEffect(() => {
-    if (!animation || !containerRef.current) return
-
-    const animate = (e: Ticker) => {
-      animation(e, containerRef.current as BaseSprite)
-    }
-
-    app.ticker.add(animate)
-
-    return () => {
-      app.ticker.remove(animate)
-    }
-  }, [animation])
+  usePixiAnimation({ container: containerRef.current, animation })
 
   useEffect(() => {
     if (position && containerRef.current) {
@@ -58,6 +52,35 @@ export const Sprite = ({
   }, [position])
 
   usePixiInstance({ container: containerRef.current })
+
+  return <></>
+}
+
+export const SpriteAnimated = ({
+  spriteSheetData,
+}: SpritePropsInterface & { spriteSheetData: SpritesheetData }) => {
+  const animatedSprite = useMemo(() => {
+    const spriteSheet = createSpritesheetByData(spriteSheetData)
+    return new AnimatedSprite(spriteSheet.animations.main)
+  }, [spriteSheetData])
+
+  const container = useMemo(() => {
+    return new AnimatedSprite(animatedSprite)
+  }, [animatedSprite])
+
+  usePixiInstance({ container })
+
+  useEffect(() => {
+    const anim = container
+    anim.animationSpeed = 0.2
+    anim.play()
+    anim.width = 100
+    anim.height = 100
+    anim.anchor.set(0.5)
+    anim.x = 25
+    anim.y = 25
+    return () => anim.stop()
+  }, [container])
 
   return <></>
 }
