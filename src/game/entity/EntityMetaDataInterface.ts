@@ -38,4 +38,5 @@ export interface EntityMetaDataInterface<T extends EntityInterface = EntityInter
   workerAction?: ActionMetadataInterface<any>
   propriety: EntityPriorityInterface
   canBeBuild: (payload: { entity: T; game: GameInterface }) => boolean
+  onDeath?: (payload: { entity: T; game: GameInterface }) => void
 }

@@ -8,6 +8,28 @@ import { appLdType } from "@/src/AppLdType"
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
+import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
+import attackAnimationSrc from "./animation/attack.png"
+import ideAnimationSrc from "./animation/idle.png"
+import moveSrc from "./animation/move.png"
+
+const moveAnimation = createFramePixiJs({
+  image: moveSrc,
+  steps: 8,
+  width: 768,
+})
+
+const attackAnimation = createFramePixiJs({
+  image: attackAnimationSrc,
+  width: 864,
+  steps: 9,
+})
+
+const idleAnimation = createFramePixiJs({
+  image: ideAnimationSrc,
+  steps: 8,
+  width: 768,
+})
 
 export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "zombie"),
@@ -15,10 +37,13 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   asset: {
     model2d: zombieUrl,
     icon: iconFarmerSrc,
+    asset2d: [moveSrc, attackAnimationSrc, ideAnimationSrc],
     animationMapper: {
-      [EntityState.move]: "CharacterArmature|Walk",
-      [EntityState.wait]: "CharacterArmature|Idle",
-      [EntityState.attack]: "CharacterArmature|Kick_Left",
+      [EntityState.move]: moveAnimation,
+      [EntityState.go_to_enemy]: moveAnimation,
+      [EntityState.wait]: idleAnimation,
+      [EntityState.attack]: attackAnimation,
+      [EntityState.find_enemy]: idleAnimation,
     },
   },
   propriety: {

@@ -92,12 +92,20 @@ export function updateContainer<T extends BaseJsonLdInterface>(
 export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType | JsonLdType[],
+  strict: boolean = false,
 ): Array<T> {
   const results: Array<T> = []
+  const validator = (key: string, needle: string): boolean => {
+    if (strict) {
+      return key === needle
+    }
+
+    return key.startsWith(needle)
+  }
 
   if (Array.isArray(jsonLdType)) {
     Object.keys(container).forEach((key) => {
-      if (jsonLdType.some((type) => key.startsWith(type))) {
+      if (jsonLdType.some((type) => validator(key, type))) {
         results.push(container[key])
       }
     })
@@ -106,7 +114,7 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
   }
 
   Object.keys(container).map((key) => {
-    if (key.startsWith(jsonLdType)) {
+    if (validator(key, jsonLdType)) {
       results.push(container[key])
     }
   })

@@ -1,7 +1,10 @@
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
 import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseEntity"
-import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
+import {
+  treeDeathEntityMeta,
+  treeEntityMetaData,
+} from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
@@ -55,6 +58,7 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [ArrowMetaData["@type"]]: ArrowMetaData,
   [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
   [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
+  [treeDeathEntityMeta["@type"]]: treeDeathEntityMeta,
 }
 
 export default configGame

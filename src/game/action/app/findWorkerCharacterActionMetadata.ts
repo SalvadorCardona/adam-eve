@@ -11,6 +11,7 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { removeByIndex } from "@/src/utils/array/array"
 
 export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: appLdType.findWorkerAction,
@@ -19,7 +20,17 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
 
     const buildings = entityQuery<BuildingEntityInterface>(game, {
       "@type": appLdType.entityBuilding,
-    }).filter((building) => {
+    })
+
+    buildings.forEach((building) => {
+      building.workers.forEach((worker, e) => {
+        if (!game.entities[worker]) {
+          building.workers = removeByIndex(building.workers, e)
+        }
+      })
+    })
+
+    buildings.filter((building) => {
       const metaData = getMetaData<EntityMetaDataInterface>(building)
       const workMeta = metaData.propriety.work
 

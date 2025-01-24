@@ -38,6 +38,7 @@ interface EntityQueryParams {
   }
   state?: EntityState | EntityState[]
   faction?: EntityFaction | EntityFaction[]
+  strict?: boolean
 }
 
 const orderTypePriority = {
@@ -66,6 +67,7 @@ export function entityQuery<T = EntityInterface>(
     state,
     order,
     faction,
+    strict,
   } = query
 
   if (id && !Array.isArray(id)) {
@@ -76,7 +78,7 @@ export function entityQuery<T = EntityInterface>(
   }
 
   let entities: EntityInterface[] = type
-    ? getByLdType(game.entities, type)
+    ? getByLdType(game.entities, type, strict ?? false)
     : Object.values(game.entities)
 
   if (id) {
