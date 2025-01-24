@@ -31,7 +31,7 @@ import grass11 from "./asset/normal/grass11.png"
 import grass12 from "./asset/normal/grass12.png"
 import grass13 from "./asset/normal/grass13.png"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "../../../EntityMetaDataInterface"
 import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
@@ -92,14 +92,12 @@ export const grassGroundEntityMetadata = entityMedataFactory({
     return true
   },
   component: ({ entity }) => {
-    const [version, setVersion] = useState(1)
-
     const size = useMemo(() => {
       const size = getMetaData<EntityMetaDataInterface>(entity).propriety
         .size as Vector3Interface
       return {
-        width: size.x as Number,
-        height: size.y as Number,
+        width: size.x as number,
+        height: size.y as number,
       }
     }, [])
 

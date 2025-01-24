@@ -3,9 +3,11 @@ import imageIcon from "./icon.png?url"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { appLdType } from "@/src/AppLdType"
 import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
+import model from "./model.png"
 
 export const towerEntityMetaData = entityMedataFactory({
   asset: {
+    model2d: model,
     icon: imageIcon,
   },
   propriety: {

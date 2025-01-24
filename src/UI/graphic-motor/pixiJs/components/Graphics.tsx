@@ -1,7 +1,7 @@
 import { Graphics as BaseGraphics } from "pixi.js"
 import { GraphicsContext } from "pixi.js/lib/scene/graphics/shared/GraphicsContext"
 import { GraphicsOptions } from "pixi.js/lib/scene/graphics/shared/Graphics"
-import { useMemo } from "react"
+import React, { useMemo } from "react"
 import { usePixiInstance } from "@/src/UI/graphic-motor/pixiJs/hook/useTexture"
 
 interface GraphicsPropsInterface {
@@ -22,5 +22,5 @@ export const Graphics = ({ options, draw }: GraphicsPropsInterface) => {
 
   usePixiInstance({ container })
 
-  return
+  return <></>
 }

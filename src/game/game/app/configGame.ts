@@ -9,7 +9,7 @@ import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessour
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
-import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/woodRessource"
+import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/goldRessource"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
@@ -23,12 +23,13 @@ import { gameMetadata } from "@/src/game/game/GameMetaData"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
 import { TowerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
-import { ArrowMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
+import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { JsonLdTypeContainerInterface } from "@/src/utils/jsonLd/jsonLd"
+import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -55,10 +56,11 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [towerEntityMetaData["@type"]]: towerEntityMetaData,
   [TowerAttackActionMetadata["@type"]]: TowerAttackActionMetadata,
   [ArrowAttackActionMetadata["@type"]]: ArrowAttackActionMetadata,
-  [ArrowMetaData["@type"]]: ArrowMetaData,
+  [ArrowEntityMetaData["@type"]]: ArrowEntityMetaData,
   [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
   [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
   [treeDeathEntityMeta["@type"]]: treeDeathEntityMeta,
+  [bloodEntityMetaData["@type"]]: bloodEntityMetaData,
 }
 
 export default configGame

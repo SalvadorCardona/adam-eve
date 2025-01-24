@@ -8,8 +8,9 @@ export function updateEntityInGame(
   entity: EntityInterface,
   action: ContainerAction = ContainerAction.update,
 ): void {
+  updateContainer(game.entities, entity, action)
+
   if (isGroundEntity(entity)) {
     updateGroundWithGame({ game })
   }
-  updateContainer(game.entities, entity, action)
 }

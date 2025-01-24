@@ -10,8 +10,10 @@ export function removeEntityToGame(
   entity: EntityInterface,
 ): boolean {
   const entityMetaDataInterface = getMetaData<EntityMetaDataInterface>(entity)
-  entityMetaDataInterface.onDeath &&
+  
+  if (entityMetaDataInterface.onDeath)
     entityMetaDataInterface.onDeath({ game, entity })
+
   updateEntityInGame(game, entity, ContainerAction.remove)
 
   return true

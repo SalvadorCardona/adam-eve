@@ -26,12 +26,12 @@ export const EntityDecoratorPixiJs = ({
   entity,
   color,
 }: EntityDecoratorResolverPropsInterface) => {
-  const [version, setVersion] = useState(entity["@version"])
+  const [, setVersion] = useState(entity["@version"])
 
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
 
-  useGamePubSub(entity["@id"], (e) => {
+  useGamePubSub(entity["@id"], () => {
     setVersion(entity["@version"])
   })
 
@@ -68,10 +68,24 @@ export const EntityDecoratorPixiJs = ({
     }
   }, [entity.position.x, entity.position.z])
 
+  const scale = useMemo(() => {
+    if (!entity.rotation) return undefined
+
+    return {
+      x: entity.rotation < 0 ? -1 : 1,
+      y: entity.rotation > 0 ? -1 : 1,
+    }
+  }, [entity.rotation])
+
   return (
     <Container
-      options={{ width: width, height: height, zIndex: entity.position.y }}
+      options={{
+        width: width,
+        height: height,
+        zIndex: entity.position.y,
+      }}
       position={position}
+      scale={scale}
     >
       <EntityComponent entity={entity} />
       {color && (
@@ -139,6 +153,7 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
   if (spriteSheetData) {
     return <SpriteAnimated spriteSheetData={spriteSheetData} />
   }
+
   return <Sprite image={asset} options={size} animation={animation} />
 }
 

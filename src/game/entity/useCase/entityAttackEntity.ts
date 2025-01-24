@@ -3,19 +3,27 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import GameInterface from "@/src/game/game/GameInterface"
 
 export function entityAttackEntity(
+  game: GameInterface,
   entitySource: EntityInterface,
   entityTarget: EntityInterface,
 ): boolean {
-  const entityMeta = getMetaData<EntityMetaDataInterface>(entitySource)
-  const attack = entityMeta.propriety.attack
+  const entitySourceMeta = getMetaData<EntityMetaDataInterface>(entitySource)
+  const entityTargetMeta = getMetaData<EntityMetaDataInterface>(entityTarget)
+
+  const attack = entitySourceMeta.propriety.attack
   if (!attack) return false
 
   const canBeAttack = entityCanBeAttackEntity(entitySource, entityTarget)
   if (canBeAttack) {
     entitySource.state = EntityState.attack
     entityTarget.life -= attack.damage
+    if (entityTargetMeta.onHit) {
+      entityTargetMeta.onHit({ game, entity: entityTarget })
+    }
+
     return true
   }
 

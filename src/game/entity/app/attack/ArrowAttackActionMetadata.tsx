@@ -1,20 +1,20 @@
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
+import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
 export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "ArrowAttack"),
   onFrame: ({ game, entity }) => {
-    if (!entity || !entity.entityAttackTargetIri) {
+    if (!entity) {
       return
     }
+    const zombie = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
 
-    const zombie = game.entities[entity.entityAttackTargetIri]
     if (!zombie) {
-      removeEntityToGame(game, entity)
+      entity.life = 0
       return
     }
 
@@ -23,8 +23,8 @@ export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
       target: zombie,
     })
 
-    if (entityAttackEntity(entity, zombie)) {
-      removeEntityToGame(game, entity)
+    if (entityAttackEntity(game, entity, zombie)) {
+      entity.life = 0
     }
   },
   factory: () => {

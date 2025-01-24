@@ -23,6 +23,7 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   faction: EntityFaction
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
+  createdAt: number
   connections: {
     top?: JsonLdIri
     bottom?: JsonLdIri

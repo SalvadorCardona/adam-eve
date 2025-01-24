@@ -11,10 +11,12 @@ import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { aroundVector } from "@/src/utils/3Dmath/aroundVector"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
+import GameInterface from "@/src/game/game/GameInterface"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
->(payload?: { entity?: Partial<T> }): T {
+>(payload?: { entity?: Partial<T>; game: GameInterface }): T {
   let ldType: JsonLdType = "undefined"
 
   if (payload?.entity?.["@type"]) ldType = payload.entity["@type"]
@@ -26,6 +28,7 @@ export function entityFactory<
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
     connections: {},
+    createdAt: payload?.game.time ?? 0,
     position: {
       x: 0,
       y: 0,
@@ -56,16 +59,16 @@ export function entityFactory<
     entity.actions = {}
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
     entity.position.y += 1
-    if (metaData?.propriety?.defaultActions) {
-      metaData.propriety.defaultActions.forEach((actionType) => {
-        const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory(
-          {
-            entity,
-          },
-        )
-        addAction(entity.actions, action)
+  }
+
+  if (metaData?.propriety?.defaultActions) {
+    entity.actions = {}
+    metaData.propriety.defaultActions.forEach((actionType) => {
+      const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory({
+        entity,
       })
-    }
+      addAction(entity.actions as ActionBagInterface, action)
+    })
   }
 
   if (isCharacterEntity(entity)) {

@@ -5,21 +5,22 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
-
+import model from "./model.png"
 import { EntityState } from "@/src/game/entity/EntityState"
 
 export const bridgeEntityMetaData = entityMedataFactory({
   asset: {
     icon: imageIcon,
+    model2d: model,
   },
   propriety: {
     health: {
       maxLife: 100,
     },
     size: {
-      x: 100,
-      y: 100,
-      z: 100,
+      x: 50,
+      y: 50,
+      z: 50,
     },
     ressourceForConstruction: {
       [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({

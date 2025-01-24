@@ -9,6 +9,8 @@ import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixi
 import attackAnimationSrc from "./animation/attack.png"
 import ideAnimationSrc from "./animation/ide.png"
 import moveSrc from "./animation/move.png"
+import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
+import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
 
 const moveAnimation = createFramePixiJs({
   image: moveSrc,
@@ -51,5 +53,13 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     health: {
       maxLife: 25,
     },
+  },
+  onHit: ({ entity, game }) => {
+    const deathTree = bloodEntityMetaData.factory({
+      game,
+      entity: { position: entity.position },
+    })
+
+    addEntityToGame(game, deathTree)
   },
 })

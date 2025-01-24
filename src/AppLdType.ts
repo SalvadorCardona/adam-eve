@@ -2,7 +2,7 @@ import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 
 const entityBuilding = "entity/building"
 const typeAction = "action"
-const typeRessource = "action"
+const typeRessource = "ressource"
 
 export const appLdType = {
   camera: "camera",
@@ -16,6 +16,7 @@ export const appLdType = {
   entityAttack: "entity/attack",
   entityRessource: "entity/ressource",
   entityCharacter: "entity/character",
+  entityEffect: "entity/effect",
   entityGround: "entity/ground",
   ressource: typeRessource,
   saveGame: "save-game",

@@ -53,7 +53,7 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       }
 
       if (enemy && entity.state === EntityState.attack) {
-        if (!entityAttackEntity(entity, enemy)) {
+        if (!entityAttackEntity(game, entity, enemy)) {
           entity.state = EntityState.go_to_enemy
         }
 

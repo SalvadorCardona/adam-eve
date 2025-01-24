@@ -8,18 +8,24 @@ import { appLdType } from "@/src/AppLdType"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 
 export const treeDeathEntityMeta = entityMedataFactory({
+  onFrame: ({ entity }) => {
+    entity.life--
+  },
   asset: {
     icon: modelTreeCut,
     model2d: modelTreeCut,
   },
   propriety: {
+    health: {
+      maxLife: 200,
+    },
     size: {
       x: 25,
       y: 25,
       z: 25,
     },
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityRessource, "deathTree"),
+  ["@type"]: JsonLdTypeFactory(appLdType.entityEffect, "deathTree"),
 })
 
 export const treeEntityMetaData = entityMedataFactory({
