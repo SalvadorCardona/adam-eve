@@ -8,30 +8,30 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { appLdType } from "@/src/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
-import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
+import { getByLdTypeIn } from "@/src/utils/jsonLd/jsonLd"
 
 export const BottomSidebar = () => {
-  const buildingMetaDatas = getByLdType<EntityMetaDataInterface>(
+  const buildingMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
     configGame,
     appLdType.entityBuilding,
   )
 
-  const groundMetaDatas = getByLdType<EntityMetaDataInterface>(
+  const groundMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
     configGame,
     appLdType.entityGround,
   )
 
-  const natureMetaDatas = getByLdType<EntityMetaDataInterface>(
+  const natureMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
     configGame,
     appLdType.entityRessource,
   )
 
-  const actionMetaDatas = getByLdType<ActionUserMetaDataInterface>(
+  const actionMetaDatas = getByLdTypeIn<ActionUserMetaDataInterface>(
     configGame,
     appLdType.userAction,
   )
 
-  const characterMetaDatas = getByLdType<ActionUserMetaDataInterface>(
+  const characterMetaDatas = getByLdTypeIn<ActionUserMetaDataInterface>(
     configGame,
     appLdType.entityCharacter,
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {
   createVector2,
   Vector2Interface,
@@ -20,10 +20,10 @@ export const Camera = () => {
     const newCamera = vector3ToVector2(game.camera.position)
     setCamera({ ...newCamera })
   })
-
-  useEffect(() => {
-    stage.position = camera
-  }, [camera])
+  //
+  // useEffect(() => {
+  //   stage.position = camera
+  // }, [camera])
 
   return <></>
 }

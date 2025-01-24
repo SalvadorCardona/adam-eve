@@ -29,7 +29,7 @@ export const bridgeEntityMetaData = entityMedataFactory({
     },
   },
   canBeBuild: ({ entity, game }) => {
-    const grounds = entityQuery(game, { "@type": appLdType.entityGround })
+    const grounds = entityQuery(game, { "@typeIn": appLdType.entityGround })
     for (const ground of grounds) {
       if (entityHasCollision(entity, ground)) {
         return false

@@ -11,7 +11,7 @@ import { entityQuery } from "../useCase/query/entityQuery"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = entityQuery<GroundEntityInterface>(game, {
-    "@type": appLdType.entityGround,
+    "@typeIn": appLdType.entityGround,
   })
 
   updateGround({ entities: grounds })

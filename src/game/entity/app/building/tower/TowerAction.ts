@@ -15,7 +15,7 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TowerAttack"),
   onFrame: ({ game, action, entity }) => {
     action.nextTick = game.time + 50
-    console.log("ici")
+
     if (!entity) {
       return
     }

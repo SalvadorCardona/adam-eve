@@ -9,7 +9,7 @@ export const theDeathActionMetadata: ActionMetadataInterface<any> = {
   onFrame: ({ game, action }) => {
     action.nextTick = game.time + 50
 
-    const entities = entityQuery(game, { "@type": appLdType.entity }).filter(
+    const entities = entityQuery(game, { "@typeIn": appLdType.entity }).filter(
       (entity) => {
         return entity.life <= 0
       },

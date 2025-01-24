@@ -1,5 +1,10 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { getByLdType, JsonLdIri, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import {
+  getByLdType,
+  getByLdTypeIn,
+  JsonLdIri,
+  JsonLdType,
+} from "@/src/utils/jsonLd/jsonLd"
 import {
   Vector2Interface,
   Vector3Interface,
@@ -30,6 +35,7 @@ type Order = "ASC" | "DESC"
 
 interface EntityQueryParams {
   "@type"?: JsonLdType | JsonLdType[]
+  "@typeIn"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
   squareSearch?: SquareSearch
@@ -61,13 +67,13 @@ export function entityQuery<T = EntityInterface>(
 ): T[] {
   const {
     "@type": type,
+    "@typeIn": typeIn,
     "@id": id,
     circleSearch,
     squareSearch,
     state,
     order,
     faction,
-    strict,
   } = query
 
   if (id && !Array.isArray(id)) {
@@ -77,9 +83,15 @@ export function entityQuery<T = EntityInterface>(
     return entity ? [entity] : []
   }
 
-  let entities: EntityInterface[] = type
-    ? getByLdType(game.entities, type, strict ?? false)
-    : Object.values(game.entities)
+  let entities: EntityInterface[] = Object.values(game.entities)
+
+  if (type) {
+    entities = getByLdType(game.entities, type)
+  }
+
+  if (typeIn) {
+    entities = getByLdTypeIn(game.entities, typeIn)
+  }
 
   if (id) {
     entities = entities.filter((entity) => {

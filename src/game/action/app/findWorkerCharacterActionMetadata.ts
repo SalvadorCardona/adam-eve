@@ -19,7 +19,7 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
     action.nextTick = game.time + 60
 
     const buildings = entityQuery<BuildingEntityInterface>(game, {
-      "@type": appLdType.entityBuilding,
+      "@typeIn": appLdType.entityBuilding,
     })
 
     buildings.forEach((building) => {
@@ -47,7 +47,7 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
     if (buildings.length === 0) return
 
     const workers = entityQuery<CharacterEntityInterface>(game, {
-      "@type": appLdType.entityCharacter,
+      "@typeIn": appLdType.entityCharacter,
     }).filter((worker) => {
       return isObjectEmpty(worker.actions)
     })

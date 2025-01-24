@@ -7,25 +7,24 @@ import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerPr
 import configGame from "@/src/game/game/app/configGame"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getByLdType } from "@/src/utils/jsonLd/jsonLd"
+import { getByLdTypeIn } from "@/src/utils/jsonLd/jsonLd"
 import { assetList } from "@/src/app/assetList"
 
 export const PixiProvider: React.FC<{
   children: React.ReactNode
   options: Partial<ApplicationOptions>
 }> = ({ children, options }) => {
-  const applicationRef = useRef<Application | undefined>(undefined)
+  const applicationRef = useRef<Application>(new Application())
   const [ready, setReady] = useState(false)
 
   async function initPixiJs(options: Partial<ApplicationOptions>) {
-    console.log(applicationRef.current)
     const app = new Application()
     await app.init(options)
     app.stage.interactive = true
     app.stage.eventMode = "static"
 
     const assets: string[] = []
-    getByLdType<EntityMetaDataInterface>(configGame, appLdType.entity).forEach(
+    getByLdTypeIn<EntityMetaDataInterface>(configGame, appLdType.entity).forEach(
       (e) => {
         e.asset?.model2d && assets.push(e.asset.model2d)
         if (e.asset?.asset2d) e.asset.asset2d.forEach((a) => assets.push(a))

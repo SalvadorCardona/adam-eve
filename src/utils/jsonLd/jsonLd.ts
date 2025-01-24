@@ -90,19 +90,12 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   containerPubSub.publish(item["@type"], { item, action })
 }
 
-export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
+export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType | JsonLdType[],
-  strict: boolean = false,
 ): Array<T> {
   const results: Array<T> = []
-  const validator = (key: string, needle: string): boolean => {
-    if (strict) {
-      return key === needle
-    }
-
-    return key.startsWith(needle)
-  }
+  const validator = (key: string, needle: string): boolean => key.startsWith(needle)
 
   if (Array.isArray(jsonLdType)) {
     Object.keys(container).forEach((key) => {
@@ -117,6 +110,27 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
   Object.keys(container).map((key) => {
     if (validator(key, jsonLdType)) {
       results.push(container[key])
+    }
+  })
+
+  return results
+}
+
+export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
+  container: ContainerInterface,
+  jsonLdType: JsonLdType | JsonLdType[],
+): Array<T> {
+  const results: Array<T> = []
+  const ldTypes: JsonLdType[] = []
+  if (Array.isArray(jsonLdType)) {
+    jsonLdType.forEach((e) => ldTypes.push(e))
+  } else {
+    ldTypes.push(jsonLdType)
+  }
+
+  Object.values(container).forEach((item) => {
+    if (ldTypes.includes(item["@type"])) {
+      results.push(item)
     }
   })
 

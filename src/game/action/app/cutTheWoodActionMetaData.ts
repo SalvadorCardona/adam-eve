@@ -20,6 +20,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
       if (entity.state === EntityState.wait) {
         entity.state = EntityState.go_to_tree
       }
+
       if (entity.state === EntityState.go_to_tree) {
         const newTreeEntity = entityQueryFindOne(game, {
           "@type": treeEntityMetaData["@type"],
@@ -27,6 +28,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
         if (!newTreeEntity) {
           entity.state = EntityState.wait
+          action.nextTick = game.time + 60
           return
         }
 
@@ -43,11 +45,12 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
           entity.inventory,
           appLdType.woodRessource,
         )
+
         if (woodRessource.quantity > 50) {
           entity.state = EntityState.go_to_put_ressource
         }
 
-        action.nextTick = game.time + 5
+        action.nextTick = game.time + 10
       }
 
       if (entity.state === EntityState.go_to_put_ressource) {
