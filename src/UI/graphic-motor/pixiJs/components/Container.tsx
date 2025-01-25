@@ -26,8 +26,8 @@ export const Container = ({
       containerRef.current.x = position.x
       containerRef.current.y = position.y
       if (scale && scale.x === -1) {
-        // containerRef.current.scale.x = scale.x
-        // containerRef.current.x = position.x + options?.width / 2
+        containerRef.current.scale.x = scale.x
+        containerRef.current.x = position.x + options.width
       }
     }
   }, [position, scale])

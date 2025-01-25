@@ -42,7 +42,9 @@ export function entityGoToEntity({
   entity.position.z += normalizedDirection.z * speed
   entity.position.y += normalizedDirection.y * speed
 
-  entity.rotation = Math.atan2(normalizedDirection.x, normalizedDirection.z)
+  entity.rotation = parseFloat(
+    Math.atan2(normalizedDirection.x, normalizedDirection.z).toFixed(2),
+  )
 
   const distance = distanceBetweenVector(entity.position, targetPosition)
 

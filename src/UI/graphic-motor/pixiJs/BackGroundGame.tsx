@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {
-  createVector2,
-  Vector2Interface,
-  vector3ToVector2,
-} from "@/src/utils/3Dmath/Vector"
+import { Vector2Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
@@ -15,8 +11,11 @@ import { Ticker } from "pixi.js"
 import { ApplicationOptions } from "pixi.js/lib/app/Application"
 
 export const BackGroundGame = ({ size }: { size: Vector2Interface }) => {
-  const [camera, setCamera] = useState<Vector2Interface>(createVector2())
   const game = useGameContext().game
+
+  const [camera, setCamera] = useState<Vector2Interface>(
+    vector3ToVector2(game.camera.position),
+  )
   const pixi = usePixiApp()
   const stage = pixi.app.stage as ContainerChild
 

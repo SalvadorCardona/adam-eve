@@ -5,7 +5,9 @@ import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import { config } from "@/src/app/config"
-import EntityInterface from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  isCharacterEntity,
+} from "@/src/game/entity/EntityInterface"
 import {
   Sprite,
   SpriteAnimated,
@@ -16,6 +18,7 @@ import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { assetList } from "@/src/app/assetList"
 
 export interface EntityDecoratorResolverPropsInterface {
   color?: string
@@ -52,7 +55,7 @@ export const EntityDecoratorPixiJs = ({
           y: entityMetaData.propriety.size.y ?? 0,
         }
       : { x: 0, y: 0 }
-  }, [])
+  }, [entity])
 
   const { width, height } = useMemo(() => {
     return {
@@ -70,11 +73,17 @@ export const EntityDecoratorPixiJs = ({
 
   const scale = useMemo(() => {
     if (!entity.rotation) return undefined
-
+    console.log(entity.rotation)
     return {
       x: entity.rotation < 0 ? -1 : 1,
-      y: entity.rotation > 0 ? -1 : 1,
+      y: 1,
     }
+  }, [entity.rotation])
+
+  const rotation = useMemo(() => {
+    if (!entity.rotation) return undefined
+
+    return entity.rotation - Math.PI / 2
   }, [entity.rotation])
 
   return (
@@ -103,6 +112,21 @@ export const EntityDecoratorPixiJs = ({
             g.fill({ color: 0xffff00, alpha: 0.5 })
           }}
         />
+      )}
+
+      {isCharacterEntity(entity) && (
+        <>
+          <Graphics
+            draw={(g) => {
+              g.rect(0, 0, size.x, size.y)
+              g.fill({ color: 0xffff00, alpha: 0.5 })
+            }}
+          />
+          <Sprite
+            options={{ width, height, zIndex: entity.position.y - 1 }}
+            image={assetList.arrowDirectionnal}
+          ></Sprite>
+        </>
       )}
     </Container>
   )

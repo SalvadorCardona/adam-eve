@@ -69,19 +69,23 @@ export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
             <div className="font-semibold">Etat : {entity.state}</div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Box className="h-5 w-5 text-purple-600" />
-            <div className="font-semibold">
-              Inventaire : {Object.values(entity.inventory).length} objets
+          {Object.hasOwn(entity, "inventory") && (
+            <div className="flex items-center gap-4">
+              <Box className="h-5 w-5 text-purple-600" />
+              <div className="font-semibold">
+                Inventaire : {Object.values(entity.inventory).length} objets
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex items-center gap-4">
-            <Activity className="h-5 w-5 text-red-600" />
-            <div className="font-semibold">
-              Actions : {Object.values(entity.actions).length} disponibles
+          {Object.hasOwn(entity, "actions") && (
+            <div className="flex items-center gap-4">
+              <Activity className="h-5 w-5 text-red-600" />
+              <div className="font-semibold">
+                Actions : {Object.values(entity.actions).length} disponibles
+              </div>
             </div>
-          </div>
+          )}
 
           {/*<div className="font-semibold">*/}
           {/*  Position :*/}

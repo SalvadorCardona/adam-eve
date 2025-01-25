@@ -9,6 +9,7 @@ import {
   boundingBox2DObbToAabb,
 } from "@/src/utils/3Dmath/boudingBox"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
+import { updateGame } from "@/src/game/game/updateGame"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -37,6 +38,7 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
           })
 
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
+      updateGame(game, game.userControl)
 
       onSelectEntityUserActionMetadata.onApply({ game: game })
     },

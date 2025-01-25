@@ -15,10 +15,11 @@ export const PixiProvider: React.FC<{
   options: Partial<ApplicationOptions>
 }> = ({ children, options }) => {
   const applicationRef = useRef<Application>(new Application())
+  const mounted = useRef<boolean>(false)
   const [ready, setReady] = useState(false)
 
   async function initPixiJs(options: Partial<ApplicationOptions>) {
-    const app = new Application()
+    const app = applicationRef.current
     await app.init(options)
     app.stage.interactive = true
     app.stage.eventMode = "static"
@@ -42,14 +43,14 @@ export const PixiProvider: React.FC<{
   }
 
   useEffect(() => {
-    if (!applicationRef.current) {
+    if (!mounted.current) {
+      mounted.current = true
       initPixiJs(options).then((app) => {
-        applicationRef.current = app
         setReady(true) // Mettre à jour l'état ready une fois l'application initialisée
       })
     }
     return () => {
-      if (applicationRef.current) {
+      if (applicationRef.current && mounted.current && ready) {
         applicationRef.current.destroy(true, { children: true })
       }
     }

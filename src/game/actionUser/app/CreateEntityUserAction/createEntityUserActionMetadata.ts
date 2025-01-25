@@ -40,7 +40,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
 
       const rotationY = game.userControl?.rotation ?? 0
       const metaInterface = createEntityUserActionMetadata.data.entityMetaData
-      console.log(game.mouseState)
+
       const isMultipleBuilding = bounding2DSize(game.mouseState.bounding2d) > 1
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {

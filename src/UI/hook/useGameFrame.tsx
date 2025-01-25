@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import GameInterface from "@/src/game/game/GameInterface"
-import { appLdType } from "@/src/AppLdType"
 import { ContainerPublish, containerPubSub } from "@/src/utils/jsonLd/jsonLd"
 
 export const useGameFrame = (callback: (game: GameInterface) => void) => {
@@ -25,7 +24,7 @@ export const useGamePubSub = (
   useEffect(() => {
     const id = containerPubSub.subscribe(channel, callback)
     return () => {
-      containerPubSub.unsubscribe(id, appLdType.camera)
+      containerPubSub.unsubscribe(channel, id)
     }
   }, [])
 }

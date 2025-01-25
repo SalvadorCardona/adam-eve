@@ -82,7 +82,6 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   }
 
   if (action === ContainerAction.remove) {
-    console.log(item["@id"])
     deleteContainerKey(container, item["@id"])
   }
 

@@ -22,6 +22,7 @@ interface SpritePropsInterface {
   position?: Vector2Interface
   isTilling?: boolean
   animation?: SpriteAnimation
+  rotation?: number
 }
 
 export type SpriteAnimation = (e: Ticker, item: ContainerChild) => void
@@ -32,6 +33,7 @@ export const Sprite = ({
   position,
   isTilling,
   animation,
+  rotation,
 }: SpritePropsInterface) => {
   const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
     ? BaseSprite
@@ -45,11 +47,17 @@ export const Sprite = ({
   usePixiAnimation({ container: containerRef.current, animation })
 
   useEffect(() => {
-    if (position && containerRef.current) {
+    if (position) {
       containerRef.current.x = position.x
       containerRef.current.y = position.y
     }
   }, [position])
+
+  useEffect(() => {
+    if (rotation) {
+      containerRef.current.rotation = rotation
+    }
+  }, [rotation])
 
   usePixiInstance({ container: containerRef.current })
 

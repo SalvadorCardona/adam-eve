@@ -8,6 +8,7 @@ import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 
 interface CutTheWoodDataInterface {}
 
@@ -33,7 +34,8 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         }
 
         const result = entityGoToEntity({ entity, target: newTreeEntity })
-        if (result.isFinish) {
+        if (entityCanBeAttackEntity(entity, newTreeEntity)) {
+          console.log("jattaque")
           newTreeEntity.life -= 10
           entity.state = EntityState.cut_the_tree
         }

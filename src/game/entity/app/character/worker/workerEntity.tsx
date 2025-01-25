@@ -45,6 +45,11 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   propriety: {
     inventorySize: 10,
     speed: 1.4,
+    attack: {
+      damage: 1,
+      attackRange: 20,
+      attackSpeed: 60,
+    },
     size: {
       x: 50,
       y: 50,
