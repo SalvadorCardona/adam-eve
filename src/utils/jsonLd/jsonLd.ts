@@ -31,15 +31,35 @@ export interface JsonLdIriContainerInterface<T = object> {
   [key: JsonLdIri]: JsonLDItem<T>
 }
 
-export interface JsonLdIriCollection<T = BaseJsonLdInterface> {
+export interface JsonLdIriCollection<T = BaseJsonLdInterface>
+  extends BaseJsonLdInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
+  "@context": "collection"
   "@version": number
   collection: JsonLdIriContainerInterface<T>
   totalItems: number
 }
 
-export function jsonLdFactory<T>(type: string, object: Partial<T>): JsonLDItem<T> {
+function isJsonLdIriCollection(object: object): object is JsonLdIriCollection {
+  return Object.hasOwn(object, "@context")
+}
+
+export function JsonLdIriCollectionFactory<T = JsonLdIriCollection>(
+  type: JsonLdType,
+  collections: JsonLdIriContainerInterface<T> = {},
+): JsonLdIriCollection<T> {
+  return jsonLdFactory<JsonLdIriCollection<T>>(type, {
+    "@context": "collection",
+    collection: collections,
+    totalItems: 0,
+  })
+}
+
+export function jsonLdFactory<T>(
+  type: JsonLdType,
+  object: Partial<T>,
+): JsonLDItem<T> {
   const jsonLdType = JsonLdTypeFactory(type)
   // @ts-ignore
   return {
@@ -76,17 +96,32 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   item: T,
   action: ContainerAction = ContainerAction.update,
 ): void {
-  if (action === ContainerAction.update || action === ContainerAction.create) {
-    item["@version"]++
-    container[item["@id"]] = item
-  }
+  container[item["@id"]] = updateItem(item, action)
 
   if (action === ContainerAction.remove) {
     deleteContainerKey(container, item["@id"])
   }
+}
 
+export function updateItem(
+  item: JsonLDItem<any>,
+  action: ContainerAction = ContainerAction.update,
+): JsonLDItem<any> {
+  item["@version"]++
   containerPubSub.publish(item["@id"], { item, action })
   containerPubSub.publish(item["@type"], { item, action })
+
+  return item
+}
+
+export function updateCollection(
+  collection: JsonLdIriCollection,
+  item: JsonLDItem<any>,
+  action: ContainerAction = ContainerAction.update,
+): JsonLDItem<any> {
+  updateContainer(collection.collection, item, action)
+  collection.totalItems = Object.keys(collection.collection).length
+  return updateItem(collection, action)
 }
 
 export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterface>(

@@ -3,6 +3,8 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 import {
   BaseJsonLdInterface,
   jsonLdFactory,
+  JsonLdIriCollection,
+  JsonLdIriCollectionFactory,
   JsonLdIriContainerInterface,
   JsonLDItem,
 } from "@/src/utils/jsonLd/jsonLd"
@@ -18,6 +20,7 @@ import {
   createBounding2D,
 } from "@/src/utils/3Dmath/boudingBox"
 import { appLdType } from "@/src/AppLdType"
+import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
 
 export enum GameState {
   RUN = "run",
@@ -65,12 +68,14 @@ export default interface GameInterface extends BaseJsonLdInterface {
   createdAt: DateString
   time: number
   entities: JsonLdIriContainerInterface<EntityInterface>
+  players: JsonLdIriCollection<PlayerInterface>
   inventory: InventoryBagInterface
   actions: ActionBagInterface
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
   return jsonLdFactory(appLdType.game, {
+    players: JsonLdIriCollectionFactory(appLdType.player),
     graphicMotor: GraphicMotor.PIXI_JS,
     gameOption: jsonLdFactory(appLdType.camera, {
       gameSpeed: 1,

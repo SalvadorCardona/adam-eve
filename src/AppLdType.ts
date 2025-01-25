@@ -10,6 +10,7 @@ export const appLdType = {
   mouseState: "mouseState",
   game: "game",
   gameOption: "gameOption",
+  player: "player",
   entity: "entity",
   entityBuilding,
   typeAction,
