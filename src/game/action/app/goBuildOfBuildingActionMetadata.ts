@@ -44,13 +44,10 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)
       const data = action.data
 
-      const building = data.buildingIri
-        ? entityQueryFindOne<BuildingEntityInterface>(game, {
-            "@id": data.buildingIri,
-          })
-        : entityQueryFindOne<BuildingEntityInterface>(game, {
-            state: EntityState.under_construction,
-          })
+      const building = entityQueryFindOne<BuildingEntityInterface>(game, {
+        "@id": data.buildingIri,
+        state: EntityState.under_construction,
+      })
 
       if (!building) {
         data.state = State.NoBuild
@@ -58,10 +55,12 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
         return
       }
 
+      const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
+
       if (building && data.state === State.NoBuild) {
         data.state = State.GoToForum
       }
-      const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
+
       entity.state = EntityState.move
 
       if (data.state === State.GoToForum) {
@@ -81,6 +80,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
       }
 
       if (data.state === State.TakeRessource) {
+        debugger
         const ressourceTaken = Object.values(
           buildingMeta.propriety?.ressourceForConstruction ?? {},
         )

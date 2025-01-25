@@ -7,7 +7,7 @@ import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { appLdType } from "@/src/AppLdType"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { assetList } from "@/src/app/assetList"
-import { Ticker } from "pixi.js"
+import { Ticker, TilingSprite } from "pixi.js"
 import { ApplicationOptions } from "pixi.js/lib/app/Application"
 
 export const BackGroundGame = ({ size }: { size: Vector2Interface }) => {
@@ -40,15 +40,19 @@ export const BackGroundGame = ({ size }: { size: Vector2Interface }) => {
         x: -camera.x,
         y: -camera.y,
       }}
-      image={assetList.water}
+      image={assetList.sea}
       isTilling={true}
-      animation={(e: Ticker, item: ContainerChild) => {
-        const deform = 0.5
-        const speed = 0.001
-        // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
-        const scaleFactor = Math.cos(e.lastTime * speed) * deform
+      animation={(e: Ticker, item: TilingSprite) => {
+        const deform = 0.02
+        const speed = 0.0001
+        const moveSize = 0.1
+        const scaleFactor = 2 - deform * Math.abs(Math.cos(e.lastTime * speed))
+        // const scaleFactor = Math.cos(e.lastTime * speed) * deform
+        item.tilePosition.x += moveSize
+        // item.tilePosition.y += moveSize
+        item.tileScale.x = scaleFactor
+        item.tileScale.y = scaleFactor
 
-        // item.position.x += scaleFactor
         // item.position.y += scaleFactor
         // item.position.x += scaleFactor
       }}

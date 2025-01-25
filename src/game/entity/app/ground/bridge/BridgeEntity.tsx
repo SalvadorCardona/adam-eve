@@ -38,7 +38,7 @@ export const bridgeEntityMetaData = entityMedataFactory({
 
     return true
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityGround, "bridge"),
+  ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "bridge"),
   label: "Pont",
   defaultEntity: () => {
     return {

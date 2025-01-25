@@ -25,9 +25,11 @@ export const Container = ({
     if (position) {
       containerRef.current.x = position.x
       containerRef.current.y = position.y
-      if (scale && scale.x === -1) {
+      if (scale) {
         containerRef.current.scale.x = scale.x
-        containerRef.current.x = position.x + options.width
+        if (scale.x === -1 && options?.width) {
+          containerRef.current.x = (position.x + options.width) as number
+        }
       }
     }
   }, [position, scale])

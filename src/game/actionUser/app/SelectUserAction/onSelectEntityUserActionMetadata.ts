@@ -23,11 +23,12 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
     onSelectZone: ({ game }) => {
       const bounding = boundingBox2DObbToAabb(game.mouseState.bounding2d)
       const isClick = bounding2DSize(game.mouseState.bounding2d) < 0.3
+
       const entities = isClick
         ? entityQuery(game, {
             circleSearch: {
-              center: game.mouseState.bounding2d.position,
-              radius: 1,
+              center: game.mouseState.position,
+              radius: 50,
             },
           })
         : entityQuery(game, {

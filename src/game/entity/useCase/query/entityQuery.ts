@@ -102,6 +102,8 @@ export function entityQuery<T = EntityInterface>(
   if (circleSearch) {
     const { center, radius } = circleSearch
     const center2D = center
+    console.log(center2D)
+    console.log(entities)
     entities = entities.filter((entity) => {
       return (
         distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
@@ -126,11 +128,11 @@ export function entityQuery<T = EntityInterface>(
   }
 
   if (squareSearch) {
+    console.log("ici")
     const start2D = squareSearch.start
     const end2d = squareSearch.end
     entities = entities.filter((entity) => {
       const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-
       return has2dCollisionInZone(
         vector3ToVector2(entity.position),
         vector3ToVector2(entityMetaData.propriety.size as Vector3Interface),

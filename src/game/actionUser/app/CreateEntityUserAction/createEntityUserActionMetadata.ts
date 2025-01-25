@@ -40,17 +40,18 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
 
       const rotationY = game.userControl?.rotation ?? 0
       const metaInterface = createEntityUserActionMetadata.data.entityMetaData
-
+      console.log(game.mouseState.bounding2d)
       const isMultipleBuilding = bounding2DSize(game.mouseState.bounding2d) > 1
       const entities: EntityInterface[] = []
       if (isMultipleBuilding) {
         const bounding = boundingBox2DObbToAabb(game.mouseState.bounding2d)
+        console.log(bounding)
         const positions = diviseVector2D(
           bounding.min,
           bounding.max,
           config.pixiJs2dItemSize,
         )
-
+        console.log(positions)
         positions.forEach((newPosition) => {
           const entity = metaInterface.factory({
             game,

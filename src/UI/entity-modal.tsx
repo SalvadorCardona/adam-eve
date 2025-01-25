@@ -1,20 +1,34 @@
-import React from "react"
+import React, { useState } from "react"
 import { Progress } from "@/components/ui/progress"
 import { Activity, Box, Leaf, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { appLdType } from "@/src/AppLdType"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
 
-interface EntityModalProps {
-  entityUri: JsonLdIri
-}
+interface EntityModalProps {}
 
 // https://v0.dev/chat/b/b_i0Y0LFnf5uc?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..qvy90R5EB5YDdo3f.M41-4rBWiu9rhbr6BLxKn8JI1Ty0SJcnTppnRsaF3wqiD97so3TEoo1ZMxU.JPOThbtudLde243zJ0PjWQ
-export const EntityModal: React.FC<EntityModalProps> = ({ entityUri }) => {
+export const EntityModal: React.FC<EntityModalProps> = () => {
+  const [entity, setEntity] = useState<EntityInterface | undefined>()
+
   const game = useGameContext().game
-  const entity = game.entities[entityUri]
+  useGamePubSub(appLdType.userControl, (e) => {
+    if (game.userControl.entitiesSelected.length) {
+      setEntity(
+        entityQueryFindOne(game, { "@id": game.userControl.entitiesSelected[0] }),
+      )
+
+      return
+    }
+
+    setEntity(undefined)
+  })
+
   if (!entity) return
 
   const metaData = getMetaData<EntityMetaDataInterface>(entity)

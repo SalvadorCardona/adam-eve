@@ -11,6 +11,7 @@ export function getInventoryItem(
   inventory: InventoryBagInterface,
   inventoryType: JsonLdType,
 ): InventoryItemInterface {
+  console.log(inventory)
   const item = inventory[inventoryType]
   if (item) return item
 

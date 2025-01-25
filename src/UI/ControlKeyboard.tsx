@@ -104,6 +104,7 @@ export const ControlKeyboard = () => {
         keys: ["Escape"],
         cb: () => {
           game.userControl.currentAction = undefined
+          game.userControl.entitiesSelected = []
           updateGame(game, game.userControl)
         },
       },
