@@ -1,6 +1,6 @@
 import { Vector3Interface } from "@/src/utils/math/Vector"
 
-export function aroundVector(
+export function around(
   vector: Vector3Interface,
   roundToMultiple: number = 0,
 ): Vector3Interface {

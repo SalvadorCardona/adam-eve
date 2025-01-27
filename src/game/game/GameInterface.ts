@@ -15,10 +15,6 @@ import {
   Vector3Interface,
 } from "@/src/utils/math/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import {
-  BoundingBox2DInterface,
-  createBounding2D,
-} from "@/src/utils/math/boudingBox"
 import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
 
@@ -46,8 +42,9 @@ export type UserControl = JsonLDItem<{
 }>
 
 export type MouseState = JsonLDItem<{
-  bounding2d: BoundingBox2DInterface
   position: Vector2Interface
+  startPosition: Vector2Interface
+  endPosition: Vector2Interface
 }>
 
 export type GameOption = JsonLDItem<{
@@ -77,7 +74,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
   return jsonLdFactory(appLdType.game, {
     players: JsonLdIriCollectionFactory(appLdType.player),
     graphicMotor: GraphicMotor.PIXI_JS,
-    gameOption: jsonLdFactory(appLdType.camera, {
+    gameOption: jsonLdFactory<GameOption>(appLdType.camera, {
       gameSpeed: 1,
       gameState: GameState.RUN,
       gameMode: GameMode.NORMAL,
@@ -87,8 +84,9 @@ export function gameFactory(game?: GameInterface): GameInterface {
     entities: {},
     inventory: {},
     createdAt: new Date(),
-    mouseState: jsonLdFactory(appLdType.mouseState, {
-      bounding2d: createBounding2D(),
+    mouseState: jsonLdFactory<MouseState>(appLdType.mouseState, {
+      startPosition: createVector2(),
+      endPosition: createVector2(),
       position: createVector2(),
     }),
     camera: jsonLdFactory(appLdType.camera, {

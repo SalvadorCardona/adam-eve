@@ -8,7 +8,6 @@ import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
-import { bounding2DSize, boundingBox2DObbToAabb } from "@/src/utils/math/boudingBox"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
 import { vector2ToVector3 } from "@/src/utils/math/Vector"
@@ -36,19 +35,16 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
       }
 
       const rotationY = game.userControl?.rotation ?? 0
+      const positions = diviseVector2D(
+        game.mouseState.startPosition,
+        game.mouseState.endPosition,
+        config.pixiJs2dItemSize,
+      )
+
       const metaInterface = createEntityUserActionMetadata.data.entityMetaData
-      console.log(game.mouseState.bounding2d)
-      const isMultipleBuilding = bounding2DSize(game.mouseState.bounding2d) > 1
+
       const entities: EntityInterface[] = []
-      if (isMultipleBuilding) {
-        const bounding = boundingBox2DObbToAabb(game.mouseState.bounding2d)
-        console.log(bounding)
-        const positions = diviseVector2D(
-          bounding.min,
-          bounding.max,
-          config.pixiJs2dItemSize,
-        )
-        console.log(positions)
+      if (positions.length > 1) {
         positions.forEach((newPosition) => {
           const entity = metaInterface.factory({
             game,

@@ -1,5 +1,5 @@
 import { Vector2Interface } from "@/src/utils/math/Vector"
-import { roundUpToBase } from "@/src/utils/math/aroundVector"
+import { roundDownToBase } from "@/src/utils/math/around"
 
 export function diviseVector2D(
   vectorStart: Vector2Interface,
@@ -8,10 +8,17 @@ export function diviseVector2D(
 ): Vector2Interface[] {
   const list: Vector2Interface[] = []
 
-  const startX = roundUpToBase(vectorStart.x, divisionFactor)
-  const startY = roundUpToBase(vectorStart.y, divisionFactor)
-  const endX = roundUpToBase(vectorEnd.x, divisionFactor)
-  const endY = roundUpToBase(vectorEnd.y, divisionFactor)
+  const startX = roundDownToBase(
+    Math.min(vectorStart.x, vectorEnd.x),
+    divisionFactor,
+  )
+  const startY = roundDownToBase(
+    Math.min(vectorStart.y, vectorEnd.y),
+    divisionFactor,
+  )
+  
+  const endX = roundDownToBase(Math.max(vectorStart.x, vectorEnd.x), divisionFactor)
+  const endY = roundDownToBase(Math.max(vectorStart.y, vectorEnd.y), divisionFactor)
 
   for (let x = startX; x <= endX; x += divisionFactor) {
     for (let y = startY; y <= endY; y += divisionFactor) {

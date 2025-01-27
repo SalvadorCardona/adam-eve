@@ -8,6 +8,8 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { useDebounce } from "react-use"
 import { updateGame } from "@/src/game/game/updateGame"
+import { diviseVector2D } from "@/src/utils/math/diviseVector"
+import { config } from "@/src/app/config"
 
 let mouseMovePositon = createVector2()
 
@@ -29,9 +31,8 @@ export const SelectOnMap = () => {
     () => {
       if (isDragging) return
 
-      // game.mouseState.position = mouseMovePositon
-      const bounding = createBoundingBoxByMouse()
-      game.mouseState.bounding2d.size = bounding.size
+      game.mouseState.startPosition = startPosition
+      game.mouseState.endPosition = currentPosition
       onSelectEntityUserActionMetadata.onSelectZone({
         game: game,
       })
@@ -80,8 +81,6 @@ export const SelectOnMap = () => {
       mouseMovePositon = newPosition
       game.mouseState.position = mouseMovePositon
       updateGame(game, game.mouseState)
-
-      game.mouseState.bounding2d = createBoundingBoxByMouse()
     }
 
     const handlePointerUp = () => {
@@ -112,15 +111,15 @@ export const SelectOnMap = () => {
 
   const drawSelectionBox = (g: BaseGraphic) => {
     if (isDragging) {
-      const boundingBox = createBoundingBoxByMouse()
-      g.rect(
-        boundingBox.position.x,
-        boundingBox.position.y,
-        boundingBox.size.x,
-        boundingBox.size.y,
+      const vectors = diviseVector2D(
+        startPosition,
+        currentPosition,
+        config.pixiJs2dItemSize,
       )
-      g.fill(0x650a5a)
-      g.stroke({ width: 2, color: 0xfeeb77 })
+      vectors.forEach((v) => {
+        g.rect(v.x, v.y, config.pixiJs2dItemSize, config.pixiJs2dItemSize)
+        g.stroke({ width: 2, color: 0xfeeb77 })
+      })
     }
   }
 
