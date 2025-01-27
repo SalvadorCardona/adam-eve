@@ -1,6 +1,6 @@
 import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { has2dCollision } from "@/src/utils/3Dmath/has2dCollision"
+import { has2dCollision } from "@/src/utils/math/has2dCollision"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
 import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"

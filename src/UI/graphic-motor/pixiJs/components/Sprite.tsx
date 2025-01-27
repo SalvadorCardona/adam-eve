@@ -6,7 +6,7 @@ import {
   TilingSprite,
 } from "pixi.js"
 import React, { useEffect, useMemo, useRef } from "react"
-import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector2Interface } from "@/src/utils/math/Vector"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import {
   usePixiAnimation,

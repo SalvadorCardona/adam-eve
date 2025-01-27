@@ -4,10 +4,7 @@ import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
 import GameInterface from "@/src/game/game/GameInterface"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
-import {
-  bounding2DSize,
-  boundingBox2DObbToAabb,
-} from "@/src/utils/3Dmath/boudingBox"
+import { bounding2DSize, boundingBox2DObbToAabb } from "@/src/utils/math/boudingBox"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 import { updateGame } from "@/src/game/game/updateGame"
 

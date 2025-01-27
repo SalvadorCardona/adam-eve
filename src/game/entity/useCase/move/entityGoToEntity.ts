@@ -1,7 +1,7 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
+import { Vector3Interface } from "@/src/utils/math/Vector"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 

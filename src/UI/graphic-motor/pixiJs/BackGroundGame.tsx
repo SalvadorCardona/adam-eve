@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Vector2Interface, vector3ToVector2 } from "@/src/utils/3Dmath/Vector"
+import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/Vector"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"

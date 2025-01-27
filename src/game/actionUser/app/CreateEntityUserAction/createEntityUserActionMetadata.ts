@@ -7,14 +7,11 @@ import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { diviseVector2D } from "@/src/utils/3Dmath/diviseVector"
-import {
-  bounding2DSize,
-  boundingBox2DObbToAabb,
-} from "@/src/utils/3Dmath/boudingBox"
+import { diviseVector2D } from "@/src/utils/math/diviseVector"
+import { bounding2DSize, boundingBox2DObbToAabb } from "@/src/utils/math/boudingBox"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
-import { vector2ToVector3 } from "@/src/utils/3Dmath/Vector"
+import { vector2ToVector3 } from "@/src/utils/math/Vector"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {

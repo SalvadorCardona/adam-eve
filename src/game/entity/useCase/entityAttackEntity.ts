@@ -1,6 +1,6 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
+import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import GameInterface from "@/src/game/game/GameInterface"

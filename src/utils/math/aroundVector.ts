@@ -1,4 +1,4 @@
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/math/Vector"
 
 export function aroundVector(
   vector: Vector3Interface,

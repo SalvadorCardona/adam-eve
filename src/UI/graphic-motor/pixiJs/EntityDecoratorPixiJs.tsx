@@ -14,7 +14,7 @@ import {
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector2Interface } from "@/src/utils/math/Vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 
 export interface EntityDecoratorResolverPropsInterface {

@@ -9,13 +9,13 @@ import {
   Vector2Interface,
   Vector3Interface,
   vector3ToVector2,
-} from "@/src/utils/3Dmath/Vector"
+} from "@/src/utils/math/Vector"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
-import { distanceBetweenVector2 } from "@/src/utils/3Dmath/distanceBetweenVector"
-import { has2dCollisionInZone } from "@/src/utils/3Dmath/has2dCollision"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
+import { has2dCollisionInZone } from "@/src/utils/math/has2dCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"

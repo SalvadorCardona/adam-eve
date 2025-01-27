@@ -1,5 +1,5 @@
-import { Vector2Interface } from "@/src/utils/3Dmath/Vector"
-import { BoundingBox2DInterface } from "@/src/utils/3Dmath/boudingBox"
+import { Vector2Interface } from "@/src/utils/math/Vector"
+import { BoundingBox2DInterface } from "@/src/utils/math/boudingBox"
 
 export const has2dCollision = (
   boundingSource: BoundingBox2DInterface,

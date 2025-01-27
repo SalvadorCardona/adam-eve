@@ -34,7 +34,7 @@ import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import React, { useMemo } from "react"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "../../../EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/math/Vector"
 
 const grassNormal = [
   grass1,

@@ -1,7 +1,7 @@
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
-import { findClosest } from "@/src/utils/3Dmath/findClosest"
+import { findClosest } from "@/src/utils/math/findClosest"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import EntityInterface from "@/src/game/entity/EntityInterface"

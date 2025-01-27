@@ -1,4 +1,4 @@
-import { Vector2Interface, Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector2Interface, Vector3Interface } from "@/src/utils/math/Vector"
 
 export function distanceBetweenVector(
   v1: Vector3Interface,

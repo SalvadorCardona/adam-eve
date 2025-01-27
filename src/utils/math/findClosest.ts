@@ -1,5 +1,5 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { distanceBetweenVector } from "@/src/utils/3Dmath/distanceBetweenVector"
+import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
 
 export const findClosest = (
   entity: EntityInterface,

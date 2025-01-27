@@ -13,12 +13,12 @@ import {
   createVector2,
   Vector2Interface,
   Vector3Interface,
-} from "@/src/utils/3Dmath/Vector"
+} from "@/src/utils/math/Vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import {
   BoundingBox2DInterface,
   createBounding2D,
-} from "@/src/utils/3Dmath/boudingBox"
+} from "@/src/utils/math/boudingBox"
 import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
 

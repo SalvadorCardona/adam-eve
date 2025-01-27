@@ -2,10 +2,10 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
   bounding3ToBounding2,
   BoundingBox2DInterface,
-} from "@/src/utils/3Dmath/boudingBox"
+} from "@/src/utils/math/boudingBox"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/math/Vector"
 
 export function entityToBoundingBox(
   entity: EntityInterface,

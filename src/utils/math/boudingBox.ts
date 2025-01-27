@@ -4,7 +4,7 @@ import {
   vector2ToVector3,
   Vector3Interface,
   vector3ToVector2,
-} from "@/src/utils/3Dmath/Vector"
+} from "@/src/utils/math/Vector"
 
 export interface BoundingBox3DInterface {
   size: Vector3Interface

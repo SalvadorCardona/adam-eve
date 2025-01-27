@@ -5,7 +5,7 @@ import EntityInterface, {
 import { appLdType } from "@/src/AppLdType"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/3Dmath/Vector"
+import { Vector3Interface } from "@/src/utils/math/Vector"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { entityQuery } from "../useCase/query/entityQuery"
 
