@@ -1,14 +1,14 @@
-import { Vector3Interface } from "@/src/utils/math/Vector"
+import {
+  Vector2Interface,
+  Vector3Interface,
+  vectorTransformer,
+} from "@/src/utils/math/Vector"
 
-export function around(
-  vector: Vector3Interface,
-  roundToMultiple: number = 0,
-): Vector3Interface {
-  return {
-    z: roundDownToBase(vector.z, roundToMultiple),
-    y: roundDownToBase(vector.y, roundToMultiple),
-    x: roundDownToBase(vector.x, roundToMultiple),
-  }
+export function roundVectorToDown<T extends Vector2Interface | Vector3Interface>(
+  vector: T,
+  roundToMultiple: number = 1,
+): T {
+  return vectorTransformer<T>(vector, (e) => roundDownToBase(e, roundToMultiple))
 }
 
 //

@@ -35,7 +35,6 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
 
         const result = entityGoToEntity({ entity, target: newTreeEntity })
         if (entityCanBeAttackEntity(entity, newTreeEntity)) {
-          console.log("jattaque")
           newTreeEntity.life -= 10
           entity.state = EntityState.cut_the_tree
         }

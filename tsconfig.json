@@ -34,7 +34,4 @@
     "./packages"
   ],
 
-  "files": [
-    "./vitest.setup.ts"
-  ]
 }

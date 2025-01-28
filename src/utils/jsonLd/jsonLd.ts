@@ -96,11 +96,13 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   item: T,
   action: ContainerAction = ContainerAction.update,
 ): void {
-  container[item["@id"]] = updateItem(item, action)
+  container[item["@id"]] = item
 
   if (action === ContainerAction.remove) {
     deleteContainerKey(container, item["@id"])
   }
+
+  updateItem(item, action)
 }
 
 export function updateItem(

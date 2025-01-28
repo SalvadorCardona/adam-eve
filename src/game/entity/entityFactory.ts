@@ -9,7 +9,7 @@ import EntityInterface, {
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { around } from "@/src/utils/math/around"
+import { roundVectorToDown } from "@/src/utils/math/roundVectorToDown"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import GameInterface from "@/src/game/game/GameInterface"
@@ -44,7 +44,7 @@ export function entityFactory<
 
   const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
 
-  entity.position = around(entity.position, 50)
+  entity.position = roundVectorToDown(entity.position, 50)
 
   if (isBuildingEntity(entity)) {
     entity.state = metaData?.propriety?.ressourceForConstruction
@@ -58,7 +58,7 @@ export function entityFactory<
     entity.inventory = {}
     entity.actions = {}
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
-    entity.position.y += 1
+    entity.position.y = 1
   }
 
   if (metaData?.propriety?.defaultActions) {
@@ -76,7 +76,7 @@ export function entityFactory<
   }
 
   if (isGroundEntity(entity)) {
-    entity.position.y -= 0.5
+    entity.position.y = 0
   }
 
   return entity

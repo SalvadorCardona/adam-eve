@@ -52,7 +52,6 @@ export const BackGroundGame = ({ size }: { size: Vector2Interface }) => {
         // item.tilePosition.y += moveSize
         item.tileScale.x = scaleFactor
         item.tileScale.y = scaleFactor
-
         // item.position.y += scaleFactor
         // item.position.x += scaleFactor
       }}

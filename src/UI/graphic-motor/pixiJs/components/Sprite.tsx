@@ -7,7 +7,6 @@ import {
 } from "pixi.js"
 import React, { useEffect, useMemo, useRef } from "react"
 import { Vector2Interface } from "@/src/utils/math/Vector"
-import { ContainerChild } from "pixi.js/lib/scene/container/Container"
 import {
   usePixiAnimation,
   usePixiInstance,
@@ -25,7 +24,7 @@ interface SpritePropsInterface {
   rotation?: number
 }
 
-export type SpriteAnimation = (e: Ticker, item: ContainerChild) => void
+export type SpriteAnimation = (e: Ticker, item: TilingSprite | BaseSprite) => void
 
 export const Sprite = ({
   options,

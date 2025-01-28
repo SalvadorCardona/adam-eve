@@ -19,11 +19,10 @@ export function entityGoToEntity({
 }: EntityGoPositionParams): EntityGoPositionOutput {
   const targetPosition: Vector3Interface = target.position
   const entityPosition: Vector3Interface = entity.position
-  const result = vectorMoveToVector(targetPosition, entityPosition)
+  const result = vectorMoveToVector(entityPosition, targetPosition, 1.5)
 
   entity.position = result.position
   entity.rotation = result.rotation
-
   return {
     distance: result.distance,
     isFinish: entityHasCollision(entity, target),

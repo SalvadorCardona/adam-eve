@@ -1,6 +1,6 @@
 import { Vector3Interface } from "@/src/utils/math/Vector"
 import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
-import { aroundDecimal } from "@/src/utils/math/around"
+import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
 
 export interface VectorMoveToVectorReturnInterface {
   position: Vector3Interface
@@ -35,9 +35,9 @@ export function vectorMoveToVector(
   }
 
   const newPosition = {
-    x: aroundDecimal((direction.x / length) * distance),
-    y: aroundDecimal((direction.y / length) * distance),
-    z: aroundDecimal((direction.z / length) * distance),
+    x: vectorSource.x + (direction.x / length) * distance,
+    y: vectorSource.y + (direction.y / length) * distance,
+    z: vectorSource.z + (direction.z / length) * distance,
   }
 
   return {

@@ -3,7 +3,7 @@ import {
   vectorMoveToVector,
   VectorMoveToVectorReturnInterface,
 } from "@/src/utils/math/VectorMoveToVector"
-import { aroundDecimal } from "@/src/utils/math/around"
+import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
 
 describe("Test Vector Move To Vector", () => {
   it("Little Move", () => {
@@ -41,7 +41,11 @@ describe("Test Vector Move To Vector", () => {
     const target = createVector3(1, 1, 1)
 
     const result = vectorMoveToVector(source, target, 0.5)
-    const expected = createVector3(-0.35, -0.35, -0.35)
+    const expected = createVector3(
+      1.6464466094067263,
+      1.6464466094067263,
+      1.6464466094067263,
+    )
 
     expect(result.position).toStrictEqual(expected)
   })
