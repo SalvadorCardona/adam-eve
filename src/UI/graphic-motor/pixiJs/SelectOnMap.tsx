@@ -3,7 +3,7 @@ import { createVector2, Vector2Interface } from "@/src/utils/math/Vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container, FederatedPointerEvent, Graphics as BaseGraphic } from "pixi.js"
-import { BoundingBox2DInterface } from "@/src/utils/math/boudingBox"
+import { BoundingBox2DOBBInterface } from "@/src/utils/math/boudingBox"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { useDebounce } from "react-use"
@@ -41,7 +41,7 @@ export const SelectOnMap = () => {
     [isDragging],
   )
 
-  const createBoundingBoxByMouse = (): BoundingBox2DInterface => {
+  const createBoundingBoxByMouse = (): BoundingBox2DOBBInterface => {
     const width = Math.abs(currentPosition.x - startPosition.x)
     const height = Math.abs(currentPosition.y - startPosition.y)
 

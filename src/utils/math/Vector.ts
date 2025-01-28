@@ -81,3 +81,13 @@ export function vectorTransformer<T extends Vector2Interface | Vector3Interface>
 
   return result as T
 }
+
+export const vectorSize = (
+  min: Vector2Interface,
+  max: Vector2Interface,
+): Vector2Interface => {
+  const width = Math.abs(max.x - min.x)
+  const height = Math.abs(max.y - min.y)
+
+  return createVector2(width, height)
+}
