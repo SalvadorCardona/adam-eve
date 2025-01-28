@@ -28,3 +28,7 @@ export function roundDownToBase(number: number, base: number) {
 export function roundUpToBase(number: number, base: number) {
   return Math.ceil(number / base) * base
 }
+
+export function aroundDecimal(source: number, afterDecimal: number = 2): number {
+  return parseFloat(source.toFixed(afterDecimal))
+}

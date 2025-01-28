@@ -7,7 +7,7 @@ import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Vector3Interface } from "@/src/utils/math/Vector"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
-import { entityQuery } from "../useCase/query/entityQuery"
+import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = entityQuery<GroundEntityInterface>(game, {

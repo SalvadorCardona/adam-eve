@@ -6,7 +6,7 @@ import { addToInventory } from "@/src/game/inventory/addToInventory"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 

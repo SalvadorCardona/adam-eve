@@ -27,17 +27,17 @@ export const EntityDecoratorPixiJs = ({
   color,
 }: EntityDecoratorResolverPropsInterface) => {
   const [, setVersion] = useState(entity["@version"])
-
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
   const game = useGameContext().game
-
+  const [isSelected, setIsSelected] = useState<boolean>(false)
   useGamePubSub(entity["@id"], () => {
     setVersion(entity["@version"])
   })
 
-  const isSelected = useMemo(() => {
-    return game.userControl.entitiesSelected.includes(entity["@id"])
-  }, [game.userControl.entitiesSelected])
+  useGamePubSub(game.userControl["@type"], () => {
+    const newIsSelected = game.userControl.entitiesSelected.includes(entity["@id"])
+    setIsSelected(newIsSelected)
+  })
 
   const EntityComponent = useMemo(() => {
     if (entityMetaData.component) return entityMetaData.component

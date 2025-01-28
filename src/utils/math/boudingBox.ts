@@ -1,7 +1,5 @@
 import {
-  isVector3,
   Vector2Interface,
-  vector2ToVector3,
   Vector3Interface,
   vector3ToVector2,
 } from "@/src/utils/math/Vector"
@@ -14,16 +12,6 @@ export interface BoundingBox3DInterface {
 export interface BoundingBox2DInterface {
   size: Vector2Interface
   position: Vector2Interface
-}
-
-export function createBounding3D(
-  params?: Partial<BoundingBox3DInterface>,
-): BoundingBox3DInterface {
-  return {
-    position: { x: 0, y: 0, z: 0 },
-    size: { x: 0, y: 0, z: 0 },
-    ...params,
-  }
 }
 
 export function createBounding2D(
@@ -43,30 +31,6 @@ export function bounding3ToBounding2(
     size: vector3ToVector2(boundingBox.size),
     position: vector3ToVector2(boundingBox.position),
   }
-}
-
-export function bounding2ToBounding3(
-  boundingBox: BoundingBox2DInterface,
-): BoundingBox3DInterface {
-  return {
-    size: vector2ToVector3(boundingBox.size),
-    position: vector2ToVector3(boundingBox.position),
-  }
-}
-
-export function bounding2DSize(
-  bounding: BoundingBox2DInterface | BoundingBox3DInterface,
-): number {
-  const vector: Vector2Interface = isVector3(bounding.size)
-    ? vector3ToVector2(bounding.size)
-    : bounding.size
-
-  return Math.sqrt(vector.x * vector.x + vector.y * vector.y)
-}
-
-interface BoundingBox3DOBB {
-  min: Vector3Interface
-  max: Vector3Interface
 }
 
 interface BoundingBox2DOBB {
@@ -94,25 +58,27 @@ export function boundingBox2DObbToAabb(
   }
 }
 
-export function boundingBoxObb3DToAabb(
-  boundingBox: BoundingBox3DInterface,
-): BoundingBox3DOBB {
-  const half: Vector3Interface = {
-    x: Math.abs(boundingBox.size.x / 2),
-    y: Math.abs(boundingBox.size.y / 2),
-    z: Math.abs(boundingBox.size.z / 2),
+export function createBoundingBoxFromVectors(
+  start: Vector2Interface,
+  end: Vector2Interface,
+): BoundingBox2DInterface {
+  const minX = Math.min(start.x, end.x)
+  const minY = Math.min(start.y, end.y)
+  const maxX = Math.max(start.x, end.x)
+  const maxY = Math.max(start.y, end.y)
+
+  const size: Vector2Interface = {
+    x: maxX - minX,
+    y: maxY - minY,
+  }
+
+  const position: Vector2Interface = {
+    x: minX + size.x / 2,
+    y: minY + size.y / 2,
   }
 
   return {
-    min: {
-      x: boundingBox.position.x - half.x,
-      y: boundingBox.position.y - half.y,
-      z: boundingBox.position.z - half.z,
-    },
-    max: {
-      x: boundingBox.position.x + half.x,
-      y: boundingBox.position.y + half.y,
-      z: boundingBox.position.z + half.z,
-    },
+    size,
+    position,
   }
 }

@@ -2,7 +2,7 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
 import {
   entityAttackEntity,

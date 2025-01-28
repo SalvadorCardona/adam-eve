@@ -7,6 +7,7 @@ import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 
 export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {
   asset: {
@@ -24,7 +25,7 @@ export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {
 
     if (game.userControl.entitiesSelected.length > 0) {
       game.userControl.entitiesSelected.forEach((entityUri) => {
-        const entity = game.entities[entityUri]
+        const entity = entityQueryFindOne(game, { "@id": entityUri })
         if (entity) {
           removeEntityToGame(game, entity)
         }

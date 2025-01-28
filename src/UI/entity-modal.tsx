@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Progress } from "@/components/ui/progress"
-import { Activity, Box, Leaf, Zap } from "lucide-react"
+import { Box, Leaf, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
@@ -8,7 +8,7 @@ import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { appLdType } from "@/src/AppLdType"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 
 interface EntityModalProps {}
 
@@ -83,23 +83,23 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             <div className="font-semibold">Etat : {entity.state}</div>
           </div>
 
-          {Object.hasOwn(entity, "inventory") && (
-            <div className="flex items-center gap-4">
-              <Box className="h-5 w-5 text-purple-600" />
-              <div className="font-semibold">
-                Inventaire : {Object.values(entity.inventory).length} objets
-              </div>
-            </div>
-          )}
+          {/*{Object.hasOwn(entity, "inventory") && (*/}
+          {/*  <div className="flex items-center gap-4">*/}
+          {/*    <Box className="h-5 w-5 text-purple-600" />*/}
+          {/*    <div className="font-semibold">*/}
+          {/*      Inventaire : {Object.values(entity.inventory).length} objets*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*)}*/}
 
-          {Object.hasOwn(entity, "actions") && (
-            <div className="flex items-center gap-4">
-              <Activity className="h-5 w-5 text-red-600" />
-              <div className="font-semibold">
-                Actions : {Object.values(entity.actions).length} disponibles
-              </div>
-            </div>
-          )}
+          {/*{Object.hasOwn(entity, "actions") && (*/}
+          {/*  <div className="flex items-center gap-4">*/}
+          {/*    <Activity className="h-5 w-5 text-red-600" />*/}
+          {/*    <div className="font-semibold">*/}
+          {/*      Actions : {Object.values(entity.actions).length} disponibles*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*)}*/}
 
           {/*<div className="font-semibold">*/}
           {/*  Position :*/}
@@ -123,15 +123,15 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             </div>
           )}
 
-          {metaData?.propriety?.work && (
-            <div className="font-semibold">
-              Travailleurs :
-              <span className="font-normal">
-                {" "}
-                {entity.workers.length} / {metaData.propriety.work?.numberOfWorker}
-              </span>
-            </div>
-          )}
+          {/*{metaData?.propriety?.work && (*/}
+          {/*  <div className="font-semibold">*/}
+          {/*    Travailleurs :*/}
+          {/*    <span className="font-normal">*/}
+          {/*      {" "}*/}
+          {/*      {entity.workers.length} / {metaData.propriety.work?.numberOfWorker}*/}
+          {/*    </span>*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
       </CardContent>
     </Card>

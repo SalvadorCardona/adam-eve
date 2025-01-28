@@ -9,7 +9,7 @@ import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 
 export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TowerAttack"),

@@ -1,7 +1,7 @@
 import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { has2dCollision } from "@/src/utils/math/has2dCollision"
-import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
 import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
 
@@ -19,9 +19,9 @@ export function hasCollisionInGame(
   game: GameInterface,
   entity: EntityInterface,
 ): false | EntityInterface {
-  const canBeCollision: EntityInterface[] = Object.values(game.entities).filter(
-    (e) => e && e !== entity,
-  )
+  const canBeCollision: EntityInterface[] = entityQuery(game, {
+    "@idIsNot": entity["@id"],
+  })
 
   for (const otherEntity of canBeCollision) {
     if (!isGroundEntity(otherEntity) && entityHasCollision(entity, otherEntity)) {

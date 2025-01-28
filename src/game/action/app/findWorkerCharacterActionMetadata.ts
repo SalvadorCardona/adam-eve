@@ -8,7 +8,10 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
-import { entityQuery } from "@/src/game/entity/useCase/query/entityQuery"
+import {
+  entityQuery,
+  entityQueryFindOne,
+} from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { removeByIndex } from "@/src/utils/array/array"
@@ -24,7 +27,7 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
 
     buildings.forEach((building) => {
       building.workers.forEach((worker, e) => {
-        if (!game.entities[worker]) {
+        if (entityQueryFindOne(game, { "@id": worker })) {
           building.workers = removeByIndex(building.workers, e)
         }
       })

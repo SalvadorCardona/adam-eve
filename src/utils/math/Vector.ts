@@ -10,6 +10,18 @@ export function createVector2(x: number = 0, y: number = 0): Vector2Interface {
   }
 }
 
+export function createVector3(
+  x: number = 0,
+  y: number = 0,
+  z: number,
+): Vector3Interface {
+  return {
+    x,
+    y,
+    z,
+  }
+}
+
 export interface Vector3Interface extends Vector2Interface {
   z: number
 }

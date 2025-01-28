@@ -5,21 +5,17 @@ import {
   JsonLdIri,
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
-import {
-  Vector2Interface,
-  Vector3Interface,
-  vector3ToVector2,
-} from "@/src/utils/math/Vector"
+import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/Vector"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
-import { has2dCollisionInZone } from "@/src/utils/math/has2dCollision"
+import { has2dCollision } from "@/src/utils/math/has2dCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
+import { createBoundingBoxFromVectors } from "@/src/utils/math/boudingBox"
 
 interface CircleSearch {
   center: Vector2Interface
@@ -33,10 +29,11 @@ interface SquareSearch {
 
 type Order = "ASC" | "DESC"
 
-interface EntityQueryParams {
+export interface EntityQueryParams {
   "@type"?: JsonLdType | JsonLdType[]
   "@typeIn"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
+  "@idIsNot"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
   squareSearch?: SquareSearch
   order?: {
@@ -74,6 +71,7 @@ export function entityQuery<T = EntityInterface>(
     state,
     order,
     faction,
+    "@idIsNot": idIsNot,
   } = query
 
   if (id && !Array.isArray(id)) {
@@ -99,11 +97,16 @@ export function entityQuery<T = EntityInterface>(
     })
   }
 
+  if (idIsNot) {
+    const idIsNotList = Array.isArray(idIsNot) ? idIsNot : [idIsNot]
+    entities = entities.filter((entity) => {
+      return !idIsNotList.includes(entity["@id"])
+    })
+  }
+
   if (circleSearch) {
     const { center, radius } = circleSearch
     const center2D = center
-    console.log(center2D)
-    console.log(entities)
     entities = entities.filter((entity) => {
       return (
         distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
@@ -128,16 +131,12 @@ export function entityQuery<T = EntityInterface>(
   }
 
   if (squareSearch) {
-    console.log("ici")
     const start2D = squareSearch.start
     const end2d = squareSearch.end
     entities = entities.filter((entity) => {
-      const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-      return has2dCollisionInZone(
-        vector3ToVector2(entity.position),
-        vector3ToVector2(entityMetaData.propriety.size as Vector3Interface),
-        start2D,
-        end2d,
+      return has2dCollision(
+        entityToBoundingBox(entity),
+        createBoundingBoxFromVectors(start2D, end2d),
       )
     })
   }

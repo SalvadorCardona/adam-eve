@@ -34,8 +34,8 @@ export const appLdType = {
 }
 
 export const appLdTypeEntity = [
-  appLdType.entityGround,
-  appLdType.entityRessource,
-  appLdType.entityBuilding,
   appLdType.entityCharacter,
+  appLdType.entityBuilding,
+  appLdType.entityRessource,
+  appLdType.entityGround,
 ]

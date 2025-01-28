@@ -3,7 +3,7 @@ import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
-import { entityQueryFindOne } from "@/src/game/entity/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 
 export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "ArrowAttack"),

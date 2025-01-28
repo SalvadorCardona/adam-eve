@@ -3,11 +3,12 @@ import { EntityDecoratorPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntityDecor
 import EntityInterface, { isEntity } from "@/src/game/entity/EntityInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 
 export const EntitiesLoopPixiJs = () => {
   const game = useGameContext().game
   const [entities, setEntities] = useState<EntityInterface[]>(
-    Object.values(game.entities),
+    getEntitiesInGame(game),
   )
 
   useGamePubSub("all", (e) => {
@@ -15,7 +16,7 @@ export const EntitiesLoopPixiJs = () => {
       isEntity(e.item as EntityInterface) &&
       (e.action == "create" || e.action == "remove")
     ) {
-      setEntities(Object.values(game.entities))
+      setEntities(getEntitiesInGame(game))
     }
   })
 

@@ -120,6 +120,8 @@ export const SelectOnMap = () => {
         g.rect(v.x, v.y, config.pixiJs2dItemSize, config.pixiJs2dItemSize)
         g.stroke({ width: 2, color: 0xfeeb77 })
       })
+
+      return
     }
   }
 

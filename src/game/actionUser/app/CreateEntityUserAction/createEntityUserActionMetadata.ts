@@ -11,6 +11,7 @@ import { diviseVector2D } from "@/src/utils/math/diviseVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
 import { vector2ToVector3 } from "@/src/utils/math/Vector"
+import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -81,8 +82,8 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
         game.userControl.entitiesSelected = []
       }
 
-      console.log("current entities", Object.values(game.entities).length)
-      console.log("current array", Object.values(game.entities))
+      console.log("current entities", getEntitiesInGame(game).length)
+      console.log("current array", getEntitiesInGame(game))
 
       game.userControl.rotation = 0
     },
