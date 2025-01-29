@@ -11,11 +11,11 @@ import EntityInterface, {
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
-import { has2dCollision } from "@/src/utils/math/has2dCollision"
+import { boundingCollision } from "@/src/utils/math/boundingCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
-import { createBoundingBoxFromVectors } from "@/src/utils/math/boudingBox"
+import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
 
 interface CircleSearch {
   center: Vector2Interface
@@ -134,9 +134,9 @@ export function entityQuery<T = EntityInterface>(
     const start2D = squareSearch.start
     const end2d = squareSearch.end
     entities = entities.filter((entity) => {
-      return has2dCollision(
+      return boundingCollision(
         entityToBoundingBox(entity),
-        createBoundingBoxFromVectors(start2D, end2d),
+        createBoundingFromZone(start2D, end2d),
       )
     })
   }

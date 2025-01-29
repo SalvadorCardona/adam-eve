@@ -1,9 +1,9 @@
 import { Vector2Interface } from "@/src/utils/math/Vector"
-import { BoundingBox2DOBBInterface } from "@/src/utils/math/boudingBox"
+import { BoundingOBBInterface } from "@/src/utils/math/boudingBox"
 
-export const has2dCollision = (
-  boundingSource: BoundingBox2DOBBInterface,
-  boundingTarget: BoundingBox2DOBBInterface,
+export const boundingCollision = (
+  boundingSource: BoundingOBBInterface,
+  boundingTarget: BoundingOBBInterface,
 ) => {
   return (
     Math.abs(boundingSource.position.x - boundingTarget.position.x) <

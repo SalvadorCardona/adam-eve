@@ -1,6 +1,6 @@
 import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { has2dCollision } from "@/src/utils/math/has2dCollision"
+import { boundingCollision } from "@/src/utils/math/boundingCollision"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
 import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
@@ -9,7 +9,7 @@ export function entityHasCollision(
   entitySource: EntityInterface,
   entityTarget: EntityInterface,
 ): boolean {
-  return has2dCollision(
+  return boundingCollision(
     entityToBoundingBox(entitySource),
     entityToBoundingBox(entityTarget),
   )
