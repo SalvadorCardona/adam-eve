@@ -1,6 +1,3 @@
-/// <reference types="vitest" />
-/// <reference types="vitest/config" />
-/// <reference types="vite/client" />
 import path from "path"
 import { defineConfig } from "vite"
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite"
@@ -14,6 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./"),
     },
   },
+  // @ts-ignore used for run test well
   test: {
     globals: true,
     // setupFiles: "./vitest.setup.ts",

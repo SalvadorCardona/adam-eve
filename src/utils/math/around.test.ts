@@ -1,5 +1,6 @@
 import {
   aroundDecimal,
+  round,
   roundDownToBase,
   roundUpToBase,
   roundVectorToDown,
@@ -35,5 +36,12 @@ describe("Test Around", () => {
     expect(aroundDecimal(1.55555)).toBe(1.56)
     expect(aroundDecimal(9.55555)).toBe(9.56)
     expect(aroundDecimal(10.777998, 3)).toBe(10.778)
+  })
+
+  it("Around Number", () => {
+    expect(round(1.55555)).toBe(2)
+    expect(round(1.4)).toBe(1)
+    expect(round(55, 50)).toBe(50)
+    expect(round(76, 50)).toBe(100)
   })
 })

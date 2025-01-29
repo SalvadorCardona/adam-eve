@@ -1,3 +1,6 @@
+import { createMatrix, getMatrix, Matrix } from "@/src/utils/math/matrix"
+import { Vector2Interface } from "@/src/utils/math/Vector"
+
 type CurrentNode = {
   x: number
   y: number
@@ -7,26 +10,20 @@ type CurrentNode = {
   parent?: CurrentNode // Parent pour reconstruire le chemin
 }
 
+const heuristic = (x1: number, y1: number, x2: number, y2: number) =>
+  Math.abs(x1 - x2) + Math.abs(y1 - y2)
+
 export const findPathAStar = (
-  grid: number[][], // La grille (0 = passable, 1 = obstacle)
-  start: { x: number; y: number },
-  end: { x: number; y: number },
+  grid: Matrix, // La grille (0 = passable, 1 = obstacle)
+  start: Vector2Interface,
+  end: Vector2Interface,
 ): { x: number; y: number }[] | null => {
   const rows = grid.length
   const cols = grid[0].length
-
-  // Vérifie si une position est dans la grille et passable
-  const isValid = (x: number, y: number) =>
-    x >= 0 && y >= 0 && x < cols && y < rows && grid[y][x] === 0
-
   // Calcul de la distance de Manhattan (heuristique)
-  const heuristic = (x1: number, y1: number, x2: number, y2: number) =>
-    Math.abs(x1 - x2) + Math.abs(y1 - y2)
 
   const openList: CurrentNode[] = []
-  const closedList: boolean[][] = Array.from({ length: rows }, () =>
-    Array(cols).fill(false),
-  )
+  const closedList = createMatrix(rows, cols)
 
   // Ajouter le point de départ à la liste ouverte
   openList.push({
@@ -34,7 +31,7 @@ export const findPathAStar = (
     y: start.y,
     g: 0,
     h: heuristic(start.x, start.y, end.x, end.y),
-    f: 0 + heuristic(start.x, start.y, end.x, end.y),
+    f: heuristic(start.x, start.y, end.x, end.y),
   })
 
   // Directions de déplacement (haut, bas, gauche, droite)
@@ -54,7 +51,7 @@ export const findPathAStar = (
 
     // Si on atteint le point final, reconstruire le chemin
     if (current.x === end.x && current.y === end.y) {
-      const path: { x: number; y: number }[] = []
+      const path: Vector2Interface[] = []
       let node: CurrentNode | undefined = current
       while (node) {
         path.unshift({ x: node.x, y: node.y })
@@ -64,14 +61,17 @@ export const findPathAStar = (
     }
 
     // Marquer le noeud actuel comme visité
-    closedList[current.y][current.x] = true
+    closedList[current.y][current.x] = 1
 
     // Vérifier les voisins
     for (const dir of directions) {
       const neighborX = current.x + dir.x
       const neighborY = current.y + dir.y
 
-      if (!isValid(neighborX, neighborY) || closedList[neighborY][neighborX]) {
+      if (
+        !getMatrix(grid, neighborX, neighborY) ||
+        getMatrix(closedList, neighborX, neighborY)
+      ) {
         continue // Ignorer les cases non valides ou déjà visitées
       }
 

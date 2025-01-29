@@ -1,48 +1,76 @@
-import {
-  BoundingBoxAABBInterface,
-  createBounding,
-} from "@/src/utils/math/boudingBox"
-import { vectorSize } from "@/src/utils/math/Vector"
+import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
 
-export const createMatrix = (width: number, height: number) =>
-  Array.from({ length: height }, () => Array(width).fill(undefined))
+export type MatrixItem = string | number
+export type Matrix = (string | 0 | 1)[][]
 
-const getMatrixBounds = (
-  bounds: BoundingBoxAABBInterface[],
-): BoundingBoxAABBInterface => {
+export const createMatrix = (width: number, height: number): Matrix =>
+  Array.from({ length: height }, () => Array(width).fill(0))
+
+export const getMatrix = (
+  matrixSource: Matrix,
+  x: number,
+  y: number,
+): MatrixItem => {
+  return matrixSource[y]?.[x] ?? 0
+}
+
+export function subtractMatrix(matrixSource: Matrix, matrixTarget: Matrix): Matrix {
+  return matrixSource.map((row, y) =>
+    row.map((cell, x) => {
+      const targetValue = getMatrix(matrixTarget, x, y)
+      return targetValue ? 0 : cell
+    }),
+  )
+}
+
+export const createMatrixBounds = (
+  bounds: BoundingInterface[],
+): BoundingInterface => {
   let minX = Infinity,
     maxX = -Infinity
-  let minZ = Infinity,
-    maxZ = -Infinity
+  let minY = Infinity,
+    maxY = -Infinity
 
   for (const bound of bounds) {
     minX = Math.min(minX, bound.min.x)
     maxX = Math.max(maxX, bound.max.x)
-    minZ = Math.min(minZ, bound.min.y)
-    maxZ = Math.max(maxZ, bound.max.y)
+    minY = Math.min(minY, bound.min.y)
+    maxY = Math.max(maxY, bound.max.y)
   }
 
-  return createBounding(minX, maxX, minZ, maxZ)
+  return createBoundingByABB({
+    min: { x: minX, y: minY },
+    max: { x: maxX, y: maxY },
+  })
 }
 
-const fillMatrix = (
-  bounds: BoundingBoxAABBInterface[],
-  bound: BoundingBoxAABBInterface,
-  matrix: boolean[][],
-) => {
-  for (const currentBound of bounds) {
-    const startX = currentBound.min.x - bound.min.x
-    const startY = currentBound.min.y - bound.min.y
-    const size = vectorSize(currentBound.min, currentBound.max)
-    for (let y = 0; y < size.y; y++) {
-      for (let x = 0; x < size.x; x++) {
-        const matrixX = startX + x
-        const matrixZ = startY + y
+const fillMatrix = (boundItems: BoundingInterface[], matrix: Matrix) => {
+  for (const boundItem of boundItems) {
+    const startX = boundItem.min.x
+    const startY = boundItem.min.y
 
-        matrix[matrixZ][matrixX] =
-          matrixZ < matrix.length && matrixX < matrix[0].length
+    for (let y = 0; y < boundItem.size.y; y++) {
+      for (let x = 0; x < boundItem.size.x; x++) {
+        const matrixX = startX + x
+        const matrixY = startY + y
+
+        if (
+          matrixY >= 0 &&
+          matrixY < matrix.length &&
+          matrixX >= 0 &&
+          matrixX < (matrix[0]?.length ?? 0)
+        ) {
+          matrix[matrixY][matrixX] = boundItem?.id ?? 1
+        }
       }
     }
   }
+
   return matrix
+}
+
+export const generateMatrix = (boundItems: BoundingInterface[]) => {
+  const matrixBound = createMatrixBounds(boundItems)
+  const matrix = createMatrix(matrixBound.size.x, matrixBound.size.y)
+  return fillMatrix(boundItems, matrix)
 }
