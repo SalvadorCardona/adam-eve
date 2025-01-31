@@ -41,14 +41,6 @@ export function vector2ToVector3(vector: Vector2Interface): Vector3Interface {
   }
 }
 
-export function vector3ToArray(vector: Vector3Interface): [number, number, number] {
-  return [vector.x, vector.y, vector?.z ?? 0]
-}
-
-export function arrayToVector3(array: [number, number, number]): Vector3Interface {
-  return { x: array[0], y: array[1], z: array[2] }
-}
-
 export function areVectorsEqual(
   v1: Vector3Interface,
   v2: Vector3Interface,
@@ -64,8 +56,8 @@ export function isVector3(
 
 export function isVector2(
   vector: Vector2Interface | Vector3Interface,
-): vector is Vector3Interface {
-  return !Object.hasOwn(vector, "z")
+): vector is Vector2Interface {
+  return !isVector3(vector)
 }
 
 export function vectorTransformer<T extends Vector2Interface | Vector3Interface>(
@@ -91,3 +83,6 @@ export const vectorSize = (
 
   return createVector2(width, height)
 }
+
+export const heuristic = (vector1: Vector2Interface, vector2: Vector2Interface) =>
+  Math.abs(vector1.x - vector2.x) + Math.abs(vector1.y - vector2.y)

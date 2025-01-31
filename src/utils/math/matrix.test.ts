@@ -7,7 +7,7 @@ import {
   subtractMatrix,
 } from "@/src/utils/math/matrix"
 import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
-import { createVector2 } from "@/src/utils/math/Vector"
+import { createVector2 } from "@/src/utils/math/vector"
 import { findPathAStar } from "@/src/utils/math/findPath"
 
 describe("Test matrix", () => {
@@ -70,8 +70,8 @@ describe("Test matrix", () => {
       [0, 0, 0, 0, 0, 0, 0],
     ]
 
-    expect(getMatrix(matrix, 0, 0)).equal("A")
-    expect(getMatrix(matrix, 1000, 1000)).equal(0)
+    expect(getMatrix(matrix, createVector2(0, 0))).equal("A")
+    expect(getMatrix(matrix, createVector2(1000, 1000))).equal(0)
   })
 
   it("Context soustraction", () => {
@@ -116,6 +116,6 @@ describe("Test matrix", () => {
     const matrixFilled = generateMatrix([boundItem3, boundItem1, boundItem2])
     const path = findPathAStar(matrixFilled, boundItem1.min, boundItem2.min)
 
-    expect(path?.length).toStrictEqual(23)
+    expect(path?.length).toStrictEqual(12)
   })
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { createVector2, Vector2Interface } from "@/src/utils/math/Vector"
+import { createVector2, Vector2Interface } from "@/src/utils/math/vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container, FederatedPointerEvent, Graphics as BaseGraphic } from "pixi.js"

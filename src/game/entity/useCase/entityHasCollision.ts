@@ -3,7 +3,7 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { boundingCollision } from "@/src/utils/math/boundingCollision"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { appLdType } from "@/src/AppLdType"
-import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
+import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 
 export function entityHasCollision(
   entitySource: EntityInterface,

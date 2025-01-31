@@ -2,7 +2,7 @@ import { ContainerOptions } from "pixi.js/lib/scene/container/Container"
 import { Container as BaseContainer } from "pixi.js"
 import React, { useEffect, useRef } from "react"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
-import { Vector2Interface } from "@/src/utils/math/Vector"
+import { Vector2Interface } from "@/src/utils/math/vector"
 import { usePixiInstance } from "@/src/UI/graphic-motor/pixiJs/hook/useTexture"
 
 interface ContainerPropsInterface {}

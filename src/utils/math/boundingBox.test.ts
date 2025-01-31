@@ -3,7 +3,7 @@ import {
   createBoundingByABB,
   createBoundingByOBB,
 } from "@/src/utils/math/boudingBox"
-import { createVector2 } from "@/src/utils/math/Vector"
+import { createVector2 } from "@/src/utils/math/vector"
 
 describe("Test boundingBox", () => {
   it("Context createBoundingByABB", () => {

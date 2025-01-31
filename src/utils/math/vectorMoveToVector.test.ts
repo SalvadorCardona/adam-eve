@@ -1,9 +1,10 @@
-import { createVector3 } from "@/src/utils/math/Vector"
+import { createVector3 } from "@/src/utils/math/vector"
+
+import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
 import {
   vectorMoveToVector,
   VectorMoveToVectorReturnInterface,
-} from "@/src/utils/math/VectorMoveToVector"
-import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
+} from "./vectorMoveToVector"
 
 describe("Test Vector Move To Vector", () => {
   it("Little Move", () => {
@@ -24,7 +25,6 @@ describe("Test Vector Move To Vector", () => {
   it("Test if Equal", () => {
     const source = createVector3(1, 1, 1)
     const target = createVector3(1, 1, 1)
-
     const result = vectorMoveToVector(source, target, 0.5)
     const expected: VectorMoveToVectorReturnInterface = {
       position: createVector3(1, 1, 1),

@@ -3,7 +3,7 @@ import {
   JsonLdIri,
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
-import { Vector3Interface } from "@/src/utils/math/Vector"
+import { Vector3Interface } from "@/src/utils/math/vector"
 import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { appLdType } from "@/src/AppLdType"

@@ -5,7 +5,7 @@ import {
   JsonLdIri,
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
-import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/Vector"
+import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/vector"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,
@@ -14,7 +14,7 @@ import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
 import { boundingCollision } from "@/src/utils/math/boundingCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { entityToBoundingBox } from "@/src/game/entity/entityToBoundingBox"
+import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
 
 interface CircleSearch {

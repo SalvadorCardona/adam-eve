@@ -1,5 +1,11 @@
-import { createMatrix, getMatrix, Matrix } from "@/src/utils/math/matrix"
-import { Vector2Interface } from "@/src/utils/math/Vector"
+import {
+  createMatrix,
+  getMatrix,
+  Matrix,
+  matrixDirection,
+  setMatrix,
+} from "@/src/utils/math/matrix"
+import { createVector2, heuristic, Vector2Interface } from "@/src/utils/math/vector"
 
 type CurrentNode = {
   x: number
@@ -10,8 +16,7 @@ type CurrentNode = {
   parent?: CurrentNode // Parent pour reconstruire le chemin
 }
 
-const heuristic = (x1: number, y1: number, x2: number, y2: number) =>
-  Math.abs(x1 - x2) + Math.abs(y1 - y2)
+const matrixDirections = Object.values(matrixDirection)
 
 export const findPathAStar = (
   grid: Matrix, // La grille (0 = passable, 1 = obstacle)
@@ -20,33 +25,25 @@ export const findPathAStar = (
 ): { x: number; y: number }[] | null => {
   const rows = grid.length
   const cols = grid[0].length
-  // Calcul de la distance de Manhattan (heuristique)
 
   const openList: CurrentNode[] = []
   const closedList = createMatrix(rows, cols)
 
-  // Ajouter le point de départ à la liste ouverte
   openList.push({
     x: start.x,
     y: start.y,
     g: 0,
-    h: heuristic(start.x, start.y, end.x, end.y),
-    f: heuristic(start.x, start.y, end.x, end.y),
+    h: heuristic(start, end),
+    f: heuristic(start, end),
   })
 
   // Directions de déplacement (haut, bas, gauche, droite)
-  const directions = [
-    { x: 0, y: -1 },
-    { x: 0, y: 1 },
-    { x: -1, y: 0 },
-    { x: 1, y: 0 },
-  ]
 
   while (openList.length > 0) {
     // Trier la liste ouverte par le coût total (f)
     openList.sort((a, b) => a.f - b.f)
 
-    // Extraire le noeud avec le plus petit f
+    // Extraire le node avec le plus petit f
     const current = openList.shift()!
 
     // Si on atteint le point final, reconstruire le chemin
@@ -60,28 +57,24 @@ export const findPathAStar = (
       return path
     }
 
-    // Marquer le noeud actuel comme visité
-    closedList[current.y][current.x] = 1
+    // Marquer le node actuel comme visité
+    setMatrix(closedList, current, 1)
 
     // Vérifier les voisins
-    for (const dir of directions) {
-      const neighborX = current.x + dir.x
-      const neighborY = current.y + dir.y
+    for (const dir of matrixDirections) {
+      const neighbor = createVector2(current.x + dir.x, current.y + dir.y)
 
-      if (
-        !getMatrix(grid, neighborX, neighborY) ||
-        getMatrix(closedList, neighborX, neighborY)
-      ) {
+      if (!getMatrix(grid, neighbor) || getMatrix(closedList, neighbor)) {
         continue // Ignorer les cases non valides ou déjà visitées
       }
 
       const g = current.g + 1 // Coût pour se déplacer vers ce voisin
-      const h = heuristic(neighborX, neighborY, end.x, end.y)
+      const h = heuristic(neighbor, end)
       const f = g + h
 
       // Vérifier si le voisin est déjà dans la liste ouverte
       const existingNode = openList.find(
-        (node) => node.x === neighborX && node.y === neighborY,
+        (node) => node.x === neighbor.x && node.y === neighbor.y,
       )
 
       if (existingNode) {
@@ -94,8 +87,8 @@ export const findPathAStar = (
       } else {
         // Ajouter le voisin à la liste ouverte
         openList.push({
-          x: neighborX,
-          y: neighborY,
+          x: neighbor.x,
+          y: neighbor.y,
           g,
           h,
           f,
@@ -105,6 +98,5 @@ export const findPathAStar = (
     }
   }
 
-  // Aucun chemin trouvé
   return null
 }

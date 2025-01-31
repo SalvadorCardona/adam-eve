@@ -2,7 +2,7 @@ import {
   Vector2Interface,
   Vector3Interface,
   vectorSize,
-} from "@/src/utils/math/Vector"
+} from "@/src/utils/math/vector"
 
 export interface BoundingBox3DOBBInterface {
   size: Vector3Interface

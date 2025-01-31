@@ -10,7 +10,7 @@ import { appLdType } from "@/src/AppLdType"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { config } from "@/src/app/config"
-import { vector2ToVector3 } from "@/src/utils/math/Vector"
+import { vector2ToVector3 } from "@/src/utils/math/vector"
 import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 
 interface CreateBuildingUserActionMetadataInterface

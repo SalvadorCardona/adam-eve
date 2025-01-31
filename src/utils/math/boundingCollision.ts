@@ -1,4 +1,4 @@
-import { Vector2Interface } from "@/src/utils/math/Vector"
+import { Vector2Interface } from "@/src/utils/math/vector"
 import { BoundingOBBInterface } from "@/src/utils/math/boudingBox"
 
 export const boundingCollision = (

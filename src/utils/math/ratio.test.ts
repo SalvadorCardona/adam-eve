@@ -4,7 +4,7 @@ import {
   vectorRatioDown,
   vectorRatioUP,
 } from "@/src/utils/math/ratio"
-import { createVector3 } from "@/src/utils/math/Vector"
+import { createVector3 } from "@/src/utils/math/vector"
 
 describe("Test ratio", () => {
   it("Context Up", () => {

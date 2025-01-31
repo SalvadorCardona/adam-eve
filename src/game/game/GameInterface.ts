@@ -13,7 +13,7 @@ import {
   createVector2,
   Vector2Interface,
   Vector3Interface,
-} from "@/src/utils/math/Vector"
+} from "@/src/utils/math/vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"

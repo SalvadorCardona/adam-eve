@@ -1,7 +1,7 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { Vector3Interface } from "@/src/utils/math/Vector"
+import { Vector3Interface } from "@/src/utils/math/vector"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
-import { vectorMoveToVector } from "@/src/utils/math/VectorMoveToVector"
+import { vectorMoveToVector } from "@/src/utils/math/vectorMoveToVector"
 
 interface EntityGoPositionParams {
   entity: EntityInterface

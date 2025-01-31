@@ -1,4 +1,4 @@
-import { Vector2Interface } from "@/src/utils/math/Vector"
+import { Vector2Interface } from "@/src/utils/math/vector"
 import { roundDownToBase } from "@/src/utils/math/roundVectorToDown"
 
 export function diviseVector2D(

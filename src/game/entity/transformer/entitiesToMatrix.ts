@@ -5,8 +5,6 @@ interface gameEntitiesToMatrixParams {}
 
 interface gameEntitiesToMatrixResult {}
 
-export function gameEntitiesToMatrix(
-  game: GameInterface,
-): gameEntitiesToMatrixResult {
+export function entitiesToMatrix(game: GameInterface): gameEntitiesToMatrixResult {
   const entities = getEntitiesInGame(game)
 }

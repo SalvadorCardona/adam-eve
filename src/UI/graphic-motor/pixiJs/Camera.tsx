@@ -3,7 +3,7 @@ import {
   createVector2,
   Vector2Interface,
   vector3ToVector2,
-} from "@/src/utils/math/Vector"
+} from "@/src/utils/math/vector"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"

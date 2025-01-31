@@ -1,4 +1,4 @@
-import { Vector3Interface } from "@/src/utils/math/Vector"
+import { Vector3Interface } from "@/src/utils/math/vector"
 import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
 import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
 

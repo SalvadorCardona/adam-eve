@@ -1,4 +1,4 @@
-import { createVector2 } from "@/src/utils/math/Vector"
+import { createVector2 } from "@/src/utils/math/vector"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
 
 describe("Test Vector division", () => {

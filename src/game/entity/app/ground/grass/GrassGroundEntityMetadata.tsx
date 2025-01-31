@@ -33,8 +33,8 @@ import grass13 from "./asset/normal/grass13.png"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import React, { useMemo } from "react"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { EntityMetaDataInterface } from "../../../EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/math/Vector"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { Vector3Interface } from "@/src/utils/math/vector"
 
 const grassNormal = [
   grass1,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Vector2Interface } from "@/src/utils/math/Vector"
+import { Vector2Interface } from "@/src/utils/math/vector"
 import { PixiProvider } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/PixiProvider"
 import { ApplicationOptions } from "pixi.js/lib/app/Application"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"

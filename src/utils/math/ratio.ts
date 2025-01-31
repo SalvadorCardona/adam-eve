@@ -2,7 +2,7 @@ import {
   Vector2Interface,
   Vector3Interface,
   vectorTransformer,
-} from "@/src/utils/math/Vector"
+} from "@/src/utils/math/vector"
 
 export function ratioUP(some: number, multiplication: number = 1): number {
   return some * multiplication
