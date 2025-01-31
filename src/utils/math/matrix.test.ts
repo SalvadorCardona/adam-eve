@@ -3,7 +3,7 @@ import {
   createMatrixBounds,
   generateMatrix,
   getMatrix,
-  Matrix,
+  MatrixInterface,
   subtractMatrix,
 } from "@/src/utils/math/matrix"
 import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
@@ -30,7 +30,8 @@ describe("Test matrix", () => {
       createVector2(-1, -1),
       createVector2(3, 3),
     )
-    expect(matrixBound).toStrictEqual(expected)
+    matrixBound.id = undefined
+    expect(expected).toStrictEqual(matrixBound)
   })
 
   it("Context generate matrix", () => {
@@ -46,7 +47,7 @@ describe("Test matrix", () => {
     boundItem2.id = "B"
     const matrixFilled = generateMatrix([boundItem1, boundItem2])
 
-    const expected: Matrix = [
+    const expected: MatrixInterface = [
       ["A", 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, "B", "B", "B", "B", 0],
@@ -60,7 +61,7 @@ describe("Test matrix", () => {
   })
 
   it("Context getItem", () => {
-    const matrix: Matrix = [
+    const matrix: MatrixInterface = [
       ["A", 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, "B", "B", "B", "B", 0],
@@ -75,12 +76,12 @@ describe("Test matrix", () => {
   })
 
   it("Context soustraction", () => {
-    const source: Matrix = [
+    const source: MatrixInterface = [
       [1, 1, "A", "B", 1, 1, 1],
       ["A", 1, 1, 1, 1, 1, 1],
     ]
 
-    const target: Matrix = [
+    const target: MatrixInterface = [
       [1, 1, 1, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
     ]

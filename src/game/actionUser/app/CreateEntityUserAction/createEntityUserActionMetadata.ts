@@ -9,9 +9,9 @@ import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { config } from "@/src/app/config"
 import { vector2ToVector3 } from "@/src/utils/math/vector"
 import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
+import { vectorRatioDown } from "@/src/utils/math/ratio"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -36,12 +36,16 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
       }
 
       const rotationY = game.userControl?.rotation ?? 0
+
       const positions = diviseVector2D(
-        game.mouseState.startPosition,
-        game.mouseState.endPosition,
-        config.pixiJs2dItemSize,
+        vectorRatioDown(game.mouseState.startPosition, game.camera.zoom),
+        vectorRatioDown(game.mouseState.endPosition, game.camera.zoom),
       )
 
+      const mousePosition = vectorRatioDown(
+        game.mouseState.position,
+        game.camera.zoom,
+      )
       const metaInterface = createEntityUserActionMetadata.data.entityMetaData
 
       const entities: EntityInterface[] = []
@@ -62,7 +66,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
           metaInterface.factory({
             game,
             entity: {
-              position: vector2ToVector3(game.mouseState.position),
+              position: vector2ToVector3(mousePosition),
               rotation: rotationY,
             },
           }),

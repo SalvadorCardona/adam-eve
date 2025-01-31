@@ -4,7 +4,6 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/src/UI/graphic-motor/pixiJs/components/Container"
 import { ContainerChild } from "pixi.js/lib/scene/container/Container"
-import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
   Sprite,
@@ -14,8 +13,10 @@ import {
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { Vector2Interface } from "@/src/utils/math/vector"
+import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
+import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
+import { vectorRatioUP } from "@/src/utils/math/ratio"
 
 export interface EntityDecoratorResolverPropsInterface {
   color?: string
@@ -46,26 +47,18 @@ export const EntityDecoratorPixiJs = ({
   }, [])
 
   const size = useMemo<Vector2Interface>(() => {
-    return entityMetaData?.propriety?.size
-      ? {
-          x: entityMetaData.propriety.size.x ?? 0,
-          y: entityMetaData.propriety.size.y ?? 0,
-        }
-      : { x: 0, y: 0 }
+    return vectorRatioUP(vector3ToVector2(getEntitySize(entity)), game.camera.zoom)
   }, [entity])
 
-  const { width, height } = useMemo(() => {
+  const dimension = useMemo(() => {
     return {
       width: size.x,
       height: size.y,
     }
-  }, [])
+  }, [size])
 
   const position = useMemo(() => {
-    return {
-      x: entity.position.x,
-      y: entity.position.z,
-    }
+    return vectorRatioUP(vector3ToVector2(entity.position), game.camera.zoom)
   }, [entity.position.x, entity.position.z])
 
   const scale = useMemo(() => {
@@ -75,6 +68,7 @@ export const EntityDecoratorPixiJs = ({
       y: 1,
     }
   }, [entity.rotation])
+
   //
   // const rotation = useMemo(() => {
   //   if (!entity.rotation) return undefined
@@ -85,14 +79,13 @@ export const EntityDecoratorPixiJs = ({
   return (
     <Container
       options={{
-        width: width,
-        height: height,
+        ...dimension,
         zIndex: entity.position.y,
       }}
       position={position}
       scale={scale}
     >
-      <EntityComponent entity={entity} />
+      <EntityComponent entity={entity} size={size} />
       {color && (
         <Graphics
           draw={(g) => {
@@ -130,9 +123,10 @@ export const EntityDecoratorPixiJs = ({
 
 interface Model2DPropsInterface {
   entity: EntityInterface
+  size: Vector2Interface
 }
 
-export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
+export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   const metaData = getMetaData<EntityMetaDataInterface>(entity)
   const asset = metaData.asset?.model2d ?? metaData.asset?.icon
   if (!asset) {
@@ -140,20 +134,6 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
 
     return
   }
-
-  const size = useMemo(() => {
-    if (metaData?.propriety?.size)
-      return {
-        width: metaData.propriety.size.x,
-        height: metaData.propriety.size.y,
-      }
-
-    console.warn("Problem with entity size")
-    return {
-      width: config.pixiJs2dItemSize,
-      height: config.pixiJs2dItemSize,
-    }
-  }, [])
 
   const animation = useMemo(() => {
     if (entity.state && entity.state in entityAnimation)
@@ -174,7 +154,13 @@ export const Model2DPixiJs = ({ entity }: Model2DPropsInterface) => {
     return <SpriteAnimated spriteSheetData={spriteSheetData} />
   }
 
-  return <Sprite image={asset} options={size} animation={animation} />
+  return (
+    <Sprite
+      image={asset}
+      animation={animation}
+      options={{ width: size.x, height: size.y }}
+    />
+  )
 }
 
 const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {

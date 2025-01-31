@@ -16,9 +16,9 @@ export const bloodEntityMetaData = entityMedataFactory({
       maxLife: 200,
     },
     size: {
-      x: 100,
-      y: 100,
-      z: 100,
+      x: 2,
+      y: 2,
+      z: 2,
     },
   },
   ["@type"]: JsonLdTypeFactory(appLdType.entityEffect, "blood"),

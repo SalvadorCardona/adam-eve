@@ -1,8 +1,8 @@
 import {
   createMatrix,
   getMatrix,
-  Matrix,
   matrixDirection,
+  MatrixInterface,
   setMatrix,
 } from "@/src/utils/math/matrix"
 import { createVector2, heuristic, Vector2Interface } from "@/src/utils/math/vector"
@@ -19,7 +19,7 @@ type CurrentNode = {
 const matrixDirections = Object.values(matrixDirection)
 
 export const findPathAStar = (
-  grid: Matrix, // La grille (0 = passable, 1 = obstacle)
+  grid: MatrixInterface, // La grille (0 = passable, 1 = obstacle)
   start: Vector2Interface,
   end: Vector2Interface,
 ): { x: number; y: number }[] | null => {

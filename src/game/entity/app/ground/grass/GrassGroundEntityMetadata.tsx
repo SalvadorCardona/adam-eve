@@ -32,9 +32,6 @@ import grass12 from "./asset/normal/grass12.png"
 import grass13 from "./asset/normal/grass13.png"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import React, { useMemo } from "react"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Vector3Interface } from "@/src/utils/math/vector"
 
 const grassNormal = [
   grass1,
@@ -74,9 +71,9 @@ export const grassGroundEntityMetadata = entityMedataFactory({
   },
   propriety: {
     size: {
-      x: 50,
-      y: 50,
-      z: 50,
+      x: 1,
+      y: 1,
+      z: 1,
     },
   },
   ["@type"]: type,
@@ -91,16 +88,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
 
     return true
   },
-  component: ({ entity }) => {
-    const size = useMemo(() => {
-      const size = getMetaData<EntityMetaDataInterface>(entity).propriety
-        .size as Vector3Interface
-      return {
-        width: size.x as number,
-        height: size.y as number,
-      }
-    }, [])
-
+  component: ({ entity, size }) => {
     const texturePath = useMemo(() => {
       let asset = grassNormal[Math.floor(Math.random() * (grassNormal.length - 1))]
       const connections = entity.connections
@@ -149,7 +137,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       return asset
     }, [entity.connections])
 
-    return <Sprite image={texturePath} options={size} />
+    return <Sprite image={texturePath} options={{ width: size.x, height: size.y }} />
   },
 })
 

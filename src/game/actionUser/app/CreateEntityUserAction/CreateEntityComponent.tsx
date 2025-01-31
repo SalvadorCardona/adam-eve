@@ -6,6 +6,7 @@ import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/Create
 import { Vector2Interface, vector2ToVector3 } from "@/src/utils/math/vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { appLdType } from "@/src/AppLdType"
+import { vectorRatioDown } from "@/src/utils/math/ratio"
 
 export const CreateEntityComponent = () => {
   const game = useGameContext().game
@@ -24,7 +25,10 @@ export const CreateEntityComponent = () => {
       ? entityMetaData.factory({
           game: game,
           entity: {
-            position: vector2ToVector3(mousePosition),
+            position: vectorRatioDown(
+              vector2ToVector3(mousePosition),
+              game.camera.zoom,
+            ),
             rotation: rotationY,
           },
         })

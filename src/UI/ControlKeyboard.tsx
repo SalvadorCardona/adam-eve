@@ -140,6 +140,8 @@ export const ControlKeyboard = () => {
         name: Controls.wheelUp,
         keys: ["WheelUp"],
         cb: () => {
+          game.camera.zoom += 1
+          updateGame(game, game.camera)
           keysPressed["WheelUp"] = false
         },
       },
@@ -147,6 +149,8 @@ export const ControlKeyboard = () => {
         name: Controls.wheelDown,
         keys: ["WheelDown"],
         cb: () => {
+          game.camera.zoom -= 1
+          updateGame(game, game.camera)
           keysPressed["WheelDown"] = false
         },
       },

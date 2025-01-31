@@ -1,5 +1,6 @@
 import path from "path"
 import { defineConfig } from "vite"
+// @ts-ignore used for run test well
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite"
 import react from "@vitejs/plugin-react"
 

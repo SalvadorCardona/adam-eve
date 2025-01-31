@@ -9,9 +9,9 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 import { updateGame } from "@/src/game/game/updateGame"
-import { config } from "@/src/app/config"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
+import { vectorRatioDown } from "@/src/utils/math/ratio"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -25,7 +25,6 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
       const entities = entitiesFinder(game)
 
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
-      console.log(game.userControl.entitiesSelected)
       updateGame(game, game.userControl)
 
       onSelectEntityUserActionMetadata.onApply({ game: game })
@@ -37,16 +36,9 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
   }
 
 function entitiesFinder(game: GameInterface): EntityInterface[] {
-  // const isClick =
-  //   distanceBetweenVector2(
-  //     game.mouseState.startPosition,
-  //     game.mouseState.endPosition,
-  //   ) < config.pixiJs2dItemSize
-
   const positions = diviseVector2D(
-    game.mouseState.startPosition,
-    game.mouseState.endPosition,
-    config.pixiJs2dItemSize,
+    vectorRatioDown(game.mouseState.startPosition, game.camera.zoom),
+    vectorRatioDown(game.mouseState.endPosition, game.camera.zoom),
   )
 
   if (positions.length === 0) return []

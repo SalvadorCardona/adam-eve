@@ -7,9 +7,8 @@ import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
+import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 
 export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TowerAttack"),
@@ -20,7 +19,7 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
       return
     }
 
-    const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
+    const size = getEntitySize(entity)
     const zombies = entityQuery(game, { "@type": zombieEntityMetaData["@type"] })
     const zombie = findClosest(entity, zombies)
 
@@ -34,7 +33,7 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
 
     const entityArg: Partial<EntityInterface> = {
       entityAttackTargetIri: zombie["@id"],
-      position: { ...entity.position, y: entityMetaData.propriety.size?.y ?? 0 },
+      position: { ...entity.position, y: size.y },
     }
 
     const arrowEntity = ArrowEntityMetaData.factory({ entity: entityArg, game })

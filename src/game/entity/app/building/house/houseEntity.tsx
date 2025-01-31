@@ -22,9 +22,9 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
       maxLife: 100,
     },
     size: {
-      x: 100,
-      y: 100,
-      z: 100,
+      x: 2,
+      y: 2,
+      z: 2,
     },
   },
   ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "house"),

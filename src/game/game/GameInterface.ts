@@ -17,6 +17,8 @@ import {
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
+import { config } from "@/src/app/config"
+import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
 
 export enum GameState {
   RUN = "run",
@@ -53,6 +55,8 @@ export type GameOption = JsonLDItem<{
   gameMode: GameMode
 }>
 
+type GameSize = JsonLDItem<BoundingInterface>
+
 export default interface GameInterface extends BaseJsonLdInterface {
   mouseState: MouseState
   graphicMotor: GraphicMotor
@@ -68,11 +72,19 @@ export default interface GameInterface extends BaseJsonLdInterface {
   players: JsonLdIriCollection<PlayerInterface>
   inventory: InventoryBagInterface
   actions: ActionBagInterface
+  gameSize: GameSize
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
   return jsonLdFactory(appLdType.game, {
     players: JsonLdIriCollectionFactory(appLdType.player),
+    gameSize: jsonLdFactory<GameSize>(
+      appLdType.gameSize,
+      createBoundingByABB({
+        min: createVector2(),
+        max: createVector2(),
+      }),
+    ),
     graphicMotor: GraphicMotor.PIXI_JS,
     gameOption: jsonLdFactory<GameOption>(appLdType.camera, {
       gameSpeed: 1,
@@ -90,7 +102,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       position: createVector2(),
     }),
     camera: jsonLdFactory(appLdType.camera, {
-      zoom: 0,
+      zoom: config.pixiJs2dItemSize,
       position: {
         x: 0,
         y: 0,

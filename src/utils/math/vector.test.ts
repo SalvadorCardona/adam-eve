@@ -11,6 +11,7 @@ import {
   vector2ToVector3,
   Vector3Interface,
   vector3ToVector2,
+  vectorAddition,
   vectorSize,
   vectorTransformer,
 } from "./vector"
@@ -72,5 +73,17 @@ describe("Vector Utility Functions", () => {
     const vector2: Vector2Interface = { x: 4, y: 6 }
     const distance = heuristic(vector1, vector2)
     expect(distance).toBe(7)
+  })
+
+  test("Vector Addition", () => {
+    let vector1: Vector2Interface = { x: 1, y: 2 }
+    let vector2: Vector2Interface = { x: 4, y: 6 }
+    let expected = createVector2(5, 8)
+    expect(expected).toStrictEqual(vectorAddition(vector1, vector2))
+
+    vector1 = { x: -5, y: -7 }
+    vector2 = { x: 4, y: 6 }
+    expected = createVector2(-1, -1)
+    expect(expected).toStrictEqual(vectorAddition(vector1, vector2))
   })
 })

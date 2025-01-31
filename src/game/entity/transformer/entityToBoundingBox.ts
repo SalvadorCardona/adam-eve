@@ -1,15 +1,19 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { BoundingInterface, createBoundingByOBB } from "@/src/utils/math/boudingBox"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { Vector3Interface, vector3ToVector2 } from "@/src/utils/math/vector"
+import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
+import {
+  Vector2Interface,
+  vector3ToVector2,
+  vectorAddition,
+} from "@/src/utils/math/vector"
+import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 
 export function entityToBoundingBox(entity: EntityInterface): BoundingInterface {
-  const metaDataEntitySource = getMetaData<EntityMetaDataInterface>(entity)
+  const size = getEntitySize(entity)
+  const min = vector3ToVector2(entity.position)
 
-  return createBoundingByOBB({
-    position: vector3ToVector2(entity.position),
-    size: vector3ToVector2(metaDataEntitySource.propriety.size as Vector3Interface),
+  return createBoundingByABB({
+    min,
+    max: vectorAddition<Vector2Interface>(min, size),
     id: entity["@id"],
   })
 }

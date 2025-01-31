@@ -17,7 +17,7 @@ export const towerEntityMetaData = entityMedataFactory({
       }),
     },
     attack: {
-      attackRange: 250,
+      attackRange: 3,
       damage: 1,
       attackSpeed: 60,
     },
@@ -28,9 +28,9 @@ export const towerEntityMetaData = entityMedataFactory({
       maxLife: 100,
     },
     size: {
-      x: 100,
-      y: 100,
-      z: 100,
+      x: 2,
+      y: 2,
+      z: 2,
     },
     defaultActions: [TowerAttackActionMetadata["@type"]],
   },

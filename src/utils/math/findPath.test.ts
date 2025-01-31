@@ -1,7 +1,7 @@
 import { findPathAStar } from "./findPath"
-import { Matrix } from "@/src/utils/math/matrix"
+import { MatrixInterface } from "@/src/utils/math/matrix"
 
-const grid: Matrix = [
+const grid: MatrixInterface = [
   [1, 1, 1, 1, 0],
   [1, "A", "A", "A", 1],
   [1, 0, 0, "A", 0],
@@ -41,7 +41,7 @@ describe("A* Pathfinding Algorithm", () => {
   })
 
   it("should return null if no path exists", () => {
-    const blockedGrid: Matrix = [
+    const blockedGrid: MatrixInterface = [
       [0, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
@@ -53,7 +53,7 @@ describe("A* Pathfinding Algorithm", () => {
   })
 
   it("should handle small grids with a clear path", () => {
-    const simpleGrid: Matrix = [
+    const simpleGrid: MatrixInterface = [
       [1, 1],
       [1, 1],
     ]

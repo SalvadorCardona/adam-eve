@@ -14,9 +14,9 @@ export const storageEntityMetaData: EntityMetaDataInterface = entityMedataFactor
       maxLife: 100,
     },
     size: {
-      x: 100,
-      y: 100,
-      z: 100,
+      x: 2,
+      y: 2,
+      z: 2,
     },
     ressourceForConstruction: {
       [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({

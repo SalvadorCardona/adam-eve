@@ -1,10 +1,11 @@
-import GameInterface from "@/src/game/game/GameInterface"
-import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
+import EntityInterface from "@/src/game/entity/EntityInterface"
+import { generateMatrix, MatrixInterface } from "@/src/utils/math/matrix"
+import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 
-interface gameEntitiesToMatrixParams {}
+export function entitiesToMatrix(entities: EntityInterface[]): MatrixInterface {
+  const entitiesConverted = entities.map((entity) => {
+    return entityToBoundingBox(entity)
+  })
 
-interface gameEntitiesToMatrixResult {}
-
-export function entitiesToMatrix(game: GameInterface): gameEntitiesToMatrixResult {
-  const entities = getEntitiesInGame(game)
+  return generateMatrix(entitiesConverted)
 }

@@ -1,15 +1,12 @@
-import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
+import {
+  BoundingInterface,
+  createBoundingByABB,
+  mergeBounding,
+} from "@/src/utils/math/boudingBox"
 import { createVector2, Vector2Interface } from "@/src/utils/math/vector"
 
-export type MatrixItem = string | 0 | 1
-export type Matrix = MatrixItem[][]
-
-// export const matrixDirection: Record<string, Vector2Interface> = {
-//   top: { x: 0, y: -1 },
-//   bottom: { x: 0, y: 1 },
-//   left: { x: -1, y: 0 },
-//   right: { x: 1, y: 0 },
-// }
+export type MatrixItemInterface = string | 0 | 1
+export type MatrixInterface = MatrixItemInterface[][]
 
 export const matrixDirection: Record<string, Vector2Interface> = {
   top: { x: 0, y: -1 },
@@ -22,25 +19,28 @@ export const matrixDirection: Record<string, Vector2Interface> = {
   bottomRight: { x: 1, y: 1 },
 }
 
-export const createMatrix = (width: number, height: number): Matrix =>
+export const createMatrix = (width: number, height: number): MatrixInterface =>
   Array.from({ length: height }, () => Array(width).fill(0))
 
 export const getMatrix = (
-  matrixSource: Matrix,
+  matrixSource: MatrixInterface,
   position: Vector2Interface,
-): MatrixItem => {
+): MatrixItemInterface => {
   return matrixSource[position.y]?.[position.x] ?? 0
 }
 
 export const setMatrix = (
-  matrixSource: Matrix,
+  matrixSource: MatrixInterface,
   position: Vector2Interface,
-  value: MatrixItem,
+  value: MatrixItemInterface,
 ): void => {
   matrixSource[position.y][position.x] = value
 }
 
-export function subtractMatrix(matrixSource: Matrix, matrixTarget: Matrix): Matrix {
+export function subtractMatrix(
+  matrixSource: MatrixInterface,
+  matrixTarget: MatrixInterface,
+): MatrixInterface {
   return matrixSource.map((row, y) =>
     row.map((cell, x) => {
       const targetValue = getMatrix(matrixTarget, createVector2(x, y))
@@ -52,25 +52,19 @@ export function subtractMatrix(matrixSource: Matrix, matrixTarget: Matrix): Matr
 export const createMatrixBounds = (
   bounds: BoundingInterface[],
 ): BoundingInterface => {
-  let minX = Infinity,
-    maxX = -Infinity
-  let minY = Infinity,
-    maxY = -Infinity
+  let matrixBounding = createBoundingByABB({
+    min: createVector2(Infinity, Infinity),
+    max: createVector2(-Infinity, -Infinity),
+  })
 
   for (const bound of bounds) {
-    minX = Math.min(minX, bound.min.x)
-    maxX = Math.max(maxX, bound.max.x)
-    minY = Math.min(minY, bound.min.y)
-    maxY = Math.max(maxY, bound.max.y)
+    matrixBounding = mergeBounding(matrixBounding, bound)
   }
 
-  return createBoundingByABB({
-    min: { x: minX, y: minY },
-    max: { x: maxX, y: maxY },
-  })
+  return matrixBounding
 }
 
-const fillMatrix = (boundItems: BoundingInterface[], matrix: Matrix) => {
+const fillMatrix = (boundItems: BoundingInterface[], matrix: MatrixInterface) => {
   for (const boundItem of boundItems) {
     const startX = boundItem.min.x
     const startY = boundItem.min.y

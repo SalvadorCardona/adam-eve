@@ -92,7 +92,7 @@ export enum ContainerAction {
 }
 
 export function updateContainer<T extends BaseJsonLdInterface>(
-  container: ContainerInterface<T>,
+  container: JsonLdIriContainerInterface<T>,
   item: T,
   action: ContainerAction = ContainerAction.update,
 ): void {
@@ -100,6 +100,20 @@ export function updateContainer<T extends BaseJsonLdInterface>(
 
   if (action === ContainerAction.remove) {
     deleteContainerKey(container, item["@id"])
+  }
+
+  updateItem(item, action)
+}
+
+export function updateContainerByType<T extends BaseJsonLdInterface>(
+  container: JsonLdIriContainerInterface<T>,
+  item: T,
+  action: ContainerAction = ContainerAction.update,
+): void {
+  container[item["@type"]] = item
+
+  if (action === ContainerAction.remove) {
+    deleteContainerKey(container, item["@type"])
   }
 
   updateItem(item, action)

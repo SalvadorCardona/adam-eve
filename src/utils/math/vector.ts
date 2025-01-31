@@ -74,6 +74,20 @@ export function vectorTransformer<T extends Vector2Interface | Vector3Interface>
   return result as T
 }
 
+export function vectorAddition<T extends Vector2Interface | Vector3Interface>(
+  v1: T,
+  v2: T,
+) {
+  const result: Partial<T> = {}
+
+  Object.keys(v1).forEach((key) => {
+    // @ts-ignore
+    result[key as keyof T] = v1[key] + v2[key]
+  })
+
+  return result as T
+}
+
 export const vectorSize = (
   min: Vector2Interface,
   max: Vector2Interface,

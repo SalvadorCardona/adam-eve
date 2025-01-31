@@ -17,9 +17,9 @@ export const bridgeEntityMetaData = entityMedataFactory({
       maxLife: 100,
     },
     size: {
-      x: 50,
-      y: 50,
-      z: 50,
+      x: 1,
+      y: 1,
+      z: 1,
     },
     ressourceForConstruction: {
       [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({

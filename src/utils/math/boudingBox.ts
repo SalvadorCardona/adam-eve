@@ -105,3 +105,47 @@ export function createBoundingFromZone(
     },
   })
 }
+
+export function boundingIsOver(
+  boundingSource: BoundingInterface,
+  boundingTarget: BoundingInterface,
+): boolean {
+  return (
+    boundingTarget.min.x < boundingSource.min.x ||
+    boundingTarget.max.x > boundingSource.max.x ||
+    boundingTarget.min.y < boundingSource.min.y ||
+    boundingTarget.max.y > boundingSource.max.y
+  )
+}
+
+export function mergeBounding(
+  bounding1: BoundingInterface,
+  bounding2: BoundingInterface,
+): BoundingInterface {
+  const min = {
+    x: Math.min(bounding1.min.x, bounding2.min.x),
+    y: Math.min(bounding1.min.y, bounding2.min.y),
+  }
+
+  const max = {
+    x: Math.max(bounding1.max.x, bounding2.max.x),
+    y: Math.max(bounding1.max.y, bounding2.max.y),
+  }
+
+  const size = {
+    x: max.x - min.x,
+    y: max.y - min.y,
+  }
+
+  const position = {
+    x: min.x + size.x / 2,
+    y: min.y + size.y / 2,
+  }
+
+  return {
+    min,
+    max,
+    size,
+    position,
+  }
+}

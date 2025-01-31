@@ -47,16 +47,16 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     },
   },
   propriety: {
-    speed: 1,
+    speed: 0.02,
     attack: {
       damage: 1,
-      attackRange: 20,
+      attackRange: 0.5,
       attackSpeed: 60,
     },
     size: {
-      x: 50,
-      y: 50,
-      z: 50,
+      x: 1,
+      y: 1,
+      z: 1,
     },
     health: {
       maxLife: 100,

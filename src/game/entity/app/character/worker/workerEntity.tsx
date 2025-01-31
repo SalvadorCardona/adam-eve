@@ -1,4 +1,3 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset2D from "./worker.png"
 import iconFarmerSrc from "./iconFarmer.png"
@@ -26,7 +25,7 @@ const idleAnimation = createFramePixiJs({
   width: 864,
 })
 
-export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
+export const workerEntityMetaData = entityMedataFactory({
   ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "worker"),
   label: "Citoyen",
   asset: {
@@ -44,16 +43,16 @@ export const workerEntityMetaData: EntityMetaDataInterface = entityMedataFactory
   },
   propriety: {
     inventorySize: 10,
-    speed: 1.4,
+    speed: 0.02,
     attack: {
       damage: 1,
-      attackRange: 20,
+      attackRange: 0.5,
       attackSpeed: 60,
     },
     size: {
-      x: 50,
-      y: 50,
-      z: 50,
+      x: 1,
+      y: 1,
+      z: 1,
     },
     health: {
       maxLife: 25,

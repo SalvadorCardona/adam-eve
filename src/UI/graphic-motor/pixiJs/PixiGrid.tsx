@@ -1,5 +1,4 @@
 import { Graphics as BaseGraphics } from "pixi.js"
-import { config } from "@/src/app/config"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import React, { useState } from "react"
 import { Vector2Interface } from "@/src/utils/math/vector"
@@ -26,7 +25,7 @@ export const PixiGrid = ({ size }: GridPropsInterface) => {
   const drawGrid = (graphics: BaseGraphics) => {
     const lineWidth = 1
     const lineColor = "white"
-    const cellSize = config.pixiJs2dItemSize
+    const cellSize = game.camera.zoom
     const { x: width, y: height } = size
     // graphics.setStrokeStyle({ width: 1, color: lineColor })
 

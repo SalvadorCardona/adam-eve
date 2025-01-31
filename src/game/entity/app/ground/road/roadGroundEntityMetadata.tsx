@@ -11,9 +11,9 @@ export const roadGroundEntityMetadata = entityMedataFactory({
   label: "Route",
   propriety: {
     size: {
-      x: 50,
-      y: 50,
-      z: 50,
+      x: 1,
+      y: 1,
+      z: 1,
     },
   },
 })

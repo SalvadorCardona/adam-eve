@@ -31,6 +31,7 @@ export const appLdType = {
   // Ressource
   woodRessource: JsonLdTypeFactory(typeRessource, "wood"),
   theDeathAction: JsonLdTypeFactory(typeAction, "TheDeathActionMetadata"),
+  gameSize: "gameSize",
 }
 
 export const appLdTypeEntity = [
