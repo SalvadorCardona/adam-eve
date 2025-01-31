@@ -100,3 +100,36 @@ export const vectorSize = (
 
 export const heuristic = (vector1: Vector2Interface, vector2: Vector2Interface) =>
   Math.abs(vector1.x - vector2.x) + Math.abs(vector1.y - vector2.y)
+
+export const expendVector = (
+  points: Vector2Interface[],
+  steps: number,
+): Vector2Interface[] => {
+  if (points.length < 2) return points
+
+  function lerp(a: number, b: number, t: number): number {
+    return a + (b - a) * t
+  }
+
+  const newPoints: Vector2Interface[] = []
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const p1 = points[i]
+    const p2 = points[i + 1]
+
+    newPoints.push(p1) // Garder le point original
+
+    // Ajouter des points intermédiaires
+    for (let j = 1; j < steps; j++) {
+      const t = j / steps
+      newPoints.push({
+        x: lerp(p1.x, p2.x, t),
+        y: lerp(p1.y, p2.y, t),
+      })
+    }
+  }
+
+  newPoints.push(points[points.length - 1]) // Ajouter le dernier point
+
+  return newPoints
+}

@@ -4,6 +4,7 @@ import {
   areVectorsEqual,
   createVector2,
   createVector3,
+  expendVector,
   heuristic,
   isVector2,
   isVector3,
@@ -85,5 +86,21 @@ describe("Vector Utility Functions", () => {
     vector2 = { x: 4, y: 6 }
     expected = createVector2(-1, -1)
     expect(expected).toStrictEqual(vectorAddition(vector1, vector2))
+  })
+
+  test("Vector Addition", () => {
+    const vector1: Vector2Interface = { x: 0, y: 0 }
+    const vector2: Vector2Interface = { x: 1, y: 1 }
+    const vector3: Vector2Interface = { x: 4, y: 4 }
+    const expected = [
+      { x: 0, y: 0 },
+      { x: 0.2, y: 0.2 },
+      { x: 0.4, y: 0.4 },
+      { x: 0.6, y: 0.6 },
+      { x: 0.8, y: 0.8 },
+      { x: 1, y: 1 },
+    ]
+
+    expect(expected).toStrictEqual(expendVector([vector1, vector2, vector3], 5))
   })
 })

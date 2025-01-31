@@ -1,4 +1,7 @@
-import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
+import EntityInterface, {
+  isBuildingEntity,
+  isGroundEntity,
+} from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { updateGroundWithGame } from "@/src/game/entity/useCase/updateGround"
 import { ContainerAction, updateContainer } from "@/src/utils/jsonLd/jsonLd"
@@ -16,9 +19,11 @@ export function updateEntityInGame(
   if (isGroundEntity(entity)) {
     updateGroundWithGame({ game })
   }
-  
-  const boundingEntity = entityToBoundingBox(entity)
-  const newGameSize = mergeBounding(game.gameSize, boundingEntity)
-  game.gameSize = { ...game.gameSize, ...newGameSize }
-  updateGame(game, game.gameSize)
+
+  if (isGroundEntity(entity) || isBuildingEntity(entity)) {
+    const boundingEntity = entityToBoundingBox(entity)
+    const newGameSize = mergeBounding(game.gameSize, boundingEntity)
+    game.gameSize = { ...game.gameSize, ...newGameSize }
+    updateGame(game, game.gameSize)
+  }
 }
