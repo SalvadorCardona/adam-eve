@@ -1,7 +1,7 @@
 import { findPathAStar } from "./findPath"
-import { MatrixInterface } from "@/src/utils/math/matrix"
+import { Matrix2DInterface } from "@/src/utils/math/matrix"
 
-const grid: MatrixInterface = [
+const grid: Matrix2DInterface = [
   [1, 1, 1, 1, 0],
   [1, "A", "A", "A", 1],
   [1, 0, 0, "A", 0],
@@ -15,33 +15,18 @@ const end = { x: 4, y: 4 }
 describe("A* Pathfinding Algorithm", () => {
   it("should find the shortest path in a basic grid", () => {
     const expectedPath = [
-      {
-        x: 1,
-        y: 1,
-      },
-      {
-        x: 2,
-        y: 1,
-      },
-      {
-        x: 3,
-        y: 2,
-      },
-      {
-        x: 3,
-        y: 3,
-      },
-      {
-        x: 4,
-        y: 4,
-      },
+      { x: 1, y: 1 },
+      { x: 2, y: 1 },
+      { x: 3, y: 2 },
+      { x: 3, y: 3 },
+      { x: 4, y: 4 },
     ]
     const result = findPathAStar(grid, start, end)
     expect(result).toEqual(expectedPath)
   })
 
   it("should return null if no path exists", () => {
-    const blockedGrid: MatrixInterface = [
+    const blockedGrid: Matrix2DInterface = [
       [0, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
@@ -53,7 +38,7 @@ describe("A* Pathfinding Algorithm", () => {
   })
 
   it("should handle small grids with a clear path", () => {
-    const simpleGrid: MatrixInterface = [
+    const simpleGrid: Matrix2DInterface = [
       [1, 1],
       [1, 1],
     ]

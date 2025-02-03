@@ -41,7 +41,6 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
   [timberHouseEntityMetaData["@type"]]: timberHouseEntityMetaData,
   [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
-  // [buildRequest["@type"]]: buildRequest,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
   [waterRessourceMetadata["@type"]]: waterRessourceMetadata,
   [roadGroundEntityMetadata["@type"]]: roadGroundEntityMetadata,

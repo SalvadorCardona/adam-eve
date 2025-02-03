@@ -1,4 +1,4 @@
-import { jsonLdFactory, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { findClosest } from "@/src/utils/math/findClosest"
@@ -11,7 +11,7 @@ import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 
 export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "TowerAttack"),
+  ["@type"]: appLdType.towerAttackAction,
   onFrame: ({ game, action, entity }) => {
     action.nextTick = game.time + 50
 

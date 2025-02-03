@@ -9,7 +9,7 @@ import EntityInterface, {
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { addAction } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { roundVectorToDown } from "@/src/utils/math/roundVectorToDown"
+import { roundVectorToDown } from "@/src/utils/math/round"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import GameInterface from "@/src/game/game/GameInterface"

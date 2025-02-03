@@ -1,0 +1,79 @@
+import { createVector2, vector2ToVector3 } from "@/src/utils/math/vector"
+import { gameFactory } from "@/src/game/game/GameInterface"
+import {
+  getInMatrix,
+  Matrix2DInterface,
+  matrixToVector,
+} from "@/src/utils/math/matrix"
+import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
+import { gameToMatrix } from "@/src/game/entity/transformer/gameToMatrix"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { appLdType } from "@/src/AppLdType"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+
+const groundsPosition: Matrix2DInterface = [
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+]
+
+const buildingsPosition: Matrix2DInterface = [
+  [1, 1, 1],
+  [1, 1, 1],
+  [1, 1, 1],
+]
+
+const matrixExpected = [
+  [0, 0, 0, 0, 1, 1],
+  [0, 0, 0, 0, 1, 1],
+  [0, 0, 0, 0, 1, 1],
+  [0, 0, 0, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+] as Matrix2DInterface
+
+describe("Test gameEntitiesToMatrix", () => {
+  it("Context 1", () => {
+    const game = gameFactory()
+    const grassMeta = getMetaData<EntityMetaDataInterface>(
+      appLdType.grassGroundEntity,
+    )
+    const grounds = matrixToVector(groundsPosition).map((position) =>
+      grassMeta.factory({
+        game,
+        entity: {
+          position: vector2ToVector3(position),
+        },
+      }),
+    )
+    const towerMeta = getMetaData<EntityMetaDataInterface>(appLdType.towerEntity)
+    const building = matrixToVector(buildingsPosition).map((position) =>
+      towerMeta.factory({
+        game,
+        entity: {
+          position: vector2ToVector3(position),
+        },
+      }),
+    )
+
+    const entities = [...grounds, ...building]
+    entities.forEach((e) => addEntityToGame(game, e))
+    const matrixGame = gameToMatrix(game)
+
+    matrixGame.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        const position = createVector2(x, y)
+        const valueInEntitiesMatrix = getInMatrix(matrixGame, position)
+        const valueInMatrixExpected = getInMatrix(matrixExpected, position)
+        if (valueInMatrixExpected) {
+          expect(typeof valueInEntitiesMatrix).toBe("string")
+        } else {
+          expect(valueInEntitiesMatrix).toBe(0)
+        }
+      })
+    })
+  })
+})

@@ -1,6 +1,6 @@
 import { Vector3Interface } from "@/src/utils/math/vector"
 import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
-import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
+import { aroundDecimal } from "@/src/utils/math/round"
 
 export interface VectorMoveToVectorReturnInterface {
   position: Vector3Interface

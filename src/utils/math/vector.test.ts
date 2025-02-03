@@ -13,7 +13,7 @@ import {
   Vector3Interface,
   vector3ToVector2,
   vectorAddition,
-  vectorSize,
+  vectorDimension,
   vectorTransformer,
 } from "./vector"
 
@@ -65,7 +65,7 @@ describe("Vector Utility Functions", () => {
   test("vectorSize should calculate the size between two vectors", () => {
     const min: Vector2Interface = { x: 1, y: 1 }
     const max: Vector2Interface = { x: 4, y: 5 }
-    const size = vectorSize(min, max)
+    const size = vectorDimension(min, max)
     expect(size).toEqual({ x: 3, y: 4 })
   })
 
@@ -99,8 +99,12 @@ describe("Vector Utility Functions", () => {
       { x: 0.6, y: 0.6 },
       { x: 0.8, y: 0.8 },
       { x: 1, y: 1 },
+      { x: 1.6, y: 1.6 },
+      { x: 2.2, y: 2.2 },
+      { x: 2.8, y: 2.8 },
+      { x: 3.4, y: 3.4 },
+      { x: 4, y: 4 },
     ]
-
     expect(expected).toStrictEqual(expendVector([vector1, vector2, vector3], 5))
   })
 })

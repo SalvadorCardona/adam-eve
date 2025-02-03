@@ -1,3 +1,5 @@
+import { aroundDecimal } from "@/src/utils/math/round"
+
 export interface Vector2Interface {
   x: number
   y: number
@@ -88,7 +90,7 @@ export function vectorAddition<T extends Vector2Interface | Vector3Interface>(
   return result as T
 }
 
-export const vectorSize = (
+export const vectorDimension = (
   min: Vector2Interface,
   max: Vector2Interface,
 ): Vector2Interface => {
@@ -108,7 +110,7 @@ export const expendVector = (
   if (points.length < 2) return points
 
   function lerp(a: number, b: number, t: number): number {
-    return a + (b - a) * t
+    return aroundDecimal(a + (b - a) * t)
   }
 
   const newPoints: Vector2Interface[] = []

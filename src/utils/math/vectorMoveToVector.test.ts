@@ -1,6 +1,6 @@
 import { createVector3 } from "@/src/utils/math/vector"
 
-import { aroundDecimal } from "@/src/utils/math/roundVectorToDown"
+import { aroundDecimal } from "@/src/utils/math/round"
 import {
   vectorMoveToVector,
   VectorMoveToVectorReturnInterface,

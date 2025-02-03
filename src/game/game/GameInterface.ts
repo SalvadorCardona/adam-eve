@@ -19,6 +19,7 @@ import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
 import { config } from "@/src/app/config"
 import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
+import { Matrix2DInterface } from "@/src/utils/math/matrix"
 
 export enum GameState {
   RUN = "run",
@@ -55,7 +56,10 @@ export type GameOption = JsonLDItem<{
   gameMode: GameMode
 }>
 
-type GameSize = JsonLDItem<BoundingInterface>
+type GameSize = JsonLDItem<{
+  bounding: BoundingInterface
+  matrix: Matrix2DInterface
+}>
 
 export default interface GameInterface extends BaseJsonLdInterface {
   mouseState: MouseState

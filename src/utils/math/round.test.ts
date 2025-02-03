@@ -4,7 +4,7 @@ import {
   roundDownToBase,
   roundUpToBase,
   roundVectorToDown,
-} from "@/src/utils/math/roundVectorToDown"
+} from "@/src/utils/math/round"
 import { createVector3 } from "@/src/utils/math/vector"
 
 describe("Test Around", () => {

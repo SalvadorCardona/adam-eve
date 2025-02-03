@@ -1,11 +1,12 @@
 import {
-  createMatrix,
-  getMatrix,
+  createMatrix2D,
+  getInMatrix,
+  Matrix2DInterface,
   matrixDirection,
-  MatrixInterface,
   setMatrix,
 } from "@/src/utils/math/matrix"
 import { createVector2, heuristic, Vector2Interface } from "@/src/utils/math/vector"
+import { PathInterface } from "@/src/utils/math/path"
 
 type CurrentNode = {
   x: number
@@ -19,15 +20,15 @@ type CurrentNode = {
 const matrixDirections = Object.values(matrixDirection)
 
 export const findPathAStar = (
-  grid: MatrixInterface, // La grille (0 = passable, 1 = obstacle)
+  grid: Matrix2DInterface, // La grille (0 = passable, 1 = obstacle)
   start: Vector2Interface,
   end: Vector2Interface,
-): { x: number; y: number }[] | null => {
+): PathInterface | null => {
   const rows = grid.length
   const cols = grid[0].length
 
   const openList: CurrentNode[] = []
-  const closedList = createMatrix(rows, cols)
+  const closedList = createMatrix2D(rows, cols)
 
   openList.push({
     x: start.x,
@@ -64,7 +65,7 @@ export const findPathAStar = (
     for (const dir of matrixDirections) {
       const neighbor = createVector2(current.x + dir.x, current.y + dir.y)
 
-      if (!getMatrix(grid, neighbor) || getMatrix(closedList, neighbor)) {
+      if (!getInMatrix(grid, neighbor) || getInMatrix(closedList, neighbor)) {
         continue // Ignorer les cases non valides ou déjà visitées
       }
 

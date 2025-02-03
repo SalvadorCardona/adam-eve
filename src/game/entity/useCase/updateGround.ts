@@ -6,7 +6,6 @@ import { appLdType } from "@/src/AppLdType"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Vector3Interface } from "@/src/utils/math/vector"
-import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
@@ -18,7 +17,7 @@ export function updateGroundWithGame({ game }: { game: GameInterface }) {
 }
 
 export function updateGround({ entities }: { entities: EntityInterface[] }) {
-  const dimension = getMetaData<EntityMetaDataInterface>(grassGroundEntityMetadata)
+  const dimension = getMetaData<EntityMetaDataInterface>(appLdType.grassGroundEntity)
     .propriety.size as Vector3Interface
   const size = dimension.x
 

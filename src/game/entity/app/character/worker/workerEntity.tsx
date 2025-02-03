@@ -1,7 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import asset2D from "./worker.png"
 import iconFarmerSrc from "./iconFarmer.png"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
@@ -9,7 +8,8 @@ import attackAnimationSrc from "./animation/attack.png"
 import ideAnimationSrc from "./animation/ide.png"
 import moveSrc from "./animation/move.png"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
-import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 
 const moveAnimation = createFramePixiJs({
   image: moveSrc,
@@ -26,7 +26,7 @@ const idleAnimation = createFramePixiJs({
 })
 
 export const workerEntityMetaData = entityMedataFactory({
-  ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "worker"),
+  ["@type"]: appLdType.workerEntity,
   label: "Citoyen",
   asset: {
     model2d: asset2D,
@@ -59,7 +59,9 @@ export const workerEntityMetaData = entityMedataFactory({
     },
   },
   onHit: ({ entity, game }) => {
-    const deathTree = bloodEntityMetaData.factory({
+    const metaData = getMetaData<EntityMetaDataInterface>(appLdType.bloodEntity)
+
+    const deathTree = metaData.factory({
       game,
       entity: { position: entity.position },
     })

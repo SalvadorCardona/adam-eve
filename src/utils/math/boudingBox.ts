@@ -1,7 +1,7 @@
 import {
   Vector2Interface,
   Vector3Interface,
-  vectorSize,
+  vectorDimension,
 } from "@/src/utils/math/vector"
 
 export interface BoundingBox3DOBBInterface {
@@ -35,7 +35,7 @@ export function createBoundingByABB(
   params: BoundingAABInterface & { id?: string },
 ): BoundingInterface {
   const { max, min, id } = params
-  const size = vectorSize(
+  const size = vectorDimension(
     {
       x: min.x,
       y: min.y,
