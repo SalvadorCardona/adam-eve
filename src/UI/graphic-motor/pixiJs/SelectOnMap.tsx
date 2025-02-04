@@ -8,7 +8,6 @@ import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/Sele
 import { useDebounce } from "react-use"
 import { updateGame } from "@/src/game/game/updateGame"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
-import { config } from "@/src/app/config"
 
 let mouseMovePositon = createVector2()
 
@@ -100,10 +99,10 @@ export const SelectOnMap = () => {
       const vectors = diviseVector2D(
         startPosition,
         currentPosition,
-        config.pixiJs2dItemSize,
+        game.camera.zoom,
       )
       vectors.forEach((v) => {
-        g.rect(v.x, v.y, config.pixiJs2dItemSize, config.pixiJs2dItemSize)
+        g.rect(v.x, v.y, game.camera.zoom, game.camera.zoom)
         g.stroke({ width: 2, color: 0xfeeb77 })
       })
 

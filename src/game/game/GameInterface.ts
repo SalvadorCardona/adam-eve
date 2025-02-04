@@ -17,9 +17,8 @@ import {
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
-import { config } from "@/src/app/config"
 import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
-import { Matrix2DInterface } from "@/src/utils/math/matrix"
+import { createMatrix2D, Matrix2DInterface } from "@/src/utils/math/matrix"
 
 export enum GameState {
   RUN = "run",
@@ -56,9 +55,9 @@ export type GameOption = JsonLDItem<{
   gameMode: GameMode
 }>
 
-type GameSize = JsonLDItem<{
+type GameWorld = JsonLDItem<{
   bounding: BoundingInterface
-  matrix: Matrix2DInterface
+  entitiesMatrix: Matrix2DInterface
 }>
 
 export default interface GameInterface extends BaseJsonLdInterface {
@@ -76,19 +75,19 @@ export default interface GameInterface extends BaseJsonLdInterface {
   players: JsonLdIriCollection<PlayerInterface>
   inventory: InventoryBagInterface
   actions: ActionBagInterface
-  gameSize: GameSize
+  gameWorld: GameWorld
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
   return jsonLdFactory(appLdType.game, {
     players: JsonLdIriCollectionFactory(appLdType.player),
-    gameSize: jsonLdFactory<GameSize>(
-      appLdType.gameSize,
-      createBoundingByABB({
+    gameWorld: jsonLdFactory<GameWorld>(appLdType.gameWorld, {
+      bounding: createBoundingByABB({
         min: createVector2(),
         max: createVector2(),
       }),
-    ),
+      entitiesMatrix: createMatrix2D(0, 0),
+    }),
     graphicMotor: GraphicMotor.PIXI_JS,
     gameOption: jsonLdFactory<GameOption>(appLdType.camera, {
       gameSpeed: 1,
@@ -106,7 +105,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       position: createVector2(),
     }),
     camera: jsonLdFactory(appLdType.camera, {
-      zoom: config.pixiJs2dItemSize,
+      zoom: 50,
       position: {
         x: 0,
         y: 0,

@@ -1,7 +1,6 @@
 import {
   BoundingInterface,
-  createBoundingByABB,
-  mergeBounding,
+  mergeBoundingCollection,
 } from "@/src/utils/math/boudingBox"
 import { createVector2, Vector2Interface } from "@/src/utils/math/vector"
 
@@ -57,7 +56,7 @@ export const matrixToVector = (matrix: Matrix2DInterface): Vector2Interface[] =>
 }
 
 export const createMatrixByBounding = (boundItems: BoundingInterface[]) => {
-  const matrixBound = createMatrixBounding(boundItems)
+  const matrixBound = mergeBoundingCollection(boundItems)
   const matrix = createMatrix2D(matrixBound.size.x, matrixBound.size.y)
   return fillMatrix(boundItems, matrix)
 }
@@ -87,21 +86,6 @@ export function subtractMatrix(
       return targetValue ? 0 : cell
     }),
   )
-}
-
-export const createMatrixBounding = (
-  bounds: BoundingInterface[],
-): BoundingInterface => {
-  let matrixBounding = createBoundingByABB({
-    min: createVector2(Infinity, Infinity),
-    max: createVector2(-Infinity, -Infinity),
-  })
-
-  for (const bound of bounds) {
-    matrixBounding = mergeBounding(matrixBounding, bound)
-  }
-
-  return matrixBounding
 }
 
 const fillMatrix = (boundItems: BoundingInterface[], matrix: Matrix2DInterface) => {

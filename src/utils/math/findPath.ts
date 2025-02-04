@@ -5,8 +5,9 @@ import {
   matrixDirection,
   setMatrix,
 } from "@/src/utils/math/matrix"
-import { createVector2, heuristic, Vector2Interface } from "@/src/utils/math/vector"
+import { createVector2, Vector2Interface } from "@/src/utils/math/vector"
 import { PathInterface } from "@/src/utils/math/path"
+import { heuristic } from "@/src/utils/math/heuristic"
 
 type CurrentNode = {
   x: number

@@ -1,7 +1,7 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
 
-export const findClosest = (
+export const findClosestEntity = (
   entity: EntityInterface,
   entities: EntityInterface[],
   minDistance: number = Infinity,

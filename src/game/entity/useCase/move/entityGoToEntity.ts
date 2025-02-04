@@ -1,36 +1,44 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { Vector3Interface } from "@/src/utils/math/vector"
+import {
+  createVector2,
+  extendVectorByDistance,
+  Vector2Interface,
+  vector2ToVector3,
+  Vector3Interface,
+  vector3ToVector2,
+  vectorAddition,
+} from "@/src/utils/math/vector"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import { vectorMoveToVector } from "@/src/utils/math/vectorMoveToVector"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { entitiesToMatrix } from "@/src/game/entity/transformer/entitiesToMatrix"
-import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 import { findPathAStar } from "@/src/utils/math/findPath"
+import { roundVector } from "@/src/utils/math/round"
+import { getEntitySpeed } from "@/src/game/entity/useCase/query/getEntitySpeed"
+import {
+  consumePath,
+  createConsumablePath,
+  PathInterface,
+  PathResponseInterface,
+} from "@/src/utils/math/path"
+import { matrixDirection } from "@/src/utils/math/matrix"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
 
 interface EntityGoPositionParams {
   entity: EntityInterface
   target: EntityInterface
 }
 
-interface EntityGoPositionOutput {
-  distance: number
-  isFinish: boolean
-}
-
 export function entityGoToEntity({
   entity,
   target,
-}: EntityGoPositionParams): EntityGoPositionOutput {
+}: EntityGoPositionParams): PathResponseInterface {
   const targetPosition: Vector3Interface = target.position
   const entityPosition: Vector3Interface = entity.position
-  const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
 
   const result = vectorMoveToVector(
     entityPosition,
     targetPosition,
-    entityMetaData.propriety?.speed ?? 0.1,
+    getEntitySpeed(entity),
   )
 
   entity.position = result.position
@@ -39,6 +47,7 @@ export function entityGoToEntity({
   return {
     distance: result.distance,
     isFinish: entityHasCollision(entity, target),
+    unreachable: true,
   }
 }
 
@@ -48,26 +57,59 @@ interface EntityGoPositionParamsWithGround {
   game: GameInterface
 }
 
-export function entityGoToEntityWithCollision({
+export function entityGoToEntityWithGround({
   game,
   entity,
   target,
-}: EntityGoPositionParamsWithGround): EntityGoPositionOutput {
-  const targetPosition: Vector3Interface = target.position
-  const entityPosition: Vector3Interface = entity.position
-  const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
-  const entitySpeed = entityMetaData.propriety?.speed ?? 0.1
-  const gameMatrix = entitiesToMatrix(getEntitiesInGame(game))
-  const path = findPathAStar(gameMatrix, entityPosition, targetPosition)
+}: EntityGoPositionParamsWithGround): PathResponseInterface {
+  const targetPosition = roundVector(vector3ToVector2(target.position))
+  const entityPosition = roundVector(vector3ToVector2(entity.position))
+  const hash = entity["@id"] + target["@id"] + JSON.stringify(targetPosition)
+  const distance = distanceBetweenVector2(entityPosition, targetPosition)
+
+  if (distance < 1) {
+    return entityGoToEntity({ entity, target })
+  }
+
+  if (entity.currentPath && entity.currentPath.hash === hash) {
+    consumePath(entity.currentPath)
+    entity.position = vector2ToVector3(entity.currentPath.currentPosition)
+    if (entity.currentPath.currentRotation) {
+      entity.rotation = entity.currentPath.currentRotation
+    }
+
+    return entity.currentPath
+  }
+
+  const speed = getEntitySpeed(entity)
+  const directions: Vector2Interface[] = [
+    createVector2(0, 0),
+    ...Object.values(matrixDirection),
+  ]
+  let path: PathInterface | null = null
+
+  for (const direction of directions) {
+    path = findPathAStar(
+      game.gameWorld.entitiesMatrix,
+      entityPosition,
+      vectorAddition(direction, targetPosition),
+    )
+    if (path) {
+      break
+    }
+  }
 
   if (!path) {
     return {
+      unreachable: true,
       distance: 0,
-      isFinish: true,
+      isFinish: false,
     }
   }
-  return {
-    distance: result.distance,
-    isFinish: entityHasCollision(entity, target),
-  }
+
+  const pathExtended = extendVectorByDistance(path, speed)
+  entity.currentPath = createConsumablePath(pathExtended)
+  entity.currentPath.hash = hash
+
+  return entity.currentPath
 }

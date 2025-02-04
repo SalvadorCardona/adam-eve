@@ -8,6 +8,7 @@ import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterfa
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
+import { ConsumablePathInterface } from "@/src/utils/math/path"
 
 export enum EntityFaction {
   enemy = "enemy",
@@ -17,6 +18,7 @@ export enum EntityFaction {
 export default interface EntityInterface extends BaseJsonLdInterface {
   rotation: number
   position: Vector3Interface
+  currentPath?: ConsumablePathInterface
   life: number
   state?: EntityState
   numberOfWorker?: number
@@ -24,6 +26,8 @@ export default interface EntityInterface extends BaseJsonLdInterface {
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
   createdAt: number
+  workers?: EntityInterface["@id"][]
+  inventory?: InventoryBagInterface
   connections: {
     top?: JsonLdIri
     bottom?: JsonLdIri

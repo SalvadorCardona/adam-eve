@@ -15,7 +15,7 @@ describe("Test path createConsumablePath", () => {
   it("Context 1", () => {
     const result = createConsumablePath(inputPath)
     const expected: ConsumablePathInterface = {
-      length: inputPath.length,
+      distance: inputPath.length,
       start: inputPath[0],
       end: inputPath[inputPath.length - 1],
       currentPath: 0,

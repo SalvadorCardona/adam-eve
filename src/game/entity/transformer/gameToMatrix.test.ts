@@ -6,7 +6,6 @@ import {
   matrixToVector,
 } from "@/src/utils/math/matrix"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
-import { gameToMatrix } from "@/src/game/entity/transformer/gameToMatrix"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
@@ -61,7 +60,7 @@ describe("Test gameEntitiesToMatrix", () => {
 
     const entities = [...grounds, ...building]
     entities.forEach((e) => addEntityToGame(game, e))
-    const matrixGame = gameToMatrix(game)
+    const matrixGame = game.gameWorld.entitiesMatrix
 
     matrixGame.forEach((row, y) => {
       row.forEach((cell, x) => {

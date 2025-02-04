@@ -4,8 +4,8 @@ import {
   areVectorsEqual,
   createVector2,
   createVector3,
-  expendVector,
-  heuristic,
+  extendVectorByDistance,
+  extendVectorByStep,
   isVector2,
   isVector3,
   Vector2Interface,
@@ -16,6 +16,7 @@ import {
   vectorDimension,
   vectorTransformer,
 } from "./vector"
+import { heuristic } from "@/src/utils/math/heuristic"
 
 describe("Vector Utility Functions", () => {
   test("createVector2 should create a Vector2Interface", () => {
@@ -88,7 +89,7 @@ describe("Vector Utility Functions", () => {
     expect(expected).toStrictEqual(vectorAddition(vector1, vector2))
   })
 
-  test("Vector Addition", () => {
+  test("Vector Extend by steps", () => {
     const vector1: Vector2Interface = { x: 0, y: 0 }
     const vector2: Vector2Interface = { x: 1, y: 1 }
     const vector3: Vector2Interface = { x: 4, y: 4 }
@@ -105,6 +106,114 @@ describe("Vector Utility Functions", () => {
       { x: 3.4, y: 3.4 },
       { x: 4, y: 4 },
     ]
-    expect(expected).toStrictEqual(expendVector([vector1, vector2, vector3], 5))
+    expect(expected).toStrictEqual(
+      extendVectorByStep([vector1, vector2, vector3], 5),
+    )
+  })
+
+  test("Vector Extend by distance", () => {
+    const vector1: Vector2Interface = { x: 0, y: 0 }
+    const vector2: Vector2Interface = { x: 1, y: 1 }
+    const vector3: Vector2Interface = { x: 1.5, y: 1.5 }
+    const expected = [
+      {
+        x: 0,
+        y: 0,
+      },
+      {
+        x: 0.07,
+        y: 0.07,
+      },
+      {
+        x: 0.14,
+        y: 0.14,
+      },
+      {
+        x: 0.21,
+        y: 0.21,
+      },
+      {
+        x: 0.28,
+        y: 0.28,
+      },
+      {
+        x: 0.35,
+        y: 0.35,
+      },
+      {
+        x: 0.42,
+        y: 0.42,
+      },
+      {
+        x: 0.49,
+        y: 0.49,
+      },
+      {
+        x: 0.57,
+        y: 0.57,
+      },
+      {
+        x: 0.64,
+        y: 0.64,
+      },
+      {
+        x: 0.71,
+        y: 0.71,
+      },
+      {
+        x: 0.78,
+        y: 0.78,
+      },
+      {
+        x: 0.85,
+        y: 0.85,
+      },
+      {
+        x: 0.92,
+        y: 0.92,
+      },
+      {
+        x: 0.99,
+        y: 0.99,
+      },
+      {
+        x: 1,
+        y: 1,
+      },
+      {
+        x: 1.07,
+        y: 1.07,
+      },
+      {
+        x: 1.14,
+        y: 1.14,
+      },
+      {
+        x: 1.21,
+        y: 1.21,
+      },
+      {
+        x: 1.28,
+        y: 1.28,
+      },
+      {
+        x: 1.35,
+        y: 1.35,
+      },
+      {
+        x: 1.42,
+        y: 1.42,
+      },
+      {
+        x: 1.49,
+        y: 1.49,
+      },
+      {
+        x: 1.5,
+        y: 1.5,
+      },
+    ]
+    const result = extendVectorByDistance([vector1, vector2, vector3], 0.1)
+    expect(expected).toStrictEqual(result)
   })
 })

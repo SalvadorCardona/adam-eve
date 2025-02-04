@@ -10,7 +10,7 @@ import {
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
 
 interface ZombieAttackAction {}
 
@@ -45,7 +45,7 @@ export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAct
       }
 
       if (enemy && entity.state === EntityState.go_to_enemy) {
-        const result = entityGoToEntity({ entity, target: enemy })
+        const result = entityGoToEntityWithGround({ game, entity, target: enemy })
 
         if (entityCanBeAttackEntity(entity, enemy)) {
           entity.state = EntityState.attack

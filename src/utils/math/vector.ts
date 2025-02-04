@@ -1,4 +1,5 @@
-import { aroundDecimal } from "@/src/utils/math/round"
+import { lerp } from "@/src/utils/math/lerp"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
 
 export interface Vector2Interface {
   x: number
@@ -100,18 +101,11 @@ export const vectorDimension = (
   return createVector2(width, height)
 }
 
-export const heuristic = (vector1: Vector2Interface, vector2: Vector2Interface) =>
-  Math.abs(vector1.x - vector2.x) + Math.abs(vector1.y - vector2.y)
-
-export const expendVector = (
+export const extendVectorByStep = (
   points: Vector2Interface[],
   steps: number,
 ): Vector2Interface[] => {
   if (points.length < 2) return points
-
-  function lerp(a: number, b: number, t: number): number {
-    return aroundDecimal(a + (b - a) * t)
-  }
 
   const newPoints: Vector2Interface[] = []
 
@@ -128,6 +122,37 @@ export const expendVector = (
         x: lerp(p1.x, p2.x, t),
         y: lerp(p1.y, p2.y, t),
       })
+    }
+  }
+
+  newPoints.push(points[points.length - 1]) // Ajouter le dernier point
+
+  return newPoints
+}
+
+export const extendVectorByDistance = (
+  points: Vector2Interface[],
+  distance: number,
+): Vector2Interface[] => {
+  if (points.length < 2) return points
+
+  const newPoints: Vector2Interface[] = []
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const p1 = points[i]
+    const p2 = points[i + 1]
+    const segmentDistance = distanceBetweenVector2(p1, p2)
+
+    newPoints.push(p1) // Garder le point original
+
+    let currentDistance = distance
+    while (currentDistance < segmentDistance) {
+      const t = currentDistance / segmentDistance
+      newPoints.push({
+        x: lerp(p1.x, p2.x, t),
+        y: lerp(p1.y, p2.y, t),
+      })
+      currentDistance += distance
     }
   }
 

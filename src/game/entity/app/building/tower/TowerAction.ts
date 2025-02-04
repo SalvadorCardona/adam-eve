@@ -1,7 +1,7 @@
 import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
-import { findClosest } from "@/src/utils/math/findClosest"
+import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import EntityInterface from "@/src/game/entity/EntityInterface"
@@ -21,7 +21,7 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
 
     const size = getEntitySize(entity)
     const zombies = entityQuery(game, { "@type": zombieEntityMetaData["@type"] })
-    const zombie = findClosest(entity, zombies)
+    const zombie = findClosestEntity(entity, zombies)
 
     if (!zombie) {
       return

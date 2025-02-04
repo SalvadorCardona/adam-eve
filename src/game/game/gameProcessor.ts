@@ -5,7 +5,7 @@ import { BuildingEntityInterface } from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { GameMetadataInterface } from "@/src/game/game/GameMetaData"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { updateEntityInGame } from "@/src/game/entity/useCase/updateEntityInGame"
+import { updateEntityInGame } from "@/src/game/game/useCase/command/updateEntityInGame"
 import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 
 export function gameProcessor(game: GameInterface) {

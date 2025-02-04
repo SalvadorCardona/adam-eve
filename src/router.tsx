@@ -3,7 +3,8 @@ import { routeTree } from "./routeTree.gen"
 import { NotFound } from "@/components/NotFound"
 import React from "react"
 import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary"
-import { config } from "@/src/app/config"
+
+const isDev = import.meta.env.MODE === "development"
 
 export function createRouter() {
   const router = createTanStackRouter({
@@ -13,7 +14,7 @@ export function createRouter() {
     defaultNotFoundComponent: () => <NotFound />,
   })
 
-  if (!config.isDev) {
+  if (!isDev) {
     router.basepath = "/adam-eve"
   }
 

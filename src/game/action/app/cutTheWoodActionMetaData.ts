@@ -7,7 +7,7 @@ import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEnt
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
-import { entityGoToEntityWithCollision } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 
 interface CutTheWoodDataInterface {}
@@ -33,7 +33,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
           return
         }
 
-        const result = entityGoToEntityWithCollision({
+        const result = entityGoToEntityWithGround({
           entity,
           target: newTreeEntity,
           game,
@@ -53,7 +53,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         if (woodRessource.quantity > 50) {
           entity.state = EntityState.go_to_put_ressource
         }
-
+        console.log(woodRessource.quantity)
         action.nextTick = game.time + 10
       }
 
@@ -63,7 +63,7 @@ export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInt
         })
 
         if (!newTimberHouseEntity) return
-        const result = entityGoToEntityWithCollision({
+        const result = entityGoToEntityWithGround({
           game,
           entity,
           target: newTimberHouseEntity,

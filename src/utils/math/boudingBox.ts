@@ -1,4 +1,5 @@
 import {
+  createVector2,
   Vector2Interface,
   Vector3Interface,
   vectorDimension,
@@ -116,6 +117,21 @@ export function boundingIsOver(
     boundingTarget.min.y < boundingSource.min.y ||
     boundingTarget.max.y > boundingSource.max.y
   )
+}
+
+export function mergeBoundingCollection(
+  bounds: BoundingInterface[],
+): BoundingInterface {
+  let matrixBounding = createBoundingByABB({
+    min: createVector2(0, 0),
+    max: createVector2(0, 0),
+  })
+
+  for (const bound of bounds) {
+    matrixBounding = mergeBounding(matrixBounding, bound)
+  }
+
+  return matrixBounding
 }
 
 export function mergeBounding(
