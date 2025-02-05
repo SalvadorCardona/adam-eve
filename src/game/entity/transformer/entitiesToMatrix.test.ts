@@ -1,12 +1,14 @@
 import { entitiesToMatrix } from "@/src/game/entity/transformer/entitiesToMatrix"
 import { createVector2, vector2ToVector3 } from "@/src/utils/math/vector"
-import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { gameFactory } from "@/src/game/game/GameInterface"
 import {
   getInMatrix,
   Matrix2DInterface,
   matrixToVector,
 } from "@/src/utils/math/matrix"
+import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { appLdType } from "@/src/AppLdType"
 
 const entitiesPosition: Matrix2DInterface = [
   [1, 1, 0, 0, 1, 1],
@@ -28,8 +30,12 @@ const matrixExpected = [
 
 describe("Test gameEntitiesToMatrix", () => {
   it("Context 1", () => {
+    const entityMetadata = getMetaData<EntityMetaDataInterface>(
+      appLdType.grassGroundEntity,
+    )
+
     const entities = matrixToVector(entitiesPosition).map((position) =>
-      grassGroundEntityMetadata.factory({
+      entityMetadata.factory({
         game: gameFactory(),
         entity: {
           position: vector2ToVector3(position),

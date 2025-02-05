@@ -22,6 +22,7 @@ describe("Test path createConsumablePath", () => {
       path: inputPath,
       isFinish: false,
       currentPosition: inputPath[0],
+      unreachable: false,
     }
 
     expect(result).toStrictEqual(expected)

@@ -1,20 +1,20 @@
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
 import {
   BuildingEntityInterface,
   CharacterEntityInterface,
 } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
 import {
+  entityFindOneById,
   entityQuery,
-  entityQueryFindOne,
 } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { removeByIndex } from "@/src/utils/array/array"
+import { addActionToEntity } from "@/src/game/action/addAction"
 
 export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
   ["@type"]: appLdType.findWorkerAction,
@@ -26,11 +26,12 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
     })
 
     buildings.forEach((building) => {
-      building.workers.forEach((worker, e) => {
-        if (entityQueryFindOne(game, { "@id": worker })) {
-          building.workers = removeByIndex(building.workers, e)
-        }
-      })
+      building.workers &&
+        building.workers.forEach((workerIri, e) => {
+          if (entityFindOneById(game, workerIri) && building.workers) {
+            building.workers = removeByIndex(building.workers, e)
+          }
+        })
     })
 
     buildings.filter((building) => {
@@ -74,8 +75,8 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
           ) {
             building.workers.push(worker["@id"])
 
-            addAction(
-              worker.actions,
+            addActionToEntity(
+              worker,
               metaData.workerAction.factory({ entity: worker, game }),
             )
           }
@@ -84,6 +85,6 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
     }
   },
   factory: () => {
-    return jsonLdFactory(findWorkerCharacterActionMetadata["@type"], {})
+    return createJsonLd(findWorkerCharacterActionMetadata["@type"], {})
   },
 }

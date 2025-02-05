@@ -58,6 +58,13 @@ export function entityQueryFindOne<T = EntityInterface>(
   return result.length ? result[0] : undefined
 }
 
+export function entityFindOneById<T = EntityInterface>(
+  game: GameInterface,
+  id: JsonLdIri,
+): undefined | T {
+  return game.entities[id] as T
+}
+
 export function entityQuery<T = EntityInterface>(
   game: GameInterface,
   query: EntityQueryParams,
@@ -124,9 +131,9 @@ export function entityQuery<T = EntityInterface>(
 
   if (faction) {
     entities = entities.filter((entity) => {
-      return entity.faction && Array.isArray(faction)
+      return entity.createdBy && Array.isArray(faction)
         ? faction.includes(entity.faction)
-        : entity.faction === faction
+        : entity.createdBy === faction
     })
   }
 

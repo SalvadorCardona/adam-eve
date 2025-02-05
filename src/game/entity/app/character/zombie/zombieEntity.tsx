@@ -3,7 +3,7 @@ import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import iconFarmerSrc from "./img.png"
 import zombieUrl from "./zombie.png"
 
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { EntityState } from "@/src/game/entity/EntityState"
@@ -32,7 +32,7 @@ const idleAnimation = createFramePixiJs({
 })
 
 export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
-  ["@type"]: JsonLdTypeFactory(appLdType.entityCharacter, "zombie"),
+  ["@type"]: createJsonLdType(appLdType.entityCharacter, "zombie"),
   label: "Zombie",
   asset: {
     model2d: zombieUrl,

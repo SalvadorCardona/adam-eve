@@ -1,4 +1,4 @@
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
 const entityBuilding = "entity/building"
 const entityEffect = "entity/effect"
@@ -13,7 +13,7 @@ export const appLdType = {
   mouseState: "mouseState",
   game: "game",
   gameOption: "gameOption",
-  player: "player",
+  players: "player",
   entity: "entity",
   entityBuilding,
   typeAction,
@@ -26,20 +26,22 @@ export const appLdType = {
   saveGame: "save-game",
   userAction: "user-action",
   // Effect
-  bloodEntity: JsonLdTypeFactory(entityEffect, "blood"),
+  bloodEntity: createJsonLdType(entityEffect, "blood"),
   // Building
-  timberHouseEntity: JsonLdTypeFactory(entityBuilding, "timberHouse"),
-  towerEntity: JsonLdTypeFactory(entityBuilding, "tower"),
-  workerEntity: JsonLdTypeFactory(entityCharacter, "worker"),
-  grassGroundEntity: JsonLdTypeFactory(entityGround, "grass"),
+  timberHouseEntity: createJsonLdType(entityBuilding, "timberHouse"),
+  towerEntity: createJsonLdType(entityBuilding, "tower"),
+  workerEntity: createJsonLdType(entityCharacter, "worker"),
+  grassGroundEntity: createJsonLdType(entityGround, "grass"),
   // Action
-  findWorkerAction: JsonLdTypeFactory(typeAction, "findWorkerCharacter"),
-  cutTheWoodAction: JsonLdTypeFactory(typeAction, "cutTheWood"),
-  towerAttackAction: JsonLdTypeFactory(typeAction, "TowerAttack"),
+  findWorkerAction: createJsonLdType(typeAction, "findWorkerCharacter"),
+  cutTheWoodAction: createJsonLdType(typeAction, "cutTheWood"),
+  towerAttackAction: createJsonLdType(typeAction, "TowerAttack"),
   // Ressource
-  woodRessource: JsonLdTypeFactory(typeRessource, "wood"),
-  theDeathAction: JsonLdTypeFactory(typeAction, "TheDeathActionMetadata"),
+  theDeathAction: createJsonLdType(typeAction, "TheDeathActionMetadata"),
   gameWorld: "gameWorld",
+  // inventory
+  inventory: "inventory",
+  inventoryItem: "inventoryItem",
 }
 
 export const appLdTypeEntity = [

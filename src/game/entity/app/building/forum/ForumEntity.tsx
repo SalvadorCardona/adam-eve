@@ -2,7 +2,7 @@ import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
 import model from "./model.png"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 
 export const forumEntityMetaData = entityMedataFactory({
@@ -24,6 +24,6 @@ export const forumEntityMetaData = entityMedataFactory({
       z: 2,
     },
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "forum"),
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "forum"),
   label: "Centre Ville",
 })

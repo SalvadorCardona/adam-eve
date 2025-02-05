@@ -1,6 +1,6 @@
 import GameInterface, { gameFactory } from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { JsonLdIri, JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import {
   getItemsInLocalStorageByPrefix,
   getLocalStorage,
@@ -17,7 +17,7 @@ export interface GameMetadataInterface extends BaseGameMetaDataInterface {
   removeItem: (iriSaveGame: JsonLdIri) => void
 }
 
-const ldType = JsonLdTypeFactory(appLdType.game)
+const ldType = createJsonLdType(appLdType.game)
 
 export const gameMetadata: GameMetadataInterface = {
   "@type": appLdType.game,

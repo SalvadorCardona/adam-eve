@@ -3,16 +3,16 @@ import {
   ActionnableInterface,
 } from "@/src/game/action/ActionBagInterface"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
-import { updateContainer } from "@/src/utils/jsonLd/jsonLd"
+import { ContainerAction, updateContainer } from "@/src/utils/jsonLd/jsonLd"
 
-export function addAction(
+export function removeAction(
   bag: ActionBagInterface,
   action: ActionInterface<any>,
 ): void {
   updateContainer(bag, action)
 }
 
-export function addActionToEntity(
+export function removeActionFromEntity(
   sujet: ActionnableInterface,
   action: ActionInterface<any>,
 ): void {
@@ -20,5 +20,5 @@ export function addActionToEntity(
     sujet.actions = {}
   }
 
-  updateContainer(sujet.actions, action)
+  updateContainer(sujet.actions, action, ContainerAction.remove)
 }

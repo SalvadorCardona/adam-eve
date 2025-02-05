@@ -1,4 +1,4 @@
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
 import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
@@ -42,6 +42,6 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
     action.nextTick = game.time + 400
   },
   factory: () => {
-    return jsonLdFactory(TowerAttackActionMetadata["@type"], {})
+    return createJsonLd(TowerAttackActionMetadata["@type"], {})
   },
 }

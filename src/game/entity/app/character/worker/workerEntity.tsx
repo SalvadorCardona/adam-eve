@@ -10,6 +10,7 @@ import moveSrc from "./animation/move.png"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { workerEntityMetaDataType } from "@/src/game/entity/app/character/worker/workerEntityMetaDataType"
 
 const moveAnimation = createFramePixiJs({
   image: moveSrc,
@@ -26,7 +27,7 @@ const idleAnimation = createFramePixiJs({
 })
 
 export const workerEntityMetaData = entityMedataFactory({
-  ["@type"]: appLdType.workerEntity,
+  ["@type"]: workerEntityMetaDataType,
   label: "Citoyen",
   asset: {
     model2d: asset2D,

@@ -1,4 +1,4 @@
-import { jsonLdFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { appLdType } from "@/src/AppLdType"
@@ -18,6 +18,6 @@ export const theDeathActionMetadata: ActionMetadataInterface<any> = {
     entities.forEach((entity) => removeEntityToGame(game, entity))
   },
   factory: () => {
-    return jsonLdFactory(theDeathActionMetadata["@type"], {})
+    return createJsonLd(theDeathActionMetadata["@type"], {})
   },
 }

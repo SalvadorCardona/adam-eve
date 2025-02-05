@@ -4,41 +4,43 @@ import {
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
 import { Vector3Interface } from "@/src/utils/math/vector"
-import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
-import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
+import {
+  ActionBagInterface,
+  ActionnableInterface,
+} from "@/src/game/action/ActionBagInterface"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { ConsumablePathInterface } from "@/src/utils/math/path"
+import { Direction } from "@/src/utils/math/matrix"
+import { PlayerInterface } from "@/src/game/player/playerMetadata"
+import {
+  InventoryAbleInterface,
+  InventoryInterface,
+} from "@/src/game/inventory/InventoryInterface"
 
 export enum EntityFaction {
   enemy = "enemy",
   self = "self",
 }
 
-export default interface EntityInterface extends BaseJsonLdInterface {
+export default interface EntityInterface
+  extends BaseJsonLdInterface,
+    ActionnableInterface,
+    InventoryAbleInterface {
   rotation: number
   position: Vector3Interface
   currentPath?: ConsumablePathInterface
   life: number
   state?: EntityState
-  numberOfWorker?: number
   faction: EntityFaction
+  createdBy?: PlayerInterface["@id"]
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
   createdAt: number
   workers?: EntityInterface["@id"][]
-  inventory?: InventoryBagInterface
-  connections: {
-    top?: JsonLdIri
-    bottom?: JsonLdIri
-    left?: JsonLdIri
-    right?: JsonLdIri
-    topRight?: JsonLdIri
-    topLeft?: JsonLdIri
-    bottomLeft?: JsonLdIri
-    bottomRight?: JsonLdIri
-    on?: JsonLdIri
-  }
+  inventory?: InventoryInterface
+  connections?: Partial<Record<Direction, JsonLdIri>>
+  size: Vector3Interface
 }
 
 export function isEntity(entity: EntityInterface): entity is EntityInterface {
@@ -80,15 +82,8 @@ export function getEntityBaseType(entity: EntityInterface): JsonLdType | undefin
 
 export interface RessourceEntityInterface extends EntityInterface {}
 
-export interface CharacterEntityInterface extends EntityInterface {
-  actions: ActionBagInterface
-  inventory: InventoryBagInterface
-}
+export interface CharacterEntityInterface extends EntityInterface {}
 
-export interface BuildingEntityInterface extends EntityInterface {
-  actions: ActionBagInterface
-  workers: EntityInterface["@id"][]
-  inventory: InventoryBagInterface
-}
+export interface BuildingEntityInterface extends EntityInterface {}
 
 export interface GroundEntityInterface extends EntityInterface {}

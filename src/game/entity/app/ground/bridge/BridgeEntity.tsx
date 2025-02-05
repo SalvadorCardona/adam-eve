@@ -1,6 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
@@ -37,6 +37,6 @@ export const bridgeEntityMetaData = entityMedataFactory({
 
     return true
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "bridge"),
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "bridge"),
   label: "Pont",
 })

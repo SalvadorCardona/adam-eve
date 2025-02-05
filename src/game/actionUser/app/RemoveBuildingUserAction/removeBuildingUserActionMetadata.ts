@@ -5,7 +5,7 @@ import song from "./broken-sound.wav?url"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 
@@ -14,7 +14,7 @@ export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {
     icon: icon,
   },
   mouseIcon: mouseIcon.removeBuilding,
-  "@type": JsonLdTypeFactory(appLdType.userAction, "remove-building"),
+  "@type": createJsonLdType(appLdType.userAction, "remove-building"),
   onCall: ({ game }) => {
     game.userControl.currentAction = removeBuildingUserActionMetadata
   },

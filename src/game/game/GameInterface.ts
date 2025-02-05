@@ -1,10 +1,9 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
 import {
   BaseJsonLdInterface,
-  jsonLdFactory,
+  createJsonLd,
+  createJsonLdCollection,
   JsonLdIriCollection,
-  JsonLdIriCollectionFactory,
   JsonLdIriContainerInterface,
   JsonLDItem,
 } from "@/src/utils/jsonLd/jsonLd"
@@ -16,9 +15,10 @@ import {
 } from "@/src/utils/math/vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { appLdType } from "@/src/AppLdType"
-import { PlayerInterface } from "@/src/game/player/SaveGameMetadataInterface"
+import { PlayerInterface } from "@/src/game/player/playerMetadata"
 import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
 import { createMatrix2D, Matrix2DInterface } from "@/src/utils/math/matrix"
+import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 
 export enum GameState {
   RUN = "run",
@@ -73,15 +73,15 @@ export default interface GameInterface extends BaseJsonLdInterface {
   time: number
   entities: JsonLdIriContainerInterface<EntityInterface>
   players: JsonLdIriCollection<PlayerInterface>
-  inventory: InventoryBagInterface
+  inventory: InventoryInterface
   actions: ActionBagInterface
   gameWorld: GameWorld
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
-  return jsonLdFactory(appLdType.game, {
-    players: JsonLdIriCollectionFactory(appLdType.player),
-    gameWorld: jsonLdFactory<GameWorld>(appLdType.gameWorld, {
+  return createJsonLd(appLdType.game, {
+    players: createJsonLdCollection(appLdType.players),
+    gameWorld: createJsonLd<GameWorld>(appLdType.gameWorld, {
       bounding: createBoundingByABB({
         min: createVector2(),
         max: createVector2(),
@@ -89,7 +89,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       entitiesMatrix: createMatrix2D(0, 0),
     }),
     graphicMotor: GraphicMotor.PIXI_JS,
-    gameOption: jsonLdFactory<GameOption>(appLdType.camera, {
+    gameOption: createJsonLd<GameOption>(appLdType.camera, {
       gameSpeed: 1,
       gameState: GameState.RUN,
       gameMode: GameMode.NORMAL,
@@ -99,12 +99,12 @@ export function gameFactory(game?: GameInterface): GameInterface {
     entities: {},
     inventory: {},
     createdAt: new Date(),
-    mouseState: jsonLdFactory<MouseState>(appLdType.mouseState, {
+    mouseState: createJsonLd<MouseState>(appLdType.mouseState, {
       startPosition: createVector2(),
       endPosition: createVector2(),
       position: createVector2(),
     }),
-    camera: jsonLdFactory(appLdType.camera, {
+    camera: createJsonLd(appLdType.camera, {
       zoom: 50,
       position: {
         x: 0,
@@ -112,7 +112,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
         z: 0,
       },
     }),
-    userControl: jsonLdFactory(appLdType.userControl, {
+    userControl: createJsonLd(appLdType.userControl, {
       entitiesSelected: [],
       showGrid: true,
     }),

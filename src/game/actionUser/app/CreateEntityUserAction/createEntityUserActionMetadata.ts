@@ -5,7 +5,7 @@ import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
@@ -21,7 +21,7 @@ interface CreateBuildingUserActionMetadataInterface
 export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInterface =
   {
     mouseIcon: mouseIcon.build,
-    "@type": JsonLdTypeFactory(appLdType.userAction, "create-building"),
+    "@type": createJsonLdType(appLdType.userAction, "create-building"),
     onCall: ({ game, metaData }) => {
       createEntityUserActionMetadata.data.entityMetaData =
         metaData as EntityMetaDataInterface

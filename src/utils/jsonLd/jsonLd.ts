@@ -3,6 +3,10 @@ import { createChannelPubSub } from "@/src/utils/functionnal/pubsub"
 
 export const containerPubSub = createChannelPubSub<ContainerPublish>()
 
+export interface ContainerInterface<T = any> {
+  [key: string]: T
+}
+
 export interface ContainerPublish {
   item: BaseJsonLdInterface
   action: ContainerAction
@@ -41,36 +45,62 @@ export interface JsonLdIriCollection<T = BaseJsonLdInterface>
   totalItems: number
 }
 
-function isJsonLdIriCollection(object: object): object is JsonLdIriCollection {
-  return Object.hasOwn(object, "@context")
+export interface JsonLdTypeCollection<T = BaseJsonLdInterface>
+  extends BaseJsonLdInterface {
+  "@id": JsonLdIri
+  "@type": JsonLdType
+  "@context": "collection"
+  "@version": number
+  collection: JsonLdTypeContainerInterface<T>
+  totalItems: number
 }
 
-export function JsonLdIriCollectionFactory<T = JsonLdIriCollection>(
+export function updateCollection(
+  collection: JsonLdIriCollection,
+  item: JsonLDItem<any>,
+  action: ContainerAction = ContainerAction.update,
+): JsonLDItem<any> {
+  updateContainer(collection.collection, item, action)
+  collection.totalItems = Object.keys(collection.collection).length
+  return updateItem(collection, action)
+}
+
+export function updateCollectionOfType(
+  collection: JsonLdTypeCollection,
+  item: JsonLDItem<any>,
+  action: ContainerAction = ContainerAction.update,
+): JsonLDItem<any> {
+  updateContainerByType(collection.collection, item, action)
+  collection.totalItems = Object.keys(collection.collection).length
+  return updateItem(collection, action)
+}
+
+export function createJsonLdCollection<T = JsonLdIriCollection>(
   type: JsonLdType,
-  collections: JsonLdIriContainerInterface<T> = {},
+  collections: JsonLdIriContainerInterface<T> | JsonLdTypeContainerInterface<T> = {},
 ): JsonLdIriCollection<T> {
-  return jsonLdFactory<JsonLdIriCollection<T>>(type, {
+  return createJsonLd<JsonLdIriCollection<T>>(type, {
     "@context": "collection",
     collection: collections,
-    totalItems: 0,
+    totalItems: Object.keys(collections).length,
   })
 }
 
-export function jsonLdFactory<T>(
+export function createJsonLd<T>(
   type: JsonLdType,
   object: Partial<T>,
 ): JsonLDItem<T> {
-  const jsonLdType = JsonLdTypeFactory(type)
+  const jsonLdType = createJsonLdType(type)
   // @ts-ignore
   return {
     "@type": jsonLdType,
-    "@id": JsonLdIriFactory(jsonLdType),
+    "@id": createJsonLdIri(jsonLdType),
     "@version": 1,
     ...object,
   }
 }
 
-export function JsonLdTypeFactory(
+export function createJsonLdType(
   baseType: JsonLdType,
   nextType?: string,
 ): JsonLdType {
@@ -79,7 +109,7 @@ export function JsonLdTypeFactory(
   return baseType + "/" + nextType
 }
 
-export function JsonLdIriFactory(baseType: JsonLdType, iri?: string): JsonLdIri {
+export function createJsonLdIri(baseType: JsonLdType, iri?: string): JsonLdIri {
   const newIri = iri ?? createUniqId()
 
   return baseType + "/" + newIri
@@ -106,7 +136,7 @@ export function updateContainer<T extends BaseJsonLdInterface>(
 }
 
 export function updateContainerByType<T extends BaseJsonLdInterface>(
-  container: JsonLdIriContainerInterface<T>,
+  container: JsonLdTypeContainerInterface<T>,
   item: T,
   action: ContainerAction = ContainerAction.update,
 ): void {
@@ -130,38 +160,23 @@ export function updateItem(
   return item
 }
 
-export function updateCollection(
-  collection: JsonLdIriCollection,
-  item: JsonLDItem<any>,
-  action: ContainerAction = ContainerAction.update,
-): JsonLDItem<any> {
-  updateContainer(collection.collection, item, action)
-  collection.totalItems = Object.keys(collection.collection).length
-  return updateItem(collection, action)
-}
-
 export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {
   const results: Array<T> = []
   const validator = (key: string, needle: string): boolean => key.startsWith(needle)
+  const jsonLdTypes = Array.isArray(jsonLdType) ? jsonLdType : [jsonLdType]
 
   if (Array.isArray(jsonLdType)) {
     Object.keys(container).forEach((key) => {
-      if (jsonLdType.some((type) => validator(key, type))) {
+      if (jsonLdTypes.some((type) => validator(key, type))) {
         results.push(container[key])
       }
     })
 
     return results
   }
-
-  Object.keys(container).map((key) => {
-    if (validator(key, jsonLdType)) {
-      results.push(container[key])
-    }
-  })
 
   return results
 }
@@ -171,12 +186,7 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
   jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {
   const results: Array<T> = []
-  const ldTypes: JsonLdType[] = []
-  if (Array.isArray(jsonLdType)) {
-    jsonLdType.forEach((e) => ldTypes.push(e))
-  } else {
-    ldTypes.push(jsonLdType)
-  }
+  const ldTypes: JsonLdType[] = Array.isArray(jsonLdType) ? jsonLdType : [jsonLdType]
 
   Object.values(container).forEach((item) => {
     if (ldTypes.includes(item["@type"])) {
@@ -187,13 +197,15 @@ export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterfac
   return results
 }
 
-export interface ContainerInterface<T = any> {
-  [key: string]: T
-}
-
 export function deleteContainerKey<T>(
   container: ContainerInterface<T>,
   key: JsonLdIri,
 ): void {
   delete container[key]
+}
+
+export function getLdType(item: JsonLdType | JsonLDItem<any>): JsonLdType {
+  if (typeof item === "string") return item
+
+  return item["@type"]
 }

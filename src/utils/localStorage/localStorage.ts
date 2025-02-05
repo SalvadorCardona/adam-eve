@@ -8,7 +8,7 @@ export function getLocalStorage<T>(key: string): null | T {
 
 export function persistLocalStorage(key: string, data: unknown): void {
   if (!isBrowser()) return
-  
+
   localStorage.setItem(key, JSON.stringify(data))
 }
 
@@ -19,6 +19,8 @@ export function removeLocalStorage(key: string): void {
 }
 
 export function getItemsInLocalStorageByPrefix<T = any>(prefix: string): T[] {
+  if (!isBrowser()) return []
+
   const items: T[] = []
 
   for (let i = 0; i < localStorage.length; i++) {

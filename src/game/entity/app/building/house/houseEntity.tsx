@@ -4,7 +4,7 @@ import model from "./model.png"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 
 export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
@@ -27,6 +27,6 @@ export const houseEntityMetaData: EntityMetaDataInterface = entityMedataFactory(
       z: 2,
     },
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "house"),
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "house"),
   label: "Maison",
 })

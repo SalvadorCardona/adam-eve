@@ -1,5 +1,5 @@
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType, appLdTypeEntity } from "@/src/AppLdType"
 import {
   entityQuery,
@@ -20,7 +20,7 @@ interface OnClickEntityUserActionMetadataInterface
 
 export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataInterface =
   {
-    "@type": JsonLdTypeFactory(appLdType.userAction, "on-click-entity"),
+    "@type": createJsonLdType(appLdType.userAction, "on-click-entity"),
     onSelectZone: ({ game }) => {
       const entities = entitiesFinder(game)
 

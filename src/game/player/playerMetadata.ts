@@ -1,9 +1,9 @@
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import {
   BaseJsonLdInterface,
-  jsonLdFactory,
+  createJsonLd,
+  createJsonLdType,
   JsonLdIri,
-  JsonLdTypeFactory,
 } from "@/src/utils/jsonLd/jsonLd"
 import {
   getItemsInLocalStorageByPrefix,
@@ -26,7 +26,7 @@ export interface PlayerMetadataInterface extends BaseGameMetaDataInterface {
   getPlayer: () => PlayerInterface
 }
 
-const ldType = JsonLdTypeFactory(appLdType.player)
+const ldType = createJsonLdType(appLdType.players)
 
 export const playerMetadata: PlayerMetadataInterface = {
   "@type": ldType,
@@ -37,7 +37,7 @@ export const playerMetadata: PlayerMetadataInterface = {
       ...payload.player,
     }
 
-    return jsonLdFactory<PlayerInterface>(ldType, sameGame)
+    return createJsonLd<PlayerInterface>(ldType, sameGame)
   },
 
   getPlayer: () => {

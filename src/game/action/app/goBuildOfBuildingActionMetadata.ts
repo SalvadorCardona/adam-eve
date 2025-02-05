@@ -1,23 +1,19 @@
-import {
-  jsonLdFactory,
-  JsonLdIri,
-  JsonLdTypeFactory,
-} from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, createJsonLdType, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 import EntityInterface, {
   BuildingEntityInterface,
 } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { transfertInventory } from "@/src/game/inventory/transfertInventory"
+import { transfertInventory } from "@/src/game/inventory/useCase/transfertInventory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getInventoryItem } from "@/src/game/inventory/getInventoryItem"
-import { enoughRessource } from "@/src/game/inventory/enoughRessource"
-import { InventoryBagInterface } from "@/src/game/inventory/InventoryItemInterface"
+import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
+import { enoughRessource } from "@/src/game/inventory/useCase/enoughRessource"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
 import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 
 enum State {
   GoToForum = "GoToForum",
@@ -38,7 +34,7 @@ interface FindWorkerData {
 
 export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorkerData> =
   {
-    ["@type"]: JsonLdTypeFactory(appLdType.typeAction, "goBuildOfBuilding"),
+    ["@type"]: createJsonLdType(appLdType.typeAction, "goBuildOfBuilding"),
     onFrame: ({ action, game, entity }) => {
       if (!entity) return
       const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)
@@ -128,7 +124,7 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
 
         if (
           enoughRessource(
-            buildingMeta.propriety.ressourceForConstruction as InventoryBagInterface,
+            buildingMeta.propriety.ressourceForConstruction as InventoryInterface,
             building.inventory,
           )
         ) {
@@ -144,6 +140,6 @@ export const goBuildOfBuildingActionMetadata: ActionMetadataInterface<FindWorker
         state: State.GoToForum,
       }
 
-      return jsonLdFactory(goBuildOfBuildingActionMetadata["@type"], { data })
+      return createJsonLd(goBuildOfBuildingActionMetadata["@type"], { data })
     },
   }

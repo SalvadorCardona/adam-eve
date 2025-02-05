@@ -88,7 +88,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
   component: ({ entity, size }) => {
     const texturePath = useMemo(() => {
       let asset = grassNormal[Math.floor(Math.random() * (grassNormal.length - 1))]
-      const connections = entity.connections
+      const connections = entity.connections ?? {}
       switch (true) {
         case connections.top !== undefined &&
           connections.left !== undefined &&

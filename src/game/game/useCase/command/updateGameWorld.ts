@@ -10,14 +10,14 @@ import { updateGame } from "@/src/game/game/updateGame"
 import { gameToMatrix } from "@/src/game/entity/transformer/gameToMatrix"
 
 export function updateGameWorld(game: GameInterface, entity: EntityInterface): void {
-  if (isGroundEntity(entity)) {
-    updateGroundWithGame({ game })
-  }
-
   if (isGroundEntity(entity) || isBuildingEntity(entity)) {
     const boundingEntity = entityToBoundingBox(entity)
     game.gameWorld.bounding = mergeBounding(game.gameWorld.bounding, boundingEntity)
     game.gameWorld.entitiesMatrix = gameToMatrix(game)
     updateGame(game, game.gameWorld)
+  }
+
+  if (isGroundEntity(entity)) {
+    updateGroundWithGame({ game })
   }
 }

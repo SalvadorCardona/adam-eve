@@ -2,7 +2,7 @@ import imageIcon from "./icon.png?url"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 
 export const portEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
@@ -24,5 +24,5 @@ export const portEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
       }),
     },
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityBuilding, "port"),
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "port"),
 })

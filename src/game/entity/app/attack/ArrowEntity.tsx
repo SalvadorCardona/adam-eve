@@ -1,6 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { appLdType } from "@/src/AppLdType"
-import { JsonLdTypeFactory } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 import model from "./model.png"
 
@@ -22,5 +22,5 @@ export const ArrowEntityMetaData = entityMedataFactory({
     },
     defaultActions: [ArrowAttackActionMetadata["@type"]],
   },
-  ["@type"]: JsonLdTypeFactory(appLdType.entityAttack, "Arrow"),
+  ["@type"]: createJsonLdType(appLdType.entityAttack, "Arrow"),
 })

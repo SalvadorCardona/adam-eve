@@ -71,10 +71,10 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             </div>
           )}
 
-          {entity.faction && (
+          {entity.createdBy && (
             <div className="flex items-center gap-4">
               <Zap className="h-5 w-5 text-yellow-600" />
-              <div className="font-semibold">Faction : {entity.faction}</div>
+              <div className="font-semibold">Faction : {entity.createdBy}</div>
             </div>
           )}
 

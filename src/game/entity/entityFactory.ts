@@ -1,4 +1,4 @@
-import { jsonLdFactory, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
   EntityFaction,
@@ -7,12 +7,13 @@ import EntityInterface, {
   isGroundEntity,
 } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { addAction } from "@/src/game/action/addAction"
+import { addActionToEntity } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { roundVectorToDown } from "@/src/utils/math/round"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import GameInterface from "@/src/game/game/GameInterface"
+import { createVector3 } from "@/src/utils/math/vector"
+import { playerMetadata } from "@/src/game/player/playerMetadata"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -25,24 +26,28 @@ export function entityFactory<
   if (ldType === "undefined") console.warn("Has not Type", payload?.entity)
 
   const metaData = getMetaData<EntityMetaDataInterface>(ldType)
+
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
-    connections: {},
     createdAt: payload?.game.time ?? 0,
-    position: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
+    position: createVector3(0, 0, 0),
     ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
+  }
+
+  if (baseEntity.createdBy === undefined) {
+    baseEntity.createdBy = playerMetadata.getPlayer()["@id"]
   }
 
   if (metaData?.propriety?.health) {
     baseEntity.life = metaData.propriety.health.maxLife
   }
 
-  const entity = jsonLdFactory<EntityInterface>(ldType, baseEntity) as T
+  if (!baseEntity.size) {
+    baseEntity.size = metaData?.propriety?.size ?? createVector3(1, 1, 1)
+  }
+
+  const entity = createJsonLd<EntityInterface>(ldType, baseEntity) as T
 
   entity.position = roundVectorToDown(entity.position)
 
@@ -50,24 +55,19 @@ export function entityFactory<
     entity.state = metaData?.propriety?.ressourceForConstruction
       ? EntityState.under_construction
       : EntityState.builded
-
-    entity.workers = []
   }
 
   if (isCharacterEntity(entity) || isBuildingEntity(entity)) {
-    entity.inventory = {}
-    entity.actions = {}
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
     entity.position.y = 1
   }
 
   if (metaData?.propriety?.defaultActions) {
-    entity.actions = {}
     metaData.propriety.defaultActions.forEach((actionType) => {
       const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory({
         entity,
       })
-      addAction(entity.actions as ActionBagInterface, action)
+      addActionToEntity(entity, action)
     })
   }
 
