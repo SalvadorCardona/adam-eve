@@ -1,5 +1,4 @@
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { createJsonLd, createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { transfertInventory } from "@/src/game/inventory/useCase/transfertInventory"
 import { addToInventory } from "@/src/game/inventory/useCase/addToInventory"
 import { treeEntityMetaData } from "@/src/game/entity/app/ressource/tree/TreeEntity"
@@ -12,74 +11,72 @@ import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessour
 import { updateNextTick } from "@/src/game/action/ActionInterface"
 import { inventoryIsFull } from "@/src/game/inventory/useCase/inventoryIsFull"
 import { removeActionFromEntity } from "@/src/game/action/removeAction"
+import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { timberHouseEntityMetaData } from "@/src/game/entity/app/building/timberHouse/TimberHouseEntity"
 
 interface CutTheWoodDataInterface {}
 
-export const cutTheWoodActionMetaData: ActionMetadataInterface<CutTheWoodDataInterface> =
-  {
-    ["@type"]: createJsonLdType(appLdType.typeAction, "cutTheWood"),
-    onFrame: ({ entity, game, action }) => {
-      if (!entity) return
+export const cutTheWoodActionMetaData = actionMetaDataFactory({
+  ["@type"]: createJsonLdType(appLdType.typeAction, "cutTheWood"),
+  onFrame: ({ entity, game, action }) => {
+    if (!entity) return
 
-      if (
-        entity.state === EntityState.go_to_tree ||
-        entity.state === EntityState.wait
-      ) {
-        const newTreeEntity = entityQueryFindOne(game, {
-          "@type": treeEntityMetaData["@type"],
-        })
+    if (
+      entity.state === EntityState.go_to_tree ||
+      entity.state === EntityState.wait
+    ) {
+      const newTreeEntity = entityQueryFindOne(game, {
+        "@type": treeEntityMetaData["@type"],
+      })
 
-        if (!newTreeEntity) {
-          entity.state = EntityState.wait
-          updateNextTick(game, action, 60)
+      if (!newTreeEntity) {
+        entity.state = EntityState.wait
+        updateNextTick(game, action, 60)
 
-          return
-        }
-
-        entityGoToEntityWithGround({
-          entity,
-          target: newTreeEntity,
-          game,
-        })
-
-        if (entityAttackEntity(game, entity, newTreeEntity)) {
-          entity.state = EntityState.cut_the_tree
-        }
+        return
       }
 
-      if (entity.state === EntityState.cut_the_tree) {
-        addToInventory(entity, woodRessourceMetadata, 1)
+      entityGoToEntityWithGround({
+        entity,
+        target: newTreeEntity,
+        game,
+      })
 
-        if (inventoryIsFull(entity)) {
-          entity.state = EntityState.go_to_put_ressource
-        }
+      if (entityAttackEntity(game, entity, newTreeEntity)) {
+        entity.state = EntityState.cut_the_tree
+      }
+    }
 
-        updateNextTick(game, action, 10)
+    if (entity.state === EntityState.cut_the_tree) {
+      addToInventory(entity, woodRessourceMetadata, 1)
+
+      if (inventoryIsFull(entity)) {
+        entity.state = EntityState.go_to_put_ressource
       }
 
-      if (entity.state === EntityState.go_to_put_ressource) {
-        const target = entityQueryFindOne(game, {
-          "@type": appLdType.timberHouseEntity,
-        })
+      updateNextTick(game, action, 10)
+    }
 
-        if (!target) {
-          removeActionFromEntity(entity, action)
-          return
-        }
+    if (entity.state === EntityState.go_to_put_ressource) {
+      const target = entityQueryFindOne(game, {
+        "@type": timberHouseEntityMetaData["@type"],
+      })
 
-        const result = entityGoToEntityWithGround({
-          game,
-          entity,
-          target: target,
-        })
-
-        if (result.isFinish) {
-          transfertInventory(entity, target, woodRessourceMetadata, 10)
-          entity.state = EntityState.go_to_tree
-        }
+      if (!target) {
+        removeActionFromEntity(entity, action)
+        return
       }
-    },
-    factory: () => {
-      return createJsonLd(cutTheWoodActionMetaData["@type"], {})
-    },
-  }
+
+      const result = entityGoToEntityWithGround({
+        game,
+        entity,
+        target: target,
+      })
+
+      if (result.isFinish) {
+        transfertInventory(entity, target, woodRessourceMetadata, 10)
+        entity.state = EntityState.go_to_tree
+      }
+    }
+  },
+})

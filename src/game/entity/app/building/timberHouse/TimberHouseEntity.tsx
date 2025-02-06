@@ -3,6 +3,7 @@ import imageIcon from "./icon.png?url"
 import model from "./model.png?url"
 import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
 import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
 export const timberHouseEntityMetaData = entityMedataFactory({
   asset: {
@@ -24,5 +25,5 @@ export const timberHouseEntityMetaData = entityMedataFactory({
   },
   workerAction: cutTheWoodActionMetaData,
   label: "Maison de bucheron",
-  ["@type"]: appLdType.timberHouseEntity,
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "timberHouse"),
 })

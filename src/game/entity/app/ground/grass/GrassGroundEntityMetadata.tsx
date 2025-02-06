@@ -31,6 +31,7 @@ import grass12 from "./asset/normal/grass12.png"
 import grass13 from "./asset/normal/grass13.png"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import React, { useMemo } from "react"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
 const grassNormal = [
   grass1,
@@ -73,7 +74,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       z: 1,
     },
   },
-  ["@type"]: appLdType.grassGroundEntity,
+  ["@type"]: createJsonLdType(appLdType.entityRessource, "grass"),
   label: "Herbe",
   canBeBuild: ({ entity, game }) => {
     const grounds = entityQuery(game, { "@type": appLdType.entityGround })

@@ -1,5 +1,4 @@
-import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
@@ -9,9 +8,10 @@ import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
+import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 
-export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: appLdType.towerAttackAction,
+export const towerAttackActionMetadata = actionMetaDataFactory({
+  ["@type"]: createJsonLdType(appLdType.typeAction, "TowerAttack"),
   onFrame: ({ game, action, entity }) => {
     action.nextTick = game.time + 50
 
@@ -41,7 +41,4 @@ export const TowerAttackActionMetadata: ActionMetadataInterface<any> = {
 
     action.nextTick = game.time + 400
   },
-  factory: () => {
-    return createJsonLd(TowerAttackActionMetadata["@type"], {})
-  },
-}
+})

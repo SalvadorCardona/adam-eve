@@ -4,6 +4,7 @@ import {
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
+import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
 
 export interface InventoryItemInterface extends BaseJsonLdInterface {
   quantity: number
@@ -19,15 +20,13 @@ export interface InventoryItemMetadataInterface extends BaseGameMetaDataInterfac
 export function inventoryItemMedataFactory<
   T extends InventoryItemMetadataInterface = InventoryItemMetadataInterface,
 >(ressourceItemMetadata: Partial<T>): T {
-  if (!ressourceItemMetadata["@type"]) {
-    throw new Error("Type is not defined, is recommended to use factory")
-  }
-
-  return {
+  const meta = {
     "@type": "union",
     factory: inventoryItemFactory,
     ...ressourceItemMetadata,
   } as T
+
+  return metaDataFactory(meta) as T
 }
 
 export function inventoryItemFactory(payload: {
@@ -42,3 +41,8 @@ export function inventoryItemFactory(payload: {
 export type CanBeInventoryItemInterface =
   | InventoryItemType
   | InventoryItemMetadataInterface
+
+export interface InventoryItemRequest {
+  quantity?: number
+  inventoryItem: CanBeInventoryItemInterface
+}

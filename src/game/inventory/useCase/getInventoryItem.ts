@@ -2,12 +2,11 @@ import { updateInventory } from "@/src/game/inventory/useCase/updateInventory"
 import {
   CanBeInventoryItemInterface,
   InventoryItemInterface,
-  InventoryItemMetadataInterface,
 } from "@/src/game/inventory/InventoryItemInterface"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { CanBeInventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { getInventory } from "@/src/game/inventory/useCase/getInventory"
 import { getLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createInventoryItem } from "@/src/game/inventory/useCase/createInventoryItem"
 
 export function getInventoryItem(
   canBeInventory: CanBeInventoryInterface,
@@ -19,9 +18,8 @@ export function getInventoryItem(
 
   if (item) return item
 
-  const metaData = getMetaData<InventoryItemMetadataInterface>(type)
-
-  const newItem = metaData.factory({
+  const newItem = createInventoryItem({
+    inventoryItem: type,
     quantity: 0,
   })
 

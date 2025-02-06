@@ -4,15 +4,12 @@ import {
   hasCollisionInGame,
   hasCollisionWithGround,
 } from "@/src/game/entity/useCase/entityHasCollision"
+import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
 
 export function entityMedataFactory<
   T extends EntityMetaDataInterface = EntityMetaDataInterface,
 >(entityMetaData: Partial<T>): T {
-  if (!entityMetaData["@type"]) {
-    throw new Error("Type is not defined, is recommended to use factory")
-  }
-
-  return {
+  const meta = {
     canBeBuild: (payload) => {
       return (
         !hasCollisionInGame(payload.game, payload.entity) &&
@@ -23,4 +20,6 @@ export function entityMedataFactory<
     factory: entityFactory,
     ...entityMetaData,
   } as T
+
+  return metaDataFactory(meta) as T
 }

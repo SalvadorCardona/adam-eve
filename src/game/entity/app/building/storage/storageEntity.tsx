@@ -1,9 +1,10 @@
 import imageIcon from "./icon.png?url"
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
+import { createInventory } from "@/src/game/inventory/useCase/createInventory"
+import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 
 export const storageEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {
@@ -18,11 +19,9 @@ export const storageEntityMetaData: EntityMetaDataInterface = entityMedataFactor
       y: 2,
       z: 2,
     },
-    ressourceForConstruction: {
-      [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
-        quantity: 10,
-      }),
-    },
+    ressourceForConstruction: createInventory({
+      items: [{ inventoryItem: woodRessourceMetadata, quantity: 5 }],
+    }),
   },
   ["@type"]: createJsonLdType(appLdType.entityBuilding, "storage"),
 })

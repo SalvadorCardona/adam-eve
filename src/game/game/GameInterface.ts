@@ -19,6 +19,7 @@ import { PlayerInterface } from "@/src/game/player/playerMetadata"
 import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
 import { createMatrix2D, Matrix2DInterface } from "@/src/utils/math/matrix"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
+import { createInventory } from "@/src/game/inventory/useCase/createInventory"
 
 export enum GameState {
   RUN = "run",
@@ -97,7 +98,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
     time: 0,
     actions: {},
     entities: {},
-    inventory: {},
+    inventory: createInventory(),
     createdAt: new Date(),
     mouseState: createJsonLd<MouseState>(appLdType.mouseState, {
       startPosition: createVector2(),

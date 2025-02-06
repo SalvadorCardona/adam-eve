@@ -1,6 +1,5 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { addAction } from "@/src/game/action/addAction"
-import { appLdType } from "@/src/AppLdType"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { getByLdTypeIn, updateCollection } from "@/src/utils/jsonLd/jsonLd"
@@ -19,7 +18,7 @@ export function gameLoader(game: GameInterface): GameInterface {
     !getByLdTypeIn(game.actions, findWorkerCharacterActionMetadata["@type"]).length
   ) {
     const meta = getMetaData<ActionMetadataInterface<any>>(
-      appLdType.findWorkerAction,
+      findWorkerCharacterActionMetadata,
     )
     addAction(game.actions, meta.factory({ game }))
   }

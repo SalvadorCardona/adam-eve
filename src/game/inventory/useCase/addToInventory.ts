@@ -7,7 +7,7 @@ import { freeSpaceInInventory } from "@/src/game/inventory/useCase/freeSpaceInIn
 export function addToInventory(
   canBeInventory: CanBeInventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
-  quantity: number,
+  quantity: number = 0,
 ): void {
   const currentItem = getInventoryItem(canBeInventory, inventoryType)
 

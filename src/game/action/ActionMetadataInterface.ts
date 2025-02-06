@@ -12,7 +12,8 @@ export interface ActionPayload<T> {
   action: ActionInterface<T>
 }
 
-export interface ActionMetadataInterface<T> extends BaseGameMetaDataInterface {
+export interface ActionMetadataInterface<T = object>
+  extends BaseGameMetaDataInterface {
   onFrame: (payload: ActionPayload<T>) => void
   factory: (payload?: {
     entity?: EntityInterface

@@ -1,11 +1,9 @@
-import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
 import {
   BuildingEntityInterface,
   CharacterEntityInterface,
 } from "@/src/game/entity/EntityInterface"
 import isObjectEmpty from "@/src/utils/object/objectIsEmpty"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { appLdType } from "@/src/AppLdType"
 import {
   entityFindOneById,
@@ -15,9 +13,11 @@ import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { removeByIndex } from "@/src/utils/array/array"
 import { addActionToEntity } from "@/src/game/action/addAction"
+import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 
-export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
-  ["@type"]: appLdType.findWorkerAction,
+export const findWorkerCharacterActionMetadata = actionMetaDataFactory({
+  ["@type"]: createJsonLdType(appLdType.typeAction, "findWorkerCharacter"),
   onFrame: ({ action, game }) => {
     action.nextTick = game.time + 60
 
@@ -84,7 +84,4 @@ export const findWorkerCharacterActionMetadata: ActionMetadataInterface<any> = {
       }
     }
   },
-  factory: () => {
-    return createJsonLd(findWorkerCharacterActionMetadata["@type"], {})
-  },
-}
+})

@@ -4,8 +4,9 @@ import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import model from "./model.png"
+import { createInventory } from "@/src/game/inventory/useCase/createInventory"
+import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 
 export const bridgeEntityMetaData = entityMedataFactory({
   asset: {
@@ -21,11 +22,9 @@ export const bridgeEntityMetaData = entityMedataFactory({
       y: 1,
       z: 1,
     },
-    ressourceForConstruction: {
-      [woodRessourceMetadata["@type"]]: woodRessourceMetadata.factory({
-        quantity: 10,
-      }),
-    },
+    ressourceForConstruction: createInventory({
+      items: [{ inventoryItem: woodRessourceMetadata, quantity: 5 }],
+    }),
   },
   canBeBuild: ({ entity, game }) => {
     const grounds = entityQuery(game, { "@typeIn": appLdType.entityGround })

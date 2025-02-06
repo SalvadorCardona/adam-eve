@@ -1,7 +1,6 @@
 import { addToInventory } from "@/src/game/inventory/useCase/addToInventory"
 import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
-import { workerEntityMetaDataType } from "@/src/game/entity/app/character/worker/workerEntityMetaDataType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
 import { expect } from "vitest"
@@ -9,12 +8,13 @@ import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/goldRessour
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
 import { getTotalQuantityInInventory } from "@/src/game/inventory/useCase/getTotalQuantityInInventory"
 import { inventoryIsFull } from "@/src/game/inventory/useCase/inventoryIsFull"
+import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+
+const entityMetadata = getMetaData<EntityMetaDataInterface>(workerEntityMetaData)
 
 describe("Inventory Test", () => {
   it("Context add To Inventory", () => {
-    const entity = getMetaData<EntityMetaDataInterface>(
-      workerEntityMetaDataType,
-    ).factory()
+    const entity = entityMetadata.factory()
 
     addToInventory(entity, woodRessourceMetadata, 5)
 
@@ -23,9 +23,7 @@ describe("Inventory Test", () => {
     expect(item.quantity).toBe(5)
   })
   it("Context getTotal Inventory", () => {
-    const entity = getMetaData<EntityMetaDataInterface>(
-      workerEntityMetaDataType,
-    ).factory()
+    const entity = entityMetadata.factory()
 
     addToInventory(entity, woodRessourceMetadata, 5)
     addToInventory(entity, goldRessourceMetadata, 8)
@@ -35,9 +33,6 @@ describe("Inventory Test", () => {
     expect(getTotalQuantityInInventory(entity)).toBe(10)
   })
   it("Context Inventory is full", () => {
-    const entityMetadata = getMetaData<EntityMetaDataInterface>(
-      workerEntityMetaDataType,
-    )
     const entity = entityMetadata.factory()
 
     addToInventory(
