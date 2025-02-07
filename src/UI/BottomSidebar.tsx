@@ -1,4 +1,3 @@
-import configGame from "@/src/game/game/app/configGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { Card } from "@/components/ui/card"
 import React from "react"
@@ -9,30 +8,31 @@ import { appLdType } from "@/src/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 import { getByLdTypeIn } from "@/src/utils/jsonLd/jsonLd"
+import { metaDataRegistered } from "@/src/utils/metadata/MetadataInterface"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
-    configGame,
+    metaDataRegistered,
     appLdType.entityBuilding,
   )
 
   const groundMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
-    configGame,
+    metaDataRegistered,
     appLdType.entityGround,
   )
 
   const natureMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
-    configGame,
+    metaDataRegistered,
     appLdType.entityRessource,
   )
 
   const actionMetaDatas = getByLdTypeIn<ActionUserMetaDataInterface>(
-    configGame,
+    metaDataRegistered,
     appLdType.userAction,
   )
 
   const characterMetaDatas = getByLdTypeIn<ActionUserMetaDataInterface>(
-    configGame,
+    metaDataRegistered,
     appLdType.entityCharacter,
   )
 

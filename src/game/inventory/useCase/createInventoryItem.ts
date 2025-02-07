@@ -1,4 +1,4 @@
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import {
   InventoryItemMetadataInterface,
   InventoryItemRequest,

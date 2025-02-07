@@ -3,7 +3,7 @@ import imageIcon from "./icon.png?url"
 import { appLdType } from "@/src/AppLdType"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
 import { towerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 

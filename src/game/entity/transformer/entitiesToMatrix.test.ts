@@ -6,7 +6,7 @@ import {
   Matrix2DInterface,
   matrixToVector,
 } from "@/src/utils/math/matrix"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 

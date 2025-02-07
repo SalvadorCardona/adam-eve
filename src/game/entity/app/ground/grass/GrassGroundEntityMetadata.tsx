@@ -74,7 +74,7 @@ export const grassGroundEntityMetadata = entityMedataFactory({
       z: 1,
     },
   },
-  ["@type"]: createJsonLdType(appLdType.entityRessource, "grass"),
+  ["@type"]: createJsonLdType(appLdType.entityGround, "grass"),
   label: "Herbe",
   canBeBuild: ({ entity, game }) => {
     const grounds = entityQuery(game, { "@type": appLdType.entityGround })

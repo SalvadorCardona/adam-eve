@@ -8,14 +8,22 @@ export function addToInventory(
   canBeInventory: CanBeInventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
   quantity: number = 0,
-): void {
+): number {
   const currentItem = getInventoryItem(canBeInventory, inventoryType)
 
-  if (inventoryIsFull(canBeInventory)) return
+  if (quantity > 0) {
+    if (inventoryIsFull(canBeInventory)) return 0
 
-  const freeSpace = freeSpaceInInventory(canBeInventory)
+    const freeSpace = freeSpaceInInventory(canBeInventory)
 
-  if (quantity > freeSpace) quantity = freeSpace
+    if (quantity > freeSpace) quantity = freeSpace
+  }
+
+  if (quantity < 0) {
+    if (currentItem.quantity < Math.abs(quantity)) quantity = -currentItem.quantity
+  }
 
   currentItem.quantity += quantity
+
+  return quantity
 }

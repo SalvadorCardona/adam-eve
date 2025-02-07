@@ -37,7 +37,6 @@ export function hasCollisionWithGround(
   entity: EntityInterface,
 ): false | EntityInterface {
   const grounds = entityQuery(game, { "@typeIn": appLdType.entityGround })
-
   for (const ground of grounds) {
     if (entityHasCollision(entity, ground)) {
       return ground

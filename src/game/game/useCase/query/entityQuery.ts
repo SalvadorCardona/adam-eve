@@ -131,9 +131,9 @@ export function entityQuery<T = EntityInterface>(
 
   if (faction) {
     entities = entities.filter((entity) => {
-      return entity.createdBy && Array.isArray(faction)
+      return Array.isArray(faction)
         ? faction.includes(entity.faction)
-        : entity.createdBy === faction
+        : entity.faction === faction
     })
   }
 

@@ -2,7 +2,7 @@ import GameInterface from "@/src/game/game/GameInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { updateEntityInGame } from "@/src/game/game/useCase/command/updateEntityInGame"
 import { ContainerAction } from "@/src/utils/jsonLd/jsonLd"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 
 export function removeEntityToGame(

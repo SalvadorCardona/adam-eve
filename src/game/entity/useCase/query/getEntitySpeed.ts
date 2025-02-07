@@ -1,6 +1,6 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 
 export function getEntitySpeed(entity: EntityInterface): number {
   const entityMetaData = getMetaData(entity) as EntityMetaDataInterface

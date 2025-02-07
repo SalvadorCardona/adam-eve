@@ -1,14 +1,16 @@
 import { InventoryItemInterface } from "@/src/game/inventory/InventoryItemInterface"
 import React from "react"
 import { Card } from "@/components/ui/card"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 
 interface InventoryPropsInterface {
   inventoryItem: InventoryItemInterface
 }
 
 export const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {
-  const inventoryMetaData = getMetaData(inventoryItem) ?? null
+  const inventoryMetaData =
+    getMetaData<BaseGameMetaDataInterface>(inventoryItem) ?? null
   const icon = inventoryMetaData?.asset?.icon
   const name = inventoryMetaData?.["@type"]
   return (

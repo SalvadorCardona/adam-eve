@@ -165,18 +165,15 @@ export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterf
   jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {
   const results: Array<T> = []
+
   const validator = (key: string, needle: string): boolean => key.startsWith(needle)
   const jsonLdTypes = Array.isArray(jsonLdType) ? jsonLdType : [jsonLdType]
 
-  if (Array.isArray(jsonLdType)) {
-    Object.keys(container).forEach((key) => {
-      if (jsonLdTypes.some((type) => validator(key, type))) {
-        results.push(container[key])
-      }
-    })
-
-    return results
-  }
+  Object.keys(container).forEach((key) => {
+    if (jsonLdTypes.some((type) => validator(key, type))) {
+      results.push(container[key])
+    }
+  })
 
   return results
 }
@@ -204,8 +201,18 @@ export function deleteContainerKey<T>(
   delete container[key]
 }
 
-export function getLdType(item: JsonLdType | JsonLDItem<any>): JsonLdType {
+export type JsonLdTypeAble = JsonLdType | JsonLDItem<any>
+
+export function getLdType(item: JsonLdTypeAble): JsonLdType {
   if (typeof item === "string") return item
 
   return item["@type"]
+}
+
+export type JsonLdIriAble = JsonLdIri | JsonLDItem<any>
+
+export function getLdIri(item: JsonLdIriAble): JsonLdIri {
+  if (typeof item === "string") return item
+
+  return item["@id"]
 }

@@ -6,14 +6,14 @@ import EntityInterface, {
   isCharacterEntity,
   isGroundEntity,
 } from "@/src/game/entity/EntityInterface"
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { addActionToEntity } from "@/src/game/action/addAction"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { roundVectorToDown } from "@/src/utils/math/round"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { createVector3 } from "@/src/utils/math/vector"
 import { playerMetadata } from "@/src/game/player/playerMetadata"
+import { addActionToEntity } from "@/src/game/action/ActionInterface"
+import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -29,7 +29,7 @@ export function entityFactory<
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
-    createdAt: payload?.game.time ?? 0,
+    createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 0, 0),
     ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),

@@ -6,7 +6,7 @@ import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
 
 export const bridgeEntityMetaData = entityMedataFactory({
   asset: {

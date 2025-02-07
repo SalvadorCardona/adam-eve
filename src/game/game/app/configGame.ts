@@ -5,11 +5,11 @@ import {
   treeDeathEntityMeta,
   treeEntityMetaData,
 } from "@/src/game/entity/app/ressource/tree/TreeEntity"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
 import { waterRessourceMetadata } from "@/src/game/inventory/app/water/woodRessource"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
-import { cutTheWoodActionMetaData } from "@/src/game/action/app/cutTheWoodActionMetaData"
-import { goldRessourceMetadata } from "@/src/game/inventory/app/gold/goldRessource"
+import { getRessourceActionMetaData } from "@/src/game/action/app/getRessourceActionMetaData"
+import { goldRessourceMetadata } from "@/src/game/entity/app/ressource/gold/goldRessource"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatRessourceMetadata } from "@/src/game/inventory/app/wheat/wheatRessource"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
@@ -30,6 +30,11 @@ import { arrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAtt
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { JsonLdTypeContainerInterface } from "@/src/utils/jsonLd/jsonLd"
 import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
+import {
+  goldMineBuildMetaDataEntity,
+  goldMineRessourceMetaDataEntity,
+} from "@/src/game/entity/app/ressource/gold/GoldMineBuildMetaDataEntity"
+import { ressourceMappingMetaData } from "@/src/ressource/ressourceMappingMetadata"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
@@ -38,7 +43,7 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [houseEntityMetaData["@type"]]: houseEntityMetaData,
   [treeEntityMetaData["@type"]]: treeEntityMetaData,
   [woodRessourceMetadata["@type"]]: woodRessourceMetadata,
-  [cutTheWoodActionMetaData["@type"]]: cutTheWoodActionMetaData,
+  [getRessourceActionMetaData["@type"]]: getRessourceActionMetaData,
   [timberHouseEntityMetaData["@type"]]: timberHouseEntityMetaData,
   [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
   [goldRessourceMetadata["@type"]]: goldRessourceMetadata,
@@ -60,6 +65,9 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
   [treeDeathEntityMeta["@type"]]: treeDeathEntityMeta,
   [bloodEntityMetaData["@type"]]: bloodEntityMetaData,
+  [goldMineBuildMetaDataEntity["@type"]]: goldMineBuildMetaDataEntity,
+  [goldMineRessourceMetaDataEntity["@type"]]: goldMineRessourceMetaDataEntity,
+  [ressourceMappingMetaData["@type"]]: ressourceMappingMetaData,
 }
 
 export default configGame

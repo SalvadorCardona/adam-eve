@@ -13,6 +13,7 @@ import {
   removeLocalStorage,
 } from "@/src/utils/localStorage/localStorage"
 import { appLdType } from "@/src/AppLdType"
+import { RepositoryInterface } from "@/src/utils/repository/repository"
 
 interface SaveGameInterface extends BaseJsonLdInterface {
   name?: string
@@ -20,15 +21,13 @@ interface SaveGameInterface extends BaseJsonLdInterface {
   createdAt: Date | string
 }
 
-export interface SaveGameMetadataInterface extends BaseGameMetaDataInterface {
+export interface SaveGameMetadataInterface
+  extends BaseGameMetaDataInterface,
+    RepositoryInterface<SaveGameInterface> {
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>
   }) => SaveGameInterface
-  getItem: (iriSaveGame: JsonLdIri) => SaveGameInterface | undefined
-  getCollection: () => SaveGameInterface[]
-  persistItem: (saveGame: SaveGameInterface) => void
-  removeItem: (iriSaveGame: JsonLdIri) => void
 }
 
 const ldType = createJsonLdType(appLdType.saveGame)

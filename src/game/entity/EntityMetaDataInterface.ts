@@ -2,10 +2,10 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { FC } from "react"
 import GameInterface from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
 import { Vector2Interface, Vector3Interface } from "@/src/utils/math/vector"
 import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
+import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
 
 interface EntityAttackPriorityInterface {
   attackRange: number
@@ -35,7 +35,7 @@ export interface EntityMetaDataInterface<T extends EntityInterface = EntityInter
   component?: FC<{ entity: T; size: Vector2Interface }>
   factory: (payload?: { entity?: Partial<T>; game: GameInterface }) => T
   defaultEntity?: () => Partial<T>
-  workerAction?: ActionMetadataInterface<any>
+  workerAction?: ActionMetadataInterface
   propriety: EntityPriorityInterface
   canBeBuild: (payload: { entity: T; game: GameInterface }) => boolean
   onDeath?: (payload: { entity: T; game: GameInterface }) => void

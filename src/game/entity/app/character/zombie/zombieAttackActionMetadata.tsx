@@ -8,21 +8,21 @@ import {
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
-import { updateNextTick } from "@/src/game/action/ActionInterface"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { updateNextTick } from "@/src/game/action/updateNextTick"
 
 export const zombieAttackActionMetadata = actionMetaDataFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "ZombieAttack"),
   onFrame: ({ game, entity, action }) => {
     if (!entity) return
-
     const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
 
-    if (!enemy) entity.state = EntityState.find_enemy
-
-    if (entity.state === EntityState.find_enemy) {
+    if (
+      entity.state === EntityState.find_enemy ||
+      entity.state === EntityState.wait
+    ) {
       const newEnemy = entityQueryFindOne(game, {
         faction: EntityFaction.self,
         circleSearch: {

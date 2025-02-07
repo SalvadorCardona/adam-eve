@@ -8,14 +8,13 @@ import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 
 export interface MetadataInterface extends JsonTypedLdInterface {}
 
-const metaDataRegistered: JsonLdTypeContainerInterface<MetadataInterface> = {}
+export const metaDataRegistered: JsonLdTypeContainerInterface<MetadataInterface> = {}
 
 const addMetaData = (metaData: MetadataInterface) => {
   metaDataRegistered[metaData["@type"]] = metaData
-  console.log(metaDataRegistered)
 }
 
-export function getMetaData<T = BaseGameMetaDataInterface>(
+export function getMetaData<T = MetadataInterface>(
   metaType: JsonLdType | BaseGameMetaDataInterface,
 ): T {
   const type = getLdType(metaType)
@@ -25,7 +24,9 @@ export function getMetaData<T = BaseGameMetaDataInterface>(
   throw new Error("Meta Data Not found: " + type)
 }
 
-export function metaDataFactory(metaData: MetadataInterface) {
+export function metaDataFactory<T extends MetadataInterface = MetadataInterface>(
+  metaData: T,
+): T {
   if (!metaData["@type"]) {
     throw new Error("Type is not defined, is recommended to use factory")
   }

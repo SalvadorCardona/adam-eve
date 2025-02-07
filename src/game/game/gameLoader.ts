@@ -1,11 +1,11 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { addAction } from "@/src/game/action/addAction"
 import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import { getByLdTypeIn, updateCollection } from "@/src/utils/jsonLd/jsonLd"
 import { playerMetadata } from "@/src/game/player/playerMetadata"
 import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
+import { addAction } from "@/src/game/action/ActionInterface"
 
 export function gameLoader(game: GameInterface): GameInterface {
   if (!getByLdTypeIn(game.actions, theDeathActionMetadata["@type"]).length) {

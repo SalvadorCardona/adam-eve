@@ -4,7 +4,7 @@ import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterfa
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
-import { woodRessourceMetadata } from "@/src/game/inventory/app/wood/woodRessource"
+import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
 
 export const storageEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
   asset: {

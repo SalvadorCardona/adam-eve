@@ -12,17 +12,16 @@ import {
   removeLocalStorage,
 } from "@/src/utils/localStorage/localStorage"
 import { appLdType } from "@/src/AppLdType"
+import { RepositoryInterface } from "@/src/utils/repository/repository"
 
 export interface PlayerInterface extends BaseJsonLdInterface {
   name?: string
 }
 
-export interface PlayerMetadataInterface extends BaseGameMetaDataInterface {
+export interface PlayerMetadataInterface
+  extends BaseGameMetaDataInterface,
+    RepositoryInterface<PlayerInterface> {
   factory: (payload: { player: Partial<PlayerInterface> }) => PlayerInterface
-  getItem: (iriPlayer: JsonLdIri) => PlayerInterface | undefined
-  getCollection: () => PlayerInterface[]
-  persistItem: (player: PlayerInterface) => void
-  removeItem: (iriPlayer: JsonLdIri) => void
   getPlayer: () => PlayerInterface
 }
 

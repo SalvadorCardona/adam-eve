@@ -8,18 +8,18 @@ import {
   removeLocalStorage,
 } from "@/src/utils/localStorage/localStorage"
 import { appLdType } from "@/src/AppLdType"
+import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
+import { RepositoryInterface } from "@/src/utils/repository/repository"
 
-export interface GameMetadataInterface extends BaseGameMetaDataInterface {
+export interface GameMetadataInterface
+  extends BaseGameMetaDataInterface,
+    RepositoryInterface<GameInterface> {
   factory: (game?: GameInterface) => GameInterface
-  getItem: (iriSaveGame: JsonLdIri) => GameInterface | undefined
-  getCollection: () => GameInterface[]
-  persistItem: (game: GameInterface) => void
-  removeItem: (iriSaveGame: JsonLdIri) => void
 }
 
 const ldType = createJsonLdType(appLdType.game)
 
-export const gameMetadata: GameMetadataInterface = {
+export const gameMetadata = metaDataFactory<GameMetadataInterface>({
   "@type": appLdType.game,
   factory: gameFactory,
   getCollection: (): GameInterface[] => {
@@ -40,4 +40,4 @@ export const gameMetadata: GameMetadataInterface = {
   removeItem: (iriSaveGame: JsonLdIri): void => {
     removeLocalStorage(iriSaveGame)
   },
-}
+})

@@ -16,7 +16,7 @@ export function entityMedataFactory<
         hasCollisionWithGround(payload.game, payload.entity)
       )
     },
-    "@type": "union",
+    "@type": "undefined",
     factory: entityFactory,
     ...entityMetaData,
   } as T

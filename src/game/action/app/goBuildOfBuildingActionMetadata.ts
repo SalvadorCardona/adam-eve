@@ -3,7 +3,7 @@ import EntityInterface, {
   BuildingEntityInterface,
 } from "@/src/game/entity/EntityInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
-import { transfertInventory } from "@/src/game/inventory/useCase/transfertInventory"
+import { transfertInventoryByItem } from "@/src/game/inventory/useCase/transfertInventoryByItem"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
 import { enoughRessource } from "@/src/game/inventory/useCase/enoughRessource"
@@ -11,7 +11,7 @@ import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumE
 import { appLdType } from "@/src/AppLdType"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/game/game/app/getMetaData"
+import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
@@ -90,7 +90,7 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
           return inventoryRessource.quantity < ressource.quantity
         })
         .map((ressource) => {
-          return transfertInventory(
+          return transfertInventoryByItem(
             game.inventory,
             entity.inventory,
             ressource["@type"],
@@ -116,7 +116,7 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
 
     if (data.state === State.PutRessource) {
       Object.values(entity.inventory).forEach((item) => {
-        transfertInventory(
+        transfertInventoryByItem(
           entity.inventory,
           building.inventory,
           item["@type"],

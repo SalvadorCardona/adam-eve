@@ -21,7 +21,7 @@ export function inventoryItemMedataFactory<
   T extends InventoryItemMetadataInterface = InventoryItemMetadataInterface,
 >(ressourceItemMetadata: Partial<T>): T {
   const meta = {
-    "@type": "union",
+    "@type": "undefined",
     factory: inventoryItemFactory,
     ...ressourceItemMetadata,
   } as T

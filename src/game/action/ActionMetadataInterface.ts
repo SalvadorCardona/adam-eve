@@ -18,5 +18,6 @@ export interface ActionMetadataInterface<T = object>
   factory: (payload?: {
     entity?: EntityInterface
     game?: GameInterface
+    createdBy?: EntityInterface
   }) => ActionInterface<T>
 }
