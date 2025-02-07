@@ -5,7 +5,7 @@ import zombieUrl from "./zombie.png"
 
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
+import { zombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
 import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
@@ -61,7 +61,7 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     health: {
       maxLife: 100,
     },
-    defaultActions: [ZombieAttackActionMetadata["@type"]],
+    defaultActions: [zombieAttackActionMetadata["@type"]],
   },
   defaultEntity: () => ({ faction: EntityFaction.enemy }),
 })

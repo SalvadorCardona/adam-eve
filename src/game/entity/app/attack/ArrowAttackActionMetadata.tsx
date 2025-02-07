@@ -1,11 +1,11 @@
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { createJsonLd, createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
+import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 
-export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
+export const arrowAttackActionMetadata = actionMetaDataFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "ArrowAttack"),
   onFrame: ({ game, entity }) => {
     if (!entity) {
@@ -27,7 +27,4 @@ export const ArrowAttackActionMetadata: ActionMetadataInterface<any> = {
       entity.life = 0
     }
   },
-  factory: () => {
-    return createJsonLd(ArrowAttackActionMetadata["@type"], {})
-  },
-}
+})

@@ -14,8 +14,6 @@ import { removeActionFromEntity } from "@/src/game/action/removeAction"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 import { timberHouseEntityMetaData } from "@/src/game/entity/app/building/timberHouse/TimberHouseEntity"
 
-interface CutTheWoodDataInterface {}
-
 export const cutTheWoodActionMetaData = actionMetaDataFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "cutTheWood"),
   onFrame: ({ entity, game, action }) => {

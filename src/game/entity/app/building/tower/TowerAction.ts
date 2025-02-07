@@ -9,12 +9,12 @@ import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackE
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { updateNextTick } from "@/src/game/action/ActionInterface"
 
 export const towerAttackActionMetadata = actionMetaDataFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "TowerAttack"),
   onFrame: ({ game, action, entity }) => {
-    action.nextTick = game.time + 50
-
+    updateNextTick(game, action, 50)
     if (!entity) {
       return
     }
@@ -39,6 +39,6 @@ export const towerAttackActionMetadata = actionMetaDataFactory({
     const arrowEntity = ArrowEntityMetaData.factory({ entity: entityArg, game })
     addEntityToGame(game, arrowEntity)
 
-    action.nextTick = game.time + 400
+    updateNextTick(game, action, 400)
   },
 })

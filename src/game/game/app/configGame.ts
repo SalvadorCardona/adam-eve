@@ -25,8 +25,8 @@ import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerE
 import { towerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
 import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
-import { ZombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
-import { ArrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
+import { zombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
+import { arrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { JsonLdTypeContainerInterface } from "@/src/utils/jsonLd/jsonLd"
 import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
@@ -54,9 +54,9 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [zombieEntityMetaData["@type"]]: zombieEntityMetaData,
   [towerEntityMetaData["@type"]]: towerEntityMetaData,
   [towerAttackActionMetadata["@type"]]: towerAttackActionMetadata,
-  [ArrowAttackActionMetadata["@type"]]: ArrowAttackActionMetadata,
+  [arrowAttackActionMetadata["@type"]]: arrowAttackActionMetadata,
   [ArrowEntityMetaData["@type"]]: ArrowEntityMetaData,
-  [ZombieAttackActionMetadata["@type"]]: ZombieAttackActionMetadata,
+  [zombieAttackActionMetadata["@type"]]: zombieAttackActionMetadata,
   [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
   [treeDeathEntityMeta["@type"]]: treeDeathEntityMeta,
   [bloodEntityMetaData["@type"]]: bloodEntityMetaData,

@@ -15,12 +15,12 @@ import { removeByIndex } from "@/src/utils/array/array"
 import { addActionToEntity } from "@/src/game/action/addAction"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { updateNextTick } from "@/src/game/action/ActionInterface"
 
 export const findWorkerCharacterActionMetadata = actionMetaDataFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "findWorkerCharacter"),
   onFrame: ({ action, game }) => {
-    action.nextTick = game.time + 60
-
+    updateNextTick(game, action, 60)
     const buildings = entityQuery<BuildingEntityInterface>(game, {
       "@typeIn": appLdType.entityBuilding,
     })

@@ -1,5 +1,4 @@
-import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataInterface"
-import { createJsonLd, createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
@@ -11,60 +10,54 @@ import {
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/src/game/game/app/getMetaData"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
+import { updateNextTick } from "@/src/game/action/ActionInterface"
+import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 
-interface ZombieAttackAction {}
+export const zombieAttackActionMetadata = actionMetaDataFactory({
+  ["@type"]: createJsonLdType(appLdType.typeAction, "ZombieAttack"),
+  onFrame: ({ game, entity, action }) => {
+    if (!entity) return
 
-export const ZombieAttackActionMetadata: ActionMetadataInterface<ZombieAttackAction> =
-  {
-    ["@type"]: createJsonLdType(appLdType.typeAction, "ZombieAttack"),
-    onFrame: ({ game, entity, action }) => {
-      if (!entity) return
+    const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
+
+    if (!enemy) entity.state = EntityState.find_enemy
+
+    if (entity.state === EntityState.find_enemy) {
+      const newEnemy = entityQueryFindOne(game, {
+        faction: EntityFaction.self,
+        circleSearch: {
+          center: entity.position,
+          radius: 500,
+        },
+      })
+
+      if (!newEnemy) {
+        updateNextTick(game, action, 300)
+        return
+      }
+
+      entity.entityAttackTargetIri = newEnemy["@id"]
+      entity.state = EntityState.go_to_enemy
+    }
+
+    if (enemy && entity.state === EntityState.go_to_enemy) {
+      entityGoToEntityWithGround({ game, entity, target: enemy })
+
+      if (entityCanBeAttackEntity(entity, enemy)) {
+        entity.state = EntityState.attack
+      }
+    }
+
+    if (enemy && entity.state === EntityState.attack) {
       const metaData = getMetaData<EntityMetaDataInterface>(entity)
-      const attack = metaData.propriety.attack
+      const attack = metaData.propriety?.attack ?? 0
       if (!attack) return
 
-      const enemy = entity.entityAttackTargetIri
-        ? entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
-        : undefined
-      if (!enemy) entity.state = EntityState.find_enemy
-
-      if (entity.state === EntityState.find_enemy) {
-        const newEnemy = entityQueryFindOne(game, {
-          faction: EntityFaction.self,
-          circleSearch: {
-            center: entity.position,
-            radius: 500,
-          },
-        })
-        if (!newEnemy) {
-          action.nextTick = game.time + 300
-        } else {
-          entity.entityAttackTargetIri = newEnemy["@id"]
-          entity.state = EntityState.go_to_enemy
-        }
+      if (!entityAttackEntity(game, entity, enemy)) {
+        entity.state = EntityState.go_to_enemy
       }
 
-      if (enemy && entity.state === EntityState.go_to_enemy) {
-        const result = entityGoToEntityWithGround({ game, entity, target: enemy })
-
-        if (entityCanBeAttackEntity(entity, enemy)) {
-          entity.state = EntityState.attack
-        }
-      }
-
-      if (enemy && entity.state === EntityState.attack) {
-        if (!entityAttackEntity(game, entity, enemy)) {
-          entity.state = EntityState.go_to_enemy
-        }
-
-        action.nextTick = game.time + attack.attackSpeed
-      }
-    },
-    factory: () => {
-      const data: ZombieAttackAction = {
-        state: EntityState.find_enemy,
-      }
-
-      return createJsonLd(ZombieAttackActionMetadata["@type"], { data })
-    },
-  }
+      updateNextTick(game, action, attack.attackSpeed)
+    }
+  },
+})
