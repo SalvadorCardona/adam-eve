@@ -59,6 +59,7 @@ export type GameOption = JsonLDItem<{
 type GameWorld = JsonLDItem<{
   bounding: BoundingInterface
   entitiesMatrix: Matrix2DInterface
+  groundMatrix?: Matrix2DInterface
 }>
 
 export default interface GameInterface extends BaseJsonLdInterface {

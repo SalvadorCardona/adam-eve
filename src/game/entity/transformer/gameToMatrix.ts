@@ -11,8 +11,8 @@ export function gameToMatrix(game: GameInterface): Matrix2DInterface {
     "@typeIn": appLdType.entityBuilding,
   })
 
-  const groundMatrix = entitiesToMatrix(grounds)
+  game.gameWorld.groundMatrix = entitiesToMatrix(grounds)
   const buildingMatrix = entitiesToMatrix(buildings)
 
-  return subtractMatrix(groundMatrix, buildingMatrix)
+  return subtractMatrix(game.gameWorld.groundMatrix, buildingMatrix)
 }

@@ -5,17 +5,22 @@ import {
   JsonLdIri,
   JsonLdType,
 } from "@/src/utils/jsonLd/jsonLd"
-import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/vector"
+import {
+  Vector2Interface,
+  Vector3Interface,
+  vector3ToVector2,
+} from "@/src/utils/math/vector"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
-import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector3"
 import { boundingCollision } from "@/src/utils/math/boundingCollision"
 import { appLdType } from "@/src/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
+import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
 
 interface CircleSearch {
   center: Vector2Interface
@@ -42,6 +47,9 @@ export interface EntityQueryParams {
   state?: EntityState | EntityState[]
   faction?: EntityFaction | EntityFaction[]
   strict?: boolean
+  findClosestOf?: {
+    position: Vector3Interface
+  }
 }
 
 const orderTypePriority = {
@@ -79,6 +87,7 @@ export function entityQuery<T = EntityInterface>(
     order,
     faction,
     "@idIsNot": idIsNot,
+    findClosestOf,
   } = query
 
   if (id && !Array.isArray(id)) {
@@ -146,6 +155,10 @@ export function entityQuery<T = EntityInterface>(
         createBoundingFromZone(start2D, end2d),
       )
     })
+  }
+
+  if (findClosestOf) {
+    entities = findClosestEntity(findClosestOf.position, entities)
   }
 
   entities.sort((a, b) => {

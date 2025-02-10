@@ -1,5 +1,5 @@
 import { lerp } from "@/src/utils/math/lerp"
-import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector3"
 
 export interface Vector2Interface {
   x: number
@@ -44,11 +44,8 @@ export function vector2ToVector3(vector: Vector2Interface): Vector3Interface {
   }
 }
 
-export function areVectorsEqual(
-  v1: Vector3Interface,
-  v2: Vector3Interface,
-): boolean {
-  return v1.x === v2.x && v1.z === v2.z
+export function isVector2Equal(v1: Vector2Interface, v2: Vector2Interface): boolean {
+  return v1.x === v2.x && v1.y === v2.y
 }
 
 export function isVector3(

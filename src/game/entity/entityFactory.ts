@@ -35,6 +35,8 @@ export function entityFactory<
     ...(payload?.entity ?? {}),
   }
 
+  baseEntity.position.y = 1
+
   if (baseEntity.createdBy === undefined) {
     baseEntity.createdBy = playerMetadata.getPlayer()["@id"]
   }
@@ -59,7 +61,6 @@ export function entityFactory<
 
   if (isCharacterEntity(entity) || isBuildingEntity(entity)) {
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
-    entity.position.y = 1
   }
 
   if (metaData?.propriety?.defaultActions) {

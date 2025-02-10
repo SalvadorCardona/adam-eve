@@ -76,14 +76,18 @@ export const EntityDecoratorPixiJs = ({
   //   return entity.rotation - Math.PI / 2
   // }, [entity.rotation])
 
+  const zIndex = useMemo(() => {
+    return entity.position.y * 2 + entity.position.z * 0.001
+  }, [entity.position.y, entity.position.z])
+
   return (
     <Container
       options={{
         ...dimension,
-        zIndex: entity.position.y,
       }}
       position={position}
       scale={scale}
+      zIndex={zIndex}
     >
       <EntityComponent entity={entity} size={size} />
       {color && (

@@ -12,6 +12,11 @@ import { updateGame } from "@/src/game/game/updateGame"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { diviseVector2D } from "@/src/utils/math/diviseVector"
 import { vectorRatioDown } from "@/src/utils/math/ratio"
+import {
+  createVector2,
+  isVector2Equal,
+  vectorAddition,
+} from "@/src/utils/math/vector"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -23,7 +28,7 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
     "@type": createJsonLdType(appLdType.userAction, "on-click-entity"),
     onSelectZone: ({ game }) => {
       const entities = entitiesFinder(game)
-
+      console.log("selct", entities)
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
       updateGame(game, game.userControl)
 
@@ -36,10 +41,20 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
   }
 
 function entitiesFinder(game: GameInterface): EntityInterface[] {
-  const positions = diviseVector2D(
-    vectorRatioDown(game.mouseState.startPosition, game.camera.zoom),
-    vectorRatioDown(game.mouseState.endPosition, game.camera.zoom),
+  const startPosition = vectorRatioDown(
+    game.mouseState.startPosition,
+    game.camera.zoom,
   )
+  let endPositionPosition = vectorRatioDown(
+    game.mouseState.endPosition,
+    game.camera.zoom,
+  )
+
+  if (isVector2Equal(startPosition, endPositionPosition)) {
+    endPositionPosition = vectorAddition(endPositionPosition, createVector2(1, 1))
+  }
+
+  const positions = diviseVector2D(startPosition, endPositionPosition)
 
   if (positions.length === 0) return []
 

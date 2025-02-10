@@ -12,6 +12,7 @@ interface ContainerPropsInterface {
   children?: React.ReactNode
   position?: Vector2Interface
   scale?: Vector2Interface
+  zIndex?: number
 }
 
 export const Container = ({
@@ -19,6 +20,7 @@ export const Container = ({
   options,
   position,
   scale,
+  zIndex,
 }: ContainerPropsInterface) => {
   const containerRef = useRef(new BaseContainer(options))
   useEffect(() => {
@@ -33,6 +35,12 @@ export const Container = ({
       }
     }
   }, [position, scale])
+
+  useEffect(() => {
+    if (zIndex) {
+      containerRef.current.zIndex = zIndex
+    }
+  }, [zIndex])
   //
   // useEffect(() => {
   //   console.log(scale)

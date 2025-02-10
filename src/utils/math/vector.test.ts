@@ -1,12 +1,12 @@
 // src/utils/math/Vector.test.ts
 
 import {
-  areVectorsEqual,
   createVector2,
   createVector3,
   extendVectorByDistance,
   extendVectorByStep,
   isVector2,
+  isVector2Equal,
   isVector3,
   Vector2Interface,
   vector2ToVector3,
@@ -44,7 +44,7 @@ describe("Vector Utility Functions", () => {
   test("areVectorsEqual should check if two Vector3Interface are equal", () => {
     const v1: Vector3Interface = { x: 1, y: 2, z: 3 }
     const v2: Vector3Interface = { x: 1, y: 2, z: 3 }
-    expect(areVectorsEqual(v1, v2)).toBe(true)
+    expect(isVector2Equal(v1, v2)).toBe(true)
   })
 
   test("isVector3 should check if a vector is Vector3Interface", () => {

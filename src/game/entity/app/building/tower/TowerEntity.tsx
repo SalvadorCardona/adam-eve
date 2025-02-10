@@ -30,7 +30,7 @@ export const towerEntityMetaData = entityMedataFactory({
     size: {
       x: 2,
       y: 2,
-      z: 2,
+      z: 4,
     },
     defaultActions: [towerAttackActionMetadata["@type"]],
   },

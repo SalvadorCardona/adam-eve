@@ -165,12 +165,10 @@ export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterf
   jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {
   const results: Array<T> = []
-
-  const validator = (key: string, needle: string): boolean => key.startsWith(needle)
   const jsonLdTypes = Array.isArray(jsonLdType) ? jsonLdType : [jsonLdType]
 
   Object.keys(container).forEach((key) => {
-    if (jsonLdTypes.some((type) => validator(key, type))) {
+    if (jsonLdTypes.some((type) => key.startsWith(type))) {
       results.push(container[key])
     }
   })

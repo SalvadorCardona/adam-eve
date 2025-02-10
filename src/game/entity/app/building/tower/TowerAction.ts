@@ -1,12 +1,10 @@
 import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
 import { appLdType } from "@/src/AppLdType"
-import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
-import EntityInterface from "@/src/game/entity/EntityInterface"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
-import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 
@@ -21,8 +19,12 @@ export const towerAttackActionMetadata = actionMetaDataFactory({
     }
 
     const size = getEntitySize(entity)
-    const zombies = entityQuery(game, { "@type": zombieEntityMetaData["@type"] })
-    const zombie = findClosestEntity(entity, zombies)
+
+    const zombie = entityQueryFindOne(game, {
+      "@type": zombieEntityMetaData["@type"],
+      findClosestOf: { position: entity.position },
+      "@idIsNot": entity["@id"],
+    })
 
     if (!zombie) {
       return
@@ -32,12 +34,14 @@ export const towerAttackActionMetadata = actionMetaDataFactory({
       return
     }
 
-    const entityArg: Partial<EntityInterface> = {
-      entityAttackTargetIri: zombie["@id"],
-      position: { ...entity.position, y: size.y },
-    }
+    const arrowEntity = ArrowEntityMetaData.factory({
+      entity: {
+        entityAttackTargetIri: zombie["@id"],
+        position: { ...entity.position, y: size.y },
+      },
+      game,
+    })
 
-    const arrowEntity = ArrowEntityMetaData.factory({ entity: entityArg, game })
     addEntityToGame(game, arrowEntity)
 
     updateNextTick(game, action, 400)

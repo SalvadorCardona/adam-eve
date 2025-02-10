@@ -3,13 +3,12 @@ import {
   createVector2,
   extendVectorByDistance,
   Vector2Interface,
-  vector2ToVector3,
   Vector3Interface,
   vector3ToVector2,
   vectorAddition,
 } from "@/src/utils/math/vector"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
-import { vectorMoveToVector } from "@/src/utils/math/vectorMoveToVector"
+import { vector3MoveToVector } from "@/src/utils/math/vector3MoveToVector"
 import GameInterface from "@/src/game/game/GameInterface"
 import { findPathAStar } from "@/src/utils/math/findPath"
 import { roundVector } from "@/src/utils/math/round"
@@ -21,7 +20,7 @@ import {
   PathResponseInterface,
 } from "@/src/utils/math/path"
 import { matrixDirection } from "@/src/utils/math/matrix"
-import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector"
+import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector3"
 
 interface EntityGoPositionParams {
   entity: EntityInterface
@@ -35,13 +34,14 @@ export function entityGoToEntity({
   const targetPosition: Vector3Interface = target.position
   const entityPosition: Vector3Interface = entity.position
 
-  const result = vectorMoveToVector(
+  const result = vector3MoveToVector(
     entityPosition,
     targetPosition,
     getEntitySpeed(entity),
   )
 
-  entity.position = result.position
+  entity.position.x = result.position.x
+  entity.position.z = result.position.z
   entity.rotation = result.rotation
 
   return {
@@ -73,7 +73,10 @@ export function entityGoToEntityWithGround({
 
   if (entity.currentPath && entity.currentPath.hash === hash) {
     consumePath(entity.currentPath)
-    entity.position = vector2ToVector3(entity.currentPath.currentPosition)
+    const newPosition = entity.currentPath.currentPosition
+    entity.position.x = newPosition.x
+    entity.position.z = newPosition.y
+
     if (entity.currentPath.currentRotation) {
       entity.rotation = entity.currentPath.currentRotation
     }

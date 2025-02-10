@@ -78,7 +78,6 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
     }
 
     if (data.state === State.TakeRessource) {
-      debugger
       const ressourceTaken = Object.values(
         buildingMeta.propriety?.ressourceForConstruction ?? {},
       )

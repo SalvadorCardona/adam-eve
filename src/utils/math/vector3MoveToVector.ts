@@ -1,5 +1,5 @@
 import { Vector3Interface } from "@/src/utils/math/vector"
-import { distanceBetweenVector } from "@/src/utils/math/distanceBetweenVector"
+import { distanceBetweenVector3 } from "@/src/utils/math/distanceBetweenVector3"
 import { aroundDecimal } from "@/src/utils/math/round"
 
 export interface VectorMoveToVectorReturnInterface {
@@ -9,7 +9,7 @@ export interface VectorMoveToVectorReturnInterface {
   rotation: number
 }
 
-export function vectorMoveToVector(
+export function vector3MoveToVector(
   vectorSource: Vector3Interface,
   vectorTarget: Vector3Interface,
   distance: number = 1,
@@ -41,7 +41,7 @@ export function vectorMoveToVector(
   }
 
   return {
-    distance: distanceBetweenVector(newPosition, vectorTarget),
+    distance: distanceBetweenVector3(newPosition, vectorTarget),
     isFinish: length === 0,
     position: newPosition,
     rotation: aroundDecimal(Math.atan2(newPosition.x, newPosition.z)),

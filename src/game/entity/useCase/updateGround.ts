@@ -7,13 +7,22 @@ import {
   vectorAddition,
 } from "@/src/utils/math/vector"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
-import { Direction, getInMatrix, matrixDirection } from "@/src/utils/math/matrix"
+import {
+  Direction,
+  getInMatrix,
+  Matrix2DInterface,
+  matrixDirection,
+} from "@/src/utils/math/matrix"
 import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = entityQuery<GroundEntityInterface>(game, {
     "@typeIn": appLdType.entityGround,
   })
+
+  if (!game.gameWorld?.groundMatrix) {
+    return
+  }
 
   grounds.forEach((ground) => {
     const newConnections = {} as Partial<Record<Direction, JsonLdIri>>
@@ -22,13 +31,14 @@ export function updateGroundWithGame({ game }: { game: GameInterface }) {
         direction as Direction
       ] as Vector2Interface
       const neighbor = getInMatrix(
-        game.gameWorld.entitiesMatrix,
+        game.gameWorld.groundMatrix as Matrix2DInterface,
         vectorAddition(directionVector, vector3ToVector2(ground.position)),
       )
       if (neighbor) {
         newConnections[direction as Direction] = neighbor as string
       }
     })
+
     ground.connections = newConnections
   })
 }
