@@ -62,8 +62,8 @@ export function entityGoToEntityWithGround({
   entity,
   target,
 }: EntityGoPositionParamsWithGround): PathResponseInterface {
-  const targetPosition = roundVector(vector3ToVector2(target.position))
-  const entityPosition = roundVector(vector3ToVector2(entity.position))
+  const targetPosition = vector3ToVector2(target.position)
+  const entityPosition = vector3ToVector2(entity.position)
   const hash = entity["@id"] + target["@id"] + JSON.stringify(targetPosition)
   const distance = distanceBetweenVector2(entityPosition, targetPosition)
 
@@ -88,11 +88,14 @@ export function entityGoToEntityWithGround({
   ]
   let path: PathInterface | null = null
 
+  const targetPositionRounded = roundVector(targetPosition)
+  const entityPositionRounded = roundVector(entityPosition)
+
   for (const direction of directions) {
     path = findPathAStar(
       game.gameWorld.entitiesMatrix,
-      entityPosition,
-      vectorAddition(direction, targetPosition),
+      entityPositionRounded,
+      vectorAddition(direction, targetPositionRounded),
     )
     if (path) {
       break

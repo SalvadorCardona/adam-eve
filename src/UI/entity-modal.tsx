@@ -83,6 +83,16 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             <div className="font-semibold">Etat : {entity.state}</div>
           </div>
 
+          {metaData.propriety?.work?.numberOfWorker && entity.workers && (
+            <div className="flex items-center gap-4">
+              <Zap className="h-5 w-5 text-yellow-600" />
+              <div className="font-semibold">
+                Travailleurs : {entity.workers.length} /{" "}
+                {metaData.propriety.work.numberOfWorker}
+              </div>
+            </div>
+          )}
+
           {/*{Object.hasOwn(entity, "inventory") && (*/}
           {/*  <div className="flex items-center gap-4">*/}
           {/*    <Box className="h-5 w-5 text-purple-600" />*/}
@@ -116,12 +126,6 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
           {/*    X: {entity.size.x}, Y: {entity.size.y}, Z: {entity.size.z}*/}
           {/*  </span>*/}
           {/*</div>*/}
-
-          {entity?.state && (
-            <div className="font-semibold">
-              État :<span className="font-normal capitalize"> {entity.state}</span>
-            </div>
-          )}
 
           {/*{metaData?.propriety?.work && (*/}
           {/*  <div className="font-semibold">*/}

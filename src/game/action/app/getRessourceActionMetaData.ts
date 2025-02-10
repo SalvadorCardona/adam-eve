@@ -14,16 +14,18 @@ import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 import { RessourceMappingMetadataInterface } from "@/src/ressource/ressourceMappingMetadata"
 import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import EntityInterface from "@/src/game/entity/EntityInterface"
 
 export const getRessourceActionMetaData = actionMetaDataFactory({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "cutTheWood"),
+  ["@type"]: createJsonLdType(appLdType.typeAction, "getRessource"),
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return
+    const createdBy = entityFindOneById(game, action.createdBy) as EntityInterface
 
     const ressourceMapping =
       getMetaData<RessourceMappingMetadataInterface>("ressourceMapping")
 
-    const ressourceMapped = ressourceMapping.getItem(action.createdBy["@type"])
+    const ressourceMapped = ressourceMapping.getItem(createdBy["@type"])
     if (!ressourceMapped) {
       return
     }
@@ -64,7 +66,7 @@ export const getRessourceActionMetaData = actionMetaDataFactory({
     }
 
     if (entity.state === EntityState.go_to_put_ressource) {
-      const target = entityFindOneById(game, action.createdBy["@id"])
+      const target = entityFindOneById(game, action.createdBy)
 
       if (!target) {
         removeActionFromEntity(entity, action)

@@ -1,6 +1,6 @@
 import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
-import { createJsonLd } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, getLdIri } from "@/src/utils/jsonLd/jsonLd"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
 
 export function actionMetaDataFactory<
@@ -16,7 +16,7 @@ export function actionMetaDataFactory<
       const action = createJsonLd<ActionInterface>(meta["@type"], {})
 
       if (payload?.createdBy) {
-        action.createdBy = payload.createdBy
+        action.createdBy = getLdIri(payload.createdBy)
       }
 
       return action

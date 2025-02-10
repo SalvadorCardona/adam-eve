@@ -4,7 +4,6 @@ import {
   JsonLdTypeContainerInterface,
   JsonTypedLdInterface,
 } from "@/src/utils/jsonLd/jsonLd"
-import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 
 export interface MetadataInterface extends JsonTypedLdInterface {}
 
@@ -15,7 +14,7 @@ const addMetaData = (metaData: MetadataInterface) => {
 }
 
 export function getMetaData<T = MetadataInterface>(
-  metaType: JsonLdType | BaseGameMetaDataInterface,
+  metaType: JsonLdType | MetadataInterface,
 ): T {
   const type = getLdType(metaType)
 

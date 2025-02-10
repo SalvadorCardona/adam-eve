@@ -8,7 +8,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 export interface ActionInterface<T = object> extends BaseJsonLdInterface {
   data: T
   nextTick?: number
-  createdBy: EntityInterface
+  createdBy: EntityInterface["@id"]
 }
 
 export function addAction(
