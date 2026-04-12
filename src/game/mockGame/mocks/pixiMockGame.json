@@ -386,13 +386,7 @@
           "quantity": 41
         }
       },
-      "actions": {
-        "action/cutTheWood/1nfjg8t": {
-          "@type": "action/cutTheWood",
-          "@id": "action/cutTheWood/1nfjg8t",
-          "@version": 2
-        }
-      },
+     
       "faction": "self",
       "state": "wait",
       "currentPathOfCoordinate": {

@@ -4,7 +4,7 @@ import sea from "./asset/sea.png"
 
 export const assetList = {
   water,
-  empty: "https://pixijs.io/pixi-react/img/bunny.png",
+  empty: arrowDirectionnal,
   arrowDirectionnal,
   sea,
 }

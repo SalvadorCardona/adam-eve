@@ -69,5 +69,5 @@ const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
   [goldMineRessourceMetaDataEntity["@type"]]: goldMineRessourceMetaDataEntity,
   [ressourceMappingMetaData["@type"]]: ressourceMappingMetaData,
 }
-
+console.log(grassGroundEntityMetadata)
 export default configGame

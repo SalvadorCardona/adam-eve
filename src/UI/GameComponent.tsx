@@ -10,6 +10,7 @@ import configGame from "@/src/game/game/app/configGame"
 export default function GameComponent({ game }: { game?: GameInterface }) {
   configGame
   const currentGame = game ? gameLoader(game) : gameLoader(mockGames.defaultMock)
+  console.log(configGame)
   return (
     <main className={"h-screen overflow-hidden"}>
       <GameProvider game={currentGame}>

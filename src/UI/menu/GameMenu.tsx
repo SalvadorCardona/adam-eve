@@ -10,7 +10,6 @@ import {
 import {
   BadgePlus,
   ExternalLink,
-  Github,
   Save,
   Settings,
   Upload,
@@ -76,7 +75,7 @@ export function GameMenu() {
                 rel="noopener noreferrer"
                 className="text-amber-600 hover:text-amber-800"
               >
-                <Github className="h-6 w-6" />
+                Github
               </a>
               <a
                 href="https://x.com/salvadevme"

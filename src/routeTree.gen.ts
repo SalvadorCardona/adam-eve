@@ -8,158 +8,53 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as NewGameRouteImport } from './routes/newGame'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as MockIndexRouteImport } from './routes/mock/index'
+import { Route as SaveGameSaveGameIdRouteImport } from './routes/saveGame.$saveGameId'
+import { Route as MockMockNameRouteImport } from './routes/mock/$mockName'
+import { Route as GameGameIriRouteImport } from './routes/game.$gameIri'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as NewGameImport } from './routes/newGame'
-import { Route as AboutImport } from './routes/about'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as IndexImport } from './routes/index'
-import { Route as MockIndexImport } from './routes/mock/index'
-import { Route as SaveGameSaveGameIdImport } from './routes/saveGame.$saveGameId'
-import { Route as MockMockNameImport } from './routes/mock/$mockName'
-import { Route as GameGameIriImport } from './routes/game.$gameIri'
-
-// Create/Update Routes
-
-const NewGameRoute = NewGameImport.update({
+const NewGameRoute = NewGameRouteImport.update({
   id: '/newGame',
   path: '/newGame',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AboutRoute = AboutImport.update({
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MockIndexRoute = MockIndexImport.update({
+const MockIndexRoute = MockIndexRouteImport.update({
   id: '/mock/',
   path: '/mock/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SaveGameSaveGameIdRoute = SaveGameSaveGameIdImport.update({
+const SaveGameSaveGameIdRoute = SaveGameSaveGameIdRouteImport.update({
   id: '/saveGame/$saveGameId',
   path: '/saveGame/$saveGameId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MockMockNameRoute = MockMockNameImport.update({
+const MockMockNameRoute = MockMockNameRouteImport.update({
   id: '/mock/$mockName',
   path: '/mock/$mockName',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const GameGameIriRoute = GameGameIriImport.update({
+const GameGameIriRoute = GameGameIriRouteImport.update({
   id: '/game/$gameIri',
   path: '/game/$gameIri',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/newGame': {
-      id: '/newGame'
-      path: '/newGame'
-      fullPath: '/newGame'
-      preLoaderRoute: typeof NewGameImport
-      parentRoute: typeof rootRoute
-    }
-    '/game/$gameIri': {
-      id: '/game/$gameIri'
-      path: '/game/$gameIri'
-      fullPath: '/game/$gameIri'
-      preLoaderRoute: typeof GameGameIriImport
-      parentRoute: typeof rootRoute
-    }
-    '/mock/$mockName': {
-      id: '/mock/$mockName'
-      path: '/mock/$mockName'
-      fullPath: '/mock/$mockName'
-      preLoaderRoute: typeof MockMockNameImport
-      parentRoute: typeof rootRoute
-    }
-    '/saveGame/$saveGameId': {
-      id: '/saveGame/$saveGameId'
-      path: '/saveGame/$saveGameId'
-      fullPath: '/saveGame/$saveGameId'
-      preLoaderRoute: typeof SaveGameSaveGameIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/mock/': {
-      id: '/mock/'
-      path: '/mock'
-      fullPath: '/mock'
-      preLoaderRoute: typeof MockIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof LayoutRoute
-  '/about': typeof AboutRoute
-  '/newGame': typeof NewGameRoute
-  '/game/$gameIri': typeof GameGameIriRoute
-  '/mock/$mockName': typeof MockMockNameRoute
-  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
-  '/mock': typeof MockIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof LayoutRoute
-  '/about': typeof AboutRoute
-  '/newGame': typeof NewGameRoute
-  '/game/$gameIri': typeof GameGameIriRoute
-  '/mock/$mockName': typeof MockMockNameRoute
-  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
-  '/mock': typeof MockIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_layout': typeof LayoutRoute
   '/about': typeof AboutRoute
   '/newGame': typeof NewGameRoute
   '/game/$gameIri': typeof GameGameIriRoute
@@ -167,22 +62,38 @@ export interface FileRoutesById {
   '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
   '/mock/': typeof MockIndexRoute
 }
-
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/newGame': typeof NewGameRoute
+  '/game/$gameIri': typeof GameGameIriRoute
+  '/mock/$mockName': typeof MockMockNameRoute
+  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
+  '/mock': typeof MockIndexRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/newGame': typeof NewGameRoute
+  '/game/$gameIri': typeof GameGameIriRoute
+  '/mock/$mockName': typeof MockMockNameRoute
+  '/saveGame/$saveGameId': typeof SaveGameSaveGameIdRoute
+  '/mock/': typeof MockIndexRoute
+}
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | ''
     | '/about'
     | '/newGame'
     | '/game/$gameIri'
     | '/mock/$mockName'
     | '/saveGame/$saveGameId'
-    | '/mock'
+    | '/mock/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | ''
     | '/about'
     | '/newGame'
     | '/game/$gameIri'
@@ -192,7 +103,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/_layout'
     | '/about'
     | '/newGame'
     | '/game/$gameIri'
@@ -201,10 +111,8 @@ export interface FileRouteTypes {
     | '/mock/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LayoutRoute: typeof LayoutRoute
   AboutRoute: typeof AboutRoute
   NewGameRoute: typeof NewGameRoute
   GameGameIriRoute: typeof GameGameIriRoute
@@ -213,9 +121,62 @@ export interface RootRouteChildren {
   MockIndexRoute: typeof MockIndexRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/newGame': {
+      id: '/newGame'
+      path: '/newGame'
+      fullPath: '/newGame'
+      preLoaderRoute: typeof NewGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mock/': {
+      id: '/mock/'
+      path: '/mock'
+      fullPath: '/mock/'
+      preLoaderRoute: typeof MockIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saveGame/$saveGameId': {
+      id: '/saveGame/$saveGameId'
+      path: '/saveGame/$saveGameId'
+      fullPath: '/saveGame/$saveGameId'
+      preLoaderRoute: typeof SaveGameSaveGameIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mock/$mockName': {
+      id: '/mock/$mockName'
+      path: '/mock/$mockName'
+      fullPath: '/mock/$mockName'
+      preLoaderRoute: typeof MockMockNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/game/$gameIri': {
+      id: '/game/$gameIri'
+      path: '/game/$gameIri'
+      fullPath: '/game/$gameIri'
+      preLoaderRoute: typeof GameGameIriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LayoutRoute: LayoutRoute,
   AboutRoute: AboutRoute,
   NewGameRoute: NewGameRoute,
   GameGameIriRoute: GameGameIriRoute,
@@ -223,51 +184,6 @@ const rootRouteChildren: RootRouteChildren = {
   SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
   MockIndexRoute: MockIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/_layout",
-        "/about",
-        "/newGame",
-        "/game/$gameIri",
-        "/mock/$mockName",
-        "/saveGame/$saveGameId",
-        "/mock/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_layout": {
-      "filePath": "_layout.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/newGame": {
-      "filePath": "newGame.tsx"
-    },
-    "/game/$gameIri": {
-      "filePath": "game.$gameIri.tsx"
-    },
-    "/mock/$mockName": {
-      "filePath": "mock/$mockName.tsx"
-    },
-    "/saveGame/$saveGameId": {
-      "filePath": "saveGame.$saveGameId.tsx"
-    },
-    "/mock/": {
-      "filePath": "mock/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

@@ -1,12 +1,25 @@
 import path from "path"
-import { defineConfig } from "vite"
-// @ts-ignore used for run test well
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite"
-import react from "@vitejs/plugin-react"
+import { defineConfig } from "vitest/config"
+import react, { reactCompilerPreset } from "@vitejs/plugin-react"
+import { tanstackRouter } from "@tanstack/router-plugin/vite"
+import tailwindcss from "@tailwindcss/vite"
+import babel from "@rolldown/plugin-babel"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [TanStackRouterVite(), react()],
+  plugins: [
+    // resourcesPlugin(),
+    tanstackRouter({
+      routesDirectory: path.resolve(__dirname, "./src/routes"),
+      generatedRouteTree: path.resolve(__dirname, "./src/routeTree.gen.ts"),
+      target: "react",
+      autoCodeSplitting: true,
+    }),
+    react(),
+    babel({ presets: [reactCompilerPreset()] }),
+
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),

@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { BadgePlus, ExternalLink, Github, Upload, X } from "lucide-react"
+import { BadgePlus, ExternalLink, Upload, X } from "lucide-react"
 import { SaveLoadWindow } from "@/src/UI/menu/SaveLoadWindow"
 import { OptionWindows } from "@/src/UI/menu/OptionWindows"
 import { Card, CardContent } from "@/components/ui/card"
@@ -65,7 +65,7 @@ function Home() {
                     rel="noopener noreferrer"
                     className="text-amber-600 hover:text-amber-800"
                   >
-                    <Github className="h-6 w-6" />
+                    Github
                   </a>
                   <a
                     href="https://x.com/salvadevme"
