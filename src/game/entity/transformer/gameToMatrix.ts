@@ -1,7 +1,7 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import { Matrix2DInterface, subtractMatrix } from "@/src/utils/math/matrix"
+import { Matrix2DInterface, subtractMatrix } from "@/packages/math/matrix"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { BuildingEntityInterface } from "@/src/game/entity/EntityInterface"
 import { entitiesToMatrix } from "@/src/game/entity/transformer/entitiesToMatrix"
 

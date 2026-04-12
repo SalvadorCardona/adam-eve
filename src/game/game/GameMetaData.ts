@@ -1,15 +1,15 @@
 import GameInterface, { gameFactory } from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { createJsonLdType, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import {
   getItemsInLocalStorageByPrefix,
   getLocalStorage,
   persistLocalStorage,
   removeLocalStorage,
-} from "@/src/utils/localStorage/localStorage"
-import { appLdType } from "@/src/AppLdType"
-import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
-import { RepositoryInterface } from "@/src/utils/repository/repository"
+} from "@/packages/localStorage/localStorage"
+import { appLdType } from "@/app/AppLdType"
+import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
+import { RepositoryInterface } from "@/packages/repository/repository"
 
 export interface GameMetadataInterface
   extends BaseGameMetaDataInterface,

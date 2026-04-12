@@ -4,7 +4,7 @@ import {
   hasCollisionInGame,
   hasCollisionWithGround,
 } from "@/src/game/entity/useCase/entityHasCollision"
-import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
+import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
 
 export function entityMedataFactory<
   T extends EntityMetaDataInterface = EntityMetaDataInterface,

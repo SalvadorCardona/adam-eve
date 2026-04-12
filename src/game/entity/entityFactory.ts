@@ -1,4 +1,4 @@
-import { createJsonLd, JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, JsonLdType } from "@/packages/jsonLd/jsonLd"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import EntityInterface, {
   EntityFaction,
@@ -7,10 +7,10 @@ import EntityInterface, {
   isGroundEntity,
 } from "@/src/game/entity/EntityInterface"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { roundVectorToDown } from "@/src/utils/math/round"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { roundVectorToDown } from "@/packages/math/round"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { createVector3 } from "@/src/utils/math/vector"
+import { createVector3 } from "@/packages/math/vector"
 import { playerMetadata } from "@/src/game/player/playerMetadata"
 import { addActionToEntity } from "@/src/game/action/ActionInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
@@ -54,7 +54,7 @@ export function entityFactory<
   entity.position = roundVectorToDown(entity.position)
 
   if (isBuildingEntity(entity)) {
-    entity.state = metaData?.propriety?.ressourceForConstruction
+    entity.state = metaData?.propriety?.resourceForConstruction
       ? EntityState.under_construction
       : EntityState.builded
   }

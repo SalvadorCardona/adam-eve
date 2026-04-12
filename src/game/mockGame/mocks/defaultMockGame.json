@@ -2946,9 +2946,9 @@
         "z": 4
       }
     },
-    "entity/ressource/tree/1sk9pup": {
-      "@type": "entity/ressource/tree",
-      "@id": "entity/ressource/tree/1sk9pup",
+    "entity/resource/tree/1sk9pup": {
+      "@type": "entity/resource/tree",
+      "@id": "entity/resource/tree/1sk9pup",
       "@version": 2,
       "rotation": 0,
       "connections": {},
@@ -3394,7 +3394,7 @@
                   ]
                 }
               },
-              "go_to_put_ressource": {
+              "go_to_put_resource": {
                 "frames": {
                   "frame0": {
                     "frame": {

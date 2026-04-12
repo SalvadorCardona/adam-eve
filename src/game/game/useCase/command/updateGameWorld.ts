@@ -5,7 +5,7 @@ import EntityInterface, {
 import GameInterface from "@/src/game/game/GameInterface"
 import { updateGroundWithGame } from "@/src/game/entity/useCase/updateGround"
 import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
-import { mergeBounding } from "@/src/utils/math/boudingBox"
+import { mergeBounding } from "@/packages/math/boudingBox"
 import { updateGame } from "@/src/game/game/updateGame"
 import { gameToMatrix } from "@/src/game/entity/transformer/gameToMatrix"
 

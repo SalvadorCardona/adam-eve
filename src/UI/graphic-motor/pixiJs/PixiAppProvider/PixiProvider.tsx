@@ -4,11 +4,11 @@ import { PixiContext } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/PixiC
 import LoaderComponent from "@/components/LoaderComponent"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { getByLdTypeIn } from "@/src/utils/jsonLd/jsonLd"
-import { assetList } from "@/src/app/assetList"
-import { metaDataRegistered } from "@/src/utils/metadata/MetadataInterface"
+import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { assetList } from "@/app/assetList"
+import { metaDataRegistered } from "@/packages/metadata/MetadataInterface"
 
 export const PixiProvider: React.FC<{
   children: React.ReactNode

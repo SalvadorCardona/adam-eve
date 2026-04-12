@@ -1,5 +1,5 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { EntityState } from "@/src/game/entity/EntityState"
 

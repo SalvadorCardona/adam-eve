@@ -1,6 +1,6 @@
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"

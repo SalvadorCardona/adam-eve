@@ -1,4 +1,4 @@
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import {
   InventoryItemMetadataInterface,
   InventoryItemRequest,

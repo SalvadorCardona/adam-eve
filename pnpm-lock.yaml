@@ -50,6 +50,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      coooking-pubsub:
+        specifier: ^2.0.1
+        version: 2.0.1
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@10.2.0(jiti@2.6.1))
@@ -1627,6 +1630,9 @@ packages:
 
   cookie-es@2.0.1:
     resolution: {integrity: sha512-aVf4A4hI2w70LnF7GG+7xDQUkliwiXWXFvTjkip4+b64ygDQ2sJPRSKFDHbxn8o0xu9QzPkMuuiWIXyFSE2slA==}
+
+  coooking-pubsub@2.0.1:
+    resolution: {integrity: sha512-vYKQk269mVMpNIwn0hi0CGpkLr+h34lEh4qGRICMSuwmcnRuZ5+XF2e48dR5t34lzXMcjzLVngrSHX3DzMEQAA==}
 
   copy-to-clipboard@3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
@@ -4252,6 +4258,8 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   cookie-es@2.0.1: {}
+
+  coooking-pubsub@2.0.1: {}
 
   copy-to-clipboard@3.3.3:
     dependencies:

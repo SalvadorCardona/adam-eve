@@ -5,7 +5,7 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { mockGames } from "@/src/game/mockGame/mockGame"
 import { gameLoader } from "@/src/game/game/gameLoader"
 import { PixijsAppComponent } from "@/src/UI/graphic-motor/pixiJs/PixijsAppComponent"
-import configGame from "@/src/game/game/app/configGame"
+import configGame from "@/app/configGame"
 
 export default function GameComponent({ game }: { game?: GameInterface }) {
   configGame

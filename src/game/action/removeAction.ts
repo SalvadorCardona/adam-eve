@@ -1,16 +1,8 @@
 import {
-  ActionBagInterface,
   ActionnableInterface,
 } from "@/src/game/action/ActionBagInterface"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
-import { ContainerAction, updateContainer } from "@/src/utils/jsonLd/jsonLd"
-
-export function removeAction(
-  bag: ActionBagInterface,
-  action: ActionInterface<any>,
-): void {
-  updateContainer(bag, action)
-}
+import { ContainerAction, updateContainer } from "@/packages/jsonLd/jsonLd"
 
 export function removeActionFromEntity(
   sujet: ActionnableInterface,

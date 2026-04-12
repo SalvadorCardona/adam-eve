@@ -3,7 +3,7 @@ import {
   InventoryAbleInterface,
   InventoryInterface,
 } from "@/src/game/inventory/InventoryInterface"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 

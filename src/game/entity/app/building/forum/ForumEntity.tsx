@@ -2,8 +2,8 @@ import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
 import model from "./model.png"
 import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 
 export const forumEntityMetaData = entityMedataFactory({
   asset: {

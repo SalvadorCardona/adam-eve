@@ -1,12 +1,12 @@
 import { createContext } from "react"
 import GameInterfaceInterface, { gameFactory } from "@/src/game/game/GameInterface"
-import { createPubSub, PubSub } from "@/src/utils/functionnal/pubsub"
+import { createPubSub, Index } from "coooking-pubsub"
 
 export interface GameContextInterface {
   game: GameInterfaceInterface
   updateGame: (game: GameInterfaceInterface) => void
   version: number
-  pubSub: PubSub
+  pubSub: Index
 }
 
 export const GameContext = createContext<GameContextInterface>({

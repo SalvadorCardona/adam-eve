@@ -1,9 +1,9 @@
 import { Graphics as BaseGraphics } from "pixi.js"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import React, { useState } from "react"
-import { Vector2Interface } from "@/src/utils/math/vector"
+import { Vector2Interface } from "@/packages/math/vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { UserControl } from "@/src/game/game/GameInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 

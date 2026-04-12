@@ -1,6 +1,6 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { ContainerAction, updateContainer } from "@/src/utils/jsonLd/jsonLd"
+import { ContainerAction, updateContainer } from "@/packages/jsonLd/jsonLd"
 import { updateGameWorld } from "@/src/game/game/useCase/command/updateGameWorld"
 
 export function updateEntityInGame(

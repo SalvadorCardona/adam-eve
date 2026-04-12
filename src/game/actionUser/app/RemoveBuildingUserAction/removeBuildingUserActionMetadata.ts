@@ -1,12 +1,12 @@
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import icon from "./icon.png"
-import { playSound } from "@/src/utils/playSong"
+import { playSound } from "@/packages/playSong"
 import song from "./broken-sound.wav?url"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 
 export const removeBuildingUserActionMetadata: ActionUserMetaDataInterface = {

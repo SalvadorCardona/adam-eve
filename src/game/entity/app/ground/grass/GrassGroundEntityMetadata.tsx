@@ -1,6 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import grassIcon from "./grassIcon.png"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
@@ -31,7 +31,7 @@ import grass12 from "./asset/normal/grass12.png"
 import grass13 from "./asset/normal/grass13.png"
 import { Sprite } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import React, { useMemo } from "react"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 
 const grassNormal = [
   grass1,

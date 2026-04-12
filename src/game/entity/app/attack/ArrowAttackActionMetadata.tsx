@@ -1,5 +1,5 @@
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"

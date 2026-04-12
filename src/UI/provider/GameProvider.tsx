@@ -2,9 +2,9 @@ import React, { ReactNode, useEffect, useState } from "react"
 import GameInterface, { GameOption } from "@/src/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/src/game/game/gameProcessor"
-import { createPubSub } from "@/src/utils/functionnal/pubsub"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
+import { createPubSub } from "coooking-pubsub"
 
 interface InputGameProviderPropsInterface {
   game: GameInterface

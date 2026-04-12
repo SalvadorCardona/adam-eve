@@ -57,10 +57,10 @@ const CosyGameBook = () => {
             <ScrollArea className="h-full p-4">
               <h3 className="text-lg font-semibold mb-2">Constructions du jeu</h3>
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ressources">
+                <AccordionItem value="resources">
                   <AccordionTrigger>
                     <Tree className="mr-2 h-4 w-4" />
-                    Ressources
+                    Resources
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="list-disc list-inside">
@@ -91,8 +91,8 @@ const CosyGameBook = () => {
             <ScrollArea className="h-full p-4">
               <h3 className="text-lg font-semibold mb-2">Statistiques du jeu</h3>
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ressources">
-                  <AccordionTrigger>Ressources</AccordionTrigger>
+                <AccordionItem value="resources">
+                  <AccordionTrigger>Resources</AccordionTrigger>
                   <AccordionContent>
                     <ul className="list-none">
                       <li>Bois: 100</li>

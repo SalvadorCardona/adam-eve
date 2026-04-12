@@ -1,9 +1,10 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import model from "./model.png"
-import { appLdType } from "@/src/AppLdType"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 
 export const bloodEntityMetaData = entityMedataFactory({
+  ["@type"]: createJsonLdType(appLdType.entityEffect, "blood"),
   onFrame: ({ entity }) => {
     entity.life--
   },
@@ -20,5 +21,4 @@ export const bloodEntityMetaData = entityMedataFactory({
       z: 2,
     },
   },
-  ["@type"]: createJsonLdType(appLdType.entityEffect, "blood"),
 })

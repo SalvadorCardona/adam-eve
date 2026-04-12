@@ -476,9 +476,9 @@
       "@type": "user-action/create-building",
       "data": {
         "entityMetaData": {
-          "@type": "entity/ressource/tree",
+          "@type": "entity/resource/tree",
           "asset": {
-            "icon": "/src/game/entity/app/ressource/tree/iconSrc.png"
+            "icon": "/src/game/entity/app/resource/tree/iconSrc.png"
           },
           "propriety": {
             "speed": 0.01,

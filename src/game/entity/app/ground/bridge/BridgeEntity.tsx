@@ -1,14 +1,16 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
-import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
+import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
 
 export const bridgeEntityMetaData = entityMedataFactory({
+  ["@type"]: createJsonLdType(appLdType.entityBuilding, "bridge"),
+  label: "Pont",
   asset: {
     icon: imageIcon,
     model2d: model,
@@ -22,8 +24,8 @@ export const bridgeEntityMetaData = entityMedataFactory({
       y: 1,
       z: 1,
     },
-    ressourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodRessourceMetadata, quantity: 5 }],
+    resourceForConstruction: createInventory({
+      items: [{ inventoryItem: woodResourceMetadata, quantity: 5 }],
     }),
   },
   canBeBuild: ({ entity, game }) => {
@@ -36,6 +38,4 @@ export const bridgeEntityMetaData = entityMedataFactory({
 
     return true
   },
-  ["@type"]: createJsonLdType(appLdType.entityBuilding, "bridge"),
-  label: "Pont",
 })

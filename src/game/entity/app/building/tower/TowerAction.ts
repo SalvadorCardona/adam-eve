@@ -1,5 +1,5 @@
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
 import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"

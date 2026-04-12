@@ -1,6 +1,6 @@
-import { metaDataFactory } from "@/src/utils/metadata/MetadataInterface"
+import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
-import { createJsonLd, getLdIri } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, getLdIri } from "@/packages/jsonLd/jsonLd"
 import { ActionInterface } from "@/src/game/action/ActionInterface"
 
 export function actionMetaDataFactory<

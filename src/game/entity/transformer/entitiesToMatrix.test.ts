@@ -1,12 +1,12 @@
 import { entitiesToMatrix } from "@/src/game/entity/transformer/entitiesToMatrix"
-import { createVector2, vector2ToVector3 } from "@/src/utils/math/vector"
+import { createVector2, vector2ToVector3 } from "@/packages/math/vector"
 import { gameFactory } from "@/src/game/game/GameInterface"
 import {
   getInMatrix,
   Matrix2DInterface,
   matrixToVector,
-} from "@/src/utils/math/matrix"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+} from "@/packages/math/matrix"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 

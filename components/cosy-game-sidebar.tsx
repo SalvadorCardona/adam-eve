@@ -139,11 +139,11 @@ const CosyGameSidebar = () => {
                 Constructions du jeu
               </h3>
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ressources">
+                <AccordionItem value="resources">
                   <AccordionTrigger>
                     <Tree className="h-4 w-4" />
                     <span className={`ml-2 ${isOpen ? "inline" : "hidden"}`}>
-                      Ressources
+                      Resources
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className={isOpen ? "block" : "hidden"}>
@@ -181,11 +181,11 @@ const CosyGameSidebar = () => {
                 Statistiques du jeu
               </h3>
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ressources">
+                <AccordionItem value="resources">
                   <AccordionTrigger>
                     <BarChart className="h-4 w-4" />
                     <span className={`ml-2 ${isOpen ? "inline" : "hidden"}`}>
-                      Ressources
+                      Resources
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className={isOpen ? "block" : "hidden"}>

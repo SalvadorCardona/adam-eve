@@ -1,5 +1,5 @@
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
@@ -8,7 +8,7 @@ import {
   entityCanBeAttackEntity,
 } from "@/src/game/entity/useCase/entityAttackEntity"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"

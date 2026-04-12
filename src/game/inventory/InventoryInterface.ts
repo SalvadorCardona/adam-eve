@@ -1,4 +1,4 @@
-import { JsonLdTypeCollection } from "@/src/utils/jsonLd/jsonLd"
+import { JsonLdTypeCollection } from "@/packages/jsonLd/jsonLd"
 import { InventoryItemInterface } from "@/src/game/inventory/InventoryItemInterface"
 
 export type InventoryInterface = JsonLdTypeCollection<InventoryItemInterface> & {

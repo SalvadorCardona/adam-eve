@@ -3,10 +3,10 @@ import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import React, { useMemo, useState } from "react"
 import { EntityDecoratorPixiJs } from "@/src/UI/graphic-motor/pixiJs/EntityDecoratorPixiJs"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
-import { Vector2Interface, vector2ToVector3 } from "@/src/utils/math/vector"
+import { Vector2Interface, vector2ToVector3 } from "@/packages/math/vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
-import { appLdType } from "@/src/AppLdType"
-import { vectorRatioDown } from "@/src/utils/math/ratio"
+import { appLdType } from "@/app/AppLdType"
+import { vectorRatioDown } from "@/packages/math/ratio"
 
 export const CreateEntityComponent = () => {
   const game = useGameContext().game

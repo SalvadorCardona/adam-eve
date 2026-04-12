@@ -34,7 +34,7 @@ export const workerEntityMetaData = entityMedataFactory({
     animationMapper: {
       [EntityState.wait]: idleAnimation,
       [EntityState.move]: moveAnimation,
-      [EntityState.go_to_put_ressource]: moveAnimation,
+      [EntityState.go_to_put_resource]: moveAnimation,
       [EntityState.go_to_tree]: moveAnimation,
       [EntityState.attack]: attackAnimation,
       [EntityState.cut_the_tree]: attackAnimation,

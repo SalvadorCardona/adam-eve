@@ -1,6 +1,6 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
-import { appLdType } from "@/src/AppLdType"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { arrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
 import model from "./model.png"
 

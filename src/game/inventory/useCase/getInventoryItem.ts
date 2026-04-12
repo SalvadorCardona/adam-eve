@@ -5,7 +5,7 @@ import {
 } from "@/src/game/inventory/InventoryItemInterface"
 import { CanBeInventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { getInventory } from "@/src/game/inventory/useCase/getInventory"
-import { getLdType } from "@/src/utils/jsonLd/jsonLd"
+import { getLdType } from "@/packages/jsonLd/jsonLd"
 import { createInventoryItem } from "@/src/game/inventory/useCase/createInventoryItem"
 
 export function getInventoryItem(

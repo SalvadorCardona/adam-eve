@@ -1,7 +1,7 @@
 import { InventoryItemInterface } from "@/src/game/inventory/InventoryItemInterface"
 import React from "react"
 import { Card } from "@/components/ui/card"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 
 interface InventoryPropsInterface {
@@ -15,7 +15,7 @@ export const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {
   const name = inventoryMetaData?.["@type"]
   return (
     <Card className={"flex-col justify-items-center overflow-hidden"}>
-      {icon && <img className={"h-10 w-10"} src={icon} alt={"ressource"} />}
+      {icon && <img className={"h-10 w-10"} src={icon} alt={"resource"} />}
       {!icon && <span>{name}</span>}
       <div className={"font-extrabold py-0.5"}>{inventoryItem.quantity}</div>
     </Card>

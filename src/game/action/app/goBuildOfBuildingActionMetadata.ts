@@ -1,4 +1,4 @@
-import { createJsonLd, createJsonLdType, JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLd, createJsonLdType, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import EntityInterface, {
   BuildingEntityInterface,
 } from "@/src/game/entity/EntityInterface"
@@ -6,21 +6,21 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterfa
 import { transfertInventoryByItem } from "@/src/game/inventory/useCase/transfertInventoryByItem"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
-import { enoughRessource } from "@/src/game/inventory/useCase/enoughRessource"
+import { enoughResource } from "@/src/game/inventory/useCase/enoughResource"
 import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
 
 enum State {
   GoToForum = "GoToForum",
-  TakeRessource = "TakeRessource",
+  TakeResource = "TakeResource",
   GoToBuild = "GoToBuild",
-  PutRessource = "PutRessource",
+  PutResource = "PutResource",
   NoBuild = "NoBuild",
   ForumNotFound = "ForumNotFound",
 }
@@ -73,33 +73,33 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
 
       const result = entityGoToEntity({ entity, target: forum })
       if (result.isFinish) {
-        data.state = State.TakeRessource
+        data.state = State.TakeResource
       }
     }
 
-    if (data.state === State.TakeRessource) {
-      const ressourceTaken = Object.values(
-        buildingMeta.propriety?.ressourceForConstruction ?? {},
+    if (data.state === State.TakeResource) {
+      const resourceTaken = Object.values(
+        buildingMeta.propriety?.resourceForConstruction ?? {},
       )
-        .filter((ressource) => {
-          const inventoryRessource = getInventoryItem(
+        .filter((resource) => {
+          const inventoryResource = getInventoryItem(
             building.inventory,
-            ressource["@type"],
+            resource["@type"],
           )
-          return inventoryRessource.quantity < ressource.quantity
+          return inventoryResource.quantity < resource.quantity
         })
-        .map((ressource) => {
+        .map((resource) => {
           return transfertInventoryByItem(
             game.inventory,
             entity.inventory,
-            ressource["@type"],
+            resource["@type"],
             entityMetadata.propriety.inventorySize ?? 0,
           )
         })
 
-      const hasTakeRessource = ressourceTaken.some((amount) => amount > 0)
+      const hasTakeResource = resourceTaken.some((amount) => amount > 0)
 
-      if (hasTakeRessource) {
+      if (hasTakeResource) {
         data.state = State.GoToBuild
       } else {
         entity.state = EntityState.wait
@@ -109,11 +109,11 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
     if (data.state === State.GoToBuild) {
       const result = entityGoToEntity({ entity, target: building })
       if (result.isFinish) {
-        data.state = State.PutRessource
+        data.state = State.PutResource
       }
     }
 
-    if (data.state === State.PutRessource) {
+    if (data.state === State.PutResource) {
       Object.values(entity.inventory).forEach((item) => {
         transfertInventoryByItem(
           entity.inventory,
@@ -124,8 +124,8 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
       })
 
       if (
-        enoughRessource(
-          buildingMeta.propriety.ressourceForConstruction as InventoryInterface,
+        enoughResource(
+          buildingMeta.propriety.resourceForConstruction as InventoryInterface,
           building.inventory,
         )
       ) {

@@ -6,21 +6,21 @@ import {
   Vector3Interface,
   vector3ToVector2,
   vectorAddition,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
-import { vector3MoveToVector } from "@/src/utils/math/vector3MoveToVector"
+import { vector3MoveToVector } from "@/packages/math/vector3MoveToVector"
 import GameInterface from "@/src/game/game/GameInterface"
-import { findPathAStar } from "@/src/utils/math/findPath"
-import { roundVector } from "@/src/utils/math/round"
+import { findPathAStar } from "@/packages/math/findPath"
+import { roundVector } from "@/packages/math/round"
 import { getEntitySpeed } from "@/src/game/entity/useCase/query/getEntitySpeed"
 import {
   consumePath,
   createConsumablePath,
   PathInterface,
   PathResponseInterface,
-} from "@/src/utils/math/path"
-import { matrixDirection } from "@/src/utils/math/matrix"
-import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector3"
+} from "@/packages/math/path"
+import { matrixDirection } from "@/packages/math/matrix"
+import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 
 interface EntityGoPositionParams {
   entity: EntityInterface

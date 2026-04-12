@@ -4,22 +4,22 @@ import {
   getByLdTypeIn,
   JsonLdIri,
   JsonLdType,
-} from "@/src/utils/jsonLd/jsonLd"
+} from "@/packages/jsonLd/jsonLd"
 import {
   Vector2Interface,
   Vector3Interface,
   vector3ToVector2,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import EntityInterface, {
   EntityFaction,
   getEntityBaseType,
 } from "@/src/game/entity/EntityInterface"
-import { distanceBetweenVector2 } from "@/src/utils/math/distanceBetweenVector3"
-import { boundingCollision } from "@/src/utils/math/boundingCollision"
-import { appLdType } from "@/src/AppLdType"
+import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
+import { boundingCollision } from "@/packages/math/boundingCollision"
+import { appLdType } from "@/app/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
-import { createBoundingFromZone } from "@/src/utils/math/boudingBox"
+import { createBoundingFromZone } from "@/packages/math/boudingBox"
 import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
 
 interface CircleSearch {

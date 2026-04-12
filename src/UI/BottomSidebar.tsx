@@ -4,11 +4,11 @@ import React from "react"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
-import { getByLdTypeIn } from "@/src/utils/jsonLd/jsonLd"
-import { metaDataRegistered } from "@/src/utils/metadata/MetadataInterface"
+import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { metaDataRegistered } from "@/packages/metadata/MetadataInterface"
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
@@ -23,7 +23,7 @@ export const BottomSidebar = () => {
 
   const natureMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
     metaDataRegistered,
-    appLdType.entityRessource,
+    appLdType.entityResource,
   )
 
   const actionMetaDatas = getByLdTypeIn<ActionUserMetaDataInterface>(

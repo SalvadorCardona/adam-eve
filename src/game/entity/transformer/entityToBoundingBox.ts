@@ -1,10 +1,10 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
+import { BoundingInterface, createBoundingByABB } from "@/packages/math/boudingBox"
 import {
   Vector2Interface,
   vector3ToVector2,
   vectorAddition,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
 
 export function entityToBoundingBox(entity: EntityInterface): BoundingInterface {

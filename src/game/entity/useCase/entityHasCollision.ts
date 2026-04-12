@@ -1,8 +1,8 @@
 import EntityInterface, { isGroundEntity } from "@/src/game/entity/EntityInterface"
 import GameInterface from "@/src/game/game/GameInterface"
-import { boundingCollision } from "@/src/utils/math/boundingCollision"
+import { boundingCollision } from "@/packages/math/boundingCollision"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 
 export function entityHasCollision(

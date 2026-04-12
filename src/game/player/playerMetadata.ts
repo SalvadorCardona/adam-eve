@@ -4,15 +4,15 @@ import {
   createJsonLd,
   createJsonLdType,
   JsonLdIri,
-} from "@/src/utils/jsonLd/jsonLd"
+} from "@/packages/jsonLd/jsonLd"
 import {
   getItemsInLocalStorageByPrefix,
   getLocalStorage,
   persistLocalStorage,
   removeLocalStorage,
-} from "@/src/utils/localStorage/localStorage"
-import { appLdType } from "@/src/AppLdType"
-import { RepositoryInterface } from "@/src/utils/repository/repository"
+} from "@/packages/localStorage/localStorage"
+import { appLdType } from "@/app/AppLdType"
+import { RepositoryInterface } from "@/packages/repository/repository"
 
 export interface PlayerInterface extends BaseJsonLdInterface {
   name?: string

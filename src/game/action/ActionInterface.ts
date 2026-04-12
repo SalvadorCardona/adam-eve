@@ -1,4 +1,4 @@
-import { BaseJsonLdInterface, updateContainer } from "@/src/utils/jsonLd/jsonLd"
+import { BaseJsonLdInterface, updateContainer } from "@/packages/jsonLd/jsonLd"
 import {
   ActionBagInterface,
   ActionnableInterface,

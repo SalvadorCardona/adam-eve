@@ -12,11 +12,11 @@ import {
 } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
-import { Vector2Interface, vector3ToVector2 } from "@/src/utils/math/vector"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
+import { Vector2Interface, vector3ToVector2 } from "@/packages/math/vector"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
-import { vectorRatioUP } from "@/src/utils/math/ratio"
+import { vectorRatioUP } from "@/packages/math/ratio"
 
 export interface EntityDecoratorResolverPropsInterface {
   color?: string

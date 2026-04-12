@@ -6,18 +6,18 @@ import {
   JsonLdIriCollection,
   JsonLdIriContainerInterface,
   JsonLDItem,
-} from "@/src/utils/jsonLd/jsonLd"
+} from "@/packages/jsonLd/jsonLd"
 import { ActionBagInterface } from "@/src/game/action/ActionBagInterface"
 import {
   createVector2,
   Vector2Interface,
   Vector3Interface,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { PlayerInterface } from "@/src/game/player/playerMetadata"
-import { BoundingInterface, createBoundingByABB } from "@/src/utils/math/boudingBox"
-import { createMatrix2D, Matrix2DInterface } from "@/src/utils/math/matrix"
+import { BoundingInterface, createBoundingByABB } from "@/packages/math/boudingBox"
+import { createMatrix2D, Matrix2DInterface } from "@/packages/math/matrix"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
 
@@ -71,7 +71,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
     zoom: number
     position: Vector3Interface
   }>
-  createdAt: DateString
+  createdAt: string | Date
   time: number
   entities: JsonLdIriContainerInterface<EntityInterface>
   players: JsonLdIriCollection<PlayerInterface>

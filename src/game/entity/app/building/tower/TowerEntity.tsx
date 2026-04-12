@@ -1,11 +1,11 @@
 import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
 import imageIcon from "./icon.png?url"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
-import { woodRessourceMetadata } from "@/src/game/entity/app/ressource/tree/woodRessource"
+import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
 import { towerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 
 export const towerEntityMetaData = entityMedataFactory({
   asset: {
@@ -13,8 +13,8 @@ export const towerEntityMetaData = entityMedataFactory({
     icon: imageIcon,
   },
   propriety: {
-    ressourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodRessourceMetadata, quantity: 5 }],
+    resourceForConstruction: createInventory({
+      items: [{ inventoryItem: woodResourceMetadata, quantity: 5 }],
     }),
     attack: {
       attackRange: 3,

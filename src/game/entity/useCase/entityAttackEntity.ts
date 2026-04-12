@@ -1,8 +1,8 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { distanceBetweenVector3 } from "@/src/utils/math/distanceBetweenVector3"
+import { distanceBetweenVector3 } from "@/packages/math/distanceBetweenVector3"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { getMetaData } from "@/src/utils/metadata/MetadataInterface"
+import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 
 export function entityAttackEntity(

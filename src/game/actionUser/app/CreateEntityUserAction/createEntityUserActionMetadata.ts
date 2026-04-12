@@ -1,17 +1,17 @@
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { playSound } from "@/src/utils/playSong"
+import { playSound } from "@/packages/playSong"
 import song from "./build_song.mp3?url"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType } from "@/src/AppLdType"
-import { diviseVector2D } from "@/src/utils/math/diviseVector"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType } from "@/app/AppLdType"
+import { diviseVector2D } from "@/packages/math/diviseVector"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { vector2ToVector3 } from "@/src/utils/math/vector"
+import { vector2ToVector3 } from "@/packages/math/vector"
 import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
-import { vectorRatioDown } from "@/src/utils/math/ratio"
+import { vectorRatioDown } from "@/packages/math/ratio"
 
 interface CreateBuildingUserActionMetadataInterface
   extends ActionUserMetaDataInterface {

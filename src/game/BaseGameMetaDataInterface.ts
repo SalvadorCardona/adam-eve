@@ -1,7 +1,7 @@
 import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
 import { SpriteAnimation } from "@/src/UI/graphic-motor/pixiJs/components/Sprite"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { MetadataInterface } from "@/src/utils/metadata/MetadataInterface"
+import { MetadataInterface } from "@/packages/metadata/MetadataInterface"
 
 export interface BaseGameMetaDataInterface extends MetadataInterface {
   asset?: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import useImageLoader from "@/src/utils/react/hook/useImageLoader"
+import useImageLoader from "@/packages/react/hook/useImageLoader"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 

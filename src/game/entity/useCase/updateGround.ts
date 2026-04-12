@@ -1,19 +1,19 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { GroundEntityInterface } from "@/src/game/entity/EntityInterface"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import {
   Vector2Interface,
   vector3ToVector2,
   vectorAddition,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import {
   Direction,
   getInMatrix,
   Matrix2DInterface,
   matrixDirection,
-} from "@/src/utils/math/matrix"
-import { JsonLdIri } from "@/src/utils/jsonLd/jsonLd"
+} from "@/packages/math/matrix"
+import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = entityQuery<GroundEntityInterface>(game, {

@@ -2,16 +2,16 @@ import {
   BaseJsonLdInterface,
   JsonLdIri,
   JsonLdType,
-} from "@/src/utils/jsonLd/jsonLd"
-import { Vector3Interface } from "@/src/utils/math/vector"
+} from "@/packages/jsonLd/jsonLd"
+import { Vector3Interface } from "@/packages/math/vector"
 import {
   ActionBagInterface,
   ActionnableInterface,
 } from "@/src/game/action/ActionBagInterface"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
-import { ConsumablePathInterface } from "@/src/utils/math/path"
-import { Direction } from "@/src/utils/math/matrix"
+import { ConsumablePathInterface } from "@/packages/math/path"
+import { Direction } from "@/packages/math/matrix"
 import { PlayerInterface } from "@/src/game/player/playerMetadata"
 import {
   InventoryAbleInterface,
@@ -53,10 +53,10 @@ export function isGroundEntity(
   return entity["@type"].startsWith(appLdType.entityGround)
 }
 
-export function isRessourceEntity(
+export function isResourceEntity(
   entity: EntityInterface,
-): entity is RessourceEntityInterface {
-  return entity["@type"].startsWith(appLdType.entityRessource)
+): entity is ResourceEntityInterface {
+  return entity["@type"].startsWith(appLdType.entityResource)
 }
 
 export function isBuildingEntity(
@@ -75,12 +75,12 @@ export function getEntityBaseType(entity: EntityInterface): JsonLdType | undefin
   if (isBuildingEntity(entity)) return appLdType.entityBuilding
   if (isGroundEntity(entity)) return appLdType.entityGround
   if (isCharacterEntity(entity)) return appLdType.entityCharacter
-  if (isRessourceEntity(entity)) return appLdType.entityRessource
+  if (isResourceEntity(entity)) return appLdType.entityResource
 
   return undefined
 }
 
-export interface RessourceEntityInterface extends EntityInterface {}
+export interface ResourceEntityInterface extends EntityInterface {}
 
 export interface CharacterEntityInterface extends EntityInterface {}
 

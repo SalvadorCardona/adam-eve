@@ -2,8 +2,8 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 import { FC } from "react"
 import GameInterface from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { Vector2Interface, Vector3Interface } from "@/src/utils/math/vector"
-import { JsonLdType } from "@/src/utils/jsonLd/jsonLd"
+import { Vector2Interface, Vector3Interface } from "@/packages/math/vector"
+import { JsonLdType } from "@/packages/jsonLd/jsonLd"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
 import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
 
@@ -14,7 +14,7 @@ interface EntityAttackPriorityInterface {
 }
 
 interface EntityPriorityInterface {
-  ressourceForConstruction?: InventoryInterface
+  resourceForConstruction?: InventoryInterface
   inventorySize?: number
   speed?: number
   attack?: EntityAttackPriorityInterface

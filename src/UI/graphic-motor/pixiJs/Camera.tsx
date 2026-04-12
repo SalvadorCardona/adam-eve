@@ -3,10 +3,10 @@ import {
   createVector2,
   Vector2Interface,
   vector3ToVector2,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
-import { appLdType } from "@/src/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 
 export const Camera = () => {
   const [, setCamera] = useState<Vector2Interface>(createVector2())

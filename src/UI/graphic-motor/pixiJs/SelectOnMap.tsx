@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { createVector2, Vector2Interface } from "@/src/utils/math/vector"
+import { createVector2, Vector2Interface } from "@/packages/math/vector"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container, FederatedPointerEvent, Graphics as BaseGraphic } from "pixi.js"
@@ -7,7 +7,7 @@ import useGameContext from "@/src/UI/provider/useGameContext"
 import { onSelectEntityUserActionMetadata } from "@/src/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { useDebounce } from "react-use"
 import { updateGame } from "@/src/game/game/updateGame"
-import { diviseVector2D } from "@/src/utils/math/diviseVector"
+import { diviseVector2D } from "@/packages/math/diviseVector"
 
 let mouseMovePositon = createVector2()
 

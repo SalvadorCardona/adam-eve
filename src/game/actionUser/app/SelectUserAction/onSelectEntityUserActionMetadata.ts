@@ -1,6 +1,6 @@
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
-import { createJsonLdType } from "@/src/utils/jsonLd/jsonLd"
-import { appLdType, appLdTypeEntity } from "@/src/AppLdType"
+import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { appLdType, appLdTypeEntity } from "@/app/AppLdType"
 import {
   entityQuery,
   EntityQueryParams,
@@ -10,13 +10,13 @@ import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/Remo
 import { createEntityUserActionMetadata } from "@/src/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 import { updateGame } from "@/src/game/game/updateGame"
 import EntityInterface from "@/src/game/entity/EntityInterface"
-import { diviseVector2D } from "@/src/utils/math/diviseVector"
-import { vectorRatioDown } from "@/src/utils/math/ratio"
+import { diviseVector2D } from "@/packages/math/diviseVector"
+import { vectorRatioDown } from "@/packages/math/ratio"
 import {
   createVector2,
   isVector2Equal,
   vectorAddition,
-} from "@/src/utils/math/vector"
+} from "@/packages/math/vector"
 
 interface OnClickEntityUserActionMetadataInterface
   extends ActionUserMetaDataInterface {
@@ -28,7 +28,6 @@ export const onSelectEntityUserActionMetadata: OnClickEntityUserActionMetadataIn
     "@type": createJsonLdType(appLdType.userAction, "on-click-entity"),
     onSelectZone: ({ game }) => {
       const entities = entitiesFinder(game)
-      console.log("selct", entities)
       game.userControl.entitiesSelected = entities.map((e) => e["@id"])
       updateGame(game, game.userControl)
 
