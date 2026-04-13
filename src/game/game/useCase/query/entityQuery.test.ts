@@ -1,4 +1,4 @@
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+import { workerEntityResource } from "@/src/game/entity/app/character/worker/workerEntityResource"
 import { gameFactory } from "@/src/game/game/GameInterface"
 import { createVector3 } from "@/packages/math/vector"
 import { treeEntityMetaData } from "@/src/game/entity/app/resource/tree/TreeEntity"
@@ -10,7 +10,7 @@ import EntityInterface from "@/src/game/entity/EntityInterface"
 describe("Test entityQuery", () => {
   it("Context 1", () => {
     const game = gameFactory()
-    const worker = workerEntityMetaData.factory({
+    const worker = workerEntityResource.factory({
       game,
       entity: { position: createVector3(1, 1, 1) },
     })

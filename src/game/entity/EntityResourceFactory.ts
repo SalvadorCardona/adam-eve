@@ -1,14 +1,14 @@
 import { entityFactory } from "@/src/game/entity/entityFactory"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import {
   hasCollisionInGame,
   hasCollisionWithGround,
 } from "@/src/game/entity/useCase/entityHasCollision"
 import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
 
-export function entityMedataFactory<
-  T extends EntityMetaDataInterface = EntityMetaDataInterface,
->(entityMetaData: Partial<T>): T {
+export function entityResourceFactory<
+  T extends EntityResourceInterface = EntityResourceInterface,
+>(entityMetaData: { "@id": string } & Partial<T>): T {
   const meta = {
     canBeBuild: (payload) => {
       return (
@@ -16,10 +16,9 @@ export function entityMedataFactory<
         hasCollisionWithGround(payload.game, payload.entity)
       )
     },
-    "@type": "undefined",
+    "@type": "resource/entity",
     factory: entityFactory,
-    ...entityMetaData,
-  } as T
+  } as Partial<EntityResourceInterface>
 
-  return metaDataFactory(meta) as T
+  return metaDataFactory({ ...meta, ...entityMetaData }) as T
 }

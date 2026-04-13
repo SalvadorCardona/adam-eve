@@ -1,17 +1,17 @@
 import { addToInventory } from "@/src/game/inventory/useCase/addToInventory"
 import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
 import { expect } from "vitest"
 import { goldResourceMetadata } from "@/src/game/entity/app/resource/gold/goldResource"
 import { waterResourceMetadata } from "@/src/game/inventory/app/water/woodResource"
 import { getTotalQuantityInInventory } from "@/src/game/inventory/useCase/getTotalQuantityInInventory"
 import { inventoryIsFull } from "@/src/game/inventory/useCase/inventoryIsFull"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+import { workerEntityResource } from "@/src/game/entity/app/character/worker/workerEntityResource"
 import { transfertInventoryByItem } from "@/src/game/inventory/useCase/transfertInventoryByItem"
 
-const entityMetadata = getMetaData<EntityMetaDataInterface>(workerEntityMetaData)
+const entityMetadata = getMetaData<EntityResourceInterface>(workerEntityResource)
 
 describe("Inventory Test", () => {
   it("Context add To Inventory", () => {

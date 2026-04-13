@@ -1,17 +1,15 @@
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
-import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
-import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
+import { zombieEntityResource } from "@/src/game/entity/app/character/zombie/zombieEntityResource"
+import { arrowEntityResource } from "@/src/game/entity/app/attack/ArrowEntityResource"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/src/game/entity/useCase/query/getEntitySize"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 
-export const towerAttackActionMetadata = actionMetaDataFactory({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "TowerAttack"),
+export const towerAttackActionResource = actionResourceFactory({
+  ["@id"]: "action/tower-action",
   onFrame: ({ game, action, entity }) => {
     updateNextTick(game, action, 50)
     if (!entity) {
@@ -21,7 +19,7 @@ export const towerAttackActionMetadata = actionMetaDataFactory({
     const size = getEntitySize(entity)
 
     const zombie = entityQueryFindOne(game, {
-      "@type": zombieEntityMetaData["@type"],
+      "@type": zombieEntityResource["@type"],
       findClosestOf: { position: entity.position },
       "@idIsNot": entity["@id"],
     })
@@ -34,7 +32,7 @@ export const towerAttackActionMetadata = actionMetaDataFactory({
       return
     }
 
-    const arrowEntity = ArrowEntityMetaData.factory({
+    const arrowEntity = arrowEntityResource.factory({
       entity: {
         entityAttackTargetIri: zombie["@id"],
         position: { ...entity.position, y: size.y },

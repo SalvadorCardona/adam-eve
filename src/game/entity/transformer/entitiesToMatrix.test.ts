@@ -7,7 +7,7 @@ import {
   matrixToVector,
 } from "@/packages/math/matrix"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 
 const entitiesPosition: Matrix2DInterface = [
@@ -30,7 +30,7 @@ const matrixExpected = [
 
 describe("Test gameEntitiesToMatrix", () => {
   it("Context 1", () => {
-    const entityMetadata = getMetaData<EntityMetaDataInterface>(
+    const entityMetadata = getMetaData<EntityResourceInterface>(
       grassGroundEntityMetadata,
     )
 

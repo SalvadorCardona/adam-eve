@@ -11,9 +11,7 @@ export const useGameFrame = (callback: (game: GameInterface) => void) => {
       callback(e)
     })
     // Cleanup function to unsubscribe when the component unmounts
-    return () => {
-      gameContext.pubSub.unsubscribe(subscription)
-    }
+    return subscription.unsubscribe
   }, [gameContext])
 }
 
@@ -23,8 +21,6 @@ export const useGamePubSub = (
 ) => {
   useEffect(() => {
     const id = containerPubSub.subscribe(channel, callback)
-    return () => {
-      containerPubSub.unsubscribe(channel, id)
-    }
+    return id.unsubscribe
   }, [])
 }

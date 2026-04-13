@@ -1,13 +1,14 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import imageIcon from "./icon.png?url"
-import { appLdType } from "@/app/AppLdType"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
 import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
-import { towerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
+import { towerAttackActionResource } from "@/src/game/entity/app/building/tower/towerActionAttackResource"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
 
-export const towerEntityMetaData = entityMedataFactory({
+export const towerEntityResource = entityResourceFactory({
+  ["@id"]: "resource/tower",
+  entityType: EntityType.building,
   asset: {
     model2d: model,
     icon: imageIcon,
@@ -32,8 +33,7 @@ export const towerEntityMetaData = entityMedataFactory({
       y: 2,
       z: 4,
     },
-    defaultActions: [towerAttackActionMetadata["@type"]],
+    defaultActions: [towerAttackActionResource["@type"]],
   },
   label: "Tour de défense",
-  ["@type"]: createJsonLdType(appLdType.entityBuilding, "tower"),
 })

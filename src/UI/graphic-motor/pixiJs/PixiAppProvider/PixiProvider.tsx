@@ -5,7 +5,7 @@ import LoaderComponent from "@/components/LoaderComponent"
 import { usePixiApp } from "@/src/UI/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 import { PixiContainerProvider } from "@/src/UI/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
 import { appLdType } from "@/app/AppLdType"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { assetList } from "@/app/assetList"
 import { metaDataRegistered } from "@/packages/metadata/MetadataInterface"
@@ -25,7 +25,7 @@ export const PixiProvider: React.FC<{
     app.stage.eventMode = "static"
 
     const assets: string[] = []
-    getByLdTypeIn<EntityMetaDataInterface>(
+    getByLdTypeIn<EntityResourceInterface>(
       metaDataRegistered,
       appLdType.entity,
     ).forEach((e) => {

@@ -8,7 +8,7 @@ export interface ContainerInterface<T = any> {
 }
 
 export interface ContainerPublish {
-  item: BaseJsonLdInterface
+  item: BaseJsonLdItemInterface
   action: ContainerAction
 }
 
@@ -19,13 +19,15 @@ export interface JsonTypedLdInterface {
   "@type": JsonLdType
 }
 
-export interface BaseJsonLdInterface {
+export interface BaseJsonLdItemInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
   "@version": number
+
+  [key: string]: any
 }
 
-export type JsonLDItem<T> = BaseJsonLdInterface & T
+export type JsonLDItem<T> = BaseJsonLdItemInterface & T
 
 export interface JsonLdTypeContainerInterface<T = object> {
   [key: JsonLdType]: T
@@ -35,8 +37,9 @@ export interface JsonLdIriContainerInterface<T = object> {
   [key: JsonLdIri]: JsonLDItem<T>
 }
 
-export interface JsonLdIriCollection<T = BaseJsonLdInterface>
-  extends BaseJsonLdInterface {
+export interface JsonLdIriCollection<
+  T = BaseJsonLdItemInterface,
+> extends BaseJsonLdItemInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
   "@context": "collection"
@@ -45,8 +48,9 @@ export interface JsonLdIriCollection<T = BaseJsonLdInterface>
   totalItems: number
 }
 
-export interface JsonLdTypeCollection<T = BaseJsonLdInterface>
-  extends BaseJsonLdInterface {
+export interface JsonLdTypeCollection<
+  T = BaseJsonLdItemInterface,
+> extends BaseJsonLdItemInterface {
   "@id": JsonLdIri
   "@type": JsonLdType
   "@context": "collection"
@@ -81,7 +85,7 @@ export function createJsonLdCollection<T = JsonLdIriCollection>(
 ): JsonLdIriCollection<T> {
   return createJsonLd<JsonLdIriCollection<T>>(type, {
     "@context": "collection",
-    collection: collections,
+    collection: collections ?? {},
     totalItems: Object.keys(collections).length,
   })
 }
@@ -121,7 +125,7 @@ export enum ContainerAction {
   create = "create",
 }
 
-export function updateContainer<T extends BaseJsonLdInterface>(
+export function updateContainer<T extends BaseJsonLdItemInterface>(
   container: JsonLdIriContainerInterface<T>,
   item: T,
   action: ContainerAction = ContainerAction.update,
@@ -135,7 +139,7 @@ export function updateContainer<T extends BaseJsonLdInterface>(
   updateItem(item, action)
 }
 
-export function updateContainerByType<T extends BaseJsonLdInterface>(
+export function updateContainerByType<T extends BaseJsonLdItemInterface>(
   container: JsonLdTypeContainerInterface<T>,
   item: T,
   action: ContainerAction = ContainerAction.update,

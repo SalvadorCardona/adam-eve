@@ -1,26 +1,14 @@
 import GameInterface from "@/src/game/game/GameInterface"
-import {
-  getByLdType,
-  getByLdTypeIn,
-  JsonLdIri,
-  JsonLdType,
-} from "@/packages/jsonLd/jsonLd"
-import {
-  Vector2Interface,
-  Vector3Interface,
-  vector3ToVector2,
-} from "@/packages/math/vector"
-import EntityInterface, {
-  EntityFaction,
-  getEntityBaseType,
-} from "@/src/game/entity/EntityInterface"
+import { getByLdType, getByLdTypeIn, JsonLdIri, JsonLdType } from "@/packages/jsonLd/jsonLd"
+import { Vector2Interface, Vector3Interface, vector3ToVector2 } from "@/packages/math/vector"
+import EntityInterface, { EntityFaction, getEntityBaseType } from "@/src/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 import { boundingCollision } from "@/packages/math/boundingCollision"
-import { appLdType } from "@/app/AppLdType"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { entityToBoundingBox } from "@/src/game/entity/transformer/entityToBoundingBox"
 import { createBoundingFromZone } from "@/packages/math/boudingBox"
 import { findClosestEntity } from "@/src/game/game/useCase/query/findClosestEntity"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
 
 interface CircleSearch {
   center: Vector2Interface
@@ -35,6 +23,7 @@ interface SquareSearch {
 type Order = "ASC" | "DESC"
 
 export interface EntityQueryParams {
+  entityType: EntityType | EntityType[]
   "@type"?: JsonLdType | JsonLdType[]
   "@typeIn"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
@@ -53,9 +42,9 @@ export interface EntityQueryParams {
 }
 
 const orderTypePriority = {
-  [appLdType.entityCharacter]: 1,
-  [appLdType.entityBuilding]: 2,
-  [appLdType.entityGround]: 3,
+  [EntityType.character]: 1,
+  [EntityType.building]: 2,
+  [EntityType.ground]: 3,
 }
 
 export function entityQueryFindOne<T = EntityInterface>(
@@ -86,6 +75,7 @@ export function entityQuery<T = EntityInterface>(
     state,
     order,
     faction,
+    entityType,
     "@idIsNot": idIsNot,
     findClosestOf,
   } = query
@@ -127,6 +117,14 @@ export function entityQuery<T = EntityInterface>(
       return (
         distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
       )
+    })
+  }
+
+  if (entityType) {
+    entities = entities.filter((entity) => {
+      return entity.entityType && Array.isArray(entityType)
+        ? entityType.includes(entity.entityType)
+        : entity.entityType === entityType
     })
   }
 

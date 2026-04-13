@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import React, { useEffect } from "react"
-import { gameMetadata } from "@/src/game/game/GameMetaData"
+import { gameResource } from "@/src/game/game/gameResource"
 import { gameLoader } from "@/src/game/game/gameLoader"
 import GameComponent from "@/src/UI/GameComponent"
 import { gameFactory } from "@/src/game/game/GameInterface"
@@ -15,7 +15,7 @@ function RouteComponent() {
   const game = gameFactory()
 
   useEffect(() => {
-    gameMetadata.persistItem(gameLoader(game))
+    gameResource.persistItem(gameLoader(game))
     navigate({
       to: "/game/$gameIri",
       params: { gameIri: game["@id"] },

@@ -1,33 +1,35 @@
 import {
-  getLdType,
+  getLdIri,
+  JsonLdIri,
   JsonLdType,
   JsonLdTypeContainerInterface,
-  JsonTypedLdInterface,
 } from "@/packages/jsonLd/jsonLd"
 
-export interface MetadataInterface extends JsonTypedLdInterface {}
+export type MetadataInterface = { "@id": JsonLdIri }
+type MetadataAble = JsonLdType | MetadataInterface
 
 export const metaDataRegistered: JsonLdTypeContainerInterface<MetadataInterface> = {}
 
 const addMetaData = (metaData: MetadataInterface) => {
-  metaDataRegistered[metaData["@type"]] = metaData
+  metaDataRegistered[metaData["@id"]] = metaData
 }
 
 export function getMetaData<T = MetadataInterface>(
-  metaType: JsonLdType | MetadataInterface,
-): T {
-  const type = getLdType(metaType)
+  metaType: MetadataAble,
+): T | undefined {
+  const id = getLdIri(metaType)
+  if (id && metaDataRegistered[id]) return metaDataRegistered[id] as T
 
-  if (metaDataRegistered[type]) return metaDataRegistered[type] as T
-
-  throw new Error("Meta Data Not found: " + type)
+  return undefined
 }
 
 export function metaDataFactory<T extends MetadataInterface = MetadataInterface>(
   metaData: T,
 ): T {
-  if (!metaData["@type"]) {
-    throw new Error("Type is not defined, is recommended to use factory")
+  if (!metaData["@id"]) {
+    const message = "The @id is not defined"
+    console.error(message, metaData)
+    throw new Error(message)
   }
 
   addMetaData(metaData)

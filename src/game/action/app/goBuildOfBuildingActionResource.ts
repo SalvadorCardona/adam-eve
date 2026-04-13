@@ -1,20 +1,19 @@
-import { createJsonLd, createJsonLdType, JsonLdIri } from "@/packages/jsonLd/jsonLd"
+import { createJsonLd, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import EntityInterface, {
   BuildingEntityInterface,
 } from "@/src/game/entity/EntityInterface"
-import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
+import { ActionResourceInterface } from "@/src/game/action/ActionResourceInterface"
 import { transfertInventoryByItem } from "@/src/game/inventory/useCase/transfertInventoryByItem"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/src/game/inventory/useCase/getInventoryItem"
 import { enoughResource } from "@/src/game/inventory/useCase/enoughResource"
-import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
-import { appLdType } from "@/app/AppLdType"
+import { forumEntityResource } from "@/src/game/entity/app/building/forum/forumEntityResource"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/src/game/inventory/InventoryInterface"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 
 enum State {
   GoToForum = "GoToForum",
@@ -33,13 +32,13 @@ interface FindWorkerData {
   forumPathCoordinate?: EntityInterface
 }
 
-export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
-  ActionMetadataInterface<FindWorkerData>
+export const goBuildOfBuildingActionResource = actionResourceFactory<
+  ActionResourceInterface<FindWorkerData>
 >({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "goBuildOfBuilding"),
+  "@id": "action/goBuildOfBuilding",
   onFrame: ({ action, game, entity }) => {
     if (!entity) return
-    const entityMetadata = getMetaData<EntityMetaDataInterface>(entity)
+    const entityMetadata = getMetaData<EntityResourceInterface>(entity)
     const data = action.data
 
     const building = entityQueryFindOne<BuildingEntityInterface>(game, {
@@ -53,7 +52,7 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
       return
     }
 
-    const buildingMeta = getMetaData<EntityMetaDataInterface>(building)
+    const buildingMeta = getMetaData<EntityResourceInterface>(building)
 
     if (building && data.state === State.NoBuild) {
       data.state = State.GoToForum
@@ -63,7 +62,7 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
 
     if (data.state === State.GoToForum) {
       const forum = entityQueryFindOne(game, {
-        "@type": forumEntityMetaData["@type"],
+        "@id": forumEntityResource["@id"],
       })
 
       if (!forum) {
@@ -141,6 +140,6 @@ export const goBuildOfBuildingActionMetadata = actionMetaDataFactory<
       state: State.GoToForum,
     }
 
-    return createJsonLd(goBuildOfBuildingActionMetadata["@type"], { data })
+    return createJsonLd(goBuildOfBuildingActionResource["@type"], { data })
   },
 })

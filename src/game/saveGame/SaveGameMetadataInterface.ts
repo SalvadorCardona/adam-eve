@@ -1,7 +1,7 @@
 import GameInterface from "@/src/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import {
-  BaseJsonLdInterface,
+  BaseJsonLdItemInterface,
   createJsonLd,
   createJsonLdType,
   JsonLdIri,
@@ -15,7 +15,7 @@ import {
 import { appLdType } from "@/app/AppLdType"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
-interface SaveGameInterface extends BaseJsonLdInterface {
+interface SaveGameInterface extends BaseJsonLdItemInterface {
   name?: string
   game: GameInterface
   createdAt: Date | string

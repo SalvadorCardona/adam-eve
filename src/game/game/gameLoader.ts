@@ -3,14 +3,14 @@ import { ActionMetadataInterface } from "@/src/game/action/ActionEntityMetadataI
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { getByLdTypeIn, updateCollection } from "@/packages/jsonLd/jsonLd"
 import { playerMetadata } from "@/src/game/player/playerMetadata"
-import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
+import { theDeathActionResource } from "@/src/game/action/app/theDeathActionResource"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 import { addAction } from "@/src/game/action/ActionInterface"
 
 export function gameLoader(game: GameInterface): GameInterface {
-  if (!getByLdTypeIn(game.actions, theDeathActionMetadata["@type"]).length) {
+  if (!getByLdTypeIn(game.actions, theDeathActionResource["@type"]).length) {
     const meta = getMetaData<ActionMetadataInterface<any>>(
-      theDeathActionMetadata["@type"],
+      theDeathActionResource["@type"],
     )
     addAction(game.actions, meta.factory({ game }))
   }

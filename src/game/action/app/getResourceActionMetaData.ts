@@ -10,13 +10,13 @@ import {
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { removeActionFromEntity } from "@/src/game/action/removeAction"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 import { ResourceMappingMetadataInterface } from "@/src/resource/resourceMappingMetadata"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 
-export const getResourceActionMetaData = actionMetaDataFactory({
+export const getResourceActionMetaData = actionResourceFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "getResource"),
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return

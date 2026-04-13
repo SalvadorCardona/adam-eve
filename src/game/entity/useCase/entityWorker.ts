@@ -3,7 +3,7 @@ import { removeValue } from "@/packages/array/array"
 import { getLdIri, JsonLdIriAble } from "@/packages/jsonLd/jsonLd"
 import { addActionToEntity, hasAction } from "@/src/game/action/ActionInterface"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import GameInterface from "@/src/game/game/GameInterface"
 import { getEntityWorkerNeeded } from "@/src/game/entity/useCase/query/getEntityWorkerNeeded"
 
@@ -15,7 +15,7 @@ export function addWorkerToEntity(
   if (!source.workers) {
     source.workers = []
   }
-  const metaData = getMetaData<EntityMetaDataInterface>(source)
+  const metaData = getMetaData<EntityResourceInterface>(source)
   if (!metaData.workerAction) {
     return
   }

@@ -3,7 +3,7 @@ import { createJsonLdCollection } from "@/packages/jsonLd/jsonLd"
 import { appLdType } from "@/app/AppLdType"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { InventoryItemRequest } from "@/src/game/inventory/InventoryItemInterface"
 import { addToInventory } from "@/src/game/inventory/useCase/addToInventory"
 
@@ -20,8 +20,8 @@ export function createInventory(params?: Params): InventoryInterface {
   }
 
   if (params?.entity) {
-    const metaData = getMetaData<EntityMetaDataInterface>(params.entity)
-    baseInventory.size = metaData.propriety.inventorySize ?? Infinity
+    const metaData = getMetaData<EntityResourceInterface>(params.entity)
+    baseInventory.size = metaData?.propriety?.inventorySize ?? Infinity
   }
 
   if (params?.items) {

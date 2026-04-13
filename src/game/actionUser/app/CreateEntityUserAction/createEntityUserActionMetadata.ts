@@ -2,7 +2,7 @@ import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMet
 import { playSound } from "@/packages/playSong"
 import song from "./build_song.mp3?url"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { mouseIcon } from "@/src/UI/MouseCursor/MouseIcon"
 import { hasActionUser } from "@/src/game/actionUser/hasActionUser"
 import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
@@ -13,9 +13,8 @@ import { vector2ToVector3 } from "@/packages/math/vector"
 import { getEntitiesInGame } from "@/src/game/game/useCase/query/getEntitiesInGame"
 import { vectorRatioDown } from "@/packages/math/ratio"
 
-interface CreateBuildingUserActionMetadataInterface
-  extends ActionUserMetaDataInterface {
-  data: { entityMetaData: EntityMetaDataInterface | undefined }
+interface CreateBuildingUserActionMetadataInterface extends ActionUserMetaDataInterface {
+  data: { entityMetaData: EntityResourceInterface | undefined }
 }
 
 export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInterface =
@@ -24,7 +23,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
     "@type": createJsonLdType(appLdType.userAction, "create-building"),
     onCall: ({ game, metaData }) => {
       createEntityUserActionMetadata.data.entityMetaData =
-        metaData as EntityMetaDataInterface
+        metaData as EntityResourceInterface
       game.userControl.currentAction = createEntityUserActionMetadata
     },
     onApply: ({ game }) => {

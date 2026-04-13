@@ -1,15 +1,15 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import imageIcon from "./icon.png?url"
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/src/game/entity/useCase/entityHasCollision"
 import model from "./model.png"
 import { createInventory } from "@/src/game/inventory/useCase/createInventory"
 import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
 
-export const bridgeEntityMetaData = entityMedataFactory({
-  ["@type"]: createJsonLdType(appLdType.entityBuilding, "bridge"),
+export const BridgeEntityResource = entityResourceFactory({
+  ["@id"]: "resource/bridge",
+  entityType: EntityType.building,
   label: "Pont",
   asset: {
     icon: imageIcon,
@@ -29,7 +29,7 @@ export const bridgeEntityMetaData = entityMedataFactory({
     }),
   },
   canBeBuild: ({ entity, game }) => {
-    const grounds = entityQuery(game, { "@typeIn": appLdType.entityGround })
+    const grounds = entityQuery(game, { "@typeIn": EntityType.ground })
     for (const ground of grounds) {
       if (entityHasCollision(entity, ground)) {
         return false

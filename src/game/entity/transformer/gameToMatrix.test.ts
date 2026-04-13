@@ -7,9 +7,9 @@ import {
 } from "@/packages/math/matrix"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
-import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
+import { towerEntityResource } from "@/src/game/entity/app/building/tower/towerEntityResource"
 
 const groundsPosition: Matrix2DInterface = [
   [1, 1, 1, 1, 1, 1],
@@ -38,7 +38,7 @@ const matrixExpected = [
 describe("Test gameEntitiesToMatrix", () => {
   it("Context 1", () => {
     const game = gameFactory()
-    const grassMeta = getMetaData<EntityMetaDataInterface>(grassGroundEntityMetadata)
+    const grassMeta = getMetaData<EntityResourceInterface>(grassGroundEntityMetadata)
     const grounds = matrixToVector(groundsPosition).map((position) =>
       grassMeta.factory({
         game,
@@ -47,7 +47,7 @@ describe("Test gameEntitiesToMatrix", () => {
         },
       }),
     )
-    const towerMeta = getMetaData<EntityMetaDataInterface>(towerEntityMetaData)
+    const towerMeta = getMetaData<EntityResourceInterface>(towerEntityResource)
     const building = matrixToVector(buildingsPosition).map((position) =>
       towerMeta.factory({
         game,

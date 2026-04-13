@@ -1,4 +1,4 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { Card } from "@/components/ui/card"
 import React from "react"
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
@@ -11,17 +11,17 @@ import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { metaDataRegistered } from "@/packages/metadata/MetadataInterface"
 
 export const BottomSidebar = () => {
-  const buildingMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
+  const buildingMetaDatas = getByLdTypeIn<EntityResourceInterface>(
     metaDataRegistered,
     appLdType.entityBuilding,
   )
 
-  const groundMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
+  const groundMetaDatas = getByLdTypeIn<EntityResourceInterface>(
     metaDataRegistered,
     appLdType.entityGround,
   )
 
-  const natureMetaDatas = getByLdTypeIn<EntityMetaDataInterface>(
+  const natureMetaDatas = getByLdTypeIn<EntityResourceInterface>(
     metaDataRegistered,
     appLdType.entityResource,
   )

@@ -1,12 +1,11 @@
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { removeEntityToGame } from "@/src/game/entity/useCase/removeEntityToGame"
 import { appLdType } from "@/app/AppLdType"
 import { entityQuery } from "@/src/game/game/useCase/query/entityQuery"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 
-export const theDeathActionMetadata = actionMetaDataFactory({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "TheDeathActionMetadata"),
+export const theDeathActionResource = actionResourceFactory({
+  ["@id"]: "action/the-death",
   onFrame: ({ game, action }) => {
     updateNextTick(game, action, 20)
 

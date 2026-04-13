@@ -7,16 +7,16 @@ import {
   entityFindOneById,
   entityQuery,
 } from "@/src/game/game/useCase/query/entityQuery"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+import { workerEntityResource } from "@/src/game/entity/app/character/worker/workerEntityResource"
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 import {
   addWorkerToEntity,
   removeWorkerFromEntity,
 } from "@/src/game/entity/useCase/entityWorker"
 
-export const findWorkerCharacterActionMetadata = actionMetaDataFactory({
+export const findWorkerCharacterActionMetadata = actionResourceFactory({
   ["@type"]: createJsonLdType(appLdType.typeAction, "findWorkerCharacter"),
   onFrame: ({ action, game }) => {
     updateNextTick(game, action, 60)
@@ -34,7 +34,7 @@ export const findWorkerCharacterActionMetadata = actionMetaDataFactory({
     })
 
     const workers = entityQuery<CharacterEntityInterface>(game, {
-      "@typeIn": workerEntityMetaData["@type"],
+      "@typeIn": workerEntityResource["@type"],
     })
 
     buildings.forEach((building) => {

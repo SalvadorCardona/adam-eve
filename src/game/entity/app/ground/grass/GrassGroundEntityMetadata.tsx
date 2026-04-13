@@ -1,4 +1,4 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import grassIcon from "./grassIcon.png"
 import { appLdType } from "@/app/AppLdType"
 import EntityInterface from "@/src/game/entity/EntityInterface"
@@ -48,7 +48,7 @@ const grassNormal = [
   grass12,
   grass13,
 ]
-export const grassGroundEntityMetadata = entityMedataFactory({
+export const grassGroundEntityMetadata = entityResourceFactory({
   asset: {
     icon: grassIcon,
     asset2d: [

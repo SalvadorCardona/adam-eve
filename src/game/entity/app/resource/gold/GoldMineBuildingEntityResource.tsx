@@ -1,13 +1,14 @@
 import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
-import imageIcon from "./icon.png?url"
-import model from "./model.png?url"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
+import iconSrc from "@/src/game/entity/app/resource/gold/goldMineBuildIcon.png"
+import model from "@/src/game/entity/app/resource/gold/model.png"
 import { getResourceActionMetaData } from "@/src/game/action/app/getResourceActionMetaData"
-import { appLdType } from "@/app/AppLdType"
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 
-export const timberHouseEntityMetaData = entityResourceFactory({
+export const goldMineBuildMetaDataEntity = entityResourceFactory({
+  ["@id"]: "resource/gold-building",
+  entityType: EntityType.building,
   asset: {
-    icon: imageIcon,
+    icon: iconSrc,
     model2d: model,
   },
   propriety: {
@@ -15,7 +16,7 @@ export const timberHouseEntityMetaData = entityResourceFactory({
       numberOfWorker: 2,
     },
     health: {
-      maxLife: 100,
+      maxLife: 75,
     },
     size: {
       x: 2,
@@ -24,6 +25,4 @@ export const timberHouseEntityMetaData = entityResourceFactory({
     },
   },
   workerAction: getResourceActionMetaData,
-  label: "Timber House",
-  ["@type"]: createJsonLdType(appLdType.entityBuilding, "timberHouse"),
 })

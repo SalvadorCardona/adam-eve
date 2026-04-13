@@ -1,11 +1,11 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import {
+  EntityResourceInterface,
+  EntityType,
+} from "@/src/game/entity/EntityResourceInterface"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import iconFarmerSrc from "./img.png"
 import zombieUrl from "./zombie.png"
-
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
-import { zombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
+import { zombieAttackActionResource } from "@/src/game/entity/app/character/zombie/zombieAttackActionResource"
 import { EntityState } from "@/src/game/entity/EntityState"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
 import { createFramePixiJs } from "@/src/UI/graphic-motor/pixiJs/createFramePixiJs"
@@ -31,8 +31,9 @@ const idleAnimation = createFramePixiJs({
   width: 768,
 })
 
-export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory({
-  ["@type"]: createJsonLdType(appLdType.entityCharacter, "zombie"),
+export const zombieEntityResource: EntityResourceInterface = entityResourceFactory({
+  ["@id"]: "resource/zombie",
+  entityType: EntityType.character,
   label: "Zombie",
   asset: {
     model2d: zombieUrl,
@@ -61,7 +62,7 @@ export const zombieEntityMetaData: EntityMetaDataInterface = entityMedataFactory
     health: {
       maxLife: 100,
     },
-    defaultActions: [zombieAttackActionMetadata["@type"]],
+    defaultActions: [zombieAttackActionResource["@type"]],
   },
   defaultEntity: () => ({ faction: EntityFaction.enemy }),
 })

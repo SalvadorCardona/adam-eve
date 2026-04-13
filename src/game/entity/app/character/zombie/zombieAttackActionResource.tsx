@@ -1,6 +1,4 @@
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
 import { EntityFaction } from "@/src/game/entity/EntityInterface"
 import {
@@ -10,11 +8,11 @@ import {
 import { EntityState } from "@/src/game/entity/EntityState"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { entityGoToEntityWithGround } from "@/src/game/entity/useCase/move/entityGoToEntity"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 import { updateNextTick } from "@/src/game/action/updateNextTick"
 
-export const zombieAttackActionMetadata = actionMetaDataFactory({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "ZombieAttack"),
+export const zombieAttackActionResource = actionResourceFactory({
+  ["@id"]: "action/zombie-attack",
   onFrame: ({ game, entity, action }) => {
     if (!entity) return
     const enemy = entityQueryFindOne(game, { "@id": entity.entityAttackTargetIri })
@@ -49,8 +47,8 @@ export const zombieAttackActionMetadata = actionMetaDataFactory({
     }
 
     if (enemy && entity.state === EntityState.attack) {
-      const metaData = getMetaData<EntityMetaDataInterface>(entity)
-      const attack = metaData.propriety?.attack ?? 0
+      const metaData = getMetaData<EntityResourceInterface>(entity)
+      const attack = metaData?.propriety?.attack ?? 0
       if (!attack) return
 
       if (!entityAttackEntity(game, entity, enemy)) {

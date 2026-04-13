@@ -3,10 +3,10 @@ import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
 import React from "react"
 import GameComponent from "@/src/UI/GameComponent"
 import { NotFound } from "@/components/NotFound"
-import { gameMetadata } from "@/src/game/game/GameMetaData"
+import { gameResource } from "@/src/game/game/gameResource"
 
 export const Route = createFileRoute("/game/$gameIri")({
-  loader: ({ params: { gameIri } }) => gameMetadata.getItem(gameIri),
+  loader: ({ params: { gameIri } }) => gameResource.getItem(gameIri),
   errorComponent: SaveGameErrorComponent,
   component: SaveGameComponent,
   notFoundComponent: () => {

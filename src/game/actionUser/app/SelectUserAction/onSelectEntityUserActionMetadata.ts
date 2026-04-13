@@ -1,6 +1,6 @@
 import { ActionUserMetaDataInterface } from "@/src/game/actionUser/ActionUserMetaDataInterface"
 import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType, appLdTypeEntity } from "@/app/AppLdType"
+import { appLdType } from "@/app/AppLdType"
 import {
   entityQuery,
   EntityQueryParams,
@@ -17,9 +17,9 @@ import {
   isVector2Equal,
   vectorAddition,
 } from "@/packages/math/vector"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
 
-interface OnClickEntityUserActionMetadataInterface
-  extends ActionUserMetaDataInterface {
+interface OnClickEntityUserActionMetadataInterface extends ActionUserMetaDataInterface {
   onSelectZone: (params: { game: GameInterface }) => void
 }
 
@@ -67,7 +67,12 @@ function entitiesFinder(game: GameInterface): EntityInterface[] {
     },
   }
 
-  for (const entityQueryParam of appLdTypeEntity) {
+  for (const entityQueryParam of [
+    EntityType.character,
+    EntityType.building,
+    EntityType.resource,
+    EntityType.ground,
+  ]) {
     baseQuery["@typeIn"] = entityQueryParam
     const entities = entityQuery(game, baseQuery)
     if (entities.length) return entities

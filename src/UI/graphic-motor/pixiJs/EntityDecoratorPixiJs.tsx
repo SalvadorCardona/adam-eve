@@ -1,4 +1,4 @@
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import React, { useMemo, useState } from "react"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { Graphics } from "@/src/UI/graphic-motor/pixiJs/components/Graphics"
@@ -28,7 +28,7 @@ export const EntityDecoratorPixiJs = ({
   color,
 }: EntityDecoratorResolverPropsInterface) => {
   const [, setVersion] = useState(entity["@version"])
-  const entityMetaData = getMetaData(entity) as EntityMetaDataInterface
+  const entityMetaData = getMetaData(entity) as EntityResourceInterface
   const game = useGameContext().game
   const [isSelected, setIsSelected] = useState<boolean>(false)
   useGamePubSub(entity["@id"], () => {
@@ -131,7 +131,7 @@ interface Model2DPropsInterface {
 }
 
 export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
-  const metaData = getMetaData<EntityMetaDataInterface>(entity)
+  const metaData = getMetaData<EntityResourceInterface>(entity)
   const asset = metaData.asset?.model2d ?? metaData.asset?.icon
   if (!asset) {
     console.warn("Component 2D not found with", metaData)

@@ -1,6 +1,6 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import {
-  BaseJsonLdInterface,
+  BaseJsonLdItemInterface,
   createJsonLd,
   createJsonLdCollection,
   JsonLdIriCollection,
@@ -62,7 +62,7 @@ type GameWorld = JsonLDItem<{
   groundMatrix?: Matrix2DInterface
 }>
 
-export default interface GameInterface extends BaseJsonLdInterface {
+export default interface GameInterface extends BaseJsonLdItemInterface {
   mouseState: MouseState
   graphicMotor: GraphicMotor
   gameOption: GameOption
@@ -81,7 +81,7 @@ export default interface GameInterface extends BaseJsonLdInterface {
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
-  return createJsonLd(appLdType.game, {
+  return createJsonLd("game", {
     players: createJsonLdCollection(appLdType.players),
     gameWorld: createJsonLd<GameWorld>(appLdType.gameWorld, {
       bounding: createBoundingByABB({

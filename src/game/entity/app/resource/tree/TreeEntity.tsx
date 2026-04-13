@@ -1,4 +1,4 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import iconSrc from "./iconSrc.png"
 import model from "./model.png"
 import modelTreeCut from "./treeCuted.png"
@@ -7,7 +7,7 @@ import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { appLdType } from "@/app/AppLdType"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
 
-export const treeDeathEntityMeta = entityMedataFactory({
+export const treeDeathEntityMeta = entityResourceFactory({
   onFrame: ({ entity }) => {
     entity.life--
   },
@@ -28,7 +28,7 @@ export const treeDeathEntityMeta = entityMedataFactory({
   ["@type"]: createJsonLdType(appLdType.entityEffect, "deathTree"),
 })
 
-export const treeEntityMetaData = entityMedataFactory({
+export const treeEntityMetaData = entityResourceFactory({
   asset: {
     icon: iconSrc,
     model2d: model,

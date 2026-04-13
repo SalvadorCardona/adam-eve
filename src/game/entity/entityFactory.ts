@@ -1,5 +1,5 @@
 import { createJsonLd, JsonLdType } from "@/packages/jsonLd/jsonLd"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import EntityInterface, {
   EntityFaction,
   isBuildingEntity,
@@ -13,7 +13,7 @@ import GameInterface from "@/src/game/game/GameInterface"
 import { createVector3 } from "@/packages/math/vector"
 import { playerMetadata } from "@/src/game/player/playerMetadata"
 import { addActionToEntity } from "@/src/game/action/ActionInterface"
-import { ActionMetadataInterface } from "@/src/game/action/ActionMetadataInterface"
+import { ActionResourceInterface } from "@/src/game/action/ActionResourceInterface"
 
 export function entityFactory<
   T extends EntityInterface = EntityInterface,
@@ -25,7 +25,7 @@ export function entityFactory<
   if (this && this["@type"]) ldType = this["@type"]
   if (ldType === "undefined") console.warn("Has not Type", payload?.entity)
 
-  const metaData = getMetaData<EntityMetaDataInterface>(ldType)
+  const metaData = getMetaData<EntityResourceInterface>(ldType)
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
@@ -65,7 +65,7 @@ export function entityFactory<
 
   if (metaData?.propriety?.defaultActions) {
     metaData.propriety.defaultActions.forEach((actionType) => {
-      const action = getMetaData<ActionMetadataInterface<any>>(actionType).factory({
+      const action = getMetaData<ActionResourceInterface<any>>(actionType).factory({
         entity,
       })
       addActionToEntity(entity, action)

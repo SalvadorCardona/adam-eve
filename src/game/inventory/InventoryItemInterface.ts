@@ -1,12 +1,12 @@
 import {
-  BaseJsonLdInterface,
+  BaseJsonLdItemInterface,
   createJsonLd,
   JsonLdType,
 } from "@/packages/jsonLd/jsonLd"
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
 import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
 
-export interface InventoryItemInterface extends BaseJsonLdInterface {
+export interface InventoryItemInterface extends BaseJsonLdItemInterface {
   quantity: number
 }
 

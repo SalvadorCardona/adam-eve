@@ -1,5 +1,5 @@
 import {
-  BaseJsonLdInterface,
+  BaseJsonLdItemInterface,
   JsonLdIri,
   JsonLdType,
 } from "@/packages/jsonLd/jsonLd"
@@ -24,7 +24,7 @@ export enum EntityFaction {
 }
 
 export default interface EntityInterface
-  extends BaseJsonLdInterface,
+  extends BaseJsonLdItemInterface,
     ActionnableInterface,
     InventoryAbleInterface {
   rotation: number

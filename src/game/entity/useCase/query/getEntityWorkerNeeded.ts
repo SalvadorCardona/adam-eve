@@ -1,10 +1,10 @@
 import EntityInterface from "@/src/game/entity/EntityInterface"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import { EntityState } from "@/src/game/entity/EntityState"
 
 export function getEntityWorkerNeeded(entity: EntityInterface): number {
-  const metaData = getMetaData<EntityMetaDataInterface>(entity)
+  const metaData = getMetaData<EntityResourceInterface>(entity)
   const workMeta = metaData.propriety.work
 
   if (!workMeta) return 0

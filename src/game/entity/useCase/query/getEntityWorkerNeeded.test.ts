@@ -1,5 +1,5 @@
 import { timberHouseEntityMetaData } from "@/src/game/entity/app/building/timberHouse/TimberHouseEntity"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+import { workerEntityResource } from "@/src/game/entity/app/character/worker/workerEntityResource"
 import { gameFactory } from "@/src/game/game/GameInterface"
 import {
   addWorkerToEntity,
@@ -15,7 +15,7 @@ describe("Test getEntityWorkerNeeded", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.factory()
     const meta = getEntityMetaData(timberHouse)
-    const worker = workerEntityMetaData.factory()
+    const worker = workerEntityResource.factory()
     const numberOfWorker = meta.propriety.work?.numberOfWorker as number
     expect(getEntityWorkerNeeded(timberHouse)).toBe(numberOfWorker)
     addWorkerToEntity(game, timberHouse, worker)

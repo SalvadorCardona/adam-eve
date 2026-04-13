@@ -1,11 +1,11 @@
-import { BaseJsonLdInterface, updateContainer } from "@/packages/jsonLd/jsonLd"
+import { BaseJsonLdItemInterface, updateContainer } from "@/packages/jsonLd/jsonLd"
 import {
   ActionBagInterface,
   ActionnableInterface,
 } from "@/src/game/action/ActionBagInterface"
 import EntityInterface from "@/src/game/entity/EntityInterface"
 
-export interface ActionInterface<T = object> extends BaseJsonLdInterface {
+export interface ActionInterface<T = object> extends BaseJsonLdItemInterface {
   data: T
   nextTick?: number
   createdBy: EntityInterface["@id"]

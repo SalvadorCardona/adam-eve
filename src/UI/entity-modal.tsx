@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Progress } from "@/components/ui/progress"
 import { Box, Leaf, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { EntityMetaDataInterface } from "@/src/game/entity/EntityMetaDataInterface"
+import { EntityResourceInterface } from "@/src/game/entity/EntityResourceInterface"
 import useGameContext from "@/src/UI/provider/useGameContext"
 import { getMetaData } from "@/packages/metadata/MetadataInterface"
 import { useGamePubSub } from "@/src/UI/hook/useGameFrame"
@@ -31,7 +31,7 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
 
   if (!entity) return
 
-  const metaData = getMetaData<EntityMetaDataInterface>(entity)
+  const metaData = getMetaData<EntityResourceInterface>(entity)
   return (
     <Card className="sm:max-w-[425px] bg-amber-50 text-amber-900">
       <CardContent>

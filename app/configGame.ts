@@ -1,5 +1,5 @@
 import { BaseGameMetaDataInterface } from "@/src/game/BaseGameMetaDataInterface"
-import { workerEntityMetaData } from "@/src/game/entity/app/character/worker/workerEntity"
+import { workerEntityResource } from "@/src/game/entity/app/character/worker/workerEntityResource"
 import { houseEntityMetaData } from "@/src/game/entity/app/building/house/houseEntity"
 import {
   treeDeathEntityMeta,
@@ -7,67 +7,65 @@ import {
 } from "@/src/game/entity/app/resource/tree/TreeEntity"
 import { woodResourceMetadata } from "@/src/game/entity/app/resource/tree/woodResource"
 import { waterResourceMetadata } from "@/src/game/inventory/app/water/woodResource"
-import { forumEntityMetaData } from "@/src/game/entity/app/building/forum/ForumEntity"
+import { forumEntityResource } from "@/src/game/entity/app/building/forum/forumEntityResource"
 import { getResourceActionMetaData } from "@/src/game/action/app/getResourceActionMetaData"
 import { goldResourceMetadata } from "@/src/game/entity/app/resource/gold/goldResource"
 import { removeBuildingUserActionMetadata } from "@/src/game/actionUser/app/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatResourceMetadata } from "@/src/game/inventory/app/wheat/wheatResource"
-import { goBuildOfBuildingActionMetadata } from "@/src/game/action/app/goBuildOfBuildingActionMetadata"
+import { goBuildOfBuildingActionResource } from "@/src/game/action/app/goBuildOfBuildingActionResource"
 import { findWorkerCharacterActionMetadata } from "@/src/game/action/app/findWorkerCharacterActionMetadata"
 import { timberHouseEntityMetaData } from "@/src/game/entity/app/building/timberHouse/TimberHouseEntity"
-import { theDeathActionMetadata } from "@/src/game/action/app/TheDeathActionMetadata"
-import { storageEntityMetaData } from "@/src/game/entity/app/building/storage/storageEntity"
-import { portEntityMetaData } from "@/src/game/entity/app/building/port/portEntity"
+import { theDeathActionResource } from "@/src/game/action/app/theDeathActionResource"
+import { storageEntityResource } from "@/src/game/entity/app/building/storage/storageEntityResource"
+import { portEntityResource } from "@/src/game/entity/app/building/port/portEntityResource"
 import { roadGroundEntityMetadata } from "@/src/game/entity/app/ground/road/roadGroundEntityMetadata"
-import { gameMetadata } from "@/src/game/game/GameMetaData"
-import { zombieEntityMetaData } from "@/src/game/entity/app/character/zombie/zombieEntity"
-import { towerEntityMetaData } from "@/src/game/entity/app/building/tower/TowerEntity"
-import { towerAttackActionMetadata } from "@/src/game/entity/app/building/tower/TowerAction"
-import { ArrowEntityMetaData } from "@/src/game/entity/app/attack/ArrowEntity"
-import { bridgeEntityMetaData } from "@/src/game/entity/app/ground/bridge/BridgeEntity"
-import { zombieAttackActionMetadata } from "@/src/game/entity/app/character/zombie/zombieAttackActionMetadata"
-import { arrowAttackActionMetadata } from "@/src/game/entity/app/attack/ArrowAttackActionMetadata"
+import { gameResource } from "@/src/game/game/gameResource"
+import { zombieEntityResource } from "@/src/game/entity/app/character/zombie/zombieEntityResource"
+import { towerEntityResource } from "@/src/game/entity/app/building/tower/towerEntityResource"
+import { towerAttackActionResource } from "@/src/game/entity/app/building/tower/towerActionAttackResource"
+import { arrowEntityResource } from "@/src/game/entity/app/attack/ArrowEntityResource"
+import { BridgeEntityResource } from "@/src/game/entity/app/ground/bridge/BridgeEntityResource"
+import { zombieAttackActionResource } from "@/src/game/entity/app/character/zombie/zombieAttackActionResource"
+import { arrowAttackActionResource } from "@/src/game/entity/app/attack/arrowAttackActionResource"
 import { grassGroundEntityMetadata } from "@/src/game/entity/app/ground/grass/GrassGroundEntityMetadata"
 import { JsonLdTypeContainerInterface } from "@/packages/jsonLd/jsonLd"
-import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
-import {
-  goldMineBuildMetaDataEntity,
-  goldMineResourceMetaDataEntity,
-} from "@/src/game/entity/app/resource/gold/GoldMineBuildMetaDataEntity"
+import { goldResourceEntityResource } from "@/src/game/entity/app/resource/gold/goldResourceEntityResource"
 import { resourceMappingMetaData } from "@/src/resource/resourceMappingMetadata"
+import { goldMineBuildMetaDataEntity } from "@/src/game/entity/app/resource/gold/GoldMineBuildingEntityResource"
+import { bloodEntityResource } from "@/src/game/entity/app/effect/blood/BloodEntityResource"
 
 const configGame: JsonLdTypeContainerInterface<BaseGameMetaDataInterface> = {
-  [goBuildOfBuildingActionMetadata["@type"]]: goBuildOfBuildingActionMetadata,
-  [forumEntityMetaData["@type"]]: forumEntityMetaData,
-  [workerEntityMetaData["@type"]]: workerEntityMetaData,
-  [houseEntityMetaData["@type"]]: houseEntityMetaData,
-  [treeEntityMetaData["@type"]]: treeEntityMetaData,
-  [woodResourceMetadata["@type"]]: woodResourceMetadata,
-  [getResourceActionMetaData["@type"]]: getResourceActionMetaData,
-  [timberHouseEntityMetaData["@type"]]: timberHouseEntityMetaData,
-  [findWorkerCharacterActionMetadata["@type"]]: findWorkerCharacterActionMetadata,
-  [goldResourceMetadata["@type"]]: goldResourceMetadata,
-  [waterResourceMetadata["@type"]]: waterResourceMetadata,
-  [roadGroundEntityMetadata["@type"]]: roadGroundEntityMetadata,
-  [grassGroundEntityMetadata["@type"]]: grassGroundEntityMetadata,
-  [removeBuildingUserActionMetadata["@type"]]: removeBuildingUserActionMetadata,
-  [wheatResourceMetadata["@type"]]: wheatResourceMetadata,
-  [theDeathActionMetadata["@type"]]: theDeathActionMetadata,
-  [storageEntityMetaData["@type"]]: storageEntityMetaData,
-  [portEntityMetaData["@type"]]: portEntityMetaData,
-  [gameMetadata["@type"]]: gameMetadata,
-  [zombieEntityMetaData["@type"]]: zombieEntityMetaData,
-  [towerEntityMetaData["@type"]]: towerEntityMetaData,
-  [towerAttackActionMetadata["@type"]]: towerAttackActionMetadata,
-  [arrowAttackActionMetadata["@type"]]: arrowAttackActionMetadata,
-  [ArrowEntityMetaData["@type"]]: ArrowEntityMetaData,
-  [zombieAttackActionMetadata["@type"]]: zombieAttackActionMetadata,
-  [bridgeEntityMetaData["@type"]]: bridgeEntityMetaData,
-  [treeDeathEntityMeta["@type"]]: treeDeathEntityMeta,
-  [bloodEntityMetaData["@type"]]: bloodEntityMetaData,
-  [goldMineBuildMetaDataEntity["@type"]]: goldMineBuildMetaDataEntity,
-  [goldMineResourceMetaDataEntity["@type"]]: goldMineResourceMetaDataEntity,
-  [resourceMappingMetaData["@type"]]: resourceMappingMetaData,
+  [goBuildOfBuildingActionResource["@id"]]: goBuildOfBuildingActionResource,
+  [forumEntityResource["@id"]]: forumEntityResource,
+  [workerEntityResource["@id"]]: workerEntityResource,
+  [houseEntityMetaData["@id"]]: houseEntityMetaData,
+  [treeEntityMetaData["@id"]]: treeEntityMetaData,
+  [woodResourceMetadata["@id"]]: woodResourceMetadata,
+  [getResourceActionMetaData["@id"]]: getResourceActionMetaData,
+  [timberHouseEntityMetaData["@id"]]: timberHouseEntityMetaData,
+  [findWorkerCharacterActionMetadata["@id"]]: findWorkerCharacterActionMetadata,
+  [goldResourceMetadata["@id"]]: goldResourceMetadata,
+  [waterResourceMetadata["@id"]]: waterResourceMetadata,
+  [roadGroundEntityMetadata["@id"]]: roadGroundEntityMetadata,
+  [grassGroundEntityMetadata["@id"]]: grassGroundEntityMetadata,
+  [removeBuildingUserActionMetadata["@id"]]: removeBuildingUserActionMetadata,
+  [wheatResourceMetadata["@id"]]: wheatResourceMetadata,
+  [theDeathActionResource["@id"]]: theDeathActionResource,
+  [storageEntityResource["@id"]]: storageEntityResource,
+  [portEntityResource["@id"]]: portEntityResource,
+  [gameResource["@id"]]: gameResource,
+  [zombieEntityResource["@id"]]: zombieEntityResource,
+  [towerEntityResource["@id"]]: towerEntityResource,
+  [towerAttackActionResource["@id"]]: towerAttackActionResource,
+  [arrowAttackActionResource["@id"]]: arrowAttackActionResource,
+  [arrowEntityResource["@id"]]: arrowEntityResource,
+  [zombieAttackActionResource["@id"]]: zombieAttackActionResource,
+  [BridgeEntityResource["@id"]]: BridgeEntityResource,
+  [treeDeathEntityMeta["@id"]]: treeDeathEntityMeta,
+  [bloodEntityResource["@id"]]: bloodEntityResource,
+  [goldMineBuildMetaDataEntity["@id"]]: goldMineBuildMetaDataEntity,
+  [goldResourceEntityResource["@id"]]: goldResourceEntityResource,
+  [resourceMappingMetaData["@id"]]: resourceMappingMetaData,
 }
 
 export default configGame

@@ -1,4 +1,4 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import asset2D from "./worker.png"
 import iconFarmerSrc from "./iconFarmer.png"
 import { EntityState } from "@/src/game/entity/EntityState"
@@ -7,8 +7,8 @@ import attackAnimationSrc from "./animation/attack.png"
 import ideAnimationSrc from "./animation/ide.png"
 import moveSrc from "./animation/move.png"
 import { addEntityToGame } from "@/src/game/entity/useCase/addEntityToGame"
-import { workerEntityMetaDataType } from "@/src/game/entity/app/character/worker/workerEntityMetaDataType"
-import { bloodEntityMetaData } from "@/src/game/entity/app/effect/blood/BloodEntity"
+import { EntityType } from "@/src/game/entity/EntityResourceInterface"
+import { bloodEntityResource } from "@/src/game/entity/app/effect/blood/BloodEntityResource"
 
 const moveAnimation = createFramePixiJs({
   image: moveSrc,
@@ -24,8 +24,9 @@ const idleAnimation = createFramePixiJs({
   width: 864,
 })
 
-export const workerEntityMetaData = entityMedataFactory({
-  ["@type"]: workerEntityMetaDataType,
+export const workerEntityResource = entityResourceFactory({
+  ["@id"]: "resource/worker",
+  entityType: EntityType.character,
   label: "Citoyen",
   asset: {
     model2d: asset2D,
@@ -58,7 +59,7 @@ export const workerEntityMetaData = entityMedataFactory({
     },
   },
   onHit: ({ entity, game }) => {
-    const metaData = bloodEntityMetaData
+    const metaData = bloodEntityResource
 
     const deathTree = metaData.factory({
       game,

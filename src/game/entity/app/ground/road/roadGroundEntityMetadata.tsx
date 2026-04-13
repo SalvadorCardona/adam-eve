@@ -1,9 +1,9 @@
-import { entityMedataFactory } from "@/src/game/entity/EntityMedataFactory"
+import { entityResourceFactory } from "@/src/game/entity/EntityResourceFactory"
 import roadIcon from "./roadIcon.png"
 import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { appLdType } from "@/app/AppLdType"
 
-export const roadGroundEntityMetadata = entityMedataFactory({
+export const roadGroundEntityMetadata = entityResourceFactory({
   asset: {
     icon: roadIcon,
   },

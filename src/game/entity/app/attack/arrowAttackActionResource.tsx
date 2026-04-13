@@ -1,12 +1,10 @@
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
 import { entityGoToEntity } from "@/src/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/src/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/src/game/game/useCase/query/entityQuery"
-import { actionMetaDataFactory } from "@/src/game/action/actionMetaDataFactory"
+import { actionResourceFactory } from "@/src/game/action/actionResourceFactory"
 
-export const arrowAttackActionMetadata = actionMetaDataFactory({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "ArrowAttack"),
+export const arrowAttackActionResource = actionResourceFactory({
+  ["@id"]: "action/arrow-attack",
   onFrame: ({ game, entity }) => {
     if (!entity) {
       return
