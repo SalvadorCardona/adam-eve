@@ -1,8 +1,8 @@
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
-import { saveGameMetadata } from "@/src/game/saveGame/SaveGameMetadataInterface"
+import { saveGameMetadata } from "@/packages/game/saveGame/SaveGameMetadataInterface"
 import React from "react"
-import GameComponent from "@/src/UI/GameComponent"
+import GameComponent from "@/packages/UI/GameComponent"
 import { NotFound } from "@/components/NotFound"
 
 export const Route = createFileRoute("/saveGame/$saveGameId")({

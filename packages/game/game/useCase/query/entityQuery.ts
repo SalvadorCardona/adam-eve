@@ -1,0 +1,200 @@
+import GameInterface from "@/packages/game/game/GameInterface"
+import {
+  getByLdType,
+  getByLdTypeIn,
+  JsonLdIri,
+  JsonLdType,
+} from "@/packages/jsonLd/jsonLd"
+import {
+  Vector2Interface,
+  Vector3Interface,
+  vector3ToVector2,
+} from "@/packages/math/vector"
+import EntityInterface, {
+  EntityFaction,
+} from "@/packages/game/entity/EntityInterface"
+import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
+import { boundingCollision } from "@/packages/math/boundingCollision"
+import { EntityState } from "@/packages/game/entity/EntityState"
+import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
+import { createBoundingFromZone } from "@/packages/math/boudingBox"
+import { findClosestEntity } from "@/packages/game/game/useCase/query/findClosestEntity"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
+
+interface CircleSearch {
+  center: Vector2Interface
+  radius: number
+}
+
+interface SquareSearch {
+  start: Vector2Interface
+  end: Vector2Interface
+}
+
+type Order = "ASC" | "DESC"
+
+export interface EntityQueryParams {
+  entityType: EntityType | EntityType[]
+  "@type"?: JsonLdType | JsonLdType[]
+  "@typeIn"?: JsonLdType | JsonLdType[]
+  "@id"?: JsonLdIri | JsonLdIri[]
+  "@idIsNot"?: JsonLdIri | JsonLdIri[]
+  circleSearch?: CircleSearch
+  squareSearch?: SquareSearch
+  order?: {
+    distance?: Order
+  }
+  state?: EntityState | EntityState[]
+  faction?: EntityFaction | EntityFaction[]
+  strict?: boolean
+  findClosestOf?: {
+    position: Vector3Interface
+  }
+}
+
+const orderTypePriority = {
+  [EntityType.character]: 1,
+  [EntityType.building]: 2,
+  [EntityType.ground]: 3,
+}
+
+export function entityQueryFindOne<T = EntityInterface>(
+  game: GameInterface,
+  query: EntityQueryParams,
+): undefined | T {
+  const result = entityQuery<T>(game, query)
+  return result.length ? result[0] : undefined
+}
+
+export function entityFindOneById<T = EntityInterface>(
+  game: GameInterface,
+  id: JsonLdIri,
+): undefined | T {
+  return game.entities[id] as T
+}
+
+export function entityQuery<T = EntityInterface>(
+  game: GameInterface,
+  query: EntityQueryParams,
+): T[] {
+  const {
+    "@type": type,
+    "@typeIn": typeIn,
+    "@id": id,
+    circleSearch,
+    squareSearch,
+    state,
+    order,
+    faction,
+    entityType,
+    "@idIsNot": idIsNot,
+    findClosestOf,
+  } = query
+
+  if (id && !Array.isArray(id)) {
+    const entity = Object.hasOwn(game.entities, id)
+      ? (game.entities[id] as T)
+      : undefined
+    return entity ? [entity] : []
+  }
+
+  let entities: EntityInterface[] = Object.values(game.entities)
+
+  if (type) {
+    entities = getByLdType(game.entities, type)
+  }
+
+  if (typeIn) {
+    entities = getByLdTypeIn(game.entities, typeIn)
+  }
+
+  if (id) {
+    entities = entities.filter((entity) => {
+      return id.includes(entity["@id"])
+    })
+  }
+
+  if (idIsNot) {
+    const idIsNotList = Array.isArray(idIsNot) ? idIsNot : [idIsNot]
+    entities = entities.filter((entity) => {
+      return !idIsNotList.includes(entity["@id"])
+    })
+  }
+
+  if (circleSearch) {
+    const { center, radius } = circleSearch
+    const center2D = center
+    entities = entities.filter((entity) => {
+      return (
+        distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
+      )
+    })
+  }
+
+  if (entityType) {
+    entities = entities.filter((entity) => {
+      return entity.entityType && Array.isArray(entityType)
+        ? entityType.includes(entity.entityType)
+        : entity.entityType === entityType
+    })
+  }
+
+  if (state) {
+    entities = entities.filter((entity) => {
+      return entity.state && Array.isArray(state)
+        ? state.includes(entity.state)
+        : entity.state === state
+    })
+  }
+
+  if (faction) {
+    entities = entities.filter((entity) => {
+      return Array.isArray(faction)
+        ? faction.includes(entity.faction)
+        : entity.faction === faction
+    })
+  }
+
+  if (squareSearch) {
+    const start2D = squareSearch.start
+    const end2d = squareSearch.end
+    entities = entities.filter((entity) => {
+      return boundingCollision(
+        entityToBoundingBox(entity),
+        createBoundingFromZone(start2D, end2d),
+      )
+    })
+  }
+
+  if (findClosestOf) {
+    entities = findClosestEntity(findClosestOf.position, entities)
+  }
+
+  entities.sort((a, b) => {
+    const aType = a.entityType
+    const bType = b.entityType
+    if (!bType || !aType) return 0
+
+    const priorityA = orderTypePriority[aType] || Infinity
+    const priorityB = orderTypePriority[bType] || Infinity
+
+    return priorityA - priorityB
+  })
+
+  if (order?.distance) {
+    const referencePoint = circleSearch ? circleSearch.center : { x: 0, y: 0 }
+    entities.sort((a, b) => {
+      const distanceA = distanceBetweenVector2(
+        vector3ToVector2(a.position),
+        referencePoint,
+      )
+      const distanceB = distanceBetweenVector2(
+        vector3ToVector2(b.position),
+        referencePoint,
+      )
+      return order.distance === "ASC" ? distanceB - distanceA : distanceA - distanceB
+    })
+  }
+
+  return entities as T[]
+}

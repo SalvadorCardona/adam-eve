@@ -1,0 +1,23 @@
+import { InventoryItemInterface } from "@/packages/game/inventory/InventoryItemInterface"
+import React from "react"
+import { Card } from "@/components/ui/card"
+import { getResource } from "@/packages/metadata/MetadataInterface"
+import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
+
+interface InventoryPropsInterface {
+  inventoryItem: InventoryItemInterface
+}
+
+export const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {
+  const inventoryMetaData =
+    getResource<BaseGameMetaDataInterface>(inventoryItem) ?? null
+  const icon = inventoryMetaData?.asset?.icon
+  const name = inventoryMetaData?.["@type"]
+  return (
+    <Card className={"flex-col justify-items-center overflow-hidden"}>
+      {icon && <img className={"h-10 w-10"} src={icon} alt={"resource"} />}
+      {!icon && <span>{name}</span>}
+      <div className={"font-extrabold py-0.5"}>{inventoryItem.quantity}</div>
+    </Card>
+  )
+}

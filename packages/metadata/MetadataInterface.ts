@@ -14,7 +14,7 @@ const addMetaData = (metaData: MetadataInterface) => {
   metaDataRegistered[metaData["@id"]] = metaData
 }
 
-export function getMetaData<T = MetadataInterface>(
+export function getResource<T = MetadataInterface>(
   metaType: MetadataAble,
 ): T | undefined {
   const id = getLdIri(metaType)

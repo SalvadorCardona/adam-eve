@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import React from "react"
-import { mockGames } from "@/src/game/mockGame/mockGame"
+import { mockGames } from "@/packages/game/mockGame/mockGame"
 import {
   Card,
   CardContent,

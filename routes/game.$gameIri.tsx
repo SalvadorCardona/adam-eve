@@ -1,9 +1,9 @@
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
 import React from "react"
-import GameComponent from "@/src/UI/GameComponent"
+import GameComponent from "@/packages/UI/GameComponent"
 import { NotFound } from "@/components/NotFound"
-import { gameResource } from "@/src/game/game/gameResource"
+import { gameResource } from "@/packages/game/game/gameResource"
 
 export const Route = createFileRoute("/game/$gameIri")({
   loader: ({ params: { gameIri } }) => gameResource.getItem(gameIri),
