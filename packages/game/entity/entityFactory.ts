@@ -20,13 +20,13 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
   game: GameInterface
   resource: EntityResourceInterface
 }): T {
-  const metaData = getResource<EntityResourceInterface>(payload.resource["@id"])
+  const resource = getResource<EntityResourceInterface>(payload.resource["@id"])
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
     createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 1, 0),
-    ...(metaData?.defaultEntity ? metaData?.defaultEntity() : {}),
+    ...(resource?.defaultEntity ? resource?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
   }
 
@@ -34,12 +34,12 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     baseEntity.createdBy = playerMetadata.getPlayer()["@id"]
   }
 
-  if (metaData?.propriety?.health) {
-    baseEntity.life = metaData.propriety.health.maxLife
+  if (resource?.propriety?.health) {
+    baseEntity.life = resource.propriety.health.maxLife
   }
 
   if (!baseEntity.size) {
-    baseEntity.size = metaData?.propriety?.size ?? createVector3(1, 1, 1)
+    baseEntity.size = resource?.propriety?.size ?? createVector3(1, 1, 1)
   }
 
   const entity = createJsonLd<EntityInterface>("entity", baseEntity) as T
@@ -47,7 +47,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
   entity.position = roundVectorToDown(entity.position)
 
   if (isBuildingEntity(entity)) {
-    entity.state = metaData?.propriety?.resourceForConstruction
+    entity.state = resource?.propriety?.resourceForConstruction
       ? EntityState.under_construction
       : EntityState.builded
   }
@@ -56,8 +56,8 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     entity.faction = entity?.faction ? entity.faction : EntityFaction.self
   }
 
-  if (metaData?.propriety?.defaultActions) {
-    metaData.propriety.defaultActions.forEach((actionType) => {
+  if (resource?.propriety?.defaultActions) {
+    resource.propriety.defaultActions.forEach((actionType) => {
       const action = getResource<ActionResourceInterface>(actionType)?.factory({
         entity,
       })

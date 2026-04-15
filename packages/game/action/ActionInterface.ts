@@ -1,9 +1,15 @@
-import { BaseJsonLdItemInterface, updateContainer } from "@/packages/jsonLd/jsonLd"
 import {
-  ActionBagInterface,
-  ActionnableInterface,
-} from "@/packages/game/action/ActionBagInterface"
+  BaseJsonLdItemInterface,
+  JsonLdIriContainerInterface,
+  updateContainer,
+} from "@/packages/jsonLd/jsonLd"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
+
+export interface ActionableInterface {
+  actions?: ActionBagInterface
+}
+
+export type ActionBagInterface = JsonLdIriContainerInterface<ActionInterface<any>>
 
 export interface ActionInterface<T = object> extends BaseJsonLdItemInterface {
   data: T
@@ -19,7 +25,7 @@ export function addAction(
 }
 
 export function addActionToEntity(
-  sujet: ActionnableInterface,
+  sujet: ActionableInterface,
   action: ActionInterface<any>,
 ) {
   if (!hasAction(sujet)) {
@@ -31,6 +37,6 @@ export function addActionToEntity(
   return action
 }
 
-export function hasAction(sujet: ActionnableInterface): boolean {
+export function hasAction(sujet: ActionableInterface): boolean {
   return !!sujet.actions
 }

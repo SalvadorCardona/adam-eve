@@ -6,7 +6,7 @@ import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInter
 import useGameContext from "@/packages/UI/provider/useGameContext"
 import { appLdType } from "@/app/AppLdType"
 import { AdaptiveHoverDecorator } from "@/components/AdaptiveHoverDecorator"
-import { createEntityUserActionMetadata } from "@/packages/game/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
+import { createEntityUserActionMetadata } from "@/actionUser/app/CreateEntityUserAction/createEntityUserActionMetadata"
 import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { metaDataRegistered } from "@/packages/metadata/MetadataInterface"
 

@@ -13,6 +13,8 @@ export function entityAttackEntity(
   const entitySourceMeta = getResource<EntityResourceInterface>(entitySource)
   const entityTargetMeta = getResource<EntityResourceInterface>(entityTarget)
 
+  if (!entitySourceMeta || !entityTargetMeta) return false
+
   const attack = entitySourceMeta.propriety.attack
   if (!attack) return false
 
@@ -36,6 +38,8 @@ export function entityCanBeAttackEntity(
   entityTarget: EntityInterface,
 ): boolean {
   const entityMeta = getResource<EntityResourceInterface>(entitySource)
+  if (!entityMeta) return false
+
   const attack = entityMeta.propriety.attack
   if (!attack) return false
 

@@ -4,7 +4,7 @@ import { usePixiApp } from "@/packages/UI/graphic-motor/pixiJs/PixiAppProvider/U
 import { Graphics } from "@/packages/UI/graphic-motor/pixiJs/components/Graphics"
 import { Container, FederatedPointerEvent, Graphics as BaseGraphic } from "pixi.js"
 import useGameContext from "@/packages/UI/provider/useGameContext"
-import { onSelectEntityUserActionMetadata } from "@/packages/game/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
+import { onSelectEntityUserActionMetadata } from "@/actionUser/app/SelectUserAction/onSelectEntityUserActionMetadata"
 import { useDebounce } from "react-use"
 import { updateGame } from "@/packages/game/game/updateGame"
 import { diviseVector2D } from "@/packages/math/diviseVector"

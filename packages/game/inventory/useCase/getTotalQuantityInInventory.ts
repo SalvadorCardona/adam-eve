@@ -8,7 +8,7 @@ export function getTotalQuantityInInventory(
 
   let totalQuantity = 0
 
-  for (const item of Object.values(inventory.collection)) {
+  for (const item of Object.values(inventory.member)) {
     totalQuantity += item.quantity
   }
 

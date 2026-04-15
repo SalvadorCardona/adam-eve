@@ -2,11 +2,11 @@ import GameInterface, { gameFactory } from "@/packages/game/game/GameInterface"
 import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
 import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import {
+  getInStorage,
   getItemsInLocalStorageByPrefix,
-  getLocalStorage,
-  persistLocalStorage,
-  removeLocalStorage,
-} from "@/packages/localStorage/localStorage"
+  removeInStorage,
+  setInStorage,
+} from "@/packages/storage/storage"
 import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
@@ -23,17 +23,17 @@ export const gameResource = metaDataFactory<GameMetadataInterface>({
   },
 
   getItem: (iriSaveGame: JsonLdIri): GameInterface | undefined => {
-    return getLocalStorage<GameInterface>(iriSaveGame) ?? undefined
+    return getInStorage<GameInterface>(iriSaveGame) ?? undefined
   },
 
   persistItem: (game: GameInterface): void => {
     const iriSaveGame = game["@id"]
     if (iriSaveGame) {
-      persistLocalStorage(iriSaveGame, game)
+      setInStorage(iriSaveGame, game)
     }
   },
 
   removeItem: (iriSaveGame: JsonLdIri): void => {
-    removeLocalStorage(iriSaveGame)
+    removeInStorage(iriSaveGame)
   },
 })

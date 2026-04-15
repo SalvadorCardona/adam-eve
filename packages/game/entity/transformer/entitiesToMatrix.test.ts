@@ -8,7 +8,7 @@ import {
 } from "@/packages/math/matrix"
 import { getResource } from "@/packages/metadata/MetadataInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { grassGroundEntityMetadata } from "@/packages/game/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { grassGroundEntityMetadata } from "@/entity/app/ground/grass/GrassGroundEntityMetadata"
 
 const entitiesPosition: Matrix2DInterface = [
   [1, 1, 0, 0, 1, 1],

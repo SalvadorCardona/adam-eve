@@ -14,7 +14,7 @@ export function getInventoryItem(
 ): InventoryItemInterface {
   const inventory = getInventory(canBeInventory)
   const type = getLdType(inventoryType)
-  const item = inventory.collection[type]
+  const item = inventory.member[type]
 
   if (item) return item
 

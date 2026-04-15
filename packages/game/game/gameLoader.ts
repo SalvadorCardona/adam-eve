@@ -3,8 +3,8 @@ import { ActionMetadataInterface } from "@/packages/game/action/ActionEntityMeta
 import { getResource } from "@/packages/metadata/MetadataInterface"
 import { getByLdTypeIn, updateCollection } from "@/packages/jsonLd/jsonLd"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"
-import { theDeathActionResource } from "@/packages/game/action/app/theDeathActionResource"
-import { findWorkerCharacterActionMetadata } from "@/packages/game/action/app/findWorkerCharacterActionMetadata"
+import { theDeathActionResource } from "@/app/action/theDeathActionResource"
+import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
 import { addAction } from "@/packages/game/action/ActionInterface"
 
 export function gameLoader(game: GameInterface): GameInterface {

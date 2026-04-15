@@ -1,9 +1,11 @@
-import { ActionnableInterface } from "@/packages/game/action/ActionBagInterface"
-import { ActionInterface } from "@/packages/game/action/ActionInterface"
+import {
+  ActionableInterface,
+  ActionInterface,
+} from "@/packages/game/action/ActionInterface"
 import { ContainerAction, updateContainer } from "@/packages/jsonLd/jsonLd"
 
 export function removeActionFromEntity(
-  sujet: ActionnableInterface,
+  sujet: ActionableInterface,
   action: ActionInterface<any>,
 ): void {
   if (!sujet.actions) {

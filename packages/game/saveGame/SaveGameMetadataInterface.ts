@@ -6,11 +6,11 @@ import {
   JsonLdIri,
 } from "@/packages/jsonLd/jsonLd"
 import {
+  getInStorage,
   getItemsInLocalStorageByPrefix,
-  getLocalStorage,
-  persistLocalStorage,
-  removeLocalStorage,
-} from "@/packages/localStorage/localStorage"
+  removeInStorage,
+  setInStorage,
+} from "@/packages/storage/storage"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
 interface SaveGameInterface extends BaseJsonLdItemInterface {
@@ -28,36 +28,35 @@ export interface SaveGameMetadataInterface
 }
 
 export const saveGameMetadata: SaveGameMetadataInterface = {
-  "@id": "save-game",
+  "@id": "resource/save-game",
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>
   }): SaveGameInterface => {
     const sameGame = {
-      "@type": ldType,
       game: payload.game,
       ...payload.saveGame,
     }
 
-    return createJsonLd(ldType, sameGame)
+    return createJsonLd("save-game", sameGame)
   },
 
   getCollection: (): SaveGameInterface[] => {
-    return getItemsInLocalStorageByPrefix<SaveGameInterface>(ldType)
+    return getItemsInLocalStorageByPrefix<SaveGameInterface>("save-game")
   },
 
   getItem: (iriSaveGame: JsonLdIri): SaveGameInterface | undefined => {
-    return getLocalStorage<SaveGameInterface>(iriSaveGame) ?? undefined
+    return getInStorage<SaveGameInterface>(iriSaveGame) ?? undefined
   },
 
   persistItem: (saveGame: SaveGameInterface): void => {
     const iriSaveGame = saveGame["@id"]
     if (iriSaveGame) {
-      persistLocalStorage(iriSaveGame, saveGame)
+      setInStorage(iriSaveGame, saveGame)
     }
   },
 
   removeItem: (iriSaveGame: JsonLdIri): void => {
-    removeLocalStorage(iriSaveGame)
+    removeInStorage(iriSaveGame)
   },
 }

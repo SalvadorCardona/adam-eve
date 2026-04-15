@@ -1,5 +1,5 @@
-import { timberHouseEntityMetaData } from "@/packages/game/entity/app/building/timberHouse/TimberHouseEntity"
-import { workerEntityResource } from "@/packages/game/entity/app/character/worker/workerEntityResource"
+import { timberHouseEntityMetaData } from "@/entity/app/building/timberHouse/TimberHouseEntity"
+import { workerEntityResource } from "@/entity/app/character/worker/workerEntityResource"
 import { gameFactory } from "@/packages/game/game/GameInterface"
 import {
   addWorkerToEntity,

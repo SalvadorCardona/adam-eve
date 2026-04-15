@@ -1,14 +1,14 @@
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
-import { woodResourceMetadata } from "@/packages/game/entity/app/resource/tree/woodResource"
+import { woodResourceMetadata } from "@/entity/app/resource/tree/woodResource"
 import { getResource } from "@/packages/metadata/MetadataInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
 import { expect } from "vitest"
-import { goldResourceMetadata } from "@/packages/game/entity/app/resource/gold/goldResource"
-import { waterResourceMetadata } from "@/packages/game/inventory/app/water/woodResource"
+import { goldResourceMetadata } from "@/entity/app/resource/gold/goldResource"
+import { waterResourceMetadata } from "@/inventory/app/water/woodResource"
 import { getTotalQuantityInInventory } from "@/packages/game/inventory/useCase/getTotalQuantityInInventory"
 import { inventoryIsFull } from "@/packages/game/inventory/useCase/inventoryIsFull"
-import { workerEntityResource } from "@/packages/game/entity/app/character/worker/workerEntityResource"
+import { workerEntityResource } from "@/entity/app/character/worker/workerEntityResource"
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 
 const entityMetadata = getResource<EntityResourceInterface>(workerEntityResource)

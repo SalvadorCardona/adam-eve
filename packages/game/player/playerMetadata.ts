@@ -2,15 +2,14 @@ import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInter
 import {
   BaseJsonLdItemInterface,
   createJsonLd,
-  createJsonLdType,
   JsonLdIri,
 } from "@/packages/jsonLd/jsonLd"
 import {
+  getInStorage,
   getItemsInLocalStorageByPrefix,
-  getLocalStorage,
-  persistLocalStorage,
-  removeLocalStorage,
-} from "@/packages/localStorage/localStorage"
+  removeInStorage,
+  setInStorage,
+} from "@/packages/storage/storage"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
 export interface PlayerInterface extends BaseJsonLdItemInterface {
@@ -23,18 +22,15 @@ export interface PlayerMetadataInterface
   getPlayer: () => PlayerInterface
 }
 
-const ldType = createJsonLdType("player")
-
 export const playerMetadata: PlayerMetadataInterface = {
-  "@type": ldType,
+  "@id": "resource/player",
   factory: (payload: { player: Partial<PlayerInterface> }): PlayerInterface => {
     const sameGame = {
-      "@type": ldType,
       name: "Unknown",
       ...payload.player,
     }
 
-    return createJsonLd<PlayerInterface>(ldType, sameGame)
+    return createJsonLd<PlayerInterface>("player", sameGame)
   },
 
   getPlayer: () => {
@@ -49,21 +45,21 @@ export const playerMetadata: PlayerMetadataInterface = {
   },
 
   getCollection: (): PlayerInterface[] => {
-    return getItemsInLocalStorageByPrefix<PlayerInterface>(ldType)
+    return getItemsInLocalStorageByPrefix<PlayerInterface>("player")
   },
 
   getItem: (iriPlayer: JsonLdIri): PlayerInterface | undefined => {
-    return getLocalStorage<PlayerInterface>(iriPlayer) ?? undefined
+    return getInStorage<PlayerInterface>(iriPlayer) ?? undefined
   },
 
   persistItem: (player: PlayerInterface): void => {
     const iriPlayer = player["@id"]
     if (iriPlayer) {
-      persistLocalStorage(iriPlayer, player)
+      setInStorage(iriPlayer, player)
     }
   },
 
   removeItem: (iriPlayer: JsonLdIri): void => {
-    removeLocalStorage(iriPlayer)
+    removeInStorage(iriPlayer)
   },
 }

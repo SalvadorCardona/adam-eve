@@ -175,7 +175,9 @@ export function entityQuery<T = EntityInterface>(
     const bType = b.entityType
     if (!bType || !aType) return 0
 
+    // @ts-ignore used for run test well
     const priorityA = orderTypePriority[aType] || Infinity
+    // @ts-ignore used for run test well
     const priorityB = orderTypePriority[bType] || Infinity
 
     return priorityA - priorityB

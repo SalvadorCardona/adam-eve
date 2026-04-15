@@ -1,18 +1,12 @@
 import { BaseJsonLdItemInterface, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import { Vector3Interface } from "@/packages/math/vector"
-import {
-  ActionBagInterface,
-  ActionnableInterface,
-} from "@/packages/game/action/ActionBagInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { ConsumablePathInterface } from "@/packages/math/path"
 import { Direction } from "@/packages/math/matrix"
 import { PlayerInterface } from "@/packages/game/player/playerMetadata"
-import {
-  InventoryAbleInterface,
-  InventoryInterface,
-} from "@/packages/game/inventory/InventoryInterface"
+import { InventoryAbleInterface, InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
+import { ActionableInterface, ActionBagInterface } from "@/packages/game/action/ActionInterface"
 
 export enum EntityFaction {
   enemy = "enemy",
@@ -20,7 +14,7 @@ export enum EntityFaction {
 }
 
 export default interface EntityInterface
-  extends BaseJsonLdItemInterface, ActionnableInterface, InventoryAbleInterface {
+  extends BaseJsonLdItemInterface, ActionableInterface, InventoryAbleInterface {
   rotation: number
   position: Vector3Interface
   currentPath?: ConsumablePathInterface
@@ -43,34 +37,14 @@ export function isEntity(entity: EntityInterface): entity is EntityInterface {
   return entity["@type"] === "entity"
 }
 
-export function isGroundEntity(
-  entity: EntityInterface,
-): entity is GroundEntityInterface {
+export function isGroundEntity(entity: EntityInterface) {
   return entity.entityType === EntityType.ground
 }
 
-export function isResourceEntity(
-  entity: EntityInterface,
-): entity is ResourceEntityInterface {
-  return entity.entityType === EntityType.resource
-}
-
-export function isBuildingEntity(
-  entity: EntityInterface,
-): entity is BuildingEntityInterface {
+export function isBuildingEntity(entity: EntityInterface) {
   return entity.entityType === EntityType.building
 }
 
-export function isCharacterEntity(
-  entity: EntityInterface,
-): entity is CharacterEntityInterface {
+export function isCharacterEntity(entity: EntityInterface) {
   return entity.entityType === EntityType.character
 }
-
-export interface ResourceEntityInterface extends EntityInterface {}
-
-export interface CharacterEntityInterface extends EntityInterface {}
-
-export interface BuildingEntityInterface extends EntityInterface {}
-
-export interface GroundEntityInterface extends EntityInterface {}

@@ -5,17 +5,17 @@ import {
   JsonLdType,
   JsonLdTypeContainerInterface,
 } from "@/packages/jsonLd/jsonLd"
-import { timberHouseEntityMetaData } from "@/packages/game/entity/app/building/timberHouse/TimberHouseEntity"
-import { treeEntityMetaData } from "@/packages/game/entity/app/resource/tree/TreeEntity"
-import { woodResourceMetadata } from "@/packages/game/entity/app/resource/tree/woodResource"
-import { goldResourceEntityResource } from "@/packages/game/entity/app/resource/gold/goldResourceEntityResource"
-import { goldResourceMetadata } from "@/packages/game/entity/app/resource/gold/goldResource"
+import { timberHouseEntityMetaData } from "@/entity/app/building/timberHouse/TimberHouseEntity"
+import { treeEntityMetaData } from "@/entity/app/resource/tree/TreeEntity"
+import { woodResourceMetadata } from "@/entity/app/resource/tree/woodResource"
+import { goldResourceEntityResource } from "@/entity/app/resource/gold/goldResourceEntityResource"
+import { goldResourceMetadata } from "@/entity/app/resource/gold/goldResource"
 import { RepositoryInterface } from "@/packages/repository/repository"
 import {
   metaDataFactory,
   MetadataInterface,
 } from "@/packages/metadata/MetadataInterface"
-import { goldMineBuildMetaDataEntity } from "@/packages/game/entity/app/resource/gold/GoldMineBuildingEntityResource"
+import { goldMineBuildMetaDataEntity } from "@/entity/app/resource/gold/GoldMineBuildingEntityResource"
 
 interface ResourceMapping {
   entityMetaDataResource: EntityResourceInterface

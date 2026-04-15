@@ -44,7 +44,7 @@ export interface JsonLdIriCollection<
   "@type": JsonLdType
   "@context": "collection"
   "@version": number
-  collection: JsonLdIriContainerInterface<T>
+  member: JsonLdIriContainerInterface<T>
   totalItems: number
 }
 
@@ -55,7 +55,7 @@ export interface JsonLdTypeCollection<
   "@type": JsonLdType
   "@context": "collection"
   "@version": number
-  collection: JsonLdTypeContainerInterface<T>
+  member: JsonLdTypeContainerInterface<T>
   totalItems: number
 }
 
@@ -64,18 +64,8 @@ export function updateCollection(
   item: JsonLDItem<any>,
   action: ContainerAction = ContainerAction.update,
 ): JsonLDItem<any> {
-  updateContainer(collection.collection, item, action)
-  collection.totalItems = Object.keys(collection.collection).length
-  return updateItem(collection, action)
-}
-
-export function updateCollectionOfType(
-  collection: JsonLdTypeCollection,
-  item: JsonLDItem<any>,
-  action: ContainerAction = ContainerAction.update,
-): JsonLDItem<any> {
-  updateContainerByType(collection.collection, item, action)
-  collection.totalItems = Object.keys(collection.collection).length
+  updateContainer(collection.member, item, action)
+  collection.totalItems = Object.keys(collection.member).length
   return updateItem(collection, action)
 }
 
@@ -85,7 +75,7 @@ export function createJsonLdCollection<T = JsonLdIriCollection>(
 ): JsonLdIriCollection<T> {
   return createJsonLd<JsonLdIriCollection<T>>(type, {
     "@context": "collection",
-    collection: collections ?? {},
+    member: collections ?? [],
     totalItems: Object.keys(collections).length,
   })
 }

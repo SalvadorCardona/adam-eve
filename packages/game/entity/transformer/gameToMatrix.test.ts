@@ -8,8 +8,8 @@ import {
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { getResource } from "@/packages/metadata/MetadataInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { grassGroundEntityMetadata } from "@/packages/game/entity/app/ground/grass/GrassGroundEntityMetadata"
-import { towerEntityResource } from "@/packages/game/entity/app/building/tower/towerEntityResource"
+import { grassGroundEntityMetadata } from "@/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { towerEntityResource } from "@/entity/app/building/tower/towerEntityResource"
 
 const groundsPosition: Matrix2DInterface = [
   [1, 1, 1, 1, 1, 1],
