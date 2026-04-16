@@ -6,9 +6,9 @@ import {
   Matrix2DInterface,
   matrixToVector,
 } from "@/packages/math/matrix"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { grassGroundEntityMetadata } from "@/entity/app/ground/grass/GrassGroundEntityMetadata"
+import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
 
 const entitiesPosition: Matrix2DInterface = [
   [1, 1, 0, 0, 1, 1],

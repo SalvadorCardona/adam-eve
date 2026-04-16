@@ -1,12 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import React, { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/app/components/ui/button"
 import { BadgePlus, ExternalLink, Upload, X } from "lucide-react"
-import { SaveLoadWindow } from "@/packages/UI/menu/SaveLoadWindow"
-import { OptionWindows } from "@/packages/UI/menu/OptionWindows"
-import { Card, CardContent } from "@/components/ui/card"
+import { SaveLoadWindow } from "@/packages/ui/menu/SaveLoadWindow"
+import { OptionWindows } from "@/packages/ui/menu/OptionWindows"
+import { Card, CardContent } from "@/app/components/ui/card"
 import image from "./hom.webp"
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/app/components/ui/separator"
 
 export const Route = createFileRoute("/")({
   component: Home,

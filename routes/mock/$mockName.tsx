@@ -1,8 +1,8 @@
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { createFileRoute, ErrorComponent } from "@tanstack/react-router"
 import React from "react"
-import GameComponent from "@/packages/UI/GameComponent"
-import { NotFound } from "@/components/NotFound"
+import GameComponent from "@/packages/ui/GameComponent"
+import { NotFound } from "@/app/components/NotFound"
 import { mockGames } from "@/packages/game/mockGame/mockGame"
 
 export const Route = createFileRoute("/mock/$mockName")({

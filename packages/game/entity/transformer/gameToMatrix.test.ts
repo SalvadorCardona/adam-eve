@@ -6,10 +6,10 @@ import {
   matrixToVector,
 } from "@/packages/math/matrix"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { grassGroundEntityMetadata } from "@/entity/app/ground/grass/GrassGroundEntityMetadata"
-import { towerEntityResource } from "@/entity/app/building/tower/towerEntityResource"
+import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
+import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 
 const groundsPosition: Matrix2DInterface = [
   [1, 1, 1, 1, 1, 1],

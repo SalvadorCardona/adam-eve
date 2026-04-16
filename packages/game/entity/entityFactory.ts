@@ -8,7 +8,7 @@ import EntityInterface, {
 } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { roundVectorToDown } from "@/packages/math/round"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 import { createVector3 } from "@/packages/math/vector"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"

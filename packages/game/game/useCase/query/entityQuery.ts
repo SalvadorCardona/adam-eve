@@ -1,18 +1,7 @@
 import GameInterface from "@/packages/game/game/GameInterface"
-import {
-  getByLdType,
-  getByLdTypeIn,
-  JsonLdIri,
-  JsonLdType,
-} from "@/packages/jsonLd/jsonLd"
-import {
-  Vector2Interface,
-  Vector3Interface,
-  vector3ToVector2,
-} from "@/packages/math/vector"
-import EntityInterface, {
-  EntityFaction,
-} from "@/packages/game/entity/EntityInterface"
+import { JsonLdIri, JsonLdType } from "@/packages/jsonLd/jsonLd"
+import { Vector2Interface, Vector3Interface, vector3ToVector2 } from "@/packages/math/vector"
+import EntityInterface, { EntityFaction } from "@/packages/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 import { boundingCollision } from "@/packages/math/boundingCollision"
 import { EntityState } from "@/packages/game/entity/EntityState"
@@ -34,9 +23,8 @@ interface SquareSearch {
 type Order = "ASC" | "DESC"
 
 export interface EntityQueryParams {
-  entityType: EntityType | EntityType[]
+  entityType?: EntityType | EntityType[]
   "@type"?: JsonLdType | JsonLdType[]
-  "@typeIn"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
   "@idIsNot"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
@@ -79,7 +67,6 @@ export function entityQuery<T = EntityInterface>(
 ): T[] {
   const {
     "@type": type,
-    "@typeIn": typeIn,
     "@id": id,
     circleSearch,
     squareSearch,
@@ -101,11 +88,11 @@ export function entityQuery<T = EntityInterface>(
   let entities: EntityInterface[] = Object.values(game.entities)
 
   if (type) {
-    entities = getByLdType(game.entities, type)
-  }
-
-  if (typeIn) {
-    entities = getByLdTypeIn(game.entities, typeIn)
+    entities = entities.filter((entity) => {
+      return entity["@type"] && Array.isArray(type)
+        ? type.includes(entity["@type"])
+        : type === entity["@type"]
+    })
   }
 
   if (id) {

@@ -2,7 +2,7 @@ import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { distanceBetweenVector3 } from "@/packages/math/distanceBetweenVector3"
 import { EntityState } from "@/packages/game/entity/EntityState"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 
 export function entityAttackEntity(

@@ -1,7 +1,7 @@
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { FC } from "react"
 import GameInterface from "@/packages/game/game/GameInterface"
-import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
+import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import { Vector2Interface, Vector3Interface } from "@/packages/math/vector"
 import { JsonLdType } from "@/packages/jsonLd/jsonLd"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
@@ -41,7 +41,7 @@ interface EntityPriorityInterface {
 
 export interface EntityResourceInterface<
   T extends EntityInterface = EntityInterface,
-> extends BaseGameMetaDataInterface {
+> extends BaseGameResource {
   onFrame?: (payload: { entity: T; game: GameInterface }) => void
   component?: FC<{ entity: T; size: Vector2Interface }>
   factory: (payload?: { entity?: Partial<T>; game: GameInterface }) => T

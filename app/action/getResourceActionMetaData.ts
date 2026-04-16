@@ -3,17 +3,20 @@ import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/tran
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 import { appLdType } from "@/app/AppLdType"
 import { EntityState } from "@/packages/game/entity/EntityState"
-import { entityFindOneById, entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import {
+  entityFindOneById,
+  entityQueryFindOne,
+} from "@/packages/game/game/useCase/query/entityQuery"
 import { entityGoToEntityWithGround } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { removeActionFromEntity } from "@/packages/game/action/removeAction"
-import { actionResourceFactory } from "@/packages/game/action/actionResourceFactory"
+import { createActionResource } from "@/packages/game/action/createActionResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 import { ResourceMappingMetadataInterface } from "@/app/resourceMappingMetadata"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 
-export const getResourceActionMetaData = actionResourceFactory({
+export const getResourceActionMetaData = createActionResource({
   ["@type"]: createJsonLdType(appLdType.typeAction, "getResource"),
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return
@@ -45,7 +48,7 @@ export const getResourceActionMetaData = actionResourceFactory({
       }
 
       entityGoToEntityWithGround({
-        entity,
+        entity: entity,
         target: newTreeEntity,
         game,
       })
@@ -74,7 +77,7 @@ export const getResourceActionMetaData = actionResourceFactory({
 
       const result = entityGoToEntityWithGround({
         game,
-        entity,
+        entity: entity,
         target,
       })
 

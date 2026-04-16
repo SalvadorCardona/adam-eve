@@ -1,9 +1,9 @@
 import { removeEntityToGame } from "@/packages/game/entity/useCase/removeEntityToGame"
 import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
-import { actionResourceFactory } from "@/packages/game/action/actionResourceFactory"
+import { createActionResource } from "@/packages/game/action/createActionResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 
-export const theDeathActionResource = actionResourceFactory({
+export const theDeathActionResource = createActionResource({
   ["@id"]: "action/the-death",
   onFrame: ({ game, action }) => {
     updateNextTick(game, action, 20)

@@ -5,17 +5,17 @@ import {
   JsonLdType,
   JsonLdTypeContainerInterface,
 } from "@/packages/jsonLd/jsonLd"
-import { timberHouseEntityMetaData } from "@/entity/app/building/timberHouse/TimberHouseEntity"
-import { treeEntityMetaData } from "@/entity/app/resource/tree/TreeEntity"
-import { woodResourceMetadata } from "@/entity/app/resource/tree/woodResource"
-import { goldResourceEntityResource } from "@/entity/app/resource/gold/goldResourceEntityResource"
-import { goldResourceMetadata } from "@/entity/app/resource/gold/goldResource"
+import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
+import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
+import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
+import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
+import { goldResourceMetadata } from "@/app/entity/resource/gold/goldResource"
 import { RepositoryInterface } from "@/packages/repository/repository"
 import {
-  metaDataFactory,
+  createResource,
   MetadataInterface,
-} from "@/packages/metadata/MetadataInterface"
-import { goldMineBuildMetaDataEntity } from "@/entity/app/resource/gold/GoldMineBuildingEntityResource"
+} from "@/packages/resource/ResourceInterface"
+import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
 
 interface ResourceMapping {
   entityMetaDataResource: EntityResourceInterface
@@ -40,7 +40,7 @@ export interface ResourceMappingMetadataInterface
   extends RepositoryInterface<ResourceMapping>, MetadataInterface {}
 
 export const resourceMappingMetaData =
-  metaDataFactory<ResourceMappingMetadataInterface>({
+  createResource<ResourceMappingMetadataInterface>({
     "@id": "resourceMapping",
     getCollection: (): ResourceMapping[] => {
       return Object.values(resourceMappingList)

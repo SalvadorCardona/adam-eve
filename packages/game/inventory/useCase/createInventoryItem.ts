@@ -1,4 +1,4 @@
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import {
   InventoryItemMetadataInterface,
   InventoryItemRequest,

@@ -1,10 +1,7 @@
-import { timberHouseEntityMetaData } from "@/entity/app/building/timberHouse/TimberHouseEntity"
-import { workerEntityResource } from "@/entity/app/character/worker/workerEntityResource"
+import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
+import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { gameFactory } from "@/packages/game/game/GameInterface"
-import {
-  addWorkerToEntity,
-  removeWorkerFromEntity,
-} from "@/packages/game/entity/useCase/entityWorker"
+import { addWorkerToEntity, removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
 import { expect } from "vitest"
 import { getEntityWorkerNeeded } from "@/packages/game/entity/useCase/query/getEntityWorkerNeeded"
 import { getEntityMetaData } from "@/packages/game/entity/useCase/getEntityMetaData"

@@ -1,5 +1,5 @@
 import GameInterface, { gameFactory } from "@/packages/game/game/GameInterface"
-import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
+import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import {
   getInStorage,
@@ -7,15 +7,15 @@ import {
   removeInStorage,
   setInStorage,
 } from "@/packages/storage/storage"
-import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
+import { createResource } from "@/packages/resource/ResourceInterface"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
 export interface GameMetadataInterface
-  extends BaseGameMetaDataInterface, RepositoryInterface<GameInterface> {
+  extends BaseGameResource, RepositoryInterface<GameInterface> {
   factory: (game?: GameInterface) => GameInterface
 }
 
-export const gameResource = metaDataFactory<GameMetadataInterface>({
+export const gameResource = createResource<GameMetadataInterface>({
   "@id": "resource/game",
   factory: gameFactory,
   getCollection: (): GameInterface[] => {

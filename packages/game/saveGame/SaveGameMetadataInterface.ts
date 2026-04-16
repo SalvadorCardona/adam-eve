@@ -1,5 +1,5 @@
 import GameInterface from "@/packages/game/game/GameInterface"
-import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
+import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import {
   BaseJsonLdItemInterface,
   createJsonLd,
@@ -20,7 +20,7 @@ interface SaveGameInterface extends BaseJsonLdItemInterface {
 }
 
 export interface SaveGameMetadataInterface
-  extends BaseGameMetaDataInterface, RepositoryInterface<SaveGameInterface> {
+  extends BaseGameResource, RepositoryInterface<SaveGameInterface> {
   factory: (payload: {
     game: GameInterface
     saveGame: Partial<SaveGameInterface>

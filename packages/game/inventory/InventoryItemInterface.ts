@@ -3,8 +3,8 @@ import {
   createJsonLd,
   JsonLdType,
 } from "@/packages/jsonLd/jsonLd"
-import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
-import { metaDataFactory } from "@/packages/metadata/MetadataInterface"
+import { BaseGameResource } from "@/packages/game/BaseGameResource"
+import { createResource } from "@/packages/resource/ResourceInterface"
 
 export interface InventoryItemInterface extends BaseJsonLdItemInterface {
   quantity: number
@@ -12,7 +12,7 @@ export interface InventoryItemInterface extends BaseJsonLdItemInterface {
 
 export type InventoryItemType = JsonLdType
 
-export interface InventoryItemMetadataInterface extends BaseGameMetaDataInterface {
+export interface InventoryItemMetadataInterface extends BaseGameResource {
   ["@type"]: InventoryItemType
   factory: (payload: { quantity?: number }) => InventoryItemInterface
 }
@@ -26,7 +26,7 @@ export function inventoryItemMedataFactory<
     ...resourceItemMetadata,
   } as T
 
-  return metaDataFactory(meta) as T
+  return createResource(meta) as T
 }
 
 export function inventoryItemFactory(payload: {

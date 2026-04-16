@@ -1,24 +1,25 @@
-import EntityInterface, {
-  BuildingEntityInterface,
-  CharacterEntityInterface,
-} from "@/packages/game/entity/EntityInterface"
+import EntityInterface from "@/packages/game/entity/EntityInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
-import { BaseGameMetaDataInterface } from "@/packages/game/BaseGameMetaDataInterface"
+import {
+  BaseGameResource,
+  CreateItemPayload,
+} from "@/packages/game/BaseGameResource"
 import { ActionInterface } from "@/packages/game/action/ActionInterface"
+import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 
 export interface ActionPayload<T extends object = object> {
-  entity?: BuildingEntityInterface | CharacterEntityInterface
+  entity?: EntityInterface
   game: GameInterface
   action: ActionInterface<T>
 }
 
 export interface ActionResourceInterface<
-  T extends object = object,
-> extends BaseGameMetaDataInterface {
+  T extends BaseJsonLdItemInterface = BaseJsonLdItemInterface,
+> extends BaseGameResource<T> {
   onFrame: (payload: ActionPayload<T>) => void
-  factory: (payload?: {
+  createItem: (payload?: {
     entity?: EntityInterface
     game?: GameInterface
     createdBy?: ActionInterface["createdBy"]
-  }) => ActionInterface<T>
+  }) => CreateItemPayload<T>
 }

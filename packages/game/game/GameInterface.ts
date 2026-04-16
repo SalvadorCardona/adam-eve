@@ -7,18 +7,18 @@ import {
   JsonLdIriContainerInterface,
   JsonLDItem,
 } from "@/packages/jsonLd/jsonLd"
-import { ActionBagInterface } from "@/packages/game/action/ActionBagInterface"
 import {
   createVector2,
   Vector2Interface,
   Vector3Interface,
 } from "@/packages/math/vector"
-import { ActionUserMetaDataInterface } from "@/packages/game/actionUser/ActionUserMetaDataInterface"
+import { ActionUserResource } from "@/packages/game/actionUser/ActionUserResource"
 import { PlayerInterface } from "@/packages/game/player/playerMetadata"
 import { BoundingInterface, createBoundingByABB } from "@/packages/math/boudingBox"
 import { createMatrix2D, Matrix2DInterface } from "@/packages/math/matrix"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
+import { ActionBagInterface } from "@/packages/game/action/ActionInterface"
 
 export enum GameState {
   RUN = "run",
@@ -30,14 +30,9 @@ export enum GameMode {
   GOD = "god",
 }
 
-export enum GraphicMotor {
-  PIXI_JS = "PIXI_JS",
-  THREE_JS = "THREE_JS",
-}
-
 export type UserControl = JsonLDItem<{
   showGrid: boolean
-  currentAction?: ActionUserMetaDataInterface | undefined
+  currentAction?: ActionUserResource | undefined
   rotation?: number
   entitiesSelected: EntityInterface["@id"][]
   entitySelectedByHover?: EntityInterface["@id"]
@@ -63,7 +58,6 @@ type GameWorld = JsonLDItem<{
 
 export default interface GameInterface extends BaseJsonLdItemInterface {
   mouseState: MouseState
-  graphicMotor: GraphicMotor
   gameOption: GameOption
   userControl: UserControl
   camera: JsonLDItem<{
@@ -89,7 +83,6 @@ export function gameFactory(game?: GameInterface): GameInterface {
       }),
       entitiesMatrix: createMatrix2D(0, 0),
     }),
-    graphicMotor: GraphicMotor.PIXI_JS,
     gameOption: createJsonLd<GameOption>("option", {
       gameSpeed: 1,
       gameState: GameState.RUN,

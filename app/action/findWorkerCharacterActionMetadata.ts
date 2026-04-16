@@ -6,8 +6,8 @@ import {
   entityFindOneById,
   entityQuery,
 } from "@/packages/game/game/useCase/query/entityQuery"
-import { actionResourceFactory } from "@/packages/game/action/actionResourceFactory"
-import { workerEntityResource } from "@/entity/app/character/worker/workerEntityResource"
+import { createActionResource } from "@/packages/game/action/createActionResource"
+import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 import {
   addWorkerToEntity,
@@ -15,7 +15,7 @@ import {
 } from "@/packages/game/entity/useCase/entityWorker"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
-export const findWorkerCharacterActionMetadata = actionResourceFactory({
+export const findWorkerCharacterActionMetadata = createActionResource({
   ["@id"]: "findWorkerCharacter",
   onFrame: ({ action, game }) => {
     updateNextTick(game, action, 60)
@@ -33,7 +33,7 @@ export const findWorkerCharacterActionMetadata = actionResourceFactory({
     })
 
     const workers = entityQuery<CharacterEntityInterface>(game, {
-      "@typeIn": workerEntityResource["@type"],
+      "@type": workerEntityResource["@type"],
     })
 
     buildings.forEach((building) => {

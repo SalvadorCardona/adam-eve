@@ -1,8 +1,8 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router"
 import { routeTree } from "./routeTree.gen"
-import { NotFound } from "@/components/NotFound"
+import { NotFound } from "@/app/components/NotFound"
 import React from "react"
-import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary"
+import { DefaultCatchBoundary } from "@/app/components/DefaultCatchBoundary"
 
 const isDev = import.meta.env.MODE === "development"
 

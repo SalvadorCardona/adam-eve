@@ -21,8 +21,8 @@ export interface JsonTypedLdInterface {
 
 export interface BaseJsonLdItemInterface {
   "@id": JsonLdIri
-  "@type": JsonLdType
-  "@version": number
+  "@type"?: JsonLdType
+  "@version"?: number
 
   [key: string]: any
 }
@@ -71,7 +71,7 @@ export function updateCollection(
 
 export function createJsonLdCollection<T = JsonLdIriCollection>(
   type: JsonLdType,
-  collections: JsonLdIriContainerInterface<T> | JsonLdTypeContainerInterface<T> = {},
+  collections: JsonLdIriContainerInterface<T> = {},
 ): JsonLdIriCollection<T> {
   return createJsonLd<JsonLdIriCollection<T>>(type, {
     "@context": "collection",
@@ -164,22 +164,6 @@ export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterf
   Object.keys(container).forEach((key) => {
     if (jsonLdTypes.some((type) => key.startsWith(type))) {
       results.push(container[key])
-    }
-  })
-
-  return results
-}
-
-export function getByLdType<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
-  container: ContainerInterface,
-  jsonLdType: JsonLdType | JsonLdType[],
-): Array<T> {
-  const results: Array<T> = []
-  const ldTypes: JsonLdType[] = Array.isArray(jsonLdType) ? jsonLdType : [jsonLdType]
-
-  Object.values(container).forEach((item) => {
-    if (ldTypes.includes(item["@type"])) {
-      results.push(item)
     }
   })
 

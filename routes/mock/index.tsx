@@ -7,8 +7,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+} from "@/app/components/ui/card"
+import { Button } from "@/app/components/ui/button"
 
 export const Route = createFileRoute("/mock/")({
   component: Home,

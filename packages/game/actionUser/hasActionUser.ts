@@ -1,9 +1,9 @@
-import { ActionUserMetaDataInterface } from "@/packages/game/actionUser/ActionUserMetaDataInterface"
+import { ActionUserResource } from "@/packages/game/actionUser/ActionUserResource"
 import GameInterface from "@/packages/game/game/GameInterface"
 
 export function hasActionUser(
   game: GameInterface,
-  actionUser: ActionUserMetaDataInterface,
+  actionUser: ActionUserResource,
 ): boolean {
   return (
     game.userControl?.currentAction !== undefined &&

@@ -7,13 +7,13 @@ import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/tran
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
-import { forumEntityResource } from "@/entity/app/building/forum/forumEntityResource"
+import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/packages/game/entity/EntityState"
-import { getResource } from "@/packages/metadata/MetadataInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
-import { actionResourceFactory } from "@/packages/game/action/actionResourceFactory"
+import { createActionResource } from "@/packages/game/action/createActionResource"
 
 enum State {
   GoToForum = "GoToForum",
@@ -32,7 +32,7 @@ interface FindWorkerData {
   forumPathCoordinate?: EntityInterface
 }
 
-export const goBuildOfBuildingActionResource = actionResourceFactory<
+export const goBuildOfBuildingActionResource = createActionResource<
   ActionResourceInterface<FindWorkerData>
 >({
   "@id": "action/goBuildOfBuilding",
@@ -70,7 +70,7 @@ export const goBuildOfBuildingActionResource = actionResourceFactory<
         return
       }
 
-      const result = entityGoToEntity({ entity, target: forum })
+      const result = entityGoToEntity({ entity: entity, target: forum })
       if (result.isFinish) {
         data.state = State.TakeResource
       }
@@ -106,7 +106,7 @@ export const goBuildOfBuildingActionResource = actionResourceFactory<
     }
 
     if (data.state === State.GoToBuild) {
-      const result = entityGoToEntity({ entity, target: building })
+      const result = entityGoToEntity({ entity: entity, target: building })
       if (result.isFinish) {
         data.state = State.PutResource
       }
