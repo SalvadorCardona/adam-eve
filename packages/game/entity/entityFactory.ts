@@ -4,7 +4,7 @@ import EntityInterface, {
   EntityFaction,
   isBuildingEntity,
   isCharacterEntity,
-  isGroundEntity
+  isGroundEntity,
 } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { roundVectorToDown } from "@/packages/math/round"

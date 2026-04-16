@@ -1,7 +1,7 @@
-import { inventoryItemMedataFactory } from "@/packages/game/inventory/InventoryItemInterface"
+import { createResourceInventory } from "@/packages/game/inventory/InventoryItemInterface"
 import goldIcon from "./img.png"
 
-export const goldResourceMetadata = inventoryItemMedataFactory({
+export const goldResourceMetadata = createResourceInventory({
   "@id": "gold",
   asset: {
     icon: goldIcon,

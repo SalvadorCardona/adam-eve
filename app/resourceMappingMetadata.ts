@@ -1,5 +1,5 @@
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { InventoryItemMetadataInterface } from "@/packages/game/inventory/InventoryItemInterface"
+import { InventoryResource } from "@/packages/game/inventory/InventoryItemInterface"
 import {
   JsonLdIri,
   JsonLdType,
@@ -20,7 +20,7 @@ import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMine
 interface ResourceMapping {
   entityMetaDataResource: EntityResourceInterface
   entityMetaDataBuilding: EntityResourceInterface
-  resource: InventoryItemMetadataInterface
+  resource: InventoryResource
 }
 
 const resourceMappingList: JsonLdTypeContainerInterface<ResourceMapping> = {

@@ -1,10 +1,8 @@
+import { BaseJsonLdItemInterface, JsonLdType } from "@/packages/jsonLd/jsonLd"
 import {
-  BaseJsonLdItemInterface,
-  createJsonLd,
-  JsonLdType,
-} from "@/packages/jsonLd/jsonLd"
-import { BaseGameResource } from "@/packages/game/BaseGameResource"
-import { createResource } from "@/packages/resource/ResourceInterface"
+  BaseGameResource,
+  createResourceGame,
+} from "@/packages/game/BaseGameResource"
 
 export interface InventoryItemInterface extends BaseJsonLdItemInterface {
   quantity: number
@@ -12,35 +10,19 @@ export interface InventoryItemInterface extends BaseJsonLdItemInterface {
 
 export type InventoryItemType = JsonLdType
 
-export interface InventoryItemMetadataInterface extends BaseGameResource {
-  ["@type"]: InventoryItemType
-  factory: (payload: { quantity?: number }) => InventoryItemInterface
-}
-
-export function inventoryItemMedataFactory<
-  T extends InventoryItemMetadataInterface = InventoryItemMetadataInterface,
->(resourceItemMetadata: Partial<T>): T {
+export function createResourceInventory<
+  T extends BaseGameResource<InventoryItemInterface> =
+    BaseGameResource<InventoryItemInterface>,
+>(resource: BaseGameResource & Partial<T>): T {
   const meta = {
     "@type": "inventory",
-    factory: inventoryItemFactory,
-    ...resourceItemMetadata,
-  } as T
+    ...resource,
+  }
 
-  return createResource(meta) as T
+  return createResourceGame(meta)
 }
 
-export function inventoryItemFactory(payload: {
-  quantity?: number
-}): InventoryItemInterface {
-  // @ts-ignore
-  const type: string = this["@type"] ? this["@type"] : "unkwon"
-
-  return createJsonLd<InventoryItemInterface>(type, payload)
-}
-
-export type CanBeInventoryItemInterface =
-  | InventoryItemType
-  | InventoryItemMetadataInterface
+export type CanBeInventoryItemInterface = InventoryItemType
 
 export interface InventoryItemRequest {
   quantity?: number

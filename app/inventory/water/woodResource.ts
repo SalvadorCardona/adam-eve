@@ -1,7 +1,7 @@
-import { inventoryItemMedataFactory } from "@/packages/game/inventory/InventoryItemInterface"
+import { createResourceInventory } from "@/packages/game/inventory/InventoryItemInterface"
 import waterIcon from "./img.png"
 
-export const waterResourceMetadata = inventoryItemMedataFactory({
+export const waterResourceMetadata = createResourceInventory({
   "@id": "water",
   asset: {
     icon: waterIcon,
