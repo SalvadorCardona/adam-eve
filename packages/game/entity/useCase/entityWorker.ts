@@ -1,11 +1,12 @@
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { removeValue } from "@/packages/array/array"
 import { getLdIri, JsonLdIriAble } from "@/packages/jsonLd/jsonLd"
-import { addActionToEntity, hasAction } from "@/packages/game/action/ActionInterface"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 import { getEntityWorkerNeeded } from "@/packages/game/entity/useCase/query/getEntityWorkerNeeded"
+import { addActionToEntity } from "@/packages/game/action/AddActionToEntity"
+import { hasAction } from "@/packages/game/action/HasAction"
 
 export function addWorkerToEntity(
   game: GameInterface,

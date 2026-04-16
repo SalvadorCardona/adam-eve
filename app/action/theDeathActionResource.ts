@@ -4,11 +4,11 @@ import { createActionResource } from "@/packages/game/action/createActionResourc
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 
 export const theDeathActionResource = createActionResource({
-  ["@id"]: "action/the-death",
+  ["@id"]: "the-death",
   onFrame: ({ game, action }) => {
     updateNextTick(game, action, 20)
 
-    const entities = entityQuery(game, { "@typeIn": "entity" }).filter((entity) => {
+    const entities = entityQuery(game, { entityType: "entity" }).filter((entity) => {
       return entity.life <= 0
     })
 

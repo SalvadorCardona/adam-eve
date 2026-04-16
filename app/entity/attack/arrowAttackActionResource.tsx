@@ -4,7 +4,7 @@ import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQue
 import { createActionResource } from "@/packages/game/action/createActionResource"
 
 export const arrowAttackActionResource = createActionResource({
-  ["@id"]: "action/arrow-attack",
+  ["@id"]: "arrow-attack",
   onFrame: ({ game, entity }) => {
     if (!entity) {
       return

@@ -1,5 +1,4 @@
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
-import { getLdIri } from "@/packages/jsonLd/jsonLd"
 import {
   BaseGameResource,
   createResourceGame,
@@ -7,14 +6,8 @@ import {
 
 export function createActionResource<
   T extends ActionResourceInterface = ActionResourceInterface,
->(actionResource: BaseGameResource & Partial<T>): T {
-  actionResource.createItem = (payload) => {
-    if (payload?.createdBy) {
-      action.createdBy = getLdIri(payload.createdBy)
-    }
+>(resource: BaseGameResource & Partial<T>): T {
+  resource["@type"] = "action"
 
-    return payload
-  }
-
-  return createResourceGame({ ...actionResource }) as T
+  return createResourceGame({ ...resource }) as T
 }

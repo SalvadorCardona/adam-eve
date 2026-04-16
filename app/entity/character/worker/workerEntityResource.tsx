@@ -61,7 +61,7 @@ export const workerEntityResource = createEntityResource({
   onHit: ({ entity, game }) => {
     const resource = bloodEntityResource
 
-    const deathTree = resource.factory({
+    const deathTree = resource.createItem({
       game,
       entity: { position: entity.position },
     })

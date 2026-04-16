@@ -1,7 +1,13 @@
 import GameInterface from "@/packages/game/game/GameInterface"
 import { JsonLdIri, JsonLdType } from "@/packages/jsonLd/jsonLd"
-import { Vector2Interface, Vector3Interface, vector3ToVector2 } from "@/packages/math/vector"
-import EntityInterface, { EntityFaction } from "@/packages/game/entity/EntityInterface"
+import {
+  Vector2Interface,
+  Vector3Interface,
+  vector3ToVector2,
+} from "@/packages/math/vector"
+import EntityInterface, {
+  EntityFaction,
+} from "@/packages/game/entity/EntityInterface"
 import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 import { boundingCollision } from "@/packages/math/boundingCollision"
 import { EntityState } from "@/packages/game/entity/EntityState"

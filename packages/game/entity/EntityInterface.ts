@@ -4,17 +4,16 @@ import { EntityState } from "@/packages/game/entity/EntityState"
 import { ConsumablePathInterface } from "@/packages/math/path"
 import { Direction } from "@/packages/math/matrix"
 import { PlayerInterface } from "@/packages/game/player/playerMetadata"
-import { InventoryAbleInterface, InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import { ActionableInterface, ActionBagInterface } from "@/packages/game/action/ActionInterface"
+import { ActionBagInterface } from "@/packages/game/action/ActionResourceInterface"
 
 export enum EntityFaction {
   enemy = "enemy",
   self = "self",
 }
 
-export default interface EntityInterface
-  extends BaseJsonLdItemInterface, ActionableInterface, InventoryAbleInterface {
+export default interface EntityInterface extends BaseJsonLdItemInterface {
   rotation: number
   position: Vector3Interface
   currentPath?: ConsumablePathInterface

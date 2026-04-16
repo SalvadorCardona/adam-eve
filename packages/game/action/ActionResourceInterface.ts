@@ -1,11 +1,22 @@
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
+import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import {
-  BaseGameResource,
-  CreateItemPayload,
-} from "@/packages/game/BaseGameResource"
-import { ActionInterface } from "@/packages/game/action/ActionInterface"
-import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
+  BaseJsonLdItemInterface,
+  JsonLdIriContainerInterface,
+} from "@/packages/jsonLd/jsonLd"
+
+export interface ActionableInterface {
+  actions?: ActionBagInterface
+}
+
+export type ActionBagInterface = JsonLdIriContainerInterface<ActionInterface<any>>
+
+export interface ActionInterface<T = object> extends BaseJsonLdItemInterface {
+  data: T
+  nextTick?: number
+  createdBy: EntityInterface["@id"]
+}
 
 export interface ActionPayload<T extends object = object> {
   entity?: EntityInterface
@@ -14,12 +25,7 @@ export interface ActionPayload<T extends object = object> {
 }
 
 export interface ActionResourceInterface<
-  T extends BaseJsonLdItemInterface = BaseJsonLdItemInterface,
+  T extends ActionInterface = ActionInterface,
 > extends BaseGameResource<T> {
   onFrame: (payload: ActionPayload<T>) => void
-  createItem: (payload?: {
-    entity?: EntityInterface
-    game?: GameInterface
-    createdBy?: ActionInterface["createdBy"]
-  }) => CreateItemPayload<T>
 }

@@ -41,10 +41,9 @@ interface EntityPriorityInterface {
 
 export interface EntityResourceInterface<
   T extends EntityInterface = EntityInterface,
-> extends BaseGameResource {
+> extends BaseGameResource<T> {
   onFrame?: (payload: { entity: T; game: GameInterface }) => void
   component?: FC<{ entity: T; size: Vector2Interface }>
-  factory: (payload?: { entity?: Partial<T>; game: GameInterface }) => T
   defaultEntity?: () => Partial<T>
   workerAction?: ActionResourceInterface
   propriety: EntityPriorityInterface

@@ -4,11 +4,14 @@ import {
   hasCollisionInGame,
   hasCollisionWithGround,
 } from "@/packages/game/entity/useCase/entityHasCollision"
-import { createResource } from "@/packages/resource/ResourceInterface"
+import {
+  BaseGameResource,
+  createResourceGame,
+} from "@/packages/game/BaseGameResource"
 
 export function createEntityResource<
   T extends EntityResourceInterface = EntityResourceInterface,
->(entityMetaData: { "@id": string } & Partial<T>): T {
+>(resource: BaseGameResource & Partial<T>): T {
   const meta = {
     canBeBuild: (payload) => {
       return (
@@ -16,9 +19,9 @@ export function createEntityResource<
         hasCollisionWithGround(payload.game, payload.entity)
       )
     },
-    "@type": "resource/entity",
-    factory: entityFactory,
+    "@type": "entity",
+    createItem: entityFactory,
   } as Partial<EntityResourceInterface>
 
-  return createResource({ ...meta, ...entityMetaData }) as T
+  return createResourceGame({ ...meta, ...resource }) as T
 }

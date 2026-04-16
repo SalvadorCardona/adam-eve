@@ -4,7 +4,7 @@ import EntityInterface, {
   EntityFaction,
   isBuildingEntity,
   isCharacterEntity,
-  isGroundEntity,
+  isGroundEntity
 } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { roundVectorToDown } from "@/packages/math/round"
@@ -12,8 +12,8 @@ import { getResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 import { createVector3 } from "@/packages/math/vector"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"
-import { addActionToEntity } from "@/packages/game/action/ActionInterface"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { addActionToEntity } from "@/packages/game/action/AddActionToEntity"
 
 export function entityFactory<T extends EntityInterface = EntityInterface>(payload: {
   entity?: Partial<T>

@@ -48,7 +48,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
       const entities: EntityInterface[] = []
       if (positions.length > 1) {
         positions.forEach((newPosition) => {
-          const entity = metaInterface.factory({
+          const entity = metaInterface.createItem({
             game,
             entity: {
               position: vector2ToVector3(newPosition),
@@ -60,7 +60,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
         })
       } else {
         entities.push(
-          metaInterface.factory({
+          metaInterface.createItem({
             game,
             entity: {
               position: vector2ToVector3(mousePosition),

@@ -4,11 +4,11 @@ import { getByLdTypeIn, updateCollection } from "@/packages/jsonLd/jsonLd"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"
 import { theDeathActionResource } from "@/app/action/theDeathActionResource"
 import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
-import { addAction } from "@/packages/game/action/ActionInterface"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { addAction } from "@/packages/game/action/AddAction"
 
 export function gameLoader(game: GameInterface): GameInterface {
-  if (!getByLdTypeIn(game.actions, theDeathActionResource["@type"]).length) {
+  if (!getByLdTypeIn(game.actions, theDeathActionResource["@id"]).length) {
     const meta = getResource<ActionResourceInterface<any>>(
       theDeathActionResource["@type"],
     )

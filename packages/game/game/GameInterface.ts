@@ -18,7 +18,7 @@ import { BoundingInterface, createBoundingByABB } from "@/packages/math/boudingB
 import { createMatrix2D, Matrix2DInterface } from "@/packages/math/matrix"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
-import { ActionBagInterface } from "@/packages/game/action/ActionInterface"
+import { ActionBagInterface } from "@/packages/game/entity/ActionResourceInterface"
 
 export enum GameState {
   RUN = "run",
