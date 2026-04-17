@@ -1,5 +1,5 @@
 import { Spritesheet, Texture } from "pixi.js"
-import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
+import { SpritesheetData } from "pixi.js"
 
 interface createFramePixiJsParams {
   image: string

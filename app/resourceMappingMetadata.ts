@@ -37,7 +37,7 @@ const resourceMappingList: JsonLdTypeContainerInterface<ResourceMapping> = {
 }
 
 export interface ResourceMappingMetadataInterface
-  extends RepositoryInterface<ResourceMapping>, MetadataInterface {}
+  extends MetadataInterface, RepositoryInterface<ResourceMapping> {}
 
 export const resourceMappingMetaData =
   createResource<ResourceMappingMetadataInterface>({

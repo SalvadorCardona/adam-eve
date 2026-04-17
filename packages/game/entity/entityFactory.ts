@@ -42,7 +42,8 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     baseEntity.size = resource?.propriety?.size ?? createVector3(1, 1, 1)
   }
 
-  const entity = createJsonLd<EntityInterface>("entity", baseEntity) as T
+  const entityType = payload.resource["@id"] ?? "entity"
+  const entity = createJsonLd<EntityInterface>(entityType, baseEntity) as T
 
   entity.position = roundVectorToDown(entity.position)
 

@@ -2,6 +2,7 @@ import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoTo
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { createActionResource } from "@/packages/game/action/createActionResource"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const arrowAttackActionResource = createActionResource({
   ["@id"]: "arrow-attack",
@@ -11,7 +12,7 @@ export const arrowAttackActionResource = createActionResource({
     }
 
     const zombie = entityQueryFindOne(game, {
-      entityType: entity,
+      entityType: EntityType.character,
     })
 
     if (!zombie) {

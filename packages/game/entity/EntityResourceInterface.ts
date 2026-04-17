@@ -45,7 +45,7 @@ export interface EntityResourceInterface<
   onFrame?: (payload: { entity: T; game: GameInterface }) => void
   component?: FC<{ entity: T; size: Vector2Interface }>
   defaultEntity?: () => Partial<T>
-  workerAction?: ActionResourceInterface
+  workerAction?: ActionResourceInterface<any>
   propriety: EntityPriorityInterface
   canBeBuild: (payload: { entity: T; game: GameInterface }) => boolean
   onDeath?: (payload: { entity: T; game: GameInterface }) => void

@@ -1,4 +1,4 @@
-import { BaseGameResource } from "@/packages/game/BaseGameResource"
+import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { houseEntityMetaData } from "@/app/entity/building/house/houseEntity"
 import {
@@ -33,7 +33,7 @@ import { resourceMappingMetaData } from "@/app/resourceMappingMetadata"
 import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 
-export const resourceList: BaseGameResource[] = [
+export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
   forumEntityResource,
   workerEntityResource,

@@ -10,19 +10,24 @@ export interface InventoryItemInterface extends BaseJsonLdItemInterface {
 
 export type InventoryItemType = JsonLdType
 
+export interface InventoryResource
+  extends BaseGameResource<InventoryItemInterface> {}
+
 export function createResourceInventory<
   T extends BaseGameResource<InventoryItemInterface> =
     BaseGameResource<InventoryItemInterface>,
->(resource: BaseGameResource & Partial<T>): T {
+>(resource: Partial<BaseGameResource> & Partial<T>): T {
   const meta = {
     "@type": "inventory",
     ...resource,
   }
 
-  return createResourceGame(meta)
+  return createResourceGame<T>(meta)
 }
 
-export type CanBeInventoryItemInterface = InventoryItemType
+export type CanBeInventoryItemInterface =
+  | InventoryItemType
+  | BaseJsonLdItemInterface
 
 export interface InventoryItemRequest {
   quantity?: number

@@ -12,7 +12,7 @@ import {
   usePixiInstance,
   useTexture,
 } from "@/packages/ui/graphic-motor/pixiJs/hook/useTexture"
-import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
+import { SpritesheetData } from "pixi.js"
 import { createSpritesheetByData } from "@/packages/ui/graphic-motor/pixiJs/createFramePixiJs"
 
 interface SpritePropsInterface {
@@ -72,7 +72,7 @@ export const SpriteAnimated = ({
   }, [spriteSheetData])
 
   const container = useMemo(() => {
-    return new AnimatedSprite(animatedSprite)
+    return animatedSprite
   }, [animatedSprite])
 
   usePixiInstance({ container })

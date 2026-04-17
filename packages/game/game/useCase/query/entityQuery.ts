@@ -31,6 +31,7 @@ type Order = "ASC" | "DESC"
 export interface EntityQueryParams {
   entityType?: EntityType | EntityType[]
   "@type"?: JsonLdType | JsonLdType[]
+  "@typeIn"?: JsonLdType | JsonLdType[]
   "@id"?: JsonLdIri | JsonLdIri[]
   "@idIsNot"?: JsonLdIri | JsonLdIri[]
   circleSearch?: CircleSearch
@@ -73,6 +74,7 @@ export function entityQuery<T = EntityInterface>(
 ): T[] {
   const {
     "@type": type,
+    "@typeIn": typeIn,
     "@id": id,
     circleSearch,
     squareSearch,
@@ -98,6 +100,15 @@ export function entityQuery<T = EntityInterface>(
       return entity["@type"] && Array.isArray(type)
         ? type.includes(entity["@type"])
         : type === entity["@type"]
+    })
+  }
+
+  if (typeIn) {
+    const typeInList = Array.isArray(typeIn) ? typeIn : [typeIn]
+    entities = entities.filter((entity) => {
+      const entityType = entity["@type"]
+      if (!entityType) return false
+      return typeInList.some((t) => entityType.startsWith(t))
     })
   }
 

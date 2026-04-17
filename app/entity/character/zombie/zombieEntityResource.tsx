@@ -62,7 +62,7 @@ export const zombieEntityResource: EntityResourceInterface = createEntityResourc
     health: {
       maxLife: 100,
     },
-    defaultActions: [zombieAttackActionResource["@type"]],
+    defaultActions: [zombieAttackActionResource["@type"]!],
   },
   defaultEntity: () => ({ faction: EntityFaction.enemy }),
 })

@@ -1,4 +1,3 @@
-import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import {
   BaseJsonLdItemInterface,
   createJsonLd,
@@ -17,7 +16,7 @@ export interface PlayerInterface extends BaseJsonLdItemInterface {
 }
 
 export interface PlayerMetadataInterface
-  extends BaseGameResource, RepositoryInterface<PlayerInterface> {
+  extends BaseJsonLdItemInterface, RepositoryInterface<PlayerInterface> {
   factory: (payload: { player: Partial<PlayerInterface> }) => PlayerInterface
   getPlayer: () => PlayerInterface
 }

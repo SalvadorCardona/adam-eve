@@ -18,7 +18,7 @@ export const GameProvider = ({
   const [version, setVersion] = useState(1)
   useGamePubSub("gameOption", (e) => {
     const gameOption = e.item as GameOption
-    setVersion(gameOption["@version"])
+    setVersion(gameOption["@version"] ?? 0)
   })
 
   useEffect(() => {

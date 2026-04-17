@@ -1,6 +1,5 @@
 import GameInterface, { gameFactory } from "@/packages/game/game/GameInterface"
-import { BaseGameResource } from "@/packages/game/BaseGameResource"
-import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
+import { BaseJsonLdItemInterface, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import {
   getInStorage,
   getItemsInLocalStorageByPrefix,
@@ -11,7 +10,7 @@ import { createResource } from "@/packages/resource/ResourceInterface"
 import { RepositoryInterface } from "@/packages/repository/repository"
 
 export interface GameMetadataInterface
-  extends BaseGameResource, RepositoryInterface<GameInterface> {
+  extends BaseJsonLdItemInterface, RepositoryInterface<GameInterface> {
   factory: (game?: GameInterface) => GameInterface
 }
 

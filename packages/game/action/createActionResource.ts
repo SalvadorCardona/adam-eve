@@ -5,8 +5,8 @@ import {
 } from "@/packages/game/BaseGameResource"
 
 export function createActionResource<
-  T extends ActionResourceInterface = ActionResourceInterface,
->(resource: BaseGameResource & Partial<T>): T {
+  T extends ActionResourceInterface<any> = ActionResourceInterface,
+>(resource: Partial<BaseGameResource> & Partial<T>): T {
   resource["@type"] = "action"
 
   return createResourceGame({ ...resource }) as T

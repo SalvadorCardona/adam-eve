@@ -134,10 +134,12 @@ export function updateContainerByType<T extends BaseJsonLdItemInterface>(
   item: T,
   action: ContainerAction = ContainerAction.update,
 ): void {
-  container[item["@type"]] = item
+  const type = item["@type"]
+  if (!type) return
+  container[type] = item
 
   if (action === ContainerAction.remove) {
-    deleteContainerKey(container, item["@type"])
+    deleteContainerKey(container, type)
   }
 
   updateItem(item, action)
@@ -147,14 +149,16 @@ export function updateItem(
   item: JsonLDItem<any>,
   action: ContainerAction = ContainerAction.update,
 ): JsonLDItem<any> {
-  item["@version"]++
+  item["@version"] = (item["@version"] ?? 0) + 1
   containerPubSub.publish(item["@id"], { item, action })
-  containerPubSub.publish(item["@type"], { item, action })
+  if (item["@type"]) {
+    containerPubSub.publish(item["@type"], { item, action })
+  }
 
   return item
 }
 
-export function getByLdTypeIn<T extends JsonTypedLdInterface = JsonTypedLdInterface>(
+export function getByLdTypeIn<T = BaseJsonLdItemInterface>(
   container: ContainerInterface,
   jsonLdType: JsonLdType | JsonLdType[],
 ): Array<T> {

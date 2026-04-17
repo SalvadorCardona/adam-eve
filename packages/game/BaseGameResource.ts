@@ -1,14 +1,16 @@
-import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
+import { SpritesheetData } from "pixi.js"
 import { SpriteAnimation } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { BaseJsonLdItemInterface, createJsonLd } from "@/packages/jsonLd/jsonLd"
 import { createResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 
-export interface CreateItemPayload<T> {
-  item?: T
+export interface CreateItemPayload<T extends BaseJsonLdItemInterface> {
+  item?: Partial<T>
+  entity?: Partial<T>
   resource?: BaseGameResource
   game?: GameInterface
+  [key: string]: any
 }
 
 export interface BaseGameResource<
@@ -21,22 +23,35 @@ export interface BaseGameResource<
     animationMapper?: Partial<Record<EntityState, SpritesheetData | SpriteAnimation>>
   }
   label?: string
-  createItem?: (payload: CreateItemPayload<T>) => CreateItemPayload<T>
+  createItem: (payload?: CreateItemPayload<T>) => T
+  factory: (payload?: any) => T
 }
 
 export function createResourceGame<T extends BaseGameResource>(
-  resource: BaseGameResource,
-): BaseGameResource {
-  const newResource = { ...resource }
+  resource: Partial<BaseGameResource> & Partial<T> & { "@id"?: string; "@type"?: string },
+): T {
+  const newResource = { ...resource } as BaseGameResource
 
-  newResource.createItem = (payload) => {
-    const currentPayload = resource.createItem
-      ? resource.createItem(payload)
-      : payload
+  const originalCreateItem = resource.createItem
 
-    currentPayload.item = createJsonLd(resource["@id"], currentPayload.item ?? {})
+  newResource.createItem = (payload = {}) => {
+    const resourceType = newResource["@type"] ?? newResource["@id"]
+    if (originalCreateItem) {
+      const result: any = originalCreateItem({
+        ...payload,
+        resource: newResource,
+      })
+      if (result && result["@id"]) return result
+      const base = (result && (result.item ?? result.entity)) ?? payload.item ?? payload.entity ?? {}
+      return createJsonLd(resourceType, base) as any
+    }
 
-    return currentPayload
+    const base = payload.item ?? payload.entity ?? {}
+    return createJsonLd(resourceType, base) as any
+  }
+
+  newResource.factory = (item: any = {}) => {
+    return newResource.createItem({ item })
   }
 
   return createResource(newResource) as T

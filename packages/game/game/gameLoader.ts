@@ -15,7 +15,7 @@ export function gameLoader(game: GameInterface): GameInterface {
     addAction(game.actions, meta.createItem({ game }))
   }
   if (
-    !getByLdTypeIn(game.actions, findWorkerCharacterActionMetadata["@type"]).length
+    !getByLdTypeIn(game.actions, findWorkerCharacterActionMetadata["@type"]!).length
   ) {
     const meta = getResource<ActionResourceInterface<any>>(
       findWorkerCharacterActionMetadata,
