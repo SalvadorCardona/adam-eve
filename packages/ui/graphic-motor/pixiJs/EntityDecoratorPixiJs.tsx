@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { Graphics } from "@/packages/ui/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
-import { ContainerChild } from "pixi.js"
+import { ContainerChild, SpritesheetData } from "pixi.js"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import {
   Sprite,
@@ -155,7 +155,7 @@ export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   }, [entity.state])
 
   if (spriteSheetData && typeof spriteSheetData !== "function") {
-    return <SpriteAnimated spriteSheetData={spriteSheetData} />
+    return <SpriteAnimated spriteSheetData={spriteSheetData as SpritesheetData} />
   }
 
   return (

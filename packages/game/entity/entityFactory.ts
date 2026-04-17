@@ -26,6 +26,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     rotation: 0,
     createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 1, 0),
+    entityType: resource?.entityType ?? resource?.propriety?.entityType,
     ...(resource?.defaultEntity ? resource?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
   }

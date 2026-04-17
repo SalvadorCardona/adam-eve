@@ -1,5 +1,3 @@
-import { SpritesheetData } from "pixi.js"
-import { SpriteAnimation } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { BaseJsonLdItemInterface, createJsonLd } from "@/packages/jsonLd/jsonLd"
 import { createResource } from "@/packages/resource/ResourceInterface"
@@ -13,15 +11,17 @@ export interface CreateItemPayload<T extends BaseJsonLdItemInterface> {
   [key: string]: any
 }
 
+export interface AssetInterface {
+  icon?: string
+  model2d?: string
+  asset2d?: string[]
+  animationMapper?: Partial<Record<EntityState, unknown>>
+}
+
 export interface BaseGameResource<
   T extends BaseJsonLdItemInterface = BaseJsonLdItemInterface,
 > extends BaseJsonLdItemInterface {
-  asset?: {
-    icon?: string
-    model2d?: string
-    asset2d?: string[]
-    animationMapper?: Partial<Record<EntityState, SpritesheetData | SpriteAnimation>>
-  }
+  asset?: AssetInterface
   label?: string
   createItem: (payload?: CreateItemPayload<T>) => T
   factory: (payload?: any) => T
