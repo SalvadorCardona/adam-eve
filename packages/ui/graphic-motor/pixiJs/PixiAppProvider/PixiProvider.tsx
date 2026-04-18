@@ -33,18 +33,7 @@ export const PixiProvider: React.FC<{
   children: React.ReactNode
   options: Partial<ApplicationOptions>
 }> = ({ children, options }) => {
-  return (
-    <Application {...(options as any)}>
-      <AssetBoot>
-        <PixiContainerProvider>{children}</PixiContainerProvider>
-      </AssetBoot>
-    </Application>
-  )
-}
-
-const AssetBoot = ({ children }: PropsWithChildren) => {
-  const [ready, setReady] = useState(false)
-  const { app } = useApplication()
+  const [assetsReady, setAssetsReady] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -65,18 +54,34 @@ const AssetBoot = ({ children }: PropsWithChildren) => {
       await Assets.loadBundle("main")
 
       if (!cancelled) {
-        app.stage.interactive = true
-        app.stage.eventMode = "static"
-        setReady(true)
+        setAssetsReady(true)
       }
     }
     load()
     return () => {
       cancelled = true
     }
-  }, [app])
+  }, [])
 
-  if (!ready) return <LoaderComponent />
+  if (!assetsReady) return <LoaderComponent />
+
+  return (
+    <Application {...(options as any)}>
+      <StageBoot>
+        <PixiContainerProvider>{children}</PixiContainerProvider>
+      </StageBoot>
+    </Application>
+  )
+}
+
+const StageBoot = ({ children }: PropsWithChildren) => {
+  const { app } = useApplication()
+
+  useEffect(() => {
+    if (!app) return
+    app.stage.interactive = true
+    app.stage.eventMode = "static"
+  }, [app])
 
   return <>{children}</>
 }
