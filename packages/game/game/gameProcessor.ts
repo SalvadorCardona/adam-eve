@@ -13,8 +13,10 @@ export function gameProcessor(game: GameInterface) {
   actionProcesseur(game.actions, game)
 
   Object.values(game.entities).forEach((entity) => {
-    const entityMetaData = getResource(entity) as EntityResourceInterface
-    entityMetaData.onFrame && entityMetaData.onFrame({ entity, game })
+    const entityMetaData = getResource(entity) as
+      | EntityResourceInterface
+      | undefined
+    entityMetaData?.onFrame?.({ entity, game })
     entity?.actions &&
       actionProcesseur(entity.actions, game, entity as BuildingEntityInterface)
   })

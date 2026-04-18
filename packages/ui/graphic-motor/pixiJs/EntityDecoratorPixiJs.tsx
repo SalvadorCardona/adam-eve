@@ -28,7 +28,9 @@ export const EntityDecoratorPixiJs = ({
   color,
 }: EntityDecoratorResolverPropsInterface) => {
   const [, setVersion] = useState(entity["@version"])
-  const entityMetaData = getResource(entity) as EntityResourceInterface
+  const entityMetaData = getResource(entity) as
+    | EntityResourceInterface
+    | undefined
   const game = useGameContext().game
   const [isSelected, setIsSelected] = useState<boolean>(false)
   useGamePubSub(entity["@id"], () => {
@@ -41,7 +43,7 @@ export const EntityDecoratorPixiJs = ({
   })
 
   const EntityComponent = useMemo(() => {
-    if (entityMetaData.component) return entityMetaData.component
+    if (entityMetaData?.component) return entityMetaData.component
 
     return Model2DPixiJs
   }, [])
