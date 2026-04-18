@@ -72,7 +72,7 @@ function entitiesFinder(game: GameInterface): EntityInterface[] {
     EntityType.resource,
     EntityType.ground,
   ]) {
-    baseQuery["@typeIn"] = entityQueryParam
+    baseQuery.entityType = entityQueryParam
     const entities = entityQuery(game, baseQuery)
     if (entities.length) return entities
   }
