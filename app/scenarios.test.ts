@@ -19,6 +19,13 @@ import { forumEntityResource } from "@/app/entity/building/forum/forumEntityReso
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { goldResourceMetadata } from "@/app/entity/resource/gold/goldResource"
+import {
+  createBuilding,
+  createCharacter,
+  createHarvestable,
+} from "@/packages/game/entity/createBuilding"
+import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
+import { EntityFaction as Faction } from "@/packages/game/entity/EntityInterface"
 
 function newGame(): GameInterface {
   return gameFactory()
@@ -216,6 +223,80 @@ describe("Scenario: building construction requires resources", () => {
     addToInventory(tower, woodResourceMetadata, 5)
 
     expect(enoughResource(required, tower.inventory!)).toBe(true)
+  })
+})
+
+describe("Scenario: framework ergonomics — define content from scratch", () => {
+  it("createBuilding lets me declare a brand-new building inline", () => {
+    const farm = createBuilding({
+      "@id": "resource/test-farm",
+      label: "Ferme de test",
+      propriety: {
+        work: { numberOfWorker: 3 },
+        health: { maxLife: 80 },
+        size: { x: 2, y: 1, z: 2 },
+        resourceForConstruction: createInventory({
+          items: [{ inventoryItem: woodResourceMetadata, quantity: 3 }],
+        }),
+      },
+    })
+
+    const game = newGame()
+    const entity = farm.create({
+      game,
+      entity: { position: createVector3(0, 0, 0) },
+    })
+    addEntityToGame(game, entity)
+
+    expect(entity.life).toBe(80)
+    expect(entity.faction).toBe(Faction.self)
+    expect(farm.propriety.work?.numberOfWorker).toBe(3)
+  })
+
+  it("createCharacter lets me declare a brand-new character inline", () => {
+    const spider = createCharacter({
+      "@id": "resource/test-spider",
+      label: "Araignée",
+      propriety: {
+        inventorySize: 2,
+        speed: 0.05,
+        attack: { damage: 3, attackRange: 1, attackSpeed: 30 },
+        health: { maxLife: 15 },
+        size: { x: 1, y: 1, z: 1 },
+      },
+      defaultEntity: () => ({ faction: Faction.enemy }),
+    })
+
+    const game = newGame()
+    const entity = spider.create({
+      game,
+      entity: { position: createVector3(2, 0, 2) },
+    })
+
+    expect(entity.life).toBe(15)
+    expect(entity.faction).toBe(Faction.enemy)
+    expect(entity.state).toBe(EntityState.wait)
+  })
+
+  it("createHarvestable lets me declare a brand-new harvestable resource inline", () => {
+    const stone = createHarvestable({
+      "@id": "resource/test-stone",
+      label: "Rocher",
+      propriety: {
+        health: { maxLife: 40 },
+        size: { x: 1, y: 1, z: 1 },
+      },
+    })
+
+    const game = newGame()
+    const entity = stone.create({
+      game,
+      entity: { position: createVector3(3, 0, 3) },
+    })
+    addEntityToGame(game, entity)
+
+    expect(entity.life).toBe(40)
+    expect(Object.keys(game.entities)).toHaveLength(1)
   })
 })
 
