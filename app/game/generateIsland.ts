@@ -6,6 +6,7 @@ import { houseEntityMetaData } from "@/app/entity/building/house/houseEntity"
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
+import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
 
 const ISLAND_CENTER_X = 10
 const ISLAND_CENTER_Z = 10
@@ -43,6 +44,7 @@ export function generateIsland(game: GameInterface): GameInterface {
   generateGround(game)
 
   spawnAt(game, houseEntityMetaData, ISLAND_CENTER_X - 1, ISLAND_CENTER_Z - 1)
+  spawnAt(game, researchCenterEntityResource, ISLAND_CENTER_X + 2, ISLAND_CENTER_Z - 3)
 
   const workerPositions: Array<[number, number]> = [
     [ISLAND_CENTER_X - 3, ISLAND_CENTER_Z],
