@@ -1,4 +1,4 @@
-import { Spritesheet, Texture } from "pixi.js"
+import { Assets, Spritesheet, Texture } from "pixi.js"
 import { SpritesheetData } from "pixi.js"
 
 interface createFramePixiJsParams {
@@ -43,25 +43,23 @@ export function createFramePixiJs({
   }
 }
 
-export function createSpritesheet(params: createFramePixiJsParams): Spritesheet {
+export async function createSpritesheet(
+  params: createFramePixiJsParams,
+): Promise<Spritesheet> {
   const frame = createFramePixiJs(params)
-  const spriteSheet = new Spritesheet(
-    Texture.from(frame.meta.image as string),
-    frame,
-  )
-  spriteSheet.parse()
+  const texture = await Assets.load<Texture>(frame.meta.image as string)
+  const spriteSheet = new Spritesheet({ texture, data: frame })
+  await spriteSheet.parse()
 
   return spriteSheet
 }
 
-export function createSpritesheetByData(
+export async function createSpritesheetByData(
   spriteSheetData: SpritesheetData,
-): Spritesheet {
-  const spriteSheet = new Spritesheet(
-    Texture.from(spriteSheetData.meta.image as string),
-    spriteSheetData,
-  )
-  spriteSheet.parse()
+): Promise<Spritesheet> {
+  const texture = await Assets.load<Texture>(spriteSheetData.meta.image as string)
+  const spriteSheet = new Spritesheet({ texture, data: spriteSheetData })
+  await spriteSheet.parse()
 
   return spriteSheet
 }
