@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <style>
+      .beam { animation: beam 2s ease-in-out infinite; transform-origin: 32px 20px; }
+      .ring1 { animation: ring 2s ease-out infinite; transform-origin: 32px 20px; }
+      .ring2 { animation: ring 2s ease-out infinite 0.7s; transform-origin: 32px 20px; }
+      .ring3 { animation: ring 2s ease-out infinite 1.4s; transform-origin: 32px 20px; }
+      .light { animation: light 1.5s ease-in-out infinite; }
+      @keyframes beam {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      @keyframes ring {
+        0% { r: 4; opacity: 0.8; }
+        100% { r: 18; opacity: 0; }
+      }
+      @keyframes light {
+        0%, 100% { fill: #fbbf24; }
+        50% { fill: #f59e0b; filter: drop-shadow(0 0 4px #fbbf24); }
+      }
+    </style>
+  </defs>
+
+  <!-- Base bâtiment -->
+  <rect x="10" y="38" width="44" height="18" rx="2" fill="#1e3a5f" stroke="#1e40af" stroke-width="1.5"/>
+  <!-- Façade centrale -->
+  <rect x="20" y="30" width="24" height="20" rx="1" fill="#1e40af" stroke="#3b82f6" stroke-width="1"/>
+  <!-- Fenêtres -->
+  <rect x="23" y="34" width="6" height="6" rx="1" fill="#93c5fd"/>
+  <rect x="35" y="34" width="6" height="6" rx="1" fill="#93c5fd"/>
+  <!-- Porte -->
+  <rect x="28" y="44" width="8" height="12" rx="1" fill="#1e3a5f"/>
+
+  <!-- Tour / antenne -->
+  <rect x="30" y="10" width="4" height="22" fill="#374151"/>
+  <!-- Base antenne -->
+  <rect x="26" y="30" width="12" height="3" rx="1" fill="#4b5563"/>
+
+  <!-- Antenne parabole stylisée -->
+  <ellipse cx="32" cy="20" rx="10" ry="5" fill="none" stroke="#60a5fa" stroke-width="2" transform="rotate(-20, 32, 20)"/>
+  <line x1="32" y1="20" x2="26" y2="14" stroke="#60a5fa" stroke-width="1.5"/>
+
+  <!-- Ondes radio animées -->
+  <circle class="ring1" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle class="ring2" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle class="ring3" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+
+  <!-- Lumière clignotante au sommet -->
+  <circle class="light" cx="32" cy="10" r="3" fill="#fbbf24"/>
+</svg>
