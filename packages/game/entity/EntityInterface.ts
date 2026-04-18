@@ -36,8 +36,8 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   "@resource"?: string
 }
 
-export function isEntity(entity: EntityInterface): entity is EntityInterface {
-  return entity["@type"] === "entity"
+export function isEntity(entity: any): entity is EntityInterface {
+  return entity != null && typeof entity === "object" && "rotation" in entity && "createdAt" in entity
 }
 
 export function isGroundEntity(entity: EntityInterface) {
