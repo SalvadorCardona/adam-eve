@@ -13,9 +13,9 @@ import { ActionBagInterface } from "@/packages/game/action/ActionBagInterface"
 describe("Test getEntityWorkerNeeded", () => {
   it("Context 1", () => {
     const game = gameFactory()
-    const timberHouse = timberHouseEntityMetaData.createItem()
+    const timberHouse = timberHouseEntityMetaData.create()
     const meta = getEntityMetaData(timberHouse)
-    const worker = workerEntityResource.createItem()
+    const worker = workerEntityResource.create()
     const numberOfWorker = meta.propriety.work?.numberOfWorker as number
     expect(getEntityWorkerNeeded(timberHouse)).toBe(numberOfWorker)
     addWorkerToEntity(game, timberHouse, worker)

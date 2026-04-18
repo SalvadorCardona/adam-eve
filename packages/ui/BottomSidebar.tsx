@@ -7,8 +7,13 @@ import useGameContext from "@/packages/ui/provider/useGameContext"
 import { appLdType } from "@/app/AppLdType"
 import { AdaptiveHoverDecorator } from "@/app/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/app/ationUser/CreateEntityUserAction/createEntityUserActionMetadata"
-import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { BaseJsonLdItemInterface, getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { metaDataRegistered } from "@/packages/resource/ResourceInterface"
+
+type SidebarMetadata = BaseJsonLdItemInterface & {
+  label?: string
+  asset?: { icon?: string }
+}
 
 export const BottomSidebar = () => {
   const buildingMetaDatas = getByLdTypeIn<EntityResourceInterface>(
@@ -58,22 +63,25 @@ export const BottomSidebar = () => {
 }
 
 function isActionUserMetadata(
-  metadata: BaseGameResource,
-): metadata is ActionUserResource {
-  return metadata["@type"].startsWith("user-action/")
+  metadata: SidebarMetadata,
+): metadata is ActionUserResource & SidebarMetadata {
+  return metadata["@type"]?.startsWith("user-action/") ?? false
 }
 
-function IconBuild({ metaDatas }: { metaDatas: BaseGameResource[] }) {
+function IconBuild({ metaDatas }: { metaDatas: SidebarMetadata[] }) {
   const game = useGameContext().game
-  const clickOnBuilding = (metaData: BaseGameResource) => {
+  const clickOnBuilding = (metaData: SidebarMetadata) => {
     if (isActionUserMetadata(metaData) && metaData.onCall) {
-      metaData.onCall({ game, metaData })
+      metaData.onCall({ game, metaData: metaData as unknown as BaseGameResource })
 
       return
     }
 
     if (createEntityUserActionMetadata.onCall) {
-      createEntityUserActionMetadata.onCall({ game, metaData })
+      createEntityUserActionMetadata.onCall({
+        game,
+        metaData: metaData as unknown as BaseGameResource,
+      })
     }
   }
 

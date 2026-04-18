@@ -11,7 +11,7 @@ import {
 
 export function createEntityResource<
   T extends EntityResourceInterface = EntityResourceInterface,
->(resource: BaseGameResource & Partial<T>): T {
+>(resource: Partial<BaseGameResource> & Partial<T>): T {
   const meta = {
     canBeBuild: (payload) => {
       return (
@@ -20,7 +20,7 @@ export function createEntityResource<
       )
     },
     "@type": "entity",
-    createItem: entityFactory,
+    create: entityFactory,
   } as Partial<EntityResourceInterface>
 
   return createResourceGame({ ...meta, ...resource }) as T

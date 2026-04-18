@@ -8,7 +8,7 @@ export const theDeathActionResource = createActionResource({
   onFrame: ({ game, action }) => {
     updateNextTick(game, action, 20)
 
-    const entities = entityQuery(game, { entityType: "entity" }).filter((entity) => {
+    const entities = entityQuery(game, { "@type": "entity" }).filter((entity) => {
       return entity.life <= 0
     })
 

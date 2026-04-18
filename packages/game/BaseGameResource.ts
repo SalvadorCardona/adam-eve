@@ -1,42 +1,52 @@
-import { SpritesheetData } from "pixi.js/lib/spritesheet/Spritesheet"
-import { SpriteAnimation } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { BaseJsonLdItemInterface, createJsonLd } from "@/packages/jsonLd/jsonLd"
 import { createResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 
-export interface CreateItemPayload<T> {
-  item?: T
+export interface CreateItemPayload<T extends BaseJsonLdItemInterface> {
+  item?: Partial<T>
+  entity?: Partial<T>
   resource?: BaseGameResource
   game?: GameInterface
+  [key: string]: any
+}
+
+export interface AssetInterface {
+  icon?: string
+  model2d?: string
+  asset2d?: string[]
+  animationMapper?: Partial<Record<EntityState, unknown>>
 }
 
 export interface BaseGameResource<
   T extends BaseJsonLdItemInterface = BaseJsonLdItemInterface,
 > extends BaseJsonLdItemInterface {
-  asset?: {
-    icon?: string
-    model2d?: string
-    asset2d?: string[]
-    animationMapper?: Partial<Record<EntityState, SpritesheetData | SpriteAnimation>>
-  }
+  asset?: AssetInterface
   label?: string
-  createItem?: (payload: CreateItemPayload<T>) => CreateItemPayload<T>
+  create: (payload?: CreateItemPayload<T>) => T
 }
 
 export function createResourceGame<T extends BaseGameResource>(
-  resource: BaseGameResource,
-): BaseGameResource {
-  const newResource = { ...resource }
+  resource: Partial<BaseGameResource> & Partial<T> & { "@id"?: string; "@type"?: string },
+): T {
+  const newResource = { ...resource } as BaseGameResource
 
-  newResource.createItem = (payload) => {
-    const currentPayload = resource.createItem
-      ? resource.createItem(payload)
-      : payload
+  const originalCreate = resource.create
 
-    currentPayload.item = createJsonLd(resource["@id"], currentPayload.item ?? {})
+  newResource.create = (payload = {}) => {
+    const resourceType = newResource["@type"] ?? newResource["@id"]
+    if (originalCreate) {
+      const result: any = originalCreate({
+        ...payload,
+        resource: newResource,
+      })
+      if (result && result["@id"]) return result
+      const base = (result && (result.item ?? result.entity)) ?? payload.item ?? payload.entity ?? {}
+      return createJsonLd(resourceType, base) as any
+    }
 
-    return currentPayload
+    const base = payload.item ?? payload.entity ?? {}
+    return createJsonLd(resourceType, base) as any
   }
 
   return createResource(newResource) as T

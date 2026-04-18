@@ -23,11 +23,17 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
+      "react-reconciler/constants": "react-reconciler/constants.js",
     },
   },
   // @ts-ignore used for run test well
   test: {
     globals: true,
+    server: {
+      deps: {
+        inline: ["@pixi/react"],
+      },
+    },
     // setupFiles: "./vitest.setup.ts",
   },
 })

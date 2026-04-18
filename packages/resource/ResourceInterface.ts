@@ -9,17 +9,33 @@ import createUniqId from "@/packages/id/createUniqId"
 export const resourceRegistered: JsonLdIriContainerInterface<BaseJsonLdItemInterface> =
   {}
 
+export const metaDataRegistered = resourceRegistered
+
+export interface MetadataInterface {
+  "@id": string
+  [key: string]: any
+}
+
 const addResource = (metaData: BaseJsonLdItemInterface) => {
   resourceRegistered[metaData["@id"]] = metaData
+  if (metaData["@type"] && !resourceRegistered[metaData["@type"]]) {
+    resourceRegistered[metaData["@type"]] = metaData
+  }
 }
 
 export function getResource<T = BaseJsonLdItemInterface>(
   metaType: JsonLdIriAble,
-): T | undefined {
-  const id = getLdIri(metaType)
-  if (id && resourceRegistered[id]) return resourceRegistered[id] as T
+): T {
+  if (typeof metaType === "string") {
+    if (resourceRegistered[metaType]) return resourceRegistered[metaType] as T
+  } else if (metaType) {
+    const id = metaType["@id"]
+    if (id && resourceRegistered[id]) return resourceRegistered[id] as T
+    const type = metaType["@type"]
+    if (type && resourceRegistered[type]) return resourceRegistered[type] as T
+  }
 
-  return undefined
+  return undefined as unknown as T
 }
 
 export function createResource<

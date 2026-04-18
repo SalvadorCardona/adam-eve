@@ -1,6 +1,6 @@
 import { Graphics as BaseGraphics } from "pixi.js"
-import { GraphicsContext } from "pixi.js/lib/scene/graphics/shared/GraphicsContext"
-import { GraphicsOptions } from "pixi.js/lib/scene/graphics/shared/Graphics"
+import { GraphicsContext } from "pixi.js"
+import { GraphicsOptions } from "pixi.js"
 import React, { useMemo } from "react"
 import { usePixiInstance } from "@/packages/ui/graphic-motor/pixiJs/hook/useTexture"
 

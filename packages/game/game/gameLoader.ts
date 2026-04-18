@@ -12,15 +12,15 @@ export function gameLoader(game: GameInterface): GameInterface {
     const meta = getResource<ActionResourceInterface<any>>(
       theDeathActionResource["@type"],
     )
-    addAction(game.actions, meta.createItem({ game }))
+    addAction(game.actions, meta.create({ game }))
   }
   if (
-    !getByLdTypeIn(game.actions, findWorkerCharacterActionMetadata["@type"]).length
+    !getByLdTypeIn(game.actions, findWorkerCharacterActionMetadata["@type"]!).length
   ) {
     const meta = getResource<ActionResourceInterface<any>>(
       findWorkerCharacterActionMetadata,
     )
-    addAction(game.actions, meta.createItem({ game }))
+    addAction(game.actions, meta.create({ game }))
   }
 
   updateCollection(game.players, playerMetadata.getPlayer())

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Assets, Texture, Ticker } from "pixi.js"
-import { ContainerChild } from "pixi.js/lib/scene/container/Container"
+import { ContainerChild } from "pixi.js"
 import { usePixiContainer } from "@/packages/ui/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
 import { SpriteAnimation } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
-import { Sprite as BaseSprite } from "pixi.js/lib/scene/sprite/Sprite"
+import { Sprite as BaseSprite } from "pixi.js"
 import { usePixiApp } from "@/packages/ui/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 
 export const useTexture = ({

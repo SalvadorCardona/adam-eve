@@ -9,6 +9,9 @@ import EntityInterface from "@/packages/game/entity/EntityInterface"
 export function getInventory(
   inventory: CanBeInventoryInterface,
 ): InventoryInterface {
+  if (!inventory) {
+    return createInventory({ entity: {} as EntityInterface })
+  }
   if ("@type" in inventory && inventory["@type"] === "inventory") {
     return inventory
   }

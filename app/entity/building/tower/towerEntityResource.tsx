@@ -33,7 +33,7 @@ export const towerEntityResource = createEntityResource({
       y: 2,
       z: 4,
     },
-    defaultActions: [towerAttackActionResource["@type"]],
+    defaultActions: [towerAttackActionResource["@type"]!],
   },
   label: "Tour de défense",
 })

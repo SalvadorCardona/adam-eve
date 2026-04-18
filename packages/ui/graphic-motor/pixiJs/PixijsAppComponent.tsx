@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Vector2Interface } from "@/packages/math/vector"
 import { PixiProvider } from "@/packages/ui/graphic-motor/pixiJs/PixiAppProvider/PixiProvider"
-import { ApplicationOptions } from "pixi.js/lib/app/Application"
+import { ApplicationOptions } from "pixi.js"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
 import { SelectOnMap } from "@/packages/ui/graphic-motor/pixiJs/SelectOnMap"
 import { EntitiesLoopPixiJs } from "@/packages/ui/graphic-motor/pixiJs/EntitiesLoopPixiJs"

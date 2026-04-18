@@ -10,19 +10,19 @@ import EntityInterface from "@/packages/game/entity/EntityInterface"
 describe("Test entityQuery", () => {
   it("Context 1", () => {
     const game = gameFactory()
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(1, 1, 1) },
     })
-    const three1 = treeEntityMetaData.createItem({
+    const three1 = treeEntityMetaData.create({
       game,
       entity: { position: createVector3(10, 1, 10) },
     })
-    const three2 = treeEntityMetaData.createItem({
+    const three2 = treeEntityMetaData.create({
       game,
       entity: { position: createVector3(2, 1, 2) },
     })
-    const three3 = treeEntityMetaData.createItem({
+    const three3 = treeEntityMetaData.create({
       game,
       entity: { position: createVector3(4, 2, 4) },
     })

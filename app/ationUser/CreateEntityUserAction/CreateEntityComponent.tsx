@@ -21,7 +21,7 @@ export const CreateEntityComponent = () => {
 
   const entity = useMemo(() => {
     return entityMetaData
-      ? entityMetaData.createItem({
+      ? entityMetaData.create({
           game: game,
           entity: {
             position: vectorRatioDown(

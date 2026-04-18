@@ -13,6 +13,10 @@ export enum EntityFaction {
   self = "self",
 }
 
+export type BuildingEntityInterface = EntityInterface
+export type GroundEntityInterface = EntityInterface
+export type CharacterEntityInterface = EntityInterface
+
 export default interface EntityInterface extends BaseJsonLdItemInterface {
   rotation: number
   position: Vector3Interface

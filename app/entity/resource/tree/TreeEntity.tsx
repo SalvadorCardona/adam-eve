@@ -46,7 +46,7 @@ export const treeEntityMetaData = createEntityResource({
   },
   ["@type"]: createJsonLdType(appLdType.entityResource, "tree"),
   onDeath: ({ entity, game }) => {
-    const deathTree = treeDeathEntityMeta.createItem({
+    const deathTree = treeDeathEntityMeta.create({
       game,
       entity: { position: entity.position },
     })

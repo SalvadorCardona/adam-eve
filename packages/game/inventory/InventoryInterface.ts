@@ -9,4 +9,7 @@ export interface InventoryAbleInterface {
   inventory?: InventoryInterface
 }
 
-export type CanBeInventoryInterface = InventoryAbleInterface | InventoryInterface
+export type CanBeInventoryInterface =
+  | InventoryAbleInterface
+  | InventoryInterface
+  | undefined

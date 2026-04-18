@@ -1,4 +1,4 @@
-import { ContainerOptions } from "pixi.js/lib/scene/container/Container"
+import { ContainerOptions } from "pixi.js"
 import { Container as BaseContainer } from "pixi.js"
 import React, { useEffect, useRef } from "react"
 import { PixiContainerProvider } from "@/packages/ui/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"

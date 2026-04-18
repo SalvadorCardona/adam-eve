@@ -16,7 +16,7 @@ const entityMetadata = getResource<EntityResourceInterface>(workerEntityResource
 describe("Inventory Test", () => {
   it("Context add To Inventory", () => {
     let lastQuantity = 0
-    const entity = entityMetadata.factory()
+    const entity = entityMetadata.create()
 
     lastQuantity = addToInventory(entity, woodResourceMetadata, 5)
     expect(lastQuantity).toBe(5)
@@ -33,7 +33,7 @@ describe("Inventory Test", () => {
     expect(item.quantity).toBe(0)
   })
   it("Context getTotal Inventory", () => {
-    const entity = entityMetadata.factory()
+    const entity = entityMetadata.create()
 
     addToInventory(entity, woodResourceMetadata, 5)
     addToInventory(entity, goldResourceMetadata, 8)
@@ -43,7 +43,7 @@ describe("Inventory Test", () => {
     expect(getTotalQuantityInInventory(entity)).toBe(10)
   })
   it("Context Inventory is full", () => {
-    const entity = entityMetadata.factory()
+    const entity = entityMetadata.create()
 
     addToInventory(
       entity,
@@ -62,8 +62,8 @@ describe("Inventory Test", () => {
     expect(inventoryIsFull(entity)).toBeTruthy()
   })
   it("Context Transfert Inventory", () => {
-    const entitySource = entityMetadata.factory()
-    const entityTarget = entityMetadata.factory()
+    const entitySource = entityMetadata.create()
+    const entityTarget = entityMetadata.create()
 
     addToInventory(entitySource, woodResourceMetadata, 10)
 

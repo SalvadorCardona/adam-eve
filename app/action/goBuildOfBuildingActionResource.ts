@@ -2,7 +2,10 @@ import { createJsonLd, JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import EntityInterface, {
   BuildingEntityInterface,
 } from "@/packages/game/entity/EntityInterface"
-import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import {
+  ActionInterface,
+  ActionResourceInterface,
+} from "@/packages/game/action/ActionResourceInterface"
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
@@ -32,9 +35,9 @@ interface FindWorkerData {
   forumPathCoordinate?: EntityInterface
 }
 
-export const goBuildOfBuildingActionResource = createActionResource<
-  ActionResourceInterface<FindWorkerData>
->({
+export const goBuildOfBuildingActionResource: ActionResourceInterface<
+  ActionInterface<FindWorkerData>
+> = createActionResource<ActionResourceInterface<ActionInterface<FindWorkerData>>>({
   "@id": "action/goBuildOfBuilding",
   onFrame: ({ action, game, entity }) => {
     if (!entity) return
@@ -113,7 +116,7 @@ export const goBuildOfBuildingActionResource = createActionResource<
     }
 
     if (data.state === State.PutResource) {
-      Object.values(entity.inventory).forEach((item) => {
+      Object.values(entity.inventory ?? {}).forEach((item) => {
         transfertInventoryByItem(
           entity.inventory,
           building.inventory,
@@ -140,6 +143,9 @@ export const goBuildOfBuildingActionResource = createActionResource<
       state: State.GoToForum,
     }
 
-    return createJsonLd(goBuildOfBuildingActionResource["@type"], { data })
+    return createJsonLd(goBuildOfBuildingActionResource["@type"] ?? "action", {
+      data,
+      createdBy: "",
+    }) as ActionInterface<FindWorkerData>
   },
 })

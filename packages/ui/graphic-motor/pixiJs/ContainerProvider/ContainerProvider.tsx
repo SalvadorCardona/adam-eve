@@ -1,6 +1,6 @@
 // Créez le contexte
 import React, { createContext, use, useEffect } from "react"
-import { ContainerChild } from "pixi.js/lib/scene/container/Container"
+import { ContainerChild } from "pixi.js"
 import { usePixiApp } from "@/packages/ui/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
 
 interface PixiContainerInterface {

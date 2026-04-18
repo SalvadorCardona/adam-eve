@@ -26,6 +26,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     rotation: 0,
     createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 1, 0),
+    entityType: resource?.entityType ?? resource?.propriety?.entityType,
     ...(resource?.defaultEntity ? resource?.defaultEntity() : {}),
     ...(payload?.entity ?? {}),
   }
@@ -42,7 +43,8 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     baseEntity.size = resource?.propriety?.size ?? createVector3(1, 1, 1)
   }
 
-  const entity = createJsonLd<EntityInterface>("entity", baseEntity) as T
+  const entityType = payload.resource["@id"] ?? "entity"
+  const entity = createJsonLd<EntityInterface>(entityType, baseEntity) as T
 
   entity.position = roundVectorToDown(entity.position)
 
@@ -58,8 +60,8 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
 
   if (resource?.propriety?.defaultActions) {
     resource.propriety.defaultActions.forEach((actionType) => {
-      const action = getResource<ActionResourceInterface>(actionType)?.factory({
-        entity,
+      const action = getResource<ActionResourceInterface>(actionType)?.create({
+        item: { entity },
       })
 
       action && addActionToEntity(entity, action)

@@ -25,6 +25,7 @@ export const getResourceActionMetaData = createActionResource({
     const resourceMapping =
       getResource<ResourceMappingMetadataInterface>("resourceMapping")
 
+    if (!createdBy["@type"]) return
     const resourceMapped = resourceMapping.getItem(createdBy["@type"])
     if (!resourceMapped) {
       return

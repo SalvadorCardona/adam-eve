@@ -1,8 +1,11 @@
 import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import GameInterface from "@/packages/game/game/GameInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
+import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 
-export interface ActionUserResource<D = object> extends BaseGameResource {
+export interface ActionUserResource<D = object> extends BaseJsonLdItemInterface {
+  asset?: BaseGameResource["asset"]
+  label?: string
   mouseIcon?: string
   onCall?: (payload: { game: GameInterface; metaData?: BaseGameResource }) => void
   onApply: (payload: { game: GameInterface; entity?: EntityInterface }) => void

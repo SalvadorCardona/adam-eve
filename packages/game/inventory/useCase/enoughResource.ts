@@ -9,7 +9,8 @@ export function enoughResource(
   const currentInventorySource = getInventory(inventorySource)
   const currentInventoryTarget = getInventory(inventoryTarget)
 
-  return Object.values(currentInventorySource).every((resource) => {
+  return Object.values(currentInventorySource.member ?? {}).every((resource) => {
+    if (!resource["@type"]) return true
     const resourceTarget = getInventoryItem(
       currentInventoryTarget,
       resource["@type"],
