@@ -60,8 +60,8 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
 
   if (resource?.propriety?.defaultActions) {
     resource.propriety.defaultActions.forEach((actionType) => {
-      const action = getResource<ActionResourceInterface>(actionType)?.factory({
-        entity,
+      const action = getResource<ActionResourceInterface>(actionType)?.create({
+        item: { entity },
       })
 
       action && addActionToEntity(entity, action)

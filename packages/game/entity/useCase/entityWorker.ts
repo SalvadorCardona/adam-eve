@@ -26,10 +26,12 @@ export function addWorkerToEntity(
 
   addActionToEntity(
     worker,
-    metaData.workerAction.factory({
-      entity: worker,
-      game,
-      createdBy: source["@id"],
+    metaData.workerAction.create({
+      item: {
+        entity: worker,
+        game,
+        createdBy: source["@id"],
+      },
     }),
   )
 

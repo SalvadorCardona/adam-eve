@@ -32,7 +32,7 @@ export const towerAttackActionResource = createActionResource({
       return
     }
 
-    const arrowEntity = arrowEntityResource.createItem({
+    const arrowEntity = arrowEntityResource.create({
       entity: {
         entityAttackTargetIri: zombie["@id"],
         position: { ...entity.position, y: size.y },

@@ -12,8 +12,8 @@ export function createInventoryItem(
     inventoryItemRequest.inventoryItem,
   )
 
-  return metaData.factory({
-    quantity: inventoryItemRequest?.quantity ?? 0,
+  return metaData.create({
+    item: { quantity: inventoryItemRequest?.quantity ?? 0 },
   })
 }
 

@@ -23,8 +23,7 @@ export interface BaseGameResource<
 > extends BaseJsonLdItemInterface {
   asset?: AssetInterface
   label?: string
-  createItem: (payload?: CreateItemPayload<T>) => T
-  factory: (payload?: any) => T
+  create: (payload?: CreateItemPayload<T>) => T
 }
 
 export function createResourceGame<T extends BaseGameResource>(
@@ -32,12 +31,12 @@ export function createResourceGame<T extends BaseGameResource>(
 ): T {
   const newResource = { ...resource } as BaseGameResource
 
-  const originalCreateItem = resource.createItem
+  const originalCreate = resource.create
 
-  newResource.createItem = (payload = {}) => {
+  newResource.create = (payload = {}) => {
     const resourceType = newResource["@type"] ?? newResource["@id"]
-    if (originalCreateItem) {
-      const result: any = originalCreateItem({
+    if (originalCreate) {
+      const result: any = originalCreate({
         ...payload,
         resource: newResource,
       })
@@ -48,10 +47,6 @@ export function createResourceGame<T extends BaseGameResource>(
 
     const base = payload.item ?? payload.entity ?? {}
     return createJsonLd(resourceType, base) as any
-  }
-
-  newResource.factory = (item: any = {}) => {
-    return newResource.createItem({ item })
   }
 
   return createResource(newResource) as T

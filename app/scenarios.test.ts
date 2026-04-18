@@ -48,7 +48,7 @@ describe("Scenario: spawn entities in a game", () => {
   })
 
   it("spawns a building (forum) and registers it in the game", () => {
-    const forum = forumEntityResource.createItem({
+    const forum = forumEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -61,7 +61,7 @@ describe("Scenario: spawn entities in a game", () => {
   })
 
   it("spawns a character (worker) with full health", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(1, 0, 1) },
     })
@@ -73,7 +73,7 @@ describe("Scenario: spawn entities in a game", () => {
   })
 
   it("spawns an enemy (zombie) with enemy faction", () => {
-    const zombie = zombieEntityResource.createItem({
+    const zombie = zombieEntityResource.create({
       game,
       entity: { position: createVector3(5, 0, 5) },
     })
@@ -92,7 +92,7 @@ describe("Scenario: inventory management", () => {
   })
 
   it("adds wood and gold to a worker's inventory up to its capacity", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -105,7 +105,7 @@ describe("Scenario: inventory management", () => {
   })
 
   it("respects inventory size limits", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -117,11 +117,11 @@ describe("Scenario: inventory management", () => {
   })
 
   it("transfers resources between two inventories", () => {
-    const source = workerEntityResource.createItem({
+    const source = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
-    const target = workerEntityResource.createItem({
+    const target = workerEntityResource.create({
       game,
       entity: { position: createVector3(1, 0, 0) },
     })
@@ -143,11 +143,11 @@ describe("Scenario: combat between enemies", () => {
   })
 
   it("a zombie attacking a worker reduces the worker's life", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
-    const zombie = zombieEntityResource.createItem({
+    const zombie = zombieEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -162,11 +162,11 @@ describe("Scenario: combat between enemies", () => {
   })
 
   it("an attack out of range has no effect", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
-    const zombie = zombieEntityResource.createItem({
+    const zombie = zombieEntityResource.create({
       game,
       entity: { position: createVector3(50, 0, 50) },
     })
@@ -177,11 +177,11 @@ describe("Scenario: combat between enemies", () => {
   })
 
   it("a worker can be killed after enough hits", () => {
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
-    const zombie = zombieEntityResource.createItem({
+    const zombie = zombieEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -204,7 +204,7 @@ describe("Scenario: building construction requires resources", () => {
 
   it("the tower's construction is satisfied once enough wood is gathered", () => {
     const game = newGame()
-    const tower = towerEntityResource.createItem({
+    const tower = towerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -222,7 +222,7 @@ describe("Scenario: building construction requires resources", () => {
 describe("Scenario: full game loop tick", () => {
   it("advances time on each tick", () => {
     const game = newGame()
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
@@ -237,11 +237,11 @@ describe("Scenario: full game loop tick", () => {
 
   it("a zombie next to a worker kills it over enough ticks", () => {
     const game = newGame()
-    const worker = workerEntityResource.createItem({
+    const worker = workerEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })
-    const zombie = zombieEntityResource.createItem({
+    const zombie = zombieEntityResource.create({
       game,
       entity: { position: createVector3(0, 0, 0) },
     })

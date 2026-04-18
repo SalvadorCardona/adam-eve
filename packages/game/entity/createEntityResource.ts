@@ -20,7 +20,7 @@ export function createEntityResource<
       )
     },
     "@type": "entity",
-    createItem: entityFactory,
+    create: entityFactory,
   } as Partial<EntityResourceInterface>
 
   return createResourceGame({ ...meta, ...resource }) as T

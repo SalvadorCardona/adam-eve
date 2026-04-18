@@ -40,7 +40,7 @@ describe("Test gameEntitiesToMatrix", () => {
     const game = gameFactory()
     const grassMeta = getResource<EntityResourceInterface>(grassGroundEntityMetadata)
     const grounds = matrixToVector(groundsPosition).map((position) =>
-      grassMeta.factory({
+      grassMeta.create({
         game,
         entity: {
           position: vector2ToVector3(position),
@@ -49,7 +49,7 @@ describe("Test gameEntitiesToMatrix", () => {
     )
     const towerMeta = getResource<EntityResourceInterface>(towerEntityResource)
     const building = matrixToVector(buildingsPosition).map((position) =>
-      towerMeta.factory({
+      towerMeta.create({
         game,
         entity: {
           position: vector2ToVector3(position),
