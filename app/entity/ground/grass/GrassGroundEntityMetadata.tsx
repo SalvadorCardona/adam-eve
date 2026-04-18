@@ -1,4 +1,5 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import grassIcon from "./grassIcon.png"
 import { appLdType } from "@/app/AppLdType"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
@@ -49,6 +50,8 @@ const grassNormal = [
   grass13,
 ]
 export const grassGroundEntityMetadata = createEntityResource({
+  ["@id"]: "entity/ground/grass",
+  entityType: EntityType.ground,
   asset: {
     icon: grassIcon,
     asset2d: [
