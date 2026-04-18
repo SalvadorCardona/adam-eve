@@ -134,7 +134,7 @@ interface Model2DPropsInterface {
 
 export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   const metaData = getResource<EntityResourceInterface>(entity)
-  const asset = metaData.asset?.model2d ?? metaData.asset?.icon
+  const asset = metaData?.asset?.model2d ?? metaData?.asset?.icon
   if (!asset) {
     console.warn("Component 2D not found with", metaData)
 
