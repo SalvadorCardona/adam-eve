@@ -5,7 +5,7 @@ import {
   Ticker,
   TilingSprite,
 } from "pixi.js"
-import React, { useEffect, useMemo, useRef } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { Vector2Interface } from "@/packages/math/vector"
 import {
   usePixiAnimation,
@@ -66,19 +66,35 @@ export const Sprite = ({
 export const SpriteAnimated = ({
   spriteSheetData,
 }: SpritePropsInterface & { spriteSheetData: SpritesheetData }) => {
-  const animatedSprite = useMemo(() => {
-    const spriteSheet = createSpritesheetByData(spriteSheetData)
-    return new AnimatedSprite(spriteSheet.animations.main)
-  }, [spriteSheetData])
-
-  const container = useMemo(() => {
-    return animatedSprite
-  }, [animatedSprite])
-
-  usePixiInstance({ container })
+  const [animatedSprite, setAnimatedSprite] = useState<AnimatedSprite | null>(
+    null,
+  )
 
   useEffect(() => {
-    const anim = container
+    let cancelled = false
+    createSpritesheetByData(spriteSheetData).then((spriteSheet) => {
+      if (cancelled) return
+      setAnimatedSprite(new AnimatedSprite(spriteSheet.animations.main))
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [spriteSheetData])
+
+  if (!animatedSprite) return <></>
+
+  return <SpriteAnimatedInstance animatedSprite={animatedSprite} />
+}
+
+const SpriteAnimatedInstance = ({
+  animatedSprite,
+}: {
+  animatedSprite: AnimatedSprite
+}) => {
+  usePixiInstance({ container: animatedSprite })
+
+  useEffect(() => {
+    const anim = animatedSprite
     anim.animationSpeed = 0.2
     anim.play()
     anim.width = 100
@@ -87,7 +103,7 @@ export const SpriteAnimated = ({
     anim.x = 25
     anim.y = 25
     return () => anim.stop()
-  }, [container])
+  }, [animatedSprite])
 
   return <></>
 }
