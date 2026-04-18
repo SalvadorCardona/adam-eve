@@ -4,6 +4,7 @@ import { gameResource } from "@/packages/game/game/gameResource"
 import { gameLoader } from "@/packages/game/game/gameLoader"
 import GameComponent from "@/packages/ui/GameComponent"
 import { gameFactory } from "@/packages/game/game/GameInterface"
+import { generateIsland } from "@/app/game/generateIsland"
 
 export const Route = createFileRoute("/newGame")({
   component: RouteComponent,
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/newGame")({
 function RouteComponent() {
   const navigate = useNavigate()
 
-  const game = gameFactory()
+  const game = generateIsland(gameFactory())
 
   useEffect(() => {
     gameResource.persistItem(gameLoader(game))
