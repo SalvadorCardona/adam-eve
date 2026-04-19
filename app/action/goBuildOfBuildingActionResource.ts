@@ -65,7 +65,7 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
 
     if (data.state === State.GoToForum) {
       const forum = entityQueryFindOne(game, {
-        "@id": forumEntityResource["@id"],
+        "@type": forumEntityResource["@id"],
       })
 
       if (!forum) {

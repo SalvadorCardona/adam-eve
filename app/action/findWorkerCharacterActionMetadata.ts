@@ -33,7 +33,7 @@ export const findWorkerCharacterActionMetadata = createActionResource({
     })
 
     const workers = entityQuery<CharacterEntityInterface>(game, {
-      "@type": workerEntityResource["@type"],
+      "@type": workerEntityResource["@id"],
     })
 
     buildings.forEach((building) => {

@@ -36,7 +36,7 @@ export const getResourceActionMetaData = createActionResource({
       entity.state === EntityState.wait
     ) {
       const newTreeEntity = entityQueryFindOne(game, {
-        "@type": resourceMapped.entityMetaDataResource["@type"],
+        "@type": resourceMapped.entityMetaDataResource["@id"],
         findClosestOf: { position: entity.position },
         "@idIsNot": entity["@id"],
       })
