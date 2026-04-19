@@ -1,74 +1,30 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import grassIcon from "./grassIcon.png"
 import { appLdType } from "@/app/AppLdType"
-import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
 import { entityHasCollision } from "@/packages/game/entity/useCase/entityHasCollision"
-import grassBottomLeft from "./asset/grass-bottom-left.png"
-import grassBottomRight from "./asset/grass-bottom-right.png"
-import grassTopRight from "./asset/grass-top-right.png"
-import grassTopLeft from "./asset/grass-top-left.png"
-import grassLeft from "./asset/grass-left.png"
-import grassRight from "./asset/grass-right.png"
-import grassTop from "./asset/grass-top.png"
-import grassBottom from "./asset/grass-bottom.png"
-import grassCornerBottomLeft from "./asset/grass-corner-bottom-left.png"
-import grassCornerTopLeft from "./asset/grass-corner-bottom-left.png"
-import grassCornerBottomRight from "./asset/grass-corner-bottom-right.png"
-import grassCornerTopRight from "./asset/grass-corner-bottom-right.png"
-import grass1 from "./asset/normal/grass1.png"
-import grass2 from "./asset/normal/grass2.png"
-import grass3 from "./asset/normal/grass3.png"
-import grass4 from "./asset/normal/grass4.png"
-import grass5 from "./asset/normal/grass5.png"
-import grass6 from "./asset/normal/grass6.png"
-import grass7 from "./asset/normal/grass7.png"
-import grass8 from "./asset/normal/grass8.png"
-import grass9 from "./asset/normal/grass9.png"
-import grass10 from "./asset/normal/grass10.png"
-import grass11 from "./asset/normal/grass11.png"
-import grass12 from "./asset/normal/grass12.png"
-import grass13 from "./asset/normal/grass13.png"
+import grassIcon from "./icon.svg?url"
+import grassTexture from "./grass.svg?url"
 import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
-import React, { useMemo } from "react"
+import React from "react"
 import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 
-const grassNormal = [
-  grass1,
-  grass2,
-  grass3,
-  grass4,
-  grass5,
-  grass6,
-  grass7,
-  grass8,
-  grass9,
-  grass10,
-  grass11,
-  grass12,
-  grass13,
-]
+const GrassComponent = React.memo(
+  function GrassComponent({ size }: { size: { x: number; y: number } }) {
+    return (
+      <Sprite image={grassTexture} options={{ width: size.x, height: size.y }} />
+    )
+  },
+  (prev, next) => prev.size.x === next.size.x && prev.size.y === next.size.y,
+)
+
 export const grassGroundEntityMetadata = createEntityResource({
   ["@id"]: "entity/ground/grass",
   entityType: EntityType.ground,
   asset: {
     icon: grassIcon,
-    asset2d: [
-      grassBottomLeft,
-      grassBottomRight,
-      grassTopRight,
-      grassTopLeft,
-      grassLeft,
-      grassRight,
-      grassTop,
-      grassBottom,
-      grassCornerBottomLeft,
-      grassCornerBottomRight,
-      grassCornerTopRight,
-      grassCornerTopLeft,
-      ...grassNormal,
-    ],
+    model2d: grassTexture,
+    asset2d: [grassTexture],
   },
   propriety: {
     size: {
@@ -89,117 +45,5 @@ export const grassGroundEntityMetadata = createEntityResource({
 
     return true
   },
-  component: ({ entity, size }) => {
-    const texturePath = useMemo(() => {
-      let asset = grassNormal[Math.floor(Math.random() * (grassNormal.length - 1))]
-      const connections = entity.connections ?? {}
-      switch (true) {
-        case connections.top !== undefined &&
-          connections.left !== undefined &&
-          connections.right !== undefined &&
-          connections.bottom !== undefined:
-          break
-        case connections.top !== undefined &&
-          connections.left !== undefined &&
-          connections.right !== undefined:
-          asset = grassBottom
-          break
-        case connections.top !== undefined &&
-          connections.left !== undefined &&
-          connections.bottom !== undefined:
-          asset = grassRight
-          break
-        case connections.top !== undefined &&
-          connections.right !== undefined &&
-          connections.bottom !== undefined:
-          asset = grassLeft
-          break
-        case connections.left !== undefined &&
-          connections.right !== undefined &&
-          connections.bottom !== undefined:
-          asset = grassTop
-          break
-        case connections.top !== undefined && connections.left !== undefined:
-          asset = grassBottomRight
-          break
-        case connections.top !== undefined && connections.right !== undefined:
-          asset = grassBottomLeft
-          break
-        case connections.bottom !== undefined && connections.left !== undefined:
-          asset = grassTopRight
-          break
-        case connections.bottom !== undefined && connections.right !== undefined:
-          asset = grassTopLeft
-          break
-        default:
-          asset = asset
-      }
-
-      return asset
-    }, [entity.connections])
-
-    return <Sprite image={texturePath} options={{ width: size.x, height: size.y }} />
-  },
+  component: GrassComponent,
 })
-
-interface RoundedCubeLinePropsInterface {
-  road: EntityInterface
-}
-
-//
-// const RoundedCubeLine: React.FC<RoundedCubeLinePropsInterface> = ({ road }) => {
-//   const { connections } = road
-//
-//   // Memoize the shape for performance
-//   const roundedBox = useMemo(() => {
-//     const shape = new Shape()
-//     const size = 1 // Size of the square
-//     const radius = 0.2 // Radius for rounded corners
-//
-//     shape.moveTo(-size / 2 + radius, -size / 2)
-//     // Bottom edge
-//     if (!connections.right && !connections.bottom) {
-//       shape.lineTo(size / 2 - radius, -size / 2)
-//       shape.quadraticCurveTo(size / 2, -size / 2, size / 2, -size / 2 + radius)
-//     } else {
-//       shape.lineTo(size / 2, -size / 2)
-//     }
-//
-//     // Right edge
-//     if (!connections.top && !connections.right) {
-//       shape.lineTo(size / 2, size / 2 - radius)
-//       shape.quadraticCurveTo(size / 2, size / 2, size / 2 - radius, size / 2)
-//     } else {
-//       shape.lineTo(size / 2, size / 2)
-//     }
-//
-//     // Top edge
-//     if (!connections.left && !connections.top) {
-//       shape.lineTo(-size / 2 + radius, size / 2)
-//       shape.quadraticCurveTo(-size / 2, size / 2, -size / 2, size / 2 - radius)
-//     } else {
-//       shape.lineTo(-size / 2, size / 2)
-//     }
-//
-//     // Left edge
-//     if (!connections.bottom && !connections.left) {
-//       shape.lineTo(-size / 2, -size / 2 + radius)
-//       shape.quadraticCurveTo(-size / 2, -size / 2, -size / 2 + radius, -size / 2)
-//     } else {
-//       shape.lineTo(-size / 2, -size / 2)
-//     }
-//
-//     return shape
-//   }, [connections])
-//
-//   // Memoize extrusion settings for performance
-//   const extrudeSettings = useMemo(
-//     () => ({
-//       depth: 1, // Extrusion height
-//       bevelEnabled: false, // No beveled edges
-//     }),
-//     [],
-//   )
-//
-//   return <extrudeGeometry args={[roundedBox, extrudeSettings]} />
-// }

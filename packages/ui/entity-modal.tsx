@@ -81,11 +81,11 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             <div className="font-semibold">Etat : {entity.state}</div>
           </div>
 
-          {metaData.propriety?.work?.numberOfWorker && entity.workers && (
+          {metaData.propriety?.work?.numberOfWorker && (
             <div className="flex items-center gap-4">
               <Zap className="h-5 w-5 text-yellow-600" />
               <div className="font-semibold">
-                Travailleurs : {entity.workers.length} /{" "}
+                Travailleurs : {entity.workers?.length ?? 0} /{" "}
                 {metaData.propriety.work.numberOfWorker}
               </div>
             </div>

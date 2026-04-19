@@ -7,14 +7,24 @@ import { workerEntityResource } from "@/app/entity/character/worker/workerEntity
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
+import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
+import { EntityState } from "@/packages/game/entity/EntityState"
 
 const ISLAND_CENTER_X = 10
 const ISLAND_CENTER_Z = 10
 const ISLAND_RADIUS = 6
 
 function generateGround(game: GameInterface): void {
-  for (let x = ISLAND_CENTER_X - ISLAND_RADIUS; x <= ISLAND_CENTER_X + ISLAND_RADIUS; x++) {
-    for (let z = ISLAND_CENTER_Z - ISLAND_RADIUS; z <= ISLAND_CENTER_Z + ISLAND_RADIUS; z++) {
+  for (
+    let x = ISLAND_CENTER_X - ISLAND_RADIUS;
+    x <= ISLAND_CENTER_X + ISLAND_RADIUS;
+    x++
+  ) {
+    for (
+      let z = ISLAND_CENTER_Z - ISLAND_RADIUS;
+      z <= ISLAND_CENTER_Z + ISLAND_RADIUS;
+      z++
+    ) {
       const dx = x - ISLAND_CENTER_X
       const dz = z - ISLAND_CENTER_Z
       if (dx * dx + dz * dz > ISLAND_RADIUS * ISLAND_RADIUS) continue
@@ -40,11 +50,42 @@ function spawnAt(
   addEntityToGame(game, entity)
 }
 
+function spawnBuildingAt(
+  game: GameInterface,
+  resource: { create: (payload: any) => any },
+  x: number,
+  z: number,
+): void {
+  const entity = resource.create({
+    game,
+    entity: { position: createVector3(x, 1, z) },
+  })
+
+  entity.state = EntityState.builded
+  addEntityToGame(game, entity)
+}
+
 export function generateIsland(game: GameInterface): GameInterface {
   generateGround(game)
 
-  spawnAt(game, houseEntityMetaData, ISLAND_CENTER_X - 1, ISLAND_CENTER_Z - 1)
-  spawnAt(game, researchCenterEntityResource, ISLAND_CENTER_X + 2, ISLAND_CENTER_Z - 3)
+  spawnBuildingAt(
+    game,
+    houseEntityMetaData,
+    ISLAND_CENTER_X - 1,
+    ISLAND_CENTER_Z - 1,
+  )
+  spawnBuildingAt(
+    game,
+    researchCenterEntityResource,
+    ISLAND_CENTER_X + 2,
+    ISLAND_CENTER_Z - 3,
+  )
+  spawnBuildingAt(
+    game,
+    forumEntityResource,
+    ISLAND_CENTER_X + 3,
+    ISLAND_CENTER_Z + 1,
+  )
 
   const workerPositions: Array<[number, number]> = [
     [ISLAND_CENTER_X - 3, ISLAND_CENTER_Z],
