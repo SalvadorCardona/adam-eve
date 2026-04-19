@@ -76,12 +76,30 @@ export const PixiProvider: React.FC<{
 
 const StageBoot = ({ children }: PropsWithChildren) => {
   const { app } = useApplication()
+  const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
     if (!app) return
-    app.stage.interactive = true
-    app.stage.eventMode = "static"
+
+    let cancelled = false
+    const waitForInit = () => {
+      if (cancelled) return
+      if (app.renderer && app.stage) {
+        app.stage.interactive = true
+        app.stage.eventMode = "static"
+        setIsReady(true)
+        return
+      }
+      requestAnimationFrame(waitForInit)
+    }
+    waitForInit()
+
+    return () => {
+      cancelled = true
+    }
   }, [app])
+
+  if (!isReady) return null
 
   return <>{children}</>
 }
