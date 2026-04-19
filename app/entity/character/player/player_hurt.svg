@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Shadow (smaller - weakened) -->
+  <ellipse cx="32" cy="59" rx="14" ry="3.5" fill="rgba(0,0,0,0.25)"/>
+
+  <!-- Cape/cloak (torn) -->
+  <ellipse cx="32" cy="46" rx="13" ry="14" fill="#1a2e5a"/>
+  <!-- Tear in cape -->
+  <path d="M36 48 L39 55 L37 55 L38 60 L35 55 L37 55 Z" fill="#0d1b2a"/>
+
+  <!-- Armor chest plate (cracked) -->
+  <rect x="24" y="32" width="16" height="18" rx="3" fill="#3a5a9c"/>
+  <!-- Armor ribs -->
+  <line x1="24" y1="38" x2="40" y2="38" stroke="#2a4a8c" stroke-width="1"/>
+  <line x1="24" y1="43" x2="40" y2="43" stroke="#2a4a8c" stroke-width="1"/>
+  <!-- Cracks in armor -->
+  <path d="M28 32 L31 40 L29 45" stroke="#0d1b2a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M35 35 L38 39" stroke="#0d1b2a" stroke-width="1" fill="none"/>
+  <!-- Blood stain -->
+  <ellipse cx="34" cy="37" rx="3" ry="2" fill="#8b0000" opacity="0.7"/>
+
+  <!-- Belt -->
+  <rect x="24" y="48" width="16" height="3" rx="1" fill="#8B6914"/>
+  <rect x="30" y="47" width="4" height="5" rx="1" fill="#c9a227"/>
+
+  <!-- Left arm + shield (dented) -->
+  <rect x="13" y="32" width="8" height="14" rx="3" fill="#2a4a8c"/>
+  <!-- Shield (dented/scratched) -->
+  <path d="M10 29 L10 44 L17 50 L24 44 L24 29 Z" fill="#1a2e5a" stroke="#c9a227" stroke-width="1.5"/>
+  <path d="M17 31 L17 48" stroke="#c9a227" stroke-width="1" opacity="0.7"/>
+  <path d="M11 38 L23 38" stroke="#c9a227" stroke-width="1" opacity="0.7"/>
+  <circle cx="17" cy="38" r="3" fill="#c9a227"/>
+  <!-- Shield scratch -->
+  <path d="M12 33 L16 42" stroke="#0d1b2a" stroke-width="1.5" fill="none"/>
+  <path d="M19 35 L22 41" stroke="#0d1b2a" stroke-width="1" fill="none"/>
+
+  <!-- Right arm + sword -->
+  <rect x="43" y="30" width="8" height="14" rx="3" fill="#2a4a8c"/>
+  <!-- Sword blade (notched) -->
+  <line x1="50" y1="14" x2="53" y2="32" stroke="#b0b8c8" stroke-width="3" stroke-linecap="round"/>
+  <!-- Crossguard -->
+  <rect x="46" y="30" width="11" height="3" rx="1.5" fill="#8B6914"/>
+  <!-- Grip -->
+  <rect x="49" y="32" width="4" height="7" rx="1" fill="#5c3d0a"/>
+
+  <!-- Neck -->
+  <rect x="29" y="22" width="6" height="6" rx="2" fill="#e8b898"/>
+
+  <!-- Head -->
+  <circle cx="32" cy="19" r="11" fill="#e8b898"/>
+
+  <!-- Helmet (cracked) -->
+  <path d="M21 18 Q21 7 32 6 Q43 7 43 18 L41 18 Q41 10 32 9 Q23 10 23 18 Z" fill="#1a2e5a"/>
+  <rect x="20" y="17" width="24" height="3" rx="1.5" fill="#2a4a8c"/>
+  <rect x="30" y="6" width="4" height="11" rx="2" fill="#2a4a8c"/>
+  <!-- Plume (partially torn) -->
+  <path d="M31 6 Q28 2 30 0 Q32 2 32 5" fill="#c02030" opacity="0.8"/>
+  <!-- Helmet crack -->
+  <path d="M36 7 L33 14 L35 18" stroke="#0d1b2a" stroke-width="1.5" fill="none"/>
+
+  <!-- Visor / face opening -->
+  <rect x="25" y="18" width="14" height="6" rx="2" fill="#0d1b2a"/>
+  <!-- Eyes (one flickering) -->
+  <circle cx="29" cy="21" r="2" fill="#4af0b4" opacity="0.5"/>
+  <circle cx="35" cy="21" r="2" fill="#4af0b4"/>
+  <circle cx="35" cy="21" r="1" fill="white" opacity="0.8"/>
+  <!-- Blood drip from helmet -->
+  <path d="M27 23 L27 27 Q27 29 26 30" stroke="#8b0000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Red damage overlay -->
+  <rect x="0" y="0" width="64" height="64" fill="#ff0000" opacity="0.08" rx="4"/>
+
+  <!-- Legs -->
+  <rect x="25" y="52" width="6" height="8" rx="2" fill="#1a2e5a"/>
+  <rect x="33" y="52" width="6" height="8" rx="2" fill="#1a2e5a"/>
+  <!-- Boots -->
+  <rect x="24" y="57" width="8" height="4" rx="2" fill="#2c1810"/>
+  <rect x="32" y="57" width="8" height="4" rx="2" fill="#2c1810"/>
+</svg>

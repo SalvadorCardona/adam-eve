@@ -4,6 +4,7 @@ import { useGameFrame } from "@/packages/ui/hook/useGameFrame"
 import { GameState } from "@/packages/game/game/GameInterface"
 import { updateGame } from "@/packages/game/game/updateGame"
 import { useNavigate } from "@tanstack/react-router"
+import { keysPressed } from "@/packages/ui/keysState"
 
 interface ControlPropsInterface {}
 
@@ -27,8 +28,6 @@ interface ControlItemInterface {
   cb?: () => void
   type?: "keyup" | string
 }
-
-const keysPressed: Record<string, boolean> = {}
 
 function valideKeyBoardInput(
   controlList: ControlItemInterface[],
@@ -69,7 +68,7 @@ export const ControlKeyboard = () => {
     () => [
       {
         name: Controls.forward,
-        keys: ["ArrowUp", "KeyW"],
+        keys: ["KeyW"],
         cb: () => {
           game.camera.position.z += moveSize
           updateGame(game, game.camera)
@@ -77,7 +76,7 @@ export const ControlKeyboard = () => {
       },
       {
         name: Controls.back,
-        keys: ["ArrowDown", "KeyS"],
+        keys: ["KeyS"],
         cb: () => {
           game.camera.position.z -= moveSize
           updateGame(game, game.camera)
@@ -85,7 +84,7 @@ export const ControlKeyboard = () => {
       },
       {
         name: Controls.left,
-        keys: ["ArrowLeft", "KeyA"],
+        keys: ["KeyA"],
         cb: () => {
           game.camera.position.x += moveSize
           updateGame(game, game.camera)
@@ -93,7 +92,7 @@ export const ControlKeyboard = () => {
       },
       {
         name: Controls.right,
-        keys: ["ArrowRight", "KeyD"],
+        keys: ["KeyD"],
         cb: () => {
           game.camera.position.x -= moveSize
           updateGame(game, game.camera)
