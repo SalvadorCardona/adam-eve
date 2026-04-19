@@ -1,0 +1,80 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+pnpm dev          # start dev server (Vite)
+pnpm build        # TypeScript type-check + production build
+pnpm run lint     # type-check only (tsc, no emit)
+make test         # run all tests once (vitest run)
+make test-watch   # vitest in watch mode
+make coverage     # vitest with v8 coverage
+make watch        # tsc + vitest + vite all in parallel
+```
+
+Run a single test file:
+```bash
+pnpm vitest run app/scenarios.test.ts
+```
+
+Path alias `@` maps to the repo root (configured in `vite.config.ts`).
+
+## Architecture
+
+### Two-layer split: engine vs. content
+
+- **`packages/`** — framework/engine code that knows nothing about specific game content:
+  - `game/` — core data model, game loop, entity/action/inventory use cases
+  - `ui/` — React + Pixi.js rendering, hooks, provider
+  - `jsonLd/` — JSON-LD typed data structures + reactive pub/sub
+  - `resource/` — global resource registry (`getResource` / `createResource`)
+  - `math/` — vectors, matrices, bounding boxes, pathfinding
+
+- **`app/`** — all game-specific content (entities, actions, scenarios):
+  - `entity/` — one folder per entity type (building, character, resource, ground, attack, effect)
+  - `ationUser/` — user-interaction actions (select, create, remove)
+  - `action/` — game-logic actions (harvest, build, death, attack…)
+  - `resourceList.ts` — central registry bootstrap; **every new resource must be added here**
+
+### JSON-LD data model
+
+All game objects (`GameInterface`, `EntityInterface`, `ActionInterface`, `InventoryInterface`, etc.) are JSON-LD items: plain objects with `@id`, `@type`, and `@version` fields.
+
+`updateItem(item)` in `packages/jsonLd/jsonLd.ts` increments `@version` and publishes to two channels: `item["@id"]` and `item["@type"]`. This is the sole reactivity mechanism — React components subscribe via `containerPubSub.subscribe(channel, callback)` (wrapped in `useGamePubSub`).
+
+`updateEntityInGame(game, entity)` is the standard way to mutate an entity and trigger UI updates.
+
+### Resource registry pattern
+
+Resources are metadata descriptors (not instances). Call `createResource()` (or the typed helpers like `createBuilding`, `createCharacter`, `createHarvestable`, `createEntityResource`) to register a descriptor. `getResource(entityOrIri)` looks up by `@id` first, then `@type`.
+
+`EntityResourceInterface` is the key descriptor shape:
+- `propriety` — static config (health, speed, inventorySize, attack, work, resourceForConstruction…)
+- `onFrame({entity, game})` — called every tick for each live entity of this type
+- `create(payload)` — factory that produces a new entity instance
+- `canBeBuild({entity, game})` — placement validation
+- `component` — optional custom Pixi.js React component for rendering
+
+### Game loop
+
+`GameProvider` (`packages/ui/provider/GameProvider.tsx`) runs `gameProcessor(game)` in a `setInterval` at ~45 fps × `gameOption.gameSpeed`. `gameProcessor`:
+1. Increments `game.time`
+2. Processes global `game.actions` bag
+3. For each entity: calls `entityMetaData.onFrame` then processes `entity.actions`
+4. Calls `gameResource.persistItem(game)` (save to localStorage)
+
+### Entity selection & UI
+
+Click/drag on the map (Pixi.js `SelectOnMap`) calls `onSelectEntityUserActionMetadata.onSelectZone`, which populates `game.userControl.entitiesSelected` and calls `updateGame(game, game.userControl)`. Components subscribe to `"userControl"` to react. `EntityModal` (`packages/ui/entity-modal.tsx`) renders the first selected entity's stats and inventory.
+
+### Inventory
+
+`InventoryInterface` extends `JsonLdTypeCollection<InventoryItemInterface>`: items live in `inventory.member` keyed by `@type`. Core use cases are in `packages/game/inventory/useCase/` (`addToInventory`, `transfertInventoryByItem`, `getInventoryItem`, `enoughResource`, etc.). The global `game.inventory` holds the player's shared resource pool (wood, water, wheat, gold, knowledge).
+
+### Adding a new entity type
+
+1. Create a resource file using `createBuilding` / `createCharacter` / `createHarvestable`
+2. Register it in `app/resourceList.ts`
+3. Optionally add a Pixi.js `component` for custom rendering or `onFrame` for per-tick logic
