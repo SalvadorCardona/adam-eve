@@ -17,18 +17,20 @@ export function addWorkerToEntity(
     source.workers = []
   }
   const metaData = getResource<EntityResourceInterface>(source)
+
   if (!metaData.workerAction) {
     return
   }
 
   if (getEntityWorkerNeeded(source) <= 0) return
   if (hasAction(worker)) return
+  if (metaData.canRecruit && !metaData.canRecruit({ entity: source, game })) return
 
   addActionToEntity(
     worker,
     metaData.workerAction.create({
       item: {
-        entity: worker,
+        item: worker,
         game,
         createdBy: source["@id"],
       },

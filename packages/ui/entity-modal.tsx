@@ -15,7 +15,7 @@ interface EntityModalProps {}
 
 export const EntityModal: React.FC<EntityModalProps> = () => {
   const [entity, setEntity] = useState<EntityInterface | undefined>()
-
+  console.log(entity)
   const game = useGameContext().game
   useGamePubSub("userControl", (e) => {
     if (game.userControl.entitiesSelected.length) {
@@ -111,10 +111,7 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
                 <Package className="h-5 w-5 text-orange-600" />
                 <div className="font-semibold">
                   Inventaire ({inventoryItems.length} /{" "}
-                  {entity.inventory.size === Infinity
-                    ? "∞"
-                    : entity.inventory.size}
-                  )
+                  {entity.inventory.size === Infinity ? "∞" : entity.inventory.size})
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">

@@ -46,6 +46,7 @@ export interface EntityResourceInterface<
   component?: FC<{ entity: T; size: Vector2Interface }>
   defaultEntity?: () => Partial<T>
   workerAction?: ActionResourceInterface<any>
+  canRecruit?: (payload: { entity: T; game: GameInterface }) => boolean
   propriety: EntityPriorityInterface
   canBeBuild: (payload: { entity: T; game: GameInterface }) => boolean
   onDeath?: (payload: { entity: T; game: GameInterface }) => void

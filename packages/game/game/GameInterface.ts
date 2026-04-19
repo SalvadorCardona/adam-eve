@@ -91,7 +91,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
     time: 0,
     actions: {},
     entities: {},
-    inventory: createInventory(),
+    inventory: createInventory({ size: 10000 }),
     createdAt: new Date(),
     mouseState: createJsonLd<MouseState>("mouseState", {
       startPosition: createVector2(),

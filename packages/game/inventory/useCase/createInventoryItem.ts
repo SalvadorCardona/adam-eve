@@ -8,17 +8,8 @@ import {
 export function createInventoryItem(
   inventoryItemRequest: InventoryItemRequest,
 ): InventoryItemInterface {
-  const metaData = getResource<InventoryResource>(
-    inventoryItemRequest.inventoryItem,
-  )
-
+  const metaData = getResource<InventoryResource>(inventoryItemRequest.inventoryItem)
   return metaData.create({
     item: { quantity: inventoryItemRequest?.quantity ?? 0 },
   })
-}
-
-export function createInventoryItemByList(
-  inventoryItemRequests: InventoryItemRequest[],
-) {
-  return inventoryItemRequests.map(createInventoryItem)
 }

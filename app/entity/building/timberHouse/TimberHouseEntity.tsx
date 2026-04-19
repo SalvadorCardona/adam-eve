@@ -3,8 +3,6 @@ import imageIcon from "./icon.png?url"
 import model from "./model.png?url"
 import { getResourceActionMetaData } from "@/app/action/getResourceActionMetaData"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
 
 export const timberHouseEntityMetaData = createEntityResource({
   asset: {
@@ -27,5 +25,5 @@ export const timberHouseEntityMetaData = createEntityResource({
   workerAction: getResourceActionMetaData,
   label: "Maison de bucheron",
   entityType: EntityType.building,
-  ["@id"]: createJsonLdType(appLdType.entityBuilding, "timberHouse"),
+  ["@id"]: "timberHouse",
 })

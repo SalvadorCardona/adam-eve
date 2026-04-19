@@ -78,7 +78,7 @@ export const playerEntityResource = createEntityResource({
   onHit: ({ entity, game }) => {
     const blood = bloodEntityResource.create({
       game,
-      entity: { position: entity.position },
+      item: { position: entity.position },
     })
     addEntityToGame(game, blood)
   },

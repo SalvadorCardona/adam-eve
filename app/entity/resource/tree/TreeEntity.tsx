@@ -2,10 +2,8 @@ import { createEntityResource } from "@/packages/game/entity/createEntityResourc
 import iconSrc from "./iconSrc.png"
 import model from "./model.png"
 import modelTreeCut from "./treeCuted.png"
-
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const treeDeathEntityMeta = createEntityResource({
   onFrame: ({ entity }) => {
@@ -25,10 +23,12 @@ export const treeDeathEntityMeta = createEntityResource({
       z: 0.2,
     },
   },
-  ["@type"]: createJsonLdType(appLdType.entityEffect, "deathTree"),
+  entityType: EntityType.effect,
+  ["@id"]: "tree",
 })
 
 export const treeEntityMetaData = createEntityResource({
+  entityType: EntityType.resource,
   asset: {
     icon: iconSrc,
     model2d: model,
@@ -44,11 +44,11 @@ export const treeEntityMetaData = createEntityResource({
       z: 1,
     },
   },
-  ["@type"]: createJsonLdType(appLdType.entityResource, "tree"),
+  ["@id"]: "tree",
   onDeath: ({ entity, game }) => {
     const deathTree = treeDeathEntityMeta.create({
       game,
-      entity: { position: entity.position },
+      item: { position: entity.position },
     })
 
     addEntityToGame(game, deathTree)

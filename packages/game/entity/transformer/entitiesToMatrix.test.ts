@@ -37,7 +37,7 @@ describe("Test gameEntitiesToMatrix", () => {
     const entities = matrixToVector(entitiesPosition).map((position) =>
       entityMetadata.create({
         game: gameFactory(),
-        entity: {
+        item: {
           position: vector2ToVector3(position),
         },
       }),

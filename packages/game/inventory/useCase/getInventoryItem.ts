@@ -5,7 +5,7 @@ import {
 } from "@/packages/game/inventory/InventoryItemInterface"
 import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { getInventory } from "@/packages/game/inventory/useCase/getInventory"
-import { getLdType } from "@/packages/jsonLd/jsonLd"
+import { getLdIri } from "@/packages/jsonLd/jsonLd"
 import { createInventoryItem } from "@/packages/game/inventory/useCase/createInventoryItem"
 
 export function getInventoryItem(
@@ -13,7 +13,8 @@ export function getInventoryItem(
   inventoryType: CanBeInventoryItemInterface,
 ): InventoryItemInterface {
   const inventory = getInventory(canBeInventory)
-  const type = getLdType(inventoryType)
+  const type = getLdIri(inventoryType)
+
   const item = inventory.member[type]
 
   if (item) return item

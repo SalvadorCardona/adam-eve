@@ -23,7 +23,7 @@ export const CreateEntityComponent = () => {
     return entityMetaData
       ? entityMetaData.create({
           game: game,
-          entity: {
+          item: {
             position: vectorRatioDown(
               vector2ToVector3(mousePosition),
               game.camera.zoom,

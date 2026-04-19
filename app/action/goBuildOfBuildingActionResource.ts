@@ -11,12 +11,17 @@ import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceIn
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
-import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import {
+  entityFindOneById,
+  entityQueryFindOne,
+} from "@/packages/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
 import { createActionResource } from "@/packages/game/action/createActionResource"
+import { removeActionFromEntity } from "@/packages/game/action/removeAction"
+import { removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
 
 enum State {
   GoToForum = "GoToForum",
@@ -38,7 +43,7 @@ interface FindWorkerData {
 export const goBuildOfBuildingActionResource: ActionResourceInterface<
   ActionInterface<FindWorkerData>
 > = createActionResource<ActionResourceInterface<ActionInterface<FindWorkerData>>>({
-  "@id": "action/goBuildOfBuilding",
+  "@id": "goBuildOfBuilding",
   onFrame: ({ action, game, entity }) => {
     if (!entity) return
     const entityMetadata = getResource<EntityResourceInterface>(entity)
@@ -52,6 +57,12 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
     if (!building) {
       data.state = State.NoBuild
       entity.state = EntityState.wait
+
+      const source = action.createdBy && entityFindOneById(game, action.createdBy)
+      if (source) {
+        removeWorkerFromEntity(source, entity)
+      }
+      removeActionFromEntity(entity, action)
       return
     }
 

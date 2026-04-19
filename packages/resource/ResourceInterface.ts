@@ -1,6 +1,5 @@
 import {
   BaseJsonLdItemInterface,
-  getLdIri,
   JsonLdIriAble,
   JsonLdIriContainerInterface,
 } from "@/packages/jsonLd/jsonLd"
@@ -29,6 +28,9 @@ export function getResource<T = BaseJsonLdItemInterface>(
   if (typeof metaType === "string") {
     if (resourceRegistered[metaType]) return resourceRegistered[metaType] as T
   } else if (metaType) {
+    const resource = metaType["@resource"]
+    if (resource && resourceRegistered[resource])
+      return resourceRegistered[resource] as T
     const id = metaType["@id"]
     if (id && resourceRegistered[id]) return resourceRegistered[id] as T
     const type = metaType["@type"]

@@ -23,7 +23,7 @@ export interface BaseJsonLdItemInterface {
   "@id": JsonLdIri
   "@type"?: JsonLdType
   "@version"?: number
-
+  "@resource"?: string
   [key: string]: any
 }
 

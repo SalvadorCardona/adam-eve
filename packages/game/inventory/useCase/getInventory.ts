@@ -13,7 +13,7 @@ export function getInventory(
     return createInventory({ entity: {} as EntityInterface })
   }
   if ("@type" in inventory && inventory["@type"] === "inventory") {
-    return inventory
+    return inventory as InventoryInterface
   }
 
   if ("inventory" in inventory) {

@@ -1,7 +1,5 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
-import { appLdType } from "@/app/AppLdType"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowledgeResource"
@@ -12,7 +10,7 @@ import modelUrl from "./model.svg?url"
 const KNOWLEDGE_GENERATION_INTERVAL = 300
 
 export const researchCenterEntityResource = createEntityResource({
-  "@id": createJsonLdType(appLdType.entityBuilding, "researchCenter"),
+  "@id": "researchCenter",
   label: "Centre de Recherche",
   entityType: EntityType.building,
   asset: {
@@ -23,7 +21,7 @@ export const researchCenterEntityResource = createEntityResource({
     health: { maxLife: 150 },
     size: { x: 2, y: 2, z: 3 },
     resourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodResourceMetadata, quantity: 10 }],
+      items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
   },
   onFrame: ({ entity, game }) => {

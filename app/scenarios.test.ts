@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest"
-import { gameFactory } from "@/packages/game/game/GameInterface"
+import { beforeEach, describe, expect, it } from "vitest"
+import GameInterface, { gameFactory } from "@/packages/game/game/GameInterface"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { gameProcessor } from "@/packages/game/game/gameProcessor"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
@@ -8,10 +8,12 @@ import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/tran
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
-import { EntityFaction } from "@/packages/game/entity/EntityInterface"
+import {
+  EntityFaction,
+  EntityFaction as Faction,
+} from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { createVector3 } from "@/packages/math/vector"
-import GameInterface from "@/packages/game/game/GameInterface"
 
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
@@ -25,7 +27,6 @@ import {
   createHarvestable,
 } from "@/packages/game/entity/createBuilding"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
-import { EntityFaction as Faction } from "@/packages/game/entity/EntityInterface"
 
 function newGame(): GameInterface {
   return gameFactory()
@@ -57,7 +58,7 @@ describe("Scenario: spawn entities in a game", () => {
   it("spawns a building (forum) and registers it in the game", () => {
     const forum = forumEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, forum)
 
@@ -70,7 +71,7 @@ describe("Scenario: spawn entities in a game", () => {
   it("spawns a character (worker) with full health", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(1, 0, 1) },
+      item: { position: createVector3(1, 0, 1) },
     })
     addEntityToGame(game, worker)
 
@@ -82,7 +83,7 @@ describe("Scenario: spawn entities in a game", () => {
   it("spawns an enemy (zombie) with enemy faction", () => {
     const zombie = zombieEntityResource.create({
       game,
-      entity: { position: createVector3(5, 0, 5) },
+      item: { position: createVector3(5, 0, 5) },
     })
     addEntityToGame(game, zombie)
 
@@ -101,7 +102,7 @@ describe("Scenario: inventory management", () => {
   it("adds wood and gold to a worker's inventory up to its capacity", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
 
     addToInventory(worker, woodResourceMetadata, 5)
@@ -114,7 +115,7 @@ describe("Scenario: inventory management", () => {
   it("respects inventory size limits", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
 
     const added = addToInventory(worker, woodResourceMetadata, 100)
@@ -126,11 +127,11 @@ describe("Scenario: inventory management", () => {
   it("transfers resources between two inventories", () => {
     const source = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     const target = workerEntityResource.create({
       game,
-      entity: { position: createVector3(1, 0, 0) },
+      item: { position: createVector3(1, 0, 0) },
     })
 
     addToInventory(source, woodResourceMetadata, 8)
@@ -152,11 +153,11 @@ describe("Scenario: combat between enemies", () => {
   it("a zombie attacking a worker reduces the worker's life", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     const zombie = zombieEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, worker)
     addEntityToGame(game, zombie)
@@ -171,11 +172,11 @@ describe("Scenario: combat between enemies", () => {
   it("an attack out of range has no effect", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     const zombie = zombieEntityResource.create({
       game,
-      entity: { position: createVector3(50, 0, 50) },
+      item: { position: createVector3(50, 0, 50) },
     })
 
     const didAttack = entityAttackEntity(game, zombie, worker)
@@ -186,11 +187,11 @@ describe("Scenario: combat between enemies", () => {
   it("a worker can be killed after enough hits", () => {
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     const zombie = zombieEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
 
     for (let i = 0; i < 25; i++) {
@@ -213,7 +214,7 @@ describe("Scenario: building construction requires resources", () => {
     const game = newGame()
     const tower = towerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, tower)
 
@@ -236,7 +237,7 @@ describe("Scenario: framework ergonomics — define content from scratch", () =>
         health: { maxLife: 80 },
         size: { x: 2, y: 1, z: 2 },
         resourceForConstruction: createInventory({
-          items: [{ inventoryItem: woodResourceMetadata, quantity: 3 }],
+          items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 3 }],
         }),
       },
     })
@@ -244,7 +245,7 @@ describe("Scenario: framework ergonomics — define content from scratch", () =>
     const game = newGame()
     const entity = farm.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, entity)
 
@@ -270,7 +271,7 @@ describe("Scenario: framework ergonomics — define content from scratch", () =>
     const game = newGame()
     const entity = spider.create({
       game,
-      entity: { position: createVector3(2, 0, 2) },
+      item: { position: createVector3(2, 0, 2) },
     })
 
     expect(entity.life).toBe(15)
@@ -291,7 +292,7 @@ describe("Scenario: framework ergonomics — define content from scratch", () =>
     const game = newGame()
     const entity = stone.create({
       game,
-      entity: { position: createVector3(3, 0, 3) },
+      item: { position: createVector3(3, 0, 3) },
     })
     addEntityToGame(game, entity)
 
@@ -305,7 +306,7 @@ describe("Scenario: full game loop tick", () => {
     const game = newGame()
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, worker)
 
@@ -320,11 +321,11 @@ describe("Scenario: full game loop tick", () => {
     const game = newGame()
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     const zombie = zombieEntityResource.create({
       game,
-      entity: { position: createVector3(0, 0, 0) },
+      item: { position: createVector3(0, 0, 0) },
     })
     addEntityToGame(game, worker)
     addEntityToGame(game, zombie)

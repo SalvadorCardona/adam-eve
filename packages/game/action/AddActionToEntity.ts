@@ -13,7 +13,6 @@ export function addActionToEntity(
   if (!hasAction(sujet)) {
     sujet.actions = {}
   }
-
   updateContainer(sujet.actions as ActionBagInterface, action)
 
   return action

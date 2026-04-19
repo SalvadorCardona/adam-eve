@@ -12,19 +12,19 @@ describe("Test entityQuery", () => {
     const game = gameFactory()
     const worker = workerEntityResource.create({
       game,
-      entity: { position: createVector3(1, 1, 1) },
+      item: { position: createVector3(1, 1, 1) },
     })
     const three1 = treeEntityMetaData.create({
       game,
-      entity: { position: createVector3(10, 1, 10) },
+      item: { position: createVector3(10, 1, 10) },
     })
     const three2 = treeEntityMetaData.create({
       game,
-      entity: { position: createVector3(2, 1, 2) },
+      item: { position: createVector3(2, 1, 2) },
     })
     const three3 = treeEntityMetaData.create({
       game,
-      entity: { position: createVector3(4, 2, 4) },
+      item: { position: createVector3(4, 2, 4) },
     })
     const entities = [worker, three1, three2, three3]
     entities.forEach((e) => addEntityToGame(game, e))

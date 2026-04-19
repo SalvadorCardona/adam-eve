@@ -1,18 +1,9 @@
-import {
-  BuildingEntityInterface,
-  CharacterEntityInterface,
-} from "@/packages/game/entity/EntityInterface"
-import {
-  entityFindOneById,
-  entityQuery,
-} from "@/packages/game/game/useCase/query/entityQuery"
+import { BuildingEntityInterface, CharacterEntityInterface } from "@/packages/game/entity/EntityInterface"
+import { entityFindOneById, entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
 import { createActionResource } from "@/packages/game/action/createActionResource"
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
-import {
-  addWorkerToEntity,
-  removeWorkerFromEntity,
-} from "@/packages/game/entity/useCase/entityWorker"
+import { addWorkerToEntity, removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const findWorkerCharacterActionMetadata = createActionResource({

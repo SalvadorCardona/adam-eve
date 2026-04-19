@@ -25,7 +25,7 @@ export const BridgeEntityResource = createEntityResource({
       z: 1,
     },
     resourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodResourceMetadata, quantity: 5 }],
+      items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
   },
   canBeBuild: ({ entity, game }) => {

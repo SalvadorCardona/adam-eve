@@ -4,8 +4,8 @@ import EntityInterface, {
 import GameInterface from "@/packages/game/game/GameInterface"
 import { boundingCollision } from "@/packages/math/boundingCollision"
 import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
-import { appLdType } from "@/app/AppLdType"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export function entityHasCollision(
   entitySource: EntityInterface,
@@ -38,7 +38,7 @@ export function hasCollisionWithGround(
   game: GameInterface,
   entity: EntityInterface,
 ): false | EntityInterface {
-  const grounds = entityQuery(game, { "@typeIn": appLdType.entityGround })
+  const grounds = entityQuery(game, { entityType: EntityType.ground })
   for (const ground of grounds) {
     if (entityHasCollision(entity, ground)) {
       return ground

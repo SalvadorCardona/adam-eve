@@ -1,7 +1,5 @@
-import { createJsonLdType } from "@/packages/jsonLd/jsonLd"
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
-import { appLdType } from "@/app/AppLdType"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import {
   entityFindOneById,
@@ -17,7 +15,7 @@ import { getResource } from "@/packages/resource/ResourceInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 
 export const getResourceActionMetaData = createActionResource({
-  ["@type"]: createJsonLdType(appLdType.typeAction, "getResource"),
+  "@id": "getResourceAction",
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return
     const createdBy = entityFindOneById(game, action.createdBy) as EntityInterface
@@ -25,8 +23,8 @@ export const getResourceActionMetaData = createActionResource({
     const resourceMapping =
       getResource<ResourceMappingMetadataInterface>("resourceMapping")
 
-    if (!createdBy["@type"]) return
-    const resourceMapped = resourceMapping.getItem(createdBy["@type"])
+    if (!createdBy["@id"]) return
+    const resourceMapped = resourceMapping.getItem(createdBy["@id"])
     if (!resourceMapped) {
       return
     }
@@ -60,6 +58,7 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
+      console.log("ok")
       const quantityAdded = addToInventory(entity, resourceMapped.resource, 1)
       if (quantityAdded === 0) {
         entity.state = EntityState.go_to_put_resource
@@ -69,6 +68,7 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.go_to_put_resource) {
+      console.log("3")
       const target = entityFindOneById(game, action.createdBy)
 
       if (!target) {

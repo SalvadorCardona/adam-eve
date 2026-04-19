@@ -16,7 +16,7 @@ import { ActionResourceInterface } from "@/packages/game/action/ActionResourceIn
 import { addActionToEntity } from "@/packages/game/action/AddActionToEntity"
 
 export function entityFactory<T extends EntityInterface = EntityInterface>(payload: {
-  entity?: Partial<T>
+  item?: Partial<T>
   game: GameInterface
   resource: EntityResourceInterface
 }): T {
@@ -28,7 +28,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
     position: createVector3(0, 1, 0),
     entityType: resource?.entityType ?? resource?.propriety?.entityType,
     ...(resource?.defaultEntity ? resource?.defaultEntity() : {}),
-    ...(payload?.entity ?? {}),
+    ...(payload?.item ?? {}),
   }
 
   if (baseEntity.createdBy === undefined) {

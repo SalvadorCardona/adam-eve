@@ -42,7 +42,7 @@ describe("Test gameEntitiesToMatrix", () => {
     const grounds = matrixToVector(groundsPosition).map((position) =>
       grassMeta.create({
         game,
-        entity: {
+        item: {
           position: vector2ToVector3(position),
         },
       }),
@@ -51,7 +51,7 @@ describe("Test gameEntitiesToMatrix", () => {
     const building = matrixToVector(buildingsPosition).map((position) =>
       towerMeta.create({
         game,
-        entity: {
+        item: {
           position: vector2ToVector3(position),
         },
       }),

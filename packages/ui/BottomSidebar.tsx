@@ -1,14 +1,14 @@
-import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import { Card } from "@/app/components/ui/card"
 import React from "react"
 import { ActionUserResource } from "@/packages/game/actionUser/ActionUserResource"
 import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import useGameContext from "@/packages/ui/provider/useGameContext"
-import { appLdType } from "@/app/AppLdType"
 import { AdaptiveHoverDecorator } from "@/app/components/AdaptiveHoverDecorator"
 import { createEntityUserActionMetadata } from "@/app/ationUser/CreateEntityUserAction/createEntityUserActionMetadata"
-import { BaseJsonLdItemInterface, getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 import { metaDataRegistered } from "@/packages/resource/ResourceInterface"
+import { removeBuildingUserActionMetadata } from "@/app/ationUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 
 type SidebarMetadata = BaseJsonLdItemInterface & {
   label?: string
@@ -16,29 +16,25 @@ type SidebarMetadata = BaseJsonLdItemInterface & {
 }
 
 export const BottomSidebar = () => {
-  const buildingMetaDatas = getByLdTypeIn<EntityResourceInterface>(
-    metaDataRegistered,
-    appLdType.entityBuilding,
+  const buildingMetaDatas = Object.values(metaDataRegistered).filter(
+    (e) => e.entityType === EntityType.building,
   )
 
-  const groundMetaDatas = getByLdTypeIn<EntityResourceInterface>(
-    metaDataRegistered,
-    appLdType.entityGround,
+  const groundMetaDatas = Object.values(metaDataRegistered).filter(
+    (e) => e.entityType === EntityType.ground,
   )
 
-  const natureMetaDatas = getByLdTypeIn<EntityResourceInterface>(
-    metaDataRegistered,
-    appLdType.entityResource,
+  const natureMetaDatas = Object.values(metaDataRegistered).filter(
+    (e) => e.entityType === EntityType.resource,
   )
 
-  const actionMetaDatas = getByLdTypeIn<ActionUserResource>(
-    metaDataRegistered,
-    appLdType.userAction,
-  )
+  const actionMetaDatas = [
+    removeBuildingUserActionMetadata,
+    createEntityUserActionMetadata,
+  ]
 
-  const characterMetaDatas = getByLdTypeIn<ActionUserResource>(
-    metaDataRegistered,
-    appLdType.entityCharacter,
+  const characterMetaDatas = Object.values(metaDataRegistered).filter(
+    (e) => e.entityType === EntityType.character,
   )
 
   return (
@@ -65,7 +61,7 @@ export const BottomSidebar = () => {
 function isActionUserMetadata(
   metadata: SidebarMetadata,
 ): metadata is ActionUserResource & SidebarMetadata {
-  return metadata["@type"]?.startsWith("user-action/") ?? false
+  return metadata["@type"]?.startsWith("user-action") ?? false
 }
 
 function IconBuild({ metaDatas }: { metaDatas: SidebarMetadata[] }) {
@@ -90,8 +86,8 @@ function IconBuild({ metaDatas }: { metaDatas: SidebarMetadata[] }) {
       {metaDatas.map((metadata) => {
         return (
           <AdaptiveHoverDecorator
-            hoverElement={<span>{metadata?.label ?? metadata["@type"]}</span>}
-            key={metadata["@type"] + "icon-build"}
+            hoverElement={<span>{metadata?.label ?? metadata["@id"]}</span>}
+            key={metadata["@id"] + "icon-build"}
           >
             <Card
               className={
@@ -108,7 +104,7 @@ function IconBuild({ metaDatas }: { metaDatas: SidebarMetadata[] }) {
                   className={"w-full h-full"}
                 />
               ) : (
-                <>{metadata["@type"]}</>
+                <>{metadata["@id"]}</>
               )}
             </Card>
           </AdaptiveHoverDecorator>

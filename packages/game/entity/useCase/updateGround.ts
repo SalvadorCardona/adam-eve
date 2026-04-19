@@ -1,6 +1,5 @@
 import GameInterface from "@/packages/game/game/GameInterface"
 import { GroundEntityInterface } from "@/packages/game/entity/EntityInterface"
-import { appLdType } from "@/app/AppLdType"
 import {
   Vector2Interface,
   vector3ToVector2,
@@ -14,10 +13,11 @@ import {
   matrixDirection,
 } from "@/packages/math/matrix"
 import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
+import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export function updateGroundWithGame({ game }: { game: GameInterface }) {
   const grounds = entityQuery<GroundEntityInterface>(game, {
-    "@typeIn": appLdType.entityGround,
+    entityType: EntityType.ground,
   })
 
   if (!game.gameWorld?.groundMatrix) {

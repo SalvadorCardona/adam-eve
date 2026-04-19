@@ -30,7 +30,7 @@ function generateGround(game: GameInterface): void {
       if (dx * dx + dz * dz > ISLAND_RADIUS * ISLAND_RADIUS) continue
       const grass = grassGroundEntityMetadata.create({
         game,
-        entity: { position: createVector3(x, 0, z) },
+        item: { position: createVector3(x, 0, z) },
       })
       addEntityToGame(game, grass)
     }
@@ -45,7 +45,7 @@ function spawnAt(
 ): void {
   const entity = resource.create({
     game,
-    entity: { position: createVector3(x, 1, z) },
+    item: { position: createVector3(x, 1, z) },
   })
   addEntityToGame(game, entity)
 }
@@ -58,7 +58,7 @@ function spawnBuildingAt(
 ): void {
   const entity = resource.create({
     game,
-    entity: { position: createVector3(x, 1, z) },
+    item: { position: createVector3(x, 1, z) },
   })
 
   entity.state = EntityState.builded

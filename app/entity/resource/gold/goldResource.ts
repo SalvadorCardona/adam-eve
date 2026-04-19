@@ -2,7 +2,7 @@ import { createResourceInventory } from "@/packages/game/inventory/InventoryItem
 import goldIcon from "./img.png"
 
 export const goldResourceMetadata = createResourceInventory({
-  "@id": "gold",
+  "@id": "resource/gold",
   asset: {
     icon: goldIcon,
   },

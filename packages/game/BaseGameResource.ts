@@ -5,7 +5,6 @@ import GameInterface from "@/packages/game/game/GameInterface"
 
 export interface CreateItemPayload<T extends BaseJsonLdItemInterface> {
   item?: Partial<T>
-  entity?: Partial<T>
   resource?: BaseGameResource
   game?: GameInterface
   [key: string]: any
@@ -27,25 +26,31 @@ export interface BaseGameResource<
 }
 
 export function createResourceGame<T extends BaseGameResource>(
-  resource: Partial<BaseGameResource> & Partial<T> & { "@id"?: string; "@type"?: string },
+  resource: Partial<BaseGameResource> &
+    Partial<T> & { "@id"?: string; "@type"?: string },
 ): T {
   const newResource = { ...resource } as BaseGameResource
 
   const originalCreate = resource.create
 
   newResource.create = (payload = {}) => {
-    const resourceType = newResource["@type"] ?? newResource["@id"]
+    const resourceType = newResource["@id"]
     if (originalCreate) {
       const result: any = originalCreate({
         ...payload,
         resource: newResource,
       })
+
       if (result && result["@id"]) return result
-      const base = (result && (result.item ?? result.entity)) ?? payload.item ?? payload.entity ?? {}
+      const base = result.item ?? {}
+      base["@resource"] = newResource["@id"]
+
       return createJsonLd(resourceType, base) as any
     }
 
-    const base = payload.item ?? payload.entity ?? {}
+    const base = payload.item ?? {}
+    base["@resource"] = newResource["@id"]
+
     return createJsonLd(resourceType, base) as any
   }
 

@@ -50,7 +50,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
         positions.forEach((newPosition) => {
           const entity = metaInterface.create({
             game,
-            entity: {
+            item: {
               position: vector2ToVector3(newPosition),
               rotation: rotationY,
             },
@@ -62,7 +62,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
         entities.push(
           metaInterface.create({
             game,
-            entity: {
+            item: {
               position: vector2ToVector3(mousePosition),
               rotation: rotationY,
             },

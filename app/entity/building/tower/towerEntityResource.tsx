@@ -15,7 +15,7 @@ export const towerEntityResource = createEntityResource({
   },
   propriety: {
     resourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodResourceMetadata, quantity: 5 }],
+      items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
     attack: {
       attackRange: 3,

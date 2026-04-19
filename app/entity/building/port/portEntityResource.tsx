@@ -20,7 +20,7 @@ export const portEntityResource = createEntityResource({
       z: 2,
     },
     resourceForConstruction: createInventory({
-      items: [{ inventoryItem: woodResourceMetadata, quantity: 5 }],
+      items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
   },
 })

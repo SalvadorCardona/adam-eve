@@ -63,7 +63,7 @@ export const workerEntityResource = createEntityResource({
 
     const deathTree = resource.create({
       game,
-      entity: { position: entity.position },
+      item: { position: entity.position },
     })
 
     addEntityToGame(game, deathTree)
