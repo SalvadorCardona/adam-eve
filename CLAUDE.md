@@ -78,3 +78,67 @@ Click/drag on the map (Pixi.js `SelectOnMap`) calls `onSelectEntityUserActionMet
 1. Create a resource file using `createBuilding` / `createCharacter` / `createHarvestable`
 2. Register it in `app/resourceList.ts`
 3. Optionally add a Pixi.js `component` for custom rendering or `onFrame` for per-tick logic
+
+### Keyboard input
+
+`packages/ui/keysState.ts` exports a shared `keysPressed: Record<string, boolean>` map.
+- `ControlKeyboard.tsx` populates it on `keydown`/`keyup`/`wheel` events.
+- Any entity `onFrame` can import and read it directly — no event listeners needed.
+
+Current key assignments:
+| Keys | Action |
+|------|--------|
+| WASD | Camera movement |
+| Arrow keys | Player movement (consumed by `playerEntityResource.onFrame`) |
+| Space / F | Player attack |
+| G | Toggle grid |
+| R | Rotate building placement |
+| P | Pause / resume |
+| Escape | Cancel current action / deselect |
+| Scroll wheel | Zoom in/out |
+| N | New game |
+
+### Player entity (`resource/player`)
+
+Located at `app/entity/character/player/`.
+
+- **Movement**: reads `keysPressed` in `onFrame`, updates `entity.position` directly, calls `updateEntityInGame`.
+- **Attack**: `playerAttackActionResource` — Space/F, finds nearest enemy via `entityQueryFindOne` with `circleSearch`, calls `entityAttackEntity`.
+- **Rendering**: `PlayerComponent` switches between three SVG sprites based on `entity.life / 100`:
+  - `player_healthy.svg` → > 50 HP
+  - `player_hurt.svg` → 25–50 HP
+  - `player_critical.svg` → < 25 HP
+- Stats: 100 HP, 5 damage, 1.5 attack range, 20-slot inventory, speed 0.08.
+
+### SVG assets for entities
+
+Import SVGs as URLs with the `?url` suffix:
+```ts
+import mySvg from "./my-asset.svg?url"
+```
+Use them in a custom `component` via `<Sprite image={mySvg} options={{ width: size.x, height: size.y }} />`.
+For health-dependent or state-dependent visuals, switch the `image` prop — `useTexture` reacts to URL changes.
+
+### Faction system
+
+- `EntityFaction.self` — player-side (workers, player character)
+- `EntityFaction.enemy` — hostile (zombies)
+
+Set via `defaultEntity: () => ({ faction: EntityFaction.enemy })` in the resource descriptor.
+Use `entityQueryFindOne(game, { faction: EntityFaction.enemy, circleSearch: { center, radius } })` to find nearby enemies.
+
+### Action resources
+
+An action resource is a descriptor with an `onFrame` callback registered in `resourceList.ts`.  
+Attach it to an entity at spawn time via `propriety.defaultActions: [actionResource["@type"]!]`.  
+Use `updateNextTick(game, action, ticks)` inside `onFrame` to throttle execution (skip N ticks before next call).
+
+```ts
+export const myAction = createActionResource({
+  ["@id"]: "action/my-action",
+  onFrame: ({ game, entity, action }) => {
+    updateNextTick(game, action, 60) // run every ~1.3 s at 45 fps
+    // ... logic
+  },
+})
+```
