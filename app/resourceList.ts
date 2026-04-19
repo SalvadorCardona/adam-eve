@@ -34,6 +34,8 @@ import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMine
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowledgeResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
+import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
+import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
@@ -69,4 +71,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   resourceMappingMetaData,
   knowledgeResourceMetadata,
   researchCenterEntityResource,
+  playerEntityResource,
+  playerAttackActionResource,
 ]
