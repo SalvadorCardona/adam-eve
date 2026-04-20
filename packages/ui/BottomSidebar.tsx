@@ -16,15 +16,21 @@ type SidebarMetadata = BaseJsonLdItemInterface & {
 }
 
 export const BottomSidebar = () => {
-  const buildingMetaDatas = Object.values(metaDataRegistered).filter(
+  const allMetaDatas = Array.from(
+    new Map(
+      Object.values(metaDataRegistered).map((m) => [m["@id"], m]),
+    ).values(),
+  )
+
+  const buildingMetaDatas = allMetaDatas.filter(
     (e) => e.entityType === EntityType.building,
   )
 
-  const groundMetaDatas = Object.values(metaDataRegistered).filter(
+  const groundMetaDatas = allMetaDatas.filter(
     (e) => e.entityType === EntityType.ground,
   )
 
-  const natureMetaDatas = Object.values(metaDataRegistered).filter(
+  const natureMetaDatas = allMetaDatas.filter(
     (e) => e.entityType === EntityType.resource,
   )
 
@@ -33,7 +39,7 @@ export const BottomSidebar = () => {
     createEntityUserActionMetadata,
   ]
 
-  const characterMetaDatas = Object.values(metaDataRegistered).filter(
+  const characterMetaDatas = allMetaDatas.filter(
     (e) => e.entityType === EntityType.character,
   )
 

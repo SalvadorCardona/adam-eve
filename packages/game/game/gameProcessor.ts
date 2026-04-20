@@ -9,13 +9,13 @@ import { ActionResourceInterface } from "@/packages/game/action/ActionResourceIn
 
 export function gameProcessor(game: GameInterface) {
   game.time++
+
   const metaData = gameResource
   actionProcesseur(game.actions, game)
 
   Object.values(game.entities).forEach((entity) => {
-    const entityMetaData = getResource(entity) as
-      | EntityResourceInterface
-      | undefined
+    const entityMetaData = getResource(entity) as EntityResourceInterface | undefined
+
     entityMetaData?.onFrame?.({ entity, game })
     entity?.actions &&
       actionProcesseur(entity.actions, game, entity as BuildingEntityInterface)

@@ -1,10 +1,6 @@
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { InventoryResource } from "@/packages/game/inventory/InventoryItemInterface"
-import {
-  JsonLdIri,
-  JsonLdType,
-  JsonLdTypeContainerInterface,
-} from "@/packages/jsonLd/jsonLd"
+import { JsonLdIri, JsonLdTypeContainerInterface } from "@/packages/jsonLd/jsonLd"
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
@@ -46,7 +42,7 @@ export const resourceMappingMetaData =
       return Object.values(resourceMappingList)
     },
 
-    getItem: (buildingType: JsonLdType): ResourceMapping | undefined => {
+    getItem: (buildingType: JsonLdIri): ResourceMapping | undefined => {
       return resourceMappingList[buildingType] ?? undefined
     },
 

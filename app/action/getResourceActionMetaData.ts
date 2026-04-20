@@ -1,10 +1,7 @@
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 import { EntityState } from "@/packages/game/entity/EntityState"
-import {
-  entityFindOneById,
-  entityQueryFindOne,
-} from "@/packages/game/game/useCase/query/entityQuery"
+import { entityFindOneById, entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { entityGoToEntityWithGround } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { removeActionFromEntity } from "@/packages/game/action/removeAction"
@@ -19,12 +16,12 @@ export const getResourceActionMetaData = createActionResource({
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return
     const createdBy = entityFindOneById(game, action.createdBy) as EntityInterface
-
+    const createdByResource = getResource(createdBy)
     const resourceMapping =
       getResource<ResourceMappingMetadataInterface>("resourceMapping")
 
     if (!createdBy["@id"]) return
-    const resourceMapped = resourceMapping.getItem(createdBy["@id"])
+    const resourceMapped = resourceMapping.getItem(createdByResource["@id"])
     if (!resourceMapped) {
       return
     }
