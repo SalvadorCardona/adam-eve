@@ -58,7 +58,6 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
-      console.log("ok")
       const quantityAdded = addToInventory(entity, resourceMapped.resource, 1)
       if (quantityAdded === 0) {
         entity.state = EntityState.go_to_put_resource
@@ -68,7 +67,6 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.go_to_put_resource) {
-      console.log("3")
       const target = entityFindOneById(game, action.createdBy)
 
       if (!target) {

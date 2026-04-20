@@ -15,7 +15,6 @@ interface EntityModalProps {}
 
 export const EntityModal: React.FC<EntityModalProps> = () => {
   const [entity, setEntity] = useState<EntityInterface | undefined>()
-  console.log(entity)
   const game = useGameContext().game
   useGamePubSub("userControl", (e) => {
     if (game.userControl.entitiesSelected.length) {

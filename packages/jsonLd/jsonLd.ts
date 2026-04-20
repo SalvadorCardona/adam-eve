@@ -3,7 +3,7 @@ import { createChannelPubSub } from "coooking-pubsub"
 
 export const containerPubSub = createChannelPubSub<ContainerPublish>()
 
-export interface ContainerInterface<T = any> {
+export interface ContainerInterface<T = unknown> {
   [key: string]: T
 }
 
@@ -63,7 +63,7 @@ export function updateCollection(
   collection: JsonLdIriCollection,
   item: JsonLDItem<any>,
   action: ContainerAction = ContainerAction.update,
-): JsonLDItem<any> {
+): JsonLdIriCollection {
   updateContainer(collection.member, item, action)
   collection.totalItems = Object.keys(collection.member).length
   return updateItem(collection, action)
@@ -85,13 +85,12 @@ export function createJsonLd<T>(
   object: Partial<T>,
 ): JsonLDItem<T> {
   const jsonLdType = createJsonLdType(type)
-  // @ts-ignore
   return {
     "@type": jsonLdType,
     "@id": createJsonLdIri(jsonLdType),
     "@version": 1,
     ...object,
-  }
+  } as JsonLDItem<T>
 }
 
 export function createJsonLdType(
@@ -145,10 +144,10 @@ export function updateContainerByType<T extends BaseJsonLdItemInterface>(
   updateItem(item, action)
 }
 
-export function updateItem(
-  item: JsonLDItem<any>,
+export function updateItem<T extends BaseJsonLdItemInterface>(
+  item: T,
   action: ContainerAction = ContainerAction.update,
-): JsonLDItem<any> {
+): T {
   item["@version"] = (item["@version"] ?? 0) + 1
   containerPubSub.publish(item["@id"], { item, action })
   if (item["@type"]) {
@@ -167,7 +166,7 @@ export function getByLdTypeIn<T = BaseJsonLdItemInterface>(
 
   Object.keys(container).forEach((key) => {
     if (jsonLdTypes.some((type) => key.startsWith(type))) {
-      results.push(container[key])
+      results.push(container[key] as T)
     }
   })
 

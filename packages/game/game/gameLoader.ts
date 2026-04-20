@@ -44,6 +44,7 @@ export function gameLoader(game: GameInterface): GameInterface {
 
   for (const resource of defaultInventoryResources) {
     const type = resource["@type"]
+    if (!type) continue
     if (!game.inventory.member[type]) {
       addToInventory(game.inventory, resource, 100)
     }
