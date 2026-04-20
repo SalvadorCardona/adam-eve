@@ -5,10 +5,10 @@ import { ActionUserResource } from "@/packages/game/actionUser/ActionUserResourc
 import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { AdaptiveHoverDecorator } from "@/app/components/AdaptiveHoverDecorator"
-import { createEntityUserActionMetadata } from "@/app/ationUser/CreateEntityUserAction/createEntityUserActionMetadata"
+import { createEntityUserActionMetadata } from "@/app/actionUser/CreateEntityUserAction/createEntityUserActionMetadata"
 import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 import { metaDataRegistered } from "@/packages/resource/ResourceInterface"
-import { removeBuildingUserActionMetadata } from "@/app/ationUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
+import { removeBuildingUserActionMetadata } from "@/app/actionUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 
 type SidebarMetadata = BaseJsonLdItemInterface & {
   label?: string

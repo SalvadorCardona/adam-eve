@@ -21,6 +21,14 @@ pnpm vitest run app/scenarios.test.ts
 
 Path alias `@` maps to the repo root (configured in `vite.config.ts`).
 
+### Testing conventions
+
+- Unit tests live next to the file under test as `<name>.test.ts`.
+- Engine tests are in `packages/**/*.test.ts`; gameplay/scenario tests in `app/*.test.ts`.
+- Prefer `gameFactory()` + `createCharacter`/`createBuilding` helpers over editing JSON fixtures.
+- When testing `onFrame` and actions, build a throwaway resource in the test file rather than spying on a real content resource (real resources often have no default `onFrame` to spy on).
+- `containerPubSub` is a module-level singleton — always `unsubscribe()` in tests, and use unique `@id`s when asserting on channel delivery.
+
 ## Architecture
 
 ### Two-layer split: engine vs. content
@@ -34,7 +42,7 @@ Path alias `@` maps to the repo root (configured in `vite.config.ts`).
 
 - **`app/`** — all game-specific content (entities, actions, scenarios):
   - `entity/` — one folder per entity type (building, character, resource, ground, attack, effect)
-  - `ationUser/` — user-interaction actions (select, create, remove)
+  - `actionUser/` — user-interaction actions (select, create, remove)
   - `action/` — game-logic actions (harvest, build, death, attack…)
   - `resourceList.ts` — central registry bootstrap; **every new resource must be added here**
 
@@ -45,6 +53,15 @@ All game objects (`GameInterface`, `EntityInterface`, `ActionInterface`, `Invent
 `updateItem(item)` in `packages/jsonLd/jsonLd.ts` increments `@version` and publishes to two channels: `item["@id"]` and `item["@type"]`. This is the sole reactivity mechanism — React components subscribe via `containerPubSub.subscribe(channel, callback)` (wrapped in `useGamePubSub`).
 
 `updateEntityInGame(game, entity)` is the standard way to mutate an entity and trigger UI updates.
+
+### Mutation contract (important)
+
+State is mutated **in place** — there are no immutable copies. React re-renders are driven exclusively by the pub/sub above, **not** by reference equality. Rules:
+
+1. After changing any field on a JSON-LD item, call `updateItem(item)` (or a wrapper like `updateEntityInGame`, `updateContainer`, `updateGame`) so subscribers see the change.
+2. Forgetting to call `updateItem` will cause silent stale UI — the mutation happens, but components never re-render.
+3. Subscribe on the narrowest channel that works: an `@id` for a single entity, a `@type` for a class of items (e.g. `"userControl"`, `"gameOption"`).
+4. `GameProvider.updateGame(game)` publishes on both the game's channels *and* the broadcast `pubSub` consumed by `useGameFrame`. Call it when something outside the tick loop mutates the game root.
 
 ### Resource registry pattern
 
@@ -64,6 +81,8 @@ Resources are metadata descriptors (not instances). Call `createResource()` (or 
 2. Processes global `game.actions` bag
 3. For each entity: calls `entityMetaData.onFrame` then processes `entity.actions`
 4. Calls `gameResource.persistItem(game)` (save to localStorage)
+
+Each tick the provider then calls `updateGame(game)`, which calls `updateItem(game)` (bumps `@version`, publishes on the game's `@id` and `@type`) and also broadcasts through the context-level `pubSub` consumed by `useGameFrame`. The interval is re-created when `gameOption["@version"]` changes (e.g. `gameSpeed` toggled).
 
 ### Entity selection & UI
 

@@ -4,8 +4,8 @@ import {
   EntityQueryParams,
 } from "@/packages/game/game/useCase/query/entityQuery"
 import GameInterface from "@/packages/game/game/GameInterface"
-import { removeBuildingUserActionMetadata } from "@/app/ationUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
-import { createEntityUserActionMetadata } from "@/app/ationUser/CreateEntityUserAction/createEntityUserActionMetadata"
+import { removeBuildingUserActionMetadata } from "@/app/actionUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
+import { createEntityUserActionMetadata } from "@/app/actionUser/CreateEntityUserAction/createEntityUserActionMetadata"
 import { updateGame } from "@/packages/game/game/updateGame"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { diviseVector2D } from "@/packages/math/diviseVector"

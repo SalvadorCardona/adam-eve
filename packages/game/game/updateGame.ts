@@ -1,6 +1,12 @@
 import GameInterface from "@/packages/game/game/GameInterface"
-import { JsonLDItem, updateContainerByType } from "@/packages/jsonLd/jsonLd"
+import {
+  BaseJsonLdItemInterface,
+  updateContainerByType,
+} from "@/packages/jsonLd/jsonLd"
 
-export function updateGame(game: GameInterface, item: JsonLDItem<any>): void {
+export function updateGame(
+  game: GameInterface,
+  item: BaseJsonLdItemInterface,
+): void {
   updateContainerByType(game, item)
 }

@@ -8,7 +8,7 @@ import { EntitiesLoopPixiJs } from "@/packages/ui/graphic-motor/pixiJs/EntitiesL
 import { PixiGrid } from "@/packages/ui/graphic-motor/pixiJs/PixiGrid"
 import { ControlKeyboard } from "@/packages/ui/ControlKeyboard"
 import { Camera } from "@/packages/ui/graphic-motor/pixiJs/Camera"
-import { CreateEntityComponent } from "@/app/ationUser/CreateEntityUserAction/CreateEntityComponent"
+import { CreateEntityComponent } from "@/app/actionUser/CreateEntityUserAction/CreateEntityComponent"
 import { BackGroundGame } from "@/packages/ui/graphic-motor/pixiJs/BackGroundGame"
 
 export const PixijsAppComponent = () => {
