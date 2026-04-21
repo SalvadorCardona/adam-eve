@@ -4,7 +4,7 @@ import GameInterface from "@/packages/game/game/GameInterface"
 import { BaseGameResource } from "@/packages/game/BaseGameResource"
 import { Vector2Interface, Vector3Interface } from "@/packages/math/vector"
 import { JsonLdType } from "@/packages/jsonLd/jsonLd"
-import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 
 export enum EntityType {

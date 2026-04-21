@@ -1,11 +1,13 @@
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
-import { CanBeInventoryItemInterface } from "@/packages/game/inventory/InventoryItemInterface"
-import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import {
+  CanBeInventoryItemInterface,
+  InventoryInterface,
+} from "@/packages/game/inventory/InventoryResource"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 
 export function transfertInventoryByItem(
-  source: CanBeInventoryInterface,
-  target: CanBeInventoryInterface,
+  source: InventoryInterface,
+  target: InventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
   quantity: number,
 ): number | 0 {

@@ -1,11 +1,11 @@
-import { InventoryItemInterface } from "@/packages/game/inventory/InventoryItemInterface"
+import { InventoryItem } from "@/packages/game/inventory/InventoryResource"
 import React from "react"
 import { Card } from "@/app/components/ui/card"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { BaseGameResource } from "@/packages/game/BaseGameResource"
 
 interface InventoryPropsInterface {
-  inventoryItem: InventoryItemInterface
+  inventoryItem: InventoryItem
 }
 
 export const Inventory = ({ inventoryItem }: InventoryPropsInterface) => {

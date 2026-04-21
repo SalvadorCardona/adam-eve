@@ -1,6 +1,6 @@
 import React from "react"
 import { BottomSidebar } from "@/packages/ui/BottomSidebar"
-import { RightSideBarPropsInterfaceSideBar } from "@/packages/ui/RightSideBarPropsInterfaceSideBar"
+import { RightSidebar } from "@/packages/ui/RightSidebar"
 import { TopSideBar } from "@/packages/ui/TopSideBar"
 import TimeControls from "@/packages/ui/TimeControl"
 import CosyGameSidebar from "@/app/components/cosy-game-sidebar"
@@ -12,7 +12,7 @@ export const InterfaceComponent = () => {
       <TimeControls></TimeControls>
       <TopSideBar></TopSideBar>
       {/*<LeftSidebar></LeftSidebar>*/}
-      <RightSideBarPropsInterfaceSideBar></RightSideBarPropsInterfaceSideBar>
+      <RightSidebar></RightSidebar>
       <BottomSidebar></BottomSidebar>
     </>
   )

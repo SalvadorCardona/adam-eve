@@ -1,12 +1,8 @@
-import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { getTotalQuantityInInventory } from "@/packages/game/inventory/useCase/getTotalQuantityInInventory"
-import { getInventory } from "@/packages/game/inventory/useCase/getInventory"
 
-export function freeSpaceInInventory(
-  canBeInventory: CanBeInventoryInterface,
-): number {
-  const inventory = getInventory(canBeInventory)
-  const quantity = getTotalQuantityInInventory(canBeInventory)
+export function freeSpaceInInventory(inventory: InventoryInterface): number {
+  const quantity = getTotalQuantityInInventory(inventory)
 
   return inventory.size - quantity
 }

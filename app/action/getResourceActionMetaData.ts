@@ -1,7 +1,10 @@
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 import { EntityState } from "@/packages/game/entity/EntityState"
-import { entityFindOneById, entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import {
+  entityFindOneById,
+  entityQueryFindOne,
+} from "@/packages/game/game/useCase/query/entityQuery"
 import { entityGoToEntityWithGround } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { removeActionFromEntity } from "@/packages/game/action/removeAction"
@@ -55,7 +58,11 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
-      const quantityAdded = addToInventory(entity, resourceMapped.resource, 1)
+      const quantityAdded = addToInventory(
+        entity.inventory,
+        resourceMapped.resource,
+        1,
+      )
       if (quantityAdded === 0) {
         entity.state = EntityState.go_to_put_resource
       }
@@ -78,7 +85,12 @@ export const getResourceActionMetaData = createActionResource({
       })
 
       if (result.isFinish) {
-        transfertInventoryByItem(entity, target, resourceMapped.resource, Infinity)
+        transfertInventoryByItem(
+          entity.inventory,
+          target.inventory,
+          resourceMapped.resource,
+          Infinity,
+        )
         entity.state = EntityState.go_to_tree
       }
     }

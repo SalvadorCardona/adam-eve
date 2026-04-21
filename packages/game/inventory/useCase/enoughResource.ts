@@ -1,20 +1,13 @@
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
-import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
-import { getInventory } from "@/packages/game/inventory/useCase/getInventory"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 
 export function enoughResource(
-  inventorySource: CanBeInventoryInterface,
-  inventoryTarget: CanBeInventoryInterface,
+  inventorySource: InventoryInterface,
+  inventoryTarget: InventoryInterface,
 ): boolean {
-  const currentInventorySource = getInventory(inventorySource)
-  const currentInventoryTarget = getInventory(inventoryTarget)
-
-  return Object.values(currentInventorySource.member ?? {}).every((resource) => {
-    if (!resource["@type"]) return true
-    const resourceTarget = getInventoryItem(
-      currentInventoryTarget,
-      resource["@type"],
-    )
+  return Object.values(inventorySource.member ?? {}).every((resource) => {
+    if (!inventorySource["@type"] || !resource["@type"]) return true
+    const resourceTarget = getInventoryItem(inventoryTarget, resource["@type"])
 
     return resource.quantity <= resourceTarget.quantity
   })

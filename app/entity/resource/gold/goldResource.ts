@@ -1,4 +1,4 @@
-import { createResourceInventory } from "@/packages/game/inventory/InventoryItemInterface"
+import { createResourceInventory } from "@/packages/game/inventory/InventoryResource"
 import goldIcon from "./img.png"
 
 export const goldResourceMetadata = createResourceInventory({

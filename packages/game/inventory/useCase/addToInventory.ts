@@ -1,30 +1,33 @@
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
-import { CanBeInventoryItemInterface } from "@/packages/game/inventory/InventoryItemInterface"
-import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import {
+  CanBeInventoryItemInterface,
+  InventoryInterface,
+} from "@/packages/game/inventory/InventoryResource"
 import { inventoryIsFull } from "@/packages/game/inventory/useCase/inventoryIsFull"
 import { freeSpaceInInventory } from "@/packages/game/inventory/useCase/freeSpaceInInventory"
+import { updateInventory } from "@/packages/game/inventory/useCase/updateInventory"
 
 export function addToInventory(
-  canBeInventory: CanBeInventoryInterface,
+  inventory: InventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
   quantity: number = 0,
 ): number {
-  const currentItem = getInventoryItem(canBeInventory, inventoryType)
+  const currentItem = getInventoryItem(inventory, inventoryType)
   if (quantity > 0) {
-    if (inventoryIsFull(canBeInventory)) return 0
+    if (inventoryIsFull(inventory)) return 0
 
-    const freeSpace = freeSpaceInInventory(canBeInventory)
+    const freeSpace = freeSpaceInInventory(inventory)
 
     if (quantity > freeSpace) quantity = freeSpace
   }
 
-  if (quantity < 0) {
-    if (currentItem.quantity < Math.abs(quantity)) {
-      quantity = currentItem.quantity === 0 ? 0 : -currentItem.quantity
-    }
+  if (quantity < 0 && currentItem.quantity < Math.abs(quantity)) {
+    quantity = currentItem.quantity === 0 ? 0 : -currentItem.quantity
   }
 
   currentItem.quantity += quantity
+
+  updateInventory(inventory, currentItem)
 
   return quantity
 }

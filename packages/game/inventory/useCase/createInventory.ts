@@ -1,9 +1,11 @@
-import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import {
+  InventoryInterface,
+  InventoryItemRequest,
+} from "@/packages/game/inventory/InventoryResource"
 import { createJsonLdCollection } from "@/packages/jsonLd/jsonLd"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { InventoryItemRequest } from "@/packages/game/inventory/InventoryItemInterface"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 
 interface Params {

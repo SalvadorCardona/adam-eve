@@ -150,6 +150,7 @@ export function updateItem<T extends BaseJsonLdItemInterface>(
 ): T {
   item["@version"] = (item["@version"] ?? 0) + 1
   containerPubSub.publish(item["@id"], { item, action })
+
   if (item["@type"]) {
     containerPubSub.publish(item["@type"], { item, action })
   }

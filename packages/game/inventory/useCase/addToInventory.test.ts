@@ -15,53 +15,67 @@ describe("addToInventory", () => {
     it("adds the requested quantity and returns it when there is room", () => {
       const entity = entityMetadata.create()
 
-      const added = addToInventory(entity, woodResourceMetadata, 4)
+      const added = addToInventory(entity.inventory, woodResourceMetadata, 4)
 
       expect(added).toBe(4)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(4)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        4,
+      )
     })
 
     it("accumulates across successive calls on the same item", () => {
       const entity = entityMetadata.create()
 
-      addToInventory(entity, woodResourceMetadata, 3)
-      const added = addToInventory(entity, woodResourceMetadata, 2)
+      addToInventory(entity.inventory, woodResourceMetadata, 3)
+      const added = addToInventory(entity.inventory, woodResourceMetadata, 2)
 
       expect(added).toBe(2)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(5)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        5,
+      )
     })
 
     it("caps the quantity to the available free space and returns the capped value", () => {
       const entity = entityMetadata.create()
       const size = entityMetadata.propriety.inventorySize as number
 
-      const added = addToInventory(entity, woodResourceMetadata, size + 100)
+      const added = addToInventory(
+        entity.inventory,
+        woodResourceMetadata,
+        size + 100,
+      )
 
       expect(added).toBe(size)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(size)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        size,
+      )
     })
 
     it("returns 0 and does not change anything when the inventory is full", () => {
       const entity = entityMetadata.create()
       const size = entityMetadata.propriety.inventorySize as number
 
-      addToInventory(entity, woodResourceMetadata, size)
-      const added = addToInventory(entity, woodResourceMetadata, 5)
+      addToInventory(entity.inventory, woodResourceMetadata, size)
+      const added = addToInventory(entity.inventory, woodResourceMetadata, 5)
 
       expect(added).toBe(0)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(size)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        size,
+      )
     })
 
     it("shares the inventory space across different resources", () => {
       const entity = entityMetadata.create()
       const size = entityMetadata.propriety.inventorySize as number
 
-      addToInventory(entity, woodResourceMetadata, size - 2)
-      const added = addToInventory(entity, goldResourceMetadata, 5)
+      addToInventory(entity.inventory, woodResourceMetadata, size - 2)
+      const added = addToInventory(entity.inventory, goldResourceMetadata, 5)
 
       expect(added).toBe(2)
-      expect(getInventoryItem(entity, goldResourceMetadata).quantity).toBe(2)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(
+      expect(getInventoryItem(entity.inventory, goldResourceMetadata).quantity).toBe(
+        2,
+      )
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
         size - 2,
       )
     })
@@ -70,52 +84,62 @@ describe("addToInventory", () => {
   describe("negative quantity", () => {
     it("removes the requested quantity when available", () => {
       const entity = entityMetadata.create()
-      addToInventory(entity, woodResourceMetadata, 6)
+      addToInventory(entity.inventory, woodResourceMetadata, 6)
 
-      const removed = addToInventory(entity, woodResourceMetadata, -4)
+      const removed = addToInventory(entity.inventory, woodResourceMetadata, -4)
 
       expect(removed).toBe(-4)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(2)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        2,
+      )
     })
 
     it("clamps the removal to the available quantity", () => {
       const entity = entityMetadata.create()
-      addToInventory(entity, woodResourceMetadata, 3)
+      addToInventory(entity.inventory, woodResourceMetadata, 3)
 
-      const removed = addToInventory(entity, woodResourceMetadata, -10)
+      const removed = addToInventory(entity.inventory, woodResourceMetadata, -10)
 
       expect(removed).toBe(-3)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(0)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        0,
+      )
     })
 
     it("returns 0 when removing from an item that does not exist yet", () => {
       const entity = entityMetadata.create()
 
-      const removed = addToInventory(entity, woodResourceMetadata, -5)
+      const removed = addToInventory(entity.inventory, woodResourceMetadata, -5)
 
       expect(removed).toBe(0)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(0)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        0,
+      )
     })
   })
 
   describe("zero quantity", () => {
     it("returns 0 and does not modify the item", () => {
       const entity = entityMetadata.create()
-      addToInventory(entity, woodResourceMetadata, 4)
+      addToInventory(entity.inventory, woodResourceMetadata, 4)
 
-      const result = addToInventory(entity, woodResourceMetadata, 0)
+      const result = addToInventory(entity.inventory, woodResourceMetadata, 0)
 
       expect(result).toBe(0)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(4)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        4,
+      )
     })
 
     it("returns 0 when called without an explicit quantity", () => {
       const entity = entityMetadata.create()
 
-      const result = addToInventory(entity, woodResourceMetadata)
+      const result = addToInventory(entity.inventory, woodResourceMetadata)
 
       expect(result).toBe(0)
-      expect(getInventoryItem(entity, woodResourceMetadata).quantity).toBe(0)
+      expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(
+        0,
+      )
     })
   })
 

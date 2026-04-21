@@ -14,8 +14,9 @@ import { createVector3 } from "@/packages/math/vector"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { addActionToEntity } from "@/packages/game/action/AddActionToEntity"
+import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 
-export function entityFactory<T extends EntityInterface = EntityInterface>(payload: {
+export function createEntity<T extends EntityInterface = EntityInterface>(payload: {
   item?: Partial<T>
   game: GameInterface
   resource: EntityResourceInterface
@@ -24,6 +25,7 @@ export function entityFactory<T extends EntityInterface = EntityInterface>(paylo
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
+    inventory: createInventory(),
     createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 1, 0),
     entityType: resource?.entityType ?? resource?.propriety?.entityType,

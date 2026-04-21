@@ -16,7 +16,7 @@ import { ActionUserResource } from "@/packages/game/actionUser/ActionUserResourc
 import { PlayerInterface } from "@/packages/game/player/playerMetadata"
 import { BoundingInterface, createBoundingByABB } from "@/packages/math/boudingBox"
 import { createMatrix2D, Matrix2DInterface } from "@/packages/math/matrix"
-import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 import { ActionBagInterface } from "@/packages/game/entity/ActionResourceInterface"
 
@@ -91,7 +91,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
     time: 0,
     actions: {},
     entities: {},
-    inventory: createInventory({ size: 10000 }),
+    inventory: createInventory({ size: 10000000 }),
     createdAt: new Date(),
     mouseState: createJsonLd<MouseState>("mouseState", {
       startPosition: createVector2(),

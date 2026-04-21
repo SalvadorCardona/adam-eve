@@ -4,7 +4,7 @@ import { EntityState } from "@/packages/game/entity/EntityState"
 import { ConsumablePathInterface } from "@/packages/math/path"
 import { Direction } from "@/packages/math/matrix"
 import { PlayerInterface } from "@/packages/game/player/playerMetadata"
-import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import { ActionBagInterface } from "@/packages/game/action/ActionResourceInterface"
 
@@ -29,7 +29,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   actions?: ActionBagInterface
   createdAt: number
   workers?: EntityInterface["@id"][]
-  inventory?: InventoryInterface
+  inventory: InventoryInterface
   connections?: Partial<Record<Direction, JsonLdIri>>
   size: Vector3Interface
   entityType?: EntityType
@@ -37,7 +37,12 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
 }
 
 export function isEntity(entity: any): entity is EntityInterface {
-  return entity != null && typeof entity === "object" && "rotation" in entity && "createdAt" in entity
+  return (
+    entity != null &&
+    typeof entity === "object" &&
+    "rotation" in entity &&
+    "createdAt" in entity
+  )
 }
 
 export function isGroundEntity(entity: EntityInterface) {

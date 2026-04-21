@@ -8,10 +8,7 @@ import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/tran
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
 import { entityAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
-import {
-  EntityFaction,
-  EntityFaction as Faction,
-} from "@/packages/game/entity/EntityInterface"
+import { EntityFaction, EntityFaction as Faction } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { createVector3 } from "@/packages/math/vector"
 
@@ -21,11 +18,7 @@ import { forumEntityResource } from "@/app/entity/building/forum/forumEntityReso
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { goldResourceMetadata } from "@/app/entity/resource/gold/goldResource"
-import {
-  createBuilding,
-  createCharacter,
-  createHarvestable,
-} from "@/packages/game/entity/createBuilding"
+import { createBuilding, createCharacter, createHarvestable } from "@/packages/game/entity/createBuilding"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 
 function newGame(): GameInterface {
@@ -105,11 +98,11 @@ describe("Scenario: inventory management", () => {
       item: { position: createVector3(0, 0, 0) },
     })
 
-    addToInventory(worker, woodResourceMetadata, 5)
-    addToInventory(worker, goldResourceMetadata, 3)
+    addToInventory(worker.inventory, woodResourceMetadata, 5)
+    addToInventory(worker.inventory, goldResourceMetadata, 3)
 
-    expect(getInventoryItem(worker, woodResourceMetadata).quantity).toBe(5)
-    expect(getInventoryItem(worker, goldResourceMetadata).quantity).toBe(3)
+    expect(getInventoryItem(worker.inventory, woodResourceMetadata).quantity).toBe(5)
+    expect(getInventoryItem(worker.inventory, goldResourceMetadata).quantity).toBe(3)
   })
 
   it("respects inventory size limits", () => {
@@ -118,10 +111,12 @@ describe("Scenario: inventory management", () => {
       item: { position: createVector3(0, 0, 0) },
     })
 
-    const added = addToInventory(worker, woodResourceMetadata, 100)
+    const added = addToInventory(worker.inventory, woodResourceMetadata, 100)
 
     expect(added).toBe(10)
-    expect(getInventoryItem(worker, woodResourceMetadata).quantity).toBe(10)
+    expect(getInventoryItem(worker.inventory, woodResourceMetadata).quantity).toBe(
+      10,
+    )
   })
 
   it("transfers resources between two inventories", () => {
@@ -134,12 +129,17 @@ describe("Scenario: inventory management", () => {
       item: { position: createVector3(1, 0, 0) },
     })
 
-    addToInventory(source, woodResourceMetadata, 8)
-    const moved = transfertInventoryByItem(source, target, woodResourceMetadata, 5)
+    addToInventory(source.inventory, woodResourceMetadata, 8)
+    const moved = transfertInventoryByItem(
+      source.inventory,
+      target.inventory,
+      woodResourceMetadata,
+      5,
+    )
 
     expect(moved).toBe(5)
-    expect(getInventoryItem(source, woodResourceMetadata).quantity).toBe(3)
-    expect(getInventoryItem(target, woodResourceMetadata).quantity).toBe(5)
+    expect(getInventoryItem(source.inventory, woodResourceMetadata).quantity).toBe(3)
+    expect(getInventoryItem(target.inventory, woodResourceMetadata).quantity).toBe(5)
   })
 })
 
@@ -203,13 +203,6 @@ describe("Scenario: combat between enemies", () => {
 })
 
 describe("Scenario: building construction requires resources", () => {
-  it("a tower requires 5 wood as construction material", () => {
-    expect(towerEntityResource.propriety.resourceForConstruction).toBeDefined()
-
-    const required = towerEntityResource.propriety.resourceForConstruction!
-    expect(enoughResource(required, {})).toBe(false)
-  })
-
   it("the tower's construction is satisfied once enough wood is gathered", () => {
     const game = newGame()
     const tower = towerEntityResource.create({
@@ -219,9 +212,9 @@ describe("Scenario: building construction requires resources", () => {
     addEntityToGame(game, tower)
 
     const required = towerEntityResource.propriety.resourceForConstruction!
-    expect(enoughResource(required, tower.inventory ?? {})).toBe(false)
+    expect(enoughResource(required, tower.inventory)).toBe(false)
 
-    addToInventory(tower, woodResourceMetadata, 5)
+    addToInventory(tower.inventory, woodResourceMetadata, 5)
 
     expect(enoughResource(required, tower.inventory!)).toBe(true)
   })

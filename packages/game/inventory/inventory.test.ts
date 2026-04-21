@@ -18,70 +18,85 @@ describe("Inventory Test", () => {
     let lastQuantity = 0
     const entity = entityMetadata.create()
 
-    lastQuantity = addToInventory(entity, woodResourceMetadata, 5)
+    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, 5)
     expect(lastQuantity).toBe(5)
-    const item = getInventoryItem(entity, woodResourceMetadata)
+    const item = getInventoryItem(entity.inventory, woodResourceMetadata)
 
     expect(item.quantity).toBe(5)
 
-    lastQuantity = addToInventory(entity, woodResourceMetadata, -3)
+    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, -3)
     expect(lastQuantity).toBe(-3)
     expect(item.quantity).toBe(2)
 
-    lastQuantity = addToInventory(entity, woodResourceMetadata, -10)
+    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, -10)
     expect(lastQuantity).toBe(-2)
     expect(item.quantity).toBe(0)
   })
   it("Context getTotal Inventory", () => {
     const entity = entityMetadata.create()
 
-    addToInventory(entity, woodResourceMetadata, 5)
-    addToInventory(entity, goldResourceMetadata, 8)
-    addToInventory(entity, waterResourceMetadata, 13)
-    addToInventory(entity, woodResourceMetadata, 5)
+    addToInventory(entity.inventory, woodResourceMetadata, 5)
+    addToInventory(entity.inventory, goldResourceMetadata, 8)
+    addToInventory(entity.inventory, waterResourceMetadata, 13)
+    addToInventory(entity.inventory, woodResourceMetadata, 5)
 
-    expect(getTotalQuantityInInventory(entity)).toBe(10)
+    expect(getTotalQuantityInInventory(entity.inventory)).toBe(10)
   })
   it("Context Inventory is full", () => {
     const entity = entityMetadata.create()
 
     addToInventory(
-      entity,
+      entity.inventory,
       woodResourceMetadata,
       (entityMetadata.propriety.inventorySize as number) - 1,
     )
 
-    expect(inventoryIsFull(entity)).toBeFalsy()
+    expect(inventoryIsFull(entity.inventory)).toBeFalsy()
 
     addToInventory(
-      entity,
+      entity.inventory,
       woodResourceMetadata,
       (entityMetadata.propriety.inventorySize as number) + 1,
     )
 
-    expect(inventoryIsFull(entity)).toBeTruthy()
+    expect(inventoryIsFull(entity.inventory)).toBeTruthy()
   })
   it("Context Transfert Inventory", () => {
     const entitySource = entityMetadata.create()
     const entityTarget = entityMetadata.create()
 
-    addToInventory(entitySource, woodResourceMetadata, 10)
+    addToInventory(entitySource.inventory, woodResourceMetadata, 10)
 
-    expect(getInventoryItem(entitySource, woodResourceMetadata).quantity).toBe(10)
-
-    transfertInventoryByItem(entitySource, entityTarget, woodResourceMetadata, 3)
-
-    expect(getInventoryItem(entitySource, woodResourceMetadata).quantity).toBe(7)
-    expect(getInventoryItem(entityTarget, woodResourceMetadata).quantity).toBe(3)
+    expect(
+      getInventoryItem(entitySource.inventory, woodResourceMetadata).quantity,
+    ).toBe(10)
 
     transfertInventoryByItem(
-      entitySource,
-      entityTarget,
+      entitySource.inventory,
+      entityTarget.inventory,
+      woodResourceMetadata,
+      3,
+    )
+
+    expect(
+      getInventoryItem(entitySource.inventory, woodResourceMetadata).quantity,
+    ).toBe(7)
+    expect(
+      getInventoryItem(entityTarget.inventory, woodResourceMetadata).quantity,
+    ).toBe(3)
+
+    transfertInventoryByItem(
+      entitySource.inventory,
+      entityTarget.inventory,
       woodResourceMetadata,
       Infinity,
     )
 
-    expect(getInventoryItem(entitySource, woodResourceMetadata).quantity).toBe(0)
-    expect(getInventoryItem(entityTarget, woodResourceMetadata).quantity).toBe(10)
+    expect(
+      getInventoryItem(entitySource.inventory, woodResourceMetadata).quantity,
+    ).toBe(0)
+    expect(
+      getInventoryItem(entityTarget.inventory, woodResourceMetadata).quantity,
+    ).toBe(10)
   })
 })

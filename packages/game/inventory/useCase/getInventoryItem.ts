@@ -1,18 +1,15 @@
-import { updateInventory } from "@/packages/game/inventory/useCase/updateInventory"
 import {
   CanBeInventoryItemInterface,
-  InventoryItemInterface,
-} from "@/packages/game/inventory/InventoryItemInterface"
-import { CanBeInventoryInterface } from "@/packages/game/inventory/InventoryInterface"
-import { getInventory } from "@/packages/game/inventory/useCase/getInventory"
+  InventoryInterface,
+  InventoryResource,
+} from "@/packages/game/inventory/InventoryResource"
 import { getLdIri } from "@/packages/jsonLd/jsonLd"
 import { createInventoryItem } from "@/packages/game/inventory/useCase/createInventoryItem"
 
 export function getInventoryItem(
-  canBeInventory: CanBeInventoryInterface,
+  inventory: InventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
-): InventoryItemInterface {
-  const inventory = getInventory(canBeInventory)
+): InventoryResource {
   const type = getLdIri(inventoryType)
 
   const item = inventory.member[type]
@@ -23,8 +20,6 @@ export function getInventoryItem(
     inventoryItem: type,
     quantity: 0,
   })
-
-  updateInventory(inventory, newItem)
 
   return newItem
 }

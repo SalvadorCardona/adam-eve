@@ -1,13 +1,10 @@
 import { getResource } from "@/packages/resource/ResourceInterface"
 import {
-  InventoryItemInterface,
   InventoryItemRequest,
   InventoryResource,
-} from "@/packages/game/inventory/InventoryItemInterface"
+} from "@/packages/game/inventory/InventoryResource"
 
-export function createInventoryItem(
-  inventoryItemRequest: InventoryItemRequest,
-): InventoryItemInterface {
+export function createInventoryItem(inventoryItemRequest: InventoryItemRequest) {
   const metaData = getResource<InventoryResource>(inventoryItemRequest.inventoryItem)
   return metaData.create({
     item: { quantity: inventoryItemRequest?.quantity ?? 0 },

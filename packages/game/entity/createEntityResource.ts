@@ -1,4 +1,4 @@
-import { entityFactory } from "@/packages/game/entity/entityFactory"
+import { createEntity } from "@/packages/game/entity/createEntity"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import {
   hasCollisionInGame,
@@ -20,7 +20,7 @@ export function createEntityResource<
       )
     },
     "@type": "entity",
-    create: entityFactory,
+    create: createEntity,
   } as Partial<EntityResourceInterface>
 
   return createResourceGame({ ...meta, ...resource }) as T

@@ -1,5 +1,7 @@
-import { InventoryItemInterface } from "@/packages/game/inventory/InventoryItemInterface"
-import { InventoryInterface } from "@/packages/game/inventory/InventoryInterface"
+import {
+  InventoryInterface,
+  InventoryResource,
+} from "@/packages/game/inventory/InventoryResource"
 import {
   ContainerAction,
   JsonLDItem,
@@ -10,7 +12,7 @@ import {
 
 export function updateInventory(
   inventory: InventoryInterface,
-  item: InventoryItemInterface,
+  item: InventoryResource,
 ): void {
   updateCollectionOfType(inventory, item)
 }

@@ -1,5 +1,5 @@
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { InventoryResource } from "@/packages/game/inventory/InventoryItemInterface"
+import { InventoryResource } from "@/packages/game/inventory/InventoryResource"
 import { JsonLdIri, JsonLdTypeContainerInterface } from "@/packages/jsonLd/jsonLd"
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
