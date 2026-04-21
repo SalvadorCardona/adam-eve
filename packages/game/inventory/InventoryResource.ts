@@ -1,4 +1,4 @@
-import { BaseJsonLdItemInterface, JsonLdType, JsonLdTypeCollection } from "@/packages/jsonLd/jsonLd"
+import { BaseJsonLdItemInterface, JsonLdTypeAble, JsonLdTypeCollection } from "@/packages/jsonLd/jsonLd"
 import { BaseGameResource, createResourceGame } from "@/packages/game/BaseGameResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
@@ -6,9 +6,7 @@ export interface InventoryItem extends BaseJsonLdItemInterface {
   quantity: number
 }
 
-export type InventoryItemType = JsonLdType
-
-export type CanBeInventoryItemInterface = InventoryItemType | BaseJsonLdItemInterface
+export type CanBeInventoryItemInterface = JsonLdTypeAble
 
 export interface InventoryItemRequest {
   quantity?: number
@@ -19,7 +17,7 @@ export type InventoryInterface = JsonLdTypeCollection<InventoryItem> & {
   size: number
 }
 
-export interface InventoryResource extends BaseGameResource<InventoryResource> {}
+export interface InventoryResource extends BaseGameResource<InventoryItem> {}
 
 export function createResourceInventory<
   T extends BaseGameResource<InventoryResource> =

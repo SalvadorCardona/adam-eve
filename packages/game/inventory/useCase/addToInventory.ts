@@ -12,6 +12,7 @@ export function addToInventory(
   inventoryType: CanBeInventoryItemInterface,
   quantity: number = 0,
 ): number {
+  console.log(inventoryType)
   const currentItem = getInventoryItem(inventory, inventoryType)
   if (quantity > 0) {
     if (inventoryIsFull(inventory)) return 0
