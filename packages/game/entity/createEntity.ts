@@ -25,7 +25,7 @@ export function createEntity<T extends EntityInterface = EntityInterface>(payloa
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
-    inventory: createInventory(),
+    inventory: createInventory({ size: resource?.propriety?.inventorySize }),
     createdAt: payload?.game?.time ?? 0,
     position: createVector3(0, 1, 0),
     entityType: resource?.entityType ?? resource?.propriety?.entityType,
