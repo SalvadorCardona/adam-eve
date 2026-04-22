@@ -1,10 +1,13 @@
 import { createJsonLd } from "@/packages/jsonLd/jsonLd"
-import { EntityResourceInterface, EntityType } from "@/packages/game/entity/EntityResourceInterface"
+import {
+  EntityResourceInterface,
+  EntityType,
+} from "@/packages/game/entity/EntityResourceInterface"
 import EntityInterface, {
   EntityFaction,
   isBuildingEntity,
   isCharacterEntity,
-  isGroundEntity
+  isGroundEntity,
 } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { roundVectorToDown } from "@/packages/math/round"
@@ -30,7 +33,7 @@ export function createEntity<T extends EntityInterface = EntityInterface>(payloa
 
   const baseEntity: Partial<EntityInterface> = {
     rotation: 0,
-    inventory: createInventory({ size: 20 }),
+    inventory: createInventory({ size: resource?.propriety?.inventorySize }),
     createdAt: payload?.game?.time ?? 0,
     position: defaultPosition,
     entityType: resource?.entityType ?? resource?.propriety?.entityType,
