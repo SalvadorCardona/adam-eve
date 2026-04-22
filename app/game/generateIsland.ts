@@ -105,13 +105,14 @@ export function generateIsland(game: GameInterface): GameInterface {
     [ISLAND_CENTER_X + 4, ISLAND_CENTER_Z + 4],
     [ISLAND_CENTER_X - 2, ISLAND_CENTER_Z + 5],
   ]
+
   for (const [x, z] of treePositions) {
     spawnAt(game, treeEntityMetaData, x, z)
   }
 
   const goldPositions: Array<[number, number]> = [
     [ISLAND_CENTER_X + 5, ISLAND_CENTER_Z + 1],
-    [ISLAND_CENTER_X - 5, ISLAND_CENTER_Z + 4],
+    [ISLAND_CENTER_X - 4, ISLAND_CENTER_Z + 3],
   ]
   for (const [x, z] of goldPositions) {
     spawnAt(game, goldResourceEntityResource, x, z)

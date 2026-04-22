@@ -1,6 +1,6 @@
 import {
   InventoryInterface,
-  InventoryResource,
+  InventoryItem,
 } from "@/packages/game/inventory/InventoryResource"
 import {
   ContainerAction,
@@ -12,7 +12,7 @@ import {
 
 export function updateInventory(
   inventory: InventoryInterface,
-  item: InventoryResource,
+  item: InventoryItem,
 ): void {
   updateCollectionOfType(inventory, item)
 }
