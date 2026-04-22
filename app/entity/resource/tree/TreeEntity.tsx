@@ -24,11 +24,12 @@ export const treeDeathEntityMeta = createEntityResource({
     },
   },
   entityType: EntityType.effect,
-  ["@id"]: "tree",
+  ["@id"]: "tree-death",
 })
 
 export const treeEntityMetaData = createEntityResource({
   entityType: EntityType.resource,
+  label: "Arbre",
   asset: {
     icon: iconSrc,
     model2d: model,

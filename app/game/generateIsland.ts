@@ -9,6 +9,8 @@ import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResou
 import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
+import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
+import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
 import { EntityState } from "@/packages/game/entity/EntityState"
@@ -128,6 +130,20 @@ export function generateIsland(game: GameInterface): GameInterface {
 
   spawnBuildingAt(
     game,
+    timberHouseEntityMetaData,
+    ISLAND_CENTER_X - 4,
+    ISLAND_CENTER_Z + 1,
+  )
+
+  spawnBuildingAt(
+    game,
+    forestierEntityResource,
+    ISLAND_CENTER_X - 1,
+    ISLAND_CENTER_Z + 4,
+  )
+
+  spawnBuildingAt(
+    game,
     towerEntityResource,
     ISLAND_CENTER_X + ISLAND_RADIUS - 1,
     ISLAND_CENTER_Z - 2,
@@ -145,6 +161,8 @@ export function generateIsland(game: GameInterface): GameInterface {
     [ISLAND_CENTER_X, ISLAND_CENTER_Z - 3],
     [ISLAND_CENTER_X + 2, ISLAND_CENTER_Z + 2],
     [ISLAND_CENTER_X - 3, ISLAND_CENTER_Z + 2],
+    [ISLAND_CENTER_X + 1, ISLAND_CENTER_Z + 3],
+    [ISLAND_CENTER_X - 2, ISLAND_CENTER_Z - 2],
   ]
   for (const [x, z] of workerPositions) {
     spawnAt(game, workerEntityResource, x, z)

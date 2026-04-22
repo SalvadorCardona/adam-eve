@@ -22,7 +22,7 @@ import { roadGroundEntityMetadata } from "@/app/entity/ground/road/roadGroundEnt
 import { gameResource } from "@/packages/game/game/gameResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
-import { towerAttackActionResource } from "@/app/entity/building/tower/towerActionAttackResource"
+import towerAttackActionResource from "@/app/entity/building/tower/towerActionAttackResource"
 import { arrowEntityResource } from "@/app/entity/attack/ArrowEntityResource"
 import { BridgeEntityResource } from "@/app/entity/ground/bridge/BridgeEntityResource"
 import { zombieAttackActionResource } from "@/app/entity/character/zombie/zombieAttackActionResource"
@@ -34,6 +34,7 @@ import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMine
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowledgeResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
+import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
 import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
 import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
 
@@ -71,6 +72,7 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   resourceMappingMetaData,
   knowledgeResourceMetadata,
   researchCenterEntityResource,
+  forestierEntityResource,
   playerEntityResource,
   playerAttackActionResource,
 ]

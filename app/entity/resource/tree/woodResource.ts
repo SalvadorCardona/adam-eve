@@ -1,9 +1,10 @@
 import { createResourceInventory } from "@/packages/game/inventory/InventoryResource"
-import goldIcon from "@/app/inventory/wheat/img.png"
+import woodIcon from "./img.png"
 
 export const woodResourceMetadata = createResourceInventory({
   "@id": "resource/wood",
+  label: "Bois",
   asset: {
-    icon: goldIcon,
+    icon: woodIcon,
   },
 })

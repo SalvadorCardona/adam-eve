@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="roofGradIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a2a14"/>
+      <stop offset="1" stop-color="#3a1808"/>
+    </linearGradient>
+    <linearGradient id="logGradIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b2824e"/>
+      <stop offset="1" stop-color="#7a4e28"/>
+    </linearGradient>
+    <radialGradient id="windowGlowIcon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe79a"/>
+      <stop offset="1" stop-color="#d89030"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="42" y="18" width="6" height="12" fill="#4a3020" stroke="#1e1208" stroke-width="0.7"/>
+  <rect x="41" y="17" width="8" height="2" fill="#2e1a0e"/>
+
+  <polygon points="8,36 32,12 56,36 52,38 32,16 12,38" fill="url(#roofGradIcon)" stroke="#1e0c04" stroke-width="0.7"/>
+
+  <rect x="12" y="34" width="40" height="26" fill="url(#logGradIcon)" stroke="#3a1e08" stroke-width="0.7"/>
+  <g stroke="#3a1e08" stroke-width="0.5" fill="none">
+    <path d="M12,40 Q32,39 52,40"/>
+    <path d="M12,46 Q32,45 52,46"/>
+    <path d="M12,52 Q32,51 52,52"/>
+  </g>
+  <g fill="#3a1e08">
+    <circle cx="12" cy="37" r="1.2"/>
+    <circle cx="52" cy="37" r="1.2"/>
+    <circle cx="12" cy="43" r="1.2"/>
+    <circle cx="52" cy="43" r="1.2"/>
+    <circle cx="12" cy="49" r="1.2"/>
+    <circle cx="52" cy="49" r="1.2"/>
+    <circle cx="12" cy="55" r="1.2"/>
+    <circle cx="52" cy="55" r="1.2"/>
+  </g>
+
+  <rect x="16" y="40" width="8" height="8" rx="0.5" fill="url(#windowGlowIcon)" stroke="#3a1e08" stroke-width="0.7"/>
+  <line x1="20" y1="40" x2="20" y2="48" stroke="#3a1e08" stroke-width="0.5"/>
+  <line x1="16" y1="44" x2="24" y2="44" stroke="#3a1e08" stroke-width="0.5"/>
+
+  <rect x="40" y="40" width="8" height="8" rx="0.5" fill="url(#windowGlowIcon)" stroke="#3a1e08" stroke-width="0.7"/>
+  <line x1="44" y1="40" x2="44" y2="48" stroke="#3a1e08" stroke-width="0.5"/>
+  <line x1="40" y1="44" x2="48" y2="44" stroke="#3a1e08" stroke-width="0.5"/>
+
+  <path d="M26,60 L26,46 Q26,40 32,40 Q38,40 38,46 L38,60 Z" fill="#3a1e08" stroke="#1e0c04" stroke-width="0.7"/>
+  <circle cx="35" cy="51" r="0.9" fill="#d8b040"/>
+</svg>

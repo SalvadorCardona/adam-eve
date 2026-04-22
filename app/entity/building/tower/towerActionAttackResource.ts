@@ -8,7 +8,7 @@ import { createActionResource } from "@/packages/game/action/createActionResourc
 
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 
-export const towerAttackActionResource = createActionResource({
+const towerAttackActionResource = createActionResource({
   ["@id"]: "action/tower-action",
   onFrame: ({ game, action, entity }) => {
     updateNextTick(game, action, 50)
@@ -19,11 +19,11 @@ export const towerAttackActionResource = createActionResource({
     const size = getEntitySize(entity)
 
     const zombie = entityQueryFindOne(game, {
-      "@type": zombieEntityResource["@type"],
+      "@type": zombieEntityResource["@id"],
       findClosestOf: { position: entity.position },
       "@idIsNot": entity["@id"],
     })
-
+    console.log(zombie)
     if (!zombie) {
       return
     }
@@ -45,3 +45,4 @@ export const towerAttackActionResource = createActionResource({
     updateNextTick(game, action, 400)
   },
 })
+export default towerAttackActionResource
