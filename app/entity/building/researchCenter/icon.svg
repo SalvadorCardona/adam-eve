@@ -1,50 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
   <defs>
-    <style>
-      .beam { animation: beam 2s ease-in-out infinite; transform-origin: 32px 20px; }
-      .ring1 { animation: ring 2s ease-out infinite; transform-origin: 32px 20px; }
-      .ring2 { animation: ring 2s ease-out infinite 0.7s; transform-origin: 32px 20px; }
-      .ring3 { animation: ring 2s ease-out infinite 1.4s; transform-origin: 32px 20px; }
-      .light { animation: light 1.5s ease-in-out infinite; }
-      @keyframes beam {
-        0%, 100% { opacity: 0.6; }
-        50% { opacity: 1; }
-      }
-      @keyframes ring {
-        0% { r: 4; opacity: 0.8; }
-        100% { r: 18; opacity: 0; }
-      }
-      @keyframes light {
-        0%, 100% { fill: #fbbf24; }
-        50% { fill: #f59e0b; filter: drop-shadow(0 0 4px #fbbf24); }
-      }
-    </style>
+    <linearGradient id="stoneGradIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a928a"/>
+      <stop offset="1" stop-color="#5c544c"/>
+    </linearGradient>
+    <linearGradient id="roofGradIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c1d95"/>
+      <stop offset="1" stop-color="#1a0f3c"/>
+    </linearGradient>
+    <radialGradient id="orbGradIcon" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#c4b5fd"/>
+      <stop offset="1" stop-color="#6d28d9"/>
+    </radialGradient>
+    <radialGradient id="windowGlowIcon2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe79a"/>
+      <stop offset="1" stop-color="#d89030"/>
+    </radialGradient>
   </defs>
 
-  <!-- Base bâtiment -->
-  <rect x="10" y="38" width="44" height="18" rx="2" fill="#1e3a5f" stroke="#1e40af" stroke-width="1.5"/>
-  <!-- Façade centrale -->
-  <rect x="20" y="30" width="24" height="20" rx="1" fill="#1e40af" stroke="#3b82f6" stroke-width="1"/>
-  <!-- Fenêtres -->
-  <rect x="23" y="34" width="6" height="6" rx="1" fill="#93c5fd"/>
-  <rect x="35" y="34" width="6" height="6" rx="1" fill="#93c5fd"/>
-  <!-- Porte -->
-  <rect x="28" y="44" width="8" height="12" rx="1" fill="#1e3a5f"/>
+  <ellipse cx="32" cy="61" rx="22" ry="2.5" fill="#000" opacity="0.3"/>
 
-  <!-- Tour / antenne -->
-  <rect x="30" y="10" width="4" height="22" fill="#374151"/>
-  <!-- Base antenne -->
-  <rect x="26" y="30" width="12" height="3" rx="1" fill="#4b5563"/>
+  <polygon points="20,26 32,4 44,26" fill="url(#roofGradIcon)" stroke="#0d0620" stroke-width="0.7"/>
+  <polygon points="20,26 44,26 42,28 22,28" fill="#0d0620"/>
 
-  <!-- Antenne parabole stylisée -->
-  <ellipse cx="32" cy="20" rx="10" ry="5" fill="none" stroke="#60a5fa" stroke-width="2" transform="rotate(-20, 32, 20)"/>
-  <line x1="32" y1="20" x2="26" y2="14" stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="30" y="3" width="4" height="4" fill="#4c1d95"/>
+  <path d="M34,3 L46,2 L44,5 L46,8 L34,7 Z" fill="#c9a227" stroke="#5a3a0a" stroke-width="0.5"/>
 
-  <!-- Ondes radio animées -->
-  <circle class="ring1" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-  <circle class="ring2" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-  <circle class="ring3" cx="32" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="18" y="26" width="28" height="6" fill="#6a625c" stroke="#2a2420" stroke-width="0.7"/>
+  <g fill="#3c3632">
+    <rect x="19" y="26" width="3" height="3"/>
+    <rect x="25" y="26" width="3" height="3"/>
+    <rect x="31" y="26" width="3" height="3"/>
+    <rect x="37" y="26" width="3" height="3"/>
+    <rect x="43" y="26" width="3" height="3"/>
+  </g>
 
-  <!-- Lumière clignotante au sommet -->
-  <circle class="light" cx="32" cy="10" r="3" fill="#fbbf24"/>
+  <rect x="20" y="32" width="24" height="28" fill="url(#stoneGradIcon)" stroke="#2a2420" stroke-width="0.7"/>
+
+  <g stroke="#3c3632" stroke-width="0.5" fill="none" opacity="0.8">
+    <line x1="20" y1="38" x2="44" y2="38"/>
+    <line x1="20" y1="46" x2="44" y2="46"/>
+    <line x1="20" y1="54" x2="44" y2="54"/>
+    <line x1="26" y1="32" x2="26" y2="38"/>
+    <line x1="34" y1="38" x2="34" y2="32"/>
+    <line x1="30" y1="38" x2="30" y2="46"/>
+    <line x1="38" y1="46" x2="38" y2="38"/>
+    <line x1="24" y1="46" x2="24" y2="54"/>
+    <line x1="40" y1="54" x2="40" y2="46"/>
+  </g>
+
+  <path d="M28,40 Q28,34 32,34 Q36,34 36,40 L36,48 L28,48 Z" fill="url(#windowGlowIcon2)" stroke="#3a1e08" stroke-width="0.7"/>
+  <line x1="32" y1="34" x2="32" y2="48" stroke="#3a1e08" stroke-width="0.5"/>
+  <line x1="28" y1="42" x2="36" y2="42" stroke="#3a1e08" stroke-width="0.5"/>
+
+  <path d="M27,60 L27,54 Q27,50 32,50 Q37,50 37,54 L37,60 Z" fill="#3a1e08" stroke="#1e0c04" stroke-width="0.7"/>
+  <circle cx="35" cy="56" r="0.8" fill="#d4af37"/>
+
+  <circle cx="32" cy="14" r="3.5" fill="url(#orbGradIcon)" opacity="0.95"/>
+  <circle cx="32" cy="14" r="6" fill="#a78bfa" opacity="0.25"/>
+  <circle cx="31" cy="13" r="1.2" fill="#ffffff" opacity="0.9"/>
 </svg>
