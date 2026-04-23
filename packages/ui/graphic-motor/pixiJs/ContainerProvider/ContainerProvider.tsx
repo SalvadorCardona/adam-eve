@@ -32,7 +32,9 @@ export const PixiContainerProvider = ({
     if (currentContainer && app && app.stage) {
       app.stage.addChild(_currentContainer)
       return () => {
-        app.stage.removeChild(_currentContainer)
+        if (app.stage && _currentContainer.parent === app.stage) {
+          app.stage.removeChild(_currentContainer)
+        }
       }
     }
   }, [currentContainer])

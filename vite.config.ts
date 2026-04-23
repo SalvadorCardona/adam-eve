@@ -28,11 +28,11 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 80,
+    port: 3000,
   },
   preview: {
     host: true,
-    port: 80,
+    port: 3000,
     allowedHosts: true,
   },
   // @ts-ignore used for run test well

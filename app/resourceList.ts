@@ -23,10 +23,10 @@ import { gameResource } from "@/packages/game/game/gameResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import towerAttackActionResource from "@/app/entity/building/tower/towerActionAttackResource"
-import { arrowEntityResource } from "@/app/entity/attack/ArrowEntityResource"
+import { fireballEntityResource } from "@/app/entity/attack/FireballEntityResource"
 import { BridgeEntityResource } from "@/app/entity/ground/bridge/BridgeEntityResource"
 import { zombieAttackActionResource } from "@/app/entity/character/zombie/zombieAttackActionResource"
-import { arrowAttackActionResource } from "@/app/entity/attack/arrowAttackActionResource"
+import { fireballAttackActionResource } from "@/app/entity/attack/fireballAttackActionResource"
 import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { resourceMappingMetaData } from "@/app/resourceMappingMetadata"
@@ -61,8 +61,8 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   zombieEntityResource,
   towerEntityResource,
   towerAttackActionResource,
-  arrowAttackActionResource,
-  arrowEntityResource,
+  fireballAttackActionResource,
+  fireballEntityResource,
   zombieAttackActionResource,
   BridgeEntityResource,
   treeDeathEntityMeta,

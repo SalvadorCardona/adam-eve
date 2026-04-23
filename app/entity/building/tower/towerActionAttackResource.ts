@@ -1,5 +1,5 @@
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
-import { arrowEntityResource } from "@/app/entity/attack/ArrowEntityResource"
+import { fireballEntityResource } from "@/app/entity/attack/FireballEntityResource"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
@@ -31,7 +31,7 @@ const towerAttackActionResource = createActionResource({
       return
     }
 
-    const arrowEntity = arrowEntityResource.create({
+    const fireballEntity = fireballEntityResource.create({
       item: {
         entityAttackTargetIri: zombie["@id"],
         position: { ...entity.position, y: size.y },
@@ -39,7 +39,7 @@ const towerAttackActionResource = createActionResource({
       game,
     })
 
-    addEntityToGame(game, arrowEntity)
+    addEntityToGame(game, fireballEntity)
 
     updateNextTick(game, action, 400)
   },

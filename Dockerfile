@@ -11,5 +11,5 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
 COPY . .
 RUN pnpm build
 
-EXPOSE 80
+EXPOSE 80 3000
 CMD ["pnpm", "run", "serve"]

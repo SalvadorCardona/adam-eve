@@ -25,7 +25,7 @@ const defaultInventoryResources = [
 export function gameLoader(game: GameInterface): GameInterface {
   if (!getByLdTypeIn(game.actions, theDeathActionResource["@id"]).length) {
     const meta = getResource<ActionResourceInterface<any>>(
-      theDeathActionResource["@type"],
+      theDeathActionResource["@id"],
     )
     addAction(game.actions, meta.create({ game }))
   }
@@ -43,7 +43,7 @@ export function gameLoader(game: GameInterface): GameInterface {
   }
 
   for (const resource of defaultInventoryResources) {
-    const type = resource["@type"]
+    const type = resource["@id"]
     if (!type) continue
     if (!game.inventory.member[type]) {
       addToInventory(game.inventory, resource, 100)
