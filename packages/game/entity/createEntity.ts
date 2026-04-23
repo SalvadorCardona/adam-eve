@@ -55,6 +55,7 @@ export function createEntity<T extends EntityInterface = EntityInterface>(payloa
 
   const entityType = payload.resource["@id"] ?? "entity"
   const entity = createJsonLd<EntityInterface>(entityType, baseEntity) as T
+  entity.inventory.entity = entity["@id"]
 
   entity.position = roundVectorToDown(entity.position)
 

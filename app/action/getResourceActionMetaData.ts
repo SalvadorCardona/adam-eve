@@ -13,6 +13,7 @@ import { updateNextTick } from "@/packages/game/action/updateNextTick"
 import { ResourceMappingMetadataInterface } from "@/app/resourceMappingMetadata"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
+import { freeSpaceInInventory } from "@/packages/game/inventory/useCase/freeSpaceInInventory"
 
 export const getResourceActionMetaData = createActionResource({
   "@id": "getResourceAction",
@@ -58,12 +59,9 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
-      const quantityAdded = addToInventory(
-        entity.inventory,
-        resourceMapped.resource,
-        1,
-      )
-      if (quantityAdded === 0) {
+      entity.inventory = addToInventory(entity.inventory, resourceMapped.resource, 1)
+
+      if (!freeSpaceInInventory(entity.inventory)) {
         entity.state = EntityState.go_to_put_resource
       }
 

@@ -11,10 +11,11 @@ export function addToInventory(
   inventory: InventoryInterface,
   inventoryType: CanBeInventoryItemInterface,
   quantity: number = 0,
-): number {
+): InventoryInterface {
   const currentItem = getInventoryItem(inventory, inventoryType)
+
   if (quantity > 0) {
-    if (inventoryIsFull(inventory)) return 0
+    if (inventoryIsFull(inventory)) return inventory
 
     const freeSpace = freeSpaceInInventory(inventory)
 
@@ -27,7 +28,5 @@ export function addToInventory(
 
   currentItem.quantity += quantity
 
-  updateInventory(inventory, currentItem)
-
-  return quantity
+  return updateInventory(inventory, currentItem)
 }

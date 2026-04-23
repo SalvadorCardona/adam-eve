@@ -74,7 +74,7 @@ export default interface GameInterface extends BaseJsonLdItemInterface {
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
-  return createJsonLd("game", {
+  const currentGame = createJsonLd("game", {
     players: createJsonLdCollection("players"),
     gameWorld: createJsonLd<GameWorld>("gameWorld", {
       bounding: createBoundingByABB({
@@ -112,4 +112,8 @@ export function gameFactory(game?: GameInterface): GameInterface {
     }),
     ...(game ?? {}),
   })
+
+  currentGame.inventory.entity = currentGame["@id"]
+
+  return currentGame
 }

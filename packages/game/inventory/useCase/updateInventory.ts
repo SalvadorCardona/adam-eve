@@ -13,8 +13,8 @@ import {
 export function updateInventory(
   inventory: InventoryInterface,
   item: InventoryItem,
-): void {
-  updateCollectionOfType(inventory, item)
+): InventoryInterface {
+  return updateCollectionOfType(inventory, item)
 }
 
 function updateCollectionOfType(
