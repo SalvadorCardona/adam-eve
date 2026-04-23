@@ -1,6 +1,5 @@
 import React, { PropsWithChildren, useEffect, useState } from "react"
 import {
-  Application as PixiApplication,
   ApplicationOptions,
   Assets,
   Container as PixiContainer,
@@ -9,12 +8,7 @@ import {
   TilingSprite as PixiTilingSprite,
   AnimatedSprite as PixiAnimatedSprite,
 } from "pixi.js"
-import {
-  Application,
-  extend,
-  useApplication,
-} from "@pixi/react"
-import { PixiContainerProvider } from "@/packages/ui/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
+import { Application, extend, useApplication } from "@pixi/react"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { assetList } from "@/app/assetList"
@@ -67,9 +61,7 @@ export const PixiProvider: React.FC<{
 
   return (
     <Application {...(options as any)}>
-      <StageBoot>
-        <PixiContainerProvider>{children}</PixiContainerProvider>
-      </StageBoot>
+      <StageBoot>{children}</StageBoot>
     </Application>
   )
 }
@@ -103,5 +95,3 @@ const StageBoot = ({ children }: PropsWithChildren) => {
 
   return <>{children}</>
 }
-
-export { useApplication as usePixiAppInternal } from "@pixi/react"
