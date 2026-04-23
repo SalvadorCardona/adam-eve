@@ -1,11 +1,6 @@
+import React from "react"
 import { ContainerOptions } from "pixi.js"
-import { Container as BaseContainer } from "pixi.js"
-import React, { useEffect, useRef } from "react"
-import { PixiContainerProvider } from "@/packages/ui/graphic-motor/pixiJs/ContainerProvider/ContainerProvider"
 import { Vector2Interface } from "@/packages/math/vector"
-import { usePixiInstance } from "@/packages/ui/graphic-motor/pixiJs/hook/useTexture"
-
-interface ContainerPropsInterface {}
 
 interface ContainerPropsInterface {
   options?: ContainerOptions
@@ -22,39 +17,24 @@ export const Container = ({
   scale,
   zIndex,
 }: ContainerPropsInterface) => {
-  const containerRef = useRef(new BaseContainer(options))
-  useEffect(() => {
-    if (position) {
-      containerRef.current.x = position.x
-      containerRef.current.y = position.y
-      if (scale) {
-        containerRef.current.scale.x = scale.x
-        if (scale.x === -1 && options?.width) {
-          containerRef.current.x = (position.x + options.width) as number
-        }
-      }
-    }
-  }, [position, scale])
-
-  useEffect(() => {
-    if (zIndex) {
-      containerRef.current.zIndex = zIndex
-    }
-  }, [zIndex])
-  //
-  // useEffect(() => {
-  //   console.log(scale)
-  //   if (scale && scale.x === -1) {
-  //     containerRef.current.scale.x = scale.x
-  //     // containerRef.current.scale.y = 1
-  //   }
-  // }, [scale])
-
-  usePixiInstance({ container: containerRef.current })
+  // Preserve the mirrored-placement quirk from the previous wrapper: when
+  // horizontal scale is flipped, offset x by the container width so the
+  // mirrored sprite still lands at the declared position.
+  const x =
+    position && scale?.x === -1 && options?.width
+      ? position.x + (options.width as number)
+      : position?.x
 
   return (
-    <PixiContainerProvider currentContainer={containerRef.current}>
+    <pixiContainer
+      x={x}
+      y={position?.y}
+      scale={scale}
+      zIndex={zIndex ?? options?.zIndex}
+      width={options?.width as number | undefined}
+      height={options?.height as number | undefined}
+    >
       {children}
-    </PixiContainerProvider>
+    </pixiContainer>
   )
 }

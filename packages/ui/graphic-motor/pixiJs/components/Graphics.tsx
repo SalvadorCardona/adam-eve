@@ -1,8 +1,9 @@
-import { Graphics as BaseGraphics } from "pixi.js"
-import { GraphicsContext } from "pixi.js"
-import { GraphicsOptions } from "pixi.js"
-import React, { useMemo } from "react"
-import { usePixiInstance } from "@/packages/ui/graphic-motor/pixiJs/hook/useTexture"
+import React, { useCallback } from "react"
+import {
+  Graphics as BaseGraphics,
+  GraphicsContext,
+  GraphicsOptions,
+} from "pixi.js"
 
 interface GraphicsPropsInterface {
   options?: GraphicsOptions | GraphicsContext
@@ -10,17 +11,22 @@ interface GraphicsPropsInterface {
 }
 
 export const Graphics = ({ options, draw }: GraphicsPropsInterface) => {
-  const container = useMemo(() => {
-    const graphic = new BaseGraphics(options)
+  const handleDraw = useCallback(
+    (g: BaseGraphics) => {
+      g.clear()
+      draw?.(g)
+    },
+    [draw],
+  )
 
-    if (draw) {
-      draw(graphic)
-    }
+  const x =
+    options && "position" in options && options.position
+      ? (options.position as { x: number }).x
+      : undefined
+  const y =
+    options && "position" in options && options.position
+      ? (options.position as { y: number }).y
+      : undefined
 
-    return graphic
-  }, [draw, options])
-
-  usePixiInstance({ container })
-
-  return <></>
+  return <pixiGraphics draw={handleDraw} x={x} y={y} />
 }

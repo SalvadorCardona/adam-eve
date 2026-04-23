@@ -1,19 +1,18 @@
 import {
-  AnimatedSprite,
+  Assets,
   Sprite as BaseSprite,
   SpriteOptions,
+  SpritesheetData,
+  Texture,
   Ticker,
   TilingSprite,
 } from "pixi.js"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { useTick } from "@pixi/react"
 import { Vector2Interface } from "@/packages/math/vector"
-import {
-  usePixiAnimation,
-  usePixiInstance,
-  useTexture,
-} from "@/packages/ui/graphic-motor/pixiJs/hook/useTexture"
-import { SpritesheetData } from "pixi.js"
 import { createSpritesheetByData } from "@/packages/ui/graphic-motor/pixiJs/createFramePixiJs"
+
+export type SpriteAnimation = (e: Ticker, item: TilingSprite | BaseSprite) => void
 
 interface SpritePropsInterface {
   options?: SpriteOptions
@@ -24,7 +23,32 @@ interface SpritePropsInterface {
   rotation?: number
 }
 
-export type SpriteAnimation = (e: Ticker, item: TilingSprite | BaseSprite) => void
+const useTexture = (src?: string): Texture | undefined => {
+  const [texture, setTexture] = useState<Texture | undefined>(() =>
+    src ? (Assets.get<Texture>(src) ?? undefined) : undefined,
+  )
+
+  useEffect(() => {
+    if (!src) {
+      setTexture(undefined)
+      return
+    }
+    const cached = Assets.get<Texture>(src)
+    if (cached) {
+      setTexture(cached)
+      return
+    }
+    let cancelled = false
+    Assets.load<Texture>(src).then((tex) => {
+      if (!cancelled) setTexture(tex)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [src])
+
+  return texture
+}
 
 export const Sprite = ({
   options,
@@ -34,76 +58,79 @@ export const Sprite = ({
   animation,
   rotation,
 }: SpritePropsInterface) => {
-  const Instance: typeof BaseSprite | typeof TilingSprite = !isTilling
-    ? BaseSprite
-    : TilingSprite
-  const containerRef = useRef<BaseSprite | TilingSprite>(new Instance(options))
-  useTexture({
-    textureSrc: image,
-    container: containerRef.current,
+  const texture = useTexture(image) ?? Texture.EMPTY
+  const spriteRef = useRef<BaseSprite | TilingSprite | null>(null)
+
+  useTick({
+    isEnabled: Boolean(animation),
+    callback: (ticker) => {
+      if (animation && spriteRef.current) animation(ticker, spriteRef.current)
+    },
   })
 
-  usePixiAnimation({ container: containerRef.current, animation })
+  const width = options?.width
+  const height = options?.height
+  const zIndex = options?.zIndex
 
-  useEffect(() => {
-    if (position) {
-      containerRef.current.x = position.x
-      containerRef.current.y = position.y
-    }
-  }, [position])
+  if (isTilling) {
+    return (
+      <pixiTilingSprite
+        ref={spriteRef as React.Ref<TilingSprite>}
+        texture={texture}
+        x={position?.x}
+        y={position?.y}
+        width={width}
+        height={height}
+        zIndex={zIndex}
+        rotation={rotation}
+      />
+    )
+  }
 
-  useEffect(() => {
-    if (rotation) {
-      containerRef.current.rotation = rotation
-    }
-  }, [rotation])
-
-  usePixiInstance({ container: containerRef.current })
-
-  return <></>
+  return (
+    <pixiSprite
+      ref={spriteRef as React.Ref<BaseSprite>}
+      texture={texture}
+      x={position?.x}
+      y={position?.y}
+      width={width}
+      height={height}
+      zIndex={zIndex}
+      rotation={rotation}
+    />
+  )
 }
 
 export const SpriteAnimated = ({
   spriteSheetData,
-}: SpritePropsInterface & { spriteSheetData: SpritesheetData }) => {
-  const [animatedSprite, setAnimatedSprite] = useState<AnimatedSprite | null>(
-    null,
-  )
+}: {
+  spriteSheetData: SpritesheetData
+}) => {
+  const [textures, setTextures] = useState<Texture[] | null>(null)
 
   useEffect(() => {
     let cancelled = false
-    createSpritesheetByData(spriteSheetData).then((spriteSheet) => {
+    createSpritesheetByData(spriteSheetData).then((sheet) => {
       if (cancelled) return
-      setAnimatedSprite(new AnimatedSprite(spriteSheet.animations.main))
+      setTextures(sheet.animations.main)
     })
     return () => {
       cancelled = true
     }
   }, [spriteSheetData])
 
-  if (!animatedSprite) return <></>
+  if (!textures) return null
 
-  return <SpriteAnimatedInstance animatedSprite={animatedSprite} />
-}
-
-const SpriteAnimatedInstance = ({
-  animatedSprite,
-}: {
-  animatedSprite: AnimatedSprite
-}) => {
-  usePixiInstance({ container: animatedSprite })
-
-  useEffect(() => {
-    const anim = animatedSprite
-    anim.animationSpeed = 0.2
-    anim.play()
-    anim.width = 100
-    anim.height = 100
-    anim.anchor.set(0.5)
-    anim.x = 25
-    anim.y = 25
-    return () => anim.stop()
-  }, [animatedSprite])
-
-  return <></>
+  return (
+    <pixiAnimatedSprite
+      textures={textures}
+      animationSpeed={0.2}
+      width={100}
+      height={100}
+      x={25}
+      y={25}
+      anchor={0.5}
+      autoPlay
+    />
+  )
 }
