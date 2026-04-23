@@ -64,12 +64,16 @@ export function entityGoToEntityWithGround({
 }: EntityGoPositionParamsWithGround): PathResponseInterface {
   const targetPosition = vector3ToVector2(target.position)
   const entityPosition = vector3ToVector2(entity.position)
-  const hash = entity["@id"] + target["@id"] + JSON.stringify(targetPosition)
   const distance = distanceBetweenVector2(entityPosition, targetPosition)
 
   if (distance < 1) {
     return entityGoToEntity({ entity, target })
   }
+
+  const targetPositionRounded = roundVector(targetPosition)
+  const entityPositionRounded = roundVector(entityPosition)
+  const hash =
+    entity["@id"] + target["@id"] + JSON.stringify(targetPositionRounded)
 
   if (entity.currentPath && entity.currentPath.hash === hash) {
     consumePath(entity.currentPath)
@@ -90,9 +94,6 @@ export function entityGoToEntityWithGround({
     ...Object.values(matrixDirection),
   ]
   let path: PathInterface | null = null
-
-  const targetPositionRounded = roundVector(targetPosition)
-  const entityPositionRounded = roundVector(entityPosition)
 
   for (const direction of directions) {
     path = findPathAStar(
@@ -116,6 +117,11 @@ export function entityGoToEntityWithGround({
   const pathExtended = extendVectorByDistance(path, speed)
   entity.currentPath = createConsumablePath(pathExtended)
   entity.currentPath.hash = hash
+
+  consumePath(entity.currentPath)
+  const newPosition = entity.currentPath.currentPosition
+  entity.position.x = newPosition.x
+  entity.position.z = newPosition.y
 
   return entity.currentPath
 }

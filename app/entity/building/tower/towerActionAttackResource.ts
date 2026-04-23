@@ -23,7 +23,6 @@ const towerAttackActionResource = createActionResource({
       findClosestOf: { position: entity.position },
       "@idIsNot": entity["@id"],
     })
-    console.log(zombie)
     if (!zombie) {
       return
     }
