@@ -26,6 +26,15 @@ export default defineConfig({
       "react-reconciler/constants": "react-reconciler/constants.js",
     },
   },
+  server: {
+    host: true,
+    port: 80,
+  },
+  preview: {
+    host: true,
+    port: 80,
+    allowedHosts: true,
+  },
   // @ts-ignore used for run test well
   test: {
     globals: true,
