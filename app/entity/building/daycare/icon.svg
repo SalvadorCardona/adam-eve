@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="dcRoofIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f06292"/>
+      <stop offset="1" stop-color="#c2185b"/>
+    </linearGradient>
+    <linearGradient id="dcWallIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3e0"/>
+      <stop offset="1" stop-color="#ffd180"/>
+    </linearGradient>
+  </defs>
+  <polygon points="6,34 32,10 58,34 54,36 32,14 10,36" fill="url(#dcRoofIcon)" stroke="#7a1038" stroke-width="0.8"/>
+  <rect x="12" y="34" width="40" height="26" fill="url(#dcWallIcon)" stroke="#7a4e08" stroke-width="0.8"/>
+  <rect x="17" y="40" width="8" height="8" rx="1" fill="#81d4fa" stroke="#01579b" stroke-width="0.6"/>
+  <rect x="39" y="40" width="8" height="8" rx="1" fill="#81d4fa" stroke="#01579b" stroke-width="0.6"/>
+  <path d="M27,60 L27,48 Q27,44 32,44 Q37,44 37,48 L37,60 Z" fill="#6d4c41" stroke="#3e2723" stroke-width="0.6"/>
+  <circle cx="35" cy="54" r="0.9" fill="#ffd54f"/>
+  <text x="32" y="28" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle" stroke="#7a1038" stroke-width="0.4">ABC</text>
+</svg>

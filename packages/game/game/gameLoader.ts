@@ -4,6 +4,7 @@ import { getByLdTypeIn, updateCollection } from "@/packages/jsonLd/jsonLd"
 import { playerMetadata } from "@/packages/game/player/playerMetadata"
 import { theDeathActionResource } from "@/app/action/theDeathActionResource"
 import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
+import { agingActionResource } from "@/app/action/agingActionResource"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { addAction } from "@/packages/game/action/AddAction"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
@@ -35,6 +36,11 @@ export function gameLoader(game: GameInterface): GameInterface {
     const meta = getResource<ActionResourceInterface<any>>(
       findWorkerCharacterActionMetadata,
     )
+    addAction(game.actions, meta.create({ game }))
+  }
+
+  if (!getByLdTypeIn(game.actions, agingActionResource["@id"]!).length) {
+    const meta = getResource<ActionResourceInterface<any>>(agingActionResource)
     addAction(game.actions, meta.create({ game }))
   }
 

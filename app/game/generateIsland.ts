@@ -10,6 +10,7 @@ import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMine
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
+import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
@@ -139,6 +140,13 @@ export function generateIsland(game: GameInterface): GameInterface {
     game,
     forestierEntityResource,
     ISLAND_CENTER_X - 1,
+    ISLAND_CENTER_Z + 4,
+  )
+
+  spawnBuildingAt(
+    game,
+    daycareEntityResource,
+    ISLAND_CENTER_X + 1,
     ISLAND_CENTER_Z + 4,
   )
 

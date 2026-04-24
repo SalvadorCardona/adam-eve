@@ -90,6 +90,11 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
           )}
 
           <div className="flex items-center gap-4">
+            <Zap className="h-5 w-5 text-yellow-600" />
+            <div className="font-semibold">Âge : {entity.age ?? 0} ans</div>
+          </div>
+
+          <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />
             <div className="font-semibold">Etat : {entity.state}</div>
           </div>

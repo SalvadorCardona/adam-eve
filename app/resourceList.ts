@@ -37,6 +37,8 @@ import { researchCenterEntityResource } from "@/app/entity/building/researchCent
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
 import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
 import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
+import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
+import { agingActionResource } from "@/app/action/agingActionResource"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
@@ -75,4 +77,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   forestierEntityResource,
   playerEntityResource,
   playerAttackActionResource,
+  daycareEntityResource,
+  agingActionResource,
 ]

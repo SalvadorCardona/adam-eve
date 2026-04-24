@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="dcRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f06292"/>
+      <stop offset="1" stop-color="#ad1457"/>
+    </linearGradient>
+    <linearGradient id="dcWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff8e1"/>
+      <stop offset="1" stop-color="#ffcc80"/>
+    </linearGradient>
+    <radialGradient id="dcWindow" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#fff176"/>
+      <stop offset="1" stop-color="#f57f17"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="64" cy="118" rx="52" ry="6" fill="#000" opacity="0.22"/>
+  <polygon points="12,72 64,24 116,72 108,76 64,32 20,76" fill="url(#dcRoof)" stroke="#6a0a28" stroke-width="1.2"/>
+  <polygon points="12,72 20,76 20,84 12,80" fill="#880e4f"/>
+  <polygon points="116,72 108,76 108,84 116,80" fill="#880e4f"/>
+  <rect x="20" y="72" width="88" height="44" fill="url(#dcWall)" stroke="#5d4037" stroke-width="1.2"/>
+  <rect x="30" y="82" width="16" height="16" rx="1.5" fill="url(#dcWindow)" stroke="#3e2723" stroke-width="1"/>
+  <line x1="38" y1="82" x2="38" y2="98" stroke="#3e2723" stroke-width="0.8"/>
+  <line x1="30" y1="90" x2="46" y2="90" stroke="#3e2723" stroke-width="0.8"/>
+  <rect x="82" y="82" width="16" height="16" rx="1.5" fill="url(#dcWindow)" stroke="#3e2723" stroke-width="1"/>
+  <line x1="90" y1="82" x2="90" y2="98" stroke="#3e2723" stroke-width="0.8"/>
+  <line x1="82" y1="90" x2="98" y2="90" stroke="#3e2723" stroke-width="0.8"/>
+  <path d="M54,116 L54,94 Q54,88 64,88 Q74,88 74,94 L74,116 Z" fill="#6d4c41" stroke="#3e2723" stroke-width="1"/>
+  <circle cx="70" cy="104" r="1.4" fill="#ffd54f"/>
+  <rect x="40" y="54" width="48" height="14" rx="2" fill="#ffffff" stroke="#7a1038" stroke-width="1"/>
+  <text x="64" y="65" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c2185b" text-anchor="middle">CRÈCHE</text>
+</svg>
