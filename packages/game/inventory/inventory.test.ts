@@ -15,21 +15,18 @@ const entityMetadata = getResource<EntityResourceInterface>(workerEntityResource
 
 describe("Inventory Test", () => {
   it("Context add To Inventory", () => {
-    let lastQuantity = 0
     const entity = entityMetadata.create()
 
-    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, 5)
-    expect(lastQuantity).toBe(5)
+    addToInventory(entity.inventory, woodResourceMetadata, 5)
+    expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(5)
     const item = getInventoryItem(entity.inventory, woodResourceMetadata)
-
     expect(item.quantity).toBe(5)
 
-    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, -3)
-    expect(lastQuantity).toBe(-3)
+    addToInventory(entity.inventory, woodResourceMetadata, -3)
+    expect(getInventoryItem(entity.inventory, woodResourceMetadata).quantity).toBe(2)
     expect(item.quantity).toBe(2)
 
-    lastQuantity = addToInventory(entity.inventory, woodResourceMetadata, -10)
-    expect(lastQuantity).toBe(-2)
+    addToInventory(entity.inventory, woodResourceMetadata, -10)
     expect(item.quantity).toBe(0)
   })
   it("Context getTotal Inventory", () => {
