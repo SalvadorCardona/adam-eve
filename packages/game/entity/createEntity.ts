@@ -35,6 +35,7 @@ export function createEntity<T extends EntityInterface = EntityInterface>(payloa
     rotation: 0,
     inventory: createInventory({ size: resource?.propriety?.inventorySize }),
     createdAt: payload?.game?.time ?? 0,
+    age: 0,
     position: defaultPosition,
     entityType: resource?.entityType ?? resource?.propriety?.entityType,
     ...(resource?.defaultEntity ? resource?.defaultEntity() : {}),

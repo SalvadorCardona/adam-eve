@@ -28,6 +28,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
   createdAt: number
+  age?: number
   workers?: EntityInterface["@id"][]
   inventory: InventoryInterface
   connections?: Partial<Record<Direction, JsonLdIri>>
