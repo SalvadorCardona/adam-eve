@@ -1,5 +1,13 @@
-import { BaseJsonLdItemInterface, JsonLdIri, JsonLdTypeAble, JsonLdTypeCollection } from "@/packages/jsonLd/jsonLd"
-import { BaseGameResource, createResourceGame } from "@/packages/game/BaseGameResource"
+import {
+  BaseJsonLdItemInterface,
+  JsonLdIri,
+  JsonLdTypeAble,
+  JsonLdTypeCollection,
+} from "@/packages/jsonLd/jsonLd"
+import {
+  BaseGameResource,
+  createResourceGame,
+} from "@/packages/game/BaseGameResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export interface InventoryItem extends BaseJsonLdItemInterface {
@@ -21,8 +29,7 @@ export type InventoryInterface = JsonLdTypeCollection<InventoryItem> & {
 export interface InventoryResource extends BaseGameResource<InventoryItem> {}
 
 export function createResourceInventory<
-  T extends BaseGameResource<InventoryResource> =
-    BaseGameResource<InventoryResource>,
+  T extends InventoryResource = InventoryResource,
 >(resource: Partial<BaseGameResource> & Partial<T>): T {
   const meta = {
     "@type": "inventory",

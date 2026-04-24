@@ -147,18 +147,17 @@ describe("addToInventory", () => {
     it("works directly on a standalone inventory", () => {
       const inventory = createInventory({ size: 5 })
 
-      const added = addToInventory(inventory, woodResourceMetadata, 3)
+      addToInventory(inventory, woodResourceMetadata, 3)
 
-      expect(added).toBe(3)
       expect(getInventoryItem(inventory, woodResourceMetadata).quantity).toBe(3)
     })
 
     it("respects the size of a standalone inventory", () => {
       const inventory = createInventory({ size: 5 })
 
-      const added = addToInventory(inventory, woodResourceMetadata, 100)
-
-      expect(added).toBe(5)
+      addToInventory(inventory, woodResourceMetadata, 100)
+      const item = getInventoryItem(inventory, woodResourceMetadata)
+      expect(item.quantity).toBe(5)
       expect(getInventoryItem(inventory, woodResourceMetadata).quantity).toBe(5)
     })
   })
