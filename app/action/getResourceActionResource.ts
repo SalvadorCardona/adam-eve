@@ -15,7 +15,7 @@ import { getResource } from "@/packages/resource/ResourceInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { freeSpaceInInventory } from "@/packages/game/inventory/useCase/freeSpaceInInventory"
 
-export const getResourceActionMetaData = createActionResource({
+export const getResourceActionResource = createActionResource({
   "@id": "getResourceAction",
   onFrame: ({ entity, game, action }) => {
     if (!entity || !action.createdBy) return
@@ -59,7 +59,7 @@ export const getResourceActionMetaData = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
-      entity.inventory = addToInventory(entity.inventory, resourceMapped.resource, 1)
+      addToInventory(entity.inventory, resourceMapped.resource, 1)
 
       if (!freeSpaceInInventory(entity.inventory)) {
         entity.state = EntityState.go_to_put_resource

@@ -1,5 +1,6 @@
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { Inventory } from "@/packages/ui/Inventory"
+import { Inhabitants } from "@/packages/ui/Inhabitants"
 import React, { useState } from "react"
 import { GameMenu } from "@/packages/ui/menu/GameMenu"
 import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
@@ -34,6 +35,7 @@ export const TopSideBar = () => {
             />
           )
         })}
+        <Inhabitants />
       </div>
       <div className={"flex gap-2"}>
         <Button

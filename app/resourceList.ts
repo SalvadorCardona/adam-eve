@@ -1,16 +1,15 @@
 import { BaseJsonLdItemInterface } from "@/packages/jsonLd/jsonLd"
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { houseEntityMetaData } from "@/app/entity/building/house/houseEntity"
-import {
-  treeDeathEntityMeta,
-  treeEntityMetaData,
-} from "@/app/entity/resource/tree/TreeEntity"
+import { treeDeathEntityMeta, treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { waterResourceMetadata } from "@/app/inventory/water/woodResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
-import { getResourceActionMetaData } from "@/app/action/getResourceActionMetaData"
+import { getResourceActionResource } from "@/app/action/getResourceActionResource"
 import { goldResourceMetadata } from "@/app/entity/resource/gold/goldResource"
-import { removeBuildingUserActionMetadata } from "@/app/actionUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
+import {
+  removeBuildingUserActionMetadata
+} from "@/app/actionUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatResourceMetadata } from "@/app/inventory/wheat/wheatResource"
 import { goBuildOfBuildingActionResource } from "@/app/action/goBuildOfBuildingActionResource"
 import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
@@ -26,7 +25,6 @@ import towerAttackActionResource from "@/app/entity/building/tower/towerActionAt
 import { fireballEntityResource } from "@/app/entity/attack/FireballEntityResource"
 import { BridgeEntityResource } from "@/app/entity/ground/bridge/BridgeEntityResource"
 import { zombieAttackActionResource } from "@/app/entity/character/zombie/zombieAttackActionResource"
-import { fireballAttackActionResource } from "@/app/entity/attack/fireballAttackActionResource"
 import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { resourceMappingMetaData } from "@/app/resourceMappingMetadata"
@@ -47,7 +45,7 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   houseEntityMetaData,
   treeEntityMetaData,
   woodResourceMetadata,
-  getResourceActionMetaData,
+  getResourceActionResource,
   timberHouseEntityMetaData,
   findWorkerCharacterActionMetadata,
   goldResourceMetadata,
@@ -63,7 +61,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   zombieEntityResource,
   towerEntityResource,
   towerAttackActionResource,
-  fireballAttackActionResource,
   fireballEntityResource,
   zombieAttackActionResource,
   BridgeEntityResource,
