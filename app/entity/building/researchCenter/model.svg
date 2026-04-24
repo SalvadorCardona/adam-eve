@@ -1,52 +1,171 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
   <defs>
+    <linearGradient id="stoneGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8a098"/>
+      <stop offset="1" stop-color="#5c544c"/>
+    </linearGradient>
+    <linearGradient id="stoneGradDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a625c"/>
+      <stop offset="1" stop-color="#3c3632"/>
+    </linearGradient>
+    <linearGradient id="roofGradTower" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d28d9"/>
+      <stop offset="1" stop-color="#1a0f3c"/>
+    </linearGradient>
+    <linearGradient id="bannerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c02030"/>
+      <stop offset="1" stop-color="#6b0c14"/>
+    </linearGradient>
+    <linearGradient id="doorGradT" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b3e1c"/>
+      <stop offset="1" stop-color="#3a1e08"/>
+    </linearGradient>
+    <radialGradient id="windowGlowT" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe79a"/>
+      <stop offset="1" stop-color="#d89030"/>
+    </radialGradient>
+    <radialGradient id="orbGrad" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#c4b5fd"/>
+      <stop offset="0.85" stop-color="#6d28d9"/>
+      <stop offset="1" stop-color="#2a0a5a"/>
+    </radialGradient>
+    <radialGradient id="grassGradT" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4a8a38"/>
+      <stop offset="1" stop-color="#2a5220"/>
+    </radialGradient>
     <style>
-      .ring { animation: ring 2s ease-out infinite; transform-origin: 50px 28px; }
-      .ring2 { animation: ring 2s ease-out infinite 0.7s; transform-origin: 50px 28px; }
-      .ring3 { animation: ring 2s ease-out infinite 1.4s; transform-origin: 50px 28px; }
-      .blink { animation: blink 1.2s ease-in-out infinite; }
-      @keyframes ring {
-        0% { r: 5; opacity: 0.9; }
-        100% { r: 24; opacity: 0; }
+      .orbFloat { animation: orbFloat 3s ease-in-out infinite; transform-origin: 64px 22px; }
+      .orbAura { animation: orbAura 2.2s ease-in-out infinite; transform-origin: 64px 22px; }
+      .runeA { animation: runePulse 2.8s ease-in-out infinite; }
+      .runeB { animation: runePulse 2.8s ease-in-out infinite 0.9s; }
+      .runeC { animation: runePulse 2.8s ease-in-out infinite 1.8s; }
+      .banner { animation: banner 4s ease-in-out infinite; transform-origin: 98px 22px; }
+      @keyframes orbFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-2px); }
       }
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.2; }
+      @keyframes orbAura {
+        0%, 100% { opacity: 0.25; }
+        50% { opacity: 0.55; }
+      }
+      @keyframes runePulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+      @keyframes banner {
+        0%, 100% { transform: skewY(0deg); }
+        50% { transform: skewY(-3deg); }
       }
     </style>
   </defs>
 
-  <!-- Ombre -->
-  <ellipse cx="50" cy="92" rx="30" ry="5" fill="#000" opacity="0.2"/>
+  <ellipse cx="64" cy="122" rx="52" ry="6" fill="url(#grassGradT)" opacity="0.85"/>
 
-  <!-- Corps principal bâtiment -->
-  <rect x="15" y="55" width="70" height="35" rx="3" fill="#1e3a5f" stroke="#1e40af" stroke-width="2"/>
-  <!-- Façade centrale -->
-  <rect x="28" y="44" width="44" height="30" rx="2" fill="#1e40af" stroke="#3b82f6" stroke-width="1.5"/>
-  <!-- Toit -->
-  <polygon points="25,44 75,44 80,38 20,38" fill="#1d4ed8"/>
-  <!-- Fenêtres gauche -->
-  <rect x="32" y="50" width="9" height="9" rx="1.5" fill="#bfdbfe" opacity="0.9"/>
-  <!-- Fenêtres droite -->
-  <rect x="59" y="50" width="9" height="9" rx="1.5" fill="#bfdbfe" opacity="0.9"/>
-  <!-- Porte centrale -->
-  <rect x="44" y="66" width="12" height="19" rx="1.5" fill="#1e3a5f"/>
-  <circle cx="54" cy="76" r="1.2" fill="#60a5fa"/>
+  <g opacity="0.75">
+    <circle cx="22" cy="26" r="5" fill="#c8c8c8"/>
+    <circle cx="28" cy="20" r="6" fill="#d6d6d6"/>
+    <circle cx="20" cy="14" r="7" fill="#e4e4e4"/>
+  </g>
 
-  <!-- Tour antenne -->
-  <rect x="47" y="14" width="6" height="28" fill="#374151"/>
-  <rect x="42" y="40" width="16" height="4" rx="1" fill="#4b5563"/>
+  <rect x="108" y="18" width="3" height="28" fill="#3a1e08"/>
+  <g class="banner">
+    <path d="M111,20 L124,22 L122,28 L124,34 L111,36 Z" fill="url(#bannerGrad)" stroke="#3a0a12" stroke-width="0.8"/>
+    <text x="117" y="30" font-size="7" fill="#f0c850" text-anchor="middle" font-family="serif">✦</text>
+  </g>
 
-  <!-- Parabole -->
-  <ellipse cx="50" cy="28" rx="14" ry="6" fill="none" stroke="#60a5fa" stroke-width="2.5" transform="rotate(-15, 50, 28)"/>
-  <line x1="50" y1="28" x2="40" y2="20" stroke="#60a5fa" stroke-width="2"/>
+  <g class="orbAura">
+    <circle cx="64" cy="22" r="14" fill="#a78bfa" opacity="0.35"/>
+  </g>
+  <g class="orbFloat">
+    <circle cx="64" cy="22" r="7" fill="url(#orbGrad)"/>
+    <circle cx="62" cy="20" r="2" fill="#ffffff" opacity="0.9"/>
+    <circle cx="66" cy="24" r="0.9" fill="#ffffff" opacity="0.7"/>
+  </g>
 
-  <!-- Ondes -->
-  <circle class="ring" cx="50" cy="28" r="5" fill="none" stroke="#3b82f6" stroke-width="2"/>
-  <circle class="ring2" cx="50" cy="28" r="5" fill="none" stroke="#3b82f6" stroke-width="2"/>
-  <circle class="ring3" cx="50" cy="28" r="5" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  <polygon points="40,50 64,8 88,50" fill="url(#roofGradTower)" stroke="#0d0620" stroke-width="1.2"/>
+  <g stroke="#2a1258" stroke-width="0.8" opacity="0.6" fill="none">
+    <line x1="52" y1="30" x2="54" y2="38"/>
+    <line x1="64" y1="18" x2="64" y2="26"/>
+    <line x1="76" y1="30" x2="74" y2="38"/>
+    <line x1="58" y1="42" x2="60" y2="48"/>
+    <line x1="70" y1="42" x2="68" y2="48"/>
+  </g>
+  <polygon points="40,50 88,50 85,54 43,54" fill="#0d0620"/>
 
-  <!-- Lumière sommet -->
-  <circle class="blink" cx="50" cy="14" r="4" fill="#fbbf24"/>
-  <circle class="blink" cx="50" cy="14" r="6" fill="#fbbf24" opacity="0.3"/>
+  <rect x="36" y="50" width="56" height="10" fill="url(#stoneGradDark)" stroke="#1e1814" stroke-width="1.2"/>
+  <g fill="#1e1814">
+    <rect x="38" y="50" width="5" height="5"/>
+    <rect x="48" y="50" width="5" height="5"/>
+    <rect x="58" y="50" width="5" height="5"/>
+    <rect x="68" y="50" width="5" height="5"/>
+    <rect x="78" y="50" width="5" height="5"/>
+    <rect x="88" y="50" width="5" height="5" transform="translate(-1,0)"/>
+  </g>
+
+  <rect x="40" y="60" width="48" height="58" fill="url(#stoneGrad)" stroke="#2a2420" stroke-width="1.2"/>
+
+  <g stroke="#3c3632" stroke-width="0.7" fill="none" opacity="0.75">
+    <line x1="40" y1="68" x2="88" y2="68"/>
+    <line x1="40" y1="76" x2="88" y2="76"/>
+    <line x1="40" y1="84" x2="88" y2="84"/>
+    <line x1="40" y1="92" x2="88" y2="92"/>
+    <line x1="40" y1="100" x2="88" y2="100"/>
+    <line x1="40" y1="108" x2="88" y2="108"/>
+    <line x1="48" y1="60" x2="48" y2="68"/>
+    <line x1="58" y1="68" x2="58" y2="60"/>
+    <line x1="70" y1="60" x2="70" y2="68"/>
+    <line x1="80" y1="68" x2="80" y2="60"/>
+    <line x1="44" y1="68" x2="44" y2="76"/>
+    <line x1="54" y1="76" x2="54" y2="68"/>
+    <line x1="64" y1="68" x2="64" y2="76"/>
+    <line x1="74" y1="76" x2="74" y2="68"/>
+    <line x1="84" y1="68" x2="84" y2="76"/>
+    <line x1="50" y1="84" x2="50" y2="92"/>
+    <line x1="62" y1="92" x2="62" y2="84"/>
+    <line x1="78" y1="84" x2="78" y2="92"/>
+    <line x1="46" y1="100" x2="46" y2="108"/>
+    <line x1="66" y1="108" x2="66" y2="100"/>
+    <line x1="82" y1="100" x2="82" y2="108"/>
+  </g>
+
+  <path d="M52,82 Q52,70 64,70 Q76,70 76,82 L76,94 L52,94 Z" fill="url(#windowGlowT)" stroke="#3a1e08" stroke-width="1.2"/>
+  <line x1="64" y1="70" x2="64" y2="94" stroke="#3a1e08" stroke-width="1"/>
+  <line x1="52" y1="82" x2="76" y2="82" stroke="#3a1e08" stroke-width="1"/>
+  <circle cx="64" cy="82" r="1.4" fill="#d4af37" stroke="#5a3a0a" stroke-width="0.4"/>
+
+  <rect x="45" y="100" width="8" height="6" fill="#2a1808" stroke="#d4af37" stroke-width="0.5"/>
+  <text class="runeA" x="49" y="105" font-size="6" fill="#a78bfa" text-anchor="middle" font-family="serif">ᚠ</text>
+  <rect x="75" y="100" width="8" height="6" fill="#2a1808" stroke="#d4af37" stroke-width="0.5"/>
+  <text class="runeB" x="79" y="105" font-size="6" fill="#a78bfa" text-anchor="middle" font-family="serif">ᚨ</text>
+  <rect x="60" y="100" width="8" height="6" fill="#2a1808" stroke="#d4af37" stroke-width="0.5"/>
+  <text class="runeC" x="64" y="105" font-size="6" fill="#fbbf24" text-anchor="middle" font-family="serif">✦</text>
+
+  <path d="M56,118 L56,108 Q56,100 64,100 Q72,100 72,108 L72,118 Z" fill="url(#doorGradT)" stroke="#1e0c04" stroke-width="1.2"/>
+  <path d="M60,118 L60,108 Q60,104 64,104 Q68,104 68,108 L68,118" stroke="#1e0c04" stroke-width="0.8" fill="none"/>
+  <g stroke="#d4af37" stroke-width="0.6" fill="none">
+    <path d="M58,110 L70,110"/>
+    <path d="M58,114 L70,114"/>
+  </g>
+  <circle cx="69" cy="112" r="1.3" fill="#d4af37" stroke="#604818" stroke-width="0.4"/>
+
+  <g>
+    <rect x="14" y="96" width="4" height="14" fill="#3a1e08"/>
+    <polygon points="10,102 16,74 22,102" fill="#2a5220" stroke="#133012" stroke-width="0.6"/>
+    <polygon points="11,92 16,70 21,92" fill="#3a6a2c" stroke="#133012" stroke-width="0.6"/>
+    <polygon points="12,84 16,66 20,84" fill="#4a7a38" stroke="#133012" stroke-width="0.6"/>
+  </g>
+
+  <g>
+    <ellipse cx="104" cy="116" rx="8" ry="3.5" fill="#7a6248" opacity="0.7"/>
+    <ellipse cx="104" cy="115" rx="7" ry="2.8" fill="#9a7a50"/>
+    <circle cx="100" cy="113.5" r="0.7" fill="#3a2412"/>
+    <circle cx="104" cy="113.5" r="0.7" fill="#3a2412"/>
+    <circle cx="108" cy="113.5" r="0.7" fill="#3a2412"/>
+  </g>
+
+  <g>
+    <circle cx="30" cy="114" r="2.2" fill="#4c1d95" stroke="#f0c850" stroke-width="0.5"/>
+    <text class="runeA" x="30" y="116" font-size="3.2" fill="#c4b5fd" text-anchor="middle" font-family="serif">✦</text>
+  </g>
 </svg>
