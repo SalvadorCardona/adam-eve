@@ -1,0 +1,89 @@
+{
+  "character": {
+    "id": "f4e97f86-c4e5-45e9-aec3-bd1647aa5889",
+    "name": "Knowledge Sage",
+    "prompt": "wise old scholar wearing dark blue robes with golden trim, holding an open glowing spellbook, white beard, magical and learned appearance, fantasy style",
+    "size": {
+      "width": 68,
+      "height": 68
+    },
+    "template_id": "mannequin",
+    "directions": 4,
+    "view": "low top-down",
+    "created_at": "2026-04-25T15:12:30.743342+00:00"
+  },
+  "frames": {
+    "rotations": {
+      "south": "rotations/south.png",
+      "west": "rotations/west.png",
+      "east": "rotations/east.png",
+      "north": "rotations/north.png"
+    },
+    "animations": {
+      "walking-7721045d": {
+        "south": [
+          "animations/walking-7721045d/south/frame_000.png",
+          "animations/walking-7721045d/south/frame_001.png",
+          "animations/walking-7721045d/south/frame_002.png",
+          "animations/walking-7721045d/south/frame_003.png",
+          "animations/walking-7721045d/south/frame_004.png",
+          "animations/walking-7721045d/south/frame_005.png"
+        ],
+        "east": [
+          "animations/walking-7721045d/east/frame_000.png",
+          "animations/walking-7721045d/east/frame_001.png",
+          "animations/walking-7721045d/east/frame_002.png",
+          "animations/walking-7721045d/east/frame_003.png",
+          "animations/walking-7721045d/east/frame_004.png",
+          "animations/walking-7721045d/east/frame_005.png"
+        ],
+        "west": [
+          "animations/walking-7721045d/west/frame_000.png",
+          "animations/walking-7721045d/west/frame_001.png",
+          "animations/walking-7721045d/west/frame_002.png",
+          "animations/walking-7721045d/west/frame_003.png",
+          "animations/walking-7721045d/west/frame_004.png",
+          "animations/walking-7721045d/west/frame_005.png"
+        ],
+        "north": [
+          "animations/walking-7721045d/north/frame_000.png",
+          "animations/walking-7721045d/north/frame_001.png",
+          "animations/walking-7721045d/north/frame_002.png",
+          "animations/walking-7721045d/north/frame_003.png",
+          "animations/walking-7721045d/north/frame_004.png",
+          "animations/walking-7721045d/north/frame_005.png"
+        ]
+      },
+      "animating-8b1ac113": {
+        "east": [
+          "animations/animating-8b1ac113/east/frame_000.png",
+          "animations/animating-8b1ac113/east/frame_001.png",
+          "animations/animating-8b1ac113/east/frame_002.png",
+          "animations/animating-8b1ac113/east/frame_003.png"
+        ]
+      },
+      "animating-9c3d6c76": {
+        "west": [
+          "animations/animating-9c3d6c76/west/frame_000.png",
+          "animations/animating-9c3d6c76/west/frame_001.png",
+          "animations/animating-9c3d6c76/west/frame_002.png",
+          "animations/animating-9c3d6c76/west/frame_003.png"
+        ],
+        "north": [
+          "animations/animating-9c3d6c76/north/frame_000.png",
+          "animations/animating-9c3d6c76/north/frame_001.png",
+          "animations/animating-9c3d6c76/north/frame_002.png",
+          "animations/animating-9c3d6c76/north/frame_003.png"
+        ],
+        "south": [
+          "animations/animating-9c3d6c76/south/frame_000.png",
+          "animations/animating-9c3d6c76/south/frame_001.png",
+          "animations/animating-9c3d6c76/south/frame_002.png",
+          "animations/animating-9c3d6c76/south/frame_003.png"
+        ]
+      }
+    }
+  },
+  "export_version": "2.0",
+  "export_date": "2026-04-25T15:25:52.992905"
+}

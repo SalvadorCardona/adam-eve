@@ -34,7 +34,7 @@ export type UserControl = JsonLDItem<{
   showGrid: boolean
   currentAction?: ActionUserResource | undefined
   rotation?: number
-  entitiesSelected: EntityInterface["@id"][]
+  entitySelected?: EntityInterface["@id"]
   entitySelectedByHover?: EntityInterface["@id"]
 }>
 
@@ -54,6 +54,8 @@ type GameWorld = JsonLDItem<{
   bounding: BoundingInterface
   entitiesMatrix: Matrix2DInterface
   groundMatrix?: Matrix2DInterface
+  visitedMatrix?: boolean[][]
+  visibleMatrix?: boolean[][]
 }>
 
 export default interface GameInterface extends BaseJsonLdItemInterface {
@@ -107,7 +109,6 @@ export function gameFactory(game?: GameInterface): GameInterface {
       },
     }),
     userControl: createJsonLd("userControl", {
-      entitiesSelected: [],
       showGrid: true,
     }),
     ...(game ?? {}),

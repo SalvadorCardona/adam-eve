@@ -16,19 +16,19 @@ export function addWorkerToEntity(
   if (!source.workers) {
     source.workers = []
   }
-  const metaData = getResource<EntityResourceInterface>(source)
+  const resource = getResource<EntityResourceInterface>(source)
 
-  if (!metaData.workerAction) {
+  if (!resource.workerAction) {
     return
   }
 
   if (getEntityWorkerNeeded(source) <= 0) return
   if (hasAction(worker)) return
-  if (metaData.canRecruit && !metaData.canRecruit({ entity: source, game })) return
+  if (resource.canRecruit && !resource.canRecruit({ entity: source, game })) return
 
   addActionToEntity(
     worker,
-    metaData.workerAction.create({
+    resource.workerAction.create({
       item: {
         item: worker,
         game,
@@ -45,6 +45,5 @@ export function removeWorkerFromEntity(
   worker: JsonLdIriAble,
 ): void {
   if (!source.workers) return
-
   source.workers = removeValue(source.workers, getLdIri(worker))
 }

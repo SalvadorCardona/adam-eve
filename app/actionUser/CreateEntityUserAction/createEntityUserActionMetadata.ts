@@ -80,7 +80,7 @@ export const createEntityUserActionMetadata: CreateBuildingUserActionMetadataInt
       })
       if (result.some((e) => e)) {
         playSound(song)
-        game.userControl.entitiesSelected = []
+        game.userControl.entitySelected = undefined
       }
 
       game.userControl.rotation = 0

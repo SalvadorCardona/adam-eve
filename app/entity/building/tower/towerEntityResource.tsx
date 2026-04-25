@@ -5,6 +5,7 @@ import { createInventory } from "@/packages/game/inventory/useCase/createInvento
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import towerAttackActionResource from "@/app/entity/building/tower/towerActionAttackResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
+import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 
 export const towerEntityResource = createEntityResource({
   ["@id"]: "resource/tower",
@@ -18,8 +19,8 @@ export const towerEntityResource = createEntityResource({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
     attack: {
-      attackRange: 3,
-      damage: 1,
+      attackRange: 10,
+      damage: 80,
       attackSpeed: 60,
     },
     work: {
@@ -35,5 +36,6 @@ export const towerEntityResource = createEntityResource({
     },
     defaultActions: [towerAttackActionResource["@id"]!],
   },
+  workerAction: stayInBuildingActionResource,
   label: "Tour de défense",
 })

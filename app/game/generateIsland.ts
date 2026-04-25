@@ -15,6 +15,7 @@ import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zom
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
+import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
 import { EntityState } from "@/packages/game/entity/EntityState"
 
 const ISLAND_CENTER_X = 10
@@ -164,6 +165,8 @@ export function generateIsland(game: GameInterface): GameInterface {
     ISLAND_CENTER_Z + 2,
   )
 
+  spawnAt(game, playerEntityResource, ISLAND_CENTER_X + 1, ISLAND_CENTER_Z + 1)
+
   const workerPositions: Array<[number, number]> = [
     [ISLAND_CENTER_X - 3, ISLAND_CENTER_Z],
     [ISLAND_CENTER_X + 2, ISLAND_CENTER_Z],
@@ -205,10 +208,10 @@ export function generateIsland(game: GameInterface): GameInterface {
   )
 
   const zombiePositions: Array<[number, number]> = [
-    [ZOMBIE_ISLAND_CENTER_X, ZOMBIE_ISLAND_CENTER_Z],
-    [ZOMBIE_ISLAND_CENTER_X - 2, ZOMBIE_ISLAND_CENTER_Z - 1],
-    [ZOMBIE_ISLAND_CENTER_X + 2, ZOMBIE_ISLAND_CENTER_Z + 1],
-    [ZOMBIE_ISLAND_CENTER_X + 1, ZOMBIE_ISLAND_CENTER_Z - 2],
+    //[ZOMBIE_ISLAND_CENTER_X, ZOMBIE_ISLAND_CENTER_Z],
+    //[ZOMBIE_ISLAND_CENTER_X - 2, ZOMBIE_ISLAND_CENTER_Z - 1],
+    // [ZOMBIE_ISLAND_CENTER_X + 2, ZOMBIE_ISLAND_CENTER_Z + 1],
+    // [ZOMBIE_ISLAND_CENTER_X + 1, ZOMBIE_ISLAND_CENTER_Z - 2],
     [ZOMBIE_ISLAND_CENTER_X - 1, ZOMBIE_ISLAND_CENTER_Z + 2],
   ]
   for (const [x, z] of zombiePositions) {

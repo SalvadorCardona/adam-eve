@@ -1,5 +1,5 @@
 import React from "react"
-import { ContainerOptions } from "pixi.js"
+import { ContainerOptions, FederatedPointerEvent } from "pixi.js"
 import { Vector2Interface } from "@/packages/math/vector"
 
 interface ContainerPropsInterface {
@@ -8,6 +8,11 @@ interface ContainerPropsInterface {
   position?: Vector2Interface
   scale?: Vector2Interface
   zIndex?: number
+  eventMode?: ContainerOptions["eventMode"]
+  cursor?: ContainerOptions["cursor"]
+  onPointerTap?: (e: FederatedPointerEvent) => void
+  onPointerOver?: (e: FederatedPointerEvent) => void
+  onPointerOut?: (e: FederatedPointerEvent) => void
 }
 
 export const Container = ({
@@ -16,6 +21,11 @@ export const Container = ({
   position,
   scale,
   zIndex,
+  eventMode,
+  cursor,
+  onPointerTap,
+  onPointerOver,
+  onPointerOut,
 }: ContainerPropsInterface) => {
   // Preserve the mirrored-placement quirk from the previous wrapper: when
   // horizontal scale is flipped, offset x by the container width so the
@@ -33,6 +43,11 @@ export const Container = ({
       zIndex={zIndex ?? options?.zIndex}
       width={options?.width as number | undefined}
       height={options?.height as number | undefined}
+      eventMode={eventMode}
+      cursor={cursor}
+      onPointerTap={onPointerTap}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}
     >
       {children}
     </pixiContainer>

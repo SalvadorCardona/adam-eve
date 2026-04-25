@@ -4,8 +4,6 @@ import model from "./model.png"
 import { goBuildOfBuildingActionResource } from "@/app/action/goBuildOfBuildingActionResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
-import { EntityState } from "@/packages/game/entity/EntityState"
 
 export const forumEntityResource = createEntityResource({
   ["@id"]: "resource/forum",
@@ -15,8 +13,6 @@ export const forumEntityResource = createEntityResource({
     model2d: model,
   },
   workerAction: goBuildOfBuildingActionResource,
-  canRecruit: ({ game }) =>
-    entityQuery(game, { state: EntityState.under_construction }).length > 0,
   propriety: {
     work: {
       numberOfWorker: 2,

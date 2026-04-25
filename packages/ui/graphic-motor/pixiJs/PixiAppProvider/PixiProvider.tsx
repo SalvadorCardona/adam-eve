@@ -22,6 +22,31 @@ extend({
   AnimatedSprite: PixiAnimatedSprite,
 })
 
+let assetsLoadPromise: Promise<void> | null = null
+
+const loadAssetsOnce = (): Promise<void> => {
+  if (assetsLoadPromise) return assetsLoadPromise
+
+  assetsLoadPromise = (async () => {
+    const assets = new Set<string>()
+    for (const [key, meta] of Object.entries(metaDataRegistered)) {
+      if (key !== meta["@id"]) continue
+      if (meta["@type"] !== "entity") continue
+      const e = meta as EntityResourceInterface
+      if (e.asset?.icon) assets.add(e.asset.icon)
+      if (e.asset?.model2d) assets.add(e.asset.model2d)
+      e.asset?.asset2d?.forEach((a) => assets.add(a))
+    }
+
+    await Promise.all([...assets].map((asset) => Assets.load(asset)))
+
+    Assets.addBundle("main", assetList)
+    await Assets.loadBundle("main")
+  })()
+
+  return assetsLoadPromise
+}
+
 export const PixiProvider: React.FC<{
   children: React.ReactNode
   options: Partial<ApplicationOptions>
@@ -30,27 +55,9 @@ export const PixiProvider: React.FC<{
 
   useEffect(() => {
     let cancelled = false
-    const load = async () => {
-      const assets = new Set<string>()
-      for (const [key, meta] of Object.entries(metaDataRegistered)) {
-        if (key !== meta["@id"]) continue
-        if (meta["@type"] !== "entity") continue
-        const e = meta as EntityResourceInterface
-        if (e.asset?.icon) assets.add(e.asset.icon)
-        if (e.asset?.model2d) assets.add(e.asset.model2d)
-        e.asset?.asset2d?.forEach((a) => assets.add(a))
-      }
-
-      await Promise.all([...assets].map((asset) => Assets.load(asset)))
-
-      Assets.addBundle("main", assetList)
-      await Assets.loadBundle("main")
-
-      if (!cancelled) {
-        setAssetsReady(true)
-      }
-    }
-    load()
+    loadAssetsOnce().then(() => {
+      if (!cancelled) setAssetsReady(true)
+    })
     return () => {
       cancelled = true
     }

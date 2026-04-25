@@ -1,36 +1,33 @@
-import { createJsonLd, JsonLdIri } from "@/packages/jsonLd/jsonLd"
-import EntityInterface, { BuildingEntityInterface } from "@/packages/game/entity/EntityInterface"
+import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
+import { BuildingEntityInterface } from "@/packages/game/entity/EntityInterface"
 import { ActionInterface, ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
-import { entityFindOneById, entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { getResource } from "@/packages/resource/ResourceInterface"
-import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoToEntity"
+import { entityGoToEntityWithGround } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { createActionResource } from "@/packages/game/action/createActionResource"
-import { removeActionFromEntity } from "@/packages/game/action/removeAction"
-import { removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
+import { updateNextTick } from "@/packages/game/action/updateNextTick"
+import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
 
 enum State {
   GoToForum = "GoToForum",
   TakeResource = "TakeResource",
   GoToBuild = "GoToBuild",
   PutResource = "PutResource",
-  NoBuild = "NoBuild",
-  ForumNotFound = "ForumNotFound",
 }
 
 interface FindWorkerData {
   state: State
   buildingIri?: JsonLdIri
-  buildingPathCoordinate?: EntityInterface
-  forum?: EntityInterface
-  forumPathCoordinate?: EntityInterface
 }
+
+const NO_BUILDING_THROTTLE = 60
 
 export const goBuildOfBuildingActionResource: ActionResourceInterface<
   ActionInterface<FindWorkerData>
@@ -38,35 +35,24 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
   "@id": "goBuildOfBuilding",
   onFrame: ({ action, game, entity }) => {
     if (!entity) return
-    const entityMetadata = getResource<EntityResourceInterface>(entity)
-    const data = action.data
 
+    const data = action.data
+    if (!data.state) data.state = State.GoToForum
     const building = entityQueryFindOne<BuildingEntityInterface>(game, {
       "@id": data.buildingIri,
       state: EntityState.under_construction,
     })
 
     if (!building) {
-      data.state = State.NoBuild
       entity.state = EntityState.wait
-
-      const source = action.createdBy && entityFindOneById(game, action.createdBy)
-
-      if (source) {
-        removeWorkerFromEntity(source, entity)
-      }
-
-      removeActionFromEntity(entity, action)
+      data.state = State.GoToForum
+      data.buildingIri = undefined
+      updateNextTick(game, action, NO_BUILDING_THROTTLE)
       return
     }
 
+    const entityMetadata = getResource<EntityResourceInterface>(entity)
     const buildingMeta = getResource<EntityResourceInterface>(building)
-
-    if (building && data.state === State.NoBuild) {
-      data.state = State.GoToForum
-    }
-
-    entity.state = EntityState.move
 
     if (data.state === State.GoToForum) {
       const forum = entityQueryFindOne(game, {
@@ -74,54 +60,52 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
       })
 
       if (!forum) {
-        data.state = State.ForumNotFound
+        entity.state = EntityState.wait
         return
       }
 
-      const result = entityGoToEntity({ entity: entity, target: forum })
-      if (result.isFinish) {
-        data.state = State.TakeResource
-      }
+      entity.state = EntityState.move
+      const result = entityGoToEntityWithGround({ game, entity, target: forum })
+      if (result.isFinish) data.state = State.TakeResource
+      return
     }
 
     if (data.state === State.TakeResource) {
-      const resourceTaken = Object.values(
-        buildingMeta.propriety?.resourceForConstruction ?? {},
+      const requirements = Object.values(
+        buildingMeta.propriety?.resourceForConstruction?.member ?? {},
       )
+
+      const taken = requirements
         .filter((resource) => {
-          const inventoryResource = getInventoryItem(
-            building.inventory,
-            resource["@type"],
-          )
-          return inventoryResource.quantity < resource.quantity
+          const inBuilding = getInventoryItem(building.inventory, resource["@type"])
+          return inBuilding.quantity < resource.quantity
         })
-        .map((resource) => {
-          return transfertInventoryByItem(
+        .map((resource) =>
+          transfertInventoryByItem(
             game.inventory,
             entity.inventory,
             resource["@type"],
             entityMetadata.propriety.inventorySize ?? 0,
-          )
-        })
+          ),
+        )
 
-      const hasTakeResource = resourceTaken.some((amount) => amount > 0)
-
-      if (hasTakeResource) {
+      if (taken.some((amount) => amount > 0)) {
         data.state = State.GoToBuild
       } else {
         entity.state = EntityState.wait
       }
+      return
     }
 
     if (data.state === State.GoToBuild) {
-      const result = entityGoToEntity({ entity: entity, target: building })
-      if (result.isFinish) {
-        data.state = State.PutResource
-      }
+      entity.state = EntityState.move
+      const result = entityGoToEntityWithGround({ game, entity, target: building })
+      if (result.isFinish) data.state = State.PutResource
+      return
     }
 
     if (data.state === State.PutResource) {
-      Object.values(entity.inventory ?? {}).forEach((item) => {
+      Object.values(entity.inventory.member ?? {}).forEach((item) => {
         transfertInventoryByItem(
           entity.inventory,
           building.inventory,
@@ -130,27 +114,18 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
         )
       })
 
-      if (
-        enoughResource(
-          buildingMeta.propriety.resourceForConstruction as InventoryInterface,
-          building.inventory,
-        )
-      ) {
+      const isComplete = enoughResource(
+        buildingMeta.propriety.resourceForConstruction as InventoryInterface,
+        building.inventory,
+      )
+
+      if (isComplete) {
         building.state = EntityState.builded
         data.buildingIri = undefined
+        updateEntityInGame(game, building)
       }
 
       data.state = State.GoToForum
     }
-  },
-  factory: () => {
-    const data: FindWorkerData = {
-      state: State.GoToForum,
-    }
-
-    return createJsonLd(goBuildOfBuildingActionResource["@type"] ?? "action", {
-      data,
-      createdBy: "",
-    }) as ActionInterface<FindWorkerData>
   },
 })

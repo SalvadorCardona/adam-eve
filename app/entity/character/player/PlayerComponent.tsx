@@ -1,33 +1,65 @@
-import React, { useMemo } from "react"
-import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
+import React, { useEffect, useRef, useState } from "react"
+import { AnimatedSprite, Assets, Texture } from "pixi.js"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { Vector2Interface } from "@/packages/math/vector"
-import healthySrc from "./player_healthy.svg?url"
-import hurtSrc from "./player_hurt.svg?url"
-import criticalSrc from "./player_critical.svg?url"
+import { EntityState } from "@/packages/game/entity/EntityState"
+import {
+  sageIdleFrames,
+  sageWalkFrames,
+  SageDirection,
+} from "@/app/entity/resource/knowledge/sprites/sage"
 
-const PLAYER_MAX_LIFE = 100
-
-function getPlayerSprite(life: number): string {
-  const ratio = life / PLAYER_MAX_LIFE
-  if (ratio > 0.5) return healthySrc
-  if (ratio > 0.25) return hurtSrc
-  return criticalSrc
+function pickDirection(rotation: number | undefined): SageDirection {
+  if (rotation === -1) return "west"
+  if (rotation === 1) return "east"
+  return "south"
 }
 
 export const PlayerComponent = React.memo(
-  function PlayerComponent({ entity, size }: { entity: EntityInterface; size: Vector2Interface }) {
-    const spriteSrc = useMemo(() => getPlayerSprite(entity.life), [entity.life])
+  function PlayerComponent({
+    entity,
+    size,
+  }: {
+    entity: EntityInterface
+    size: Vector2Interface
+  }) {
+    const direction = pickDirection(entity.rotation)
+    const isMoving = entity.state === EntityState.move
+    const frames = (isMoving ? sageWalkFrames : sageIdleFrames)[direction]
+    const [textures, setTextures] = useState<Texture[] | null>(null)
+    const animatedRef = useRef<AnimatedSprite | null>(null)
+
+    useEffect(() => {
+      let cancelled = false
+      Assets.load(frames).then((loaded: Record<string, Texture>) => {
+        if (cancelled) return
+        setTextures(frames.map((f) => loaded[f]))
+      })
+      return () => {
+        cancelled = true
+      }
+    }, [frames])
+
+    useEffect(() => {
+      if (!textures || !animatedRef.current) return
+      animatedRef.current.play()
+    }, [textures])
+
+    if (!textures) return null
 
     return (
-      <Sprite
-        image={spriteSrc}
-        options={{ width: size.x, height: size.y }}
+      <pixiAnimatedSprite
+        ref={animatedRef}
+        textures={textures}
+        animationSpeed={0.2}
+        width={size.x}
+        height={size.y}
       />
     )
   },
   (prev, next) =>
-    prev.entity.life === next.entity.life &&
+    prev.entity.state === next.entity.state &&
+    prev.entity.rotation === next.entity.rotation &&
     prev.size.x === next.size.x &&
     prev.size.y === next.size.y,
 )

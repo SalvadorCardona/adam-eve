@@ -7,6 +7,6 @@ export function hasActionUser(
 ): boolean {
   return (
     game.userControl?.currentAction !== undefined &&
-    game.userControl.currentAction["@type"] === actionUser["@type"]
+    game.userControl.currentAction["@id"] === actionUser["@id"]
   )
 }

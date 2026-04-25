@@ -31,6 +31,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   age?: number
   workers?: EntityInterface["@id"][]
   isPaused?: boolean
+  hidden?: boolean
   inventory: InventoryInterface
   connections?: Partial<Record<Direction, JsonLdIri>>
   size: Vector3Interface

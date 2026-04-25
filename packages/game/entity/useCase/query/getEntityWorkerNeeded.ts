@@ -4,18 +4,18 @@ import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceIn
 import { EntityState } from "@/packages/game/entity/EntityState"
 
 export function getEntityWorkerNeeded(entity: EntityInterface): number {
-  const metaData = getResource<EntityResourceInterface>(entity)
-  const workMeta = metaData.propriety.work
+  const resource = getResource<EntityResourceInterface>(entity)
+  const workData = resource.propriety.work
 
-  if (!workMeta) return 0
+  if (!workData) return 0
 
-  const numberOfWorker = workMeta.numberOfWorker
+  const numberOfWorker = workData.numberOfWorker
 
   if (!numberOfWorker) return 0
 
   if (entity.state === EntityState.under_construction) return 0
 
-  if (!entity?.workers) return workMeta.numberOfWorker
+  if (!entity?.workers) return workData.numberOfWorker
 
   const numberOfWorkerInBuilding = entity.workers.length
 

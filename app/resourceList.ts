@@ -12,6 +12,7 @@ import {
 } from "@/app/actionUser/RemoveBuildingUserAction/removeBuildingUserActionMetadata"
 import { wheatResourceMetadata } from "@/app/inventory/wheat/wheatResource"
 import { goBuildOfBuildingActionResource } from "@/app/action/goBuildOfBuildingActionResource"
+import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { theDeathActionResource } from "@/app/action/theDeathActionResource"
@@ -41,6 +42,7 @@ import { agingActionResource } from "@/app/action/agingActionResource"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
+  stayInBuildingActionResource,
   forumEntityResource,
   workerEntityResource,
   houseEntityMetaData,

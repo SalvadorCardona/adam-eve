@@ -6,11 +6,12 @@ import { keysPressed } from "@/packages/ui/keysState"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
+import { hasCollisionInGame, hasCollisionWithGround } from "@/packages/game/entity/useCase/entityHasCollision"
 import { playerAttackActionResource } from "./playerAttackActionResource"
 import { PlayerComponent } from "./PlayerComponent"
 import healthyIcon from "./player_healthy.svg?url"
 
-const PLAYER_SPEED = 0.08
+const PLAYER_SPEED = 0.03
 
 export const playerEntityResource = createEntityResource({
   ["@id"]: "resource/player",
@@ -29,10 +30,13 @@ export const playerEntityResource = createEntityResource({
       attackRange: 1.5,
       attackSpeed: 30,
     },
+    vision: {
+      range: 6,
+    },
     size: {
-      x: 1,
-      y: 1,
-      z: 1,
+      x: 0.7,
+      y: 0.7,
+      z: 0.7,
     },
     health: {
       maxLife: 100,
@@ -42,26 +46,34 @@ export const playerEntityResource = createEntityResource({
   defaultEntity: () => ({ faction: EntityFaction.self }),
   component: PlayerComponent,
   onFrame: ({ entity, game }) => {
+    const tryMoveAxis = (axis: "x" | "z", delta: number): boolean => {
+      const previous = entity.position[axis]
+      entity.position[axis] = previous + delta
+      const blockedByEntity = hasCollisionInGame(game, entity)
+      const onGround = hasCollisionWithGround(game, entity)
+      if (!onGround || blockedByEntity) {
+        entity.position[axis] = previous
+        return false
+      }
+      return true
+    }
+
     let moved = false
 
-    if (keysPressed["ArrowUp"]) {
-      entity.position.z += PLAYER_SPEED
+    if (keysPressed["ArrowUp"] && tryMoveAxis("z", -PLAYER_SPEED)) {
       entity.state = EntityState.move
       moved = true
     }
-    if (keysPressed["ArrowDown"]) {
-      entity.position.z -= PLAYER_SPEED
+    if (keysPressed["ArrowDown"] && tryMoveAxis("z", PLAYER_SPEED)) {
       entity.state = EntityState.move
       moved = true
     }
-    if (keysPressed["ArrowLeft"]) {
-      entity.position.x += PLAYER_SPEED
+    if (keysPressed["ArrowLeft"] && tryMoveAxis("x", -PLAYER_SPEED)) {
       entity.rotation = -1
       entity.state = EntityState.move
       moved = true
     }
-    if (keysPressed["ArrowRight"]) {
-      entity.position.x -= PLAYER_SPEED
+    if (keysPressed["ArrowRight"] && tryMoveAxis("x", PLAYER_SPEED)) {
       entity.rotation = 1
       entity.state = EntityState.move
       moved = true

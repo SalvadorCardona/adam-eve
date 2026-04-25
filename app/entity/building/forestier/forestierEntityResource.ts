@@ -5,6 +5,7 @@ import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
+import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import iconSrc from "./icon.svg?url"
 import modelSrc from "./model.svg?url"
 
@@ -23,10 +24,12 @@ export const forestierEntityResource = createEntityResource({
   propriety: {
     health: { maxLife: 100 },
     size: { x: 2, y: 2, z: 2 },
+    work: { numberOfWorker: 1 },
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
   },
+  workerAction: stayInBuildingActionResource,
   onFrame: ({ entity, game }) => {
     if (game.time % TREE_GROWTH_INTERVAL !== 0) return
 

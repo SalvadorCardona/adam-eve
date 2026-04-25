@@ -13,7 +13,7 @@ export const bloodEntityResource = createEntityResource({
   },
   propriety: {
     health: {
-      maxLife: 200,
+      maxLife: 15,
     },
     size: {
       x: 2,

@@ -7,13 +7,14 @@ import {
 } from "@/packages/game/action/ActionResourceInterface"
 
 export function addActionToEntity(
-  sujet: ActionableInterface,
+  subjet: ActionableInterface,
   action: ActionInterface<any>,
 ) {
-  if (!hasAction(sujet)) {
-    sujet.actions = {}
+  if (!hasAction(subjet)) {
+    subjet.actions = {}
   }
-  updateContainer(sujet.actions as ActionBagInterface, action)
+
+  updateContainer(subjet.actions as ActionBagInterface, action)
 
   return action
 }

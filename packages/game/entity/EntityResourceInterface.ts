@@ -22,11 +22,16 @@ interface EntityAttackPriorityInterface {
   attackSpeed: number
 }
 
+interface EntityVisionPriorityInterface {
+  range: number
+}
+
 interface EntityPriorityInterface {
   resourceForConstruction?: InventoryInterface
   inventorySize?: number
   speed?: number
   attack?: EntityAttackPriorityInterface
+  vision?: EntityVisionPriorityInterface
   work?: {
     numberOfWorker: number
   }

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { Progress } from "@/app/components/ui/progress"
-import { Box, Leaf, Package, Pause, Play, Zap } from "lucide-react"
+import { Activity, Box, Leaf, Package, Pause, Play, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { useGameFrame, useGamePubSub } from "@/packages/ui/hook/useGameFrame"
-import EntityInterface, {
-  isBuildingEntity,
-} from "@/packages/game/entity/EntityInterface"
+import EntityInterface, { isBuildingEntity } from "@/packages/game/entity/EntityInterface"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { containerPubSub } from "@/packages/jsonLd/jsonLd"
 import { Inventory } from "@/packages/ui/Inventory"
 import { Button } from "@/app/components/ui/button"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
+import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
 
 interface EntityModalProps {}
 const REFRESH_EVERY_TICKS = 30
@@ -21,12 +21,10 @@ const REFRESH_EVERY_TICKS = 30
 export const EntityModal: React.FC<EntityModalProps> = () => {
   const [entity, setEntity] = useState<EntityInterface | undefined>()
   const game = useGameContext().game
-  useGamePubSub("userControl", (e) => {
-    if (game.userControl.entitiesSelected.length) {
-      setEntity(
-        entityQueryFindOne(game, { "@id": game.userControl.entitiesSelected[0] }),
-      )
-
+  useGamePubSub("userControl", () => {
+    const selectedId = game.userControl.entitySelected
+    if (selectedId) {
+      setEntity(entityQueryFindOne(game, { "@id": selectedId }))
       return
     }
 
@@ -54,10 +52,18 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
   const inventoryItems = entity.inventory
     ? Object.values(entity.inventory.member)
     : []
+  const actions = Object.values(entity.actions ?? {})
 
   const handleTogglePause = () => {
     if (!entity) return
     entity.isPaused = !entity.isPaused
+    if (entity.isPaused && entity.workers) {
+      entity.workers.forEach((workerIri, e) => {
+        if (entity.isPaused) {
+          removeWorkerFromEntity(entity, workerIri)
+        }
+      })
+    }
     updateEntityInGame(game, entity)
   }
 
@@ -118,6 +124,33 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
           <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />
             <div className="font-semibold">Etat : {entity.state}</div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-4">
+              <Activity className="h-5 w-5 text-blue-600" />
+              <div className="font-semibold">Actions ({actions.length})</div>
+            </div>
+            {actions.length === 0 ? (
+              <div className="text-sm text-amber-700 italic pl-9">Aucune</div>
+            ) : (
+              <ul className="flex flex-col gap-1 pl-9 text-sm">
+                {actions.map((action) => {
+                  const actionResource = getResource<ActionResourceInterface>(action)
+                  const label =
+                    actionResource?.label ?? action["@type"] ?? action["@id"]
+                  return (
+                    <li
+                      key={action["@id"]}
+                      className="flex items-center justify-between gap-4"
+                    >
+                      <span>{label}</span>
+                      <span>{action["createdBy"]}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
           </div>
 
           {metaData.propriety?.work?.numberOfWorker && (

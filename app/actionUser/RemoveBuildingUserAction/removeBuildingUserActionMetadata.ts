@@ -22,14 +22,14 @@ export const removeBuildingUserActionMetadata: ActionUserResource = {
       return
     }
 
-    if (game.userControl.entitiesSelected.length > 0) {
-      game.userControl.entitiesSelected.forEach((entityUri) => {
-        const entity = entityQueryFindOne(game, { "@id": entityUri })
-        if (entity) {
-          removeEntityToGame(game, entity)
-        }
-      })
-      playSound(song)
-    }
+    const selectedId = game.userControl.entitySelected
+    if (!selectedId) return
+
+    const entity = entityQueryFindOne(game, { "@id": selectedId })
+    if (!entity) return
+
+    removeEntityToGame(game, entity)
+    game.userControl.entitySelected = undefined
+    playSound(song)
   },
 }

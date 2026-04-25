@@ -1,9 +1,12 @@
-import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import React, { useMemo, useState } from "react"
+import {
+  EntityResourceInterface,
+  EntityType,
+} from "@/packages/game/entity/EntityResourceInterface"
+import React, { useCallback, useMemo, useState } from "react"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { Graphics } from "@/packages/ui/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
-import { ContainerChild, SpritesheetData } from "pixi.js"
+import { ContainerChild, FederatedPointerEvent, SpritesheetData } from "pixi.js"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import {
   Sprite,
@@ -17,6 +20,7 @@ import { Vector2Interface, vector3ToVector2 } from "@/packages/math/vector"
 import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
 import { getEntitySize } from "@/packages/game/entity/useCase/query/getEntitySize"
 import { vectorRatioUP } from "@/packages/math/ratio"
+import { updateGame } from "@/packages/game/game/updateGame"
 
 export interface EntityDecoratorResolverPropsInterface {
   color?: string
@@ -38,7 +42,7 @@ export const EntityDecoratorPixiJs = ({
   })
 
   useGamePubSub(game.userControl["@id"], () => {
-    const newIsSelected = game.userControl.entitiesSelected.includes(entity["@id"])
+    const newIsSelected = game.userControl.entitySelected === entity["@id"]
     setIsSelected(newIsSelected)
   })
 
@@ -82,6 +86,20 @@ export const EntityDecoratorPixiJs = ({
     return entity.position.y * 2 + entity.position.z * 0.001
   }, [entity.position.y, entity.position.z])
 
+  const isSelectable = entity.entityType !== EntityType.ground
+
+  const handlePointerTap = useCallback(
+    (e: FederatedPointerEvent) => {
+      if (game.userControl.currentAction) return
+      e.stopPropagation()
+      game.userControl.entitySelected = entity["@id"]
+      updateGame(game, game.userControl)
+    },
+    [entity, game],
+  )
+
+  if (entity.hidden) return null
+
   return (
     <Container
       options={{
@@ -90,6 +108,9 @@ export const EntityDecoratorPixiJs = ({
       position={position}
       scale={scale}
       zIndex={zIndex}
+      eventMode={isSelectable ? "static" : undefined}
+      cursor={isSelectable ? "pointer" : undefined}
+      onPointerTap={isSelectable ? handlePointerTap : undefined}
     >
       <EntityComponent entity={entity} size={size} />
       {color && (
@@ -105,6 +126,16 @@ export const EntityDecoratorPixiJs = ({
           draw={(g) => {
             g.circle(size.x / 2, size.y / 2, Math.max(size.x, size.y) / 2)
             g.stroke({ color: 0xffff00, width: 2, alpha: 1 })
+          }}
+        />
+      )}
+      {isSelected && entityMetaData?.propriety?.attack?.attackRange && (
+        <Graphics
+          draw={(g) => {
+            const radius =
+              entityMetaData.propriety.attack!.attackRange * game.camera.zoom
+            g.circle(size.x / 2, size.y / 2, radius)
+            g.stroke({ color: 0xff3333, width: 2, alpha: 0.6 })
           }}
         />
       )}

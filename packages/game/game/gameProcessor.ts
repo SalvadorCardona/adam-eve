@@ -6,6 +6,7 @@ import { gameResource } from "@/packages/game/game/gameResource"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { updateFogOfWar } from "@/packages/game/game/useCase/updateFogOfWar"
 
 export function gameProcessor(game: GameInterface) {
   game.time++
@@ -20,6 +21,8 @@ export function gameProcessor(game: GameInterface) {
     entity?.actions &&
       actionProcesseur(entity.actions, game, entity as BuildingEntityInterface)
   })
+
+  updateFogOfWar(game)
 
   metaData.persistItem(game)
 

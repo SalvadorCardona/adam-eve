@@ -4,6 +4,7 @@ import { createInventory } from "@/packages/game/inventory/useCase/createInvento
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowledgeResource"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
+import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import iconUrl from "./icon.svg?url"
 import modelUrl from "./model.svg?url"
 
@@ -20,10 +21,12 @@ export const researchCenterEntityResource = createEntityResource({
   propriety: {
     health: { maxLife: 150 },
     size: { x: 2, y: 2, z: 3 },
+    work: { numberOfWorker: 1 },
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
   },
+  workerAction: stayInBuildingActionResource,
   onFrame: ({ entity, game }) => {
     if (game.time % KNOWLEDGE_GENERATION_INTERVAL === 0) {
       addToInventory(game.inventory, knowledgeResourceMetadata, 1)
