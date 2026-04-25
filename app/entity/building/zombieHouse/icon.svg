@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="zhRoofIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a148c"/>
+      <stop offset="1" stop-color="#1a0033"/>
+    </linearGradient>
+    <linearGradient id="zhWallIcon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4e6b3a"/>
+      <stop offset="1" stop-color="#1b2e10"/>
+    </linearGradient>
+  </defs>
+  <polygon points="6,34 32,10 58,34 54,36 32,14 10,36" fill="url(#zhRoofIcon)" stroke="#0d001a" stroke-width="0.8"/>
+  <rect x="12" y="34" width="40" height="26" fill="url(#zhWallIcon)" stroke="#0e1a07" stroke-width="0.8"/>
+  <rect x="17" y="40" width="8" height="8" rx="1" fill="#7cb342" stroke="#1b5e20" stroke-width="0.6"/>
+  <line x1="21" y1="40" x2="21" y2="48" stroke="#1b5e20" stroke-width="0.5"/>
+  <line x1="17" y1="44" x2="25" y2="44" stroke="#1b5e20" stroke-width="0.5"/>
+  <rect x="39" y="40" width="8" height="8" rx="1" fill="#7cb342" stroke="#1b5e20" stroke-width="0.6"/>
+  <line x1="43" y1="40" x2="43" y2="48" stroke="#1b5e20" stroke-width="0.5"/>
+  <line x1="39" y1="44" x2="47" y2="44" stroke="#1b5e20" stroke-width="0.5"/>
+  <path d="M27,60 L27,48 Q27,44 32,44 Q37,44 37,48 L37,60 Z" fill="#3e2723" stroke="#1b0e0a" stroke-width="0.6"/>
+  <circle cx="35" cy="54" r="0.9" fill="#b71c1c"/>
+  <text x="32" y="28" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#b71c1c" text-anchor="middle" stroke="#0d001a" stroke-width="0.4">ZOMBIE</text>
+</svg>

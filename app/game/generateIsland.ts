@@ -11,6 +11,7 @@ import { researchCenterEntityResource } from "@/app/entity/building/researchCent
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
 import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
+import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zombieHouseEntityResource"
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { towerEntityResource } from "@/app/entity/building/tower/towerEntityResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
@@ -195,6 +196,13 @@ export function generateIsland(game: GameInterface): GameInterface {
   for (const [x, z] of goldPositions) {
     spawnAt(game, goldResourceEntityResource, x, z)
   }
+
+  spawnBuildingAt(
+    game,
+    zombieHouseEntityResource,
+    ZOMBIE_ISLAND_CENTER_X,
+    ZOMBIE_ISLAND_CENTER_Z + 2,
+  )
 
   const zombiePositions: Array<[number, number]> = [
     [ZOMBIE_ISLAND_CENTER_X, ZOMBIE_ISLAND_CENTER_Z],

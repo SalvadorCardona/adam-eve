@@ -10,7 +10,6 @@ import {
 } from "pixi.js"
 import { Application, extend, useApplication } from "@pixi/react"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
 import { assetList } from "@/app/assetList"
 import { metaDataRegistered } from "@/packages/resource/ResourceInterface"
 import LoaderComponent from "@/app/components/LoaderComponent"
@@ -32,17 +31,17 @@ export const PixiProvider: React.FC<{
   useEffect(() => {
     let cancelled = false
     const load = async () => {
-      const assets: string[] = []
-      getByLdTypeIn<EntityResourceInterface>(metaDataRegistered, "entity").forEach(
-        (e) => {
-          e.asset?.model2d && assets.push(e.asset.model2d)
-          if (e.asset?.asset2d) e.asset.asset2d.forEach((a) => assets.push(a))
-        },
-      )
-
-      for (const asset of assets) {
-        await Assets.load(asset)
+      const assets = new Set<string>()
+      for (const [key, meta] of Object.entries(metaDataRegistered)) {
+        if (key !== meta["@id"]) continue
+        if (meta["@type"] !== "entity") continue
+        const e = meta as EntityResourceInterface
+        if (e.asset?.icon) assets.add(e.asset.icon)
+        if (e.asset?.model2d) assets.add(e.asset.model2d)
+        e.asset?.asset2d?.forEach((a) => assets.add(a))
       }
+
+      await Promise.all([...assets].map((asset) => Assets.load(asset)))
 
       Assets.addBundle("main", assetList)
       await Assets.loadBundle("main")

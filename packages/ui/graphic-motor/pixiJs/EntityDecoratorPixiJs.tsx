@@ -103,8 +103,8 @@ export const EntityDecoratorPixiJs = ({
       {isSelected && (
         <Graphics
           draw={(g) => {
-            g.rect(0, 0, size.x, size.y)
-            g.fill({ color: 0xffff00, alpha: 0.5 })
+            g.circle(size.x / 2, size.y / 2, Math.max(size.x, size.y) / 2)
+            g.stroke({ color: 0xffff00, width: 2, alpha: 1 })
           }}
         />
       )}
@@ -157,7 +157,12 @@ export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   }, [entity.state])
 
   if (spriteSheetData && typeof spriteSheetData !== "function") {
-    return <SpriteAnimated spriteSheetData={spriteSheetData as SpritesheetData} />
+    return (
+      <SpriteAnimated
+        spriteSheetData={spriteSheetData as SpritesheetData}
+        size={size}
+      />
+    )
   }
 
   return (

@@ -5,6 +5,7 @@ import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQue
 import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { entityHasCollision } from "@/packages/game/entity/useCase/entityHasCollision"
 import { getResource } from "@/packages/resource/ResourceInterface"
+import { removeEntityToGame } from "@/packages/game/entity/useCase/removeEntityToGame"
 
 export const fireballEntityResource = createEntityResource({
   ["@id"]: "resource/fireball",
@@ -20,7 +21,7 @@ export const fireballEntityResource = createEntityResource({
       damage: 20,
       attackSpeed: 0.1,
     },
-    speed: 0.03,
+    speed: 0.01,
     size: {
       x: 0.4,
       y: 0.4,
@@ -56,7 +57,7 @@ export const fireballEntityResource = createEntityResource({
       const damage = meta?.propriety.attack?.damage ?? 0
       target.life -= damage
       entity.life = 0
-      //removeEntityToGame(game, entity)
+      removeEntityToGame(game, entity)
     }
   },
 })

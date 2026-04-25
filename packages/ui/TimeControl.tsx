@@ -61,32 +61,30 @@ export default function TimeControls() {
           </div>
         </div>
       )}
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-amber-100 p-4 rounded-2xl shadow-lg">
-        <div className="flex items-center space-x-4">
-          <div>{timeString}</div>
-          <Button
-            disabled={isPaused || !canBeDownSpeed}
-            onClick={() => handleSpeedChange(0.5)}
-            className="bg-teal-500 hover:bg-teal-600 text-white rounded-full p-2"
-          >
-            <Rewind size={24} />
-          </Button>
-          <Button
-            onClick={handlePauseToggle}
-            className="bg-rose-500 hover:bg-rose-600 text-white rounded-full p-2"
-          >
-            {isPaused ? <Play size={24} /> : <Pause size={24} />}
-          </Button>
-          <Button
-            disabled={isPaused || !canBeUpSpeed}
-            onClick={() => handleSpeedChange(2)}
-            className="bg-indigo-500 hover:bg-indigo-600 text-white rounded-full p-2"
-          >
-            <FastForward size={24} />
-          </Button>
-        </div>
-        <div className="text-center mt-2 font-medium text-amber-800">
-          {isPaused ? "En pause" : `Vitesse: ${speed}x`}
+      <div className="bg-amber-100 px-3 py-2 rounded-2xl shadow-lg flex items-center gap-3">
+        <div className="font-medium text-amber-900">{timeString}</div>
+        <Button
+          disabled={isPaused || !canBeDownSpeed}
+          onClick={() => handleSpeedChange(0.5)}
+          className="bg-teal-500 hover:bg-teal-600 text-white rounded-full p-2"
+        >
+          <Rewind size={20} />
+        </Button>
+        <Button
+          onClick={handlePauseToggle}
+          className="bg-rose-500 hover:bg-rose-600 text-white rounded-full p-2"
+        >
+          {isPaused ? <Play size={20} /> : <Pause size={20} />}
+        </Button>
+        <Button
+          disabled={isPaused || !canBeUpSpeed}
+          onClick={() => handleSpeedChange(2)}
+          className="bg-indigo-500 hover:bg-indigo-600 text-white rounded-full p-2"
+        >
+          <FastForward size={20} />
+        </Button>
+        <div className="font-medium text-amber-800 text-sm">
+          {isPaused ? "En pause" : `${speed}x`}
         </div>
       </div>
     </>

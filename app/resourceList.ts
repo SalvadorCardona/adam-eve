@@ -36,6 +36,7 @@ import { forestierEntityResource } from "@/app/entity/building/forestier/foresti
 import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
 import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
 import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
+import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zombieHouseEntityResource"
 import { agingActionResource } from "@/app/action/agingActionResource"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
@@ -75,5 +76,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   playerEntityResource,
   playerAttackActionResource,
   daycareEntityResource,
+  zombieHouseEntityResource,
   agingActionResource,
 ]

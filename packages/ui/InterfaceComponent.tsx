@@ -2,14 +2,12 @@ import React from "react"
 import { BottomSidebar } from "@/packages/ui/BottomSidebar"
 import { RightSidebar } from "@/packages/ui/RightSidebar"
 import { TopSideBar } from "@/packages/ui/TopSideBar"
-import TimeControls from "@/packages/ui/TimeControl"
 import CosyGameSidebar from "@/app/components/cosy-game-sidebar"
 import { SidebarProvider } from "@/app/components/ui/sidebar"
 
 export const InterfaceComponent = () => {
   return (
     <>
-      <TimeControls></TimeControls>
       <TopSideBar></TopSideBar>
       {/*<LeftSidebar></LeftSidebar>*/}
       <RightSidebar></RightSidebar>

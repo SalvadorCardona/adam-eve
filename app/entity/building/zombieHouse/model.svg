@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="zhRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a148c"/>
+      <stop offset="1" stop-color="#12001f"/>
+    </linearGradient>
+    <linearGradient id="zhWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a7a40"/>
+      <stop offset="1" stop-color="#1b2e10"/>
+    </linearGradient>
+    <radialGradient id="zhWindow" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#aed581"/>
+      <stop offset="1" stop-color="#33691e"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="64" cy="118" rx="52" ry="6" fill="#000" opacity="0.45"/>
+  <polygon points="12,72 64,24 116,72 108,76 64,32 20,76" fill="url(#zhRoof)" stroke="#0d001a" stroke-width="1.2"/>
+  <polygon points="12,72 20,76 20,84 12,80" fill="#1a0033"/>
+  <polygon points="116,72 108,76 108,84 116,80" fill="#1a0033"/>
+  <rect x="20" y="72" width="88" height="44" fill="url(#zhWall)" stroke="#0e1a07" stroke-width="1.2"/>
+  <path d="M22,76 L34,86 L28,96 L40,92 L34,104 L46,100" fill="none" stroke="#2a3a1a" stroke-width="0.9"/>
+  <path d="M88,82 L96,90 L90,100 L102,96" fill="none" stroke="#2a3a1a" stroke-width="0.9"/>
+  <rect x="30" y="82" width="16" height="16" rx="1.5" fill="url(#zhWindow)" stroke="#0e1a07" stroke-width="1"/>
+  <line x1="38" y1="82" x2="38" y2="98" stroke="#0e1a07" stroke-width="0.8"/>
+  <line x1="30" y1="90" x2="46" y2="90" stroke="#0e1a07" stroke-width="0.8"/>
+  <rect x="82" y="82" width="16" height="16" rx="1.5" fill="url(#zhWindow)" stroke="#0e1a07" stroke-width="1"/>
+  <line x1="90" y1="82" x2="90" y2="98" stroke="#0e1a07" stroke-width="0.8"/>
+  <line x1="82" y1="90" x2="98" y2="90" stroke="#0e1a07" stroke-width="0.8"/>
+  <path d="M54,116 L54,94 Q54,88 64,88 Q74,88 74,94 L74,116 Z" fill="#3e2723" stroke="#1b0e0a" stroke-width="1"/>
+  <circle cx="70" cy="104" r="1.4" fill="#b71c1c"/>
+  <rect x="40" y="54" width="48" height="14" rx="2" fill="#1a0033" stroke="#0d001a" stroke-width="1"/>
+  <text x="64" y="65" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#b71c1c" text-anchor="middle">ZOMBIE</text>
+</svg>

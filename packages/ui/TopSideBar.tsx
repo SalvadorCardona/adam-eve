@@ -7,6 +7,7 @@ import { useGameFrame } from "@/packages/ui/hook/useGameFrame"
 import { Button } from "@/app/components/ui/button"
 import { BadgePlus } from "lucide-react"
 import { useNavigate } from "@tanstack/react-router"
+import TimeControls from "@/packages/ui/TimeControl"
 
 const REFRESH_EVERY_TICKS = 30
 
@@ -37,7 +38,8 @@ export const TopSideBar = () => {
         })}
         <Inhabitants />
       </div>
-      <div className={"flex gap-2"}>
+      <div className={"flex gap-2 items-center"}>
+        <TimeControls />
         <Button
           className="bg-amber-400 hover:bg-amber-500 text-amber-900"
           onClick={() => navigate({ to: "/newGame" })}

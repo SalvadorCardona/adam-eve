@@ -1,4 +1,5 @@
 import {
+  AnimatedSprite,
   Assets,
   Sprite as BaseSprite,
   SpriteOptions,
@@ -25,7 +26,9 @@ interface SpritePropsInterface {
 
 const useTexture = (src?: string): Texture | undefined => {
   const [texture, setTexture] = useState<Texture | undefined>(() =>
-    src ? (Assets.get<Texture>(src) ?? undefined) : undefined,
+    src && Assets.cache.has(src)
+      ? (Assets.cache.get(src) as Texture | undefined)
+      : undefined,
   )
 
   useEffect(() => {
@@ -33,9 +36,8 @@ const useTexture = (src?: string): Texture | undefined => {
       setTexture(undefined)
       return
     }
-    const cached = Assets.get<Texture>(src)
-    if (cached) {
-      setTexture(cached)
+    if (Assets.cache.has(src)) {
+      setTexture(Assets.cache.get(src) as Texture)
       return
     }
     let cancelled = false
@@ -103,10 +105,13 @@ export const Sprite = ({
 
 export const SpriteAnimated = ({
   spriteSheetData,
+  size,
 }: {
   spriteSheetData: SpritesheetData
+  size?: Vector2Interface
 }) => {
   const [textures, setTextures] = useState<Texture[] | null>(null)
+  const animatedRef = useRef<AnimatedSprite | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -119,18 +124,27 @@ export const SpriteAnimated = ({
     }
   }, [spriteSheetData])
 
+  useEffect(() => {
+    if (!textures || !animatedRef.current) return
+    animatedRef.current.play()
+  }, [textures])
+
   if (!textures) return null
+
+  const baseWidth = size?.x ?? 50
+  const baseHeight = size?.y ?? 50
+  const renderScale = 2
 
   return (
     <pixiAnimatedSprite
+      ref={animatedRef}
       textures={textures}
       animationSpeed={0.2}
-      width={100}
-      height={100}
-      x={25}
-      y={25}
+      width={baseWidth * renderScale}
+      height={baseHeight * renderScale}
+      x={baseWidth / 2}
+      y={baseHeight / 2}
       anchor={0.5}
-      autoPlay
     />
   )
 }

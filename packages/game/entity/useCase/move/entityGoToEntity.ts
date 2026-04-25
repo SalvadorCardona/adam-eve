@@ -15,6 +15,7 @@ import { roundVector } from "@/packages/math/round"
 import { getEntitySpeed } from "@/packages/game/entity/useCase/query/getEntitySpeed"
 import {
   consumePath,
+  ConsumablePathInterface,
   createConsumablePath,
   PathInterface,
   PathResponseInterface,
@@ -47,7 +48,7 @@ export function entityGoToEntity({
   return {
     distance: result.distance,
     isFinish: entityHasCollision(entity, target),
-    unreachable: true,
+    unreachable: false,
   }
 }
 
@@ -57,6 +58,31 @@ interface EntityGoPositionParamsWithGround {
   game: GameInterface
 }
 
+function pathHash(
+  entity: EntityInterface,
+  target: EntityInterface,
+  targetPositionRounded: Vector2Interface,
+): string {
+  return [
+    entity["@id"],
+    target["@id"],
+    targetPositionRounded.x,
+    targetPositionRounded.y,
+  ].join("|")
+}
+
+function applyConsumablePath(
+  entity: EntityInterface,
+  path: ConsumablePathInterface,
+): void {
+  consumePath(path)
+  entity.position.x = path.currentPosition.x
+  entity.position.z = path.currentPosition.y
+  if (path.currentRotation !== undefined) {
+    entity.rotation = path.currentRotation
+  }
+}
+
 export function entityGoToEntityWithGround({
   game,
   entity,
@@ -64,31 +90,20 @@ export function entityGoToEntityWithGround({
 }: EntityGoPositionParamsWithGround): PathResponseInterface {
   const targetPosition = vector3ToVector2(target.position)
   const entityPosition = vector3ToVector2(entity.position)
-  const distance = distanceBetweenVector2(entityPosition, targetPosition)
 
-  if (distance < 1) {
+  if (distanceBetweenVector2(entityPosition, targetPosition) < 1) {
     return entityGoToEntity({ entity, target })
   }
 
   const targetPositionRounded = roundVector(targetPosition)
   const entityPositionRounded = roundVector(entityPosition)
-  const hash =
-    entity["@id"] + target["@id"] + JSON.stringify(targetPositionRounded)
+  const hash = pathHash(entity, target, targetPositionRounded)
 
   if (entity.currentPath && entity.currentPath.hash === hash) {
-    consumePath(entity.currentPath)
-    const newPosition = entity.currentPath.currentPosition
-    entity.position.x = newPosition.x
-    entity.position.z = newPosition.y
-
-    if (entity.currentPath.currentRotation) {
-      entity.rotation = entity.currentPath.currentRotation
-    }
-
+    applyConsumablePath(entity, entity.currentPath)
     return entity.currentPath
   }
 
-  const speed = getEntitySpeed(entity)
   const directions: Vector2Interface[] = [
     createVector2(0, 0),
     ...Object.values(matrixDirection),
@@ -101,9 +116,7 @@ export function entityGoToEntityWithGround({
       entityPositionRounded,
       vectorAddition(direction, targetPositionRounded),
     )
-    if (path) {
-      break
-    }
+    if (path) break
   }
 
   if (!path) {
@@ -114,14 +127,10 @@ export function entityGoToEntityWithGround({
     }
   }
 
-  const pathExtended = extendVectorByDistance(path, speed)
+  const pathExtended = extendVectorByDistance(path, getEntitySpeed(entity))
   entity.currentPath = createConsumablePath(pathExtended)
   entity.currentPath.hash = hash
 
-  consumePath(entity.currentPath)
-  const newPosition = entity.currentPath.currentPosition
-  entity.position.x = newPosition.x
-  entity.position.z = newPosition.y
-
+  applyConsumablePath(entity, entity.currentPath)
   return entity.currentPath
 }

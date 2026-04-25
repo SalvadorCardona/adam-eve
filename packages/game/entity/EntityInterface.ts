@@ -30,6 +30,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   createdAt: number
   age?: number
   workers?: EntityInterface["@id"][]
+  isPaused?: boolean
   inventory: InventoryInterface
   connections?: Partial<Record<Direction, JsonLdIri>>
   size: Vector3Interface

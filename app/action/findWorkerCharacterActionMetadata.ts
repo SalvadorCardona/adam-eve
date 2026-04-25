@@ -28,6 +28,7 @@ export const findWorkerCharacterActionMetadata = createActionResource({
     })
 
     buildings.forEach((building) => {
+      if (building.isPaused) return
       workers.forEach((worker) => {
         addWorkerToEntity(game, building, worker)
       })

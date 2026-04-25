@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { Progress } from "@/app/components/ui/progress"
-import { Box, Leaf, Package, Zap } from "lucide-react"
+import { Box, Leaf, Package, Pause, Play, Zap } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { useGameFrame, useGamePubSub } from "@/packages/ui/hook/useGameFrame"
-import EntityInterface from "@/packages/game/entity/EntityInterface"
+import EntityInterface, {
+  isBuildingEntity,
+} from "@/packages/game/entity/EntityInterface"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { containerPubSub } from "@/packages/jsonLd/jsonLd"
 import { Inventory } from "@/packages/ui/Inventory"
+import { Button } from "@/app/components/ui/button"
+import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
 
 interface EntityModalProps {}
 const REFRESH_EVERY_TICKS = 30
@@ -50,6 +54,12 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
   const inventoryItems = entity.inventory
     ? Object.values(entity.inventory.member)
     : []
+
+  const handleTogglePause = () => {
+    if (!entity) return
+    entity.isPaused = !entity.isPaused
+    updateEntityInGame(game, entity)
+  }
 
   return (
     <Card
@@ -117,6 +127,29 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
                 Travailleurs : {entity.workers?.length ?? 0} /{" "}
                 {metaData.propriety.work.numberOfWorker}
               </div>
+            </div>
+          )}
+
+          {isBuildingEntity(entity) && (
+            <div className="flex items-center gap-4">
+              <Button
+                onClick={handleTogglePause}
+                className={
+                  entity.isPaused
+                    ? "bg-emerald-500 hover:bg-emerald-600 text-white"
+                    : "bg-rose-500 hover:bg-rose-600 text-white"
+                }
+              >
+                {entity.isPaused ? (
+                  <>
+                    <Play className="mr-2 h-4 w-4" /> Reprendre
+                  </>
+                ) : (
+                  <>
+                    <Pause className="mr-2 h-4 w-4" /> Mettre en pause
+                  </>
+                )}
+              </Button>
             </div>
           )}
 

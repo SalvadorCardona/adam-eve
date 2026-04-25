@@ -1,20 +1,12 @@
 import { createJsonLd, JsonLdIri } from "@/packages/jsonLd/jsonLd"
-import EntityInterface, {
-  BuildingEntityInterface,
-} from "@/packages/game/entity/EntityInterface"
-import {
-  ActionInterface,
-  ActionResourceInterface,
-} from "@/packages/game/action/ActionResourceInterface"
+import EntityInterface, { BuildingEntityInterface } from "@/packages/game/entity/EntityInterface"
+import { ActionInterface, ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { transfertInventoryByItem } from "@/packages/game/inventory/useCase/transfertInventoryByItem"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getInventoryItem } from "@/packages/game/inventory/useCase/getInventoryItem"
 import { enoughResource } from "@/packages/game/inventory/useCase/enoughResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
-import {
-  entityFindOneById,
-  entityQueryFindOne,
-} from "@/packages/game/game/useCase/query/entityQuery"
+import { entityFindOneById, entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { entityGoToEntity } from "@/packages/game/entity/useCase/move/entityGoToEntity"
@@ -59,9 +51,11 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
       entity.state = EntityState.wait
 
       const source = action.createdBy && entityFindOneById(game, action.createdBy)
+
       if (source) {
         removeWorkerFromEntity(source, entity)
       }
+
       removeActionFromEntity(entity, action)
       return
     }
