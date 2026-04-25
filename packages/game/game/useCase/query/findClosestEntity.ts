@@ -1,5 +1,5 @@
 import EntityInterface from "@/packages/game/entity/EntityInterface"
-import { distanceBetweenVector3 } from "@/packages/math/distanceBetweenVector3"
+import { distanceSquaredBetweenVector3 } from "@/packages/math/distanceBetweenVector3"
 import { Vector3Interface } from "@/packages/math/vector"
 
 export const findClosestEntity = (
@@ -7,8 +7,8 @@ export const findClosestEntity = (
   entities: EntityInterface[],
 ): EntityInterface[] => {
   return entities.sort((a, b) => {
-    const distanceA = distanceBetweenVector3(position, a.position)
-    const distanceB = distanceBetweenVector3(position, b.position)
+    const distanceA = distanceSquaredBetweenVector3(position, a.position)
+    const distanceB = distanceSquaredBetweenVector3(position, b.position)
 
     return distanceA - distanceB
   })

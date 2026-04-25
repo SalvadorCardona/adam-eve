@@ -63,6 +63,18 @@ describe("Vector Utility Functions", () => {
     expect(transformedVector).toEqual({ x: 2, y: 4 })
   })
 
+  test("vectorTransformer should handle Vector3Interface (preserve z)", () => {
+    const vector3: Vector3Interface = { x: 1, y: 2, z: 3 }
+    const transformedVector = vectorTransformer(vector3, (n) => n * 3)
+    expect(transformedVector).toEqual({ x: 3, y: 6, z: 9 })
+  })
+
+  test("vectorTransformer should not mutate the input vector", () => {
+    const vector2: Vector2Interface = { x: 1, y: 2 }
+    vectorTransformer(vector2, (n) => n + 100)
+    expect(vector2).toEqual({ x: 1, y: 2 })
+  })
+
   test("vectorSize should calculate the size between two vectors", () => {
     const min: Vector2Interface = { x: 1, y: 1 }
     const max: Vector2Interface = { x: 4, y: 5 }
@@ -87,6 +99,20 @@ describe("Vector Utility Functions", () => {
     vector2 = { x: 4, y: 6 }
     expected = createVector2(-1, -1)
     expect(expected).toStrictEqual(vectorAddition(vector1, vector2))
+  })
+
+  test("Vector Addition should sum every axis of a Vector3Interface", () => {
+    const vector1: Vector3Interface = { x: 1, y: 2, z: 3 }
+    const vector2: Vector3Interface = { x: 10, y: 20, z: 30 }
+    expect(vectorAddition(vector1, vector2)).toStrictEqual({ x: 11, y: 22, z: 33 })
+  })
+
+  test("Vector Addition should not mutate the input vectors", () => {
+    const vector1: Vector2Interface = { x: 1, y: 2 }
+    const vector2: Vector2Interface = { x: 4, y: 6 }
+    vectorAddition(vector1, vector2)
+    expect(vector1).toEqual({ x: 1, y: 2 })
+    expect(vector2).toEqual({ x: 4, y: 6 })
   })
 
   test("Vector Extend by steps", () => {

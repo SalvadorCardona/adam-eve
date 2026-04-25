@@ -3,7 +3,10 @@ import { gameFactory } from "@/packages/game/game/GameInterface"
 import { createVector3 } from "@/packages/math/vector"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
-import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import {
+  entityQueryFindOne,
+  entityQuery,
+} from "@/packages/game/game/useCase/query/entityQuery"
 import { expect } from "vitest"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 
@@ -35,5 +38,31 @@ describe("Test entityQuery", () => {
     })
 
     expect((entityResult as EntityInterface)["@id"]).toBe(three2["@id"])
+  })
+
+  it("circleSearch returns entities within the radius and excludes those outside", () => {
+    const game = gameFactory()
+    const inside = treeEntityMetaData.create({
+      game,
+      item: { position: createVector3(3, 0, 4) },
+    })
+    const onBoundary = treeEntityMetaData.create({
+      game,
+      item: { position: createVector3(5, 0, 0) },
+    })
+    const outside = treeEntityMetaData.create({
+      game,
+      item: { position: createVector3(10, 0, 10) },
+    })
+    ;[inside, onBoundary, outside].forEach((e) => addEntityToGame(game, e))
+
+    const result = entityQuery(game, {
+      circleSearch: { center: { x: 0, y: 0 }, radius: 5 },
+    })
+
+    const ids = result.map((e) => e["@id"])
+    expect(ids).toContain(inside["@id"])
+    expect(ids).toContain(onBoundary["@id"])
+    expect(ids).not.toContain(outside["@id"])
   })
 })

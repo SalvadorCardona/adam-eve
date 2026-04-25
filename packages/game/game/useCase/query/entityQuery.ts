@@ -8,7 +8,7 @@ import {
 import EntityInterface, {
   EntityFaction,
 } from "@/packages/game/entity/EntityInterface"
-import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
+import { distanceSquaredBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 import { boundingCollision } from "@/packages/math/boundingCollision"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
@@ -127,10 +127,11 @@ export function entityQuery<T = EntityInterface>(
 
   if (circleSearch) {
     const { center, radius } = circleSearch
-    const center2D = center
+    const radiusSquared = radius * radius
     entities = entities.filter((entity) => {
       return (
-        distanceBetweenVector2(vector3ToVector2(entity.position), center2D) <= radius
+        distanceSquaredBetweenVector2(vector3ToVector2(entity.position), center) <=
+        radiusSquared
       )
     })
   }
@@ -190,11 +191,11 @@ export function entityQuery<T = EntityInterface>(
   if (order?.distance) {
     const referencePoint = circleSearch ? circleSearch.center : { x: 0, y: 0 }
     entities.sort((a, b) => {
-      const distanceA = distanceBetweenVector2(
+      const distanceA = distanceSquaredBetweenVector2(
         vector3ToVector2(a.position),
         referencePoint,
       )
-      const distanceB = distanceBetweenVector2(
+      const distanceB = distanceSquaredBetweenVector2(
         vector3ToVector2(b.position),
         referencePoint,
       )
