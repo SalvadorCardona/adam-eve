@@ -64,28 +64,28 @@ export function vectorTransformer<T extends Vector2Interface | Vector3Interface>
   vector: T,
   cb: (s: number) => number,
 ): T {
-  const result: Partial<T> = {}
-
-  Object.keys(vector).forEach((key) => {
-    // @ts-ignore
-    result[key as keyof T] = cb(vector[key as keyof T]) as T[keyof T]
-  })
-
-  return result as T
+  if ("z" in vector) {
+    return {
+      x: cb(vector.x),
+      y: cb(vector.y),
+      z: cb((vector as Vector3Interface).z),
+    } as unknown as T
+  }
+  return { x: cb(vector.x), y: cb(vector.y) } as unknown as T
 }
 
 export function vectorAddition<T extends Vector2Interface | Vector3Interface>(
   v1: T,
   v2: T,
-) {
-  const result: Partial<T> = {}
-
-  Object.keys(v1).forEach((key) => {
-    // @ts-ignore
-    result[key as keyof T] = v1[key] + v2[key]
-  })
-
-  return result as T
+): T {
+  if ("z" in v1) {
+    return {
+      x: v1.x + v2.x,
+      y: v1.y + v2.y,
+      z: (v1 as Vector3Interface).z + (v2 as Vector3Interface).z,
+    } as unknown as T
+  }
+  return { x: v1.x + v2.x, y: v1.y + v2.y } as unknown as T
 }
 
 export const vectorDimension = (
