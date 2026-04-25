@@ -3,31 +3,31 @@ import { Inventory } from "@/packages/ui/Inventory"
 import { Inhabitants } from "@/packages/ui/Inhabitants"
 import React, { useState } from "react"
 import { GameMenu } from "@/packages/ui/menu/GameMenu"
-import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
-import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
+import { useGameFrame } from "@/packages/ui/hook/useGameFrame"
 import { Button } from "@/app/components/ui/button"
 import { BadgePlus } from "lucide-react"
 import { useNavigate } from "@tanstack/react-router"
 
+const REFRESH_EVERY_TICKS = 30
+
 export const TopSideBar = () => {
   const gameContext = useGameContext()
-  const [, setTick] = useState(0)
-  //useGameFrame(() => setTick((t) => t + 1))
-  const [inventory, setInventory] = useState<InventoryInterface>(
-    gameContext.game.inventory,
-  )
-  useGamePubSub("inventory", (e) => {
-    console.log(e)
-    console.log(gameContext.game.inventory)
-    setInventory({ ...gameContext.game.inventory })
+  const [tick, setTick] = useState<number>()
+
+  useGameFrame((game) => {
+    if (game.time % REFRESH_EVERY_TICKS !== 0) return
+    setTick(game["@version"] ?? 1)
   })
 
   const navigate = useNavigate()
 
   return (
-    <div className={"fixed flex top-0 left-0  w-full justify-between  p-2 gap-2"}>
+    <div
+      key={"top" + tick}
+      className={"fixed flex top-0 left-0  w-full justify-between  p-2 gap-2"}
+    >
       <div className={"flex gap-2"}>
-        {Object.values(inventory.member).map((inventoryItem) => {
+        {Object.values(gameContext.game.inventory.member).map((inventoryItem) => {
           return (
             <Inventory
               inventoryItem={inventoryItem}

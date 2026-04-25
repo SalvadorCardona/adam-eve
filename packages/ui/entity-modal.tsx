@@ -5,13 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/ca
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
-import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
+import { useGameFrame, useGamePubSub } from "@/packages/ui/hook/useGameFrame"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { containerPubSub } from "@/packages/jsonLd/jsonLd"
 import { Inventory } from "@/packages/ui/Inventory"
 
 interface EntityModalProps {}
+const REFRESH_EVERY_TICKS = 30
 
 export const EntityModal: React.FC<EntityModalProps> = () => {
   const [entity, setEntity] = useState<EntityInterface | undefined>()
@@ -26,6 +27,13 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
     }
 
     setEntity(undefined)
+  })
+
+  const [tick, setTick] = useState<number>()
+
+  useGameFrame((game) => {
+    if (game.time % REFRESH_EVERY_TICKS !== 0) return
+    setTick(game["@version"] ?? 1)
   })
 
   useEffect(() => {
@@ -44,7 +52,10 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
     : []
 
   return (
-    <Card className="sm:max-w-[425px] bg-amber-50 text-amber-900">
+    <Card
+      key={"modale" + tick}
+      className="sm:max-w-[425px] bg-amber-50 text-amber-900"
+    >
       <CardContent>
         <CardHeader className={"flex flex-row items-center gap-4"}>
           <div className="relative w-16 h-16 rounded-full overflow-hidden bg-amber-200">

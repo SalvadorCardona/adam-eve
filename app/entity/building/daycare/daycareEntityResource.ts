@@ -8,21 +8,19 @@ import { createVector3 } from "@/packages/math/vector"
 import iconUrl from "./icon.svg?url"
 import modelUrl from "./model.svg?url"
 
-const WORKER_SPAWN_INTERVAL = 10000
-const SPAWN_OFFSETS: Array<[number, number]> = [
-  [1, 0],
-  [-1, 0],
-  [0, 1],
-  [0, -1],
-  [1, 1],
-  [-1, 1],
-  [1, -1],
-  [-1, -1],
-  [2, 0],
-  [-2, 0],
-  [0, 2],
-  [0, -2],
-]
+const WORKER_SPAWN_INTERVAL = 1000
+const MAX_SPAWN_RADIUS = 6
+
+function* ringOffsets(maxRadius: number): Generator<[number, number], void, void> {
+  for (let radius = 1; radius <= maxRadius; radius++) {
+    for (let dx = -radius; dx <= radius; dx++) {
+      for (let dz = -radius; dz <= radius; dz++) {
+        if (Math.max(Math.abs(dx), Math.abs(dz)) !== radius) continue
+        yield [dx, dz]
+      }
+    }
+  }
+}
 
 export const daycareEntityResource = createEntityResource({
   ["@id"]: "daycare",
@@ -43,9 +41,9 @@ export const daycareEntityResource = createEntityResource({
     if (game.time === 0) return
     if (game.time % WORKER_SPAWN_INTERVAL !== 0) return
 
-    for (const [dx, dz] of SPAWN_OFFSETS) {
+    for (const [dx, dz] of ringOffsets(MAX_SPAWN_RADIUS)) {
       const position = createVector3(
-        entity.position.x + entity.size.x + dx,
+        entity.position.x + dx,
         1,
         entity.position.z + dz,
       )

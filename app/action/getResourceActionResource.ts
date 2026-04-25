@@ -85,7 +85,7 @@ export const getResourceActionResource = createActionResource({
       if (result.isFinish) {
         transfertInventoryByItem(
           entity.inventory,
-          target.inventory,
+          game.inventory,
           resourceMapped.resource,
           Infinity,
         )
