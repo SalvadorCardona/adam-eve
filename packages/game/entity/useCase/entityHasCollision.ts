@@ -1,4 +1,5 @@
 import EntityInterface, {
+  isCharacterEntity,
   isGroundEntity,
 } from "@/packages/game/entity/EntityInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
@@ -21,12 +22,16 @@ export function hasCollisionInGame(
   game: GameInterface,
   entity: EntityInterface,
 ): false | EntityInterface {
+  const sourceIsCharacter = isCharacterEntity(entity)
+
   const canBeCollision: EntityInterface[] = entityQuery(game, {
     "@idIsNot": entity["@id"],
   })
 
   for (const otherEntity of canBeCollision) {
-    if (!isGroundEntity(otherEntity) && entityHasCollision(entity, otherEntity)) {
+    if (isGroundEntity(otherEntity)) continue
+    if (sourceIsCharacter && isCharacterEntity(otherEntity)) continue
+    if (entityHasCollision(entity, otherEntity)) {
       return otherEntity
     }
   }

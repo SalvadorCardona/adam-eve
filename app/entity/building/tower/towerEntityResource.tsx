@@ -23,6 +23,9 @@ export const towerEntityResource = createEntityResource({
       damage: 80,
       attackSpeed: 60,
     },
+    vision: {
+      range: 8,
+    },
     work: {
       numberOfWorker: 2,
     },

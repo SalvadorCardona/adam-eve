@@ -22,9 +22,6 @@ export function updateFogOfWar(game: GameInterface): void {
   if (width === 0 || height === 0) return
 
   const visited = ensureRows(game.gameWorld.visitedMatrix ?? [], height, width)
-  const visible: boolean[][] = Array.from({ length: height }, () =>
-    new Array(width).fill(false),
-  )
 
   const revealers = entityQuery(game, { faction: EntityFaction.self })
 
@@ -40,13 +37,12 @@ export function updateFogOfWar(game: GameInterface): void {
     const y0 = Math.max(0, Math.floor(cz - range))
     const y1 = Math.min(height - 1, Math.ceil(cz + range))
     for (let y = y0; y <= y1; y++) {
-      const visibleRow = visible[y]
       const visitedRow = visited[y]
       for (let x = x0; x <= x1; x++) {
+        if (visitedRow[x]) continue
         const dx = x + 0.5 - cx
         const dy = y + 0.5 - cz
         if (dx * dx + dy * dy <= r2) {
-          visibleRow[x] = true
           visitedRow[x] = true
         }
       }
@@ -54,5 +50,4 @@ export function updateFogOfWar(game: GameInterface): void {
   }
 
   game.gameWorld.visitedMatrix = visited
-  game.gameWorld.visibleMatrix = visible
 }

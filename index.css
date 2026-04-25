@@ -1,39 +1,457 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-@theme {
-  /* Reporte ici toutes tes variables shadcn */
-  --color-border: hsl(var(--border));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-ring: hsl(var(--ring));
+@custom-variant dark (&:is(.dark *));
+
+/* ===========================================
+   RPG PIXEL ART THEME - Style "Heroes & Villains"
+   Bordures bois/or, intérieurs sombres, rivets
+   =========================================== */
+
+:root {
+  /* Fond général - gris-vert olive comme l'image */
+  --background: oklch(0.52 0.04 110);
+  --foreground: oklch(0.95 0.02 85);
+
+  /* Card - Intérieur bleu-gris foncé */
+  --card: oklch(0.28 0.03 250);
+  --card-foreground: oklch(0.92 0.02 85);
+
+  /* Popover - Légèrement plus clair */
+  --popover: oklch(0.32 0.03 250);
+  --popover-foreground: oklch(0.92 0.02 85);
+
+  /* Primary - Or/Bois chaud (bordures principales) */
+  --primary: oklch(0.68 0.14 70);
+  --primary-foreground: oklch(0.20 0.04 50);
+
+  /* Secondary - Bois plus foncé */
+  --secondary: oklch(0.55 0.12 55);
+  --secondary-foreground: oklch(0.95 0.02 85);
+
+  /* Muted - Panneaux bois clair */
+  --muted: oklch(0.62 0.10 65);
+  --muted-foreground: oklch(0.25 0.04 50);
+
+  /* Accent - Vert émeraude (succès, info) */
+  --accent: oklch(0.55 0.15 145);
+  --accent-foreground: oklch(0.98 0.01 85);
+
+  /* Destructive - Rouge erreur */
+  --destructive: oklch(0.50 0.22 25);
+  --destructive-foreground: oklch(0.98 0.02 85);
+
+  /* Warning - Jaune/Or */
+  --warning: oklch(0.75 0.16 85);
+  --warning-foreground: oklch(0.20 0.04 50);
+
+  /* Borders - Brun foncé contour */
+  --border: oklch(0.30 0.06 50);
+  --border-light: oklch(0.75 0.12 70);
+  --input: oklch(0.35 0.03 250);
+  --ring: oklch(0.68 0.14 70);
+
+  /* Charts - Palette RPG */
+  --chart-1: oklch(0.68 0.14 70); /* Or */
+  --chart-2: oklch(0.55 0.15 145); /* Vert */
+  --chart-3: oklch(0.55 0.18 300); /* Violet */
+  --chart-4: oklch(0.55 0.16 220); /* Bleu */
+  --chart-5: oklch(0.50 0.22 25); /* Rouge */
+
+  /* Border radius arrondi style RPG */
+  --radius: 8px;
+
+  /* Sidebar */
+  --sidebar: oklch(0.22 0.03 250);
+  --sidebar-foreground: oklch(0.92 0.02 85);
+  --sidebar-primary: oklch(0.68 0.14 70);
+  --sidebar-primary-foreground: oklch(0.20 0.04 50);
+  --sidebar-accent: oklch(0.30 0.03 250);
+  --sidebar-accent-foreground: oklch(0.92 0.02 85);
+  --sidebar-border: oklch(0.35 0.04 50);
+  --sidebar-ring: oklch(0.68 0.14 70);
 }
 
-/* Tes variables HSL restent ici */
+.dark {
+  /* Mode sombre - encore plus profond */
+  --background: oklch(0.18 0.02 260);
+  --foreground: oklch(0.92 0.02 85);
+
+  --card: oklch(0.22 0.025 250);
+  --card-foreground: oklch(0.92 0.02 85);
+
+  --popover: oklch(0.20 0.02 250);
+  --popover-foreground: oklch(0.92 0.02 85);
+
+  --primary: oklch(0.72 0.15 70);
+  --primary-foreground: oklch(0.18 0.04 50);
+
+  --secondary: oklch(0.50 0.10 55);
+  --secondary-foreground: oklch(0.95 0.02 85);
+
+  --muted: oklch(0.28 0.02 250);
+  --muted-foreground: oklch(0.65 0.02 85);
+
+  --accent: oklch(0.50 0.14 145);
+  --accent-foreground: oklch(0.98 0.01 85);
+
+  --destructive: oklch(0.48 0.20 25);
+  --destructive-foreground: oklch(0.98 0.02 85);
+
+  --border: oklch(0.35 0.05 50);
+  --border-light: oklch(0.55 0.10 70);
+  --input: oklch(0.25 0.02 250);
+  --ring: oklch(0.72 0.15 70);
+
+  --chart-1: oklch(0.72 0.15 70);
+  --chart-2: oklch(0.50 0.14 145);
+  --chart-3: oklch(0.55 0.18 300);
+  --chart-4: oklch(0.55 0.16 220);
+  --chart-5: oklch(0.55 0.22 25);
+
+  --sidebar: oklch(0.15 0.02 260);
+  --sidebar-foreground: oklch(0.92 0.02 85);
+  --sidebar-primary: oklch(0.72 0.15 70);
+  --sidebar-primary-foreground: oklch(0.18 0.04 50);
+  --sidebar-accent: oklch(0.22 0.02 260);
+  --sidebar-accent-foreground: oklch(0.92 0.02 85);
+  --sidebar-border: oklch(0.30 0.03 50);
+  --sidebar-ring: oklch(0.72 0.15 70);
+}
+
+@theme inline {
+  /* Press Start 2P pour titres, VT323 pour UI lisible */
+  --font-sans: var(--font-vt323), 'VT323', monospace;
+  --font-serif: var(--font-pixel), 'Press Start 2P', monospace;
+  --font-mono: var(--font-pixel), 'Press Start 2P', monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-full: 9999px;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --border: 214.3 31.8% 91.4%;
-    /* ... */
-  }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    /* ... */
-  }
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
+    image-rendering: pixelated;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 20px;
+  }
+
+  /* Titres pixel */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply tracking-tight leading-relaxed;
+  }
+
+  h1 {
+    @apply text-xl;
+  }
+
+  h2 {
+    @apply text-lg;
+  }
+
+  h3 {
+    @apply text-base;
+  }
+}
+
+/* ============================================
+   COMPOSANTS RPG PIXEL ART
+   ============================================ */
+
+@layer components {
+  /* Bordure bois/or style RPG avec rivets */
+  .rpg-border {
+    position: relative;
+    border: 4px solid var(--primary);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: inset 0 0 0 2px var(--border),
+    inset 0 0 0 4px var(--secondary),
+    0 4px 0 0 var(--border),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Variante avec rivets (coins décoratifs) */
+  .rpg-border-rivets::before,
+  .rpg-border-rivets::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .rpg-border-rivets::before {
+    top: 6px;
+    left: 6px;
+  }
+
+  .rpg-border-rivets::after {
+    top: 6px;
+    right: 6px;
+  }
+
+  /* Panneau inventaire / carte */
+  .rpg-panel {
+    position: relative;
+    border: 4px solid var(--primary);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: inset 0 0 0 2px var(--border),
+    0 4px 0 0 var(--border),
+    0 6px 12px rgba(0, 0, 0, 0.4);
+    padding: 16px;
+  }
+
+  /* Header de panneau avec titre */
+  .rpg-panel-header {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin: -8px -8px 12px -8px;
+    text-align: center;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bouton RPG style bois arrondi */
+  .rpg-btn {
+    position: relative;
+    border: 3px solid var(--border);
+    border-radius: 20px;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 8px 20px;
+    font-family: var(--font-serif);
+    font-size: 10px;
+    color: var(--primary-foreground);
+    cursor: pointer;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.25),
+    0 3px 0 var(--border),
+    0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease;
+  }
+
+  .rpg-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 4px 0 var(--border),
+    0 6px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  .rpg-btn:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.2),
+    0 1px 0 var(--border),
+    0 2px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bouton avec icône ronde à gauche */
+  .rpg-btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 8px;
+  }
+
+  .rpg-btn-icon::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--border);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+  }
+
+  /* Slots d'inventaire */
+  .rpg-slot {
+    width: 48px;
+    height: 48px;
+    background: oklch(0.22 0.02 250);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .rpg-slot:hover {
+    background: oklch(0.28 0.02 250);
+    border-color: var(--primary);
+  }
+
+  /* Barre de progression RPG */
+  .rpg-progress {
+    position: relative;
+    height: 20px;
+    background: oklch(0.22 0.02 250);
+    border: 3px solid var(--primary);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px var(--border),
+    0 2px 0 var(--border);
+  }
+
+  .rpg-progress-bar {
+    height: 100%;
+    background: linear-gradient(180deg,
+    oklch(0.65 0.20 145) 0%,
+    oklch(0.50 0.18 145) 50%,
+    oklch(0.45 0.16 145) 100%
+    );
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: width 0.3s ease;
+  }
+
+  .rpg-progress-bar.health {
+    background: linear-gradient(180deg,
+    oklch(0.60 0.22 25) 0%,
+    oklch(0.50 0.22 25) 50%,
+    oklch(0.40 0.20 25) 100%
+    );
+  }
+
+  .rpg-progress-bar.mana {
+    background: linear-gradient(180deg,
+    oklch(0.60 0.18 250) 0%,
+    oklch(0.50 0.18 250) 50%,
+    oklch(0.40 0.16 250) 100%
+    );
+  }
+
+  /* Alertes/Notifications RPG */
+  .rpg-alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border: 3px solid var(--primary);
+    border-radius: 8px;
+    background: var(--card);
+    box-shadow: inset 0 0 0 1px var(--border),
+    0 2px 0 var(--border);
+  }
+
+  .rpg-alert-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .rpg-alert.notice .rpg-alert-icon {
+    background: var(--chart-4);
+  }
+
+  .rpg-alert.error .rpg-alert-icon {
+    background: var(--destructive);
+  }
+
+  .rpg-alert.warning .rpg-alert-icon {
+    background: var(--warning);
+  }
+
+  .rpg-alert.success .rpg-alert-icon {
+    background: var(--accent);
+  }
+
+  /* Slider RPG avec poignée ornée */
+  .rpg-slider {
+    position: relative;
+    height: 24px;
+    background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    padding: 0 16px;
+  }
+
+  .rpg-slider-track {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: var(--border);
+    transform: translateY(-50%);
+    border-radius: 2px;
+  }
+
+  .rpg-slider-thumb {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 28px;
+    background: var(--accent);
+    border: 3px solid var(--border);
+    border-radius: 6px;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Tooltip style parchemin */
+  .rpg-tooltip {
+    background: var(--muted);
+    border: 3px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--muted-foreground);
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 }

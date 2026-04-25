@@ -49,6 +49,9 @@ export const workerEntityResource = createEntityResource({
       attackRange: 0.5,
       attackSpeed: 60,
     },
+    vision: {
+      range: 4,
+    },
     size: {
       x: 1,
       y: 1,

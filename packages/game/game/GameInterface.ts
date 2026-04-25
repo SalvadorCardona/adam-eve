@@ -55,7 +55,6 @@ type GameWorld = JsonLDItem<{
   entitiesMatrix: Matrix2DInterface
   groundMatrix?: Matrix2DInterface
   visitedMatrix?: boolean[][]
-  visibleMatrix?: boolean[][]
 }>
 
 export default interface GameInterface extends BaseJsonLdItemInterface {

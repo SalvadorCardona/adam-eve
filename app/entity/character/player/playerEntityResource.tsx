@@ -4,6 +4,7 @@ import { EntityFaction } from "@/packages/game/entity/EntityInterface"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { keysPressed } from "@/packages/ui/keysState"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
+import { updateGame } from "@/packages/game/game/updateGame"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 import { hasCollisionInGame, hasCollisionWithGround } from "@/packages/game/entity/useCase/entityHasCollision"
@@ -85,6 +86,10 @@ export const playerEntityResource = createEntityResource({
 
     if (moved) {
       updateEntityInGame(game, entity)
+      const zoom = game.camera.zoom
+      game.camera.position.x = window.innerWidth / 2 - entity.position.x * zoom
+      game.camera.position.z = window.innerHeight / 2 - entity.position.z * zoom
+      updateGame(game, game.camera)
     }
   },
   onHit: ({ entity, game }) => {
