@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm build)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm vitest:*)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm lint:*)",
+      "Bash(make test)",
+      "Bash(make test:*)",
+      "Bash(make watch)",
+      "Bash(make coverage)",
+      "WebFetch(domain:localhost)",
+      "WebFetch(domain:127.0.0.1)",
+      "Read(/tmp/**)"
+    ]
+  }
+}

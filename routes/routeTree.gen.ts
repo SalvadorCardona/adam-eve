@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './__root'
 import { Route as NewGameRouteImport } from './newGame'
+import { Route as CurrentGameRouteImport } from './current-game'
 import { Route as IndexRouteImport } from './index'
 import { Route as MockIndexRouteImport } from './mock/index'
 import { Route as SaveGameSaveGameIdRouteImport } from './saveGame.$saveGameId'
@@ -19,6 +20,11 @@ import { Route as GameGameIriRouteImport } from './game.$gameIri'
 const NewGameRoute = NewGameRouteImport.update({
   id: '/newGame',
   path: '/newGame',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurrentGameRoute = CurrentGameRouteImport.update({
+  id: '/current-game',
+  path: '/current-game',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -42,13 +48,14 @@ const MockMockNameRoute = MockMockNameRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GameGameIriRoute = GameGameIriRouteImport.update({
-  id: '/game/$gameIri',
-  path: '/game/$gameIri',
-  getParentRoute: () => rootRouteImport,
+  id: '/$gameIri',
+  path: '/$gameIri',
+  getParentRoute: () => GameRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/current-game': typeof CurrentGameRoute
   '/newGame': typeof NewGameRoute
   '/game/$gameIri': typeof GameGameIriRoute
   '/mock/$mockName': typeof MockMockNameRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/current-game': typeof CurrentGameRoute
   '/newGame': typeof NewGameRoute
   '/game/$gameIri': typeof GameGameIriRoute
   '/mock/$mockName': typeof MockMockNameRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/current-game': typeof CurrentGameRoute
   '/newGame': typeof NewGameRoute
   '/game/$gameIri': typeof GameGameIriRoute
   '/mock/$mockName': typeof MockMockNameRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/current-game'
     | '/newGame'
     | '/game/$gameIri'
     | '/mock/$mockName'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/current-game'
     | '/newGame'
     | '/game/$gameIri'
     | '/mock/$mockName'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/current-game'
     | '/newGame'
     | '/game/$gameIri'
     | '/mock/$mockName'
@@ -101,8 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CurrentGameRoute: typeof CurrentGameRoute
   NewGameRoute: typeof NewGameRoute
-  GameGameIriRoute: typeof GameGameIriRoute
   MockMockNameRoute: typeof MockMockNameRoute
   SaveGameSaveGameIdRoute: typeof SaveGameSaveGameIdRoute
   MockIndexRoute: typeof MockIndexRoute
@@ -115,6 +127,13 @@ declare module '@tanstack/react-router' {
       path: '/newGame'
       fullPath: '/newGame'
       preLoaderRoute: typeof NewGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/current-game': {
+      id: '/current-game'
+      path: '/current-game'
+      fullPath: '/current-game'
+      preLoaderRoute: typeof CurrentGameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -147,18 +166,18 @@ declare module '@tanstack/react-router' {
     }
     '/game/$gameIri': {
       id: '/game/$gameIri'
-      path: '/game/$gameIri'
+      path: '/$gameIri'
       fullPath: '/game/$gameIri'
       preLoaderRoute: typeof GameGameIriRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GameRoute
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CurrentGameRoute: CurrentGameRoute,
   NewGameRoute: NewGameRoute,
-  GameGameIriRoute: GameGameIriRoute,
   MockMockNameRoute: MockMockNameRoute,
   SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
   MockIndexRoute: MockIndexRoute,

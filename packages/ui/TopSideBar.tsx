@@ -42,7 +42,7 @@ export const TopSideBar = () => {
         <TimeControls />
         <Button
           className="bg-amber-400 hover:bg-amber-500 text-amber-900"
-          onClick={() => navigate({ to: "/newGame" })}
+          onClick={() => navigate({ to: "/current-game" })}
         >
           <BadgePlus className="mr-2 h-4 w-4" /> Nouvelle partie
         </Button>
