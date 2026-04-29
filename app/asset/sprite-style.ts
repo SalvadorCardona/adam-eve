@@ -1,5 +1,5 @@
 export const spriteStyle = {
-  view: "low top-down",
+  view: "high top-down",
   outline: "single color black outline",
   shading: "basic shading",
   detail: "medium detail",

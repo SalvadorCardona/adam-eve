@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="timberRoofGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a3d1c"/>
+      <stop offset="1" stop-color="#3a1e08"/>
+    </linearGradient>
+    <linearGradient id="timberLogGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a8743e"/>
+      <stop offset="0.5" stop-color="#c89460"/>
+      <stop offset="1" stop-color="#7a4e28"/>
+    </linearGradient>
+    <linearGradient id="timberPanelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4a574"/>
+      <stop offset="1" stop-color="#8a5e30"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Drop shadow -->
+  <rect x="6" y="8" width="54" height="54" rx="3" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- Roof base (square outer) -->
+  <rect x="4" y="4" width="56" height="56" rx="2" fill="url(#timberRoofGrad)" stroke="#1e0c04" stroke-width="1"/>
+
+  <!-- Roof ridge lines (top-down: 4 panels meeting at center) -->
+  <polygon points="4,4 60,4 32,32" fill="#5a2f14" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="60,4 60,60 32,32" fill="#4a2710" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="60,60 4,60 32,32" fill="#3a1e08" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="4,60 4,4 32,32" fill="#542a12" stroke="#1e0c04" stroke-width="0.6"/>
+
+  <!-- Roof shingle texture - top panel -->
+  <g stroke="#1e0c04" stroke-width="0.3" opacity="0.5" fill="none">
+    <line x1="10" y1="8" x2="32" y2="32"/>
+    <line x1="20" y1="6" x2="32" y2="32"/>
+    <line x1="32" y1="4" x2="32" y2="32"/>
+    <line x1="44" y1="6" x2="32" y2="32"/>
+    <line x1="54" y1="8" x2="32" y2="32"/>
+  </g>
+  <g stroke="#1e0c04" stroke-width="0.3" opacity="0.5" fill="none">
+    <line x1="56" y1="10" x2="32" y2="32"/>
+    <line x1="58" y1="20" x2="32" y2="32"/>
+    <line x1="56" y1="44" x2="32" y2="32"/>
+    <line x1="56" y1="54" x2="32" y2="32"/>
+    <line x1="8" y1="10" x2="32" y2="32"/>
+    <line x1="6" y1="20" x2="32" y2="32"/>
+    <line x1="6" y1="44" x2="32" y2="32"/>
+    <line x1="8" y1="54" x2="32" y2="32"/>
+  </g>
+
+  <!-- Sign panel center (where we write BUCHERON) -->
+  <rect x="10" y="26" width="44" height="12" rx="1" fill="url(#timberPanelGrad)" stroke="#3a1e08" stroke-width="0.8"/>
+  <!-- Wood plank lines -->
+  <line x1="10" y1="30" x2="54" y2="30" stroke="#5a3a14" stroke-width="0.3" opacity="0.6"/>
+  <line x1="10" y1="34" x2="54" y2="34" stroke="#5a3a14" stroke-width="0.3" opacity="0.6"/>
+  <!-- Nails -->
+  <circle cx="12" cy="28" r="0.6" fill="#2a1808"/>
+  <circle cx="52" cy="28" r="0.6" fill="#2a1808"/>
+  <circle cx="12" cy="36" r="0.6" fill="#2a1808"/>
+  <circle cx="52" cy="36" r="0.6" fill="#2a1808"/>
+
+  <!-- "BUCHERON" text -->
+  <text x="32" y="35.5" font-family="Georgia, 'Times New Roman', serif" font-size="8" font-weight="bold" fill="#2a1808" text-anchor="middle" letter-spacing="0.3">BUCHERON</text>
+
+  <!-- Decorative logs at corners -->
+  <rect x="6" y="6" width="14" height="3" rx="1.5" fill="url(#timberLogGrad)" stroke="#3a1e08" stroke-width="0.4"/>
+  <circle cx="6.5" cy="7.5" r="1" fill="#7a4e28" stroke="#3a1e08" stroke-width="0.3"/>
+  <circle cx="19.5" cy="7.5" r="1" fill="#7a4e28" stroke="#3a1e08" stroke-width="0.3"/>
+
+  <rect x="44" y="55" width="14" height="3" rx="1.5" fill="url(#timberLogGrad)" stroke="#3a1e08" stroke-width="0.4"/>
+  <circle cx="44.5" cy="56.5" r="1" fill="#7a4e28" stroke="#3a1e08" stroke-width="0.3"/>
+  <circle cx="57.5" cy="56.5" r="1" fill="#7a4e28" stroke="#3a1e08" stroke-width="0.3"/>
+
+  <!-- Axe in top right corner -->
+  <line x1="50" y1="10" x2="56" y2="20" stroke="#5c3d0a" stroke-width="1.2" stroke-linecap="round"/>
+  <polygon points="48,8 54,6 56,12 50,14" fill="#a0a4ac" stroke="#1e0c04" stroke-width="0.5"/>
+  <polygon points="48,8 54,6 52,10" fill="#c0c4cc" opacity="0.7"/>
+
+  <!-- Highlight (lighting) -->
+  <path d="M4 4 L60 4 L58 6 L6 6 L6 58 L4 60 Z" fill="white" opacity="0.1"/>
+</svg>

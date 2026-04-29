@@ -1,7 +1,7 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import iconSrc from "@/app/entity/resource/gold/goldMineBuildIcon.png"
-import model from "@/app/entity/resource/gold/model.png"
+import iconSrc from "@/app/entity/resource/gold/icon.svg?url"
+import model from "@/app/entity/resource/gold/model.svg?url"
 import { getResourceActionResource } from "@/app/action/getResourceActionResource"
 
 export const goldMineBuildMetaDataEntity = createEntityResource({

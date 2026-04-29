@@ -109,4 +109,14 @@
     <circle cx="38" cy="115.6" r="0.5" fill="#4a2810"/>
     <circle cx="41" cy="115.6" r="0.5" fill="#4a2810"/>
   </g>
+
+  <g>
+    <line x1="50" y1="68" x2="50" y2="74" stroke="#1e0c04" stroke-width="0.8"/>
+    <line x1="78" y1="68" x2="78" y2="74" stroke="#1e0c04" stroke-width="0.8"/>
+    <rect x="40" y="73" width="48" height="11" rx="1" fill="#d8a868" stroke="#3a1e08" stroke-width="1"/>
+    <rect x="40" y="73" width="48" height="11" rx="1" fill="url(#logGrad)" opacity="0.35"/>
+    <line x1="40" y1="76" x2="88" y2="76" stroke="#3a1e08" stroke-width="0.4" opacity="0.5"/>
+    <line x1="40" y1="81" x2="88" y2="81" stroke="#3a1e08" stroke-width="0.4" opacity="0.5"/>
+    <text x="64" y="82" font-family="Georgia, serif" font-size="7.5" font-weight="bold" text-anchor="middle" fill="#2a1408" letter-spacing="0.4">FORESTIER</text>
+  </g>
 </svg>

@@ -30,6 +30,11 @@ export function hasCollisionInGame(
 
   for (const otherEntity of canBeCollision) {
     if (isGroundEntity(otherEntity)) continue
+    if (
+      otherEntity.entityType === EntityType.effect ||
+      otherEntity.entityType === EntityType.attack
+    )
+      continue
     if (sourceIsCharacter && isCharacterEntity(otherEntity)) continue
     if (entityHasCollision(entity, otherEntity)) {
       return otherEntity

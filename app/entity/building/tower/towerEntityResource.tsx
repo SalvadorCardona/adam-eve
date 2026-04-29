@@ -1,6 +1,6 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import imageIcon from "./icon.png?url"
-import model from "./model.png"
+import imageIcon from "./icon.svg?url"
+import model from "./model.svg?url"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import towerAttackActionResource from "@/app/entity/building/tower/towerActionAttackResource"
@@ -28,6 +28,7 @@ export const towerEntityResource = createEntityResource({
     },
     work: {
       numberOfWorker: 2,
+      speedOfProduction: 400,
     },
     health: {
       maxLife: 100,
@@ -35,7 +36,7 @@ export const towerEntityResource = createEntityResource({
     size: {
       x: 2,
       y: 2,
-      z: 4,
+      z: 2,
     },
     defaultActions: [towerAttackActionResource["@id"]!],
   },

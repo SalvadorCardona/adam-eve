@@ -19,6 +19,15 @@ import { createMatrix2D, Matrix2DInterface } from "@/packages/math/matrix"
 import { InventoryInterface } from "@/packages/game/inventory/InventoryResource"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 import { ActionBagInterface } from "@/packages/game/entity/ActionResourceInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
+import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { addAction } from "@/packages/game/action/AddAction"
+import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { theDeathActionResource } from "@/app/action/theDeathActionResource"
+import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharacterActionMetadata"
+import { agingActionResource } from "@/app/action/agingActionResource"
+import { saveGameActionResource } from "@/app/action/saveGameActionResource"
+import { updateFogOfWarActionResource } from "@/app/action/updateFogOfWarActionResource"
 
 export enum GameState {
   RUN = "run",
@@ -100,7 +109,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       position: createVector2(),
     }),
     camera: createJsonLd("camera", {
-      zoom: 50,
+      zoom: 100,
       position: {
         x: 0,
         y: 0,
@@ -114,6 +123,20 @@ export function gameFactory(game?: GameInterface): GameInterface {
   })
 
   currentGame.inventory.entity = currentGame["@id"]
+
+  const defaultActions = [
+    theDeathActionResource,
+    findWorkerCharacterActionMetadata,
+    agingActionResource,
+    saveGameActionResource,
+    updateFogOfWarActionResource,
+  ]
+
+  for (const actionResource of defaultActions) {
+    if (getByLdTypeIn(currentGame.actions, actionResource["@id"]!).length) continue
+    const meta = getResource<ActionResourceInterface<any>>(actionResource)
+    addAction(currentGame.actions, meta.create({ game: currentGame }))
+  }
 
   return currentGame
 }

@@ -48,9 +48,9 @@ const MockMockNameRoute = MockMockNameRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GameGameIriRoute = GameGameIriRouteImport.update({
-  id: '/$gameIri',
-  path: '/$gameIri',
-  getParentRoute: () => GameRoute,
+  id: '/game/$gameIri',
+  path: '/game/$gameIri',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -115,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CurrentGameRoute: typeof CurrentGameRoute
   NewGameRoute: typeof NewGameRoute
+  GameGameIriRoute: typeof GameGameIriRoute
   MockMockNameRoute: typeof MockMockNameRoute
   SaveGameSaveGameIdRoute: typeof SaveGameSaveGameIdRoute
   MockIndexRoute: typeof MockIndexRoute
@@ -166,10 +167,10 @@ declare module '@tanstack/react-router' {
     }
     '/game/$gameIri': {
       id: '/game/$gameIri'
-      path: '/$gameIri'
+      path: '/game/$gameIri'
       fullPath: '/game/$gameIri'
       preLoaderRoute: typeof GameGameIriRouteImport
-      parentRoute: typeof GameRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -178,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CurrentGameRoute: CurrentGameRoute,
   NewGameRoute: NewGameRoute,
+  GameGameIriRoute: GameGameIriRoute,
   MockMockNameRoute: MockMockNameRoute,
   SaveGameSaveGameIdRoute: SaveGameSaveGameIdRoute,
   MockIndexRoute: MockIndexRoute,

@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vite-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "port": 3000,
+      "autoPort": false
+    },
+    {
+      "name": "vite-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["serve"],
+      "port": 3000
+    }
+  ]
+}

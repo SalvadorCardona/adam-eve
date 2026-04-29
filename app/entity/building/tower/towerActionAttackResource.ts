@@ -4,6 +4,7 @@ import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { entityCanBeAttackEntity } from "@/packages/game/entity/useCase/entityAttackEntity"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { getEntitySize } from "@/packages/game/entity/useCase/query/getEntitySize"
+import { getEntityProductionSpeed } from "@/packages/game/entity/useCase/query/getEntityProductionSpeed"
 import { createActionResource } from "@/packages/game/action/createActionResource"
 
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
@@ -13,6 +14,11 @@ const towerAttackActionResource = createActionResource({
   onFrame: ({ game, action, entity }) => {
     updateNextTick(game, action, 50)
     if (!entity) {
+      return
+    }
+
+    const cooldown = getEntityProductionSpeed(entity)
+    if (cooldown === 0) {
       return
     }
 
@@ -41,7 +47,7 @@ const towerAttackActionResource = createActionResource({
 
     addEntityToGame(game, fireballEntity)
 
-    updateNextTick(game, action, 400)
+    updateNextTick(game, action, cooldown)
   },
 })
 export default towerAttackActionResource

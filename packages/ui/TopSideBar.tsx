@@ -9,14 +9,12 @@ import { BadgePlus } from "lucide-react"
 import { useNavigate } from "@tanstack/react-router"
 import TimeControls from "@/packages/ui/TimeControl"
 
-const REFRESH_EVERY_TICKS = 30
-
 export const TopSideBar = () => {
   const gameContext = useGameContext()
   const [tick, setTick] = useState<number>()
 
   useGameFrame((game) => {
-    if (game.time % REFRESH_EVERY_TICKS !== 0) return
+    if (game.time % 30 !== 0) return
     setTick(game["@version"] ?? 1)
   })
 

@@ -4,7 +4,11 @@ import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 
-function ensureRows(matrix: boolean[][], height: number, width: number): boolean[][] {
+function ensureRows(
+  matrix: boolean[][],
+  height: number,
+  width: number,
+): boolean[][] {
   while (matrix.length < height) matrix.push(new Array(width).fill(false))
   for (let y = 0; y < height; y++) {
     const row = matrix[y]
@@ -27,7 +31,7 @@ export function updateFogOfWar(game: GameInterface): void {
 
   for (const entity of revealers) {
     const meta = getResource<EntityResourceInterface>(entity)
-    const range = meta?.propriety?.vision?.range
+    const range = meta?.propriety?.vision?.range ?? 1
     if (!range || range <= 0) continue
     const cx = entity.position.x
     const cz = entity.position.z
@@ -48,6 +52,6 @@ export function updateFogOfWar(game: GameInterface): void {
       }
     }
   }
-
+  console.log(visited)
   game.gameWorld.visitedMatrix = visited
 }

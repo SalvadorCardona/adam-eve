@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="iconTimberRoofGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a3d1c"/>
+      <stop offset="1" stop-color="#3a1e08"/>
+    </linearGradient>
+    <linearGradient id="iconTimberPanelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4a574"/>
+      <stop offset="1" stop-color="#8a5e30"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Roof base -->
+  <rect x="4" y="4" width="56" height="56" rx="2" fill="url(#iconTimberRoofGrad)" stroke="#1e0c04" stroke-width="1"/>
+
+  <!-- Roof panels (top-down pyramid) -->
+  <polygon points="4,4 60,4 32,32" fill="#5a2f14" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="60,4 60,60 32,32" fill="#4a2710" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="60,60 4,60 32,32" fill="#3a1e08" stroke="#1e0c04" stroke-width="0.6"/>
+  <polygon points="4,60 4,4 32,32" fill="#542a12" stroke="#1e0c04" stroke-width="0.6"/>
+
+  <!-- Sign panel -->
+  <rect x="8" y="25" width="48" height="14" rx="1" fill="url(#iconTimberPanelGrad)" stroke="#3a1e08" stroke-width="0.8"/>
+  <line x1="8" y1="30" x2="56" y2="30" stroke="#5a3a14" stroke-width="0.3" opacity="0.6"/>
+  <line x1="8" y1="34" x2="56" y2="34" stroke="#5a3a14" stroke-width="0.3" opacity="0.6"/>
+  <circle cx="10" cy="27" r="0.7" fill="#2a1808"/>
+  <circle cx="54" cy="27" r="0.7" fill="#2a1808"/>
+  <circle cx="10" cy="37" r="0.7" fill="#2a1808"/>
+  <circle cx="54" cy="37" r="0.7" fill="#2a1808"/>
+
+  <!-- "BUCHERON" text -->
+  <text x="32" y="35.5" font-family="Georgia, 'Times New Roman', serif" font-size="9" font-weight="bold" fill="#2a1808" text-anchor="middle" letter-spacing="0.4">BUCHERON</text>
+
+  <!-- Axe decoration -->
+  <line x1="48" y1="10" x2="56" y2="20" stroke="#5c3d0a" stroke-width="1.4" stroke-linecap="round"/>
+  <polygon points="46,7 54,5 56,12 49,14" fill="#a0a4ac" stroke="#1e0c04" stroke-width="0.5"/>
+  <polygon points="46,7 54,5 52,10" fill="#c0c4cc" opacity="0.7"/>
+</svg>

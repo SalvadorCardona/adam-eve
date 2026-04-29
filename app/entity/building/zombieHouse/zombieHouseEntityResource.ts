@@ -5,11 +5,18 @@ import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
+import EntityInterface, { EntityFaction } from "@/packages/game/entity/EntityInterface"
+import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
 import iconUrl from "./icon.svg?url"
 import modelUrl from "./model.svg?url"
 
 const ZOMBIE_SPAWN_INTERVAL = 1000
 const MAX_SPAWN_RADIUS = 6
+const MAX_ALIVE_ZOMBIES = 6
+
+interface ZombieHouseEntity extends EntityInterface {
+  spawnedZombieIds?: JsonLdIri[]
+}
 
 function* ringOffsets(maxRadius: number): Generator<[number, number], void, void> {
   for (let radius = 1; radius <= maxRadius; radius++) {
@@ -37,9 +44,16 @@ export const zombieHouseEntityResource = createEntityResource({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 8 }],
     }),
   },
+  defaultEntity: () => ({ faction: EntityFaction.enemy }),
   onFrame: ({ entity, game }) => {
+    const house = entity as ZombieHouseEntity
+    house.spawnedZombieIds = (house.spawnedZombieIds ?? []).filter(
+      (id) => game.entities[id] !== undefined,
+    )
+
     if (game.time === 0) return
     if (game.time % ZOMBIE_SPAWN_INTERVAL !== 0) return
+    if (house.spawnedZombieIds.length >= MAX_ALIVE_ZOMBIES) return
 
     for (const [dx, dz] of ringOffsets(MAX_SPAWN_RADIUS)) {
       const position = createVector3(
@@ -55,6 +69,7 @@ export const zombieHouseEntityResource = createEntityResource({
 
       if (zombieEntityResource.canBeBuild?.({ entity: newZombie, game })) {
         addEntityToGame(game, newZombie)
+        house.spawnedZombieIds.push(newZombie["@id"])
         return
       }
     }

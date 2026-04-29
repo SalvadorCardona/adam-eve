@@ -1,6 +1,6 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import imageIcon from "./icon.png?url"
-import model from "./model.png?url"
+import imageIcon from "./icon.svg?url"
+import model from "./model.svg?url"
 import { getResourceActionResource } from "@/app/action/getResourceActionResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 

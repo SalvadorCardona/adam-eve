@@ -5,8 +5,12 @@ import { useGameFrame } from "@/packages/ui/hook/useGameFrame"
 
 export const FogOfWar = () => {
   const game = useGameContext().game
-  const [, setTick] = useState(0)
-  useGameFrame(() => setTick((t) => t + 1))
+  const [tick, setTick] = useState<number>()
+
+  useGameFrame((game) => {
+    if (game.time % 30 !== 0) return
+    setTick(game["@version"] ?? 1)
+  })
 
   const draw = (g: import("pixi.js").Graphics) => {
     const visited = game.gameWorld.visitedMatrix
@@ -25,5 +29,5 @@ export const FogOfWar = () => {
     }
   }
 
-  return <Graphics draw={draw} />
+  return <Graphics key={"grog" + tick} draw={draw} />
 }

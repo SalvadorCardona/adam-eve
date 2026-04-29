@@ -34,6 +34,7 @@ interface EntityPriorityInterface {
   vision?: EntityVisionPriorityInterface
   work?: {
     numberOfWorker: number
+    speedOfProduction?: number
   }
   health?: {
     maxLife: number

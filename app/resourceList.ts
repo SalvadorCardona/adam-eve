@@ -39,6 +39,8 @@ import { playerAttackActionResource } from "@/app/entity/character/player/player
 import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
 import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zombieHouseEntityResource"
 import { agingActionResource } from "@/app/action/agingActionResource"
+import { saveGameActionResource } from "@/app/action/saveGameActionResource"
+import { updateFogOfWarActionResource } from "@/app/action/updateFogOfWarActionResource"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
@@ -80,4 +82,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   daycareEntityResource,
   zombieHouseEntityResource,
   agingActionResource,
+  saveGameActionResource,
+  updateFogOfWarActionResource,
 ]

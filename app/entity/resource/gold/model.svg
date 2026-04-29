@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="rockGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a7a68"/>
+      <stop offset="1" stop-color="#4a3e30"/>
+    </linearGradient>
+    <linearGradient id="rockDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a4e40"/>
+      <stop offset="1" stop-color="#2e2418"/>
+    </linearGradient>
+    <linearGradient id="woodGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a87038"/>
+      <stop offset="1" stop-color="#6a4218"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe060"/>
+      <stop offset="0.5" stop-color="#f8c020"/>
+      <stop offset="1" stop-color="#a87010"/>
+    </linearGradient>
+    <radialGradient id="entranceGrad" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#1a1208"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="grassGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4a8a38"/>
+      <stop offset="1" stop-color="#2a5220"/>
+    </radialGradient>
+    <radialGradient id="signGold" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#fff0a0"/>
+      <stop offset="1" stop-color="#c89020"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="64" cy="120" rx="60" ry="7" fill="url(#grassGrad)" opacity="0.85"/>
+
+  <polygon points="6,116 22,60 38,90 54,40 72,80 90,50 110,90 122,116" fill="url(#rockGrad)" stroke="#1e1810" stroke-width="1.2"/>
+  <polygon points="22,60 30,72 38,90 32,86 26,76" fill="url(#rockDark)" opacity="0.6"/>
+  <polygon points="54,40 62,58 72,80 64,72 58,56" fill="url(#rockDark)" opacity="0.6"/>
+  <polygon points="90,50 98,68 110,90 102,82 96,68" fill="url(#rockDark)" opacity="0.6"/>
+
+  <g fill="#fff8e0" opacity="0.9">
+    <polygon points="54,40 50,52 58,52"/>
+    <polygon points="90,50 86,62 94,62"/>
+  </g>
+
+  <g fill="url(#goldGrad)" stroke="#6a4810" stroke-width="0.5">
+    <circle cx="28" cy="78" r="1.6"/>
+    <circle cx="44" cy="68" r="1.2"/>
+    <circle cx="80" cy="64" r="1.4"/>
+    <circle cx="100" cy="74" r="1.6"/>
+    <circle cx="112" cy="100" r="1.3"/>
+    <circle cx="18" cy="100" r="1.4"/>
+  </g>
+
+  <path d="M40,118 L40,86 Q40,74 64,72 Q88,74 88,86 L88,118 Z" fill="url(#rockDark)" stroke="#1e1408" stroke-width="1.4"/>
+  <path d="M44,118 L44,88 Q44,78 64,76 Q84,78 84,88 L84,118" fill="url(#rockGrad)" opacity="0.4"/>
+
+  <path d="M48,118 L48,96 Q48,84 64,82 Q80,84 80,96 L80,118 Z" fill="url(#entranceGrad)" stroke="#000000" stroke-width="1.2"/>
+
+  <g fill="url(#woodGrad)" stroke="#3a1e08" stroke-width="0.8">
+    <rect x="46" y="92" width="4" height="26" rx="0.5"/>
+    <rect x="78" y="92" width="4" height="26" rx="0.5"/>
+    <path d="M44,84 L84,84 L82,90 L46,90 Z"/>
+  </g>
+
+  <g>
+    <line x1="56" y1="68" x2="56" y2="76" stroke="#2a1808" stroke-width="0.8"/>
+    <line x1="72" y1="68" x2="72" y2="76" stroke="#2a1808" stroke-width="0.8"/>
+    <rect x="44" y="64" width="40" height="14" rx="1.5" fill="#c89030" stroke="#3a1e08" stroke-width="1.2"/>
+    <rect x="44" y="64" width="40" height="14" rx="1.5" fill="url(#signGold)" opacity="0.7"/>
+    <text x="64" y="76" font-family="Georgia, serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#3a1e08" letter-spacing="1">Or</text>
+  </g>
+
+  <g>
+    <rect x="20" y="100" width="22" height="3" fill="#3a2818" stroke="#1e1208" stroke-width="0.4"/>
+    <rect x="22" y="103" width="2" height="6" fill="#3a2818"/>
+    <rect x="38" y="103" width="2" height="6" fill="#3a2818"/>
+    <line x1="20" y1="100" x2="42" y2="100" stroke="#6a5030" stroke-width="0.3"/>
+    <line x1="20" y1="103" x2="42" y2="103" stroke="#6a5030" stroke-width="0.3"/>
+  </g>
+
+  <g>
+    <rect x="22" y="92" width="14" height="9" rx="1" fill="#6a4828" stroke="#2a1808" stroke-width="0.8"/>
+    <rect x="24" y="93" width="10" height="6" fill="#3a2818"/>
+    <circle cx="36" cy="98" r="0.8" fill="#d8a040"/>
+    <circle cx="22" cy="98" r="0.8" fill="#d8a040"/>
+    <g fill="url(#goldGrad)" stroke="#6a4810" stroke-width="0.3">
+      <circle cx="27" cy="95" r="1"/>
+      <circle cx="30" cy="96" r="0.8"/>
+      <circle cx="32" cy="94.5" r="0.9"/>
+    </g>
+  </g>
+
+  <g>
+    <rect x="96" y="92" width="3" height="22" fill="#6a4828" stroke="#2a1808" stroke-width="0.5"/>
+    <path d="M97.5,92 L97.5,80 Q97.5,76 102,76 L106,76" fill="none" stroke="#6a4828" stroke-width="2"/>
+    <line x1="106" y1="76" x2="106" y2="86" stroke="#3a2818" stroke-width="0.6"/>
+    <polygon points="103,86 109,86 106,92" fill="#8a7060" stroke="#2a1808" stroke-width="0.5"/>
+  </g>
+
+  <g fill="#3a2818">
+    <rect x="14" y="115" width="6" height="3" rx="0.5"/>
+    <rect x="108" y="116" width="8" height="2" rx="0.5"/>
+    <circle cx="100" cy="116" r="1.2"/>
+    <circle cx="105" cy="117" r="0.8"/>
+  </g>
+</svg>

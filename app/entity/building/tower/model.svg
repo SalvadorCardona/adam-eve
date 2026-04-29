@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="geometricPrecision">
+  <defs>
+    <radialGradient id="towerStoneGrad" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#9aa0a8"/>
+      <stop offset="0.7" stop-color="#6b6f76"/>
+      <stop offset="1" stop-color="#3d4046"/>
+    </radialGradient>
+    <radialGradient id="towerInnerGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2a2d33"/>
+      <stop offset="1" stop-color="#15171b"/>
+    </radialGradient>
+    <radialGradient id="towerPlatformGrad" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#7c5a36"/>
+      <stop offset="1" stop-color="#4a3520"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Drop shadow -->
+  <rect x="6" y="8" width="54" height="54" rx="3" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- Outer wall (stone) -->
+  <rect x="4" y="4" width="56" height="56" rx="2" fill="url(#towerStoneGrad)" stroke="#23262b" stroke-width="1"/>
+
+  <!-- Crenellations (battlements) - top edge -->
+  <g fill="#5a5e64" stroke="#23262b" stroke-width="0.7">
+    <rect x="6" y="2" width="6" height="6"/>
+    <rect x="18" y="2" width="6" height="6"/>
+    <rect x="30" y="2" width="6" height="6"/>
+    <rect x="42" y="2" width="6" height="6"/>
+    <rect x="54" y="2" width="6" height="6"/>
+  </g>
+  <!-- Crenellations - bottom edge -->
+  <g fill="#5a5e64" stroke="#23262b" stroke-width="0.7">
+    <rect x="6" y="56" width="6" height="6"/>
+    <rect x="18" y="56" width="6" height="6"/>
+    <rect x="30" y="56" width="6" height="6"/>
+    <rect x="42" y="56" width="6" height="6"/>
+    <rect x="54" y="56" width="6" height="6"/>
+  </g>
+  <!-- Crenellations - left edge -->
+  <g fill="#5a5e64" stroke="#23262b" stroke-width="0.7">
+    <rect x="2" y="6" width="6" height="6"/>
+    <rect x="2" y="18" width="6" height="6"/>
+    <rect x="2" y="30" width="6" height="6"/>
+    <rect x="2" y="42" width="6" height="6"/>
+    <rect x="2" y="54" width="6" height="6"/>
+  </g>
+  <!-- Crenellations - right edge -->
+  <g fill="#5a5e64" stroke="#23262b" stroke-width="0.7">
+    <rect x="56" y="6" width="6" height="6"/>
+    <rect x="56" y="18" width="6" height="6"/>
+    <rect x="56" y="30" width="6" height="6"/>
+    <rect x="56" y="42" width="6" height="6"/>
+    <rect x="56" y="54" width="6" height="6"/>
+  </g>
+
+  <!-- Stone block lines (texture) -->
+  <g stroke="#3d4046" stroke-width="0.5" opacity="0.7" fill="none">
+    <line x1="4" y1="14" x2="60" y2="14"/>
+    <line x1="4" y1="24" x2="60" y2="24"/>
+    <line x1="4" y1="40" x2="60" y2="40"/>
+    <line x1="4" y1="50" x2="60" y2="50"/>
+    <line x1="14" y1="4" x2="14" y2="14"/>
+    <line x1="24" y1="14" x2="24" y2="24"/>
+    <line x1="40" y1="4" x2="40" y2="14"/>
+    <line x1="50" y1="14" x2="50" y2="24"/>
+    <line x1="14" y1="40" x2="14" y2="50"/>
+    <line x1="40" y1="50" x2="40" y2="60"/>
+    <line x1="24" y1="50" x2="24" y2="60"/>
+  </g>
+
+  <!-- Inner platform (wooden floor) -->
+  <rect x="14" y="14" width="36" height="36" rx="1" fill="url(#towerPlatformGrad)" stroke="#2a1e10" stroke-width="0.8"/>
+  <g stroke="#2a1e10" stroke-width="0.4" opacity="0.7">
+    <line x1="14" y1="22" x2="50" y2="22"/>
+    <line x1="14" y1="30" x2="50" y2="30"/>
+    <line x1="14" y1="38" x2="50" y2="38"/>
+    <line x1="14" y1="46" x2="50" y2="46"/>
+  </g>
+
+  <!-- Central opening (where archer/ballista shoots from) -->
+  <circle cx="32" cy="32" r="10" fill="url(#towerInnerGrad)" stroke="#0a0b0e" stroke-width="0.8"/>
+
+  <!-- Ballista / weapon mounted -->
+  <rect x="30" y="18" width="4" height="28" rx="1" fill="#3a2614" stroke="#1a0e06" stroke-width="0.5"/>
+  <!-- Ballista crossbar -->
+  <rect x="20" y="30" width="24" height="3" rx="1" fill="#3a2614" stroke="#1a0e06" stroke-width="0.5"/>
+  <!-- Bowstring -->
+  <line x1="20" y1="32" x2="44" y2="32" stroke="#d0c090" stroke-width="0.6"/>
+  <!-- Arrow tip -->
+  <polygon points="32,14 29,20 35,20" fill="#c8ccd2" stroke="#1a0e06" stroke-width="0.4"/>
+  <!-- Pivot -->
+  <circle cx="32" cy="32" r="2.2" fill="#1a0e06"/>
+  <circle cx="32" cy="32" r="1" fill="#c9a227"/>
+
+  <!-- Highlight on top-left (lighting) -->
+  <path d="M4 4 L60 4 L60 8 L8 8 L8 60 L4 60 Z" fill="white" opacity="0.08"/>
+</svg>

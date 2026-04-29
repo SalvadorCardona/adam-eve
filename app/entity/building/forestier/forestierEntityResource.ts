@@ -6,10 +6,10 @@ import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
+import { getEntityProductionSpeed } from "@/packages/game/entity/useCase/query/getEntityProductionSpeed"
 import iconSrc from "./icon.svg?url"
 import modelSrc from "./model.svg?url"
 
-const TREE_GROWTH_INTERVAL = 1000
 const TREE_GROWTH_RADIUS = 100
 const TREE_PLACEMENT_ATTEMPTS = 20
 
@@ -24,14 +24,16 @@ export const forestierEntityResource = createEntityResource({
   propriety: {
     health: { maxLife: 100 },
     size: { x: 2, y: 2, z: 2 },
-    work: { numberOfWorker: 1 },
+    work: { numberOfWorker: 1, speedOfProduction: 1000 },
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
   },
   workerAction: stayInBuildingActionResource,
   onFrame: ({ entity, game }) => {
-    if (game.time % TREE_GROWTH_INTERVAL !== 0) return
+    const interval = getEntityProductionSpeed(entity)
+    if (interval === 0) return
+    if (game.time % interval !== 0) return
 
     for (let attempt = 0; attempt < TREE_PLACEMENT_ATTEMPTS; attempt++) {
       const angle = Math.random() * Math.PI * 2

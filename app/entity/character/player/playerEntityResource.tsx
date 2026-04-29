@@ -8,7 +8,6 @@ import { updateGame } from "@/packages/game/game/updateGame"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 import { hasCollisionInGame, hasCollisionWithGround } from "@/packages/game/entity/useCase/entityHasCollision"
-import { playerAttackActionResource } from "./playerAttackActionResource"
 import { PlayerComponent } from "./PlayerComponent"
 import healthyIcon from "./player_healthy.svg?url"
 
@@ -42,7 +41,6 @@ export const playerEntityResource = createEntityResource({
     health: {
       maxLife: 100,
     },
-    defaultActions: [playerAttackActionResource["@type"]!],
   },
   defaultEntity: () => ({ faction: EntityFaction.self }),
   component: PlayerComponent,
@@ -86,6 +84,7 @@ export const playerEntityResource = createEntityResource({
 
     if (moved) {
       updateEntityInGame(game, entity)
+
       const zoom = game.camera.zoom
       game.camera.position.x = window.innerWidth / 2 - entity.position.x * zoom
       game.camera.position.z = window.innerHeight / 2 - entity.position.z * zoom
