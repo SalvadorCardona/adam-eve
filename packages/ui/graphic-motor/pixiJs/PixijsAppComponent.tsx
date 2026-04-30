@@ -5,9 +5,11 @@ import { ApplicationOptions } from "pixi.js"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
 import { SelectOnMap } from "@/packages/ui/graphic-motor/pixiJs/SelectOnMap"
 import { EntitiesLoopPixiJs } from "@/packages/ui/graphic-motor/pixiJs/EntitiesLoopPixiJs"
+import { GroundTilesLayer } from "@/packages/ui/graphic-motor/pixiJs/GroundTilesLayer"
 import { ControlKeyboard } from "@/packages/ui/ControlKeyboard"
 import { Camera } from "@/packages/ui/graphic-motor/pixiJs/Camera"
 import { CreateEntityComponent } from "@/app/actionUser/CreateEntityUserAction/CreateEntityComponent"
+import { PlayerBuildPreviewComponent } from "@/app/entity/character/player/PlayerBuildPreviewComponent"
 import { BackGroundGame } from "@/packages/ui/graphic-motor/pixiJs/BackGroundGame"
 import { FogOfWar } from "@/packages/ui/graphic-motor/pixiJs/FogOfWar"
 
@@ -42,7 +44,9 @@ export const PixijsAppComponent = () => {
     <PixiProvider options={options}>
       <SelectOnMap></SelectOnMap>
       <CreateEntityComponent></CreateEntityComponent>
+      <PlayerBuildPreviewComponent></PlayerBuildPreviewComponent>
       <Container>
+        <GroundTilesLayer />
         <EntitiesLoopPixiJs></EntitiesLoopPixiJs>
       </Container>
       <FogOfWar />

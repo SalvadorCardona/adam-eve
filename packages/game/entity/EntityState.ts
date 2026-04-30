@@ -4,6 +4,7 @@ export enum EntityState {
   under_construction = "under_construction",
   builded = "builded",
   attack = "attack",
+  construction = "construction",
   find_enemy = "find_enemy",
   go_to_enemy = "go_to_enemy",
   cut_the_tree = "cut_the_tree",

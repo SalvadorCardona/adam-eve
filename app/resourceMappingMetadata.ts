@@ -12,6 +12,12 @@ import {
   MetadataInterface,
 } from "@/packages/resource/ResourceInterface"
 import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
+import { stoneResourceEntityResource } from "@/app/entity/resource/stone/stoneResourceEntityResource"
+import { stoneMineBuildMetaDataEntity } from "@/app/entity/resource/stone/StoneMineBuildingEntityResource"
+import { stoneResourceMetadata } from "@/app/inventory/stone/stoneResource"
+import { ironResourceEntityResource } from "@/app/entity/resource/iron/ironResourceEntityResource"
+import { ironMineBuildMetaDataEntity } from "@/app/entity/resource/iron/IronMineBuildingEntityResource"
+import { ironResourceMetadata } from "@/app/inventory/iron/ironResource"
 
 interface ResourceMapping {
   entityMetaDataResource: EntityResourceInterface
@@ -29,6 +35,16 @@ const resourceMappingList: JsonLdTypeContainerInterface<ResourceMapping> = {
     entityMetaDataResource: goldResourceEntityResource,
     entityMetaDataBuilding: goldMineBuildMetaDataEntity,
     resource: goldResourceMetadata,
+  },
+  [stoneMineBuildMetaDataEntity["@id"]]: {
+    entityMetaDataResource: stoneResourceEntityResource,
+    entityMetaDataBuilding: stoneMineBuildMetaDataEntity,
+    resource: stoneResourceMetadata,
+  },
+  [ironMineBuildMetaDataEntity["@id"]]: {
+    entityMetaDataResource: ironResourceEntityResource,
+    entityMetaDataBuilding: ironMineBuildMetaDataEntity,
+    resource: ironResourceMetadata,
   },
 }
 

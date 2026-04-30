@@ -6,7 +6,12 @@ import {
   JsonLdIriCollection,
   JsonLdIriContainerInterface,
   JsonLDItem,
+  JsonLdType,
 } from "@/packages/jsonLd/jsonLd"
+import {
+  GameModifiers,
+  createDefaultGameModifiers,
+} from "@/packages/game/mutation/GameModifiers"
 import {
   createVector2,
   Vector2Interface,
@@ -28,6 +33,7 @@ import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharac
 import { agingActionResource } from "@/app/action/agingActionResource"
 import { saveGameActionResource } from "@/app/action/saveGameActionResource"
 import { updateFogOfWarActionResource } from "@/app/action/updateFogOfWarActionResource"
+import { migrateLegacyGroundEntities } from "@/packages/game/game/useCase/migrateLegacyGroundEntities"
 
 export enum GameState {
   RUN = "run",
@@ -62,7 +68,8 @@ export type GameOption = JsonLDItem<{
 type GameWorld = JsonLDItem<{
   bounding: BoundingInterface
   entitiesMatrix: Matrix2DInterface
-  groundMatrix?: Matrix2DInterface
+  groundMatrix: Matrix2DInterface
+  buildingMatrix: Matrix2DInterface
   visitedMatrix?: boolean[][]
 }>
 
@@ -81,6 +88,8 @@ export default interface GameInterface extends BaseJsonLdItemInterface {
   inventory: InventoryInterface
   actions: ActionBagInterface
   gameWorld: GameWorld
+  modifiers: GameModifiers
+  researchedMutations: JsonLdType[]
 }
 
 export function gameFactory(game?: GameInterface): GameInterface {
@@ -92,6 +101,8 @@ export function gameFactory(game?: GameInterface): GameInterface {
         max: createVector2(),
       }),
       entitiesMatrix: createMatrix2D(0, 0),
+      groundMatrix: createMatrix2D(0, 0),
+      buildingMatrix: createMatrix2D(0, 0),
     }),
     gameOption: createJsonLd<GameOption>("option", {
       gameSpeed: 1,
@@ -119,10 +130,21 @@ export function gameFactory(game?: GameInterface): GameInterface {
     userControl: createJsonLd("userControl", {
       showGrid: true,
     }),
+    modifiers: createDefaultGameModifiers(),
+    researchedMutations: [],
     ...(game ?? {}),
   })
 
+  if (!currentGame.modifiers) {
+    currentGame.modifiers = createDefaultGameModifiers()
+  }
+  if (!currentGame.researchedMutations) {
+    currentGame.researchedMutations = []
+  }
+
   currentGame.inventory.entity = currentGame["@id"]
+
+  migrateLegacyGroundEntities(currentGame)
 
   const defaultActions = [
     theDeathActionResource,

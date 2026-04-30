@@ -14,6 +14,10 @@ import { EntityState } from "@/packages/game/entity/EntityState"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
 import { createBoundingFromZone } from "@/packages/math/boudingBox"
 import { findClosestEntity } from "@/packages/game/game/useCase/query/findClosestEntity"
+import {
+  circleCandidates,
+  squareCandidates,
+} from "@/packages/game/game/useCase/query/spatialIndex"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 interface CircleSearch {
@@ -45,12 +49,6 @@ export interface EntityQueryParams {
   findClosestOf?: {
     position: Vector3Interface
   }
-}
-
-const orderTypePriority = {
-  [EntityType.character]: 1,
-  [EntityType.building]: 2,
-  [EntityType.ground]: 3,
 }
 
 export function entityQueryFindOne<T = EntityInterface>(
@@ -93,7 +91,14 @@ export function entityQuery<T = EntityInterface>(
     return entity ? [entity] : []
   }
 
-  let entities: EntityInterface[] = Object.values(game.entities)
+  let entities: EntityInterface[]
+  if (circleSearch) {
+    entities = circleCandidates(game, circleSearch.center, circleSearch.radius)
+  } else if (squareSearch) {
+    entities = squareCandidates(game, squareSearch.start, squareSearch.end)
+  } else {
+    entities = Object.values(game.entities)
+  }
 
   if (type) {
     entities = entities.filter((entity) => {
@@ -174,19 +179,6 @@ export function entityQuery<T = EntityInterface>(
   if (findClosestOf) {
     entities = findClosestEntity(findClosestOf.position, entities)
   }
-
-  entities.sort((a, b) => {
-    const aType = a.entityType
-    const bType = b.entityType
-    if (!bType || !aType) return 0
-
-    // @ts-ignore used for run test well
-    const priorityA = orderTypePriority[aType] || Infinity
-    // @ts-ignore used for run test well
-    const priorityB = orderTypePriority[bType] || Infinity
-
-    return priorityA - priorityB
-  })
 
   if (order?.distance) {
     const referencePoint = circleSearch ? circleSearch.center : { x: 0, y: 0 }

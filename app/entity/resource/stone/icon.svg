@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="stoneRockGradI" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8c4bc"/>
+      <stop offset="1" stop-color="#5a564e"/>
+    </linearGradient>
+    <radialGradient id="stoneEntranceI" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#1a1812"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+
+  <polygon points="2,58 10,28 18,42 28,16 38,38 48,22 58,42 62,58" fill="url(#stoneRockGradI)" stroke="#1e1810" stroke-width="0.8"/>
+
+  <path d="M18,58 L18,40 Q18,32 32,30 Q46,32 46,40 L46,58 Z" fill="#2e2a24" stroke="#1e1408" stroke-width="0.8"/>
+  <path d="M22,58 L22,44 Q22,38 32,36 Q42,38 42,44 L42,58 Z" fill="url(#stoneEntranceI)"/>
+
+  <g>
+    <rect x="14" y="20" width="36" height="12" rx="1.5" fill="#9a968e" stroke="#2a2622" stroke-width="1"/>
+    <text x="32" y="30" font-family="Georgia, serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1e1810" letter-spacing="1">Pierre</text>
+  </g>
+
+  <g fill="#7a766e" stroke="#2a2622" stroke-width="0.4">
+    <circle cx="8" cy="46" r="1.4"/>
+    <circle cx="56" cy="46" r="1.4"/>
+    <circle cx="50" cy="54" r="1.2"/>
+    <circle cx="12" cy="54" r="1.2"/>
+  </g>
+</svg>

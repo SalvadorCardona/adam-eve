@@ -7,6 +7,10 @@ import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import iconUrl from "./icon.svg?url"
 import modelUrl from "./model.svg?url"
+import {
+  computeHousingCapacity,
+  countWorkers,
+} from "@/app/entity/building/house/housingUseCase"
 
 const WORKER_SPAWN_INTERVAL = 1000
 const MAX_SPAWN_RADIUS = 6
@@ -40,6 +44,7 @@ export const daycareEntityResource = createEntityResource({
   onFrame: ({ entity, game }) => {
     if (game.time === 0) return
     if (game.time % WORKER_SPAWN_INTERVAL !== 0) return
+    if (countWorkers(game) >= computeHousingCapacity(game)) return
 
     for (const [dx, dz] of ringOffsets(MAX_SPAWN_RADIUS)) {
       const position = createVector3(

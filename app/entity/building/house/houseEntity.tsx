@@ -18,6 +18,7 @@ export const houseEntityMetaData: EntityResourceInterface = createEntityResource
     health: {
       maxLife: 100,
     },
+    housingCapacity: 10,
     size: {
       x: 2,
       y: 2,

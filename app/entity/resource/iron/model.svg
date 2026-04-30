@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="ironMineRock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a8088"/>
+      <stop offset="1" stop-color="#3a4048"/>
+    </linearGradient>
+    <linearGradient id="ironMineRockDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a5058"/>
+      <stop offset="1" stop-color="#1e2228"/>
+    </linearGradient>
+    <linearGradient id="ironWoodGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a87038"/>
+      <stop offset="1" stop-color="#6a4218"/>
+    </linearGradient>
+    <linearGradient id="ironVeinM" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c8a878"/>
+      <stop offset="0.5" stop-color="#8a6438"/>
+      <stop offset="1" stop-color="#4a3018"/>
+    </linearGradient>
+    <radialGradient id="ironEntranceGrad" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#0a0c10"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="ironGrassGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4a8a38"/>
+      <stop offset="1" stop-color="#2a5220"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="64" cy="120" rx="60" ry="7" fill="url(#ironGrassGrad)" opacity="0.85"/>
+
+  <polygon points="6,116 22,60 38,90 54,40 72,80 90,50 110,90 122,116" fill="url(#ironMineRock)" stroke="#0e1218" stroke-width="1.2"/>
+  <polygon points="22,60 30,72 38,90 32,86 26,76" fill="url(#ironMineRockDark)" opacity="0.7"/>
+  <polygon points="54,40 62,58 72,80 64,72 58,56" fill="url(#ironMineRockDark)" opacity="0.7"/>
+  <polygon points="90,50 98,68 110,90 102,82 96,68" fill="url(#ironMineRockDark)" opacity="0.7"/>
+
+  <g fill="url(#ironVeinM)" opacity="0.95">
+    <path d="M28,72 Q34,68 38,82 Q34,86 30,82 Z"/>
+    <path d="M70,72 Q78,68 82,84 Q76,88 72,82 Z"/>
+    <path d="M100,68 Q108,66 110,82 Q104,86 100,80 Z"/>
+  </g>
+
+  <path d="M40,118 L40,86 Q40,74 64,72 Q88,74 88,86 L88,118 Z" fill="url(#ironMineRockDark)" stroke="#0e1218" stroke-width="1.4"/>
+  <path d="M44,118 L44,88 Q44,78 64,76 Q84,78 84,88 L84,118" fill="url(#ironMineRock)" opacity="0.4"/>
+
+  <path d="M48,118 L48,96 Q48,84 64,82 Q80,84 80,96 L80,118 Z" fill="url(#ironEntranceGrad)" stroke="#000000" stroke-width="1.2"/>
+
+  <g fill="url(#ironWoodGrad)" stroke="#3a1e08" stroke-width="0.8">
+    <rect x="46" y="92" width="4" height="26" rx="0.5"/>
+    <rect x="78" y="92" width="4" height="26" rx="0.5"/>
+    <path d="M44,84 L84,84 L82,90 L46,90 Z"/>
+  </g>
+
+  <g>
+    <rect x="44" y="64" width="40" height="14" rx="1.5" fill="url(#ironVeinM)" stroke="#3a1e08" stroke-width="1.2"/>
+    <text x="64" y="76" font-family="Georgia, serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a0e04" letter-spacing="1">Fer</text>
+  </g>
+
+  <g>
+    <rect x="22" y="92" width="14" height="9" rx="1" fill="#6a4828" stroke="#2a1808" stroke-width="0.8"/>
+    <rect x="24" y="93" width="10" height="6" fill="#3a2818"/>
+    <g fill="url(#ironVeinM)" stroke="#3a2018" stroke-width="0.3">
+      <circle cx="27" cy="95" r="1"/>
+      <circle cx="30" cy="96" r="0.8"/>
+      <circle cx="32" cy="94.5" r="0.9"/>
+    </g>
+  </g>
+
+  <g fill="#3a2818">
+    <rect x="14" y="115" width="6" height="3" rx="0.5"/>
+    <rect x="108" y="116" width="8" height="2" rx="0.5"/>
+  </g>
+</svg>

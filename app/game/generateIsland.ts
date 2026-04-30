@@ -7,6 +7,10 @@ import { workerEntityResource } from "@/app/entity/character/worker/workerEntity
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
+import { stoneResourceEntityResource } from "@/app/entity/resource/stone/stoneResourceEntityResource"
+import { stoneMineBuildMetaDataEntity } from "@/app/entity/resource/stone/StoneMineBuildingEntityResource"
+import { ironResourceEntityResource } from "@/app/entity/resource/iron/ironResourceEntityResource"
+import { ironMineBuildMetaDataEntity } from "@/app/entity/resource/iron/IronMineBuildingEntityResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
 import { forumEntityResource } from "@/app/entity/building/forum/forumEntityResource"
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
@@ -133,6 +137,20 @@ export function generateIsland(game: GameInterface): GameInterface {
 
   spawnBuildingAt(
     game,
+    stoneMineBuildMetaDataEntity,
+    ISLAND_CENTER_X + 3,
+    ISLAND_CENTER_Z - 3,
+  )
+
+  spawnBuildingAt(
+    game,
+    ironMineBuildMetaDataEntity,
+    ISLAND_CENTER_X + 3,
+    ISLAND_CENTER_Z + 3,
+  )
+
+  spawnBuildingAt(
+    game,
     timberHouseEntityMetaData,
     ISLAND_CENTER_X - 4,
     ISLAND_CENTER_Z + 1,
@@ -198,6 +216,23 @@ export function generateIsland(game: GameInterface): GameInterface {
   ]
   for (const [x, z] of goldPositions) {
     spawnAt(game, goldResourceEntityResource, x, z)
+  }
+
+  const stonePositions: Array<[number, number]> = [
+    [ISLAND_CENTER_X + 5, ISLAND_CENTER_Z - 2],
+    [ISLAND_CENTER_X + 4, ISLAND_CENTER_Z - 4],
+    [ISLAND_CENTER_X - 5, ISLAND_CENTER_Z + 1],
+  ]
+  for (const [x, z] of stonePositions) {
+    spawnAt(game, stoneResourceEntityResource, x, z)
+  }
+
+  const ironPositions: Array<[number, number]> = [
+    [ISLAND_CENTER_X + 5, ISLAND_CENTER_Z + 4],
+    [ISLAND_CENTER_X + 4, ISLAND_CENTER_Z + 5],
+  ]
+  for (const [x, z] of ironPositions) {
+    spawnAt(game, ironResourceEntityResource, x, z)
   }
 
   spawnBuildingAt(

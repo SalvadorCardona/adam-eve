@@ -1,7 +1,6 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
-import { entityHasCollision } from "@/packages/game/entity/useCase/entityHasCollision"
+import { findTileUnderEntity } from "@/packages/game/game/useCase/query/groundQuery"
 import grassIcon from "./icon.svg?url"
 import grassTexture from "./grass.svg?url"
 import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
@@ -33,14 +32,7 @@ export const grassGroundEntityMetadata = createEntityResource({
   },
   label: "Herbe",
   canBeBuild: ({ entity, game }) => {
-    const grounds = entityQuery(game, { entityType: EntityType.ground })
-    for (const ground of grounds) {
-      if (entityHasCollision(entity, ground)) {
-        return false
-      }
-    }
-
-    return true
+    return findTileUnderEntity(game, entity) === undefined
   },
   component: GrassComponent,
 })

@@ -1,0 +1,169 @@
+import React, { useEffect, useMemo, useState } from "react"
+import useGameContext from "@/packages/ui/provider/useGameContext"
+import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
+import { usePixiApp } from "@/packages/ui/graphic-motor/pixiJs/PixiAppProvider/UsePixiApp"
+import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
+import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
+import { getResource } from "@/packages/resource/ResourceInterface"
+import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
+import { Matrix2DInterface } from "@/packages/math/matrix"
+
+const CHUNK_SIZE = 16
+
+interface ViewportRect {
+  minX: number
+  minY: number
+  maxX: number
+  maxY: number
+}
+
+function computeVisibleChunks(
+  cameraX: number,
+  cameraY: number,
+  screenW: number,
+  screenH: number,
+  zoom: number,
+): ViewportRect {
+  const worldMinX = -cameraX
+  const worldMinY = -cameraY
+  const worldMaxX = worldMinX + screenW
+  const worldMaxY = worldMinY + screenH
+
+  const cellMinX = Math.floor(worldMinX / zoom)
+  const cellMinY = Math.floor(worldMinY / zoom)
+  const cellMaxX = Math.ceil(worldMaxX / zoom)
+  const cellMaxY = Math.ceil(worldMaxY / zoom)
+
+  return {
+    minX: Math.floor(cellMinX / CHUNK_SIZE),
+    minY: Math.floor(cellMinY / CHUNK_SIZE),
+    maxX: Math.floor((cellMaxX - 1) / CHUNK_SIZE),
+    maxY: Math.floor((cellMaxY - 1) / CHUNK_SIZE),
+  }
+}
+
+export const GroundTilesLayer = () => {
+  const game = useGameContext().game
+  const app = usePixiApp().app
+
+  const [tilesVersion, setTilesVersion] = useState<number>(
+    game.gameWorld["@version"] ?? 0,
+  )
+  useGamePubSub(game.gameWorld["@id"], () => {
+    setTilesVersion(game.gameWorld["@version"] ?? 0)
+  })
+
+  const [cameraVersion, setCameraVersion] = useState(0)
+  useGamePubSub("camera", () => {
+    setCameraVersion((v) => v + 1)
+  })
+
+  const [screen, setScreen] = useState<{ w: number; h: number }>(() => ({
+    w: app?.screen?.width ?? window.innerWidth,
+    h: app?.screen?.height ?? window.innerHeight,
+  }))
+  useEffect(() => {
+    const onResize = () =>
+      setScreen({
+        w: app?.screen?.width ?? window.innerWidth,
+        h: app?.screen?.height ?? window.innerHeight,
+      })
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
+  }, [app])
+
+  const zoom = game.camera.zoom
+  const matrix = game.gameWorld.groundMatrix
+
+  const visibleChunks = useMemo(() => {
+    const range = computeVisibleChunks(
+      game.camera.position.x,
+      game.camera.position.z,
+      screen.w,
+      screen.h,
+      zoom,
+    )
+    const out: Array<{ cx: number; cy: number }> = []
+    for (let cy = range.minY; cy <= range.maxY; cy++) {
+      for (let cx = range.minX; cx <= range.maxX; cx++) {
+        if (cx < 0 || cy < 0) continue
+        const chunkOriginX = cx * CHUNK_SIZE
+        const chunkOriginY = cy * CHUNK_SIZE
+        if (chunkOriginY >= matrix.length) continue
+        if (chunkOriginX >= (matrix[0]?.length ?? 0)) continue
+        out.push({ cx, cy })
+      }
+    }
+    return out
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cameraVersion, screen.w, screen.h, zoom, matrix.length])
+
+  return (
+    <>
+      {visibleChunks.map(({ cx, cy }) => (
+        <GroundChunk
+          key={`gc-${cx},${cy}`}
+          cx={cx}
+          cy={cy}
+          zoom={zoom}
+          matrix={matrix}
+          tilesVersion={tilesVersion}
+        />
+      ))}
+    </>
+  )
+}
+
+interface GroundChunkProps {
+  cx: number
+  cy: number
+  zoom: number
+  matrix: Matrix2DInterface
+  tilesVersion: number
+}
+
+const GroundChunk = React.memo(
+  function GroundChunk({ cx, cy, zoom, matrix, tilesVersion }: GroundChunkProps) {
+    const tiles = useMemo(() => {
+      const out: Array<{ key: string; x: number; y: number; image: string }> = []
+      const startX = cx * CHUNK_SIZE
+      const startY = cy * CHUNK_SIZE
+      const endX = Math.min(startX + CHUNK_SIZE, matrix[0]?.length ?? 0)
+      const endY = Math.min(startY + CHUNK_SIZE, matrix.length)
+      for (let y = startY; y < endY; y++) {
+        const row = matrix[y]
+        if (!row) continue
+        for (let x = startX; x < endX; x++) {
+          const value = row[x]
+          if (typeof value !== "string" || !value) continue
+          const resource = getResource<EntityResourceInterface>(value)
+          const image = resource?.asset?.model2d
+          if (!image) continue
+          out.push({ key: `${x},${y}`, x: x * zoom, y: y * zoom, image })
+        }
+      }
+      return out
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cx, cy, zoom, matrix, tilesVersion])
+
+    return (
+      <>
+        {tiles.map((tile) => (
+          <Container
+            key={tile.key}
+            position={{ x: tile.x, y: tile.y }}
+            options={{ width: zoom, height: zoom }}
+          >
+            <Sprite image={tile.image} options={{ width: zoom, height: zoom }} />
+          </Container>
+        ))}
+      </>
+    )
+  },
+  (prev, next) =>
+    prev.cx === next.cx &&
+    prev.cy === next.cy &&
+    prev.zoom === next.zoom &&
+    prev.matrix === next.matrix &&
+    prev.tilesVersion === next.tilesVersion,
+)

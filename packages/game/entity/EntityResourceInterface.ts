@@ -39,6 +39,7 @@ interface EntityPriorityInterface {
   health?: {
     maxLife: number
   }
+  housingCapacity?: number
   size?: Vector3Interface
   scale?: Vector3Interface
   defaultActions?: JsonLdType[]
@@ -58,4 +59,5 @@ export interface EntityResourceInterface<
   onDeath?: (payload: { entity: T; game: GameInterface }) => void
   onHit?: (payload: { entity: T; game: GameInterface }) => void
   entityType?: EntityType
+  mutationRecipes?: JsonLdType[]
 }

@@ -36,11 +36,20 @@ import { researchCenterEntityResource } from "@/app/entity/building/researchCent
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
 import { playerEntityResource } from "@/app/entity/character/player/playerEntityResource"
 import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
+import { playerBuildUserActionMetadata } from "@/app/actionUser/PlayerBuildUserAction/playerBuildUserActionMetadata"
 import { daycareEntityResource } from "@/app/entity/building/daycare/daycareEntityResource"
 import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zombieHouseEntityResource"
 import { agingActionResource } from "@/app/action/agingActionResource"
 import { saveGameActionResource } from "@/app/action/saveGameActionResource"
 import { updateFogOfWarActionResource } from "@/app/action/updateFogOfWarActionResource"
+import { stoneResourceMetadata } from "@/app/inventory/stone/stoneResource"
+import { stoneResourceEntityResource } from "@/app/entity/resource/stone/stoneResourceEntityResource"
+import { stoneMineBuildMetaDataEntity } from "@/app/entity/resource/stone/StoneMineBuildingEntityResource"
+import { ironResourceMetadata } from "@/app/inventory/iron/ironResource"
+import { ironResourceEntityResource } from "@/app/entity/resource/iron/ironResourceEntityResource"
+import { ironMineBuildMetaDataEntity } from "@/app/entity/resource/iron/IronMineBuildingEntityResource"
+import { researchMutationActionResource } from "@/app/action/researchMutationActionResource"
+import { workerSpeedMutation } from "@/app/mutation/workerSpeedMutation"
 
 export const resourceList: BaseJsonLdItemInterface[] = [
   goBuildOfBuildingActionResource,
@@ -79,9 +88,18 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   forestierEntityResource,
   playerEntityResource,
   playerAttackActionResource,
+  playerBuildUserActionMetadata,
   daycareEntityResource,
   zombieHouseEntityResource,
   agingActionResource,
   saveGameActionResource,
   updateFogOfWarActionResource,
+  stoneResourceMetadata,
+  stoneResourceEntityResource,
+  stoneMineBuildMetaDataEntity,
+  ironResourceMetadata,
+  ironResourceEntityResource,
+  ironMineBuildMetaDataEntity,
+  researchMutationActionResource,
+  workerSpeedMutation,
 ]

@@ -2,6 +2,7 @@ import React from "react"
 import { BottomSidebar } from "@/packages/ui/BottomSidebar"
 import { RightSidebar } from "@/packages/ui/RightSidebar"
 import { TopSideBar } from "@/packages/ui/TopSideBar"
+import { PlayerBuildDrawer } from "@/app/entity/character/player/PlayerBuildDrawer"
 import CosyGameSidebar from "@/app/components/cosy-game-sidebar"
 import { SidebarProvider } from "@/app/components/ui/sidebar"
 
@@ -12,6 +13,7 @@ export const InterfaceComponent = () => {
       {/*<LeftSidebar></LeftSidebar>*/}
       <RightSidebar></RightSidebar>
       <BottomSidebar></BottomSidebar>
+      <PlayerBuildDrawer></PlayerBuildDrawer>
     </>
   )
 }

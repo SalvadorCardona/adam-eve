@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="ironRockGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a8088"/>
+      <stop offset="1" stop-color="#3a4048"/>
+    </linearGradient>
+    <linearGradient id="ironRockDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a5058"/>
+      <stop offset="1" stop-color="#1e2228"/>
+    </linearGradient>
+    <linearGradient id="ironVein" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c8a878"/>
+      <stop offset="0.5" stop-color="#8a6438"/>
+      <stop offset="1" stop-color="#4a3018"/>
+    </linearGradient>
+    <radialGradient id="ironShade" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="64" cy="118" rx="54" ry="6" fill="url(#ironShade)"/>
+
+  <polygon points="14,116 28,72 42,90 60,56 78,86 100,68 116,116" fill="url(#ironRockGrad)" stroke="#0e1218" stroke-width="1.2"/>
+  <polygon points="28,72 36,86 42,90 36,82" fill="url(#ironRockDark)" opacity="0.8"/>
+  <polygon points="60,56 68,72 78,86 70,76" fill="url(#ironRockDark)" opacity="0.8"/>
+  <polygon points="100,68 108,82 116,116 110,106" fill="url(#ironRockDark)" opacity="0.7"/>
+
+  <g fill="url(#ironVein)" opacity="0.95">
+    <path d="M30,90 Q44,82 50,98 Q42,100 36,96 Z"/>
+    <path d="M70,80 Q82,74 88,92 Q80,96 74,90 Z"/>
+    <path d="M96,90 Q104,82 110,100 Q104,104 100,98 Z"/>
+    <circle cx="44" cy="90" r="1.6"/>
+    <circle cx="80" cy="86" r="1.4"/>
+    <circle cx="104" cy="94" r="1.5"/>
+  </g>
+
+  <g fill="#dde2e8" opacity="0.85">
+    <circle cx="40" cy="86" r="0.8"/>
+    <circle cx="76" cy="82" r="0.7"/>
+    <circle cx="100" cy="92" r="0.7"/>
+  </g>
+
+  <g stroke="#1e2228" stroke-width="0.5" fill="none" opacity="0.7">
+    <path d="M30,90 L42,98"/>
+    <path d="M68,80 L80,92"/>
+    <path d="M96,90 L108,100"/>
+  </g>
+</svg>

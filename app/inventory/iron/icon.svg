@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="ironGradInv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8c0c8"/>
+      <stop offset="0.5" stop-color="#7a8088"/>
+      <stop offset="1" stop-color="#3a4048"/>
+    </linearGradient>
+    <linearGradient id="ironHighlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dde2e8" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#dde2e8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <polygon points="6,46 12,32 50,32 56,46 50,56 12,56" fill="url(#ironGradInv)" stroke="#1e2228" stroke-width="1.2"/>
+  <polygon points="6,46 12,32 50,32 56,46" fill="url(#ironHighlight)" opacity="0.6"/>
+  <polygon points="14,40 22,40 26,46 22,52 14,52 10,46" fill="#5a6068" stroke="#1e2228" stroke-width="0.6" opacity="0.8"/>
+  <polygon points="38,40 46,40 50,46 46,52 38,52 34,46" fill="#5a6068" stroke="#1e2228" stroke-width="0.6" opacity="0.8"/>
+  <line x1="14" y1="34" x2="50" y2="34" stroke="#dde2e8" stroke-width="0.8" opacity="0.7"/>
+</svg>

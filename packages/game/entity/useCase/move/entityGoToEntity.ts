@@ -26,11 +26,13 @@ import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
 interface EntityGoPositionParams {
   entity: EntityInterface
   target: EntityInterface
+  game?: GameInterface
 }
 
 export function entityGoToEntity({
   entity,
   target,
+  game,
 }: EntityGoPositionParams): PathResponseInterface {
   const targetPosition: Vector3Interface = target.position
   const entityPosition: Vector3Interface = entity.position
@@ -38,7 +40,7 @@ export function entityGoToEntity({
   const result = vector3MoveToVector(
     entityPosition,
     targetPosition,
-    getEntitySpeed(entity),
+    getEntitySpeed(entity, game),
   )
 
   entity.position.x = result.position.x
@@ -92,7 +94,7 @@ export function entityGoToEntityWithGround({
   const entityPosition = vector3ToVector2(entity.position)
 
   if (distanceBetweenVector2(entityPosition, targetPosition) < 1) {
-    return entityGoToEntity({ entity, target })
+    return entityGoToEntity({ entity, target, game })
   }
 
   const targetPositionRounded = roundVector(targetPosition)
@@ -127,7 +129,7 @@ export function entityGoToEntityWithGround({
     }
   }
 
-  const pathExtended = extendVectorByDistance(path, getEntitySpeed(entity))
+  const pathExtended = extendVectorByDistance(path, getEntitySpeed(entity, game))
   entity.currentPath = createConsumablePath(pathExtended)
   entity.currentPath.hash = hash
 

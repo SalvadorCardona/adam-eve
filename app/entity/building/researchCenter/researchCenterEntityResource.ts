@@ -6,6 +6,7 @@ import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowl
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import { getEntityProductionSpeed } from "@/packages/game/entity/useCase/query/getEntityProductionSpeed"
+import { workerSpeedMutation } from "@/app/mutation/workerSpeedMutation"
 import iconUrl from "./icon.svg?url"
 import modelUrl from "./model.svg?url"
 
@@ -26,6 +27,7 @@ export const researchCenterEntityResource = createEntityResource({
     }),
   },
   workerAction: stayInBuildingActionResource,
+  mutationRecipes: [workerSpeedMutation["@id"]],
   onFrame: ({ entity, game }) => {
     const interval = getEntityProductionSpeed(entity)
     if (interval === 0) return
