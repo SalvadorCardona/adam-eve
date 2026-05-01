@@ -9,11 +9,13 @@ import { expect } from "vitest"
 import { getEntityWorkerNeeded } from "@/packages/game/entity/useCase/query/getEntityWorkerNeeded"
 import { getEntityMetaData } from "@/packages/game/entity/useCase/getEntityMetaData"
 import { ActionBagInterface } from "@/packages/game/action/ActionBagInterface"
+import { EntityState } from "@/packages/game/entity/EntityState"
 
 describe("Test getEntityWorkerNeeded", () => {
   it("Context 1", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.create()
+    timberHouse.state = EntityState.builded
     const meta = getEntityMetaData(timberHouse)
     const worker = workerEntityResource.create()
     const numberOfWorker = meta.propriety.work?.numberOfWorker as number

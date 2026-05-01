@@ -47,6 +47,7 @@ function setupBuildScenario(
     game,
     item: { position: createVector3(fx, 1, fz) },
   })
+  forum.state = EntityState.builded
   if (!options.skipForum) addEntityToGame(game, forum)
 
   const [bx, bz] = options.buildingAt ?? [10, 0]
@@ -172,7 +173,7 @@ describe("goBuildOfBuildingActionResource", () => {
     expect(inBuilding.quantity).toBe(3)
   })
 
-  it("PutResource marks the building as built and lets the worker keep looking for more work", () => {
+  it("PutResource transitions to Building, then marks the building as built once construction time elapses", () => {
     const s = setupBuildScenario({
       workerAt: [10, 0],
       buildingAt: [10, 0],
@@ -182,6 +183,12 @@ describe("goBuildOfBuildingActionResource", () => {
     s.action.data.state = "PutResource"
 
     runOnFrame(s)
+
+    expect(s.action.data.state).toBe("Building")
+    expect(s.building.state).toBe(EntityState.under_construction)
+
+    const target = daycareEntityResource.propriety.constructionTime ?? 300
+    for (let i = 0; i < target + 1; i++) runOnFrame(s)
 
     expect(s.building.state).toBe(EntityState.builded)
     expect(s.action.data.state).toBe("GoToForum")

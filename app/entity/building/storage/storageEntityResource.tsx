@@ -1,4 +1,5 @@
-import imageIcon from "./icon.png?url"
+import iconUrl from "./icon.svg?url"
+import modelUrl from "./model.svg?url"
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import {
   EntityResourceInterface,
@@ -9,9 +10,11 @@ import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 
 export const storageEntityResource: EntityResourceInterface = createEntityResource({
   ["@id"]: "resource/storage",
+  label: "Entrepôt",
   entityType: EntityType.building,
   asset: {
-    icon: imageIcon,
+    icon: iconUrl,
+    model2d: modelUrl,
   },
   propriety: {
     health: {
@@ -25,5 +28,6 @@ export const storageEntityResource: EntityResourceInterface = createEntityResour
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
+    constructionTime: 300,
   },
 })

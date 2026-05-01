@@ -17,6 +17,7 @@ import { playerBuildUserActionMetadata } from "@/app/actionUser/PlayerBuildUserA
 import { hasActionUser } from "@/packages/game/actionUser/hasActionUser"
 import { PlayerComponent } from "./PlayerComponent"
 import healthyIcon from "./player_healthy.svg?url"
+import { expandWorldAroundPlayer } from "@/app/game/proceduralSpawn"
 
 const PLAYER_SPEED = 0.03
 
@@ -122,6 +123,8 @@ export const playerEntityResource = createEntityResource({
   },
   component: PlayerComponent,
   onFrame: ({ entity, game }) => {
+    expandWorldAroundPlayer(game, entity)
+
     const tryMoveAxis = (axis: "x" | "z", delta: number): boolean => {
       const previous = entity.position[axis]
       entity.position[axis] = previous + delta

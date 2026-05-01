@@ -1,6 +1,9 @@
 import GameInterface from "@/packages/game/game/GameInterface"
 import { ActionBagInterface } from "@/packages/game/action/ActionBagInterface"
-import { BuildingEntityInterface } from "@/packages/game/entity/EntityInterface"
+import EntityInterface, {
+  BuildingEntityInterface,
+  isGroundEntity,
+} from "@/packages/game/entity/EntityInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
@@ -12,6 +15,7 @@ export function gameProcessor(game: GameInterface) {
   actionProcesseur(game.actions, game)
 
   Object.values(game.entities).forEach((entity) => {
+    if (isGroundEntity(entity)) return
     const entityMetaData = getResource(entity) as EntityResourceInterface | undefined
 
     entityMetaData?.onFrame?.({ entity, game })
@@ -20,6 +24,24 @@ export function gameProcessor(game: GameInterface) {
   })
 
   return game
+}
+
+function entityVisualHash(entity: EntityInterface): string {
+  return (
+    entity.position.x +
+    "|" +
+    entity.position.y +
+    "|" +
+    entity.position.z +
+    "|" +
+    (entity.state ?? "") +
+    "|" +
+    entity.rotation +
+    "|" +
+    entity.life +
+    "|" +
+    (entity.hidden ? 1 : 0)
+  )
 }
 
 function actionProcesseur(
@@ -34,9 +56,16 @@ function actionProcesseur(
 
     action.nextTick = undefined
     const actionMeta = getResource<ActionResourceInterface>(action)
-    actionMeta?.onFrame?.({ entity: entity, action, game })
 
-    if (entity) {
+    if (!entity) {
+      actionMeta?.onFrame?.({ entity, action, game })
+      return
+    }
+
+    const before = entityVisualHash(entity)
+    actionMeta?.onFrame?.({ entity, action, game })
+
+    if (entityVisualHash(entity) !== before) {
       updateEntityInGame(game, entity)
     }
   })

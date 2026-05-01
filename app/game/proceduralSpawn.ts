@@ -1,4 +1,5 @@
 import GameInterface from "@/packages/game/game/GameInterface"
+import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import { hasTileAtCell } from "@/packages/game/game/useCase/query/groundQuery"
@@ -143,7 +144,10 @@ export function proceduralSpawnOnCell(
       PROCEDURAL_CLUSTER.groundPatch.groundRadius,
       PROCEDURAL_CLUSTER.groundPatch.groundDensity,
     )
+    return
   }
+
+  spawnGroundAt(game, x, z)
 }
 
 export function proceduralSpawnOnCells(
@@ -152,5 +156,22 @@ export function proceduralSpawnOnCells(
 ): void {
   for (const [x, z] of cells) {
     proceduralSpawnOnCell(game, x, z)
+  }
+}
+
+const EXPAND_RADIUS = 12
+
+export function expandWorldAroundPlayer(
+  game: GameInterface,
+  player: EntityInterface,
+): void {
+  const cx = Math.round(player.position.x)
+  const cz = Math.round(player.position.z)
+  const r2 = EXPAND_RADIUS * EXPAND_RADIUS
+  for (let dz = -EXPAND_RADIUS; dz <= EXPAND_RADIUS; dz++) {
+    for (let dx = -EXPAND_RADIUS; dx <= EXPAND_RADIUS; dx++) {
+      if (dx * dx + dz * dz > r2) continue
+      proceduralSpawnOnCell(game, cx + dx, cz + dz)
+    }
   }
 }

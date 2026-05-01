@@ -28,6 +28,7 @@ interface EntityVisionPriorityInterface {
 
 interface EntityPriorityInterface {
   resourceForConstruction?: InventoryInterface
+  constructionTime?: number
   inventorySize?: number
   speed?: number
   attack?: EntityAttackPriorityInterface

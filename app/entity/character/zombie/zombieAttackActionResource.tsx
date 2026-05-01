@@ -33,6 +33,7 @@ export const zombieAttackActionResource = createActionResource({
       target = entityQueryFindOne(game, {
         faction: EntityFaction.self,
         circleSearch: { center: entity.position, radius: SEARCH_RADIUS },
+        order: { distance: "DESC" },
       })
 
       if (!target) {

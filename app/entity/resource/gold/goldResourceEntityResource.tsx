@@ -4,6 +4,7 @@ import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const goldResourceEntityResource = createEntityResource({
   ["@id"]: "resource/gold-resource",
+  label: "Filon d'or",
   entityType: EntityType.resource,
   asset: {
     icon: goldMineSrc,

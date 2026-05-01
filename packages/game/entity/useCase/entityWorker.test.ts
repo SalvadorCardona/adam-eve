@@ -6,11 +6,13 @@ import { describe, expect, it } from "vitest"
 import { ActionBagInterface } from "@/packages/game/action/ActionBagInterface"
 import { getLdIri } from "@/packages/jsonLd/jsonLd"
 import { hasAction } from "@/packages/game/action/HasAction"
+import { EntityState } from "@/packages/game/entity/EntityState"
 
 describe("addWorkerToEntity", () => {
   it("adds a worker to the source entity and creates the worker action", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.create()
+    timberHouse.state = EntityState.builded
     const worker = workerEntityResource.create()
 
     expect(hasAction(worker)).toBe(false)
@@ -29,6 +31,7 @@ describe("addWorkerToEntity", () => {
   it("initializes the workers array when missing and assigns the action", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.create()
+    timberHouse.state = EntityState.builded
     delete timberHouse.workers
     const worker = workerEntityResource.create()
 
@@ -53,6 +56,7 @@ describe("addWorkerToEntity", () => {
   it("does not add a worker when no more workers are needed", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.create()
+    timberHouse.state = EntityState.builded
     const maxWorkers = timberHouseEntityMetaData.propriety.work
       ?.numberOfWorker as number
 
@@ -70,7 +74,9 @@ describe("addWorkerToEntity", () => {
   it("does not assign a worker that already has an action", () => {
     const game = gameFactory()
     const timberHouse = timberHouseEntityMetaData.create()
+    timberHouse.state = EntityState.builded
     const otherSource = timberHouseEntityMetaData.create()
+    otherSource.state = EntityState.builded
     const worker = workerEntityResource.create()
 
     addWorkerToEntity(game, otherSource, worker)

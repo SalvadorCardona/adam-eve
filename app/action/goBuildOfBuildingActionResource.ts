@@ -20,7 +20,10 @@ enum State {
   TakeResource = "TakeResource",
   GoToBuild = "GoToBuild",
   PutResource = "PutResource",
+  Building = "Building",
 }
+
+const DEFAULT_CONSTRUCTION_TIME = 300
 
 interface FindWorkerData {
   state: State
@@ -120,12 +123,26 @@ export const goBuildOfBuildingActionResource: ActionResourceInterface<
       )
 
       if (isComplete) {
+        data.state = State.Building
+      } else {
+        data.state = State.GoToForum
+      }
+      return
+    }
+
+    if (data.state === State.Building) {
+      entity.state = EntityState.build
+      const target = buildingMeta.propriety.constructionTime ?? DEFAULT_CONSTRUCTION_TIME
+      building.constructionProgress = (building.constructionProgress ?? 0) + 1
+      updateEntityInGame(game, building)
+
+      if (building.constructionProgress >= target) {
         building.state = EntityState.builded
+        building.constructionProgress = target
         data.buildingIri = undefined
+        data.state = State.GoToForum
         updateEntityInGame(game, building)
       }
-
-      data.state = State.GoToForum
     }
   },
 })

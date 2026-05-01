@@ -28,6 +28,7 @@ export const forestierEntityResource = createEntityResource({
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
+    constructionTime: 500,
   },
   workerAction: stayInBuildingActionResource,
   onFrame: ({ entity, game }) => {

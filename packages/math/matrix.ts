@@ -73,7 +73,12 @@ export const setMatrix = (
   position: Vector2Interface,
   value: MatrixItemInterface,
 ): void => {
-  matrixSource[position.y][position.x] = value
+  let row = matrixSource[position.y]
+  if (!row) {
+    row = []
+    matrixSource[position.y] = row
+  }
+  row[position.x] = value
 }
 
 export function subtractMatrix(

@@ -25,6 +25,7 @@ export const researchCenterEntityResource = createEntityResource({
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 10 }],
     }),
+    constructionTime: 600,
   },
   workerAction: stayInBuildingActionResource,
   mutationRecipes: [workerSpeedMutation["@id"]],

@@ -25,6 +25,7 @@ export const treeDeathEntityMeta = createEntityResource({
   },
   entityType: EntityType.effect,
   ["@id"]: "tree-death",
+  label: "Souche",
 })
 
 export const treeEntityMetaData = createEntityResource({

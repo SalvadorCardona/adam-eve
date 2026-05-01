@@ -39,6 +39,7 @@ export const workerEntityResource = createEntityResource({
       [EntityState.go_to_tree]: moveAnimation,
       [EntityState.attack]: attackAnimation,
       [EntityState.cut_the_tree]: attackAnimation,
+      [EntityState.build]: attackAnimation,
     },
   },
   propriety: {

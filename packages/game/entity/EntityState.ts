@@ -10,4 +10,5 @@ export enum EntityState {
   cut_the_tree = "cut_the_tree",
   go_to_tree = "go_to_tree",
   go_to_put_resource = "go_to_put_resource",
+  build = "build",
 }

@@ -22,6 +22,10 @@ import {
 } from "@/packages/math/path"
 import { matrixDirection } from "@/packages/math/matrix"
 import { distanceBetweenVector2 } from "@/packages/math/distanceBetweenVector3"
+import {
+  matrixToWorld,
+  worldToMatrix,
+} from "@/packages/game/game/useCase/command/worldMatrix"
 
 interface EntityGoPositionParams {
   entity: EntityInterface
@@ -113,11 +117,12 @@ export function entityGoToEntityWithGround({
   let path: PathInterface | null = null
 
   for (const direction of directions) {
-    path = findPathAStar(
-      game.gameWorld.entitiesMatrix,
-      entityPositionRounded,
+    const startMatrix = worldToMatrix(game, entityPositionRounded)
+    const endMatrix = worldToMatrix(
+      game,
       vectorAddition(direction, targetPositionRounded),
     )
+    path = findPathAStar(game.gameWorld.entitiesMatrix, startMatrix, endMatrix)
     if (path) break
   }
 
@@ -129,7 +134,8 @@ export function entityGoToEntityWithGround({
     }
   }
 
-  const pathExtended = extendVectorByDistance(path, getEntitySpeed(entity, game))
+  const worldPath = path.map((p) => matrixToWorld(game, p))
+  const pathExtended = extendVectorByDistance(worldPath, getEntitySpeed(entity, game))
   entity.currentPath = createConsumablePath(pathExtended)
   entity.currentPath.hash = hash
 

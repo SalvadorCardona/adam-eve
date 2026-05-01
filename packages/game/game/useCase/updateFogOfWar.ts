@@ -3,31 +3,17 @@ import { EntityFaction } from "@/packages/game/entity/EntityInterface"
 import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
+import { Vector2Interface } from "@/packages/math/vector"
+import {
+  ensureOriginCovers,
+  worldToMatrix,
+} from "@/packages/game/game/useCase/command/worldMatrix"
 
-function ensureRows(
-  matrix: boolean[][],
-  height: number,
-  width: number,
-): boolean[][] {
-  while (matrix.length < height) matrix.push(new Array(width).fill(false))
-  for (let y = 0; y < height; y++) {
-    const row = matrix[y]
-    if (row.length < width) {
-      for (let x = row.length; x < width; x++) row.push(false)
-    }
-  }
-  return matrix
-}
-
-export function updateFogOfWar(game: GameInterface): void {
-  const max = game.gameWorld.bounding.max
-  const width = Math.max(0, Math.ceil(max.x))
-  const height = Math.max(0, Math.ceil(max.y))
-  if (width === 0 || height === 0) return
-
-  const visited = ensureRows(game.gameWorld.visitedMatrix ?? [], height, width)
-
+export function updateFogOfWar(game: GameInterface): Array<[number, number]> {
   const revealers = entityQuery(game, { faction: EntityFaction.self })
+  if (revealers.length === 0) return []
+
+  const cellsToReveal: Vector2Interface[] = []
 
   for (const entity of revealers) {
     const meta = getResource<EntityResourceInterface>(entity)
@@ -36,22 +22,40 @@ export function updateFogOfWar(game: GameInterface): void {
     const cx = entity.position.x
     const cz = entity.position.z
     const r2 = range * range
-    const x0 = Math.max(0, Math.floor(cx - range))
-    const x1 = Math.min(width - 1, Math.ceil(cx + range))
-    const y0 = Math.max(0, Math.floor(cz - range))
-    const y1 = Math.min(height - 1, Math.ceil(cz + range))
+    const x0 = Math.floor(cx - range)
+    const x1 = Math.ceil(cx + range)
+    const y0 = Math.floor(cz - range)
+    const y1 = Math.ceil(cz + range)
     for (let y = y0; y <= y1; y++) {
-      const visitedRow = visited[y]
       for (let x = x0; x <= x1; x++) {
-        if (visitedRow[x]) continue
         const dx = x + 0.5 - cx
         const dy = y + 0.5 - cz
         if (dx * dx + dy * dy <= r2) {
-          visitedRow[x] = true
+          cellsToReveal.push({ x, y })
         }
       }
     }
   }
-  console.log(visited)
+
+  if (cellsToReveal.length === 0) return []
+
+  ensureOriginCovers(game, cellsToReveal)
+
+  const visited = game.gameWorld.visitedMatrix ?? []
   game.gameWorld.visitedMatrix = visited
+
+  const newlyRevealed: Array<[number, number]> = []
+  for (const worldCell of cellsToReveal) {
+    const matrixCell = worldToMatrix(game, worldCell)
+    let row = visited[matrixCell.y]
+    if (!row) {
+      row = []
+      visited[matrixCell.y] = row
+    }
+    if (row[matrixCell.x]) continue
+    row[matrixCell.x] = true
+    newlyRevealed.push([worldCell.x, worldCell.y])
+  }
+
+  return newlyRevealed
 }

@@ -23,16 +23,18 @@ function computeVisibleChunks(
   screenW: number,
   screenH: number,
   zoom: number,
+  originX: number,
+  originY: number,
 ): ViewportRect {
   const worldMinX = -cameraX
   const worldMinY = -cameraY
   const worldMaxX = worldMinX + screenW
   const worldMaxY = worldMinY + screenH
 
-  const cellMinX = Math.floor(worldMinX / zoom)
-  const cellMinY = Math.floor(worldMinY / zoom)
-  const cellMaxX = Math.ceil(worldMaxX / zoom)
-  const cellMaxY = Math.ceil(worldMaxY / zoom)
+  const cellMinX = Math.floor(worldMinX / zoom) + originX
+  const cellMinY = Math.floor(worldMinY / zoom) + originY
+  const cellMaxX = Math.ceil(worldMaxX / zoom) + originX
+  const cellMaxY = Math.ceil(worldMaxY / zoom) + originY
 
   return {
     minX: Math.floor(cellMinX / CHUNK_SIZE),
@@ -74,6 +76,7 @@ export const GroundTilesLayer = () => {
 
   const zoom = game.camera.zoom
   const matrix = game.gameWorld.groundMatrix
+  const origin = game.gameWorld.origin ?? { x: 0, y: 0 }
 
   const visibleChunks = useMemo(() => {
     const range = computeVisibleChunks(
@@ -82,21 +85,21 @@ export const GroundTilesLayer = () => {
       screen.w,
       screen.h,
       zoom,
+      origin.x,
+      origin.y,
     )
     const out: Array<{ cx: number; cy: number }> = []
     for (let cy = range.minY; cy <= range.maxY; cy++) {
       for (let cx = range.minX; cx <= range.maxX; cx++) {
         if (cx < 0 || cy < 0) continue
-        const chunkOriginX = cx * CHUNK_SIZE
         const chunkOriginY = cy * CHUNK_SIZE
         if (chunkOriginY >= matrix.length) continue
-        if (chunkOriginX >= (matrix[0]?.length ?? 0)) continue
         out.push({ cx, cy })
       }
     }
     return out
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cameraVersion, screen.w, screen.h, zoom, matrix.length])
+  }, [cameraVersion, screen.w, screen.h, zoom, matrix.length, origin.x, origin.y])
 
   return (
     <>
@@ -108,6 +111,8 @@ export const GroundTilesLayer = () => {
           zoom={zoom}
           matrix={matrix}
           tilesVersion={tilesVersion}
+          originX={origin.x}
+          originY={origin.y}
         />
       ))}
     </>
@@ -120,31 +125,48 @@ interface GroundChunkProps {
   zoom: number
   matrix: Matrix2DInterface
   tilesVersion: number
+  originX: number
+  originY: number
 }
 
 const GroundChunk = React.memo(
-  function GroundChunk({ cx, cy, zoom, matrix, tilesVersion }: GroundChunkProps) {
+  function GroundChunk({
+    cx,
+    cy,
+    zoom,
+    matrix,
+    tilesVersion,
+    originX,
+    originY,
+  }: GroundChunkProps) {
     const tiles = useMemo(() => {
       const out: Array<{ key: string; x: number; y: number; image: string }> = []
       const startX = cx * CHUNK_SIZE
       const startY = cy * CHUNK_SIZE
-      const endX = Math.min(startX + CHUNK_SIZE, matrix[0]?.length ?? 0)
       const endY = Math.min(startY + CHUNK_SIZE, matrix.length)
       for (let y = startY; y < endY; y++) {
         const row = matrix[y]
         if (!row) continue
+        const endX = Math.min(startX + CHUNK_SIZE, row.length)
         for (let x = startX; x < endX; x++) {
           const value = row[x]
           if (typeof value !== "string" || !value) continue
           const resource = getResource<EntityResourceInterface>(value)
           const image = resource?.asset?.model2d
           if (!image) continue
-          out.push({ key: `${x},${y}`, x: x * zoom, y: y * zoom, image })
+          const worldX = x - originX
+          const worldY = y - originY
+          out.push({
+            key: `${x},${y}`,
+            x: worldX * zoom,
+            y: worldY * zoom,
+            image,
+          })
         }
       }
       return out
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cx, cy, zoom, matrix, tilesVersion])
+    }, [cx, cy, zoom, matrix, tilesVersion, originX, originY])
 
     return (
       <>
@@ -165,5 +187,7 @@ const GroundChunk = React.memo(
     prev.cy === next.cy &&
     prev.zoom === next.zoom &&
     prev.matrix === next.matrix &&
-    prev.tilesVersion === next.tilesVersion,
+    prev.tilesVersion === next.tilesVersion &&
+    prev.originX === next.originX &&
+    prev.originY === next.originY,
 )

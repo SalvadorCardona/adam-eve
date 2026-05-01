@@ -1,5 +1,4 @@
 import {
-  createMatrix2D,
   getInMatrix,
   Matrix2DInterface,
   matrixDirection,
@@ -25,11 +24,8 @@ export const findPathAStar = (
   start: Vector2Interface,
   end: Vector2Interface,
 ): PathInterface | null => {
-  const rows = grid.length
-  const cols = grid[0].length
-
   const openList: CurrentNode[] = []
-  const closedList = createMatrix2D(rows, cols)
+  const closedList: Matrix2DInterface = []
 
   openList.push({
     x: start.x,

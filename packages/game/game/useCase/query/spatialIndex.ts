@@ -5,16 +5,16 @@ import { Vector2Interface } from "@/packages/math/vector"
 const CHUNK = 8
 
 interface SpatialCache {
-  time: number
   gameIri: string
   byChunk: Map<string, EntityInterface[]>
 }
 
 const cache: SpatialCache = {
-  time: -1,
   gameIri: "",
   byChunk: new Map(),
 }
+
+let dirty = true
 
 function chunkKey(x: number, y: number): string {
   return Math.floor(x / CHUNK) + "," + Math.floor(y / CHUNK)
@@ -28,14 +28,14 @@ function rebuild(game: GameInterface): void {
     if (bucket) bucket.push(entity)
     else byChunk.set(key, [entity])
   }
-  cache.time = game.time
   cache.gameIri = game["@id"]
   cache.byChunk = byChunk
 }
 
 function getIndex(game: GameInterface): Map<string, EntityInterface[]> {
-  if (cache.time !== game.time || cache.gameIri !== game["@id"]) {
+  if (dirty || cache.gameIri !== game["@id"]) {
     rebuild(game)
+    dirty = false
   }
   return cache.byChunk
 }
@@ -90,6 +90,5 @@ export function squareCandidates(
 }
 
 export function invalidateSpatialIndex(): void {
-  cache.time = -1
-  cache.gameIri = ""
+  dirty = true
 }

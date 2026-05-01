@@ -71,6 +71,7 @@ type GameWorld = JsonLDItem<{
   groundMatrix: Matrix2DInterface
   buildingMatrix: Matrix2DInterface
   visitedMatrix?: boolean[][]
+  origin: Vector2Interface
 }>
 
 export default interface GameInterface extends BaseJsonLdItemInterface {
@@ -103,6 +104,7 @@ export function gameFactory(game?: GameInterface): GameInterface {
       entitiesMatrix: createMatrix2D(0, 0),
       groundMatrix: createMatrix2D(0, 0),
       buildingMatrix: createMatrix2D(0, 0),
+      origin: createVector2(),
     }),
     gameOption: createJsonLd<GameOption>("option", {
       gameSpeed: 1,
@@ -140,6 +142,9 @@ export function gameFactory(game?: GameInterface): GameInterface {
   }
   if (!currentGame.researchedMutations) {
     currentGame.researchedMutations = []
+  }
+  if (!currentGame.gameWorld.origin) {
+    currentGame.gameWorld.origin = createVector2()
   }
 
   currentGame.inventory.entity = currentGame["@id"]

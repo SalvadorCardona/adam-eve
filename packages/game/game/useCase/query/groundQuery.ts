@@ -4,6 +4,7 @@ import { JsonLdType } from "@/packages/jsonLd/jsonLd"
 import { Vector2Interface } from "@/packages/math/vector"
 import { getInMatrix } from "@/packages/math/matrix"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
+import { worldToMatrix } from "@/packages/game/game/useCase/command/worldMatrix"
 
 export function getTileAtCell(
   game: GameInterface,
@@ -11,7 +12,8 @@ export function getTileAtCell(
 ): JsonLdType | undefined {
   const matrix = game.gameWorld?.groundMatrix
   if (!matrix) return undefined
-  const value = getInMatrix(matrix, cell)
+  const matrixCell = worldToMatrix(game, cell)
+  const value = getInMatrix(matrix, matrixCell)
   return typeof value === "string" ? value : undefined
 }
 

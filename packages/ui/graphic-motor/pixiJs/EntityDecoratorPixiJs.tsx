@@ -196,11 +196,15 @@ export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
     )
   }
 
+  const alpha =
+    entity.state === EntityState.under_construction ? 0.5 : 1
+
   return (
     <Sprite
       image={asset}
       animation={animation}
       options={{ width: size.x, height: size.y }}
+      alpha={alpha}
     />
   )
 }
@@ -213,9 +217,6 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
 
     item.scale.x = scaleFactor / 5
     item.scale.y = scaleFactor / 5
-  },
-  [EntityState.under_construction]: (e: Ticker, item: ContainerChild) => {
-    item.alpha = 0.5
   },
   [EntityState.find_enemy]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1

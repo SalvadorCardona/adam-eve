@@ -1,6 +1,7 @@
 import { createActionResource } from "@/packages/game/action/createActionResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
+import { isCharacterEntity } from "@/packages/game/entity/EntityInterface"
 
 export const AGING_INTERVAL = 10000
 
@@ -10,6 +11,7 @@ export const agingActionResource = createActionResource({
     updateNextTick(game, action, AGING_INTERVAL)
 
     Object.values(game.entities).forEach((entity) => {
+      if (!isCharacterEntity(entity)) return
       entity.age = (entity.age ?? 0) + 1
       updateEntityInGame(game, entity)
     })

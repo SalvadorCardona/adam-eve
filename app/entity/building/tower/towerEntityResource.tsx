@@ -18,6 +18,7 @@ export const towerEntityResource = createEntityResource({
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 5 }],
     }),
+    constructionTime: 450,
     attack: {
       attackRange: 10,
       damage: 80,

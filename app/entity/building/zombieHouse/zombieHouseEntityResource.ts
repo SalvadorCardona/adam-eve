@@ -43,6 +43,7 @@ export const zombieHouseEntityResource = createEntityResource({
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 8 }],
     }),
+    constructionTime: 400,
   },
   defaultEntity: () => ({ faction: EntityFaction.enemy }),
   onFrame: ({ entity, game }) => {

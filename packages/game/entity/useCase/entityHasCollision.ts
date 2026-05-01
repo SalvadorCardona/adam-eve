@@ -4,10 +4,12 @@ import EntityInterface, {
 } from "@/packages/game/entity/EntityInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
 import { boundingCollision } from "@/packages/math/boundingCollision"
-import { entityQuery } from "@/packages/game/game/useCase/query/entityQuery"
+import { circleCandidates } from "@/packages/game/game/useCase/query/spatialIndex"
 import { findTileUnderEntity } from "@/packages/game/game/useCase/query/groundQuery"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
+
+const COLLISION_SEARCH_MARGIN = 5
 
 export function entityHasCollision(
   entitySource: EntityInterface,
@@ -24,12 +26,18 @@ export function hasCollisionInGame(
   entity: EntityInterface,
 ): false | EntityInterface {
   const sourceIsCharacter = isCharacterEntity(entity)
+  const sizeX = entity.size?.x ?? 1
+  const sizeZ = entity.size?.z ?? 1
+  const center = {
+    x: entity.position.x + sizeX / 2,
+    y: entity.position.z + sizeZ / 2,
+  }
+  const radius = Math.max(sizeX, sizeZ) / 2 + COLLISION_SEARCH_MARGIN
+  const candidates = circleCandidates(game, center, radius)
+  const sourceId = entity["@id"]
 
-  const canBeCollision: EntityInterface[] = entityQuery(game, {
-    "@idIsNot": entity["@id"],
-  })
-
-  for (const otherEntity of canBeCollision) {
+  for (const otherEntity of candidates) {
+    if (otherEntity["@id"] === sourceId) continue
     if (isGroundEntity(otherEntity)) continue
     if (
       otherEntity.entityType === EntityType.effect ||

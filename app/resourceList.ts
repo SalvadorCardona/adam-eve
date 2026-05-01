@@ -17,7 +17,6 @@ import { findWorkerCharacterActionMetadata } from "@/app/action/findWorkerCharac
 import { timberHouseEntityMetaData } from "@/app/entity/building/timberHouse/TimberHouseEntity"
 import { theDeathActionResource } from "@/app/action/theDeathActionResource"
 import { storageEntityResource } from "@/app/entity/building/storage/storageEntityResource"
-import { portEntityResource } from "@/app/entity/building/port/portEntityResource"
 import { roadGroundEntityMetadata } from "@/app/entity/ground/road/roadGroundEntityMetadata"
 import { gameResource } from "@/packages/game/game/gameResource"
 import { zombieEntityResource } from "@/app/entity/character/zombie/zombieEntityResource"
@@ -70,7 +69,6 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   wheatResourceMetadata,
   theDeathActionResource,
   storageEntityResource,
-  portEntityResource,
   gameResource,
   zombieEntityResource,
   towerEntityResource,

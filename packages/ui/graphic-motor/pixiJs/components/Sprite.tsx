@@ -22,6 +22,7 @@ interface SpritePropsInterface {
   isTilling?: boolean
   animation?: SpriteAnimation
   rotation?: number
+  alpha?: number
 }
 
 const useTexture = (src?: string): Texture | undefined => {
@@ -59,6 +60,7 @@ export const Sprite = ({
   isTilling,
   animation,
   rotation,
+  alpha,
 }: SpritePropsInterface) => {
   const texture = useTexture(image) ?? Texture.EMPTY
   const spriteRef = useRef<BaseSprite | TilingSprite | null>(null)
@@ -85,6 +87,7 @@ export const Sprite = ({
         height={height}
         zIndex={zIndex}
         rotation={rotation}
+        alpha={alpha}
       />
     )
   }
@@ -99,6 +102,7 @@ export const Sprite = ({
       height={height}
       zIndex={zIndex}
       rotation={rotation}
+      alpha={alpha}
     />
   )
 }

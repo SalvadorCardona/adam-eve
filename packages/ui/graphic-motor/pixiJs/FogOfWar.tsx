@@ -16,6 +16,7 @@ export const FogOfWar = () => {
     const visited = game.gameWorld.visitedMatrix
     if (!visited) return
     const zoom = game.camera.zoom
+    const origin = game.gameWorld.origin ?? { x: 0, y: 0 }
     const height = visited.length
     for (let y = 0; y < height; y++) {
       const row = visited[y]
@@ -23,7 +24,9 @@ export const FogOfWar = () => {
       const width = row.length
       for (let x = 0; x < width; x++) {
         if (row[x]) continue
-        g.rect(x * zoom, y * zoom, zoom, zoom)
+        const worldX = x - origin.x
+        const worldY = y - origin.y
+        g.rect(worldX * zoom, worldY * zoom, zoom, zoom)
         g.fill({ color: 0x000000, alpha: 1 })
       }
     }

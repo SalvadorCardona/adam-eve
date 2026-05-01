@@ -4,6 +4,7 @@ import model from "@/app/entity/effect/blood/model.png"
 
 export const bloodEntityResource = createEntityResource({
   ["@id"]: "blood",
+  label: "Sang",
   entityType: EntityType.effect,
   onFrame: ({ entity }) => {
     entity.life--

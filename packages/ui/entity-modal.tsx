@@ -6,7 +6,7 @@ import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceIn
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { useGameFrame, useGamePubSub } from "@/packages/ui/hook/useGameFrame"
-import EntityInterface, { isBuildingEntity } from "@/packages/game/entity/EntityInterface"
+import EntityInterface, { isBuildingEntity, isCharacterEntity } from "@/packages/game/entity/EntityInterface"
 import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
 import { containerPubSub } from "@/packages/jsonLd/jsonLd"
 import { Inventory } from "@/packages/ui/Inventory"
@@ -14,6 +14,7 @@ import { Button } from "@/app/components/ui/button"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
+import { MutationRecipes } from "@/app/components/MutationRecipes"
 
 interface EntityModalProps {}
 const REFRESH_EVERY_TICKS = 30
@@ -116,10 +117,12 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             </div>
           )}
 
-          <div className="flex items-center gap-4">
-            <Zap className="h-5 w-5 text-yellow-600" />
-            <div className="font-semibold">Âge : {entity.age ?? 0} ans</div>
-          </div>
+          {isCharacterEntity(entity) && (
+            <div className="flex items-center gap-4">
+              <Zap className="h-5 w-5 text-yellow-600" />
+              <div className="font-semibold">Âge : {entity.age ?? 0} ans</div>
+            </div>
+          )}
 
           <div className="flex items-center gap-4">
             <Box className="h-5 w-5 text-purple-600" />
@@ -205,6 +208,12 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
               </div>
             </div>
           )}
+
+          <MutationRecipes
+            entity={entity}
+            game={game}
+            onChange={() => setTick((game["@version"] ?? 0) + 1)}
+          />
         </div>
       </CardContent>
     </Card>

@@ -36,6 +36,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   connections?: Partial<Record<Direction, JsonLdIri>>
   size: Vector3Interface
   entityType?: EntityType
+  constructionProgress?: number
   "@resource"?: string
 }
 

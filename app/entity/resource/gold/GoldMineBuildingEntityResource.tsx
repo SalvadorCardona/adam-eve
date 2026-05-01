@@ -6,6 +6,7 @@ import { getResourceActionResource } from "@/app/action/getResourceActionResourc
 
 export const goldMineBuildMetaDataEntity = createEntityResource({
   ["@id"]: "resource/gold-building",
+  label: "Mine d'or",
   entityType: EntityType.building,
   asset: {
     icon: iconSrc,

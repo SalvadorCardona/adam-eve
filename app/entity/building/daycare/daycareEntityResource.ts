@@ -40,6 +40,7 @@ export const daycareEntityResource = createEntityResource({
     resourceForConstruction: createInventory({
       items: [{ inventoryItem: woodResourceMetadata["@id"], quantity: 8 }],
     }),
+    constructionTime: 450,
   },
   onFrame: ({ entity, game }) => {
     if (game.time === 0) return
