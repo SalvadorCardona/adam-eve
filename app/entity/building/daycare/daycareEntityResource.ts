@@ -5,8 +5,8 @@ import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import { workerEntityResource } from "@/app/entity/character/worker/workerEntityResource"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
-import iconUrl from "./icon.svg?url"
-import modelUrl from "./model.svg?url"
+import iconUrl from "./icon.png"
+import modelUrl from "./model.png"
 import {
   computeHousingCapacity,
   countWorkers,

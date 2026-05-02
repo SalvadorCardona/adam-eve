@@ -1,5 +1,5 @@
-import iconUrl from "./icon.svg?url"
-import modelUrl from "./model.svg?url"
+import iconUrl from "./icon.png"
+import modelUrl from "./model.png"
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import {
   EntityResourceInterface,

@@ -7,8 +7,8 @@ import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory
 import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import { getEntityProductionSpeed } from "@/packages/game/entity/useCase/query/getEntityProductionSpeed"
 import { workerSpeedMutation } from "@/app/mutation/workerSpeedMutation"
-import iconUrl from "./icon.svg?url"
-import modelUrl from "./model.svg?url"
+import iconUrl from "./icon.png"
+import modelUrl from "./model.png"
 
 export const researchCenterEntityResource = createEntityResource({
   "@id": "researchCenter",

@@ -47,7 +47,9 @@ export const PixijsAppComponent = () => {
       <PlayerBuildPreviewComponent></PlayerBuildPreviewComponent>
       <Container>
         <GroundTilesLayer />
-        <EntitiesLoopPixiJs></EntitiesLoopPixiJs>
+        <Container sortableChildren>
+          <EntitiesLoopPixiJs></EntitiesLoopPixiJs>
+        </Container>
       </Container>
       <FogOfWar />
 

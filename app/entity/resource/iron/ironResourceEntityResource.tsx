@@ -1,5 +1,5 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import depositSrc from "./deposit.svg?url"
+import depositSrc from "./deposit.png"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const ironResourceEntityResource = createEntityResource({

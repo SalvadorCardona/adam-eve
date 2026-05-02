@@ -7,8 +7,8 @@ import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import EntityInterface, { EntityFaction } from "@/packages/game/entity/EntityInterface"
 import { JsonLdIri } from "@/packages/jsonLd/jsonLd"
-import iconUrl from "./icon.svg?url"
-import modelUrl from "./model.svg?url"
+import iconUrl from "./icon.png"
+import modelUrl from "./model.png"
 
 const ZOMBIE_SPAWN_INTERVAL = 1000
 const MAX_SPAWN_RADIUS = 6

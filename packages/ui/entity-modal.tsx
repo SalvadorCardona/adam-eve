@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Progress } from "@/app/components/ui/progress"
 import { Activity, Box, Leaf, Package, Pause, Play, Zap } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/app/components/ui/sheet"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
@@ -12,6 +17,7 @@ import { containerPubSub } from "@/packages/jsonLd/jsonLd"
 import { Inventory } from "@/packages/ui/Inventory"
 import { Button } from "@/app/components/ui/button"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
+import { updateGame } from "@/packages/game/game/updateGame"
 import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
 import { removeWorkerFromEntity } from "@/packages/game/entity/useCase/entityWorker"
 import { MutationRecipes } from "@/app/components/MutationRecipes"
@@ -47,7 +53,15 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
     return sub.unsubscribe
   }, [entity?.["@id"]])
 
-  if (!entity) return null
+  const handleOpenChange = (open: boolean) => {
+    if (open) return
+    game.userControl.entitySelected = undefined
+    updateGame(game, game.userControl)
+  }
+
+  if (!entity) {
+    return <Sheet open={false} onOpenChange={handleOpenChange} />
+  }
 
   const metaData = getResource<EntityResourceInterface>(entity)
   const inventoryItems = entity.inventory
@@ -69,21 +83,22 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
   }
 
   return (
-    <Card
-      key={"modale" + tick}
-      className="sm:max-w-[425px] bg-amber-50 text-amber-900"
-    >
-      <CardContent>
-        <CardHeader className={"flex flex-row items-center gap-4"}>
-          <div className="relative w-16 h-16 rounded-full overflow-hidden bg-amber-200">
+    <Sheet open onOpenChange={handleOpenChange}>
+      <SheetContent
+        key={"modale" + tick}
+        side="right"
+        className="bg-amber-50 text-amber-900 border-amber-200 overflow-y-auto sm:max-w-md"
+      >
+        <SheetHeader className="flex flex-row items-center gap-4 space-y-0">
+          <div className="relative w-16 h-16 rounded-full overflow-hidden bg-amber-200 shrink-0">
             {metaData.asset?.icon && (
               <img src={metaData.asset?.icon} alt="Icône de l'entité" />
             )}
           </div>
-          <CardTitle className="text-2xl font-bold text-amber-800">
+          <SheetTitle className="text-2xl font-bold text-amber-800">
             {metaData.label ?? metaData["@type"]}
-          </CardTitle>
-        </CardHeader>
+          </SheetTitle>
+        </SheetHeader>
 
         <div className="grid gap-4 py-4">
           {metaData.propriety?.health && (
@@ -215,7 +230,7 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             onChange={() => setTick((game["@version"] ?? 0) + 1)}
           />
         </div>
-      </CardContent>
-    </Card>
+      </SheetContent>
+    </Sheet>
   )
 }

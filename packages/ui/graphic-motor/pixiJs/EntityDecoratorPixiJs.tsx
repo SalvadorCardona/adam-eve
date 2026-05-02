@@ -83,8 +83,9 @@ export const EntityDecoratorPixiJs = ({
   // }, [entity.rotation])
 
   const zIndex = useMemo(() => {
-    return entity.position.y * 2 + entity.position.z * 0.001
-  }, [entity.position.y, entity.position.z])
+    const sizeZ = entity.size?.z ?? 0
+    return entity.position.z + sizeZ + entity.position.y * 0.01
+  }, [entity.position.y, entity.position.z, entity.size?.z])
 
   const isSelectable = entity.entityType !== EntityType.ground
 

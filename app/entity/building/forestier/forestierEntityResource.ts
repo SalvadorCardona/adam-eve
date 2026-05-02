@@ -7,8 +7,8 @@ import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import { stayInBuildingActionResource } from "@/app/action/stayInBuildingActionResource"
 import { getEntityProductionSpeed } from "@/packages/game/entity/useCase/query/getEntityProductionSpeed"
-import iconSrc from "./icon.svg?url"
-import modelSrc from "./model.svg?url"
+import iconSrc from "./icon.png"
+import modelSrc from "./model.png"
 
 const TREE_GROWTH_RADIUS = 100
 const TREE_PLACEMENT_ATTEMPTS = 20

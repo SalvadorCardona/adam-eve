@@ -1,6 +1,6 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import roadIcon from "./icon.svg?url"
-import roadTexture from "./road.svg?url"
+import roadIcon from "./icon.png"
+import roadTexture from "./road.png"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 
 export const roadGroundEntityMetadata = createEntityResource({

@@ -1,8 +1,8 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import { findTileUnderEntity } from "@/packages/game/game/useCase/query/groundQuery"
-import grassIcon from "./icon.svg?url"
-import grassTexture from "./grass.svg?url"
+import grassIcon from "./icon.png"
+import grassTexture from "./grass.png"
 import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import React from "react"
 

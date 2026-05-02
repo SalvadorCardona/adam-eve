@@ -1,6 +1,6 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
-import imageIcon from "./icon.svg?url"
-import model from "./model.svg?url"
+import imageIcon from "./icon.png"
+import model from "./model.png"
 import { createInventory } from "@/packages/game/inventory/useCase/createInventory"
 import { woodResourceMetadata } from "@/app/entity/resource/tree/woodResource"
 import towerAttackActionResource from "@/app/entity/building/tower/towerActionAttackResource"

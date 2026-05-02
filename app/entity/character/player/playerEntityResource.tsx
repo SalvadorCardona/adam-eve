@@ -16,7 +16,7 @@ import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQue
 import { playerBuildUserActionMetadata } from "@/app/actionUser/PlayerBuildUserAction/playerBuildUserActionMetadata"
 import { hasActionUser } from "@/packages/game/actionUser/hasActionUser"
 import { PlayerComponent } from "./PlayerComponent"
-import healthyIcon from "./player_healthy.svg?url"
+import healthyIcon from "./icon.png"
 import { expandWorldAroundPlayer } from "@/app/game/proceduralSpawn"
 
 const PLAYER_SPEED = 0.03

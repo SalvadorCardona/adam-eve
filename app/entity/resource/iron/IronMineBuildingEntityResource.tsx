@@ -1,7 +1,7 @@
 import { createEntityResource } from "@/packages/game/entity/createEntityResource"
 import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
-import iconSrc from "@/app/entity/resource/iron/icon.svg?url"
-import model from "@/app/entity/resource/iron/model.svg?url"
+import iconSrc from "@/app/entity/resource/iron/icon.png"
+import model from "@/app/entity/resource/iron/model.png"
 import { getResourceActionResource } from "@/app/action/getResourceActionResource"
 
 export const ironMineBuildMetaDataEntity = createEntityResource({
