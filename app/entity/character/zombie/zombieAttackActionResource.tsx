@@ -1,5 +1,8 @@
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
-import { entityQueryFindOne } from "@/packages/game/game/useCase/query/entityQuery"
+import {
+  entityQuery,
+  entityQueryFindOne,
+} from "@/packages/game/game/useCase/query/entityQuery"
 import EntityInterface, {
   EntityFaction,
 } from "@/packages/game/entity/EntityInterface"
@@ -12,6 +15,7 @@ import { getResource } from "@/packages/resource/ResourceInterface"
 import { entityGoToEntityWithGround } from "@/packages/game/entity/useCase/move/entityGoToEntity"
 import { createActionResource } from "@/packages/game/action/createActionResource"
 import { updateNextTick } from "@/packages/game/action/updateNextTick"
+import { spawnFloatingText } from "@/app/entity/effect/floatingText/FloatingTextEntityResource"
 
 const SEARCH_RADIUS = 500
 const IDLE_TICKS = 60
@@ -30,11 +34,13 @@ export const zombieAttackActionResource = createActionResource({
 
     if (!target || target.life <= 0) {
       entity.entityAttackTargetIri = undefined
-      target = entityQueryFindOne(game, {
+      const candidates = entityQuery(game, {
         faction: EntityFaction.self,
         circleSearch: { center: entity.position, radius: SEARCH_RADIUS },
         order: { distance: "DESC" },
-      })
+      }).filter((candidate) => candidate.life > 0)
+
+      target = candidates[0]
 
       if (!target) {
         entity.state = EntityState.wait
@@ -47,7 +53,9 @@ export const zombieAttackActionResource = createActionResource({
 
     if (entityCanBeAttackEntity(entity, target)) {
       entity.state = EntityState.attack
-      entityAttackEntity(game, entity, target)
+      if (entityAttackEntity(game, entity, target)) {
+        spawnFloatingText(game, target.position, undefined, `-${attack.damage}`)
+      }
       updateNextTick(game, action, attack.attackSpeed)
       return
     }

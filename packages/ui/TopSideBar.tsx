@@ -16,7 +16,7 @@ export const TopSideBar = () => {
 
   useGameFrame((game) => {
     if (game.time % 30 !== 0) return
-    setTick(game["@version"] ?? 1)
+    setTick(game.time)
   })
 
   const navigate = useNavigate()

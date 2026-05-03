@@ -4,6 +4,7 @@ import { distanceBetweenVector3 } from "@/packages/math/distanceBetweenVector3"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import GameInterface from "@/packages/game/game/GameInterface"
+import { applyDamageToEntity } from "@/packages/game/entity/useCase/applyDamageToEntity"
 
 export function entityAttackEntity(
   game: GameInterface,
@@ -21,7 +22,8 @@ export function entityAttackEntity(
   const canBeAttack = entityCanBeAttackEntity(entitySource, entityTarget)
   if (canBeAttack) {
     entitySource.state = EntityState.attack
-    entityTarget.life -= attack.damage
+    applyDamageToEntity(game, entityTarget, attack.damage)
+
     if (entityTargetMeta.onHit) {
       entityTargetMeta.onHit({ game, entity: entityTarget })
     }

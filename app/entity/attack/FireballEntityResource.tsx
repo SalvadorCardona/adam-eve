@@ -11,6 +11,8 @@ import { removeEntityToGame } from "@/packages/game/entity/useCase/removeEntityT
 import { vector3MoveToVector } from "@/packages/math/vector3MoveToVector"
 import { getEntitySpeed } from "@/packages/game/entity/useCase/query/getEntitySpeed"
 import { updateEntityInGame } from "@/packages/game/game/useCase/command/updateEntityInGame"
+import { applyDamageToEntity } from "@/packages/game/entity/useCase/applyDamageToEntity"
+import { spawnFloatingText } from "@/app/entity/effect/floatingText/FloatingTextEntityResource"
 
 export const fireballEntityResource = createEntityResource({
   ["@id"]: "resource/fireball",
@@ -53,7 +55,8 @@ export const fireballEntityResource = createEntityResource({
     if (entityHasCollision(entity, target)) {
       const meta = getResource<EntityResourceInterface>(entity)
       const damage = meta?.propriety.attack?.damage ?? 0
-      target.life -= damage
+      applyDamageToEntity(game, target, damage)
+      spawnFloatingText(game, target.position, undefined, `-${damage}`)
       entity.life = 0
       removeEntityToGame(game, entity)
       return

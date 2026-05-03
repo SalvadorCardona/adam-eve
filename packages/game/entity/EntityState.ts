@@ -8,7 +8,7 @@ export enum EntityState {
   find_enemy = "find_enemy",
   go_to_enemy = "go_to_enemy",
   cut_the_tree = "cut_the_tree",
-  go_to_tree = "go_to_tree",
+  go_to_resource = "go_to_resource",
   go_to_put_resource = "go_to_put_resource",
   build = "build",
 }

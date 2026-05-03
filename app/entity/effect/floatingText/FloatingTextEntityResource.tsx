@@ -49,7 +49,7 @@ export const floatingTextEntityResource =
 export function spawnFloatingText(
   game: GameInterface,
   position: Vector3Interface,
-  iconAsset: string,
+  iconAsset: string | undefined,
   text: string = "+1",
 ): void {
   const entity = floatingTextEntityResource.create({

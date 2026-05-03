@@ -1,5 +1,5 @@
 import React from "react"
-import { ContainerOptions, FederatedPointerEvent } from "pixi.js"
+import { ContainerOptions, FederatedPointerEvent, Rectangle } from "pixi.js"
 import { Vector2Interface } from "@/packages/math/vector"
 
 interface ContainerPropsInterface {
@@ -13,6 +13,7 @@ interface ContainerPropsInterface {
   cullableChildren?: boolean
   eventMode?: ContainerOptions["eventMode"]
   cursor?: ContainerOptions["cursor"]
+  hitArea?: Rectangle
   onPointerTap?: (e: FederatedPointerEvent) => void
   onPointerOver?: (e: FederatedPointerEvent) => void
   onPointerOut?: (e: FederatedPointerEvent) => void
@@ -29,6 +30,7 @@ export const Container = ({
   cullableChildren,
   eventMode,
   cursor,
+  hitArea,
   onPointerTap,
   onPointerOver,
   onPointerOut,
@@ -50,10 +52,9 @@ export const Container = ({
       sortableChildren={sortableChildren}
       cullable={cullable}
       cullableChildren={cullableChildren}
-      width={options?.width as number | undefined}
-      height={options?.height as number | undefined}
       eventMode={eventMode}
       cursor={cursor}
+      hitArea={hitArea}
       onPointerTap={onPointerTap}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}

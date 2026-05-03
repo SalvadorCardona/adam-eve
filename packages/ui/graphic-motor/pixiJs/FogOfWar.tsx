@@ -9,7 +9,7 @@ export const FogOfWar = () => {
 
   useGameFrame((game) => {
     if (game.time % 30 !== 0) return
-    setTick(game["@version"] ?? 1)
+    setTick(game.time)
   })
 
   const draw = (g: import("pixi.js").Graphics) => {

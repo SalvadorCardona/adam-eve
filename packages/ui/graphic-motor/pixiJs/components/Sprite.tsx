@@ -25,7 +25,7 @@ interface SpritePropsInterface {
   alpha?: number
 }
 
-const useTexture = (src?: string): Texture | undefined => {
+export const useTexture = (src?: string): Texture | undefined => {
   const [texture, setTexture] = useState<Texture | undefined>(() =>
     src && Assets.cache.has(src)
       ? (Assets.cache.get(src) as Texture | undefined)

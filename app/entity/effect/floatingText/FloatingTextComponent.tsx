@@ -26,12 +26,12 @@ export const FloatingTextComponent = ({ entity, size }: FloatingTextProps) => {
       )}
       <pixiText
         text={text}
-        x={iconSize}
+        x={entity.iconAsset ? iconSize : 0}
         y={0}
         style={{
           fontSize: Math.round(iconSize * 0.7),
           fontWeight: "bold",
-          fill: 0xffffff,
+          fill: entity.iconAsset ? 0xffffff : 0xff5555,
           stroke: { color: 0x000000, width: 3 },
         }}
       />

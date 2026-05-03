@@ -73,7 +73,19 @@ export const SelectOnMap = () => {
     }
 
     app.stage.eventMode = "static"
-    app.stage.hitArea = new Rectangle(0, 0, app.screen.width, app.screen.height)
+
+    const updateHitArea = () => {
+      if (!app.stage || app.stage.destroyed || !app.screen) return
+      app.stage.hitArea = new Rectangle(
+        -app.stage.position.x,
+        -app.stage.position.y,
+        app.screen.width,
+        app.screen.height,
+      )
+    }
+
+    updateHitArea()
+    app.ticker.add(updateHitArea)
 
     app.stage.on("pointerdown", handlePointerDown)
     app.stage.on("pointermove", handlePointerMove)
@@ -83,6 +95,7 @@ export const SelectOnMap = () => {
 
     return () => {
       if (!app.stage || app.stage.destroyed) return
+      app.ticker.remove(updateHitArea)
       app.stage.off("pointerdown", handlePointerDown)
       app.stage.off("pointermove", handlePointerMove)
       app.stage.off("pointerup", handlePointerUp)

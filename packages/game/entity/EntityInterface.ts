@@ -28,6 +28,7 @@ export default interface EntityInterface extends BaseJsonLdItemInterface {
   entityAttackTargetIri?: JsonLdIri
   actions?: ActionBagInterface
   createdAt: number
+  lastHitAt?: number
   age?: number
   workers?: EntityInterface["@id"][]
   isPaused?: boolean

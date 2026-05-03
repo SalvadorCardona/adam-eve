@@ -72,6 +72,37 @@ describe("zombieAttackActionResource", () => {
     expect(zombie.state).toBe(EntityState.wait)
   })
 
+  it("switches to a live target instead of attacking a corpse with life <= 0", () => {
+    const game = gameFactory()
+    const firstWorker = workerEntityResource.create({
+      game,
+      item: { position: createVector3(0, 0, 0) },
+    })
+    const secondWorker = workerEntityResource.create({
+      game,
+      item: { position: createVector3(0, 0, 1) },
+    })
+    const zombie = zombieEntityResource.create({
+      game,
+      item: { position: createVector3(0, 0, 0) },
+    })
+    addEntityToGame(game, firstWorker)
+    addEntityToGame(game, secondWorker)
+    addEntityToGame(game, zombie)
+
+    // Drive the zombie to kill the first worker without removing it from the
+    // game (mimicking the real game where theDeathActionResource only runs
+    // every 20 ticks, so corpses linger briefly).
+    firstWorker.life = 0
+
+    for (let tick = 0; tick < 200; tick++) {
+      gameProcessor(game)
+      if (zombie.entityAttackTargetIri === secondWorker["@id"]) break
+    }
+
+    expect(zombie.entityAttackTargetIri).toBe(secondWorker["@id"])
+  })
+
   it("re-acquires a new target after the previous one dies", () => {
     const game = gameFactory()
     const firstWorker = workerEntityResource.create({

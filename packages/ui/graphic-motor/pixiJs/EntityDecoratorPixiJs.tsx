@@ -2,16 +2,22 @@ import {
   EntityResourceInterface,
   EntityType,
 } from "@/packages/game/entity/EntityResourceInterface"
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { Graphics } from "@/packages/ui/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
-import { ContainerChild, FederatedPointerEvent, SpritesheetData } from "pixi.js"
+import {
+  ContainerChild,
+  FederatedPointerEvent,
+  Rectangle,
+  SpritesheetData,
+} from "pixi.js"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import {
   Sprite,
   SpriteAnimated,
   SpriteAnimation,
+  useTexture,
 } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import { Ticker } from "pixi.js"
 import { EntityState } from "@/packages/game/entity/EntityState"
@@ -37,9 +43,20 @@ export const EntityDecoratorPixiJs = ({
     | undefined
   const game = useGameContext().game
   const [isSelected, setIsSelected] = useState<boolean>(false)
+  const [isFlashing, setIsFlashing] = useState<boolean>(false)
+  const lastHitAtRef = useRef<number | undefined>(entity.lastHitAt)
   useGamePubSub(entity["@id"], () => {
     setVersion(entity["@version"])
   })
+
+  useEffect(() => {
+    if (entity.lastHitAt === undefined) return
+    if (entity.lastHitAt === lastHitAtRef.current) return
+    lastHitAtRef.current = entity.lastHitAt
+    setIsFlashing(true)
+    const timeoutId = setTimeout(() => setIsFlashing(false), 150)
+    return () => clearTimeout(timeoutId)
+  }, [entity.lastHitAt])
 
   useGamePubSub(game.userControl["@id"], () => {
     const newIsSelected = game.userControl.entitySelected === entity["@id"]
@@ -87,7 +104,15 @@ export const EntityDecoratorPixiJs = ({
     return entity.position.z + sizeZ + entity.position.y * 0.01
   }, [entity.position.y, entity.position.z, entity.size?.z])
 
-  const isSelectable = entity.entityType !== EntityType.ground
+  const isSelectable =
+    entity.entityType === EntityType.building ||
+    entity.entityType === EntityType.character ||
+    entity.entityType === EntityType.resource
+
+  const hitArea = useMemo(() => {
+    if (!isSelectable) return undefined
+    return new Rectangle(0, 0, size.x, size.y)
+  }, [isSelectable, size.x, size.y])
 
   const handlePointerTap = useCallback(
     (e: FederatedPointerEvent) => {
@@ -112,9 +137,18 @@ export const EntityDecoratorPixiJs = ({
       cullable
       eventMode={isSelectable ? "static" : undefined}
       cursor={isSelectable ? "pointer" : undefined}
+      hitArea={hitArea}
       onPointerTap={isSelectable ? handlePointerTap : undefined}
     >
       <EntityComponent entity={entity} size={size} />
+      {isFlashing && (
+        <Graphics
+          draw={(g) => {
+            g.rect(0, 0, size.x, size.y)
+            g.fill({ color: 0xff0000, alpha: 0.45 })
+          }}
+        />
+      )}
       {color && (
         <Graphics
           draw={(g) => {
@@ -168,11 +202,6 @@ interface Model2DPropsInterface {
 export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   const metaData = getResource<EntityResourceInterface>(entity)
   const asset = metaData?.asset?.model2d ?? metaData?.asset?.icon
-  if (!asset) {
-    console.warn("Component 2D not found with", metaData)
-
-    return
-  }
 
   const animation = useMemo(() => {
     if (entity.state && entity.state in entityAnimation)
@@ -184,10 +213,19 @@ export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
   const spriteSheetData = useMemo(() => {
     return (
       entity.state &&
-      metaData.asset?.animationMapper &&
+      metaData?.asset?.animationMapper &&
       metaData.asset?.animationMapper[entity.state]
     )
   }, [entity.state])
+
+  const texture = useTexture(asset)
+  const aspectRatio =
+    texture && texture.width > 0 ? texture.height / texture.width : 1
+
+  if (!asset) {
+    console.warn("Component 2D not found with", metaData)
+    return
+  }
 
   if (spriteSheetData && typeof spriteSheetData !== "function") {
     return (
@@ -198,14 +236,17 @@ export const Model2DPixiJs = ({ entity, size }: Model2DPropsInterface) => {
     )
   }
 
-  const alpha =
-    entity.state === EntityState.under_construction ? 0.5 : 1
+  const visualWidth = size.x
+  const visualHeight = visualWidth * aspectRatio
+
+  const alpha = entity.state === EntityState.under_construction ? 0.5 : 1
 
   return (
     <Sprite
       image={asset}
       animation={animation}
-      options={{ width: size.x, height: size.y }}
+      options={{ width: visualWidth, height: visualHeight }}
+      position={{ x: 0, y: size.y - visualHeight }}
       alpha={alpha}
     />
   )

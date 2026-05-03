@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Progress } from "@/app/components/ui/progress"
-import { Activity, Box, Leaf, Package, Pause, Play, Zap } from "lucide-react"
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/app/components/ui/sheet"
+import { Activity, Box, Leaf, Package, Pause, Play, X, Zap } from "lucide-react"
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { getResource } from "@/packages/resource/ResourceInterface"
@@ -42,7 +36,7 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
 
   useGameFrame((game) => {
     if (game.time % REFRESH_EVERY_TICKS !== 0) return
-    setTick(game["@version"] ?? 1)
+    setTick(game.time)
   })
 
   useEffect(() => {
@@ -53,15 +47,12 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
     return sub.unsubscribe
   }, [entity?.["@id"]])
 
-  const handleOpenChange = (open: boolean) => {
-    if (open) return
+  const handleClose = () => {
     game.userControl.entitySelected = undefined
     updateGame(game, game.userControl)
   }
 
-  if (!entity) {
-    return <Sheet open={false} onOpenChange={handleOpenChange} />
-  }
+  if (!entity) return null
 
   const metaData = getResource<EntityResourceInterface>(entity)
   const inventoryItems = entity.inventory
@@ -83,22 +74,28 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
   }
 
   return (
-    <Sheet open onOpenChange={handleOpenChange}>
-      <SheetContent
-        key={"modale" + tick}
-        side="right"
-        className="bg-amber-50 text-amber-900 border-amber-200 overflow-y-auto sm:max-w-md"
+    <aside
+      key={"modale" + tick}
+      className="fixed inset-y-0 right-0 z-40 w-full sm:max-w-md bg-amber-50 text-amber-900 border-l border-amber-200 shadow-lg overflow-y-auto p-6"
+    >
+      <button
+        onClick={handleClose}
+        aria-label="Fermer"
+        className="absolute right-4 top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
       >
-        <SheetHeader className="flex flex-row items-center gap-4 space-y-0">
-          <div className="relative w-16 h-16 rounded-full overflow-hidden bg-amber-200 shrink-0">
-            {metaData.asset?.icon && (
-              <img src={metaData.asset?.icon} alt="Icône de l'entité" />
-            )}
-          </div>
-          <SheetTitle className="text-2xl font-bold text-amber-800">
-            {metaData.label ?? metaData["@type"]}
-          </SheetTitle>
-        </SheetHeader>
+        <X className="h-4 w-4" />
+      </button>
+
+      <header className="flex flex-row items-center gap-4">
+        <div className="relative w-16 h-16 rounded-full overflow-hidden bg-amber-200 shrink-0">
+          {metaData.asset?.icon && (
+            <img src={metaData.asset?.icon} alt="Icône de l'entité" />
+          )}
+        </div>
+        <h2 className="text-2xl font-bold text-amber-800">
+          {metaData.label ?? metaData["@type"]}
+        </h2>
+      </header>
 
         <div className="grid gap-4 py-4">
           {metaData.propriety?.health && (
@@ -230,7 +227,6 @@ export const EntityModal: React.FC<EntityModalProps> = () => {
             onChange={() => setTick((game["@version"] ?? 0) + 1)}
           />
         </div>
-      </SheetContent>
-    </Sheet>
+    </aside>
   )
 }

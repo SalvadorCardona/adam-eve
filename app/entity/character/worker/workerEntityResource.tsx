@@ -36,7 +36,7 @@ export const workerEntityResource = createEntityResource({
       [EntityState.wait]: idleAnimation,
       [EntityState.move]: moveAnimation,
       [EntityState.go_to_put_resource]: moveAnimation,
-      [EntityState.go_to_tree]: moveAnimation,
+      [EntityState.go_to_resource]: moveAnimation,
       [EntityState.attack]: attackAnimation,
       [EntityState.cut_the_tree]: attackAnimation,
       [EntityState.build]: attackAnimation,

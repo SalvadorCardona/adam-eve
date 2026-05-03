@@ -62,7 +62,11 @@ export const playerAttackActionResource = createActionResource({
 
     if (!entityCanBeAttackEntity(entity, target)) return
 
-    entityAttackEntity(game, entity, target)
+    const didAttack = entityAttackEntity(game, entity, target)
+
+    if (didAttack && target.entityType !== EntityType.resource) {
+      spawnFloatingText(game, target.position, undefined, `-${attack.damage}`)
+    }
 
     if (target.entityType === EntityType.resource) {
       const mapping = resourceMappingMetaData
