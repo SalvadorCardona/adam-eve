@@ -60,5 +60,6 @@ export interface EntityResourceInterface<
   onDeath?: (payload: { entity: T; game: GameInterface }) => void
   onHit?: (payload: { entity: T; game: GameInterface }) => void
   entityType?: EntityType
+  walkable?: boolean
   mutationRecipes?: JsonLdType[]
 }

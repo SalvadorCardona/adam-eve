@@ -35,8 +35,8 @@ export const towerEntityResource = createEntityResource({
       maxLife: 100,
     },
     size: {
-      x: 2,
-      y: 2,
+      x: 1,
+      y: 1,
       z: 2,
     },
     defaultActions: [towerAttackActionResource["@id"]!],

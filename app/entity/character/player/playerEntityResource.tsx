@@ -8,6 +8,11 @@ import { updateGame } from "@/packages/game/game/updateGame"
 import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
 import { hasCollisionInGame, hasCollisionWithGround } from "@/packages/game/entity/useCase/entityHasCollision"
+import { playerAttackActionResource } from "@/app/entity/character/player/playerAttackActionResource"
+import { addActionToEntity } from "@/packages/game/action/AddActionToEntity"
+import { getByLdTypeIn } from "@/packages/jsonLd/jsonLd"
+import { ActionResourceInterface } from "@/packages/game/action/ActionResourceInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 import { createEntity } from "@/packages/game/entity/createEntity"
 import GameInterface from "@/packages/game/game/GameInterface"
 import { Vector3Interface, createVector3 } from "@/packages/math/vector"
@@ -109,6 +114,7 @@ export const playerEntityResource = createEntityResource({
     health: {
       maxLife: 100,
     },
+    defaultActions: [playerAttackActionResource["@id"]!],
   },
   defaultEntity: () => ({ faction: EntityFaction.self }),
   create: (payload: any): EntityInterface => {
@@ -123,6 +129,14 @@ export const playerEntityResource = createEntityResource({
   },
   component: PlayerComponent,
   onFrame: ({ entity, game }) => {
+    if (
+      !entity.actions ||
+      getByLdTypeIn(entity.actions, playerAttackActionResource["@id"]!).length === 0
+    ) {
+      const meta = getResource<ActionResourceInterface>(playerAttackActionResource)
+      if (meta) addActionToEntity(entity, meta.create({ item: { entity } }))
+    }
+
     expandWorldAroundPlayer(game, entity)
 
     const tryMoveAxis = (axis: "x" | "z", delta: number): boolean => {

@@ -9,6 +9,8 @@ interface ContainerPropsInterface {
   scale?: Vector2Interface
   zIndex?: number
   sortableChildren?: boolean
+  cullable?: boolean
+  cullableChildren?: boolean
   eventMode?: ContainerOptions["eventMode"]
   cursor?: ContainerOptions["cursor"]
   onPointerTap?: (e: FederatedPointerEvent) => void
@@ -23,6 +25,8 @@ export const Container = ({
   scale,
   zIndex,
   sortableChildren,
+  cullable,
+  cullableChildren,
   eventMode,
   cursor,
   onPointerTap,
@@ -44,6 +48,8 @@ export const Container = ({
       scale={scale}
       zIndex={zIndex ?? options?.zIndex}
       sortableChildren={sortableChildren}
+      cullable={cullable}
+      cullableChildren={cullableChildren}
       width={options?.width as number | undefined}
       height={options?.height as number | undefined}
       eventMode={eventMode}

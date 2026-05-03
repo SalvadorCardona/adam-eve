@@ -14,33 +14,50 @@ export function gameProcessor(game: GameInterface) {
 
   actionProcesseur(game.actions, game)
 
-  Object.values(game.entities).forEach((entity) => {
-    if (isGroundEntity(entity)) return
-    const entityMetaData = getResource(entity) as EntityResourceInterface | undefined
+  const entities = game.entities
+  for (const id in entities) {
+    const entity = entities[id]
+    if (isGroundEntity(entity)) continue
 
+    const entityMetaData = getResource(entity) as EntityResourceInterface | undefined
     entityMetaData?.onFrame?.({ entity, game })
-    entity?.actions &&
+
+    if (entity.actions) {
       actionProcesseur(entity.actions, game, entity as BuildingEntityInterface)
-  })
+    }
+  }
 
   return game
 }
 
-function entityVisualHash(entity: EntityInterface): string {
+// Module-level scratch slots: avoids per-tick allocation of a snapshot object.
+let snapPosX = 0
+let snapPosY = 0
+let snapPosZ = 0
+let snapState: string | undefined = undefined
+let snapRotation: number | undefined = undefined
+let snapLife: number | undefined = undefined
+let snapHidden = false
+
+function snapshotEntity(entity: EntityInterface): void {
+  snapPosX = entity.position.x
+  snapPosY = entity.position.y
+  snapPosZ = entity.position.z
+  snapState = entity.state
+  snapRotation = entity.rotation
+  snapLife = entity.life
+  snapHidden = !!entity.hidden
+}
+
+function entityChangedSinceSnapshot(entity: EntityInterface): boolean {
   return (
-    entity.position.x +
-    "|" +
-    entity.position.y +
-    "|" +
-    entity.position.z +
-    "|" +
-    (entity.state ?? "") +
-    "|" +
-    entity.rotation +
-    "|" +
-    entity.life +
-    "|" +
-    (entity.hidden ? 1 : 0)
+    entity.position.x !== snapPosX ||
+    entity.position.y !== snapPosY ||
+    entity.position.z !== snapPosZ ||
+    entity.state !== snapState ||
+    entity.rotation !== snapRotation ||
+    entity.life !== snapLife ||
+    !!entity.hidden !== snapHidden
   )
 }
 
@@ -49,24 +66,23 @@ function actionProcesseur(
   game: GameInterface,
   entity?: BuildingEntityInterface,
 ): void {
-  Object.values(actionBag).forEach((action) => {
-    if (action?.nextTick && action.nextTick > game.time) {
-      return
-    }
+  for (const id in actionBag) {
+    const action = actionBag[id]
+    if (action?.nextTick && action.nextTick > game.time) continue
 
     action.nextTick = undefined
     const actionMeta = getResource<ActionResourceInterface>(action)
 
     if (!entity) {
       actionMeta?.onFrame?.({ entity, action, game })
-      return
+      continue
     }
 
-    const before = entityVisualHash(entity)
+    snapshotEntity(entity)
     actionMeta?.onFrame?.({ entity, action, game })
 
-    if (entityVisualHash(entity) !== before) {
+    if (entityChangedSinceSnapshot(entity)) {
       updateEntityInGame(game, entity)
     }
-  })
+  }
 }

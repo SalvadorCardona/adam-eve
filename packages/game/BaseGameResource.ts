@@ -14,6 +14,7 @@ export interface AssetInterface {
   icon?: string
   model2d?: string
   asset2d?: string[]
+  decorations?: string[]
   animationMapper?: Partial<Record<EntityState, unknown>>
 }
 

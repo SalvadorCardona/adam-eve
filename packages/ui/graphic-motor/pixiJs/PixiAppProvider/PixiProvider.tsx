@@ -3,12 +3,17 @@ import {
   ApplicationOptions,
   Assets,
   Container as PixiContainer,
+  CullerPlugin,
   Graphics as PixiGraphics,
   Sprite as PixiSprite,
+  Text as PixiText,
   TilingSprite as PixiTilingSprite,
   AnimatedSprite as PixiAnimatedSprite,
+  extensions,
 } from "pixi.js"
 import { Application, extend, useApplication } from "@pixi/react"
+
+extensions.add(CullerPlugin)
 import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 import { assetList } from "@/app/assetList"
 import { metaDataRegistered } from "@/packages/resource/ResourceInterface"
@@ -18,6 +23,7 @@ extend({
   Container: PixiContainer,
   Graphics: PixiGraphics,
   Sprite: PixiSprite,
+  Text: PixiText,
   TilingSprite: PixiTilingSprite,
   AnimatedSprite: PixiAnimatedSprite,
 })
@@ -36,6 +42,7 @@ const loadAssetsOnce = (): Promise<void> => {
       if (e.asset?.icon) assets.add(e.asset.icon)
       if (e.asset?.model2d) assets.add(e.asset.model2d)
       e.asset?.asset2d?.forEach((a) => assets.add(a))
+      e.asset?.decorations?.forEach((a) => assets.add(a))
     }
 
     await Promise.all([...assets].map((asset) => Assets.load(asset)))

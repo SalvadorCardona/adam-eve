@@ -3,6 +3,11 @@ import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import { findTileUnderEntity } from "@/packages/game/game/useCase/query/groundQuery"
 import grassIcon from "./icon.png"
 import grassTexture from "./grass.png"
+import flowerYellow from "./decorations/flower-yellow.svg?url"
+import flowerPink from "./decorations/flower-pink.svg?url"
+import flowerBlue from "./decorations/flower-blue.svg?url"
+import grassTuft from "./decorations/grass-tuft.svg?url"
+import pebble from "./decorations/pebble.svg?url"
 import { Sprite } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
 import React from "react"
 
@@ -22,6 +27,7 @@ export const grassGroundEntityMetadata = createEntityResource({
     icon: grassIcon,
     model2d: grassTexture,
     asset2d: [grassTexture],
+    decorations: [flowerYellow, flowerPink, flowerBlue, grassTuft, pebble],
   },
   propriety: {
     size: {

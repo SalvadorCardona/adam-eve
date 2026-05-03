@@ -109,6 +109,7 @@ export const EntityDecoratorPixiJs = ({
       position={position}
       scale={scale}
       zIndex={zIndex}
+      cullable
       eventMode={isSelectable ? "static" : undefined}
       cursor={isSelectable ? "pointer" : undefined}
       onPointerTap={isSelectable ? handlePointerTap : undefined}

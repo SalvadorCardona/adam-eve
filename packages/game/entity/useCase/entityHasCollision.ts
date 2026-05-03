@@ -7,7 +7,11 @@ import { boundingCollision } from "@/packages/math/boundingCollision"
 import { circleCandidates } from "@/packages/game/game/useCase/query/spatialIndex"
 import { findTileUnderEntity } from "@/packages/game/game/useCase/query/groundQuery"
 import { entityToBoundingBox } from "@/packages/game/entity/transformer/entityToBoundingBox"
-import { EntityType } from "@/packages/game/entity/EntityResourceInterface"
+import {
+  EntityResourceInterface,
+  EntityType,
+} from "@/packages/game/entity/EntityResourceInterface"
+import { getResource } from "@/packages/resource/ResourceInterface"
 
 const COLLISION_SEARCH_MARGIN = 5
 
@@ -57,5 +61,11 @@ export function hasCollisionWithGround(
   game: GameInterface,
   entity: EntityInterface,
 ): boolean {
-  return findTileUnderEntity(game, entity) !== undefined
+  const tile = findTileUnderEntity(game, entity)
+  if (tile === undefined) return false
+  if (isCharacterEntity(entity)) {
+    const tileResource = getResource<EntityResourceInterface>(tile)
+    if (tileResource?.walkable === false) return false
+  }
+  return true
 }

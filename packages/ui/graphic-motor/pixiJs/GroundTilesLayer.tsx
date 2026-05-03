@@ -10,6 +10,15 @@ import { Matrix2DInterface } from "@/packages/math/matrix"
 
 const CHUNK_SIZE = 16
 
+const DECORATION_PROBABILITY = 0.18
+
+function tileHash(x: number, y: number, salt: number): number {
+  let h = (x | 0) * 374761393 + (y | 0) * 668265263 + salt * 2147483647
+  h = (h ^ (h >>> 13)) >>> 0
+  h = Math.imul(h, 1274126177) >>> 0
+  return (h ^ (h >>> 16)) >>> 0
+}
+
 interface ViewportRect {
   minX: number
   minY: number
@@ -140,7 +149,18 @@ const GroundChunk = React.memo(
     originY,
   }: GroundChunkProps) {
     const tiles = useMemo(() => {
-      const out: Array<{ key: string; x: number; y: number; image: string }> = []
+      const out: Array<{
+        key: string
+        x: number
+        y: number
+        image: string
+        decoration?: {
+          image: string
+          size: number
+          offsetX: number
+          offsetY: number
+        }
+      }> = []
       const startX = cx * CHUNK_SIZE
       const startY = cy * CHUNK_SIZE
       const endY = Math.min(startY + CHUNK_SIZE, matrix.length)
@@ -156,11 +176,34 @@ const GroundChunk = React.memo(
           if (!image) continue
           const worldX = x - originX
           const worldY = y - originY
+
+          let decoration:
+            | { image: string; size: number; offsetX: number; offsetY: number }
+            | undefined
+          const decorations = resource?.asset?.decorations
+          if (decorations && decorations.length > 0) {
+            const roll = tileHash(x, y, 0) / 0xffffffff
+            if (roll < DECORATION_PROBABILITY) {
+              const idx = tileHash(x, y, 1) % decorations.length
+              const size = zoom * 0.45
+              const slack = zoom - size
+              const offsetX = (tileHash(x, y, 2) / 0xffffffff) * slack
+              const offsetY = (tileHash(x, y, 3) / 0xffffffff) * slack
+              decoration = {
+                image: decorations[idx],
+                size,
+                offsetX,
+                offsetY,
+              }
+            }
+          }
+
           out.push({
             key: `${x},${y}`,
             x: worldX * zoom,
             y: worldY * zoom,
             image,
+            decoration,
           })
         }
       }
@@ -177,6 +220,16 @@ const GroundChunk = React.memo(
             options={{ width: zoom, height: zoom }}
           >
             <Sprite image={tile.image} options={{ width: zoom, height: zoom }} />
+            {tile.decoration && (
+              <Sprite
+                image={tile.decoration.image}
+                position={{ x: tile.decoration.offsetX, y: tile.decoration.offsetY }}
+                options={{
+                  width: tile.decoration.size,
+                  height: tile.decoration.size,
+                }}
+              />
+            )}
           </Container>
         ))}
       </>

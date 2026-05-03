@@ -26,10 +26,13 @@ import { fireballEntityResource } from "@/app/entity/attack/FireballEntityResour
 import { BridgeEntityResource } from "@/app/entity/ground/bridge/BridgeEntityResource"
 import { zombieAttackActionResource } from "@/app/entity/character/zombie/zombieAttackActionResource"
 import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
+import { waterGroundEntityMetadata } from "@/app/entity/ground/water/WaterGroundEntityMetadata"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { resourceMappingMetaData } from "@/app/resourceMappingMetadata"
 import { goldMineBuildMetaDataEntity } from "@/app/entity/resource/gold/GoldMineBuildingEntityResource"
 import { bloodEntityResource } from "@/app/entity/effect/blood/BloodEntityResource"
+import { slashEntityResource } from "@/app/entity/effect/slash/SlashEntityResource"
+import { floatingTextEntityResource } from "@/app/entity/effect/floatingText/FloatingTextEntityResource"
 import { knowledgeResourceMetadata } from "@/app/entity/resource/knowledge/knowledgeResource"
 import { researchCenterEntityResource } from "@/app/entity/building/researchCenter/researchCenterEntityResource"
 import { forestierEntityResource } from "@/app/entity/building/forestier/forestierEntityResource"
@@ -65,6 +68,7 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   waterResourceMetadata,
   roadGroundEntityMetadata,
   grassGroundEntityMetadata,
+  waterGroundEntityMetadata,
   removeBuildingUserActionMetadata,
   wheatResourceMetadata,
   theDeathActionResource,
@@ -78,6 +82,8 @@ export const resourceList: BaseJsonLdItemInterface[] = [
   BridgeEntityResource,
   treeDeathEntityMeta,
   bloodEntityResource,
+  slashEntityResource,
+  floatingTextEntityResource,
   goldMineBuildMetaDataEntity,
   goldResourceEntityResource,
   resourceMappingMetaData,

@@ -14,6 +14,7 @@ import { ResourceMappingMetadataInterface } from "@/app/resourceMappingMetadata"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import { freeSpaceInInventory } from "@/packages/game/inventory/useCase/freeSpaceInInventory"
+import { spawnFloatingText } from "@/app/entity/effect/floatingText/FloatingTextEntityResource"
 
 export const getResourceActionResource = createActionResource({
   "@id": "getResourceAction",
@@ -59,7 +60,16 @@ export const getResourceActionResource = createActionResource({
     }
 
     if (entity.state === EntityState.cut_the_tree) {
-      addToInventory(entity.inventory, resourceMapped.resource, 1)
+      const added = addToInventory(entity.inventory, resourceMapped.resource, 1)
+
+      if (added > 0 && resourceMapped.resource.asset?.icon) {
+        spawnFloatingText(
+          game,
+          entity.position,
+          resourceMapped.resource.asset.icon,
+          `+${added}`,
+        )
+      }
 
       if (!freeSpaceInInventory(entity.inventory)) {
         entity.state = EntityState.go_to_put_resource

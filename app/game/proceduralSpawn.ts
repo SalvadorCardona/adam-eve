@@ -4,10 +4,12 @@ import { addEntityToGame } from "@/packages/game/entity/useCase/addEntityToGame"
 import { createVector3 } from "@/packages/math/vector"
 import { hasTileAtCell } from "@/packages/game/game/useCase/query/groundQuery"
 import { grassGroundEntityMetadata } from "@/app/entity/ground/grass/GrassGroundEntityMetadata"
+import { waterGroundEntityMetadata } from "@/app/entity/ground/water/WaterGroundEntityMetadata"
 import { treeEntityMetaData } from "@/app/entity/resource/tree/TreeEntity"
 import { goldResourceEntityResource } from "@/app/entity/resource/gold/goldResourceEntityResource"
 import { zombieHouseEntityResource } from "@/app/entity/building/zombieHouse/zombieHouseEntityResource"
 import { EntityState } from "@/packages/game/entity/EntityState"
+import { EntityResourceInterface } from "@/packages/game/entity/EntityResourceInterface"
 
 interface ClusterDef {
   entityCount: [number, number]
@@ -20,6 +22,7 @@ export const PROCEDURAL_SPAWN_PROBABILITY = {
   forest: 0.025,
   gold: 0.008,
   zombieCamp: 0.003,
+  lake: 0.006,
   groundPatch: 0.06,
 } as const
 
@@ -29,6 +32,7 @@ export const PROCEDURAL_CLUSTER: Record<BiomeKey, ClusterDef> = {
   forest: { entityCount: [4, 9], spawnRadius: 3, groundRadius: 3, groundDensity: 0.85 },
   gold: { entityCount: [2, 5], spawnRadius: 2, groundRadius: 2, groundDensity: 0.85 },
   zombieCamp: { entityCount: [1, 2], spawnRadius: 3, groundRadius: 4, groundDensity: 0.85 },
+  lake: { entityCount: [0, 0], spawnRadius: 0, groundRadius: 3, groundDensity: 0.95 },
   groundPatch: { entityCount: [0, 0], spawnRadius: 0, groundRadius: 3, groundDensity: 0.7 },
 }
 
@@ -36,14 +40,19 @@ function hasGroundAt(game: GameInterface, x: number, z: number): boolean {
   return hasTileAtCell(game, { x, y: z })
 }
 
-function spawnGroundAt(game: GameInterface, x: number, z: number): void {
+function spawnGroundAt(
+  game: GameInterface,
+  x: number,
+  z: number,
+  resource: EntityResourceInterface = grassGroundEntityMetadata,
+): void {
   if (hasGroundAt(game, x, z)) return
-  const grass = grassGroundEntityMetadata.create({
+  const tile = resource.create({
     game,
     item: { position: createVector3(x, 0, z) },
   })
-  if (!grassGroundEntityMetadata.canBeBuild?.({ entity: grass, game })) return
-  addEntityToGame(game, grass)
+  if (!resource.canBeBuild?.({ entity: tile, game })) return
+  addEntityToGame(game, tile)
 }
 
 function trySpawnEntity(
@@ -72,13 +81,14 @@ function spawnGroundBlob(
   cz: number,
   radius: number,
   density: number,
+  resource: EntityResourceInterface = grassGroundEntityMetadata,
 ): void {
   const r2 = radius * radius
   for (let dz = -radius; dz <= radius; dz++) {
     for (let dx = -radius; dx <= radius; dx++) {
       if (dx * dx + dz * dz > r2) continue
       if (!(dx === 0 && dz === 0) && Math.random() > density) continue
-      spawnGroundAt(game, cx + dx, cz + dz)
+      spawnGroundAt(game, cx + dx, cz + dz, resource)
     }
   }
 }
@@ -133,6 +143,19 @@ export function proceduralSpawnOnCell(
   acc += PROCEDURAL_SPAWN_PROBABILITY.forest
   if (roll < acc) {
     spawnCluster(game, treeEntityMetaData, x, z, PROCEDURAL_CLUSTER.forest)
+    return
+  }
+  acc += PROCEDURAL_SPAWN_PROBABILITY.lake
+  if (roll < acc) {
+    const lakeRadius = randInt(2, PROCEDURAL_CLUSTER.lake.groundRadius)
+    spawnGroundBlob(
+      game,
+      x,
+      z,
+      lakeRadius,
+      PROCEDURAL_CLUSTER.lake.groundDensity,
+      waterGroundEntityMetadata,
+    )
     return
   }
   acc += PROCEDURAL_SPAWN_PROBABILITY.groundPatch

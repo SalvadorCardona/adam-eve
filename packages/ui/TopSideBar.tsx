@@ -8,6 +8,7 @@ import { Button } from "@/app/components/ui/button"
 import { BadgePlus } from "lucide-react"
 import { useNavigate } from "@tanstack/react-router"
 import TimeControls from "@/packages/ui/TimeControl"
+import FpsCounter from "@/packages/ui/FpsCounter"
 
 export const TopSideBar = () => {
   const gameContext = useGameContext()
@@ -37,6 +38,7 @@ export const TopSideBar = () => {
         <Inhabitants />
       </div>
       <div className={"flex gap-2 items-center"}>
+        <FpsCounter />
         <TimeControls />
         <Button
           className="bg-amber-400 hover:bg-amber-500 text-amber-900"

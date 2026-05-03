@@ -3,7 +3,6 @@ import GameInterface, { GameOption } from "@/packages/game/game/GameInterface"
 import { GameContext } from "./GameContext"
 import { gameProcessor } from "@/packages/game/game/gameProcessor"
 import { useGamePubSub } from "@/packages/ui/hook/useGameFrame"
-import { updateItem } from "@/packages/jsonLd/jsonLd"
 import { createPubSub } from "coooking-pubsub"
 
 interface InputGameProviderPropsInterface {
@@ -23,8 +22,9 @@ export const GameProvider = ({
     setVersion(gameOption["@version"] ?? 0)
   })
 
+  // Tick broadcast only — skip updateItem(nextGame) to avoid containerPubSub
+  // fan-out on game @id/@type/"all" for every frame.
   const updateGame = (nextGame: GameInterface) => {
-    updateItem(nextGame)
     pubSub.publish(nextGame)
   }
 
