@@ -1,25 +1,16 @@
-import {
-  EntityResourceInterface,
-  EntityType,
-} from "@/packages/game/entity/EntityResourceInterface"
+import { EntityResourceInterface, EntityType } from "@/packages/game/entity/EntityResourceInterface"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import useGameContext from "@/packages/ui/provider/useGameContext"
 import { Graphics } from "@/packages/ui/graphic-motor/pixiJs/components/Graphics"
 import { Container } from "@/packages/ui/graphic-motor/pixiJs/components/Container"
-import {
-  ContainerChild,
-  FederatedPointerEvent,
-  Rectangle,
-  SpritesheetData,
-} from "pixi.js"
+import { ContainerChild, FederatedPointerEvent, Rectangle, SpritesheetData, Ticker } from "pixi.js"
 import EntityInterface from "@/packages/game/entity/EntityInterface"
 import {
   Sprite,
   SpriteAnimated,
   SpriteAnimation,
-  useTexture,
+  useTexture
 } from "@/packages/ui/graphic-motor/pixiJs/components/Sprite"
-import { Ticker } from "pixi.js"
 import { EntityState } from "@/packages/game/entity/EntityState"
 import { getResource } from "@/packages/resource/ResourceInterface"
 import { Vector2Interface, vector3ToVector2 } from "@/packages/math/vector"
@@ -38,9 +29,7 @@ export const EntityDecoratorPixiJs = ({
   color,
 }: EntityDecoratorResolverPropsInterface) => {
   const [, setVersion] = useState(entity["@version"])
-  const entityMetaData = getResource(entity) as
-    | EntityResourceInterface
-    | undefined
+  const entityMetaData = getResource(entity) as EntityResourceInterface | undefined
   const game = useGameContext().game
   const [isSelected, setIsSelected] = useState<boolean>(false)
   const [isFlashing, setIsFlashing] = useState<boolean>(false)
@@ -91,13 +80,6 @@ export const EntityDecoratorPixiJs = ({
       y: 1,
     }
   }, [entity.rotation])
-
-  //
-  // const rotation = useMemo(() => {
-  //   if (!entity.rotation) return undefined
-  //
-  //   return entity.rotation - Math.PI / 2
-  // }, [entity.rotation])
 
   const zIndex = useMemo(() => {
     const sizeZ = entity.size?.z ?? 0
@@ -175,21 +157,6 @@ export const EntityDecoratorPixiJs = ({
           }}
         />
       )}
-
-      {/*{isCharacterEntity(entity) && (*/}
-      {/*  <>*/}
-      {/*    <Graphics*/}
-      {/*      draw={(g) => {*/}
-      {/*        g.rect(0, 0, size.x, size.y)*/}
-      {/*        g.fill({ color: 0xffff00, alpha: 0.5 })*/}
-      {/*      }}*/}
-      {/*    />*/}
-      {/*    <Sprite*/}
-      {/*      options={{ width, height, zIndex: entity.position.y - 1 }}*/}
-      {/*      image={assetList.arrowDirectionnal}*/}
-      {/*    ></Sprite>*/}
-      {/*  </>*/}
-      {/*)}*/}
     </Container>
   )
 }
@@ -264,17 +231,14 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
   [EntityState.find_enemy]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1
     const speed = 0.01
-    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
     const scaleFactor = Math.cos(e.lastTime * speed) * deform
 
-    // item.position.x += scaleFactor
     item.position.y += scaleFactor
     item.rotation += scaleFactor / 4
   },
   [EntityState.move]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1
     const speed = 0.01
-    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
     const scaleFactor = Math.cos(e.lastTime * speed) * deform
 
     // item.position.x += scaleFactor
@@ -284,10 +248,8 @@ const entityAnimation: Partial<Record<EntityState, SpriteAnimation>> = {
   [EntityState.cut_the_tree]: (e: Ticker, item: ContainerChild) => {
     const deform = 0.1
     const speed = 0.01
-    // const scaleFactor = (1 - deform * Math.abs(Math.cos(e.lastTime * speed))) / 1.9
     const scaleFactor = Math.cos(e.lastTime * speed) * deform
 
-    // item.position.x += scaleFactor
     item.position.y += scaleFactor
     item.rotation += scaleFactor / 4
   },

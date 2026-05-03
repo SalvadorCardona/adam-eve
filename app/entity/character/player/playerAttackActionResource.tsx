@@ -16,6 +16,7 @@ import {
   EntityType,
 } from "@/packages/game/entity/EntityResourceInterface"
 import { spawnSlashInFront } from "@/app/entity/effect/slash/SlashEntityResource"
+import { getPlayerFacing } from "@/app/entity/character/player/playerEntityResource"
 import { resourceMappingMetaData } from "@/app/resourceMappingMetadata"
 import { addToInventory } from "@/packages/game/inventory/useCase/addToInventory"
 import { spawnFloatingText } from "@/app/entity/effect/floatingText/FloatingTextEntityResource"
@@ -27,7 +28,7 @@ export const playerAttackActionResource = createActionResource({
   onFrame: ({ game, entity, action }) => {
     if (!entity) return
 
-    const isAttackPressed = keysPressed["Space"] || keysPressed["KeyF"]
+    const isAttackPressed = keysPressed["KeyF"]
     if (!isAttackPressed) {
       if (entity.state === EntityState.attack) {
         entity.state = EntityState.wait
@@ -52,7 +53,7 @@ export const playerAttackActionResource = createActionResource({
       })
     }
 
-    spawnSlashInFront(game, entity)
+    spawnSlashInFront(game, entity, getPlayerFacing())
     updateNextTick(game, action, attack.attackSpeed)
 
     if (!target) {
